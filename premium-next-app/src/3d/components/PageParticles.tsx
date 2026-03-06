@@ -1,25 +1,23 @@
 "use client";
 
 import { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-interface ParticlesProps {
+interface ParticlesFieldProps {
   count?: number;
 }
 
-export function Particles({ count = 200 }: ParticlesProps) {
+function ParticlesField({ count = 400 }: ParticlesFieldProps) {
   const meshRef = useRef<THREE.Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
-  // Create circular particle texture
   const particleTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
     const ctx = canvas.getContext('2d')!;
     
-    // Draw a soft circle
     const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
     gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.8)');
@@ -39,13 +37,13 @@ export function Particles({ count = 200 }: ParticlesProps) {
     const velocities = new Float32Array(count * 3);
     
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 30;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+      positions[i * 3] = (Math.random() - 0.5) * 40;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
       
       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.003;
     }
     
     return [positions, velocities];
@@ -53,12 +51,11 @@ export function Particles({ count = 200 }: ParticlesProps) {
 
   const particleColors = useMemo(() => {
     const colors = new Float32Array(count * 3);
-    // TechBridge color palette: violet, indigo, purple, white
     const colorPalette = [
-      new THREE.Color('#8b5cf6'), // violet-500
-      new THREE.Color('#6366f1'), // indigo-500
-      new THREE.Color('#a855f7'), // purple-500
-      new THREE.Color('#ffffff'), // white
+      new THREE.Color('#8b5cf6'),
+      new THREE.Color('#6366f1'),
+      new THREE.Color('#a855f7'),
+      new THREE.Color('#ffffff'),
     ];
     
     for (let i = 0; i < count; i++) {
@@ -83,39 +80,39 @@ export function Particles({ count = 200 }: ParticlesProps) {
     
     const positionArray = meshRef.current.geometry.attributes.position.array as Float32Array;
     
-    mouseRef.current.x += (state.pointer.x - mouseRef.current.x) * 0.05;
-    mouseRef.current.y += (state.pointer.y - mouseRef.current.y) * 0.05;
+    mouseRef.current.x += (state.pointer.x - mouseRef.current.x) * 0.03;
+    mouseRef.current.y += (state.pointer.y - mouseRef.current.y) * 0.03;
     
     for (let i = 0; i < count; i++) {
       positionArray[i * 3] += velocities[i * 3];
       positionArray[i * 3 + 1] += velocities[i * 3 + 1];
       positionArray[i * 3 + 2] += velocities[i * 3 + 2];
       
-      const dx = positionArray[i * 3] - mouseRef.current.x * 10;
-      const dy = positionArray[i * 3 + 1] - mouseRef.current.y * 5;
+      const dx = positionArray[i * 3] - mouseRef.current.x * 15;
+      const dy = positionArray[i * 3 + 1] - mouseRef.current.y * 10;
       const dist = Math.sqrt(dx * dx + dy * dy);
       
-      if (dist < 3) {
-        const force = (3 - dist) * 0.001;
+      if (dist < 4) {
+        const force = (4 - dist) * 0.0005;
         positionArray[i * 3] += dx * force;
         positionArray[i * 3 + 1] += dy * force;
       }
       
-      if (positionArray[i * 3] > 15) positionArray[i * 3] = -15;
-      if (positionArray[i * 3] < -15) positionArray[i * 3] = 15;
-      if (positionArray[i * 3 + 1] > 10) positionArray[i * 3 + 1] = -10;
-      if (positionArray[i * 3 + 1] < -10) positionArray[i * 3 + 1] = 10;
+      if (positionArray[i * 3] > 20) positionArray[i * 3] = -20;
+      if (positionArray[i * 3] < -20) positionArray[i * 3] = 20;
+      if (positionArray[i * 3 + 1] > 40) positionArray[i * 3 + 1] = -40;
+      if (positionArray[i * 3 + 1] < -40) positionArray[i * 3 + 1] = 40;
     }
     
     meshRef.current.geometry.attributes.position.needsUpdate = true;
-    meshRef.current.rotation.x = mouseRef.current.y * 0.03;
-    meshRef.current.rotation.y = mouseRef.current.x * 0.03;
+    meshRef.current.rotation.x = mouseRef.current.y * 0.02;
+    meshRef.current.rotation.y = mouseRef.current.x * 0.02;
   });
 
   return (
     <points ref={meshRef} geometry={geometry}>
       <pointsMaterial
-        size={0.12}
+        size={0.14}
         vertexColors
         transparent
         opacity={0.8}
@@ -126,5 +123,26 @@ export function Particles({ count = 200 }: ParticlesProps) {
         depthWrite={false}
       />
     </points>
+  );
+}
+
+export function PageParticles() {
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 10], fov: 75 }}
+      dpr={[1, 1.5]}
+      gl={{ 
+        antialias: false, 
+        alpha: true,
+        powerPreference: 'high-performance'
+      }}
+      style={{ 
+        background: 'transparent',
+        width: '100%',
+        height: '100%'
+      }}
+    >
+      <ParticlesField count={400} />
+    </Canvas>
   );
 }

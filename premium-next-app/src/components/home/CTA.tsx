@@ -25,12 +25,36 @@ export default function CTA() {
                 id="cta"
                 ref={ref}
                 /* z-10 + solid bg: covers the footer behind it until scroll reveals it */
-                className="relative z-10 overflow-hidden bg-neutral-950 py-36 lg:py-48"
+                className="relative z-10 overflow-hidden py-36 lg:py-48"
             >
+                {/* ── Subtle Grain Texture Overlay ── */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 z-[1] opacity-[0.035]"
+                    style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: "repeat",
+                        backgroundSize: "128px 128px",
+                    }}
+                />
+
+                {/* ── Subtle Gradient Mesh Background ── */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 z-0"
+                    style={{
+                        background: `
+                            radial-gradient(ellipse at 20% 80%, rgba(109,40,217,0.08) 0%, transparent 50%),
+                            radial-gradient(ellipse at 80% 20%, rgba(79,70,229,0.06) 0%, transparent 50%),
+                            radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.8) 0%, transparent 70%)
+                        `,
+                    }}
+                />
+
                 {/* ── Radial glow anchor ── */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 flex items-center justify-center"
+                    className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
                 >
                     <div
                         className="cta-glow h-[560px] w-[560px] rounded-full blur-[120px]"
@@ -44,7 +68,7 @@ export default function CTA() {
                 {/* Top separator hairline */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                    className="pointer-events-none absolute left-1/2 top-0 z-[2] h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 />
 
                 {/* ── Content ── */}

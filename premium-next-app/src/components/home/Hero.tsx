@@ -41,7 +41,7 @@ export default function Hero() {
     const canvasRef = useRef<HTMLDivElement>(null);
 
     return (
-        <section className="relative min-h-screen w-full overflow-hidden bg-black">
+        <section className="relative min-h-screen w-full overflow-hidden">
             {/* ─── 3D Hybrid Background (contained within Hero only) ─── */}
             <HybridBackground />
             
@@ -75,7 +75,7 @@ export default function Hero() {
                 className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-12"
             >
                 {/* Eyebrow badge */}
-                <motion.div variants={fadeUp} className="mb-8">
+                <motion.div variants={fadeUp} className="mb-10">
                     <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-widest text-zinc-400 uppercase backdrop-blur-sm">
                         <span className="relative flex h-1.5 w-1.5">
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
@@ -85,36 +85,36 @@ export default function Hero() {
                     </span>
                 </motion.div>
 
-                {/* Primary headline */}
+                {/* Primary headline - Shrunk by ~10%, better spacing */}
                 <motion.h1
                     variants={fadeUp}
-                    className="max-w-4xl text-center text-5xl font-bold leading-[1.07] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+                    className="max-w-5xl text-center text-[2.75rem] font-bold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
                 >
-                    We Build the{" "}
+                    <span className="block mb-2">We Build the</span>
                     <span className="relative">
                         <span className="bg-gradient-to-br from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
                             Systems
                         </span>
-                    </span>{" "}
-                    That Drive{" "}
+                    </span>
+                    <span className="block my-2">That Drive</span>
                     <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Modern Business
                     </span>
                 </motion.h1>
 
-                {/* Sub-headline */}
+                {/* Sub-headline - Shrunk by ~10%, more breathing room */}
                 <motion.p
                     variants={fadeUp}
-                    className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-zinc-400 lg:text-xl"
+                    className="mt-10 max-w-2xl text-center text-base leading-7 text-zinc-400 lg:text-lg"
                 >
                     TechBridge delivers custom software, AI automation, and scalable SaaS
-                    platforms - engineered for precision, built for growth.
+                    platforms — engineered for precision, built for growth.
                 </motion.p>
 
                 {/* CTA row */}
                 <motion.div
                     variants={fadeUp}
-                    className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
+                    className="mt-12 flex flex-col items-center gap-4 sm:flex-row"
                 >
                     <Link
                         href="/contact"
@@ -151,7 +151,7 @@ export default function Hero() {
                     ref={canvasRef}
                     id="neural-bridge-canvas"
                     aria-hidden="true"
-                    className="relative mt-16 w-full max-w-4xl"
+                    className="relative mt-20 w-full max-w-4xl"
                 >
                     {/* 3D Canvas Container */}
                     <div className="relative h-[320px] w-full rounded-3xl border border-white/10 bg-black/40 backdrop-blur-sm lg:h-[440px] overflow-hidden">
@@ -201,10 +201,10 @@ export default function Hero() {
                 {/* Social proof stats */}
                 <motion.div
                     variants={fadeUp}
-                    className="mt-20 grid grid-cols-3 gap-8 border-t border-white/5 pt-10 sm:gap-16"
+                    className="mt-24 grid grid-cols-3 gap-8 border-t border-white/5 pt-12 sm:gap-16"
                 >
                     {STATS.map((stat) => (
-                        <div key={stat.label} className="flex flex-col items-center gap-1">
+                        <div key={stat.label} className="flex flex-col items-center gap-2">
                             <span className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 {stat.value}
                             </span>

@@ -155,7 +155,7 @@ export default function HowItWorks() {
         <section
             id="how-it-works"
             ref={sectionRef}
-            className="relative overflow-hidden bg-black py-28 lg:py-36"
+            className="relative overflow-hidden py-28 lg:py-36"
         >
             {/* Top separator */}
             <div

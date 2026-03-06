@@ -218,7 +218,7 @@ export default function Services() {
         <section
             id="services"
             ref={ref}
-            className="relative overflow-hidden bg-black py-28 lg:py-36"
+            className="relative overflow-hidden py-28 lg:py-36"
         >
             {/* Section ambient glow */}
             <div

@@ -10,23 +10,20 @@ interface ColorStop {
   opacity: number;
 }
 
-interface SoftGradientBlobProps {
+interface CenterBlobProps {
   colorStops: ColorStop[];
   position: [number, number, number];
   scale?: number;
   speed?: number;
-  phase?: number;
 }
 
-export function SoftGradientBlob({ 
+export function CenterBlob({ 
   colorStops, 
   position, 
   scale = 1,
   speed = 1,
-  phase = 0
-}: SoftGradientBlobProps) {
+}: CenterBlobProps) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const gradientTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
@@ -74,33 +71,26 @@ export function SoftGradientBlob({
   useFrame((state) => {
     if (!meshRef.current) return;
     
-    const time = state.clock.elapsedTime * speed + phase;
+    const time = state.clock.elapsedTime * speed;
     
-    // Fixed X position
+    // More dynamic floating
+    const floatY = Math.sin(time * 0.4) * 0.2 + Math.sin(time * 0.25) * 0.1;
+    meshRef.current.position.y = position[1] + floatY;
     meshRef.current.position.x = position[0];
     meshRef.current.position.z = position[2];
     
-    // More dynamic floating - combines sine waves for organic motion
-    const floatY = Math.sin(time * 0.5) * 0.25 + Math.sin(time * 0.3) * 0.15;
-    meshRef.current.position.y = position[1] + floatY;
-    
-    // Faster clockwise rotation
-    meshRef.current.rotation.z = -time * 0.25;
-    
-    // Dynamic pulsing - varies with time
-    const pulse = 1 + Math.sin(time * 0.6) * 0.08 + Math.sin(time * 1.2) * 0.04;
+    // Gentle pulsing
+    const pulse = 1 + Math.sin(time * 0.5) * 0.05;
     meshRef.current.scale.setScalar(scale * pulse);
     
-    // Subtle wobble effect
-    meshRef.current.rotation.x = Math.sin(time * 0.4) * 0.05;
-    meshRef.current.rotation.y = Math.cos(time * 0.35) * 0.05;
+    // Very subtle rotation
+    meshRef.current.rotation.z = Math.sin(time * 0.1) * 0.02;
   });
 
   return (
     <mesh ref={meshRef} position={position}>
       <planeGeometry args={[6, 6]} />
       <shaderMaterial
-        ref={materialRef}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}

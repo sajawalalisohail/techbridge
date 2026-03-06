@@ -148,7 +148,7 @@ export default function TechStackMarquee() {
     const isInView = useInView(ref, { once: true, margin: "-60px" });
 
     return (
-        <section ref={ref} className="relative overflow-hidden py-20 lg:py-24">
+        <section ref={ref} className="relative overflow-hidden bg-black py-20 lg:py-24">
             <style dangerouslySetInnerHTML={{ __html: MARQUEE_CSS }} />
 
             {/* Subtle top + bottom hairlines */}

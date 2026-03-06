@@ -20,7 +20,7 @@ const fadeUp = {
     show: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
     },
 };
 
@@ -98,7 +98,7 @@ export default function Hero() {
                     className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-zinc-400 lg:text-xl"
                 >
                     TechBridge delivers custom software, AI automation, and scalable SaaS
-                    platforms — engineered for precision, built for growth.
+                    platforms - engineered for precision, built for growth.
                 </motion.p>
 
                 {/* CTA row */}

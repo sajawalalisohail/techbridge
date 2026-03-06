@@ -50,13 +50,13 @@ export default function Footer() {
     return (
         <footer className="bg-zinc-950 pt-20 pb-10">
             {/* Top hairline */}
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-7xl px-6 lg:px-16">
                 <div className="mb-16 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
 
-                {/* 3-column grid (removed the Get Started CTA column) */}
-                <div className="grid grid-cols-2 gap-12 md:grid-cols-3 lg:gap-16">
+                {/* Grid layout with horizontal spread */}
+                <div className="flex flex-col gap-12 md:flex-row md:justify-between lg:col-span-3">
                     {/* Col 1 — Brand */}
-                    <div className="col-span-2 md:col-span-1">
+                    <div className="max-w-xs">
                         <Link href="/" className="group mb-5 inline-flex items-center gap-2.5">
                             <span className="relative flex h-6 w-6 items-center justify-center">
                                 <span className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 opacity-80 blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:blur" />
@@ -85,42 +85,44 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Col 2 — Services */}
-                    <div>
-                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            Services
-                        </p>
-                        <ul className="flex flex-col gap-3">
-                            {SERVICES_LINKS.map((link) => (
-                                <li key={link.label}>
-                                    <Link
-                                        href={link.href}
-                                        className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <div className="flex gap-16 lg:gap-24">
+                        {/* Col 2 — Services */}
+                        <div>
+                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                Services
+                            </p>
+                            <ul className="flex flex-col gap-3">
+                                {SERVICES_LINKS.map((link) => (
+                                    <li key={link.label}>
+                                        <Link
+                                            href={link.href}
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                    {/* Col 3 — Company */}
-                    <div>
-                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            Company
-                        </p>
-                        <ul className="flex flex-col gap-3">
-                            {COMPANY_LINKS.map((link) => (
-                                <li key={link.label}>
-                                    <Link
-                                        href={link.href}
-                                        className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                        {/* Col 3 — Company */}
+                        <div>
+                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                Company
+                            </p>
+                            <ul className="flex flex-col gap-3">
+                                {COMPANY_LINKS.map((link) => (
+                                    <li key={link.label}>
+                                        <Link
+                                            href={link.href}
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
 

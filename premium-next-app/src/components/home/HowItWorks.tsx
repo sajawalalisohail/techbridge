@@ -57,16 +57,25 @@ function PhaseCard({
     const isInView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
     const Icon = phase.icon;
 
+    const itemVariants = {
+        hidden: { opacity: 0, x: 32 },
+        show: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 0.75,
+                ease: [0.22, 1, 0.36, 1] as const,
+                delay: 0.05,
+            },
+        },
+    };
+
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, x: 32 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{
-                duration: 0.75,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 0.05,
-            }}
+            variants={itemVariants}
+            initial="hidden"
+            animate={isInView ? "show" : "hidden"}
             className="group relative ml-10 flex flex-col gap-4 lg:ml-16"
         >
             {/* Timeline dot — sits on the vertical line */}
@@ -180,7 +189,7 @@ export default function HowItWorks() {
                         </span>
                     </h2>
                     <p className="mt-5 max-w-lg text-base leading-relaxed text-zinc-500 lg:text-lg">
-                        A four-phase methodology that turns ambiguity into precision-engineered systems — on time, every time.
+                        A four-phase methodology that turns ambiguity into precision-engineered systems - on time, every time.
                     </p>
                 </motion.div>
 

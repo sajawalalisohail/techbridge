@@ -2,8 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-
-
+import { ArrowUpRight } from "lucide-react";
 /* ─── Keyframes for the SVG placeholder patterns ─────────── */
 const patternStyles = `
   @keyframes scan-down {
@@ -215,6 +214,7 @@ const CASE_STUDIES = [
         description:
             "Complete architectural redesign and AI-driven document workflow automation — transforming a fragile monolith into a resilient, multi-tenant SaaS powering law firms across three continents.",
         tags: ["Next.js", "AI Automation", "Dashboard"],
+        liveUrl: "https://nextlex.com",
         pattern: <PatternDotScan />,
         accentColor: "rgba(139,92,246,0.15)",
         isLarge: true,
@@ -228,6 +228,7 @@ const CASE_STUDIES = [
         description:
             "High-performance digital storefront streamlining global supply chain operations — from quote to shipment in a single, unified platform.",
         tags: ["E-Commerce", "API Integration", "Supply Chain"],
+        liveUrl: "https://primemarkapparel.com",
         pattern: <PatternFlowGrid />,
         accentColor: "rgba(99,102,241,0.12)",
         isLarge: false,
@@ -309,16 +310,33 @@ function LargeCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
                     </p>
                 </div>
 
-                {/* Bottom: tags */}
-                <div className="mt-8 flex flex-wrap gap-2">
-                    {study.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                {/* Bottom: tags + live link */}
+                <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-wrap gap-2">
+                        {study.tags.map((tag) => (
+                            <span
+                                key={tag}
+                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
+                    {study.liveUrl && (
+                        <a
+                            href={study.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-950/30 hover:shadow-[0_0_20px_rgba(109,40,217,0.18)]"
                         >
-                            {tag}
-                        </span>
-                    ))}
+                            View Live Platform
+                            <ArrowUpRight
+                                size={14}
+                                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            />
+                        </a>
+                    )}
                 </div>
             </div>
         </motion.div>
@@ -369,15 +387,32 @@ function SmallCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
                     </p>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                    {study.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-wrap gap-2">
+                        {study.tags.map((tag) => (
+                            <span
+                                key={tag}
+                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
+                    {study.liveUrl && (
+                        <a
+                            href={study.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-950/30 hover:shadow-[0_0_20px_rgba(109,40,217,0.18)]"
                         >
-                            {tag}
-                        </span>
-                    ))}
+                            View Live Platform
+                            <ArrowUpRight
+                                size={14}
+                                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            />
+                        </a>
+                    )}
                 </div>
             </div>
         </motion.div>

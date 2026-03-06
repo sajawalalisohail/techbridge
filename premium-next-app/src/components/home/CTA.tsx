@@ -107,7 +107,7 @@ export default function CTA() {
 
                         {/* Secondary — ghost with violet glow */}
                         <Link
-                            href="/services"
+                            href="/websites"
                             className="group inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-7 py-4 text-sm font-medium text-zinc-300 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-950/30 hover:text-white hover:shadow-[0_0_24px_rgba(109,40,217,0.2)]"
                         >
                             <Zap size={14} strokeWidth={1.8} className="text-violet-400" />

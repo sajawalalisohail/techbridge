@@ -213,6 +213,8 @@ const PROJECTS: Project[] = [
         description:
             "Complete architectural redesign of a fragile monolith into a resilient, multi-tenant SaaS platform powering law firms across three continents. We integrated AI-driven document workflow automation — classifying, summarising, and routing legal documents at scale — reducing manual review time by over 70% and eliminating the bottlenecks that were blocking growth.",
         tags: ["Next.js", "AI Automation", "Dashboard", "Multi-tenant SaaS"],
+        liveUrl: "https://nextlex.com",
+        liveLabel: "View Live Platform",
         pattern: <PatternDotScan />,
         accentGlow: "rgba(109,40,217,0.18)",
     },
@@ -239,6 +241,8 @@ const PROJECTS: Project[] = [
         description:
             "Engineered a high-performance digital storefront to streamline global B2B supply chain operations for a large-scale apparel manufacturer. The platform unified order management, supplier coordination, and logistics tracking into a single, real-time interface — cutting order routing time by 300% and eliminating the manual email chains that were slowing international fulfillment.",
         tags: ["E-Commerce", "API Integration", "Supply Chain", "B2B"],
+        liveUrl: "https://primemarkapparel.com",
+        liveLabel: "View Live Platform",
         pattern: <PatternDiagFlow />,
         accentGlow: "rgba(99,102,241,0.14)",
     },

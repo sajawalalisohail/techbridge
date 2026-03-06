@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import {
     Code2,
@@ -21,6 +22,7 @@ interface ServiceCard {
     colSpan?: string; // Tailwind col-span class
     highlight?: boolean; // special accent treatment
     accentColor: string; // radial glow color on hover
+    href?: string; // target link for the whole card
 }
 
 /* ─── Data ───────────────────────────────────────────────── */
@@ -41,7 +43,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Intelligence",
         title: "AI Workflow Automation",
         description:
-            "Intelligent systems that identify, replace, and continuously improve manual processes — freeing your team to focus on what only humans can do.",
+            "Intelligent systems that identify, replace, and continuously improve manual processes - freeing your team to focus on what only humans can do.",
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.14) 0%, transparent 70%)",
     },
@@ -60,7 +62,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Products",
         title: "SaaS Platform Development",
         description:
-            "End-to-end product development — from architecture and auth to billing and beyond. Built to scale from day one.",
+            "End-to-end product development - from architecture and auth to billing and beyond. Built to scale from day one.",
         accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.10) 0%, transparent 70%)",
     },
     {
@@ -78,13 +80,16 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Speed",
         title: "24-Hour Rapid Deploy Websites",
         description:
-            "Premium web presence, delivered in a day. Performance-first, conversion-optimized, and polished to perfection — without the wait.",
+            "Premium web presence, delivered in a day. Performance-first, conversion-optimized, and polished to perfection - without the wait.",
         highlight: true,
         accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.18) 0%, transparent 65%)",
+        href: "/websites",
     },
 ];
 
 /* ─── Animation variants ─────────────────────────────────── */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const containerVariants = {
     hidden: {},
     show: {
@@ -99,7 +104,7 @@ const cardVariants = {
     show: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.7, ease: EASE },
     },
 };
 
@@ -108,7 +113,7 @@ const headerVariants = {
     show: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.7, ease: EASE },
     },
 };
 
@@ -120,10 +125,14 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
         <motion.div
             variants={cardVariants}
             className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${card.colSpan ?? ""} ${card.highlight
-                    ? "border-violet-500/30 shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
-                    : "border-white/8 hover:border-white/15"
+                ? "border-violet-500/30 shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
+                : "border-white/8 hover:border-white/15"
                 }`}
         >
+            {/* Clickable overlay if href exists */}
+            {card.href && (
+                <Link href={card.href} className="absolute inset-0 z-20 rounded-2xl" aria-label={`Go to ${card.title}`} />
+            )}
             {/* Radial glow — appears on hover */}
             <div
                 aria-hidden="true"
@@ -150,8 +159,8 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 {/* Icon */}
                 <div
                     className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-300 ${card.highlight
-                            ? "border-violet-500/40 bg-violet-950/60 text-violet-400"
-                            : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-white/20 group-hover:text-white"
+                        ? "border-violet-500/40 bg-violet-950/60 text-violet-400"
+                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-white/20 group-hover:text-white"
                         }`}
                 >
                     <Icon size={20} strokeWidth={1.5} />
@@ -178,8 +187,8 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 {/* Bottom learn-more nudge */}
                 <div
                     className={`mt-6 flex items-center gap-1.5 text-xs font-medium transition-colors duration-300 ${card.highlight
-                            ? "text-violet-400"
-                            : "text-zinc-600 group-hover:text-white"
+                        ? "text-violet-400"
+                        : "text-zinc-600 group-hover:text-white"
                         }`}
                 >
                     <span>Learn more</span>
@@ -239,7 +248,7 @@ export default function Services() {
                         of Your Business
                     </h2>
                     <p className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-lg">
-                        From intelligent automation to enterprise platforms — we build the systems that give your business an unfair competitive advantage.
+                        From intelligent automation to enterprise platforms - we build the systems that give your business an unfair competitive advantage.
                     </p>
                 </motion.div>
 

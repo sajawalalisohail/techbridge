@@ -118,72 +118,65 @@ function LeadershipSection({ isInView }: { isInView: boolean }) {
                 </motion.div>
 
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
-                    {/* Left — headshot placeholder */}
+                    {/* Left & Right - Hybrid Partnership Grid */}
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        {/* Morgantown Founder Card */}
+                        <motion.div
+                            variants={fadeUp(0.1)}
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
+                        >
+                            <div className="mb-6 flex items-center justify-between">
+                                <span className="inline-flex h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 text-xs font-bold uppercase tracking-widest text-zinc-400 select-none">
+                                    WV
+                                </span>
+                            </div>
+                            <h3 className="mb-2 text-xl font-bold tracking-tight text-white">Founder & Lead Designer</h3>
+                            <p className="mb-6 text-sm leading-relaxed text-zinc-400">
+                                WVU Computer Science alumnus leading business strategy, UI/UX architecture, and project orchestration from Morgantown, WV.
+                            </p>
+                            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-violet-500/10 blur-[40px] transition-all duration-500 group-hover:bg-violet-500/20" />
+                        </motion.div>
+
+                        {/* Pakistan Engineering Card */}
+                        <motion.div
+                            variants={fadeUp(0.2)}
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
+                        >
+                            <div className="mb-6 flex items-center justify-between">
+                                <span className="inline-flex h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 text-xs font-bold uppercase tracking-widest text-zinc-400 select-none">
+                                    PK
+                                </span>
+                            </div>
+                            <h3 className="mb-2 text-xl font-bold tracking-tight text-white">Lead Engineering Cell (Pakistan)</h3>
+                            <p className="mb-6 text-sm leading-relaxed text-zinc-400">
+                                Specialized senior backend and full-stack developers handling large-scale enterprise builds under our direct architectural oversight.
+                            </p>
+                            <div className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-indigo-500/10 blur-[40px] transition-all duration-500 group-hover:bg-indigo-500/20" />
+                        </motion.div>
+                    </div>
+
+                    {/* Bottom Bio / Intro */}
                     <motion.div
-                        variants={fadeUp(0.1)}
+                        variants={fadeUp(0.3)}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
+                        className="mt-16 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12"
                     >
-                        <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/50 flex items-center justify-center min-h-[340px]">
-                            {/* Ambient */}
-                            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-950/30 to-transparent" />
-                            {/* Subtle grid */}
-                            <svg className="absolute inset-0 h-full w-full opacity-20" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <pattern id="headshot-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                                        <circle cx="1.5" cy="1.5" r="0.8" fill="white" fillOpacity="0.15" />
-                                    </pattern>
-                                </defs>
-                                <rect width="100%" height="100%" fill="url(#headshot-dots)" />
-                            </svg>
-                            {/* Placeholder silhouette */}
-                            <div className="relative z-10 flex flex-col items-center gap-4">
-                                <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-white/10 bg-white/[0.05]">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="h-12 w-12 text-zinc-600">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                        <circle cx="12" cy="7" r="4" />
-                                    </svg>
-                                </div>
-                                <div className="text-center">
-                                    <p className="text-sm font-semibold text-zinc-400">TechBridge</p>
-                                    <p className="text-xs text-zinc-600 mt-0.5">Founder & Lead Engineer</p>
-                                    <p className="mt-2 text-xs text-zinc-700 uppercase tracking-widest">Photo Coming Soon</p>
-                                </div>
-                            </div>
-                            {/* WVU badge */}
-                            <div className="absolute bottom-5 right-5 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-sm">
-                                <span className="text-xs font-semibold tracking-wider text-zinc-500">WVU CS Alumni</span>
-                            </div>
+                        <div className="flex-1">
+                            <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
+                                TechBridge operates as a hybrid engineering firm. Headquartered in Morgantown, WV, and powered by elite distributed engineering cells in Pakistan. This allows us to scale development output massively while maintaining pure computer science quality standards and rigorous US-based architecture oversight.
+                            </p>
                         </div>
-                    </motion.div>
-
-                    {/* Right — bio */}
-                    <motion.div
-                        variants={fadeUp(0.2)}
-                        initial="hidden"
-                        animate={isInView ? "show" : "hidden"}
-                        className="flex flex-col justify-center"
-                    >
-                        <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                            TechBridge is led by pure computer science fundamentals. Headquartered
-                            in Morgantown, WV, and founded by a West Virginia University Computer
-                            Science alumni, we bridge the gap between complex engineering and
-                            business execution.
-                        </p>
-                        <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
-                            We don&apos;t employ layers of account managers — when you partner with
-                            TechBridge, you work directly with the engineers architecting your
-                            system. Every decision is made by someone who understands the trade-offs
-                            at the code level.
-                        </p>
-
-                        {/* Credentials */}
-                        <div className="mt-10 grid grid-cols-2 gap-4">
+                        <div className="grid flex-1 grid-cols-2 gap-4">
                             {[
                                 { label: "Discipline", value: "Computer Science" },
-                                { label: "University", value: "West Virginia University" },
-                                { label: "Focus", value: "B2B Engineering" },
-                                { label: "Model", value: "Direct Senior Access" },
+                                { label: "Scale", value: "Distributed Teams" },
+                                { label: "Oversight", value: "WV Headquarters" },
+                                { label: "Model", value: "Hybrid Precision" },
                             ].map((item) => (
                                 <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
                                     <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>

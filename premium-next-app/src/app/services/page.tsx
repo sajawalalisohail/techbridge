@@ -92,7 +92,7 @@ const SECTIONS = [
 /* ─── Fade-up variant ─────────────────────────────────────── */
 const fadeUp = {
     hidden: { opacity: 0, y: 28 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
 /* ─── Section Block ──────────────────────────────────────── */
@@ -287,8 +287,8 @@ export default function ServicesPage() {
                                                 key={s.id}
                                                 href={`#${s.id}`}
                                                 className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 ${isActive
-                                                        ? "border border-white/10 bg-white/[0.05] text-white"
-                                                        : "text-zinc-600 hover:text-zinc-400"
+                                                    ? "border border-white/10 bg-white/[0.05] text-white"
+                                                    : "text-zinc-600 hover:text-zinc-400"
                                                     }`}
                                             >
                                                 <span

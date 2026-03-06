@@ -7,6 +7,14 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+/* ─── Violet pulse glow ──────────────────────────────────── */
+const violetPulseCSS = `
+  @keyframes violet-pulse {
+    0%, 100% { box-shadow: 0 0 0 1px rgba(139,92,246,0.15), 0 0 20px rgba(139,92,246,0.05); }
+    50%      { box-shadow: 0 0 0 1px rgba(139,92,246,0.35), 0 0 40px rgba(139,92,246,0.15); }
+  }
+`;
+
 /* ─── Global ease constant ───────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -58,7 +66,7 @@ function Section({
 /* ─── Eyebrow ────────────────────────────────────────────── */
 function Eyebrow({ children }: { children: React.ReactNode }) {
     return (
-        <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
             <span className="h-px w-6 bg-zinc-700" />
             {children}
         </span>
@@ -167,7 +175,7 @@ function Hero() {
                     animate={isInView ? "show" : "hidden"}
                     className="mt-14 flex flex-wrap items-center justify-center gap-8"
                 >
-                    {["Custom-coded — not Wix", "100% satisfaction guarantee", "Built by CS engineers"].map((t) => (
+                    {["Custom-coded - not Wix", "100% satisfaction guarantee", "Built by CS engineers"].map((t) => (
                         <span key={t} className="flex items-center gap-2 text-xs text-zinc-600">
                             <Check size={12} className="text-violet-500" />
                             {t}
@@ -183,9 +191,9 @@ function Hero() {
    STEP 2 — COMPARISON TABLE
 ══════════════════════════════════════════════════════════ */
 const COMPARISON_ROWS = [
-    { label: "Price", freelancer: "$300–$800", agency: "$8k–$20k", tb: "$997–$4,997" },
+    { label: "Price", freelancer: "$300-$800", agency: "$8k-$20k", tb: "$997-$4,997" },
     { label: "Design", freelancer: "Template", agency: "Custom", tb: "Custom" },
-    { label: "Timeline", freelancer: "2–6 weeks", agency: "8–12 weeks", tb: "24 hours" },
+    { label: "Timeline", freelancer: "2-6 weeks", agency: "8-12 weeks", tb: "24 hours" },
     { label: "Support", freelancer: "None", agency: "Account mgr", tb: "Direct engineer" },
     { label: "Performance", freelancer: "Generic", agency: "Variable", tb: "Core Web Vitals opt." },
 ];
@@ -404,7 +412,7 @@ const TIMELINE = [
     {
         time: "9:00 AM",
         title: "Design & Architecture Begin",
-        desc: "Our engineer starts your custom layout — no theme files, no page builders. Built precisely for your brand.",
+        desc: "Our engineer starts your custom layout - no theme files, no page builders. Built precisely for your brand.",
         tag: "Day 1",
     },
     {
@@ -430,51 +438,50 @@ function Timeline() {
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
                 <Eyebrow>The 24-Hour Process</Eyebrow>
                 <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    From kickoff to live — in a single day.
+                    From kickoff to live - in a single day.
                 </h2>
             </motion.div>
 
-            <div className="relative">
-                {/* Vertical line */}
-                <div className="absolute left-[22px] top-2 bottom-10 w-px bg-gradient-to-b from-violet-500/60 via-violet-500/20 to-transparent md:left-1/2 md:-translate-x-px" />
+            <motion.div
+                variants={stagger(0.15)}
+                initial="hidden"
+                animate={isInView ? "show" : "hidden"}
+                className="relative grid grid-cols-[3rem_1fr] gap-x-5 gap-y-10"
+            >
+                {/* Vertical rail line */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-[1.375rem] top-2 bottom-10 w-px bg-gradient-to-b from-violet-500/60 via-violet-500/20 to-transparent"
+                />
 
-                <motion.div
-                    variants={stagger(0.15)}
-                    initial="hidden"
-                    animate={isInView ? "show" : "hidden"}
-                    className="flex flex-col gap-10"
-                >
-                    {TIMELINE.map((step, i) => (
-                        <motion.div key={i} variants={childFade} className="relative flex gap-6 md:gap-10">
-                            {/* Node */}
-                            <div className="relative z-10 flex-shrink-0">
-                                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-violet-500/40 bg-violet-950/60 shadow-[0_0_20px_rgba(109,40,217,0.3)]">
-                                    <span className="font-mono text-xs font-bold text-violet-300">{String(i + 1).padStart(2, "0")}</span>
-                                </div>
+                {TIMELINE.map((step, i) => (
+                    <motion.div key={i} variants={childFade} className="contents">
+                        {/* Node (col 1) */}
+                        <div className="relative z-10 flex justify-center pt-0">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-violet-500/40 bg-violet-950/60 shadow-[0_0_20px_rgba(109,40,217,0.3)]">
+                                <span className="font-mono text-xs font-bold text-violet-300">{String(i + 1).padStart(2, "0")}</span>
                             </div>
+                        </div>
 
-                            {/* Card */}
-                            <div className="flex-1 pb-2">
-                                <div className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/15">
-                                    <div
-                                        aria-hidden="true"
-                                        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                        style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(109,40,217,0.08) 0%, transparent 60%)" }}
-                                    />
-                                    <div className="mb-2 flex items-center gap-3">
-                                        <span className="rounded-full border border-violet-500/20 bg-violet-950/40 px-2.5 py-0.5 text-xs font-semibold text-violet-400">
-                                            {step.tag}
-                                        </span>
-                                        <span className="font-mono text-xs text-zinc-600">{step.time}</span>
-                                    </div>
-                                    <h3 className="mb-2 text-base font-bold text-white">{step.title}</h3>
-                                    <p className="text-sm leading-relaxed text-zinc-500">{step.desc}</p>
-                                </div>
+                        {/* Card (col 2) */}
+                        <div className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/15">
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                                style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(109,40,217,0.08) 0%, transparent 60%)" }}
+                            />
+                            <div className="mb-2 flex items-center gap-3">
+                                <span className="rounded-full border border-violet-500/20 bg-violet-950/40 px-2.5 py-0.5 text-xs font-semibold text-violet-400">
+                                    {step.tag}
+                                </span>
+                                <span className="font-mono text-xs text-zinc-600">{step.time}</span>
                             </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
+                            <h3 className="mb-2 text-base font-bold text-white">{step.title}</h3>
+                            <p className="text-sm leading-relaxed text-zinc-500">{step.desc}</p>
+                        </div>
+                    </motion.div>
+                ))}
+            </motion.div>
         </div>
     );
 }
@@ -551,7 +558,7 @@ function SocialProof() {
                             <p className="text-base leading-relaxed text-zinc-400">
                                 A premium digital presence for a direct buyer of industrial
                                 plied rubber conveyor belts. Designed, built, and deployed
-                                within a single business day — now representing 35 years of
+                                within a single business day - now representing 35 years of
                                 trade legacy online.
                             </p>
                         </div>
@@ -617,7 +624,7 @@ const TIERS = [
     {
         name: "Premium",
         price: "$4,997",
-        description: "Full-service launch — copywriting, SEO, and 30-day partnership.",
+        description: "Full-service launch - copywriting, SEO, and 30-day partnership.",
         highlight: false,
         features: [
             "Everything in Standard",
@@ -725,7 +732,7 @@ const CARE_PLANS = [
         name: "Site Care Plan",
         price: "$197",
         period: "/mo",
-        description: "Everything you need to keep your site healthy, updated, and protected — hands-free.",
+        description: "Everything you need to keep your site healthy, updated, and protected - hands-free.",
         features: [
             "Managed hosting & SSL",
             "Security & plugin updates",
@@ -824,7 +831,7 @@ function CarePlans() {
 const FAQS = [
     {
         q: "Is it built on a template?",
-        a: "No. Every site we build is custom-designed and custom-coded from scratch for your brand. We never use Wix, Webflow templates, or WordPress themes — it's all Next.js, Tailwind, and precision engineering.",
+        a: "No. Every site we build is custom-designed and custom-coded from scratch for your brand. We never use Wix, Webflow templates, or WordPress themes - it's all Next.js, Tailwind, and precision engineering.",
     },
     {
         q: "What about changes after launch?",
@@ -836,7 +843,7 @@ const FAQS = [
     },
     {
         q: "Is 24 hours actually realistic?",
-        a: "Yes — for single and multi-page sites. The 24-hour window starts after your kickoff call and deposit. We've delivered this multiple times for real clients. The Ali Wali Trading Company platform above is a live example.",
+        a: "Yes - for single and multi-page sites. The 24-hour window starts after your kickoff call and deposit. We've delivered this multiple times for real clients. The Ali Wali Trading Company platform above is a live example.",
     },
     {
         q: "What technology do you use?",
@@ -981,8 +988,19 @@ function FinalCTA() {
 ══════════════════════════════════════════════════════════ */
 export default function WebsitesPage() {
     return (
-        <div className="bg-neutral-950 text-white">
-            <div className="relative z-10">
+        <div className="relative bg-black text-white">
+            <style dangerouslySetInnerHTML={{ __html: violetPulseCSS }} />
+
+            {/* Ambient background glows — matches homepage */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+                <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[120px]" />
+                <div className="absolute -bottom-32 right-0 h-[500px] w-[500px] rounded-full bg-indigo-900/15 blur-[100px]" />
+            </div>
+
+            <div
+                className="relative z-10 overflow-hidden min-h-screen bg-black border border-violet-500/10 rounded-sm"
+                style={{ animation: "violet-pulse 4s ease-in-out infinite" }}
+            >
                 <Navbar />
                 <Hero />
 
@@ -1053,6 +1071,8 @@ export default function WebsitesPage() {
                 {/* Final CTA */}
                 <FinalCTA />
 
+            </div>
+            <div className="sticky bottom-0 z-0">
                 <Footer />
             </div>
         </div>

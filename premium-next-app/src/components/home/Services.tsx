@@ -33,7 +33,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Foundation",
         title: "Custom Software Development",
         description:
-            "Scalable, enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths — engineered right the first time.",
+            "Scalable, enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths - engineered right the first time.",
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.12) 0%, transparent 70%)",
     },
@@ -168,7 +168,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
 
                 {/* Eyebrow */}
                 <p
-                    className={`mb-2 text-xs font-semibold uppercase tracking-widest ${card.highlight ? "text-violet-400" : "text-zinc-600"
+                    className={`mb-2 font-mono text-xs font-semibold uppercase tracking-widest ${card.highlight ? "text-violet-400" : "text-zinc-600"
                         }`}
                 >
                     {card.eyebrow}
@@ -236,7 +236,7 @@ export default function Services() {
                     variants={headerVariants}
                     className="mb-16 max-w-2xl lg:mb-20"
                 >
-                    <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                    <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                         <span className="h-px w-6 bg-zinc-700" />
                         Our Capabilities
                     </span>

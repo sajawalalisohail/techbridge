@@ -76,7 +76,7 @@ export default function ContactPage() {
             <style dangerouslySetInnerHTML={{ __html: inputFocusCSS }} />
 
             <div className="bg-black">
-                <div className="relative z-10">
+                <div className="relative z-10 overflow-hidden min-h-screen bg-black">
                     <Navbar />
 
                     {/* ── Main section ── */}
@@ -333,6 +333,8 @@ export default function ContactPage() {
                         </div>
                     </section>
 
+                </div>
+                <div className="sticky bottom-0 z-0">
                     <Footer />
                 </div>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,64 +14,91 @@ const NAV_LINKS = [
     { label: "Contact", href: "/contact" },
 ];
 
+type NavState = "top" | "hidden" | "pill";
+
 export default function Navbar() {
-    const [scrolled, setScrolled] = useState(false);
+    const [navState, setNavState] = useState<NavState>("top");
     const [mobileOpen, setMobileOpen] = useState(false);
     const [bannerVisible, setBannerVisible] = useState(true);
     const pathname = usePathname();
 
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 100);
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
+    const updateNavState = useCallback(() => {
+        const y = window.scrollY;
+        if (y < 50) setNavState("top");
+        else if (y < 600) setNavState("hidden");
+        else setNavState("pill");
     }, []);
+
+    useEffect(() => {
+        window.addEventListener("scroll", updateNavState, { passive: true });
+        updateNavState();
+        return () => window.removeEventListener("scroll", updateNavState);
+    }, [updateNavState]);
 
     const isActive = (href: string) => pathname === href;
 
+    /* Motion variants for the header wrapper */
+    const headerVariants = {
+        top: { y: 0, opacity: 1 },
+        hidden: { y: "-100%", opacity: 0 },
+        pill: { y: 0, opacity: 1 },
+    };
+
     return (
         <>
-            {/* Announcement Banner (Normal flow, scrolls away naturally) */}
-            <AnimatePresence>
-                {bannerVisible && pathname !== "/websites" && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="relative z-50 bg-neutral-950 border-b border-indigo-500/10"
-                    >
-                        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5 lg:px-12">
-                            <p className="w-full text-center text-sm font-medium text-zinc-300">
-                                Need a premium web presence fast? Launch your site in 24 hours.{" "}
-                                <Link href="/websites" className="text-white hover:text-indigo-300 underline underline-offset-4 transition-colors">
-                                    Explore the Studio →
-                                </Link>
-                            </p>
-                            <button
-                                onClick={() => setBannerVisible(false)}
-                                className="absolute right-4 rounded-md p-1 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"
-                                aria-label="Dismiss banner"
-                            >
-                                <X size={16} />
-                            </button>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Banner + Navbar anchor: relative wrapper so navbar can float below banner */}
+            <div className="relative z-50">
+                {/* Announcement Banner — in normal flow, pushes hero down by its height */}
+                <AnimatePresence>
+                    {bannerVisible && pathname !== "/websites" && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="bg-neutral-950 border-b border-indigo-500/10"
+                        >
+                            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5 lg:px-12">
+                                <p className="w-full text-center text-sm font-medium text-zinc-300">
+                                    Need a premium web presence fast? Launch your site in 24 hours.{" "}
+                                    <Link href="/websites" className="text-white hover:text-indigo-300 underline underline-offset-4 transition-colors">
+                                        Explore the Studio &rarr;
+                                    </Link>
+                                </p>
+                                <button
+                                    onClick={() => setBannerVisible(false)}
+                                    className="absolute right-4 rounded-md p-1 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"
+                                    aria-label="Dismiss banner"
+                                >
+                                    <X size={16} />
+                                </button>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
-            {/* Navbar (Sticky, stays at top; negative mb so it overlays Hero below it) */}
-            <motion.header
-                initial={{ opacity: 0, y: -24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="sticky top-0 z-50 w-full -mb-[76px]"
-            >
-                <div
-                    className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${scrolled
-                        ? "mt-4 max-w-6xl rounded-2xl border border-white/10 bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl"
-                        : "max-w-full rounded-none border-b border-white/5 bg-transparent backdrop-blur-md"
-                        }`}
+                {/* Navbar — absolute at top so it overlays hero; fixed when pill */}
+                <motion.header
+                    initial={{ opacity: 0, y: -24 }}
+                    animate={headerVariants[navState]}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className={`left-0 right-0 z-50 ${
+                        navState === "top" ? "absolute" : "fixed top-0"
+                    }`}
                 >
-                    <nav className="flex items-center justify-between px-6 py-4 xl:px-8">
+                <div
+                    className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        navState === "pill"
+                            ? "mt-4 max-w-5xl rounded-full border border-white/10 bg-black/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+                            : "max-w-full rounded-none border-b border-transparent bg-transparent"
+                    }`}
+                >
+                    <nav
+                        className={`flex items-center justify-between ${
+                            navState === "pill"
+                                ? "px-5 py-2.5"
+                                : "px-6 py-4 xl:px-8"
+                        }`}
+                    >
                         {/* Logo */}
                         <Link href="/" className="group flex items-center gap-2.5">
                             <span className="relative flex h-6 w-6 items-center justify-center">
@@ -84,14 +111,16 @@ export default function Navbar() {
                         </Link>
 
                         {/* Desktop links */}
-                        <ul className="hidden md:flex items-center gap-10 lg:gap-14">
+                        <ul className={`hidden md:flex items-center ${
+                            navState === "pill" ? "gap-7 lg:gap-10" : "gap-6 lg:gap-8"
+                        }`}>
                             {NAV_LINKS.map((link) => {
                                 const active = isActive(link.href);
                                 return (
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
-                                            className={`relative text-sm transition-colors duration-200
+                                            className={`relative whitespace-nowrap text-sm transition-colors duration-200
                                             after:absolute after:-bottom-0.5 after:left-0 after:h-px after:transition-all after:duration-300
                                             ${active
                                                     ? "text-white after:w-full after:bg-violet-400 drop-shadow-[0_0_8px_rgba(167,139,250,0.6)]"
@@ -109,7 +138,9 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center gap-4">
                             <Link
                                 href="/contact"
-                                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/15 bg-white/5 px-5 py-2 text-sm font-medium text-white transition-all duration-300 hover:border-white/30 hover:bg-white/10"
+                                className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/15 bg-white/5 text-sm font-medium text-white transition-all duration-300 hover:border-white/30 hover:bg-white/10 ${
+                                    navState === "pill" ? "px-4 py-1.5 text-xs" : "px-5 py-2"
+                                }`}
                             >
                                 <span className="relative z-10">Start a Project</span>
                                 <svg
@@ -166,7 +197,7 @@ export default function Navbar() {
                                         onClick={() => setMobileOpen(false)}
                                         className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white"
                                     >
-                                        Start a Project →
+                                        Start a Project &rarr;
                                     </Link>
                                 </li>
                             </ul>
@@ -174,6 +205,8 @@ export default function Navbar() {
                     )}
                 </AnimatePresence>
             </motion.header>
+            </div>
+
         </>
     );
 }

@@ -212,7 +212,7 @@ const CASE_STUDIES = [
         metric: "10k+",
         metricLabel: "Active Users Scaled To",
         description:
-            "Complete architectural redesign and AI-driven document workflow automation — transforming a fragile monolith into a resilient, multi-tenant SaaS powering law firms across three continents.",
+            "Complete architectural redesign and AI-driven document workflow automation - transforming a fragile monolith into a resilient, multi-tenant SaaS powering law firms across three continents.",
         tags: ["Next.js", "AI Automation", "Dashboard"],
         liveUrl: "https://nextlex.com",
         pattern: <PatternDotScan />,
@@ -226,7 +226,7 @@ const CASE_STUDIES = [
         metric: "300%",
         metricLabel: "Faster Order Routing",
         description:
-            "High-performance digital storefront streamlining global supply chain operations — from quote to shipment in a single, unified platform.",
+            "High-performance digital storefront streamlining global supply chain operations - from quote to shipment in a single, unified platform.",
         tags: ["E-Commerce", "API Integration", "Supply Chain"],
         liveUrl: "https://primemarkapparel.com",
         pattern: <PatternFlowGrid />,
@@ -240,7 +240,7 @@ const CASE_STUDIES = [
         metric: "85%",
         metricLabel: "Reduction in Latency",
         description:
-            "Custom internal tools and predictive AI models for fleet management — delivering real-time visibility across a 500-vehicle operation.",
+            "Custom internal tools and predictive AI models for fleet management - delivering real-time visibility across a 500-vehicle operation.",
         tags: ["Machine Learning", "React", "Python"],
         pattern: <PatternNodeGraph />,
         accentColor: "rgba(109,40,217,0.13)",
@@ -458,7 +458,7 @@ export default function CaseStudies() {
                         className="mb-16 flex flex-col gap-5 lg:mb-20 lg:flex-row lg:items-end lg:justify-between"
                     >
                         <div>
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-px w-6 bg-zinc-700" />
                                 Proven Impact
                             </span>

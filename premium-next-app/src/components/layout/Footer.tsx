@@ -1,5 +1,41 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
+/* ─── Live Clock ─────────────────────────────────────────── */
+function LiveClock({ tz, label }: { tz: string; label: string }) {
+    const [time, setTime] = useState("");
+
+    useEffect(() => {
+        const tick = () =>
+            setTime(
+                new Intl.DateTimeFormat("en-US", {
+                    timeZone: tz,
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false,
+                }).format(new Date())
+            );
+        tick();
+        const id = setInterval(tick, 1000);
+        return () => clearInterval(id);
+    }, [tz]);
+
+    return (
+        <div>
+            <p className="text-xs uppercase tracking-widest text-zinc-600 mb-1.5">
+                {label}
+            </p>
+            <p className="font-mono text-sm tabular-nums text-zinc-400">
+                {time || "--:--:--"}
+            </p>
+        </div>
+    );
+}
+
+/* ─── Data ───────────────────────────────────────────────── */
 const SERVICES_LINKS = [
     { label: "Custom Software", href: "/services#custom-software" },
     { label: "AI Automation", href: "/services#ai-automation" },
@@ -44,18 +80,19 @@ const SOCIAL_LINKS = [
     },
 ];
 
+/* ─── Footer ─────────────────────────────────────────────── */
 export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="bg-zinc-950 pt-20 pb-10">
-            {/* Top hairline */}
+        <footer className="w-full bg-zinc-950 pt-20 pb-10">
             <div className="mx-auto max-w-7xl px-6 lg:px-16">
+                {/* Top hairline */}
                 <div className="mb-16 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
 
-                {/* Grid layout with horizontal spread */}
-                <div className="flex flex-col gap-12 md:flex-row md:justify-between lg:col-span-3">
-                    {/* Col 1 — Brand */}
+                {/* 4-column distributed layout */}
+                <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+                    {/* Col 1 - Brand */}
                     <div className="max-w-xs">
                         <Link href="/" className="group mb-5 inline-flex items-center gap-2.5">
                             <span className="relative flex h-6 w-6 items-center justify-center">
@@ -67,7 +104,7 @@ export default function Footer() {
                             </span>
                         </Link>
                         <p className="text-sm leading-relaxed text-zinc-500">
-                            Engineering the future of business — one system at a time.
+                            Engineering the future of business - one system at a time.
                         </p>
 
                         {/* Social row */}
@@ -85,43 +122,52 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="flex gap-16 lg:gap-24">
-                        {/* Col 2 — Services */}
-                        <div>
-                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                Services
-                            </p>
-                            <ul className="flex flex-col gap-3">
-                                {SERVICES_LINKS.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    {/* Col 2 - Services */}
+                    <div>
+                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            Services
+                        </p>
+                        <ul className="flex flex-col gap-3">
+                            {SERVICES_LINKS.map((link) => (
+                                <li key={link.label}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                        {/* Col 3 — Company */}
-                        <div>
-                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                Company
-                            </p>
-                            <ul className="flex flex-col gap-3">
-                                {COMPANY_LINKS.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                    {/* Col 3 - Company */}
+                    <div>
+                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            Company
+                        </p>
+                        <ul className="flex flex-col gap-3">
+                            {COMPANY_LINKS.map((link) => (
+                                <li key={link.label}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Col 4 - Global Presence (Live Clocks) */}
+                    <div>
+                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            Global Presence
+                        </p>
+                        <div className="flex flex-col gap-5">
+                            <LiveClock tz="America/New_York" label="HQ - Morgantown, WV" />
+                            <LiveClock tz="Asia/Karachi" label="Engineering - Lahore, PK" />
                         </div>
                     </div>
                 </div>
@@ -129,7 +175,7 @@ export default function Footer() {
                 {/* Bottom bar */}
                 <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
                     <p className="text-xs text-zinc-600">
-                        © {year} TechBridge. All rights reserved.
+                        <span className="font-mono tabular-nums">&copy; {year}</span> TechBridge. All rights reserved.
                     </p>
                     <p className="text-xs text-zinc-700">
                         Engineered with precision.

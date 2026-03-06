@@ -25,7 +25,7 @@ export default function CTA() {
                 id="cta"
                 ref={ref}
                 /* z-10 + solid bg: covers the footer behind it until scroll reveals it */
-                className="relative z-10 overflow-hidden rounded-b-3xl bg-neutral-950 py-36 lg:py-48"
+                className="relative z-10 overflow-hidden bg-neutral-950 py-36 lg:py-48"
             >
                 {/* ── Radial glow anchor ── */}
                 <div
@@ -55,7 +55,7 @@ export default function CTA() {
                         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                     >
                         {/* Eyebrow */}
-                        <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-500">
+                        <span className="mb-6 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-500">
                             <span className="h-px w-6 bg-zinc-700" />
                             Start Your Project
                             <span className="h-px w-6 bg-zinc-700" />

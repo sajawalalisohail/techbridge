@@ -205,7 +205,7 @@ export default function AboutPage() {
 
     return (
         <div className="bg-black">
-            <div className="relative z-10">
+            <div className="relative z-10 overflow-hidden min-h-screen bg-black">
                 <Navbar />
 
                 {/* ── Hero ── */}
@@ -322,6 +322,8 @@ export default function AboutPage() {
                     </div>
                 </section>
 
+            </div>
+            <div className="sticky bottom-0 z-0">
                 <Footer />
             </div>
         </div>

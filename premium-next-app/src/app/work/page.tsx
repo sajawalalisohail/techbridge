@@ -396,7 +396,7 @@ export default function WorkPage() {
             <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
             <div className="bg-black">
-                <div className="relative z-10">
+                <div className="relative z-10 overflow-hidden min-h-screen bg-black">
                     <Navbar />
 
                     {/* ── Work Hero ── */}
@@ -471,6 +471,8 @@ export default function WorkPage() {
                         </div>
                     </div>
 
+                </div>
+                <div className="sticky bottom-0 z-0">
                     <Footer />
                 </div>
             </div>

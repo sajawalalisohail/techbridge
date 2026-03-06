@@ -24,7 +24,7 @@ const PHASES = [
         icon: Rocket,
         label: "Rapid Deployment",
         description:
-            "MVPs and premium web presences launched in record time to establish immediate ROI and create a feedback loop with real users — not assumptions.",
+            "MVPs and premium web presences launched in record time to establish immediate ROI and create a feedback loop with real users - not assumptions.",
         tags: ["MVP Launch", "Performance Budgets", "Conversion Architecture"],
     },
     {
@@ -32,7 +32,7 @@ const PHASES = [
         icon: Code2,
         label: "Core Engineering",
         description:
-            "Building your custom software, SaaS platform, or internal tools using modern, scalable stacks. Clean code, proper abstractions, and thorough documentation — always.",
+            "Building your custom software, SaaS platform, or internal tools using modern, scalable stacks. Clean code, proper abstractions, and thorough documentation - always.",
         tags: ["Full-Stack Development", "API Design", "QA & Testing"],
     },
     {
@@ -48,10 +48,8 @@ const PHASES = [
 /* ─── Individual Step ────────────────────────────────────── */
 function PhaseCard({
     phase,
-    index,
 }: {
     phase: (typeof PHASES)[number];
-    index: number;
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
@@ -76,21 +74,23 @@ function PhaseCard({
             variants={itemVariants}
             initial="hidden"
             animate={isInView ? "show" : "hidden"}
-            className="group relative ml-10 flex flex-col gap-4 lg:ml-16"
+            className="contents"
         >
-            {/* Timeline dot — sits on the vertical line */}
-            <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
-                className="absolute -left-[2.85rem] top-8 flex h-5 w-5 items-center justify-center lg:-left-[4.1rem]"
-            >
-                <span className="absolute inset-0 rounded-full bg-violet-500/30 blur-sm" />
-                <span className="relative h-2.5 w-2.5 rounded-full bg-violet-400 ring-2 ring-violet-400/30 ring-offset-2 ring-offset-black" />
-            </motion.div>
+            {/* Left rail - dot (col 1) */}
+            <div className="relative flex justify-center pt-8">
+                <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
+                    className="relative flex h-5 w-5 items-center justify-center"
+                >
+                    <span className="absolute inset-0 rounded-full bg-violet-500/30 blur-sm" />
+                    <span className="relative h-2.5 w-2.5 rounded-full bg-violet-400 ring-2 ring-violet-400/30 ring-offset-2 ring-offset-black" />
+                </motion.div>
+            </div>
 
-            {/* Glass card */}
-            <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-8">
+            {/* Glass card (col 2) */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-8">
                 {/* Hover glow */}
                 <div
                     aria-hidden="true"
@@ -149,7 +149,6 @@ export default function HowItWorks() {
         offset: ["start 75%", "end 60%"],
     });
 
-    /* The glowing fill line scaleY: 0 → 1 as we scroll through the section */
     const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
     return (
@@ -178,7 +177,7 @@ export default function HowItWorks() {
                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-20 lg:mb-24"
                 >
-                    <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                    <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                         <span className="h-px w-6 bg-zinc-700" />
                         Our Process
                     </span>
@@ -193,30 +192,27 @@ export default function HowItWorks() {
                     </p>
                 </motion.div>
 
-                {/* ── Timeline ── */}
-                <div className="relative">
-                    {/* Track: the ghost line */}
-                    <div className="absolute left-0 top-0 h-full w-px bg-white/5 lg:left-0" />
-
+                {/* ── Timeline (2-column grid: rail | cards) ── */}
+                <div className="relative grid grid-cols-[2rem_1fr] gap-x-4 gap-y-10 lg:grid-cols-[3rem_1fr] lg:gap-x-6 lg:gap-y-12">
+                    {/* Vertical rail line (spans all rows, behind dots) */}
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute left-[1rem] top-0 h-full w-px bg-white/5 lg:left-[1.5rem]"
+                    />
                     {/* Glow line: scroll-driven scaleY */}
                     <motion.div
+                        aria-hidden="true"
                         style={{ scaleY: lineScaleY, originY: 0 }}
-                        className="absolute left-0 top-0 h-full w-px lg:left-0"
+                        className="pointer-events-none absolute left-[1rem] top-0 h-full w-px lg:left-[1.5rem]"
                     >
-                        {/* The glowing line itself */}
                         <div className="h-full w-full bg-gradient-to-b from-violet-500 via-indigo-500 to-violet-500/10" />
-                        {/* Bloom at the leading edge of the line */}
-                        <div
-                            className="pointer-events-none absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 rounded-full bg-violet-500/60 blur-md"
-                        />
+                        <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 rounded-full bg-violet-500/60 blur-md" />
                     </motion.div>
 
-                    {/* Phase cards */}
-                    <div className="flex flex-col gap-10 lg:gap-12">
-                        {PHASES.map((phase, index) => (
-                            <PhaseCard key={phase.number} phase={phase} index={index} />
-                        ))}
-                    </div>
+                    {/* Phase cards (each renders into both columns via `contents`) */}
+                    {PHASES.map((phase) => (
+                        <PhaseCard key={phase.number} phase={phase} />
+                    ))}
                 </div>
             </div>
         </section>

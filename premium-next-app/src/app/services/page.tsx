@@ -200,7 +200,7 @@ export default function ServicesPage() {
 
     return (
         <div className="bg-black">
-            <div className="relative z-10">
+            <div className="relative z-10 overflow-hidden min-h-screen bg-black">
                 <Navbar />
 
                 {/* ── Services Hero ── */}
@@ -337,7 +337,8 @@ export default function ServicesPage() {
                     </div>
                 </div>
 
-                {/* Footer */}
+            </div>
+            <div className="sticky bottom-0 z-0">
                 <Footer />
             </div>
         </div>

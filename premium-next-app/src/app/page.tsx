@@ -22,7 +22,7 @@ export default function Home() {
      */
     <div className="bg-black">
       {/* All main content: z-10, solid backgrounds, covers footer during scroll */}
-      <div className="relative z-10">
+      <div className="relative z-10 overflow-hidden">
         <Navbar />
         <Hero />
         <Services />

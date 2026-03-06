@@ -39,7 +39,7 @@ const ADVANTAGES: Advantage[] = [
         eyebrow: "Modern Stack",
         title: "AI-Native Engineering",
         description:
-            "We don't bolt AI on at the end. Every system we build is designed from the ground up with modern AI stacks, intelligent automation, and machine-readable APIs — so your business can compound its advantage over time.",
+            "We don't bolt AI on at the end. Every system we build is designed from the ground up with modern AI stacks, intelligent automation, and machine-readable APIs - so your business can compound its advantage over time.",
         detail: "Built with AI from line one.",
         accentA: "rgba(139,92,246,0.18)",
         accentB: "rgba(99,102,241,0.12)",
@@ -49,7 +49,7 @@ const ADVANTAGES: Advantage[] = [
         eyebrow: "Direct Access",
         title: "Zero Bloat. Senior Engineers Only.",
         description:
-            "No layers of account managers, no offshore handoffs, no junior devs flying blind. You work directly with senior engineers who own the outcome — meaning faster decisions and zero information loss.",
+            "No layers of account managers, no offshore handoffs, no junior devs flying blind. You work directly with senior engineers who own the outcome - meaning faster decisions and zero information loss.",
         detail: "You talk to the builder.",
         accentA: "rgba(99,102,241,0.15)",
         accentB: "rgba(167,139,250,0.10)",
@@ -59,7 +59,7 @@ const ADVANTAGES: Advantage[] = [
         eyebrow: "Velocity",
         title: "Rapid Execution",
         description:
-            "Speed is a competitive moat, not a luxury. We ship MVPs in weeks, premium web presences in 24 hours, and maintain that velocity through every phase — without sacrificing engineering quality.",
+            "Speed is a competitive moat, not a luxury. We ship MVPs in weeks, premium web presences in 24 hours, and maintain that velocity through every phase - without sacrificing engineering quality.",
         detail: "Production-ready in days.",
         accentA: "rgba(167,139,250,0.16)",
         accentB: "rgba(99,102,241,0.12)",
@@ -69,7 +69,7 @@ const ADVANTAGES: Advantage[] = [
         eyebrow: "Resilience",
         title: "Enterprise-Grade Foundations",
         description:
-            "Every system is architected for scale, security, and observability from the start. We write the kind of code that survives your Series B — not a re-write every 18 months.",
+            "Every system is architected for scale, security, and observability from the start. We write the kind of code that survives your Series B - not a re-write every 18 months.",
         detail: "Built to handle your growth.",
         accentA: "rgba(109,40,217,0.15)",
         accentB: "rgba(139,92,246,0.10)",
@@ -100,7 +100,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
             variants={cardVariants}
             className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-10"
         >
-            {/* ── Gradient mesh — always mounted, fades in on hover ── */}
+            {/* ── Gradient mesh - always mounted, fades in on hover ── */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
@@ -117,7 +117,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
                 />
             </div>
 
-            {/* Edge accent line — top */}
+            {/* Edge accent line - top */}
             <div
                 aria-hidden="true"
                 className="absolute left-0 top-0 h-px w-0 bg-gradient-to-r from-violet-500/60 to-transparent transition-all duration-700 group-hover:w-full"
@@ -131,7 +131,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
                 </div>
 
                 {/* Eyebrow */}
-                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-600 transition-colors duration-300 group-hover:text-zinc-500">
+                <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 transition-colors duration-300 group-hover:text-zinc-500">
                     {item.eyebrow}
                 </p>
 
@@ -195,7 +195,7 @@ export default function WhyChooseUs() {
                         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         className="mb-16 lg:mb-20"
                     >
-                        <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-px w-6 bg-zinc-700" />
                             The TechBridge Advantage
                         </span>

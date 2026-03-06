@@ -156,7 +156,7 @@ export default function Hero() {
                                 </svg>
                             </div>
                             <p className="text-xs font-medium tracking-widest text-white/20 uppercase">
-                                Neural Bridge — 3D Canvas
+                                Neural Bridge - 3D Canvas
                             </p>
                         </div>
                     </div>
@@ -172,7 +172,7 @@ export default function Hero() {
                 >
                     {STATS.map((stat) => (
                         <div key={stat.label} className="flex flex-col items-center gap-1">
-                            <span className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                            <span className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 {stat.value}
                             </span>
                             <span className="text-xs tracking-wider text-zinc-500 uppercase text-center">

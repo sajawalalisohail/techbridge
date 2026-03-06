@@ -276,7 +276,7 @@ function LargeCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                style={{ background: study.accentColor ? `radial-gradient(ellipse at 0% 50%, ${study.accentColor} 0%, transparent 60%)` : undefined }}
+                style={{ background: study.accentColor ? `radial-gradient(ellipse at 0% 50%, ${study.accentColor} 0%, transparent 100%)` : undefined }}
             />
 
             {/* Visual area — left 2 cols */}
@@ -354,7 +354,7 @@ function SmallCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                style={{ background: study.accentColor ? `radial-gradient(ellipse at 50% 0%, ${study.accentColor} 0%, transparent 65%)` : undefined }}
+                style={{ background: study.accentColor ? `radial-gradient(ellipse at 50% 0%, ${study.accentColor} 0%, transparent 100%)` : undefined }}
             />
 
             {/* Visual area — top */}

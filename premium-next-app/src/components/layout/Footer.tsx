@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 /* ─── Live Clock ─────────────────────────────────────────── */
@@ -83,105 +83,123 @@ const SOCIAL_LINKS = [
 /* ─── Footer ─────────────────────────────────────────────── */
 export default function Footer() {
     const year = new Date().getFullYear();
+    const footerRef = React.useRef<HTMLElement>(null);
+
+    React.useEffect(() => {
+        const updateHeight = () => {
+            if (footerRef.current) {
+                document.documentElement.style.setProperty('--footer-height', `${footerRef.current.offsetHeight}px`);
+            }
+        };
+        updateHeight();
+        window.addEventListener('resize', updateHeight);
+        return () => window.removeEventListener('resize', updateHeight);
+    }, []);
 
     return (
-        <footer className="w-full bg-[#030303] pt-20 pb-10">
-            <div className="mx-auto max-w-7xl px-6 lg:px-16">
-                {/* Top hairline */}
-                <div className="mb-16 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+        <>
+            {/* Spacer that pushes normal document flow to allow scrolling past the fixed footer */}
+            <div style={{ height: "var(--footer-height, 400px)" }} className="w-full pointer-events-none" />
 
-                {/* 4-column distributed layout */}
-                <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-                    {/* Col 1 - Brand */}
-                    <div className="max-w-xs">
-                        <Link href="/" className="group mb-5 inline-flex items-center gap-2.5">
-                            <span className="relative flex h-6 w-6 items-center justify-center">
-                                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 opacity-80 blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:blur" />
-                                <span className="relative h-3 w-3 rounded-full bg-white" />
-                            </span>
-                            <span className="text-sm font-semibold tracking-widest text-white uppercase">
-                                TechBridge
-                            </span>
-                        </Link>
-                        <p className="text-sm leading-relaxed text-zinc-500">
-                            Engineering the future of business - one system at a time.
-                        </p>
+            {/* The actual footer sits fixed at the bottom behind the page content */}
+            <footer ref={footerRef} className="fixed bottom-0 left-0 z-[0] w-full bg-[#030303] pt-20 pb-10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+                <div className="mx-auto max-w-7xl px-6 lg:px-16">
+                    {/* Top hairline */}
+                    <div className="mb-16 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
 
-                        {/* Social row */}
-                        <div className="mt-7 flex items-center gap-3">
-                            {SOCIAL_LINKS.map((s) => (
-                                <a
-                                    key={s.label}
-                                    href={s.href}
-                                    aria-label={s.label}
-                                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
-                                >
-                                    {s.icon}
-                                </a>
-                            ))}
+                    {/* 4-column distributed layout */}
+                    <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+                        {/* Col 1 - Brand */}
+                        <div className="max-w-xs">
+                            <Link href="/" className="group mb-5 inline-flex items-center gap-2.5">
+                                <span className="relative flex h-6 w-6 items-center justify-center">
+                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 opacity-80 blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:blur" />
+                                    <span className="relative h-3 w-3 rounded-full bg-white" />
+                                </span>
+                                <span className="text-sm font-semibold tracking-widest text-white uppercase">
+                                    TechBridge
+                                </span>
+                            </Link>
+                            <p className="text-sm leading-relaxed text-zinc-500">
+                                Engineering the future of business - one system at a time.
+                            </p>
+
+                            {/* Social row */}
+                            <div className="mt-7 flex items-center gap-3">
+                                {SOCIAL_LINKS.map((s) => (
+                                    <a
+                                        key={s.label}
+                                        href={s.href}
+                                        aria-label={s.label}
+                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                                    >
+                                        {s.icon}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Col 2 - Services */}
+                        <div>
+                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                Services
+                            </p>
+                            <ul className="flex flex-col gap-3">
+                                {SERVICES_LINKS.map((link) => (
+                                    <li key={link.label}>
+                                        <Link
+                                            href={link.href}
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Col 3 - Company */}
+                        <div>
+                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                Company
+                            </p>
+                            <ul className="flex flex-col gap-3">
+                                {COMPANY_LINKS.map((link) => (
+                                    <li key={link.label}>
+                                        <Link
+                                            href={link.href}
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Col 4 - Global Presence (Live Clocks) */}
+                        <div>
+                            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                Global Presence
+                            </p>
+                            <div className="flex flex-col gap-5">
+                                <LiveClock tz="America/New_York" label="HQ - Morgantown, WV" />
+                                <LiveClock tz="Asia/Karachi" label="Engineering - Lahore, PK" />
+                            </div>
                         </div>
                     </div>
 
-                    {/* Col 2 - Services */}
-                    <div>
-                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            Services
+                    {/* Bottom bar */}
+                    <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
+                        <p className="text-xs text-zinc-600">
+                            <span className="font-mono tabular-nums">&copy; {year}</span> TechBridge. All rights reserved.
                         </p>
-                        <ul className="flex flex-col gap-3">
-                            {SERVICES_LINKS.map((link) => (
-                                <li key={link.label}>
-                                    <Link
-                                        href={link.href}
-                                        className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Col 3 - Company */}
-                    <div>
-                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            Company
+                        <p className="text-xs text-zinc-700">
+                            Engineered with precision.
                         </p>
-                        <ul className="flex flex-col gap-3">
-                            {COMPANY_LINKS.map((link) => (
-                                <li key={link.label}>
-                                    <Link
-                                        href={link.href}
-                                        className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Col 4 - Global Presence (Live Clocks) */}
-                    <div>
-                        <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            Global Presence
-                        </p>
-                        <div className="flex flex-col gap-5">
-                            <LiveClock tz="America/New_York" label="HQ - Morgantown, WV" />
-                            <LiveClock tz="Asia/Karachi" label="Engineering - Lahore, PK" />
-                        </div>
                     </div>
                 </div>
-
-                {/* Bottom bar */}
-                <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
-                    <p className="text-xs text-zinc-600">
-                        <span className="font-mono tabular-nums">&copy; {year}</span> TechBridge. All rights reserved.
-                    </p>
-                    <p className="text-xs text-zinc-700">
-                        Engineered with precision.
-                    </p>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </>
     );
 }

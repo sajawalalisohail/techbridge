@@ -97,7 +97,7 @@ function PhaseCard({
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
                         background:
-                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.10) 0%, transparent 70%)",
+                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, transparent 100%)",
                     }}
                 />
 

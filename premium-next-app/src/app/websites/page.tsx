@@ -987,11 +987,11 @@ function FinalCTA() {
 ══════════════════════════════════════════════════════════ */
 export default function WebsitesPage() {
     return (
-        <div className="relative bg-black text-white">
+        <div className="relative text-white min-h-screen">
             <style dangerouslySetInnerHTML={{ __html: violetPulseCSS }} />
 
             {/* Ambient background glows — matches homepage */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
                 <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[120px]" />
                 <div className="absolute -bottom-32 right-0 h-[500px] w-[500px] rounded-full bg-indigo-900/15 blur-[100px]" />
             </div>
@@ -1071,9 +1071,9 @@ export default function WebsitesPage() {
                 <FinalCTA />
 
             </div>
-            <div className="sticky bottom-0 z-0">
-                <Footer />
-            </div>
+
+            {/* Footer handles its own reveal trick (spacer + fixed z-0) */}
+            <Footer />
         </div>
     );
 }

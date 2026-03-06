@@ -44,9 +44,8 @@ export default function CTA() {
                     className="pointer-events-none absolute inset-0 z-0"
                     style={{
                         background: `
-                            radial-gradient(ellipse at 20% 80%, rgba(109,40,217,0.08) 0%, transparent 50%),
-                            radial-gradient(ellipse at 80% 20%, rgba(79,70,229,0.06) 0%, transparent 50%),
-                            radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.8) 0%, transparent 70%)
+                            radial-gradient(ellipse at 20% 80%, rgba(109,40,217,0.05) 0%, transparent 100%),
+                            radial-gradient(ellipse at 80% 20%, rgba(79,70,229,0.04) 0%, transparent 100%)
                         `,
                     }}
                 />
@@ -60,7 +59,7 @@ export default function CTA() {
                         className="cta-glow h-[560px] w-[560px] rounded-full blur-[120px]"
                         style={{
                             background:
-                                "radial-gradient(ellipse, rgba(109,40,217,0.35) 0%, rgba(79,70,229,0.15) 50%, transparent 75%)",
+                                "radial-gradient(ellipse, rgba(109,40,217,0.18) 0%, rgba(79,70,229,0.06) 60%, transparent 100%)",
                         }}
                     />
                 </div>

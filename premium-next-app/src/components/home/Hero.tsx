@@ -3,6 +3,13 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+// Dynamically import 3D background for performance
+const HybridBackground = dynamic(
+    () => import("@/3d").then((mod) => mod.HybridBackground),
+    { ssr: false }
+);
 
 /* Stagger container + child variants */
 const container = {
@@ -35,14 +42,11 @@ export default function Hero() {
 
     return (
         <section className="relative min-h-screen w-full overflow-hidden">
-            {/* ─── CSS blob atmosphere (no separate Canvas — global particles flow through) ─── */}
+            {/* ─── 3D Hybrid Background ─── */}
+            <HybridBackground />
+
+            {/* ─── Overlay: noise + hairline ─── */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-                {/* Centre violet bloom */}
-                <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-700/20 blur-[140px]" />
-                {/* Left indigo bloom */}
-                <div className="absolute -left-20 top-1/3 h-[400px] w-[400px] rounded-full bg-indigo-700/18 blur-[120px]" />
-                {/* Right purple bloom */}
-                <div className="absolute right-0 top-1/4 h-[350px] w-[350px] rounded-full bg-purple-700/15 blur-[110px]" />
                 {/* Fine noise texture for depth */}
                 <div
                     className="absolute inset-0 opacity-[0.03]"

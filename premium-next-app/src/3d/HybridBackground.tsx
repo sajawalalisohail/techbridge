@@ -9,14 +9,13 @@ export function HybridBackground() {
       <Canvas
         camera={{ position: [0, 0, 8], fov: 60 }}
         dpr={[1, 2]}
-        gl={{ 
-          antialias: true, 
+        gl={{
+          antialias: true,
           alpha: true,
           powerPreference: 'high-performance'
         }}
+        style={{ background: 'transparent' }}
       >
-        <color attach="background" args={['#000000']} />
-        <fog attach="fog" args={['#000000', 10, 30]} />
         <MainScene />
       </Canvas>
     </div>

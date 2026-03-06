@@ -1,10 +1,8 @@
 "use client";
 
 import { InteractiveCamera } from '../components/InteractiveCamera';
-import { DarkBackground } from '../components/DarkBackground';
 import { SoftGradientBlob } from '../components/SoftGradientBlob';
 import { CenterBlob } from '../components/CenterBlob';
-import { Particles } from '../components/Particles';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 export function MainScene() {
@@ -12,9 +10,6 @@ export function MainScene() {
     <>
       <InteractiveCamera />
       <ambientLight intensity={0.3} />
-
-      {/* Dark base background */}
-      <DarkBackground />
 
       {/* Center Blob: Higher up */}
       <CenterBlob
@@ -56,9 +51,6 @@ export function MainScene() {
         speed={0.6}
         phase={2}
       />
-
-      {/* Floating circular particles */}
-      <Particles count={50} />
 
       {/* Bloom post-processing */}
       <EffectComposer>

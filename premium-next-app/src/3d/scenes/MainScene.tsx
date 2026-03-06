@@ -12,12 +12,12 @@ export function MainScene() {
     <>
       <InteractiveCamera />
       <ambientLight intensity={0.3} />
-      
+
       {/* Dark base background */}
       <DarkBackground />
-      
+
       {/* Center Blob: Higher up */}
-      <CenterBlob 
+      <CenterBlob
         colorStops={[
           { offset: 0, color: 'rgba(109, 40, 217, 0.28)', opacity: 0.28 },
           { offset: 0.3, color: 'rgba(91, 33, 182, 0.16)', opacity: 0.16 },
@@ -28,9 +28,9 @@ export function MainScene() {
         scale={1.3}
         speed={0.4}
       />
-      
+
       {/* Blob 1: Left blob - much higher */}
-      <SoftGradientBlob 
+      <SoftGradientBlob
         colorStops={[
           { offset: 0, color: 'rgba(99, 102, 241, 0.32)', opacity: 0.32 },
           { offset: 0.3, color: 'rgba(79, 70, 229, 0.18)', opacity: 0.18 },
@@ -42,9 +42,9 @@ export function MainScene() {
         speed={0.7}
         phase={0}
       />
-      
+
       {/* Blob 2: Right blob - much higher */}
-      <SoftGradientBlob 
+      <SoftGradientBlob
         colorStops={[
           { offset: 0, color: 'rgba(168, 85, 247, 0.28)', opacity: 0.28 },
           { offset: 0.3, color: 'rgba(147, 51, 234, 0.16)', opacity: 0.16 },
@@ -56,13 +56,13 @@ export function MainScene() {
         speed={0.6}
         phase={2}
       />
-      
+
       {/* Floating circular particles */}
-      <Particles count={200} />
-      
+      <Particles count={50} />
+
       {/* Bloom post-processing */}
       <EffectComposer>
-        <Bloom 
+        <Bloom
           intensity={0.4}
           luminanceThreshold={0.15}
           luminanceSmoothing={0.85}

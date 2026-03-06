@@ -8,7 +8,7 @@ interface ParticlesProps {
   count?: number;
 }
 
-export function Particles({ count = 200 }: ParticlesProps) {
+export function Particles({ count = 80 }: ParticlesProps) {
   const meshRef = useRef<THREE.Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -18,17 +18,17 @@ export function Particles({ count = 200 }: ParticlesProps) {
     canvas.width = 32;
     canvas.height = 32;
     const ctx = canvas.getContext('2d')!;
-    
+
     // Draw a soft circle
     const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
     gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.8)');
     gradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.3)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-    
+
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 32, 32);
-    
+
     const texture = new THREE.CanvasTexture(canvas);
     texture.needsUpdate = true;
     return texture;
@@ -37,17 +37,17 @@ export function Particles({ count = 200 }: ParticlesProps) {
   const [positions, velocities] = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const velocities = new Float32Array(count * 3);
-    
+
     for (let i = 0; i < count; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 30;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
-      
+
       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
     }
-    
+
     return [positions, velocities];
   }, [count]);
 
@@ -60,14 +60,14 @@ export function Particles({ count = 200 }: ParticlesProps) {
       new THREE.Color('#a855f7'), // purple-500
       new THREE.Color('#ffffff'), // white
     ];
-    
+
     for (let i = 0; i < count; i++) {
       const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
     }
-    
+
     return colors;
   }, [count]);
 
@@ -80,33 +80,33 @@ export function Particles({ count = 200 }: ParticlesProps) {
 
   useFrame((state) => {
     if (!meshRef.current) return;
-    
+
     const positionArray = meshRef.current.geometry.attributes.position.array as Float32Array;
-    
+
     mouseRef.current.x += (state.pointer.x - mouseRef.current.x) * 0.05;
     mouseRef.current.y += (state.pointer.y - mouseRef.current.y) * 0.05;
-    
+
     for (let i = 0; i < count; i++) {
       positionArray[i * 3] += velocities[i * 3];
       positionArray[i * 3 + 1] += velocities[i * 3 + 1];
       positionArray[i * 3 + 2] += velocities[i * 3 + 2];
-      
+
       const dx = positionArray[i * 3] - mouseRef.current.x * 10;
       const dy = positionArray[i * 3 + 1] - mouseRef.current.y * 5;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (dist < 3) {
         const force = (3 - dist) * 0.001;
         positionArray[i * 3] += dx * force;
         positionArray[i * 3 + 1] += dy * force;
       }
-      
+
       if (positionArray[i * 3] > 15) positionArray[i * 3] = -15;
       if (positionArray[i * 3] < -15) positionArray[i * 3] = 15;
       if (positionArray[i * 3 + 1] > 10) positionArray[i * 3 + 1] = -10;
       if (positionArray[i * 3 + 1] < -10) positionArray[i * 3 + 1] = 10;
     }
-    
+
     meshRef.current.geometry.attributes.position.needsUpdate = true;
     meshRef.current.rotation.x = mouseRef.current.y * 0.03;
     meshRef.current.rotation.y = mouseRef.current.x * 0.03;
@@ -115,7 +115,7 @@ export function Particles({ count = 200 }: ParticlesProps) {
   return (
     <points ref={meshRef} geometry={geometry}>
       <pointsMaterial
-        size={0.12}
+        size={0.06}
         vertexColors
         transparent
         opacity={0.8}

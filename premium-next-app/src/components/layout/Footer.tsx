@@ -85,7 +85,7 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="w-full bg-zinc-950 pt-20 pb-10">
+        <footer className="w-full bg-[#030303] pt-20 pb-10">
             <div className="mx-auto max-w-7xl px-6 lg:px-16">
                 {/* Top hairline */}
                 <div className="mb-16 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />

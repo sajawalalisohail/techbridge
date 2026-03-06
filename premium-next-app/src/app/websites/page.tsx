@@ -10,8 +10,8 @@ import Footer from "@/components/layout/Footer";
 /* ─── Violet pulse glow ──────────────────────────────────── */
 const violetPulseCSS = `
   @keyframes violet-pulse {
-    0%, 100% { box-shadow: 0 0 0 1px rgba(139,92,246,0.15), 0 0 20px rgba(139,92,246,0.05); }
-    50%      { box-shadow: 0 0 0 1px rgba(139,92,246,0.35), 0 0 40px rgba(139,92,246,0.15); }
+    0%, 100% { box-shadow: 0 0 0 1px rgba(139,92,246,0.4), 0 0 30px rgba(139,92,246,0.15), inset 0 0 30px rgba(139,92,246,0.03); }
+    50%      { box-shadow: 0 0 0 1px rgba(139,92,246,0.7), 0 0 60px rgba(139,92,246,0.3), inset 0 0 40px rgba(139,92,246,0.06); }
   }
 `;
 
@@ -413,19 +413,16 @@ const TIMELINE = [
         time: "9:00 AM",
         title: "Design & Architecture Begin",
         desc: "Our engineer starts your custom layout - no theme files, no page builders. Built precisely for your brand.",
-        tag: "Day 1",
     },
     {
         time: "5:00 PM",
         title: "Staging Site Live",
         desc: "Your complete site is deployed to a private staging URL for your review. We walk you through it live.",
-        tag: "Day 1",
     },
     {
         time: "8:00 PM",
         title: "Revisions Applied. You're Live.",
         desc: "After your approval, we apply all revisions, point your DNS, and your site goes live before you sleep.",
-        tag: "Day 1",
     },
 ];
 
@@ -471,9 +468,11 @@ function Timeline() {
                                 style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(109,40,217,0.08) 0%, transparent 60%)" }}
                             />
                             <div className="mb-2 flex items-center gap-3">
-                                <span className="rounded-full border border-violet-500/20 bg-violet-950/40 px-2.5 py-0.5 text-xs font-semibold text-violet-400">
-                                    {step.tag}
-                                </span>
+                                {step.tag && (
+                                    <span className="rounded-full border border-violet-500/20 bg-violet-950/40 px-2.5 py-0.5 text-xs font-semibold text-violet-400">
+                                        {step.tag}
+                                    </span>
+                                )}
                                 <span className="font-mono text-xs text-zinc-600">{step.time}</span>
                             </div>
                             <h3 className="mb-2 text-base font-bold text-white">{step.title}</h3>

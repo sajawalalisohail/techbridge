@@ -25,7 +25,7 @@ export default function CTA() {
                 id="cta"
                 ref={ref}
                 /* z-10 + solid bg: covers the footer behind it until scroll reveals it */
-                className="relative z-10 overflow-hidden py-36 lg:py-48"
+                className="relative z-10 overflow-hidden py-20 lg:py-28"
             >
                 {/* ── Subtle Grain Texture Overlay ── */}
                 <div

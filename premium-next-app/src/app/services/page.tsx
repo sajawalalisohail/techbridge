@@ -10,8 +10,6 @@ import {
     CheckCircle2,
     ArrowRight,
 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /* ─── Data ───────────────────────────────────────────────── */
 const SECTIONS = [
@@ -199,21 +197,16 @@ export default function ServicesPage() {
     const activeSection = SECTIONS.find((s) => s.id === activeId) ?? SECTIONS[0];
 
     return (
-        <div className="bg-black">
-            <div className="relative z-10 overflow-hidden min-h-screen bg-black">
-                <Navbar />
+        <div className="relative text-white">
+            <div className="relative z-10 overflow-hidden min-h-screen">
 
                 {/* ── Services Hero ── */}
                 <section className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">
                     {/* Ambient glow */}
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute left-1/4 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-violet-900/20 blur-[120px]"
-                    />
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute right-1/4 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-indigo-900/15 blur-[100px]"
-                    />
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 50%)" }} />
+                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(79,70,229,0.06) 0%, rgba(79,70,229,0) 50%)" }} />
+                    </div>
 
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
                         <motion.div
@@ -337,9 +330,15 @@ export default function ServicesPage() {
                     </div>
                 </div>
 
-            </div>
-            <div className="sticky bottom-0 z-0">
-                <Footer />
+                {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+                    style={{
+                        background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                    }}
+                />
             </div>
         </div>
     );

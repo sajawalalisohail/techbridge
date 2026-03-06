@@ -67,16 +67,6 @@ export default function Hero() {
                 animate="show"
                 className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-12"
             >
-                {/* Eyebrow badge */}
-                <motion.div variants={fadeUp} className="mb-10">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-widest text-zinc-400 uppercase backdrop-blur-sm">
-                        <span className="relative flex h-1.5 w-1.5">
-                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
-                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-violet-500" />
-                        </span>
-                        AI-Powered Software Agency
-                    </span>
-                </motion.div>
 
                 {/* Primary headline - Shrunk by ~10%, better spacing */}
                 <motion.h1

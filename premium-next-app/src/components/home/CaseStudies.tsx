@@ -216,7 +216,8 @@ const CASE_STUDIES = [
         tags: ["Next.js", "AI Automation", "Dashboard"],
         liveUrl: "https://nextlex.com",
         pattern: <PatternDotScan />,
-        accentColor: "rgba(139,92,246,0.15)",
+        accentColor: "139,92,246", // violet
+        accentOpacity: 0.15,
         isLarge: true,
     },
     {
@@ -230,7 +231,8 @@ const CASE_STUDIES = [
         tags: ["E-Commerce", "API Integration", "Supply Chain"],
         liveUrl: "https://primemarkapparel.com",
         pattern: <PatternFlowGrid />,
-        accentColor: "rgba(99,102,241,0.12)",
+        accentColor: "99,102,241", // indigo
+        accentOpacity: 0.12,
         isLarge: false,
     },
     {
@@ -243,7 +245,8 @@ const CASE_STUDIES = [
             "Custom internal tools and predictive AI models for fleet management - delivering real-time visibility across a 500-vehicle operation.",
         tags: ["Machine Learning", "React", "Python"],
         pattern: <PatternNodeGraph />,
-        accentColor: "rgba(109,40,217,0.13)",
+        accentColor: "109,40,217", // violet-700
+        accentOpacity: 0.13,
         isLarge: false,
     },
 ];
@@ -276,7 +279,7 @@ function LargeCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                style={{ background: study.accentColor ? `radial-gradient(ellipse at 0% 50%, ${study.accentColor} 0%, transparent 100%)` : undefined }}
+                style={{ background: study.accentColor ? `radial-gradient(ellipse at 0% 50%, rgba(${study.accentColor},${study.accentOpacity}) 0%, rgba(${study.accentColor},0) 100%)` : undefined }}
             />
 
             {/* Visual area — left 2 cols */}
@@ -354,7 +357,7 @@ function SmallCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                style={{ background: study.accentColor ? `radial-gradient(ellipse at 50% 0%, ${study.accentColor} 0%, transparent 100%)` : undefined }}
+                style={{ background: study.accentColor ? `radial-gradient(ellipse at 50% 0%, rgba(${study.accentColor},${study.accentOpacity}) 0%, rgba(${study.accentColor},0) 100%)` : undefined }}
             />
 
             {/* Visual area — top */}
@@ -445,7 +448,8 @@ export default function CaseStudies() {
                 {/* Ambient glow */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute left-0 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-indigo-950/20 blur-[130px]"
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
                 />
 
                 <div className="mx-auto max-w-7xl px-6 lg:px-12">

@@ -16,9 +16,6 @@ const MARQUEE_CSS = `
     animation: tb-marquee-scroll 35s linear infinite;
     will-change: transform;
   }
-  .tb-marquee-container:hover .tb-marquee-track {
-    animation-play-state: paused;
-  }
 `;
 
 /* ─── Tech stack data ─────────────────────────────────────── */

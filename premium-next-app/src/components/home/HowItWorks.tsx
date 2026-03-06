@@ -6,6 +6,7 @@ import {
     useScroll,
     useTransform,
     useInView,
+    useSpring
 } from "framer-motion";
 import { Search, Rocket, Code2, BrainCircuit } from "lucide-react";
 
@@ -97,7 +98,7 @@ function PhaseCard({
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
                         background:
-                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, transparent 100%)",
+                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
                     }}
                 />
 
@@ -146,10 +147,16 @@ export default function HowItWorks() {
     /* Scroll-driven line draw */
     const { scrollYProgress } = useScroll({
         target: sectionRef,
-        offset: ["start 75%", "end 60%"],
+        offset: ["start 85%", "end 30%"],
     });
 
-    const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
+    const lineScaleY = useTransform(smoothProgress, [0, 1], [0, 1]);
 
     return (
         <section
@@ -165,7 +172,8 @@ export default function HowItWorks() {
             {/* Ambient left glow */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -left-32 top-1/3 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-indigo-900/10 blur-[130px]"
+                className="pointer-events-none absolute inset-0"
+                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
             />
 
             <div className="mx-auto max-w-5xl px-6 lg:px-12">

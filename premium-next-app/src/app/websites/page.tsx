@@ -4,8 +4,6 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Check, X, ChevronDown, ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /* ─── Violet pulse glow ──────────────────────────────────── */
 const violetPulseCSS = `
@@ -88,11 +86,13 @@ function Hero() {
             {/* Background glows */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-900/15 blur-[140px]"
-            />
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-indigo-900/10 blur-[100px]"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                    background: `
+                        radial-gradient(circle at 50% 50%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%),
+                        radial-gradient(circle at 100% 0%, rgba(79,70,229,0.05) 0%, rgba(79,70,229,0) 50%)
+                    `,
+                }}
             />
 
             {/* Subtle dot grid */}
@@ -387,7 +387,7 @@ function TechStack() {
                             key={item.label}
                             className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-white/15"
                         >
-                            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(109,40,217,0.1) 0%, transparent 70%)" }} />
+                            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(109,40,217,0.1) 0%, rgba(109,40,217,0) 100%)" }} />
                             <p className="font-mono text-3xl font-extrabold text-white">{item.stat}</p>
                             <p className="mt-1 text-xs font-semibold text-zinc-400">{item.label}</p>
                             <p className="mt-0.5 text-xs text-zinc-700">{item.sub}</p>
@@ -465,7 +465,7 @@ function Timeline() {
                             <div
                                 aria-hidden="true"
                                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(109,40,217,0.08) 0%, transparent 60%)" }}
+                                style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(109,40,217,0.08) 0%, rgba(109,40,217,0) 100%)" }}
                             />
                             <div className="mb-2 flex items-center gap-3">
                                 {step.tag && (
@@ -504,7 +504,7 @@ function SocialProof() {
             <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isInView ? "show" : "hidden"}>
                 <div className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:flex">
                     {/* Hover glow */}
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(109,40,217,0.1) 0%, transparent 60%)" }} />
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(109,40,217,0.1) 0%, rgba(109,40,217,0) 100%)" }} />
 
                     {/* Visual panel */}
                     <div className="relative h-64 overflow-hidden border-b border-white/5 bg-neutral-950 lg:h-auto lg:w-1/2 lg:border-b-0 lg:border-r">
@@ -914,7 +914,10 @@ function FinalCTA() {
             {/* Ambient blob */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-900/20 blur-[130px]"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                    background: "radial-gradient(circle at 50% 50%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%)"
+                }}
             />
 
             <div className="relative z-10 mx-auto max-w-3xl px-6 text-center lg:px-12">
@@ -987,20 +990,13 @@ function FinalCTA() {
 ══════════════════════════════════════════════════════════ */
 export default function WebsitesPage() {
     return (
-        <div className="relative text-white min-h-screen">
+        <>
             <style dangerouslySetInnerHTML={{ __html: violetPulseCSS }} />
 
-            {/* Ambient background glows — matches homepage */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
-                <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[120px]" />
-                <div className="absolute -bottom-32 right-0 h-[500px] w-[500px] rounded-full bg-indigo-900/15 blur-[100px]" />
-            </div>
-
             <div
-                className="relative z-10 overflow-hidden min-h-screen bg-black border border-violet-500/10 rounded-sm"
+                className="relative z-10 overflow-hidden min-h-screen border border-violet-500/10 rounded-sm"
                 style={{ animation: "violet-pulse 4s ease-in-out infinite" }}
             >
-                <Navbar />
                 <Hero />
 
                 {/* Separator */}
@@ -1071,9 +1067,6 @@ export default function WebsitesPage() {
                 <FinalCTA />
 
             </div>
-
-            {/* Footer handles its own reveal trick (spacer + fixed z-0) */}
-            <Footer />
-        </div>
+        </>
     );
 }

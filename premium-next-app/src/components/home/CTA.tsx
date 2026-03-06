@@ -44,8 +44,8 @@ export default function CTA() {
                     className="pointer-events-none absolute inset-0 z-0"
                     style={{
                         background: `
-                            radial-gradient(ellipse at 20% 80%, rgba(109,40,217,0.05) 0%, transparent 100%),
-                            radial-gradient(ellipse at 80% 20%, rgba(79,70,229,0.04) 0%, transparent 100%)
+                            radial-gradient(ellipse at 20% 80%, rgba(109,40,217,0.05) 0%, rgba(109,40,217,0) 100%),
+                            radial-gradient(ellipse at 80% 20%, rgba(79,70,229,0.04) 0%, rgba(79,70,229,0) 100%)
                         `,
                     }}
                 />
@@ -53,16 +53,12 @@ export default function CTA() {
                 {/* ── Radial glow anchor ── */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
-                >
-                    <div
-                        className="cta-glow h-[560px] w-[560px] rounded-full blur-[120px]"
-                        style={{
-                            background:
-                                "radial-gradient(ellipse, rgba(109,40,217,0.18) 0%, rgba(79,70,229,0.06) 60%, transparent 100%)",
-                        }}
-                    />
-                </div>
+                    className="pointer-events-none absolute inset-0 z-0 cta-glow"
+                    style={{
+                        background:
+                            "radial-gradient(ellipse at center, rgba(109,40,217,0.12) 0%, rgba(79,70,229,0.04) 40%, rgba(79,70,229,0) 70%)",
+                    }}
+                />
 
                 {/* Top separator hairline */}
                 <div

@@ -3,8 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Layers, Users, Zap } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /* ─── Ease constant (fixes TS Variants type error) ────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -55,8 +53,8 @@ const VALUES = [
 function FounderCard() {
     return (
         <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/50 backdrop-blur-sm h-full min-h-[480px] lg:min-h-[560px]">
-            <div aria-hidden="true" className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-violet-900/25 blur-[80px]" />
-            <div aria-hidden="true" className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-indigo-900/20 blur-[80px]" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 0% 0%, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 50%)" }} />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 100% 100%, rgba(79,70,229,0.12) 0%, rgba(79,70,229,0) 50%)" }} />
             <svg className="absolute inset-0 h-full w-full opacity-30" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <pattern id="about-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -136,7 +134,7 @@ function LeadershipSection({ isInView }: { isInView: boolean }) {
                             <p className="mb-6 text-sm leading-relaxed text-zinc-400">
                                 WVU Computer Science alumnus leading business strategy, UI/UX architecture, and project orchestration from Morgantown, WV.
                             </p>
-                            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-violet-500/10 blur-[40px] transition-all duration-500 group-hover:bg-violet-500/20" />
+                            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 100% 100%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 60%)" }} />
                         </motion.div>
 
                         {/* Pakistan Engineering Card */}
@@ -155,7 +153,7 @@ function LeadershipSection({ isInView }: { isInView: boolean }) {
                             <p className="mb-6 text-sm leading-relaxed text-zinc-400">
                                 Specialized senior backend and full-stack developers handling large-scale enterprise builds under our direct architectural oversight.
                             </p>
-                            <div className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-indigo-500/10 blur-[40px] transition-all duration-500 group-hover:bg-indigo-500/20" />
+                            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 0% 100%, rgba(79,70,229,0.12) 0%, rgba(79,70,229,0) 60%)" }} />
                         </motion.div>
                     </div>
 
@@ -204,13 +202,12 @@ export default function AboutPage() {
     const isLeaderInView = useInView(leaderRef, { once: true, margin: "-80px" });
 
     return (
-        <div className="bg-black">
-            <div className="relative z-10 overflow-hidden min-h-screen bg-black">
-                <Navbar />
+        <div className="relative text-white">
+            <div className="relative z-10 overflow-hidden min-h-screen">
 
                 {/* ── Hero ── */}
                 <section ref={heroRef} className="relative flex min-h-[55vh] items-center overflow-hidden border-b border-white/5">
-                    <div aria-hidden="true" className="pointer-events-none absolute left-1/3 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-violet-900/18 blur-[120px]" />
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%)" }} />
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
                         <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"}
                             className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
@@ -322,9 +319,15 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-            </div>
-            <div className="sticky bottom-0 z-0">
-                <Footer />
+                {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+                    style={{
+                        background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                    }}
+                />
             </div>
         </div>
     );

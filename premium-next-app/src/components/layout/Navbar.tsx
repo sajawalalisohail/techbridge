@@ -86,7 +86,7 @@ export default function Navbar() {
                 >
                     <div
                         className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navState === "pill"
-                            ? "mt-4 max-w-5xl rounded-full border border-white/10 bg-black/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+                            ? "mt-4 max-w-5xl rounded-full border border-violet-500/20 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-xl"
                             : "max-w-full rounded-none border-b border-transparent bg-transparent"
                             }`}
                     >
@@ -192,7 +192,6 @@ export default function Navbar() {
                                             onClick={() => setMobileOpen(false)}
                                             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white"
                                         >
-                                            Start a Project &rarr;
                                         </Link>
                                     </li>
                                 </ul>
@@ -201,7 +200,6 @@ export default function Navbar() {
                     </AnimatePresence>
                 </motion.header>
             </div>
-
         </>
     );
 }

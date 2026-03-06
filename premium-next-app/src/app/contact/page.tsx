@@ -2,9 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import { ArrowRight, Mail, MapPin, CheckCircle2 } from "lucide-react";
 
 /* ─── Styles ──────────────────────────────────────────────── */
 const inputFocusCSS = `
@@ -75,9 +73,8 @@ export default function ContactPage() {
         <>
             <style dangerouslySetInnerHTML={{ __html: inputFocusCSS }} />
 
-            <div className="bg-black">
-                <div className="relative z-10 overflow-hidden min-h-screen bg-black">
-                    <Navbar />
+            <div className="relative text-white min-h-screen">
+                <div className="relative z-10 overflow-hidden min-h-screen">
 
                     {/* ── Main section ── */}
                     <section
@@ -85,14 +82,10 @@ export default function ContactPage() {
                         className="relative min-h-[calc(100vh-80px)] overflow-hidden"
                     >
                         {/* Ambient glows */}
-                        <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute left-0 top-1/3 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-violet-900/15 blur-[130px]"
-                        />
-                        <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] rounded-full bg-indigo-900/10 blur-[100px]"
-                        />
+                        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%)" }} />
+                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(79,70,229,0.04) 0%, rgba(79,70,229,0) 50%)" }} />
+                        </div>
 
                         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-32">
                             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
@@ -195,7 +188,8 @@ export default function ContactPage() {
                                         {/* Corner glow */}
                                         <div
                                             aria-hidden="true"
-                                            className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-violet-900/20 blur-[60px]"
+                                            className="pointer-events-none absolute inset-0"
+                                            style={{ background: "radial-gradient(circle at 100% 0%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 50%)" }}
                                         />
 
                                         {!submitted ? (
@@ -333,9 +327,15 @@ export default function ContactPage() {
                         </div>
                     </section>
 
-                </div>
-                <div className="sticky bottom-0 z-0">
-                    <Footer />
+                    {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+                        style={{
+                            background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
+                            boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                        }}
+                    />
                 </div>
             </div>
         </>

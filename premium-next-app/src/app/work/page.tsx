@@ -9,8 +9,6 @@ import {
     useInView,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /* ─── Keyframes ──────────────────────────────────────────── */
 const CSS = `
@@ -201,6 +199,7 @@ interface Project {
     liveLabel?: string;
     pattern: React.ReactNode;
     accentGlow: string;
+    accentOpacity: number;
 }
 
 const PROJECTS: Project[] = [
@@ -216,7 +215,8 @@ const PROJECTS: Project[] = [
         liveUrl: "https://nextlex.com",
         liveLabel: "View Live Platform",
         pattern: <PatternDotScan />,
-        accentGlow: "rgba(109,40,217,0.18)",
+        accentGlow: "109,40,217", // violet-700
+        accentOpacity: 0.18,
     },
     {
         slug: "ali-wali",
@@ -230,7 +230,8 @@ const PROJECTS: Project[] = [
         liveUrl: "https://aliwalitrading.com",
         liveLabel: "View Live Platform",
         pattern: <PatternGlobalNodeMap />,
-        accentGlow: "rgba(79,70,229,0.15)",
+        accentGlow: "79,70,229", // indigo-600
+        accentOpacity: 0.15,
     },
     {
         slug: "primemark",
@@ -244,7 +245,8 @@ const PROJECTS: Project[] = [
         liveUrl: "https://primemarkapparel.com",
         liveLabel: "View Live Platform",
         pattern: <PatternDiagFlow />,
-        accentGlow: "rgba(99,102,241,0.14)",
+        accentGlow: "99,102,241", // indigo-500
+        accentOpacity: 0.14,
     },
 ];
 
@@ -300,7 +302,7 @@ function ProjectVisual({
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-50"
                 style={{
-                    background: `radial-gradient(ellipse at 30% 50%, ${project.accentGlow} 0%, transparent 65%)`,
+                    background: `radial-gradient(ellipse at 30% 50%, rgba(${project.accentGlow},${project.accentOpacity}) 0%, rgba(${project.accentGlow},0) 100%)`,
                 }}
             />
         </div>
@@ -395,9 +397,8 @@ export default function WorkPage() {
         <>
             <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
-            <div className="bg-black">
-                <div className="relative z-10 overflow-hidden min-h-screen bg-black">
-                    <Navbar />
+            <div className="relative text-white min-h-screen">
+                <div className="relative z-10 overflow-hidden min-h-screen">
 
                     {/* ── Work Hero ── */}
                     <section
@@ -471,9 +472,15 @@ export default function WorkPage() {
                         </div>
                     </div>
 
-                </div>
-                <div className="sticky bottom-0 z-0">
-                    <Footer />
+                    {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+                        style={{
+                            background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
+                            boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                        }}
+                    />
                 </div>
             </div>
         </>

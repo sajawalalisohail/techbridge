@@ -37,7 +37,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "Scalable, enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths - engineered right the first time.",
         colSpan: "md:col-span-2",
-        accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, transparent 100%)",
+        accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
     },
     {
         id: 2,
@@ -47,7 +47,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "Intelligent systems that identify, replace, and continuously improve manual processes - freeing your team to focus on what only humans can do.",
         colSpan: "md:col-span-2",
-        accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, transparent 100%)",
+        accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, rgba(99,102,241,0) 100%)",
     },
     {
         id: 3,
@@ -56,7 +56,7 @@ const SERVICES: ServiceCard[] = [
         title: "Internal Business Tools",
         description:
             "Custom dashboards, CRMs, and operational platforms that give your team real-time visibility and control.",
-        accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, transparent 100%)",
+        accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
     },
     {
         id: 4,
@@ -65,7 +65,7 @@ const SERVICES: ServiceCard[] = [
         title: "SaaS Platform Development",
         description:
             "End-to-end product development - from architecture and auth to billing and beyond. Built to scale from day one.",
-        accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.07) 0%, transparent 100%)",
+        accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.07) 0%, rgba(99,102,241,0) 100%)",
     },
     {
         id: 5,
@@ -74,7 +74,7 @@ const SERVICES: ServiceCard[] = [
         title: "API Integrations & Data Pipelines",
         description:
             "Connect your existing tools and data sources into a unified, reliable ecosystem that flows without friction.",
-        accentColor: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, transparent 100%)",
+        accentColor: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
     },
     {
         id: 6,
@@ -84,7 +84,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "Premium web presence, delivered in a day. Performance-first, conversion-optimized, and polished to perfection - without the wait.",
         highlight: true,
-        accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.11) 0%, transparent 100%)",
+        accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.11) 0%, rgba(167,139,250,0) 100%)",
         href: "/websites",
     },
 ];
@@ -227,7 +227,8 @@ export default function Services() {
             />
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute right-0 top-1/3 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-violet-900/10 blur-[120px]"
+                className="pointer-events-none absolute inset-0"
+                style={{ background: "radial-gradient(ellipse at 100% 30%, rgba(139,92,246,0.03) 0%, rgba(139,92,246,0) 50%)" }}
             />
 
             <div className="mx-auto max-w-7xl px-6 lg:px-12">

@@ -183,7 +183,8 @@ export default function WhyChooseUs() {
                 {/* Ambient center glow */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -right-48 top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-violet-950/20 blur-[140px]"
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: "radial-gradient(circle at 100% 50%, rgba(139,92,246,0.04) 0%, rgba(139,92,246,0) 50%)" }}
                 />
 
                 <div className="mx-auto max-w-7xl px-6 lg:px-12">

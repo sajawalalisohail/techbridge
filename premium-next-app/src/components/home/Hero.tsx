@@ -3,6 +3,13 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+// Dynamically import 3D background for performance
+const HybridBackground = dynamic(
+  () => import("@/3d").then((mod) => mod.HybridBackground),
+  { ssr: false }
+);
 
 /* Stagger container + child variants */
 const container = {
@@ -35,15 +42,18 @@ export default function Hero() {
 
     return (
         <section className="relative min-h-screen w-full overflow-hidden bg-black">
-            {/* ─── Ambient background gradients ─── */}
+            {/* ─── 3D Hybrid Background (contained within Hero only) ─── */}
+            <HybridBackground />
+            
+            {/* ─── Ambient background gradients (subtle overlay above 3D) ─── */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 z-0"
+                className="pointer-events-none absolute inset-0 z-[1]"
             >
                 {/* Deep top-left violet bloom */}
-                <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[120px]" />
+                <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-violet-900/10 blur-[120px]" />
                 {/* Subtle bottom-right indigo */}
-                <div className="absolute -bottom-32 right-0 h-[500px] w-[500px] rounded-full bg-indigo-900/15 blur-[100px]" />
+                <div className="absolute -bottom-32 right-0 h-[500px] w-[500px] rounded-full bg-indigo-900/10 blur-[100px]" />
                 {/* Fine noise texture for depth */}
                 <div
                     className="absolute inset-0 opacity-[0.03]"
@@ -57,7 +67,7 @@ export default function Hero() {
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
-            {/* ─── Main content ─── */}
+            {/* ─── Main content (above 3D background) ─── */}
             <motion.div
                 variants={container}
                 initial="hidden"
@@ -135,11 +145,7 @@ export default function Hero() {
                     </Link>
                 </motion.div>
 
-                {/* ────────────────────────────────────────────
-            3D CANVAS INJECTION ZONE
-            React Three Fiber "Neural Bridge" goes here.
-            Load dynamically via next/dynamic for performance.
-        ──────────────────────────────────────────── */}
+                {/* ─── 3D Neural Bridge Canvas Zone ─── */}
                 <motion.div
                     variants={fadeUp}
                     ref={canvasRef}
@@ -147,17 +153,44 @@ export default function Hero() {
                     aria-hidden="true"
                     className="relative mt-16 w-full max-w-4xl"
                 >
-                    {/* Placeholder frame — replace inner content with <NeuralBridge /> */}
-                    <div className="flex h-[320px] w-full items-center justify-center rounded-3xl border border-dashed border-white/10 bg-white/[0.02] lg:h-[440px]">
-                        <div className="flex flex-col items-center gap-3 text-center">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5">
-                                <svg className="h-5 w-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                                </svg>
+                    {/* 3D Canvas Container */}
+                    <div className="relative h-[320px] w-full rounded-3xl border border-white/10 bg-black/40 backdrop-blur-sm lg:h-[440px] overflow-hidden">
+                        {/* Inner glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 to-transparent pointer-events-none" />
+                        
+                        {/* Corner accents */}
+                        <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-violet-500/20 rounded-tl-3xl pointer-events-none" />
+                        <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-violet-500/20 rounded-tr-3xl pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-violet-500/20 rounded-bl-3xl pointer-events-none" />
+                        <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-violet-500/20 rounded-br-3xl pointer-events-none" />
+                        
+                        {/* Central content placeholder - can be replaced with actual 3D scene */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="flex flex-col items-center gap-4 text-center">
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-violet-500/20 blur-xl rounded-full" />
+                                    <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm">
+                                        <svg className="h-8 w-8 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-white/80">Neural Bridge</p>
+                                    <p className="text-xs text-zinc-500 mt-1">AI-Powered Development Pipeline</p>
+                                </div>
                             </div>
-                            <p className="text-xs font-medium tracking-widest text-white/20 uppercase">
-                                Neural Bridge - 3D Canvas
-                            </p>
+                        </div>
+                        
+                        {/* Animated grid lines */}
+                        <div className="absolute inset-0 opacity-20">
+                            <div className="absolute inset-0" style={{
+                                backgroundImage: `
+                                    linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+                                    linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px)
+                                `,
+                                backgroundSize: '40px 40px'
+                            }} />
                         </div>
                     </div>
 

@@ -13,9 +13,11 @@ import {
 } from "lucide-react";
 
 /* ─── Types ──────────────────────────────────────────────── */
+import type { LucideIcon } from "lucide-react";
+
 interface ServiceCard {
     id: number;
-    icon: React.ElementType;
+    icon: LucideIcon;
     eyebrow: string;
     title: string;
     description: string;

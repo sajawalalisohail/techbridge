@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { BrainCircuit, Users, Rocket, Shield } from "lucide-react";
+import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-react";
 
 /* ─── Keyframe for the shifting gradient mesh ───────────── */
 const gradientStyle = `
@@ -24,7 +24,7 @@ const gradientStyle = `
 
 /* ─── Data ───────────────────────────────────────────────── */
 interface Advantage {
-    icon: React.ElementType;
+    icon: LucideIcon;
     eyebrow: string;
     title: string;
     description: string;

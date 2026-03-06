@@ -1,0 +1,105 @@
+"use client";
+
+import { useRef, useMemo } from 'react';
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+
+interface ParticlesProps {
+  count?: number;
+}
+
+export function Particles({ count = 200 }: ParticlesProps) {
+  const meshRef = useRef<THREE.Points>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  const [positions, velocities] = useMemo(() => {
+    const positions = new Float32Array(count * 3);
+    const velocities = new Float32Array(count * 3);
+    
+    for (let i = 0; i < count; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 30;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+      
+      velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
+    }
+    
+    return [positions, velocities];
+  }, [count]);
+
+  const particleColors = useMemo(() => {
+    const colors = new Float32Array(count * 3);
+    // TechBridge color palette: violet, indigo, cyan, white
+    const colorPalette = [
+      new THREE.Color('#8b5cf6'), // violet-500
+      new THREE.Color('#6366f1'), // indigo-500
+      new THREE.Color('#a855f7'), // purple-500
+      new THREE.Color('#ffffff'), // white
+    ];
+    
+    for (let i = 0; i < count; i++) {
+      const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+    }
+    
+    return colors;
+  }, [count]);
+
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+    return geo;
+  }, [positions, particleColors]);
+
+  useFrame((state) => {
+    if (!meshRef.current) return;
+    
+    const positionArray = meshRef.current.geometry.attributes.position.array as Float32Array;
+    
+    mouseRef.current.x += (state.pointer.x - mouseRef.current.x) * 0.05;
+    mouseRef.current.y += (state.pointer.y - mouseRef.current.y) * 0.05;
+    
+    for (let i = 0; i < count; i++) {
+      positionArray[i * 3] += velocities[i * 3];
+      positionArray[i * 3 + 1] += velocities[i * 3 + 1];
+      positionArray[i * 3 + 2] += velocities[i * 3 + 2];
+      
+      const dx = positionArray[i * 3] - mouseRef.current.x * 10;
+      const dy = positionArray[i * 3 + 1] - mouseRef.current.y * 5;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      if (dist < 3) {
+        const force = (3 - dist) * 0.001;
+        positionArray[i * 3] += dx * force;
+        positionArray[i * 3 + 1] += dy * force;
+      }
+      
+      if (positionArray[i * 3] > 15) positionArray[i * 3] = -15;
+      if (positionArray[i * 3] < -15) positionArray[i * 3] = 15;
+      if (positionArray[i * 3 + 1] > 10) positionArray[i * 3 + 1] = -10;
+      if (positionArray[i * 3 + 1] < -10) positionArray[i * 3 + 1] = 10;
+    }
+    
+    meshRef.current.geometry.attributes.position.needsUpdate = true;
+    meshRef.current.rotation.x = mouseRef.current.y * 0.03;
+    meshRef.current.rotation.y = mouseRef.current.x * 0.03;
+  });
+
+  return (
+    <points ref={meshRef} geometry={geometry}>
+      <pointsMaterial
+        size={0.06}
+        vertexColors
+        transparent
+        opacity={0.7}
+        sizeAttenuation
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
+}

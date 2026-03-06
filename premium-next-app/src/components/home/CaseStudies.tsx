@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+
 
 /* ─── Keyframes for the SVG placeholder patterns ─────────── */
 const patternStyles = `
@@ -248,6 +248,8 @@ const CASE_STUDIES = [
 ];
 
 /* ─── Animation variants ─────────────────────────────────── */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const containerVariants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.14 } },
@@ -258,7 +260,7 @@ const cardVariants = {
     show: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.8, ease: EASE },
     },
 };
 
@@ -307,26 +309,16 @@ function LargeCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
                     </p>
                 </div>
 
-                {/* Bottom: tags + CTA */}
-                <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex flex-wrap gap-2">
-                        {study.tags.map((tag) => (
-                            <span
-                                key={tag}
-                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    <button className="group/btn inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors duration-300 hover:text-violet-400 whitespace-nowrap">
-                        Read Full Study
-                        <ArrowRight
-                            size={14}
-                            className="translate-x-0 transition-transform duration-300 group-hover/btn:translate-x-1"
-                        />
-                    </button>
+                {/* Bottom: tags */}
+                <div className="mt-8 flex flex-wrap gap-2">
+                    {study.tags.map((tag) => (
+                        <span
+                            key={tag}
+                            className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                        >
+                            {tag}
+                        </span>
+                    ))}
                 </div>
             </div>
         </motion.div>
@@ -377,25 +369,15 @@ function SmallCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
                     </p>
                 </div>
 
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex flex-wrap gap-2">
-                        {study.tags.map((tag) => (
-                            <span
-                                key={tag}
-                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    <button className="group/btn inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 transition-colors duration-300 hover:text-violet-400 whitespace-nowrap">
-                        Read Full Study
-                        <ArrowRight
-                            size={12}
-                            className="translate-x-0 transition-transform duration-300 group-hover/btn:translate-x-1"
-                        />
-                    </button>
+                <div className="mt-6 flex flex-wrap gap-2">
+                    {study.tags.map((tag) => (
+                        <span
+                            key={tag}
+                            className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                        >
+                            {tag}
+                        </span>
+                    ))}
                 </div>
             </div>
         </motion.div>

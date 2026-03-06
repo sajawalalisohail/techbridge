@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
@@ -14,12 +15,15 @@ const NAV_LINKS = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
+
+    const isActive = (href: string) => pathname === href;
 
     return (
         <motion.header
@@ -31,8 +35,8 @@ export default function Navbar() {
             {/* Glass bar */}
             <div
                 className={`mx-auto transition-all duration-500 ${scrolled
-                        ? "mt-3 max-w-5xl rounded-2xl border border-white/10 bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl"
-                        : "max-w-full rounded-none border-b border-white/5 bg-black/20 backdrop-blur-sm"
+                    ? "mt-3 max-w-5xl rounded-2xl border border-white/10 bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+                    : "max-w-full rounded-none border-b border-white/5 bg-black/20 backdrop-blur-sm"
                     }`}
             >
                 <nav className="flex items-center justify-between px-6 py-4 lg:px-10">
@@ -49,16 +53,24 @@ export default function Navbar() {
 
                     {/* Desktop links */}
                     <ul className="hidden md:flex items-center gap-8">
-                        {NAV_LINKS.map((link) => (
-                            <li key={link.href}>
-                                <Link
-                                    href={link.href}
-                                    className="relative text-sm text-zinc-400 transition-colors duration-200 hover:text-white after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
-                                >
-                                    {link.label}
-                                </Link>
-                            </li>
-                        ))}
+                        {NAV_LINKS.map((link) => {
+                            const active = isActive(link.href);
+                            return (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className={`relative text-sm transition-colors duration-200
+                                            after:absolute after:-bottom-0.5 after:left-0 after:h-px after:transition-all after:duration-300
+                                            ${active
+                                                ? "text-white after:w-full after:bg-violet-400 drop-shadow-[0_0_8px_rgba(167,139,250,0.6)]"
+                                                : "text-zinc-400 hover:text-white after:w-0 after:bg-white hover:after:w-full"
+                                            }`}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
 
                     {/* CTA */}
@@ -70,14 +82,10 @@ export default function Navbar() {
                             <span className="relative z-10">Start a Project</span>
                             <svg
                                 className="relative z-10 h-3.5 w-3.5 translate-x-0 transition-transform duration-300 group-hover:translate-x-0.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                            {/* Glow on hover */}
                             <span className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-violet-600/20 to-indigo-600/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         </Link>
                     </div>
@@ -88,15 +96,9 @@ export default function Navbar() {
                         onClick={() => setMobileOpen((v) => !v)}
                         aria-label="Toggle menu"
                     >
-                        <span
-                            className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "translate-y-2.5 rotate-45" : ""}`}
-                        />
-                        <span
-                            className={`block h-px w-6 bg-white transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`}
-                        />
-                        <span
-                            className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "-translate-y-2.5 -rotate-45" : ""}`}
-                        />
+                        <span className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "translate-y-2.5 rotate-45" : ""}`} />
+                        <span className={`block h-px w-6 bg-white transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
+                        <span className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "-translate-y-2.5 -rotate-45" : ""}`} />
                     </button>
                 </nav>
             </div>
@@ -112,17 +114,20 @@ export default function Navbar() {
                         className="md:hidden mx-3 mt-2 rounded-2xl border border-white/10 bg-black/80 backdrop-blur-xl p-6"
                     >
                         <ul className="flex flex-col gap-5">
-                            {NAV_LINKS.map((link) => (
-                                <li key={link.href}>
-                                    <Link
-                                        href={link.href}
-                                        onClick={() => setMobileOpen(false)}
-                                        className="text-base text-zinc-300 hover:text-white transition-colors"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
+                            {NAV_LINKS.map((link) => {
+                                const active = isActive(link.href);
+                                return (
+                                    <li key={link.href}>
+                                        <Link
+                                            href={link.href}
+                                            onClick={() => setMobileOpen(false)}
+                                            className={`text-base transition-colors ${active ? "text-violet-400 font-medium" : "text-zinc-300 hover:text-white"}`}
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
                             <li>
                                 <Link
                                     href="/contact"

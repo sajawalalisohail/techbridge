@@ -25,13 +25,16 @@ const inputFocusCSS = `
   }
 `;
 
+/* ─── Ease constant (fixes TS Variants type error) ────────── */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 /* ─── Fade-up helper ──────────────────────────────────────── */
 const fadeUp = (delay = 0) => ({
     hidden: { opacity: 0, y: 24 },
     show: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.7, delay, ease: EASE },
     },
 });
 
@@ -249,11 +252,17 @@ export default function ContactPage() {
                                                             <option value="custom-software">
                                                                 Custom Software Development
                                                             </option>
+                                                            <option value="saas-platform">
+                                                                SaaS Platform Development
+                                                            </option>
                                                             <option value="ai-automation">
                                                                 AI Workflow Automation
                                                             </option>
                                                             <option value="internal-tools">
                                                                 Internal Business Tools
+                                                            </option>
+                                                            <option value="api-integrations">
+                                                                API Integrations
                                                             </option>
                                                             <option value="24h-website">
                                                                 24-Hour Web Presence

@@ -220,26 +220,26 @@ export default function HowItWorks() {
                 style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
             />
 
-            <div className="mx-auto max-w-5xl px-6 lg:px-12">
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
                 {/* ── Section Header ── */}
                 <motion.div
                     ref={headerRef}
                     initial={{ opacity: 0, y: 24 }}
                     animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                    className="mb-20 lg:mb-24"
+                    className="mb-16 max-w-2xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                         <span className="h-px w-6 bg-zinc-700" />
                         Our Process
                     </span>
-                    <h2 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
+                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
                         From Concept to{" "}
                         <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
                             Scalable Architecture
                         </span>
                     </h2>
-                    <p className="mt-5 max-w-lg text-base leading-relaxed text-zinc-500 lg:text-lg">
+                    <p className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-lg">
                         A four-phase methodology that turns ambiguity into precision-engineered systems - on time, every time.
                     </p>
                 </motion.div>

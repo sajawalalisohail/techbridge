@@ -1,0 +1,253 @@
+
+> premium-next-app@0.1.0 lint
+> eslint
+
+
+F:\Techbridge\premium-next-app\src\3d\components\InteractiveCamera.tsx
+   3:10  warning  'useRef' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  11:5   error    Error: This value cannot be modified
+
+Modifying a value returned from a hook is not allowed. Consider moving the modification into the hook where the value is constructed.
+
+F:\Techbridge\premium-next-app\src\3d\components\InteractiveCamera.tsx:11:5
+   9 |   useFrame(() => {
+  10 |     // Fixed camera — no cursor interaction
+> 11 |     camera.position.x = 0;
+     |     ^^^^^^^^^^^^^^^ `camera` cannot be modified
+  12 |     camera.position.y = 0;
+  13 |     camera.lookAt(0, 0, 0);
+  14 |   });  react-hooks/immutability
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx
+  40:27  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:40:27
+  38 |
+  39 |     for (let i = 0; i < count; i++) {
+> 40 |       positions[i * 3] = (Math.random() - 0.5) * 40;
+     |                           ^^^^^^^^^^^^^ Cannot call impure function
+  41 |       positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+  42 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+  43 |                                                                                      react-hooks/purity
+  41:31  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:41:31
+  39 |     for (let i = 0; i < count; i++) {
+  40 |       positions[i * 3] = (Math.random() - 0.5) * 40;
+> 41 |       positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+     |                               ^^^^^^^^^^^^^ Cannot call impure function
+  42 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+  43 |
+  44 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;                         react-hooks/purity
+  42:31  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:42:31
+  40 |       positions[i * 3] = (Math.random() - 0.5) * 40;
+  41 |       positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+> 42 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+     |                               ^^^^^^^^^^^^^ Cannot call impure function
+  43 |
+  44 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+  45 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;  react-hooks/purity
+  44:28  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:44:28
+  42 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+  43 |
+> 44 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+     |                            ^^^^^^^^^^^^^ Cannot call impure function
+  45 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+  46 |       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.003;
+  47 |     }                                                react-hooks/purity
+  45:32  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:45:32
+  43 |
+  44 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+> 45 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+     |                                ^^^^^^^^^^^^^ Cannot call impure function
+  46 |       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.003;
+  47 |     }
+  48 |                                                                                                    react-hooks/purity
+  46:32  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:46:32
+  44 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+  45 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+> 46 |       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.003;
+     |                                ^^^^^^^^^^^^^ Cannot call impure function
+  47 |     }
+  48 |
+  49 |     return [positions, velocities];                                                                react-hooks/purity
+  62:45  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\PageParticles.tsx:62:45
+  60 |
+  61 |     for (let i = 0; i < count; i++) {
+> 62 |       const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+     |                                             ^^^^^^^^^^^^^ Cannot call impure function
+  63 |       colors[i * 3] = color.r;
+  64 |       colors[i * 3 + 1] = color.g;
+  65 |       colors[i * 3 + 2] = color.b;                                                  react-hooks/purity
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx
+  42:27  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:42:27
+  40 |
+  41 |     for (let i = 0; i < count; i++) {
+> 42 |       positions[i * 3] = (Math.random() - 0.5) * 30;
+     |                           ^^^^^^^^^^^^^ Cannot call impure function
+  43 |       positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+  44 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+  45 |                                                                                      react-hooks/purity
+  43:31  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:43:31
+  41 |     for (let i = 0; i < count; i++) {
+  42 |       positions[i * 3] = (Math.random() - 0.5) * 30;
+> 43 |       positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+     |                               ^^^^^^^^^^^^^ Cannot call impure function
+  44 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+  45 |
+  46 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;                         react-hooks/purity
+  44:31  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:44:31
+  42 |       positions[i * 3] = (Math.random() - 0.5) * 30;
+  43 |       positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+> 44 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+     |                               ^^^^^^^^^^^^^ Cannot call impure function
+  45 |
+  46 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+  47 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;  react-hooks/purity
+  46:28  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:46:28
+  44 |       positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+  45 |
+> 46 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+     |                            ^^^^^^^^^^^^^ Cannot call impure function
+  47 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+  48 |       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
+  49 |     }                                                react-hooks/purity
+  47:32  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:47:32
+  45 |
+  46 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+> 47 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+     |                                ^^^^^^^^^^^^^ Cannot call impure function
+  48 |       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
+  49 |     }
+  50 |                                                                                                         react-hooks/purity
+  48:32  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:48:32
+  46 |       velocities[i * 3] = (Math.random() - 0.5) * 0.008;
+  47 |       velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+> 48 |       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
+     |                                ^^^^^^^^^^^^^ Cannot call impure function
+  49 |     }
+  50 |
+  51 |     return [positions, velocities];                                                                     react-hooks/purity
+  65:45  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Techbridge\premium-next-app\src\3d\components\Particles.tsx:65:45
+  63 |
+  64 |     for (let i = 0; i < count; i++) {
+> 65 |       const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+     |                                             ^^^^^^^^^^^^^ Cannot call impure function
+  66 |       colors[i * 3] = color.r;
+  67 |       colors[i * 3 + 1] = color.g;
+  68 |       colors[i * 3 + 2] = color.b;                                                       react-hooks/purity
+
+F:\Techbridge\premium-next-app\src\3d\components\ScrollLinkedBlob.tsx
+   25:11  warning  'viewport' is assigned a value but never used       @typescript-eslint/no-unused-vars
+   88:32  warning  'index' is defined but never used                   @typescript-eslint/no-unused-vars
+  125:9   error    'targetZ' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Techbridge\premium-next-app\src\app\about\page.tsx
+  260:41  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  261:87  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+F:\Techbridge\premium-next-app\src\app\services\page.tsx
+  189:25  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  189:48  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+F:\Techbridge\premium-next-app\src\app\websites\page.tsx
+   7:10  warning  'WebsitePlayer' is defined but never used  @typescript-eslint/no-unused-vars
+  34:10  warning  'Section' is defined but never used        @typescript-eslint/no-unused-vars
+
+F:\Techbridge\premium-next-app\src\components\home\CaseStudies.tsx
+   3:18  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+   3:29  warning  'useState' is defined but never used   @typescript-eslint/no-unused-vars
+  56:35  warning  'index' is defined but never used      @typescript-eslint/no-unused-vars
+
+F:\Techbridge\premium-next-app\src\components\home\Hero.tsx
+  42:11  warning  'canvasRef' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Techbridge\premium-next-app\src\components\home\HowItWorks.tsx
+  58:11  warning  'isInView' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  62:11  warning  'itemVariants' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Techbridge\premium-next-app\src\components\layout\Navbar.tsx
+  34:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Techbridge\premium-next-app\src\components\layout\Navbar.tsx:34:9
+  32 |     useEffect(() => {
+  33 |         window.addEventListener("scroll", updateNavState, { passive: true });
+> 34 |         updateNavState();
+     |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  35 |         return () => window.removeEventListener("scroll", updateNavState);
+  36 |     }, [updateNavState]);
+  37 |  react-hooks/set-state-in-effect
+
+F:\Techbridge\premium-next-app\src\components\remotion\CaseStudyReel.tsx
+   4:37  warning  'spring' is defined but never used           @typescript-eslint/no-unused-vars
+   4:78  warning  'Sequence' is defined but never used         @typescript-eslint/no-unused-vars
+  16:13  warning  'fps' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  16:36  warning  'width' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  16:43  warning  'height' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Techbridge\premium-next-app\src\components\remotion\WebsiteShowcase.tsx
+   3:17  warning  'useMemo' is defined but never used                 @typescript-eslint/no-unused-vars
+  37:11  warning  'easedProgress' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 39 problems (21 errors, 18 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

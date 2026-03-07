@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Check, X, ChevronDown, ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
-
+import { WebsitePlayer } from "@/components/remotion/WebsiteShowcase";
 
 
 /* ─── Global ease constant ───────────────────────────────── */
@@ -422,61 +422,160 @@ const TIMELINE = [
     },
 ];
 
-function Timeline() {
+function TimelineStep({
+    step,
+    dotRef,
+    index
+}: {
+    step: typeof TIMELINE[number];
+    dotRef?: React.RefObject<HTMLDivElement | null>;
+    index: number;
+}) {
     const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-80px" });
+    const isCenterInView = useInView(ref, { margin: "-45% 0px -45% 0px" });
 
     return (
-        <div ref={ref} className="mx-auto max-w-3xl px-6 lg:px-12">
-            <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
+        <div className="contents">
+            {/* Left rail - dot (col 1) */}
+            <div className="relative flex justify-center pt-8">
+                <motion.div
+                    ref={dotRef}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
+                    className="relative flex h-11 w-11 items-center justify-center"
+                >
+                    <span className={`absolute inset-0 rounded-full blur-md transition-all duration-700 ${isCenterInView ? "bg-violet-500/60 scale-[1.2]" : "bg-violet-500/10"}`} />
+                    <span className={`relative flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-700 ${isCenterInView ? "border-violet-500/40 bg-violet-950/60 shadow-[0_0_20px_rgba(109,40,217,0.4)]" : "border-violet-500/10 bg-violet-950/20 shadow-none"}`}>
+                        <span className={`font-mono text-xs font-bold transition-colors duration-700 ${isCenterInView ? "text-violet-300" : "text-violet-500/50"}`}>{String(index + 1).padStart(2, "0")}</span>
+                    </span>
+                </motion.div>
+            </div>
+
+            {/* Glass card (col 2) */}
+            <motion.div
+                ref={ref}
+                initial={{ opacity: 0, x: 32 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                className={`group relative overflow-hidden rounded-xl border transition-all duration-700 p-6 backdrop-blur-sm ${isCenterInView
+                    ? "border-violet-500/50 bg-violet-500/10 shadow-[0_0_30px_rgba(139,92,246,0.15)] scale-[1.01]"
+                    : "border-white/8 bg-neutral-900/50 hover:border-white/15"
+                    }`}
+            >
+                {/* Active glow gradient */}
+                <div
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-0 transition-opacity duration-1000 ${isCenterInView ? "opacity-100" : "opacity-0"
+                        }`}
+                    style={{
+                        background:
+                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 100%)",
+                    }}
+                />
+                <div className="mb-2 relative z-10 flex flex-wrap items-center gap-3">
+                    {step.tag && (
+                        <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-700 ${isCenterInView ? "border-violet-500/30 bg-violet-950/60 text-violet-400" : "border-violet-500/10 bg-violet-950/20 text-violet-500/60"
+                            }`}>
+                            {step.tag}
+                        </span>
+                    )}
+                    <span className={`font-mono text-xs transition-colors duration-700 ${isCenterInView ? "text-violet-300" : "text-zinc-600"}`}>
+                        {step.time}
+                    </span>
+                </div>
+                <h3 className={`relative z-10 mb-2 border-none text-base font-bold transition-colors duration-700 ${isCenterInView ? "text-white" : "text-zinc-400 group-hover:text-white"}`}>
+                    {step.title}
+                </h3>
+                <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-700 ${isCenterInView ? "text-zinc-300" : "text-zinc-500 group-hover:text-zinc-400"}`}>
+                    {step.desc}
+                </p>
+            </motion.div>
+        </div>
+    );
+}
+
+function Timeline() {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const timelineRef = useRef<HTMLDivElement>(null);
+    const isHeaderInView = useInView(sectionRef, { once: true, margin: "-80px" });
+
+    const { scrollYProgress } = useScroll({
+        target: timelineRef,
+        offset: ["start 50%", "end 50%"],
+    });
+
+    const [lineHeight, setLineHeight] = useState(0);
+    const lastDotRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const updateHeight = () => {
+            if (timelineRef.current && lastDotRef.current) {
+                const timelineRect = timelineRef.current.getBoundingClientRect();
+                const lastDotRect = lastDotRef.current.getBoundingClientRect();
+                const centerPos = lastDotRect.top - timelineRect.top + (lastDotRect.height / 2);
+                setLineHeight(centerPos);
+            }
+        };
+
+        updateHeight();
+        window.addEventListener("resize", updateHeight);
+        return () => window.removeEventListener("resize", updateHeight);
+    }, []);
+
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 70,
+        damping: 30,
+        restDelta: 0.001
+    });
+
+    const lineScaleY = useTransform(smoothProgress, [0, 1], [0, 1]);
+
+    return (
+        <div ref={sectionRef} className="mx-auto max-w-3xl px-6 lg:px-12">
+            <motion.div variants={fadeUp(0)} initial="hidden" animate={isHeaderInView ? "show" : "hidden"} className="mb-14 text-center">
                 <Eyebrow>The 24-Hour Process</Eyebrow>
                 <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
                     From kickoff to live - in a single day.
                 </h2>
             </motion.div>
 
-            <motion.div
-                variants={stagger(0.15)}
-                initial="hidden"
-                animate={isInView ? "show" : "hidden"}
+            <div
+                ref={timelineRef}
                 className="relative grid grid-cols-[3rem_1fr] gap-x-5 gap-y-10"
             >
-                {/* Vertical rail line */}
+                {/* Vertical rail line Background */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute left-[1.375rem] top-2 bottom-10 w-px bg-gradient-to-b from-violet-500/60 via-violet-500/20 to-transparent"
+                    className="pointer-events-none absolute left-[1.375rem] top-0 h-full w-px bg-white/5"
                 />
 
-                {TIMELINE.map((step, i) => (
-                    <motion.div key={i} variants={childFade} className="contents">
-                        {/* Node (col 1) */}
-                        <div className="relative z-10 flex justify-center pt-0">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-violet-500/40 bg-violet-950/60 shadow-[0_0_20px_rgba(109,40,217,0.3)]">
-                                <span className="font-mono text-xs font-bold text-violet-300">{String(i + 1).padStart(2, "0")}</span>
-                            </div>
-                        </div>
+                {/* Glow line: scroll-driven scaleY from center of dot 1 to center of dot 4 */}
+                <motion.div
+                    aria-hidden="true"
+                    style={{
+                        scaleY: lineHeight ? lineScaleY : 0,
+                        originY: 0,
+                        // Start at center of first dot (pt-8 = 32px + h-11/2 = 22px => 54px)
+                        height: lineHeight ? (lineHeight - 54) : "100%"
+                    }}
+                    className="pointer-events-none absolute left-[1.375rem] top-[54px] w-px"
+                >
+                    <div className="h-full w-[2px] -ml-[0.5px] bg-gradient-to-b from-violet-500 via-indigo-500 to-violet-500/10" />
+                    <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/60 blur-md" />
+                </motion.div>
 
-                        {/* Card (col 2) */}
-                        <div className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/15">
-                            <div
-                                aria-hidden="true"
-                                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(109,40,217,0.08) 0%, rgba(109,40,217,0) 100%)" }}
-                            />
-                            <div className="mb-2 flex items-center gap-3">
-                                {step.tag && (
-                                    <span className="rounded-full border border-violet-500/20 bg-violet-950/40 px-2.5 py-0.5 text-xs font-semibold text-violet-400">
-                                        {step.tag}
-                                    </span>
-                                )}
-                                <span className="font-mono text-xs text-zinc-600">{step.time}</span>
-                            </div>
-                            <h3 className="mb-2 text-base font-bold text-white">{step.title}</h3>
-                            <p className="text-sm leading-relaxed text-zinc-500">{step.desc}</p>
-                        </div>
-                    </motion.div>
+                {TIMELINE.map((step, i) => (
+                    <TimelineStep
+                        key={i}
+                        index={i}
+                        step={step}
+                        dotRef={i === TIMELINE.length - 1 ? lastDotRef : undefined}
+                    />
                 ))}
-            </motion.div>
+            </div>
         </div>
     );
 }
@@ -484,101 +583,235 @@ function Timeline() {
 /* ══════════════════════════════════════════════════════════
    STEP 4 — SOCIAL PROOF / LIVE EXAMPLE
 ══════════════════════════════════════════════════════════ */
+const SOCIAL_PROOF_PROJECTS = [
+    {
+        client: "NextLex",
+        metrics: "14 Days",
+        metricSubtitle: "From Idea To Live",
+        desc: "A premium marketing website for a legal document automation SaaS. Designed and deployed rapidly to support their high-growth acquisition strategy.",
+        link: "https://nextlex.com",
+        tags: ["Next.js", "Marketing Site", "SEO"],
+        assets: ["/proofs/NextLex/1.png", "/proofs/NextLex/2.png", "/proofs/NextLex/3.png", "/proofs/NextLex/4.png"],
+        accentColor: "rgb(139,92,246)", // violet
+    },
+    {
+        client: "PrimeMark Apparel",
+        metrics: "12x",
+        metricSubtitle: "Lead Quality",
+        desc: "High-performance digital storefront streamlining global supply chain operations. A premium web presence built to capture enterprise leads.",
+        link: "https://primemarkapparel.com",
+        tags: ["Corporate Site", "Lead Gen", "Performance"],
+        assets: ["/proofs/PrimeMark/1.png", "/proofs/PrimeMark/2.png", "/proofs/PrimeMark/3.png", "/proofs/PrimeMark/4.png"],
+        accentColor: "rgb(99,102,241)", // indigo
+    },
+    {
+        client: "AliWali Trading Co.",
+        metrics: "35+",
+        metricSubtitle: "Years of Legacy",
+        desc: "A fast, modern digital presence for a direct buyer of industrial plied rubber conveyor belts. Replacing an outdated platform with zero downtime.",
+        link: "https://aliwalitradingco.com",
+        tags: ["Next.js", "Global Reach", "B2B Portal"],
+        assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png"],
+        accentColor: "rgb(109,40,217)", // violet-700
+    },
+];
+
+import { CaseStudyReel } from "@/components/remotion/CaseStudyReel";
+import { PlayerRef } from "@remotion/player";
+
+function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { project: typeof SOCIAL_PROOF_PROJECTS[number], index: number, expanded: number, setExpanded: (idx: number) => void, onSelect: (p: typeof SOCIAL_PROOF_PROJECTS[number]) => void }) {
+    const isExpanded = expanded === index;
+    const playerRef = useRef<PlayerRef>(null);
+
+    // Refined VERY slow, heavily weighted scrub on hover simulation
+    const springProgress = useSpring(0, { damping: 60, stiffness: 20, mass: 3 });
+
+    useEffect(() => {
+        if (isExpanded) {
+            springProgress.set(1);
+        } else {
+            springProgress.set(0);
+        }
+    }, [isExpanded, springProgress]);
+
+    useMotionValueEvent(springProgress, "change", (latest) => {
+        if (playerRef.current) {
+            const frame = Math.floor(latest * 600); // 600 frames mapped to sequence
+            playerRef.current.seekTo(frame);
+        }
+    });
+
+    return (
+        <motion.div
+            layout
+            onHoverStart={() => setExpanded(index)}
+            onClick={() => isExpanded ? onSelect(project) : setExpanded(index)}
+            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'border-white/20 bg-neutral-900/60' : 'border-white/5 bg-neutral-900/20 hover:bg-neutral-900/40'}`}
+        >
+            <div className={`p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-opacity ${isExpanded ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}>
+
+                {/* Text Data */}
+                <div className="flex-1">
+                    <div className="flex items-center gap-4 mb-2">
+                        <span className="font-mono text-3xl font-extrabold text-white">{project.metrics}</span>
+                        <div className="h-4 w-px bg-white/20" />
+                        <h4 className="text-xl font-bold tracking-tight text-white">{project.client}</h4>
+                    </div>
+
+                    {isExpanded && (
+                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mt-4">
+                            <p className="text-sm text-zinc-400 max-w-lg mb-6">{project.desc}</p>
+                            <div className="flex flex-wrap gap-2 mb-6">
+                                {project.tags.map(t => (
+                                    <span key={t} className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500">{t}</span>
+                                ))}
+                            </div>
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-white tracking-widest uppercase hover:text-violet-400 transition-colors">
+                                View Live Site <ExternalLink size={14} />
+                            </a>
+                        </motion.div>
+                    )}
+                </div>
+
+                {/* Video Player */}
+                <motion.div
+                    layout
+                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 ${isExpanded ? 'w-full md:w-1/2 aspect-video' : 'w-full md:w-1/4 h-24'} transition-transform duration-700 ${isExpanded ? 'scale-[1.02]' : 'scale-100'}`}
+                >
+                    <CaseStudyReel playerRef={playerRef} brand={project.client} assets={project.assets} theme={project.accentColor} />
+
+                    {!isExpanded && (
+                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none transition-opacity group-hover:opacity-0">
+                            <span className="text-xs font-mono font-bold tracking-widest text-white/70 bg-black/60 px-3 py-1 rounded-full border border-white/10">
+                                {project.client}
+                            </span>
+                        </div>
+                    )}
+                </motion.div>
+
+            </div>
+        </motion.div>
+    );
+}
+
 function SocialProof() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
+    const [expanded, setExpanded] = useState(0);
+    const [selectedProject, setSelectedProject] = useState<typeof SOCIAL_PROOF_PROJECTS[number] | null>(null);
+
+    // Escape listener for modal
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setSelectedProject(null);
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
 
     return (
-        <div ref={ref} className="mx-auto max-w-5xl px-6 lg:px-12">
+        <div ref={ref} className="mx-auto max-w-5xl px-6 lg:px-12 py-10">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
-                <Eyebrow>Live Example</Eyebrow>
+                <Eyebrow>Live Examples</Eyebrow>
                 <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
                     Built by us. Already live.
                 </h2>
+                <p className="mt-4 text-sm text-zinc-500 font-mono tracking-widest uppercase">{"//"} INTERACTIVE WALKTHROUGH</p>
             </motion.div>
 
-            <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isInView ? "show" : "hidden"}>
-                <div className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:flex">
-                    {/* Hover glow */}
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(109,40,217,0.1) 0%, rgba(109,40,217,0) 100%)" }} />
+            <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isInView ? "show" : "hidden"} className="flex flex-col gap-4">
+                {SOCIAL_PROOF_PROJECTS.map((project, i) => (
+                    <AccordionRow key={project.client} project={project} index={i} expanded={expanded} setExpanded={setExpanded} onSelect={setSelectedProject} />
+                ))}
+            </motion.div>
 
-                    {/* Visual panel */}
-                    <div className="relative h-64 overflow-hidden border-b border-white/5 bg-neutral-950 lg:h-auto lg:w-1/2 lg:border-b-0 lg:border-r">
-                        {/* Animated global node-map */}
-                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <pattern id="proof-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-                                    <circle cx="1" cy="1" r="0.75" fill="white" fillOpacity="0.07" />
-                                </pattern>
-                                <style>{`
-                  @keyframes proof-ping { 0%,100%{r:3;opacity:.5} 50%{r:5;opacity:1} }
-                  @keyframes proof-dash { to{stroke-dashoffset:-40} }
-                  .pp-a{animation:proof-ping 2.2s ease-in-out infinite}
-                  .pp-b{animation:proof-ping 2.2s ease-in-out .7s infinite}
-                  .pp-c{animation:proof-ping 2.2s ease-in-out 1.4s infinite}
-                  .pd{animation:proof-dash 2.5s linear infinite}
-                `}</style>
-                            </defs>
-                            <rect width="100%" height="100%" fill="url(#proof-dots)" />
-                            {/* Shipping arc lines */}
-                            {[["15%", "30%", "55%", "20%"], ["55%", "20%", "85%", "40%"], ["25%", "65%", "65%", "70%"], ["65%", "70%", "85%", "40%"], ["15%", "30%", "25%", "65%"]].map(([x1, y1, x2, y2], i) => (
-                                <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#7c3aed" strokeOpacity="0.25" strokeWidth="1" strokeDasharray="4 6" className="pd" />
-                            ))}
-                            {/* Nodes */}
-                            {[["15%", "30%", "pp-a"], ["55%", "20%", "pp-b"], ["85%", "40%", "pp-c"], ["25%", "65%", "pp-a"], ["65%", "70%", "pp-b"]].map(([cx, cy, cls], i) => (
-                                <g key={i}>
-                                    <circle cx={cx} cy={cy} r="8" fill="none" stroke="#7c3aed" strokeOpacity="0.15" strokeWidth="1" className={cls} />
-                                    <circle cx={cx} cy={cy} fill="#a78bfa" fillOpacity="0.7" className={cls} />
-                                </g>
-                            ))}
-                        </svg>
-                        {/* Client badge */}
-                        <div className="absolute bottom-4 left-4 rounded-full border border-white/10 bg-black/60 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-zinc-400 backdrop-blur-sm">
-                            Ali Wali Trading Co.
-                        </div>
-                    </div>
-
-                    {/* Text panel */}
-                    <div className="relative z-10 flex flex-col justify-between p-8 lg:w-1/2 lg:p-12">
-                        <div>
-                            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                B2B Logistics Platform · Global Reach
-                            </p>
-                            <h3 className="mb-1 font-mono text-7xl font-extrabold leading-none tracking-tight text-white lg:text-8xl">
-                                35+
-                            </h3>
-                            <p className="mb-6 text-sm uppercase tracking-wider text-zinc-500">
-                                Years of Global Trade
-                            </p>
-                            <p className="text-base leading-relaxed text-zinc-400">
-                                A premium digital presence for a direct buyer of industrial
-                                plied rubber conveyor belts. Designed, built, and deployed
-                                within a single business day - now representing 35 years of
-                                trade legacy online.
-                            </p>
-                        </div>
-
-                        <div className="mt-8 flex flex-wrap items-center gap-4">
-                            <a
-                                href="https://aliwalitradingco.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/30"
+            {/* CLICK INTERACTION MODAL */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-black/60"
+                        onClick={() => setSelectedProject(null)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overflow-x-hidden rounded-3xl border border-white/10 bg-neutral-950/80 p-6 md:p-8 shadow-2xl backdrop-blur-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setSelectedProject(null)}
+                                className="absolute right-6 top-6 rounded-full border border-white/10 bg-white/5 p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
                             >
-                                View Live Site
-                                <ExternalLink size={13} className="text-zinc-500 transition-colors group-hover:text-violet-400" />
-                            </a>
-                            <div className="flex flex-wrap gap-2">
-                                {["Next.js", "Global Logistics", "B2B Portal"].map((t) => (
-                                    <span key={t} className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500">
-                                        {t}
-                                    </span>
+                                <X size={16} />
+                            </button>
+
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="font-mono text-3xl md:text-4xl font-extrabold text-white">{selectedProject.metrics}</span>
+                                <div className="h-6 w-px bg-white/20" />
+                                <div>
+                                    <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white">{selectedProject.client}</h3>
+                                    <p className="text-xs md:text-sm font-mono tracking-widest text-zinc-500 uppercase">{selectedProject.metricSubtitle}</p>
+                                </div>
+                            </div>
+
+                            {/* Image Carousel */}
+                            <div className="relative mb-8 w-full aspect-video rounded-xl overflow-x-auto flex snap-x snap-mandatory border border-white/10 bg-black/50 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                {selectedProject.assets.map((asset: string, idx: number) => (
+                                    <div key={idx} className="w-full h-full shrink-0 snap-center relative">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={asset}
+                                            alt={`${selectedProject.client} view ${idx + 1}`}
+                                            className="w-full h-full object-cover object-top"
+                                        />
+                                        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full text-white/70 font-mono text-[10px] uppercase tracking-widest">
+                                            {idx + 1} / {selectedProject.assets.length}
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                                <div className="md:col-span-2">
+                                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                                        {selectedProject.desc}
+                                    </p>
+                                </div>
+                                <div className="md:col-span-1">
+                                    <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">Tech Stack & Features</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {selectedProject.tags.map((t: string) => (
+                                            <span key={t} className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-zinc-300">
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a
+                                href={selectedProject.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-900/20"
+                            >
+                                <span className="relative z-10 tracking-widest uppercase">Explore Live Platform</span>
+                                <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                <div
+                                    className="absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100"
+                                    style={{ background: `linear-gradient(90deg, transparent, ${selectedProject.accentColor.replace('rgb', 'rgba').replace(')', ', 0.1)')}, transparent)` }}
+                                />
+                            </a>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

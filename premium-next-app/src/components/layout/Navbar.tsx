@@ -13,13 +13,13 @@ const NAV_LINKS = [
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
 ];
-
 type NavState = "top" | "hidden" | "pill";
 
 export default function Navbar() {
     const [navState, setNavState] = useState<NavState>("top");
     const [mobileOpen, setMobileOpen] = useState(false);
     const [bannerVisible, setBannerVisible] = useState(true);
+    const [forceHide, setForceHide] = useState(false);
     const pathname = usePathname();
 
     const updateNavState = useCallback(() => {
@@ -31,9 +31,18 @@ export default function Navbar() {
 
     useEffect(() => {
         window.addEventListener("scroll", updateNavState, { passive: true });
+        // Call it once manually after mount, but outside render
         updateNavState();
         return () => window.removeEventListener("scroll", updateNavState);
     }, [updateNavState]);
+
+    useEffect(() => {
+        const handleForceHide = (e: CustomEvent<{ hide: boolean }>) => {
+            setForceHide(e.detail.hide);
+        };
+        window.addEventListener("force-hide-navbar", handleForceHide as EventListener);
+        return () => window.removeEventListener("force-hide-navbar", handleForceHide as EventListener);
+    }, []);
 
     const isActive = (href: string) => pathname === href;
 
@@ -90,10 +99,9 @@ export default function Navbar() {
                 {/* Navbar — absolute at top so it overlays hero; fixed when pill */}
                 <motion.header
                     initial={{ opacity: 0, y: -24 }}
-                    animate={headerVariants[navState]}
+                    animate={forceHide ? { opacity: 0, y: -24 } : headerVariants[navState]}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className={`left-0 right-0 z-50 ${navState === "top" ? "absolute" : "fixed top-0"
-                        }`}
+                    className={`left-0 right-0 z-50 ${navState === "top" ? "absolute" : "fixed top-0"} ${forceHide ? "pointer-events-none" : ""}`}
                 >
                     <div
                         className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navState === "pill"

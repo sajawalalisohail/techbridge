@@ -57,29 +57,29 @@ function PinnedCaseStudy({ study, index }: { study: (typeof CASE_STUDIES)[number
     const containerRef = useRef<HTMLDivElement>(null);
     const playerRef = useRef<PlayerRef>(null);
 
-    // Track scroll over a 400vh container. The sticky part stays for 300vh.
+    // Track scroll over a tighter 250vh container. 
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"] // start entering view -> completely passed
     });
 
-    // For kinetic text, we reveal on enter.
-    const textOpacity = useTransform(scrollYProgress, [0.15, 0.22, 0.78, 0.85], [0, 1, 1, 0]);
-    const textY = useTransform(scrollYProgress, [0.15, 0.22, 0.78, 0.85], [40, 0, 0, -40]);
+    // For kinetic text, we reveal on enter and fade out slightly later.
+    const textOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.75, 0.85], [0, 1, 1, 0]);
+    const textY = useTransform(scrollYProgress, [0.15, 0.25, 0.75, 0.85], [40, 0, 0, -40]);
 
     // Scrub the video
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         if (playerRef.current) {
             const duration = 600; // Updated duration from the mapped reel
-            // map a portion of scroll to the 600 frames. 0.22 to 0.78 matches the pinned duration
-            const scrubVal = Math.max(0, Math.min(1, (latest - 0.22) / 0.56));
+            // map a portion of scroll to the 600 frames. 0.25 to 0.75 matches the pinned duration
+            const scrubVal = Math.max(0, Math.min(1, (latest - 0.25) / 0.50));
             const frameToSeek = Math.floor(scrubVal * duration);
             playerRef.current.seekTo(frameToSeek);
         }
     });
 
     return (
-        <div ref={containerRef} className="relative h-[400vh] w-full">
+        <div ref={containerRef} className="relative h-[250vh] w-full">
             <div className="sticky top-0 left-0 flex h-screen w-full flex-col lg:flex-row items-center justify-between px-6 lg:px-12 py-24 gap-12 overflow-hidden">
 
                 {/* ── Left side: Kinetic Typography / Data ── */}

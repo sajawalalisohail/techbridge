@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Check, X, ChevronDown, ArrowRight, ExternalLink } from "lucide-react";
+import { Check, X, ChevronDown, ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { WebsitePlayer } from "@/components/remotion/WebsiteShowcase";
 
@@ -699,15 +699,59 @@ function SocialProof() {
     const isInView = useInView(ref, { once: true, margin: "-80px" });
     const [expanded, setExpanded] = useState(0);
     const [selectedProject, setSelectedProject] = useState<typeof SOCIAL_PROOF_PROJECTS[number] | null>(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Escape listener for modal
+    // Reset image index when project changes
+    useEffect(() => { setCurrentImageIndex(0); }, [selectedProject]);
+
+    // Escape listener and Navbar occlusion / body lock
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") setSelectedProject(null);
         };
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
+
+        if (selectedProject) {
+            document.body.style.overflow = "hidden";
+            window.dispatchEvent(new CustomEvent("force-hide-navbar", { detail: { hide: true } }));
+            window.addEventListener("keydown", handleKeyDown);
+        } else {
+            document.body.style.overflow = "unset";
+            window.dispatchEvent(new CustomEvent("force-hide-navbar", { detail: { hide: false } }));
+        }
+
+        return () => {
+            // cleanup safely in case of dismount
+            document.body.style.overflow = "unset";
+            window.dispatchEvent(new CustomEvent("force-hide-navbar", { detail: { hide: false } }));
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [selectedProject]);
+
+    const currentProjectIndex = SOCIAL_PROOF_PROJECTS.findIndex((p) => p.client === selectedProject?.client);
+
+    const handlePrevProject = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (currentProjectIndex < 0) return;
+        const prev = currentProjectIndex > 0 ? currentProjectIndex - 1 : SOCIAL_PROOF_PROJECTS.length - 1;
+        setSelectedProject(SOCIAL_PROOF_PROJECTS[prev]);
+    };
+
+    const handleNextProject = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (currentProjectIndex < 0) return;
+        const next = currentProjectIndex < SOCIAL_PROOF_PROJECTS.length - 1 ? currentProjectIndex + 1 : 0;
+        setSelectedProject(SOCIAL_PROOF_PROJECTS[next]);
+    };
+
+    const handlePrevImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : (selectedProject?.assets.length || 1) - 1));
+    };
+
+    const handleNextImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentImageIndex((prev) => (prev < (selectedProject?.assets.length || 1) - 1 ? prev + 1 : 0));
+    };
 
     return (
         <div ref={ref} className="mx-auto max-w-5xl px-6 lg:px-12 py-10">
@@ -732,9 +776,16 @@ function SocialProof() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-black/60"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-xl bg-black/80"
                         onClick={() => setSelectedProject(null)}
                     >
+                        {/* Level 1 Nav: Project Switchers */}
+                        <button onClick={handlePrevProject} className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md">
+                            <ChevronLeft size={24} />
+                        </button>
+                        <button onClick={handleNextProject} className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md">
+                            <ChevronRight size={24} />
+                        </button>
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -746,9 +797,9 @@ function SocialProof() {
                             {/* Close Button */}
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="absolute right-6 top-6 rounded-full border border-white/10 bg-white/5 p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+                                className="absolute right-4 md:right-6 top-4 md:top-6 z-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
                             >
-                                <X size={16} />
+                                <X size={20} />
                             </button>
 
                             <div className="flex items-center gap-4 mb-6">
@@ -760,21 +811,33 @@ function SocialProof() {
                                 </div>
                             </div>
 
-                            {/* Image Carousel */}
-                            <div className="relative mb-8 w-full aspect-video rounded-xl overflow-x-auto flex snap-x snap-mandatory border border-white/10 bg-black/50 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                                {selectedProject.assets.map((asset: string, idx: number) => (
-                                    <div key={idx} className="w-full h-full shrink-0 snap-center relative">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            src={asset}
-                                            alt={`${selectedProject.client} view ${idx + 1}`}
-                                            className="w-full h-full object-cover object-top"
-                                        />
-                                        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full text-white/70 font-mono text-[10px] uppercase tracking-widest">
-                                            {idx + 1} / {selectedProject.assets.length}
-                                        </div>
-                                    </div>
-                                ))}
+                            {/* Image Carousel (Level 2 Nav) */}
+                            <div className="relative mb-8 w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 group/carousel">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={selectedProject.assets[currentImageIndex]}
+                                    alt={`${selectedProject.client} screenshot`}
+                                    className="w-full h-full object-cover object-top"
+                                />
+
+                                {/* Floating Slide Counter */}
+                                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-white/80 font-mono text-[10px] uppercase tracking-widest z-10">
+                                    IMG {currentImageIndex + 1} / {selectedProject.assets.length}
+                                </div>
+
+                                {/* Inner Image Nav Buttons */}
+                                <button
+                                    onClick={handlePrevImage}
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-white hover:bg-white/15 transition-all"
+                                >
+                                    <ChevronLeft size={18} />
+                                </button>
+                                <button
+                                    onClick={handleNextImage}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-white hover:bg-white/15 transition-all"
+                                >
+                                    <ChevronRight size={18} />
+                                </button>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">

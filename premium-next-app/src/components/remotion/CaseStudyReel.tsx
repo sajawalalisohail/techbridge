@@ -20,53 +20,32 @@ const Composition = ({ brand, assets, theme }: CaseStudyReelProps) => {
     const segmentDuration = Math.floor(durationInFrames / Math.max(1, assets.length));
 
     return (
-        <AbsoluteFill style={{ backgroundColor: "#09090b", position: "relative" }}>
+        <AbsoluteFill style={{ backgroundColor: "transparent", position: "relative" }}>
             {/* Background blurred glow for effect based on theme color */}
             <div
                 style={{
                     position: 'absolute', top: '-10%', left: '-10%', right: '-10%', height: '50%',
                     background: `radial-gradient(circle at center, ${theme}, transparent)`,
-                    filter: 'blur(80px)',
-                    opacity: interpolate(frame, [0, 30], [0, 0.5], { extrapolateRight: "clamp" }),
+                    filter: 'blur(100px)',
+                    opacity: interpolate(frame, [0, 30], [0, 0.3], { extrapolateRight: "clamp" }),
                 }}
             />
 
-            {/* "Engineered" Code Grid Overlay */}
-            <div
-                style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                    opacity: 0.15,
-                    pointerEvents: 'none',
-                }}
-            />
-
-            <AbsoluteFill style={{ padding: '40px' }}>
+            <AbsoluteFill style={{ padding: '20px' }}>
                 <div
                     style={{
                         position: 'relative',
                         width: '100%',
                         height: '100%',
-                        borderRadius: '16px',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        backgroundColor: '#000',
+                        borderRadius: '24px',
                         overflow: 'hidden',
-                        boxShadow: `0 0 60px ${theme.replace(')', ', 0.2)').replace('rgb', 'rgba')}`,
+                        backgroundColor: 'transparent',
                         display: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
+                        // Optional highly subtle floating border
+                        boxShadow: `0 0 0 1px rgba(255, 255, 255, 0.03)`
                     }}
                 >
-                    {/* Browser Edge */}
-                    <div style={{ width: '100%', height: '32px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px', backgroundColor: '#18181b', zIndex: 10 }}>
-                        <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ef4444' }} />
-                        <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#eab308' }} />
-                        <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#22c55e' }} />
-                        <div style={{ marginLeft: '12px', color: 'rgba(255,255,255,0.4)', fontSize: '10px', fontFamily: 'monospace', letterSpacing: '1px' }}>
-                            {brand} {"//"} COMPILED SECURE BUILD
-                        </div>
-                    </div>
 
                     <div style={{ position: 'relative', flex: 1, overflow: 'hidden' }}>
                         {assets.map((asset, i) => {
@@ -94,10 +73,6 @@ const Composition = ({ brand, assets, theme }: CaseStudyReelProps) => {
                     </div>
                 </div>
             </AbsoluteFill>
-
-            <div style={{ position: 'absolute', bottom: '20px', right: '40px', color: theme, fontFamily: 'monospace', fontSize: '12px', fontWeight: 'bold' }}>
-                SCROLL_FR: {frame.toString().padStart(4, '0')} / {durationInFrames}
-            </div>
         </AbsoluteFill>
     );
 };

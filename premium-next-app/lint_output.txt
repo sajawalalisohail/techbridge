@@ -204,8 +204,24 @@ F:\Techbridge\premium-next-app\src\app\services\page.tsx
   189:48  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
 
 F:\Techbridge\premium-next-app\src\app\websites\page.tsx
-   7:10  warning  'WebsitePlayer' is defined but never used  @typescript-eslint/no-unused-vars
-  34:10  warning  'Section' is defined but never used        @typescript-eslint/no-unused-vars
+    7:10  warning  'WebsitePlayer' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+   34:10  warning  'Section' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  705:23  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Techbridge\premium-next-app\src\app\websites\page.tsx:705:23
+  703 |
+  704 |     // Reset image index when project changes
+> 705 |     useEffect(() => { setCurrentImageIndex(0); }, [selectedProject]);
+      |                       ^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  706 |
+  707 |     // Escape listener and Navbar occlusion / body lock
+  708 |     useEffect(() => {  react-hooks/set-state-in-effect
 
 F:\Techbridge\premium-next-app\src\components\home\CaseStudies.tsx
    3:18  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
@@ -220,7 +236,7 @@ F:\Techbridge\premium-next-app\src\components\home\HowItWorks.tsx
   62:11  warning  'itemVariants' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 F:\Techbridge\premium-next-app\src\components\layout\Navbar.tsx
-  34:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+  35:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
 
 Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
 * Update external systems with the latest state from React.
@@ -228,18 +244,19 @@ Effects are intended to synchronize state between React and external systems suc
 
 Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
 
-F:\Techbridge\premium-next-app\src\components\layout\Navbar.tsx:34:9
-  32 |     useEffect(() => {
+F:\Techbridge\premium-next-app\src\components\layout\Navbar.tsx:35:9
   33 |         window.addEventListener("scroll", updateNavState, { passive: true });
-> 34 |         updateNavState();
+  34 |         // Call it once manually after mount, but outside render
+> 35 |         updateNavState();
      |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
-  35 |         return () => window.removeEventListener("scroll", updateNavState);
-  36 |     }, [updateNavState]);
-  37 |  react-hooks/set-state-in-effect
+  36 |         return () => window.removeEventListener("scroll", updateNavState);
+  37 |     }, [updateNavState]);
+  38 |  react-hooks/set-state-in-effect
 
 F:\Techbridge\premium-next-app\src\components\remotion\CaseStudyReel.tsx
    4:37  warning  'spring' is defined but never used           @typescript-eslint/no-unused-vars
    4:78  warning  'Sequence' is defined but never used         @typescript-eslint/no-unused-vars
+  14:24  warning  'brand' is defined but never used            @typescript-eslint/no-unused-vars
   16:13  warning  'fps' is assigned a value but never used     @typescript-eslint/no-unused-vars
   16:36  warning  'width' is assigned a value but never used   @typescript-eslint/no-unused-vars
   16:43  warning  'height' is assigned a value but never used  @typescript-eslint/no-unused-vars
@@ -248,6 +265,6 @@ F:\Techbridge\premium-next-app\src\components\remotion\WebsiteShowcase.tsx
    3:17  warning  'useMemo' is defined but never used                 @typescript-eslint/no-unused-vars
   37:11  warning  'easedProgress' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-✖ 39 problems (21 errors, 18 warnings)
+✖ 41 problems (22 errors, 19 warnings)
   1 error and 0 warnings potentially fixable with the `--fix` option.
 

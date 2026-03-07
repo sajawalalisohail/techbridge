@@ -55,23 +55,34 @@ export default function Navbar() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="border-b border-white/[0.06] bg-transparent"
+                            className="relative overflow-hidden border-b border-white/[0.06] bg-black"
                         >
-                            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5 lg:px-12">
-                                <p className="w-full text-center text-sm font-medium text-zinc-300">
+                            {/* Matching Hero Noise Overlay */}
+                            <div
+                                className="pointer-events-none absolute inset-0 opacity-[0.03]"
+                                style={{
+                                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                                    backgroundRepeat: "repeat",
+                                    backgroundSize: "128px 128px",
+                                }}
+                            />
+
+                            <div className="relative z-10 mx-auto flex w-full items-center justify-center py-2.5 px-12 sm:px-16">
+                                <p className="text-center text-sm font-medium text-zinc-300">
                                     Need a premium web presence fast? Launch your site in 24 hours.{" "}
                                     <Link href="/websites" className="text-white hover:text-indigo-300 underline underline-offset-4 transition-colors">
                                         Explore the Studio &rarr;
                                     </Link>
                                 </p>
-                                <button
-                                    onClick={() => setBannerVisible(false)}
-                                    className="absolute right-4 rounded-md p-1 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"
-                                    aria-label="Dismiss banner"
-                                >
-                                    <X size={16} />
-                                </button>
                             </div>
+
+                            <button
+                                onClick={() => setBannerVisible(false)}
+                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors sm:right-5"
+                                aria-label="Dismiss banner"
+                            >
+                                <X size={16} />
+                            </button>
                         </motion.div>
                     )}
                 </AnimatePresence>

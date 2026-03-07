@@ -199,7 +199,7 @@ export default function ServicesPage() {
 
     return (
         <div className="relative text-white">
-            <div className="relative z-10 overflow-hidden min-h-screen">
+            <div className="relative z-10 overflow-clip min-h-screen">
 
                 {/* ── Services Hero ── */}
                 <section className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">

@@ -408,7 +408,8 @@ export default function WorkPage() {
                         {/* Ambient glow */}
                         <div
                             aria-hidden="true"
-                            className="pointer-events-none absolute right-1/4 top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full bg-violet-900/18 blur-[120px]"
+                            className="pointer-events-none absolute inset-0"
+                            style={{ background: "radial-gradient(ellipse at 70% 30%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 70%)" }}
                         />
 
                         <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-12">

@@ -142,7 +142,7 @@ export function PageParticles() {
         height: '100%'
       }}
     >
-      <ParticlesField count={300} />
+      <ParticlesField count={250} />
     </Canvas>
   );
 }

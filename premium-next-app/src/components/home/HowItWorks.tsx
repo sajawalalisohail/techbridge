@@ -144,12 +144,14 @@ function PhaseCard({
 export default function HowItWorks() {
     const sectionRef = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
+    const timelineRef = useRef<HTMLDivElement>(null);
+
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
 
     /* Scroll-driven line draw */
     const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start 95%", "end 5%"], // Maximized reach to physically pin to standard viewports
+        target: timelineRef,
+        offset: ["start 50%", "end 50%"], // Perfect 1:1 timeline sync based entirely on the grid height
     });
 
     const smoothProgress = useSpring(scrollYProgress, {
@@ -203,7 +205,7 @@ export default function HowItWorks() {
                 </motion.div>
 
                 {/* ── Timeline (2-column grid: rail | cards) ── */}
-                <div className="relative grid grid-cols-[2rem_1fr] gap-x-4 gap-y-10 lg:grid-cols-[3rem_1fr] lg:gap-x-6 lg:gap-y-12">
+                <div ref={timelineRef} className="relative grid grid-cols-[2rem_1fr] gap-x-4 gap-y-10 lg:grid-cols-[3rem_1fr] lg:gap-x-6 lg:gap-y-12">
                     {/* Vertical rail line (spans all rows, behind dots) */}
                     <div
                         aria-hidden="true"

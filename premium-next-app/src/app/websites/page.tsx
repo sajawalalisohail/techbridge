@@ -8,8 +8,28 @@ import Link from "next/link";
 /* ─── Violet pulse glow ──────────────────────────────────── */
 const violetPulseCSS = `
   @keyframes violet-pulse {
-    0%, 100% { box-shadow: 0 0 0 1px rgba(139,92,246,0.4), 0 0 30px rgba(139,92,246,0.15), inset 0 0 30px rgba(139,92,246,0.03); }
-    50%      { box-shadow: 0 0 0 1px rgba(139,92,246,0.7), 0 0 60px rgba(139,92,246,0.3), inset 0 0 40px rgba(139,92,246,0.06); }
+    0%, 100% { 
+      box-shadow: 
+        0 -1px 0 0 rgba(139,92,246,0.3), 
+        0 1px 0 0 rgba(139,92,246,0.3), 
+        -1px 0 0 0 rgba(139,92,246,0.3), 
+        1px 0 0 0 rgba(139,92,246,0.3),
+        inset 0 100px 100px -80px rgba(139,92,246,0.1),
+        inset 0 -100px 100px -80px rgba(139,92,246,0.1),
+        inset 100px 0 100px -80px rgba(139,92,246,0.1),
+        inset -100px 0 100px -80px rgba(139,92,246,0.1); 
+    }
+    50% { 
+      box-shadow: 
+        0 -1px 0 0 rgba(139,92,246,0.7), 
+        0 1px 0 0 rgba(139,92,246,0.7), 
+        -1px 0 0 0 rgba(139,92,246,0.7), 
+        1px 0 0 0 rgba(139,92,246,0.7),
+        inset 0 150px 120px -100px rgba(139,92,246,0.25),
+        inset 0 -150px 120px -100px rgba(139,92,246,0.25),
+        inset 150px 0 120px -100px rgba(139,92,246,0.25),
+        inset -150px 0 120px -100px rgba(139,92,246,0.25); 
+    }
   }
 `;
 
@@ -90,7 +110,9 @@ function Hero() {
                 style={{
                     background: `
                         radial-gradient(circle at 50% 50%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%),
-                        radial-gradient(circle at 100% 0%, rgba(79,70,229,0.05) 0%, rgba(79,70,229,0) 50%)
+                        radial-gradient(circle at 100% 0%, rgba(79,70,229,0.05) 0%, rgba(79,70,229,0) 50%),
+                        radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 70%),
+                        radial-gradient(ellipse at 100% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 70%)
                     `,
                 }}
             />
@@ -345,10 +367,10 @@ function TechStack() {
                 animate={isInView ? "show" : "hidden"}
                 className="relative"
             >
-                {/* Left fade mask */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-neutral-950 to-transparent" />
+                {/* Left fade mask — subtle so it doesn't break global side glow */}
+                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-neutral-950/80 to-transparent" />
                 {/* Right fade mask */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-neutral-950 to-transparent" />
+                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-neutral-950/80 to-transparent" />
 
                 {/* Row 1 — scrolls left */}
                 <div className="flex overflow-hidden py-3">
@@ -994,9 +1016,14 @@ export default function WebsitesPage() {
             <style dangerouslySetInnerHTML={{ __html: violetPulseCSS }} />
 
             <div
-                className="relative z-10 overflow-hidden min-h-screen border border-violet-500/10 rounded-sm"
+                className="relative z-10 overflow-hidden min-h-screen border border-violet-500/20 rounded-none"
                 style={{ animation: "violet-pulse 4s ease-in-out infinite" }}
             >
+                {/* Full-bleed side, top, and bottom ambient glows — high z-index to stay on top of section masks */}
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-violet-600/10 to-transparent" />
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-violet-600/10 to-transparent" />
+                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-violet-600/20 to-transparent" />
+                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-violet-600/20 to-transparent" />
                 <Hero />
 
                 {/* Separator */}

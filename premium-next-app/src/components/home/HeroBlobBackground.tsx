@@ -10,14 +10,11 @@ export default function HeroBlobBackground() {
     >
       {/* Flex centering anchor */}
       <div className="absolute inset-0 flex items-center justify-center">
-        {/* blob-container: backdrop-filter saturate+contrast smooths color gradients */}
+        {/* blob-container: fluid scaling for desktop and mobile */}
         <div
           className="blob-container"
-          style={{ width: "min(25vw, 320px)", height: "min(25vw, 320px)" }}
+          style={{ width: "clamp(220px, 22vw, 360px)", height: "clamp(220px, 22vw, 360px)" }}
         >
-          {/* Dithering noise overlay — pointer-events-none, z-index:1 */}
-          <div className="noise-overlay" />
-
           {/* Layer 1: Outer atmospheric halo */}
           <div className="blob-halo" />
 

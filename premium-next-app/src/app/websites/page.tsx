@@ -676,17 +676,12 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                 {/* Video Player */}
                 <motion.div
                     layout
-                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 ${isExpanded ? 'w-full md:w-1/2 aspect-video' : 'w-full md:w-1/4 h-24'} transition-transform duration-700 ${isExpanded ? 'scale-[1.02]' : 'scale-100'}`}
+                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-white/20'}`}
+                    style={{
+                        boxShadow: `0 0 20px ${project.accentColor.replace("rgb", "rgba").replace(")", ", 0.15)")}`
+                    }}
                 >
                     <CaseStudyReel playerRef={playerRef} brand={project.client} assets={project.assets} theme={project.accentColor} />
-
-                    {!isExpanded && (
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none transition-opacity group-hover:opacity-0">
-                            <span className="text-xs font-mono font-bold tracking-widest text-white/70 bg-black/60 px-3 py-1 rounded-full border border-white/10">
-                                {project.client}
-                            </span>
-                        </div>
-                    )}
                 </motion.div>
 
             </div>

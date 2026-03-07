@@ -21,29 +21,17 @@ const Composition = ({ brand, assets, theme }: CaseStudyReelProps) => {
 
     return (
         <AbsoluteFill style={{ backgroundColor: "transparent", position: "relative" }}>
-            {/* Background blurred glow for effect based on theme color */}
-            <div
-                style={{
-                    position: 'absolute', top: '-10%', left: '-10%', right: '-10%', height: '50%',
-                    background: `radial-gradient(circle at center, ${theme}, transparent)`,
-                    filter: 'blur(100px)',
-                    opacity: interpolate(frame, [0, 30], [0, 0.3], { extrapolateRight: "clamp" }),
-                }}
-            />
-
-            <AbsoluteFill style={{ padding: '20px' }}>
+            <AbsoluteFill style={{ padding: '0px' }}>
                 <div
                     style={{
                         position: 'relative',
                         width: '100%',
                         height: '100%',
-                        borderRadius: '24px',
+                        borderRadius: '0px',
                         overflow: 'hidden',
                         backgroundColor: 'transparent',
                         display: 'flex',
                         flexDirection: 'column',
-                        // Optional highly subtle floating border
-                        boxShadow: `0 0 0 1px rgba(255, 255, 255, 0.03)`
                     }}
                 >
 
@@ -86,8 +74,8 @@ const CaseStudyReelPlayer = ({ brand, assets, theme, playerRef }: CaseStudyReelP
             inputProps={{ brand, assets, theme }}
             durationInFrames={600} // 20 seconds equivalent at 30fps
             fps={30}
-            compositionWidth={1080}
-            compositionHeight={800}
+            compositionWidth={1920}
+            compositionHeight={1080}
             style={{
                 width: '100%',
                 height: '100%',

@@ -18,6 +18,22 @@ body {
   font-family: var(--font-jetbrains-mono), monospace;
 }
 
+/* Full-viewport noise dither — breaks gradient banding on 6-bit panels.
+   No boundary artifact because it extends to all viewport edges.
+   soft-light on black = invisible; only adds micro-texture on gradients. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+}
+
 @layer utilities {
 
   /* ── Keyframes ──────────────────────────────────────────── */
@@ -86,20 +102,6 @@ body {
     }
   }
 
-  /* Noise dithering overlay — physically breaks banding by adding micro-grain */
-  /* Pure CSS: repeating-conic-gradient at near-zero opacity acts as dither */
-  .noise-overlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 180px 180px;
-    opacity: 0.45;
-    mix-blend-mode: overlay;
-  }
-
   /* Blob container */
   .blob-container {
     position: relative;
@@ -123,23 +125,30 @@ body {
     animation: blobPulse 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
-  /* Layer 2: Conic base color field — purple/blue gradient, no white beacon */
+  /* Layer 2: Conic base color field — many stops for smooth 6-bit panel rendering */
   .blob-core {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     background: conic-gradient(from 0deg at 50% 50%,
         #3b1066 0deg,
+        #4a1590 20deg,
         #5b21b6 40deg,
+        #6b2dd3 60deg,
         #7c3aed 80deg,
+        #6840e0 110deg,
         #4f46e5 150deg,
+        #443bbd 175deg,
         #3730a3 200deg,
+        #3b38b4 230deg,
         #4f46e5 260deg,
+        #5956ec 285deg,
         #6366f1 310deg,
+        #4f3bab 335deg,
         #3b1066 360deg);
     opacity: 0.55;
     mix-blend-mode: screen;
-    filter: blur(60px) saturate(200%);
+    filter: blur(120px) saturate(180%);
     will-change: transform;
     animation:
       blobSpin 25s linear infinite,
@@ -188,20 +197,24 @@ body {
     mix-blend-mode: screen;
   }
 
-  /* Layer 3: Inner counter-spinner — 35s reverse, readable parallax depth */
+  /* Layer 3: Inner counter-spinner — smooth stops for 6-bit panels */
   .blob-inner {
     position: absolute;
     inset: 15%;
     border-radius: 50%;
     background: conic-gradient(from 180deg at 50% 50%,
         #4f46e5 0deg,
+        #6538ec 45deg,
         #7c3aed 90deg,
+        #7050ef 135deg,
         #6366f1 180deg,
+        #5e44d4 225deg,
         #5b21b6 270deg,
+        #5534ce 315deg,
         #4f46e5 360deg);
     opacity: 0.30;
     mix-blend-mode: screen;
-    filter: blur(100px) saturate(150%);
+    filter: blur(150px) saturate(150%);
     will-change: transform;
     animation: blobSpin 35s linear infinite reverse;
   }

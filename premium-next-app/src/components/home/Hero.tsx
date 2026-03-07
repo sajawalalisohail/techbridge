@@ -51,17 +51,6 @@ export default function Hero() {
                 {/* ── Soft Centered Luminous Cloud Blob Background ── */}
                 <HeroBlobBackground />
 
-                {/* Fine noise texture — dithers gradient banding across the full hero */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
-                        backgroundRepeat: "repeat",
-                        backgroundSize: "200px 200px",
-                        opacity: 0.55,
-                        mixBlendMode: "overlay",
-                    }}
-                />
                 {/* Hairline separator at bottom of hero */}
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </div>
@@ -119,7 +108,7 @@ export default function Hero() {
 
                     <Link
                         href="/work"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-white/20 hover:text-white"
                     >
                         View Our Work
                         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -130,21 +119,21 @@ export default function Hero() {
 
 
                 {/* Social proof stats */}
-                <motion.div
+                <motion.dl
                     variants={fadeUp}
-                    className="mt-16 grid grid-cols-3 gap-8 border-t border-white/5 pt-10 sm:gap-16"
+                    className="mt-16 grid grid-cols-3 border-t border-white/5 pt-10"
                 >
-                    {STATS.map((stat) => (
-                        <div key={stat.label} className="flex flex-col items-center gap-2">
-                            <span className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    {STATS.map((stat, i) => (
+                        <div key={stat.label} className={`flex flex-col items-center gap-2 px-6 sm:px-12${i > 0 ? " border-l border-white/10" : ""}`}>
+                            <dd className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 {stat.value}
-                            </span>
-                            <span className="text-xs tracking-wider text-zinc-500 uppercase text-center">
+                            </dd>
+                            <dt className="text-xs tracking-wider text-zinc-500 uppercase text-center">
                                 {stat.label}
-                            </span>
+                            </dt>
                         </div>
                     ))}
-                </motion.div>
+                </motion.dl>
             </motion.div>
         </section>
     );

@@ -15,9 +15,6 @@ export default function HeroBlobBackground() {
           className="blob-container"
           style={{ width: "min(25vw, 320px)", height: "min(25vw, 320px)" }}
         >
-          {/* Dithering noise overlay — pointer-events-none, z-index:1 */}
-          <div className="noise-overlay" />
-
           {/* Layer 1: Outer atmospheric halo */}
           <div className="blob-halo" />
 

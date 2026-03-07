@@ -52,9 +52,9 @@ function PhaseCard({
 }: {
     phase: (typeof PHASES)[number];
 }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
-    const isCenterInView = useInView(ref, { margin: "-45% 0px -45% 0px" });
+    const cardRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(cardRef, { once: true, margin: "-15% 0px -15% 0px" });
+    const isCenterInView = useInView(cardRef, { margin: "-35% 0px -35% 0px" });
     const Icon = phase.icon;
 
     const itemVariants = {
@@ -72,7 +72,6 @@ function PhaseCard({
 
     return (
         <motion.div
-            ref={ref}
             variants={itemVariants}
             initial="hidden"
             animate={isInView ? "show" : "hidden"}
@@ -86,13 +85,13 @@ function PhaseCard({
                     transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
                     className="relative flex h-5 w-5 items-center justify-center"
                 >
-                    <span className="absolute inset-0 rounded-full bg-violet-500/30 blur-sm" />
-                    <span className="relative h-2.5 w-2.5 rounded-full bg-violet-400 ring-2 ring-violet-400/30 ring-offset-2 ring-offset-black" />
+                    <span className={`absolute inset-0 rounded-full transition-all duration-500 ${isCenterInView ? "bg-violet-500/60 blur-md scale-150" : "bg-violet-500/30 blur-sm scale-100"}`} />
+                    <span className={`relative h-2.5 w-2.5 rounded-full transition-colors duration-500 ${isCenterInView ? "bg-violet-300 ring-2 ring-violet-400/50 ring-offset-2 ring-offset-black" : "bg-violet-400 ring-2 ring-violet-400/30 ring-offset-2 ring-offset-black"}`} />
                 </motion.div>
             </div>
 
             {/* Glass card (col 2) */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-8">
+            <div ref={cardRef} className={`group relative overflow-hidden rounded-2xl border p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${isCenterInView ? "border-violet-500/25 bg-neutral-900/60 shadow-[0_0_30px_rgba(139,92,246,0.08)]" : "border-white/8 bg-neutral-900/40 hover:border-white/15"}`}>
                 {/* Hover + Active glow */}
                 <div
                     aria-hidden="true"
@@ -100,7 +99,7 @@ function PhaseCard({
                         }`}
                     style={{
                         background:
-                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 100%)",
+                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.18) 0%, rgba(99,102,241,0.06) 50%, rgba(139,92,246,0) 100%)",
                     }}
                 />
 
@@ -109,18 +108,18 @@ function PhaseCard({
                     <span className="font-mono text-5xl font-bold leading-none tracking-tighter text-white/[0.06] select-none">
                         {phase.number}
                     </span>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-colors duration-300 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400">
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-500 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400 ${isCenterInView ? "border-violet-500/30 bg-violet-950/50 text-violet-400" : "border-white/10 bg-white/5 text-zinc-400"}`}>
                         <Icon size={18} strokeWidth={1.5} />
                     </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-3 text-xl font-semibold leading-snug text-white lg:text-2xl">
+                <h3 className={`mb-3 text-xl font-semibold leading-snug lg:text-2xl transition-colors duration-500 ${isCenterInView ? "text-white" : "text-zinc-200"}`}>
                     {phase.label}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-zinc-400">
+                <p className={`text-sm leading-relaxed transition-colors duration-500 group-hover:text-zinc-400 ${isCenterInView ? "text-zinc-400" : "text-zinc-500"}`}>
                     {phase.description}
                 </p>
 

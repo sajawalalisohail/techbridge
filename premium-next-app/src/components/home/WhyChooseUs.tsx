@@ -8,14 +8,14 @@ import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-rea
 const gradientStyle = `
   @keyframes mesh-drift {
     0%   { transform: translate(0%, 0%)    scale(1); }
-    33%  { transform: translate(6%, -8%)   scale(1.08); }
-    66%  { transform: translate(-5%, 5%)   scale(0.96); }
+    33%  { transform: translate(6%, -8%)   scale(1.03); }
+    66%  { transform: translate(-5%, 5%)   scale(0.97); }
     100% { transform: translate(0%, 0%)    scale(1); }
   }
   @keyframes mesh-drift-b {
     0%   { transform: translate(0%, 0%)    scale(1); }
-    33%  { transform: translate(-7%, 5%)   scale(1.06); }
-    66%  { transform: translate(4%, -6%)   scale(0.97); }
+    33%  { transform: translate(-7%, 5%)   scale(1.02); }
+    66%  { transform: translate(4%, -6%)   scale(0.98); }
     100% { transform: translate(0%, 0%)    scale(1); }
   }
   .mesh-orb-a { animation: mesh-drift   9s ease-in-out infinite; }
@@ -107,12 +107,12 @@ function AdvantageCard({ item }: { item: Advantage }) {
             >
                 {/* Orb A */}
                 <div
-                    className="mesh-orb-a absolute -left-16 -top-16 h-64 w-64 rounded-full blur-[80px]"
+                    className="mesh-orb-a absolute -left-16 -top-16 h-64 w-64 rounded-full blur-[80px] mix-blend-screen"
                     style={{ background: item.accentA }}
                 />
                 {/* Orb B */}
                 <div
-                    className="mesh-orb-b absolute -bottom-16 -right-16 h-56 w-56 rounded-full blur-[70px]"
+                    className="mesh-orb-b absolute -bottom-16 -right-16 h-56 w-56 rounded-full blur-[70px] mix-blend-screen"
                     style={{ background: item.accentB }}
                 />
             </div>

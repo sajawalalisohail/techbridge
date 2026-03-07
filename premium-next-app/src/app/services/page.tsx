@@ -102,7 +102,8 @@ function ServiceSection({
     onEnter: (id: string) => void;
 }) {
     const ref = useRef<HTMLElement>(null);
-    const isInView = useInView(ref, { once: false, margin: "-40% 0px -40% 0px" });
+    // Pinpoint center of screen
+    const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
     const isVisible = useInView(ref, { once: true, margin: "-80px" });
     const Icon = section.icon;
 

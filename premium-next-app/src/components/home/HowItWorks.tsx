@@ -54,6 +54,7 @@ function PhaseCard({
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
+    const isCenterInView = useInView(ref, { margin: "-45% 0px -45% 0px" });
     const Icon = phase.icon;
 
     const itemVariants = {
@@ -92,13 +93,14 @@ function PhaseCard({
 
             {/* Glass card (col 2) */}
             <div className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-8">
-                {/* Hover glow */}
+                {/* Hover + Active glow */}
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    className={`pointer-events-none absolute inset-0 transition-all duration-700 group-hover:opacity-100 ${isCenterInView ? "opacity-100" : "opacity-0"
+                        }`}
                     style={{
                         background:
-                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
+                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 100%)",
                     }}
                 />
 
@@ -147,11 +149,11 @@ export default function HowItWorks() {
     /* Scroll-driven line draw */
     const { scrollYProgress } = useScroll({
         target: sectionRef,
-        offset: ["start 85%", "end 30%"],
+        offset: ["start 95%", "end 5%"], // Maximized reach to physically pin to standard viewports
     });
 
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
+        stiffness: 70, // Slightly softer spring for more elegance 
         damping: 30,
         restDelta: 0.001
     });

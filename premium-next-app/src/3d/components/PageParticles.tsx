@@ -112,7 +112,7 @@ function ParticlesField({ count = 150 }: ParticlesFieldProps) {
   return (
     <points ref={meshRef} geometry={geometry}>
       <pointsMaterial
-        size={0.07}
+        size={0.16} // Increased base size 
         vertexColors
         transparent
         opacity={0.8}
@@ -142,7 +142,7 @@ export function PageParticles() {
         height: '100%'
       }}
     >
-      <ParticlesField count={150} />
+      <ParticlesField count={300} />
     </Canvas>
   );
 }

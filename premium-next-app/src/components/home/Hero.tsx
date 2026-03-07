@@ -128,40 +128,6 @@ export default function Hero() {
                     </Link>
                 </motion.div>
 
-                {/* ─── 3D Neural Bridge Canvas Zone ─── */}
-                <motion.div
-                    variants={fadeUp}
-                    ref={canvasRef}
-                    id="neural-bridge-canvas"
-                    aria-hidden="true"
-                    className="relative mt-20 w-full max-w-4xl"
-                >
-                    {/* 3D Canvas Container */}
-                    <div className="relative h-[320px] w-full rounded-3xl border border-white/10 bg-black/40 backdrop-blur-sm lg:h-[440px] overflow-hidden">
-                        {/* Inner glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 to-transparent pointer-events-none" />
-
-                        {/* Corner accents */}
-                        <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-violet-500/20 rounded-tl-3xl pointer-events-none" />
-                        <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-violet-500/20 rounded-tr-3xl pointer-events-none" />
-                        <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-violet-500/20 rounded-bl-3xl pointer-events-none" />
-                        <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-violet-500/20 rounded-br-3xl pointer-events-none" />
-
-                        {/* Animated grid lines */}
-                        <div className="absolute inset-0 opacity-20">
-                            <div className="absolute inset-0" style={{
-                                backgroundImage: `
-                                    linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
-                                    linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px)
-                                `,
-                                backgroundSize: '40px 40px'
-                            }} />
-                        </div>
-                    </div>
-
-                    {/* Edge fade vignette */}
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black to-transparent rounded-b-3xl" />
-                </motion.div>
 
                 {/* Social proof stats */}
                 <motion.div

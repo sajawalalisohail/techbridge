@@ -24,6 +24,9 @@ export default function HeroBlobBackground() {
           {/* Layer 2: Conic spinner with white beacon */}
           <div className="blob-core" />
 
+          {/* Layer 2.5: Rotating white/cyan highlight beacon */}
+          <div className="blob-highlight" />
+
           {/* Layer 3: Inner counter-spin */}
           <div className="blob-inner" />
 

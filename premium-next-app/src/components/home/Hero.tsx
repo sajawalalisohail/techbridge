@@ -51,13 +51,15 @@ export default function Hero() {
                 {/* ── Soft Centered Luminous Cloud Blob Background ── */}
                 <HeroBlobBackground />
 
-                {/* Fine noise texture for depth */}
+                {/* Fine noise texture — dithers gradient banding across the full hero */}
                 <div
-                    className="absolute inset-0 opacity-[0.03]"
+                    className="absolute inset-0"
                     style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
                         backgroundRepeat: "repeat",
-                        backgroundSize: "128px 128px",
+                        backgroundSize: "200px 200px",
+                        opacity: 0.55,
+                        mixBlendMode: "overlay",
                     }}
                 />
                 {/* Hairline separator at bottom of hero */}
@@ -72,27 +74,21 @@ export default function Hero() {
                 className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-12"
             >
 
-                {/* Primary headline - Shrunk by ~10%, better spacing */}
+                {/* Primary headline */}
                 <motion.h1
                     variants={fadeUp}
-                    className="max-w-5xl text-center text-[2.75rem] font-bold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+                    className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[5rem]"
                 >
-                    <span className="block mb-2">We Build the</span>
-                    <span className="relative">
-                        <span className="bg-gradient-to-br from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
-                            Systems
-                        </span>
-                    </span>
-                    <span className="block my-2">That Drive</span>
+                    <span className="block">We Build the Systems That Drive</span>
                     <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Modern Business
                     </span>
                 </motion.h1>
 
-                {/* Sub-headline - Shrunk by ~10%, more breathing room */}
+                {/* Sub-headline */}
                 <motion.p
                     variants={fadeUp}
-                    className="mt-10 max-w-2xl text-center text-base leading-7 text-zinc-400 lg:text-lg"
+                    className="mt-6 max-w-2xl text-center text-base leading-7 text-zinc-400 lg:text-lg"
                 >
                     TechBridge delivers custom software, AI automation, and scalable SaaS
                     platforms — engineered for precision, built for growth.
@@ -136,7 +132,7 @@ export default function Hero() {
                 {/* Social proof stats */}
                 <motion.div
                     variants={fadeUp}
-                    className="mt-24 grid grid-cols-3 gap-8 border-t border-white/5 pt-12 sm:gap-16"
+                    className="mt-16 grid grid-cols-3 gap-8 border-t border-white/5 pt-10 sm:gap-16"
                 >
                     {STATS.map((stat) => (
                         <div key={stat.label} className="flex flex-col items-center gap-2">

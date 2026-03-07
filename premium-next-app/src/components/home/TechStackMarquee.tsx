@@ -6,18 +6,6 @@ import { motion, useInView } from "framer-motion";
 /* ─── Ease constant ───────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── CSS keyframes for the infinite scrolling marquee ────── */
-const MARQUEE_CSS = `
-  @keyframes tb-marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .tb-marquee-track {
-    animation: tb-marquee-scroll 35s linear infinite;
-    will-change: transform;
-  }
-`;
-
 /* ─── Tech stack data ─────────────────────────────────────── */
 interface TechItem {
     name: string;
@@ -123,7 +111,7 @@ function TechCard({ name, icon, category }: TechItem) {
     return (
         <div className="group/card mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/20 hover:shadow-[0_0_18px_rgba(109,40,217,0.15)]">
             {/* Icon */}
-            <span className="text-zinc-600 transition-colors duration-300 group-hover/card:text-violet-400">
+            <span aria-hidden="true" className="text-zinc-600 transition-colors duration-300 group-hover/card:text-violet-400">
                 {icon}
             </span>
             {/* Text */}
@@ -146,8 +134,6 @@ export default function TechStackMarquee() {
 
     return (
         <section ref={ref} className="relative overflow-hidden py-20 lg:py-24">
-            <style dangerouslySetInnerHTML={{ __html: MARQUEE_CSS }} />
-
             {/* Subtle top + bottom hairlines */}
             <div className="mx-auto max-w-7xl px-6 lg:px-12">
                 <div className="mb-12 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />

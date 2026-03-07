@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import {
     motion,
     useScroll,
@@ -49,8 +49,10 @@ const PHASES = [
 /* ─── Individual Step ────────────────────────────────────── */
 function PhaseCard({
     phase,
+    dotRef,
 }: {
     phase: (typeof PHASES)[number];
+    dotRef?: React.RefObject<HTMLDivElement | null>;
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
@@ -71,72 +73,91 @@ function PhaseCard({
     };
 
     return (
-        <motion.div
-            ref={ref}
-            variants={itemVariants}
-            initial="hidden"
-            animate={isInView ? "show" : "hidden"}
-            className="contents"
-        >
+        <>
             {/* Left rail - dot (col 1) */}
             <div className="relative flex justify-center pt-8">
                 <motion.div
+                    ref={dotRef}
                     initial={{ scale: 0, opacity: 0 }}
-                    animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
                     className="relative flex h-5 w-5 items-center justify-center"
                 >
-                    <span className="absolute inset-0 rounded-full bg-violet-500/30 blur-sm" />
-                    <span className="relative h-2.5 w-2.5 rounded-full bg-violet-400 ring-2 ring-violet-400/30 ring-offset-2 ring-offset-black" />
+                    <span className={`absolute inset-0 rounded-full blur-sm transition-all duration-700 ${isCenterInView ? "bg-violet-500/60 scale-150" : "bg-violet-500/30"}`} />
+                    <span className={`relative h-2.5 w-2.5 rounded-full ring-2 ring-offset-2 ring-offset-black transition-all duration-700 ${isCenterInView ? "bg-white ring-violet-400" : "bg-violet-400 ring-violet-400/30"}`} />
                 </motion.div>
             </div>
 
             {/* Glass card (col 2) */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-8">
-                {/* Hover + Active glow */}
+            <motion.div
+                ref={ref}
+                initial={{ opacity: 0, x: 32 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                className={`group relative overflow-hidden rounded-2xl border transition-all duration-700 p-7 backdrop-blur-sm lg:p-8 ${isCenterInView
+                    ? "border-violet-500/50 bg-violet-500/10 shadow-[0_0_40px_rgba(139,92,246,0.15)] scale-[1.01]"
+                    : "border-white/8 bg-neutral-900/40 hover:border-white/15"
+                    }`}
+            >
+                {/* Active glow gradient */}
                 <div
                     aria-hidden="true"
-                    className={`pointer-events-none absolute inset-0 transition-all duration-700 group-hover:opacity-100 ${isCenterInView ? "opacity-100" : "opacity-0"
+                    className={`pointer-events-none absolute inset-0 transition-opacity duration-1000 ${isCenterInView ? "opacity-100" : "opacity-0"
                         }`}
                     style={{
                         background:
-                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 100%)",
+                            "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 100%)",
                     }}
                 />
 
                 {/* Phase number + icon */}
-                <div className="mb-5 flex items-center justify-between">
-                    <span className="font-mono text-5xl font-bold leading-none tracking-tighter text-white/[0.06] select-none">
+                <div className="relative z-10 mb-5 flex items-center justify-between">
+                    <span
+                        className={`font-mono text-5xl font-bold leading-none tracking-tighter select-none transition-all duration-700 ${isCenterInView
+                            ? "text-white drop-shadow-[0_0_20px_rgba(167,139,250,0.6)]"
+                            : "text-white/[0.06]"
+                            }`}
+                    >
                         {phase.number}
                     </span>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-colors duration-300 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400">
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-500 ${isCenterInView
+                        ? "border-violet-500/40 bg-violet-950/50 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400"
+                        }`}>
                         <Icon size={18} strokeWidth={1.5} />
                     </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-3 text-xl font-semibold leading-snug text-white lg:text-2xl">
+                <h3 className={`relative z-10 mb-3 text-xl font-semibold leading-snug lg:text-2xl transition-colors duration-500 ${isCenterInView ? "text-white" : "text-white/90 group-hover:text-white"
+                    }`}>
                     {phase.label}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-zinc-400">
+                <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-500 ${isCenterInView ? "text-zinc-300" : "text-zinc-500 group-hover:text-zinc-400"
+                    }`}>
                     {phase.description}
                 </p>
 
                 {/* Tags */}
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="relative z-10 mt-5 flex flex-wrap gap-2">
                     {phase.tags.map((tag) => (
                         <span
                             key={tag}
-                            className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500"
+                            className={`rounded-full border px-3 py-1 text-xs transition-colors duration-500 ${isCenterInView
+                                ? "border-violet-500/30 bg-violet-500/10 text-violet-300"
+                                : "border-white/8 bg-white/[0.04] text-zinc-500"
+                                }`}
                         >
                             {tag}
                         </span>
                     ))}
                 </div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </>
     );
 }
 
@@ -154,8 +175,27 @@ export default function HowItWorks() {
         offset: ["start 50%", "end 50%"], // Perfect 1:1 timeline sync based entirely on the grid height
     });
 
+    const [lineHeight, setLineHeight] = React.useState(0);
+    const lastDotRef = useRef<HTMLDivElement>(null);
+
+    React.useLayoutEffect(() => {
+        const updateHeight = () => {
+            if (timelineRef.current && lastDotRef.current) {
+                const timelineRect = timelineRef.current.getBoundingClientRect();
+                const lastDotRect = lastDotRef.current.getBoundingClientRect();
+                // Exact center of the last dot relative to timeline container
+                const centerPos = lastDotRect.top - timelineRect.top + (lastDotRect.height / 2);
+                setLineHeight(centerPos);
+            }
+        };
+
+        updateHeight();
+        window.addEventListener("resize", updateHeight);
+        return () => window.removeEventListener("resize", updateHeight);
+    }, []);
+
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 70, // Slightly softer spring for more elegance 
+        stiffness: 70,
         damping: 30,
         restDelta: 0.001
     });
@@ -211,19 +251,29 @@ export default function HowItWorks() {
                         aria-hidden="true"
                         className="pointer-events-none absolute left-[1rem] top-0 h-full w-px bg-white/5 lg:left-[1.5rem]"
                     />
-                    {/* Glow line: scroll-driven scaleY */}
+                    {/* Glow line: scroll-driven scaleY from center of dot 1 to center of dot 4 */}
                     <motion.div
                         aria-hidden="true"
-                        style={{ scaleY: lineScaleY, originY: 0 }}
-                        className="pointer-events-none absolute left-[1rem] top-0 h-full w-px lg:left-[1.5rem]"
+                        style={{
+                            scaleY: lineHeight ? lineScaleY : 0,
+                            originY: 0,
+                            // Start at center of first dot (pt-8 = 32px + h-5/2 = 10px => 42px)
+                            // Height is last dot center minus first dot center
+                            height: lineHeight ? (lineHeight - 42) : "100%"
+                        }}
+                        className="pointer-events-none absolute left-[1rem] top-[42px] w-px lg:left-[1.5rem]"
                     >
                         <div className="h-full w-full bg-gradient-to-b from-violet-500 via-indigo-500 to-violet-500/10" />
-                        <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 rounded-full bg-violet-500/60 blur-md" />
+                        <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/60 blur-md" />
                     </motion.div>
 
                     {/* Phase cards (each renders into both columns via `contents`) */}
-                    {PHASES.map((phase) => (
-                        <PhaseCard key={phase.number} phase={phase} />
+                    {PHASES.map((phase, index) => (
+                        <PhaseCard
+                            key={phase.number}
+                            phase={phase}
+                            dotRef={index === PHASES.length - 1 ? lastDotRef : undefined}
+                        />
                     ))}
                 </div>
             </div>

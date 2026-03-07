@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import {
@@ -107,8 +107,10 @@ function ServiceSection({
     const isVisible = useInView(ref, { once: true, margin: "-80px" });
     const Icon = section.icon;
 
-    // Notify parent which section is active
-    if (isInView) onEnter(section.id);
+    // Notify parent which section is active via effect to avoid render-time state updates
+    useEffect(() => {
+        if (isInView) onEnter(section.id);
+    }, [isInView, onEnter, section.id]);
 
     return (
         <motion.section
@@ -280,17 +282,24 @@ export default function ServicesPage() {
                                             <a
                                                 key={s.id}
                                                 href={`#${s.id}`}
-                                                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 ${isActive
-                                                    ? "border border-white/10 bg-white/[0.05] text-white"
+                                                className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-300 ${isActive
+                                                    ? "text-white"
                                                     : "text-zinc-600 hover:text-zinc-400"
                                                     }`}
                                             >
+                                                {isActive && (
+                                                    <motion.div
+                                                        layoutId="active-tab-highlight"
+                                                        className="absolute inset-0 rounded-xl border border-white/10 bg-white/[0.05]"
+                                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                                    />
+                                                )}
                                                 <span
-                                                    className={`h-1.5 w-1.5 rounded-full flex-shrink-0 transition-colors duration-300 ${isActive ? "bg-violet-400" : "bg-zinc-700"
+                                                    className={`relative z-10 h-1.5 w-1.5 rounded-full flex-shrink-0 transition-colors duration-300 ${isActive ? "bg-violet-400" : "bg-zinc-700"
                                                         }`}
                                                 />
-                                                <span className="font-mono text-xs mr-1 opacity-40">{s.number}</span>
-                                                {s.category}
+                                                <span className="relative z-10 font-mono text-xs mr-1 opacity-40">{s.number}</span>
+                                                <span className="relative z-10">{s.category}</span>
                                             </a>
                                         );
                                     })}

@@ -4,24 +4,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-react";
 
-/* ─── Keyframe for the shifting gradient mesh ───────────── */
-const gradientStyle = `
-  @keyframes mesh-drift {
-    0%   { transform: translate(0%, 0%)    scale(1); }
-    33%  { transform: translate(6%, -8%)   scale(1.08); }
-    66%  { transform: translate(-5%, 5%)   scale(0.96); }
-    100% { transform: translate(0%, 0%)    scale(1); }
-  }
-  @keyframes mesh-drift-b {
-    0%   { transform: translate(0%, 0%)    scale(1); }
-    33%  { transform: translate(-7%, 5%)   scale(1.06); }
-    66%  { transform: translate(4%, -6%)   scale(0.97); }
-    100% { transform: translate(0%, 0%)    scale(1); }
-  }
-  .mesh-orb-a { animation: mesh-drift   9s ease-in-out infinite; }
-  .mesh-orb-b { animation: mesh-drift-b 11s ease-in-out infinite; }
-`;
-
 /* ─── Data ───────────────────────────────────────────────── */
 interface Advantage {
     icon: LucideIcon;
@@ -166,8 +148,6 @@ export default function WhyChooseUs() {
 
     return (
         <>
-            {/* Inject keyframe CSS */}
-            <style dangerouslySetInnerHTML={{ __html: gradientStyle }} />
 
             <section
                 id="why-choose-us"

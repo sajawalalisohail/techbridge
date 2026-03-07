@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -7,8 +7,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${jetbrainsMono.variable} bg-black text-white antialiased`}
+        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} bg-black text-white antialiased font-sans`}
       >
         <div className="relative min-h-screen bg-black w-full">
           <div className="relative w-full z-10 bg-black">

@@ -3,31 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-/* ─── Keyframes for the SVG placeholder patterns ─────────── */
-const patternStyles = `
-  @keyframes scan-down {
-    0%   { transform: translateY(-100%); }
-    100% { transform: translateY(400%); }
-  }
-  @keyframes grid-pulse {
-    0%, 100% { opacity: 0.3; }
-    50%       { opacity: 0.6; }
-  }
-  @keyframes node-ping {
-    0%, 100% { r: 2.5; opacity: 0.5; }
-    50%       { r: 4;   opacity: 1;   }
-  }
-  @keyframes dash-flow {
-    to { stroke-dashoffset: -40; }
-  }
-  .scan-line  { animation: scan-down 4s linear infinite; }
-  .grid-layer { animation: grid-pulse 3s ease-in-out infinite; }
-  .node-a     { animation: node-ping 2.4s ease-in-out infinite; }
-  .node-b     { animation: node-ping 2.4s ease-in-out 0.8s infinite; }
-  .node-c     { animation: node-ping 2.4s ease-in-out 1.6s infinite; }
-  .dash-path  { animation: dash-flow 2s linear infinite; }
-`;
-
 /* ─── SVG Pattern Components ─────────────────────────────── */
 
 /** Dot-grid with a slow horizontal scan — "Legal SaaS / Document System" */
@@ -244,6 +219,7 @@ const CASE_STUDIES = [
         description:
             "Custom internal tools and predictive AI models for fleet management - delivering real-time visibility across a 500-vehicle operation.",
         tags: ["Machine Learning", "React", "Python"],
+        liveUrl: "https://auralogistics.com",
         pattern: <PatternNodeGraph />,
         accentColor: "109,40,217", // violet-700
         accentOpacity: 0.13,
@@ -432,71 +408,68 @@ export default function CaseStudies() {
     const [large, ...smalls] = CASE_STUDIES;
 
     return (
-        <>
-            <style dangerouslySetInnerHTML={{ __html: patternStyles }} />
+        <>            <section
+            id="case-studies"
+            ref={ref}
+            className="relative overflow-hidden py-28 lg:py-36"
+        >
+            {/* Top separator */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            />
+            {/* Ambient glow */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
+            />
 
-            <section
-                id="case-studies"
-                ref={ref}
-                className="relative overflow-hidden py-28 lg:py-36"
-            >
-                {/* Top separator */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                />
-                {/* Ambient glow */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0"
-                    style={{ background: "radial-gradient(ellipse at 0% 50%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
-                />
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    {/* ── Section Header ── */}
-                    <motion.div
-                        ref={headerRef}
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                        className="mb-16 flex flex-col gap-5 lg:mb-20 lg:flex-row lg:items-end lg:justify-between"
-                    >
-                        <div>
-                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
-                                Proven Impact
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                {/* ── Section Header ── */}
+                <motion.div
+                    ref={headerRef}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    className="mb-16 flex flex-col gap-5 lg:mb-20 lg:flex-row lg:items-end lg:justify-between"
+                >
+                    <div>
+                        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            <span className="h-px w-6 bg-zinc-700" />
+                            Proven Impact
+                        </span>
+                        <h2 className="max-w-lg text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
+                            Engineered for Scale.{" "}
+                            <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
+                                Built for Results.
                             </span>
-                            <h2 className="max-w-lg text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
-                                Engineered for Scale.{" "}
-                                <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
-                                    Built for Results.
-                                </span>
-                            </h2>
-                        </div>
-                        <p className="max-w-xs text-base leading-relaxed text-zinc-500 lg:text-right">
-                            Real-world outcomes from our recent engagements across industries.
-                        </p>
-                    </motion.div>
+                        </h2>
+                    </div>
+                    <p className="max-w-xs text-base leading-relaxed text-zinc-500 lg:text-right">
+                        Real-world outcomes from our recent engagements across industries.
+                    </p>
+                </motion.div>
 
-                    {/* ── Card Grid ── */}
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate={isInView ? "show" : "hidden"}
-                        className="flex flex-col gap-4 lg:gap-5"
-                    >
-                        {/* Row 1: Full-width large card */}
-                        <LargeCard study={large} />
+                {/* ── Card Grid ── */}
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="flex flex-col gap-4 lg:gap-5"
+                >
+                    {/* Row 1: Full-width large card */}
+                    <LargeCard study={large} />
 
-                        {/* Row 2: Two equal cards */}
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
-                            {smalls.map((study) => (
-                                <SmallCard key={study.id} study={study} />
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
+                    {/* Row 2: Two equal cards */}
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
+                        {smalls.map((study) => (
+                            <SmallCard key={study.id} study={study} />
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
+        </section>
         </>
     );
 }

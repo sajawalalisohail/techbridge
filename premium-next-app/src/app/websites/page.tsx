@@ -5,33 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Check, X, ChevronDown, ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-/* ─── Violet pulse glow ──────────────────────────────────── */
-const violetPulseCSS = `
-  @keyframes violet-pulse {
-    0%, 100% { 
-      box-shadow: 
-        0 -1px 0 0 rgba(139,92,246,0.3), 
-        0 1px 0 0 rgba(139,92,246,0.3), 
-        -1px 0 0 0 rgba(139,92,246,0.3), 
-        1px 0 0 0 rgba(139,92,246,0.3),
-        inset 0 100px 100px -80px rgba(139,92,246,0.1),
-        inset 0 -100px 100px -80px rgba(139,92,246,0.1),
-        inset 100px 0 100px -80px rgba(139,92,246,0.1),
-        inset -100px 0 100px -80px rgba(139,92,246,0.1); 
-    }
-    50% { 
-      box-shadow: 
-        0 -1px 0 0 rgba(139,92,246,0.7), 
-        0 1px 0 0 rgba(139,92,246,0.7), 
-        -1px 0 0 0 rgba(139,92,246,0.7), 
-        1px 0 0 0 rgba(139,92,246,0.7),
-        inset 0 150px 120px -100px rgba(139,92,246,0.25),
-        inset 0 -150px 120px -100px rgba(139,92,246,0.25),
-        inset 150px 0 120px -100px rgba(139,92,246,0.25),
-        inset -150px 0 120px -100px rgba(139,92,246,0.25); 
-    }
-  }
-`;
+
 
 /* ─── Global ease constant ───────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -1012,88 +986,84 @@ function FinalCTA() {
 ══════════════════════════════════════════════════════════ */
 export default function WebsitesPage() {
     return (
-        <>
-            <style dangerouslySetInnerHTML={{ __html: violetPulseCSS }} />
+        <div
+            className="relative z-10 overflow-hidden min-h-screen border border-violet-500/20 rounded-none"
+            style={{ animation: "violet-pulse 4s ease-in-out infinite" }}
+        >
+            {/* Full-bleed side, top, and bottom ambient glows — high z-index to stay on top of section masks */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-violet-600/5 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-violet-600/5 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-violet-600/10 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-violet-600/10 to-transparent" />
+            <Hero />
 
-            <div
-                className="relative z-10 overflow-hidden min-h-screen border border-violet-500/20 rounded-none"
-                style={{ animation: "violet-pulse 4s ease-in-out infinite" }}
-            >
-                {/* Full-bleed side, top, and bottom ambient glows — high z-index to stay on top of section masks */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-violet-600/10 to-transparent" />
-                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-violet-600/10 to-transparent" />
-                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-violet-600/20 to-transparent" />
-                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-violet-600/20 to-transparent" />
-                <Hero />
-
-                {/* Separator */}
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 2 — Comparison */}
-                <section className="py-24 lg:py-32">
-                    <ComparisonTable />
-                </section>
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 2.5 — Tech Stack */}
-                <section className="py-24 lg:py-32">
-                    <TechStack />
-                </section>
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 3 — Timeline */}
-                <section className="py-24 lg:py-32">
-                    <Timeline />
-                </section>
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 4 — Social Proof */}
-                <section className="py-24 lg:py-32">
-                    <SocialProof />
-                </section>
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 5 — Pricing */}
-                <section className="py-24 lg:py-32">
-                    <Pricing />
-                </section>
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 6 — Care Plans */}
-                <section className="py-24 lg:py-28">
-                    <CarePlans />
-                </section>
-
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                </div>
-
-                {/* Step 7 — FAQ */}
-                <section className="py-24 lg:py-32">
-                    <FAQ />
-                </section>
-
-                {/* Final CTA */}
-                <FinalCTA />
-
+            {/* Separator */}
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
-        </>
+
+            {/* Step 2 — Comparison */}
+            <section className="py-24 lg:py-32">
+                <ComparisonTable />
+            </section>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            </div>
+
+            {/* Step 2.5 — Tech Stack */}
+            <section className="py-24 lg:py-32">
+                <TechStack />
+            </section>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            </div>
+
+            {/* Step 3 — Timeline */}
+            <section className="py-24 lg:py-32">
+                <Timeline />
+            </section>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            </div>
+
+            {/* Step 4 — Social Proof */}
+            <section className="py-24 lg:py-32">
+                <SocialProof />
+            </section>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            </div>
+
+            {/* Step 5 — Pricing */}
+            <section className="py-24 lg:py-32">
+                <Pricing />
+            </section>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            </div>
+
+            {/* Step 6 — Care Plans */}
+            <section className="py-24 lg:py-28">
+                <CarePlans />
+            </section>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            </div>
+
+            {/* Step 7 — FAQ */}
+            <section className="py-24 lg:py-32">
+                <FAQ />
+            </section>
+
+            {/* Final CTA */}
+            <FinalCTA />
+
+        </div>
     );
 }

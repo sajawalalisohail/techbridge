@@ -77,9 +77,9 @@ export default function Hero() {
                 {/* Primary headline */}
                 <motion.h1
                     variants={fadeUp}
-                    className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[5rem]"
+                    className="max-w-4xl text-center text-[2.25rem] font-bold leading-[1.05] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[4.75rem]"
                 >
-                    <span className="block">We Build the Systems That Drive</span>
+                    <span className="block">We Build the Systems That Drive</span>{" "}
                     <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Modern Business
                     </span>
@@ -88,7 +88,7 @@ export default function Hero() {
                 {/* Sub-headline */}
                 <motion.p
                     variants={fadeUp}
-                    className="mt-6 max-w-2xl text-center text-base leading-7 text-zinc-400 lg:text-lg"
+                    className="mt-6 max-w-2xl text-center text-sm leading-relaxed text-zinc-400 sm:text-base lg:text-lg"
                 >
                     TechBridge delivers custom software, AI automation, and scalable SaaS
                     platforms — engineered for precision, built for growth.
@@ -130,21 +130,21 @@ export default function Hero() {
 
 
                 {/* Social proof stats */}
-                <motion.div
+                <motion.dl
                     variants={fadeUp}
                     className="mt-16 grid grid-cols-3 gap-8 border-t border-white/5 pt-10 sm:gap-16"
                 >
                     {STATS.map((stat) => (
                         <div key={stat.label} className="flex flex-col items-center gap-2">
-                            <span className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                            <dd className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 {stat.value}
-                            </span>
-                            <span className="text-xs tracking-wider text-zinc-500 uppercase text-center">
+                            </dd>
+                            <dt className="text-xs tracking-wider text-zinc-500 uppercase text-center">
                                 {stat.label}
-                            </span>
+                            </dt>
                         </div>
                     ))}
-                </motion.div>
+                </motion.dl>
             </motion.div>
         </section>
     );

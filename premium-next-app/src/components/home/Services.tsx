@@ -38,6 +38,7 @@ const SERVICES: ServiceCard[] = [
             "Scalable, enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths - engineered right the first time.",
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
+        href: "/services#custom-software",
     },
     {
         id: 2,
@@ -48,6 +49,7 @@ const SERVICES: ServiceCard[] = [
             "Intelligent systems that identify, replace, and continuously improve manual processes - freeing your team to focus on what only humans can do.",
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, rgba(99,102,241,0) 100%)",
+        href: "/services#ai-automation",
     },
     {
         id: 3,
@@ -57,6 +59,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "Custom dashboards, CRMs, and operational platforms that give your team real-time visibility and control.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
+        href: "/services#internal-tools",
     },
     {
         id: 4,
@@ -66,6 +69,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "End-to-end product development - from architecture and auth to billing and beyond. Built to scale from day one.",
         accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.07) 0%, rgba(99,102,241,0) 100%)",
+        href: "/services#saas-platforms",
     },
     {
         id: 5,
@@ -75,6 +79,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "Connect your existing tools and data sources into a unified, reliable ecosystem that flows without friction.",
         accentColor: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
+        href: "/services#api-integrations",
     },
     {
         id: 6,
@@ -131,10 +136,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 : "border-white/8 hover:border-white/15"
                 }`}
         >
-            {/* Clickable overlay if href exists */}
-            {card.href && (
-                <Link href={card.href} className="absolute inset-0 z-20 rounded-2xl" aria-label={`Go to ${card.title}`} />
-            )}
+
             {/* Radial glow — appears on hover */}
             <div
                 aria-hidden="true"
@@ -186,24 +188,43 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                     {card.description}
                 </p>
 
-                {/* Bottom learn-more nudge */}
-                <div
-                    className={`mt-6 flex items-center gap-1.5 text-xs font-medium transition-colors duration-300 ${card.highlight
-                        ? "text-violet-400"
-                        : "text-zinc-600 group-hover:text-white"
-                        }`}
-                >
-                    <span>Learn more</span>
-                    <svg
-                        className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2.5}
+                {card.href ? (
+                    <Link
+                        href={card.href}
+                        aria-label={`Learn more about ${card.title}`}
+                        className={`mt-6 inline-flex items-center gap-1.5 text-xs font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-violet-400" : "text-zinc-600 group-hover:text-white"
+                            }`}
                     >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                </div>
+                        <span>Learn more</span>
+                        <svg
+                            className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </Link>
+                ) : (
+                    <div
+                        className={`mt-6 flex items-center gap-1.5 text-xs font-medium transition-colors duration-300 ${card.highlight
+                            ? "text-violet-400"
+                            : "text-zinc-600 group-hover:text-white"
+                            }`}
+                    >
+                        <span>Learn more</span>
+                        <svg
+                            className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                )}
             </div>
         </motion.div>
     );

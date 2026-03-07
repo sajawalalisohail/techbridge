@@ -8,8 +8,8 @@ export default function HeroBlobBackground() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0"
     >
-      {/* Flex centering anchor */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      {/* Flex centering anchor, shifted slightly upwards but lowered from previous state */}
+      <div className="absolute inset-0 flex items-center justify-center -translate-y-12 lg:-translate-y-20">
         {/* blob-container: fluid scaling for desktop and mobile */}
         <div
           className="blob-container"

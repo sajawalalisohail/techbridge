@@ -18,9 +18,9 @@ interface SoftGradientBlobProps {
   phase?: number;
 }
 
-export function SoftGradientBlob({ 
-  colorStops, 
-  position, 
+export function SoftGradientBlob({
+  colorStops,
+  position,
   scale = 1,
   speed = 1,
   phase = 0
@@ -33,15 +33,15 @@ export function SoftGradientBlob({
     canvas.width = 512;
     canvas.height = 512;
     const ctx = canvas.getContext('2d')!;
-    
+
     const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
     colorStops.forEach(stop => {
       gradient.addColorStop(stop.offset, stop.color);
     });
-    
+
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 512, 512);
-    
+
     const texture = new THREE.CanvasTexture(canvas);
     texture.needsUpdate = true;
     return texture;
@@ -73,27 +73,21 @@ export function SoftGradientBlob({
 
   useFrame((state) => {
     if (!meshRef.current) return;
-    
+
+    // Clockwise orbit: cos drives X, -sin drives Y (negative = clockwise in screen space)
     const time = state.clock.elapsedTime * speed + phase;
-    
-    // Fixed X position
-    meshRef.current.position.x = position[0];
+    const orbitRadius = 1.0;
+
+    meshRef.current.position.x = position[0] + Math.cos(time * 0.35) * orbitRadius;
+    meshRef.current.position.y = position[1] + Math.sin(-time * 0.35) * orbitRadius * 0.5;
     meshRef.current.position.z = position[2];
-    
-    // More dynamic floating - combines sine waves for organic motion
-    const floatY = Math.sin(time * 0.5) * 0.25 + Math.sin(time * 0.3) * 0.15;
-    meshRef.current.position.y = position[1] + floatY;
-    
-    // Faster clockwise rotation
-    meshRef.current.rotation.z = -time * 0.25;
-    
-    // Dynamic pulsing - varies with time
-    const pulse = 1 + Math.sin(time * 0.6) * 0.08 + Math.sin(time * 1.2) * 0.04;
+
+    // Subtle scale breathe while orbiting
+    const pulse = 1 + Math.sin(time * 0.6) * 0.06;
     meshRef.current.scale.setScalar(scale * pulse);
-    
-    // Subtle wobble effect
-    meshRef.current.rotation.x = Math.sin(time * 0.4) * 0.05;
-    meshRef.current.rotation.y = Math.cos(time * 0.35) * 0.05;
+
+    // Very subtle rotation on the blob itself
+    meshRef.current.rotation.z = -time * 0.15;
   });
 
   return (

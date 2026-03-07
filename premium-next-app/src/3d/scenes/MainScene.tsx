@@ -48,8 +48,8 @@ export function MainScene() {
         ]}
         position={[1, 4.2, -16]}
         scale={1.0}
-        speed={0.6}
-        phase={2}
+        speed={0.7}
+        phase={Math.PI}
       />
 
       {/* Bloom post-processing */}

@@ -17,3 +17,176 @@ body {
   color: var(--foreground);
   font-family: var(--font-jetbrains-mono), monospace;
 }
+
+@layer utilities {
+
+  /* ── Keyframes ──────────────────────────────────────────── */
+
+  /* Clockwise rotation — 25s so beacon sweep is clearly perceptible */
+  @keyframes blobSpin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* 6-stage organic morph — prevents circle appearance */
+  @keyframes blobMorph {
+    0% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    20% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+
+    40% {
+      border-radius: 50% 40% 60% 30% / 40% 70% 50% 60%;
+    }
+
+    60% {
+      border-radius: 40% 70% 40% 60% / 60% 40% 60% 40%;
+    }
+
+    80% {
+      border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+    }
+
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+  }
+
+  /* Halo gentle breathe */
+  @keyframes blobPulse {
+    from {
+      transform: scale(0.97);
+      opacity: 0.6;
+    }
+
+    to {
+      transform: scale(1.03);
+      opacity: 0.9;
+    }
+  }
+
+  /* Shimmer subtle pulse */
+  @keyframes shimmerPulse {
+    from {
+      opacity: 0.4;
+      transform: scale(0.98);
+    }
+
+    to {
+      opacity: 0.75;
+      transform: scale(1.02);
+    }
+  }
+
+  /* Noise dithering overlay — physically breaks banding by adding micro-grain */
+  /* Pure CSS: repeating-conic-gradient at near-zero opacity acts as dither */
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+  }
+
+  /* Blob container — backdrop-filter boosts chroma smoothness, reduces banding */
+  .blob-container {
+    position: relative;
+    backdrop-filter: saturate(140%) contrast(110%);
+    -webkit-backdrop-filter: saturate(140%) contrast(110%);
+  }
+
+  /* Layer 1: Outer atmospheric halo — 180px blur, edge impossible to see */
+  .blob-halo {
+    position: absolute;
+    inset: -100px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(109, 40, 217, 0.18) 0%,
+        rgba(79, 70, 229, 0.10) 50%,
+        transparent 72%);
+    filter: blur(180px);
+    will-change: transform;
+    animation: blobPulse 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  }
+
+  /* Layer 2: Conic spinner — sharper white beacon sweeps like a clock hand */
+  .blob-core {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg at 50% 50%,
+        #3b1066 0deg,
+        #5b21b6 40deg,
+        #7c3aed 65deg,
+        rgba(255, 255, 255, 0.92) 80deg,
+        rgba(255, 255, 255, 0.92) 95deg,
+        #7c3aed 110deg,
+        #4f46e5 150deg,
+        #3730a3 200deg,
+        #4f46e5 260deg,
+        #6366f1 310deg,
+        #3b1066 360deg);
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    filter: blur(60px) saturate(200%);
+    will-change: transform;
+    animation:
+      blobSpin 25s linear infinite,
+      blobMorph 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  }
+
+  /* Layer 3: Inner counter-spinner — 35s reverse, readable parallax depth */
+  .blob-inner {
+    position: absolute;
+    inset: 15%;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg at 50% 50%,
+        #4f46e5 0deg,
+        #7c3aed 90deg,
+        #6366f1 180deg,
+        #5b21b6 270deg,
+        #4f46e5 360deg);
+    opacity: 0.30;
+    mix-blend-mode: screen;
+    filter: blur(100px) saturate(150%);
+    will-change: transform;
+    animation: blobSpin 35s linear infinite reverse;
+  }
+
+  /* Layer 4: Soft violet center shimmer — fully blended, no hard edge */
+  .blob-shimmer {
+    position: absolute;
+    inset: 30%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(124, 58, 237, 0.22) 0%,
+        rgba(99, 102, 241, 0.12) 55%,
+        transparent 72%);
+    filter: blur(100px);
+    will-change: transform;
+    animation: shimmerPulse 32s ease-in-out infinite alternate;
+  }
+
+  /* Accessibility: pause all animations including noise */
+  @media (prefers-reduced-motion: reduce) {
+
+    .blob-halo,
+    .blob-core,
+    .blob-inner,
+    .blob-shimmer {
+      animation: none !important;
+    }
+  }
+}

@@ -8,7 +8,7 @@ interface ParticlesProps {
   count?: number;
 }
 
-export function Particles({ count = 80 }: ParticlesProps) {
+export function Particles({ count = 40 }: ParticlesProps) {
   const meshRef = useRef<THREE.Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 

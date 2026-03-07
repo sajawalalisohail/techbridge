@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import HeroBlobBackground from "./HeroBlobBackground";
 
 // Dynamically import 3D background for performance
 const HybridBackground = dynamic(
@@ -47,6 +48,9 @@ export default function Hero() {
 
             {/* ─── Overlay: noise + hairline ─── */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+                {/* ── Soft Centered Luminous Cloud Blob Background ── */}
+                <HeroBlobBackground />
+
                 {/* Fine noise texture for depth */}
                 <div
                     className="absolute inset-0 opacity-[0.03]"

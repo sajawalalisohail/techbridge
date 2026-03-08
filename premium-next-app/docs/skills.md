@@ -4,11 +4,10 @@ To work on this repository, developers must possess deep expertise across the fo
 
 ## 🌐 Next.js 16 (React 19)
 - **App Router:** Understanding Server and Client components.
-- **Dynamic Imports:** Loading heavy WebGL and Video components lazily using `next/dynamic` with `{ ssr: false }`.
 - **Layout Management:** Utilizing conditional persistent `layout.tsx` strategies.
 
 ## 🎨 Advanced Frontend Animation & Styling
-- **Framer Motion (`framer-motion`):** Proficient in `useTransfrom`, `useScroll`, `useMotionValueEvent`, `useSpring`, and `AnimatePresence`. Mastering the `[0.22, 1, 0.36, 1]` ease curve.
+- **Framer Motion (`framer-motion`):** Proficient in `useTransform`, `useScroll`, `useMotionValueEvent`, `useSpring`, and `AnimatePresence`.
 - **Tailwind CSS V4:** Familiarity with building robust, inline complex classes and integrating native CSS custom properties.
 - **Scroll Hijacking/Smoothing:** Connecting Lenis or GSAP scroll synchronizations to deeply map scroll position over custom logic and component timelines.
 

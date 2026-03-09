@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 /* ─── Ease constant ───────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -106,10 +106,45 @@ const STACK: TechItem[] = [
     },
 ];
 
+/* ─── Tooltip Data ────────────────────────────────────────── */
+const TOOLTIPS: Record<string, string> = {
+    "Next.js": "Server-first React framework for SEO and performance",
+    "TypeScript": "Strict type-checking for resilient code",
+    "React": "Component-based UI library for interactive interfaces",
+    "Python": "Versatile backend language for AI and data processing",
+    "Node.js": "High-performance JavaScript runtime for scalable APIs",
+    "AWS": "Enterprise-grade cloud infrastructure for global scale",
+    "Vercel": "Edge network for fast global deployments",
+    "Tailwind CSS": "Utility-first styling for rapid UI development",
+    "OpenAI": "State-of-the-art language models for intelligent workflows",
+    "Postgres": "Robust relational database for complex data",
+};
+
 /* Individual card — muted by default, glows on hover */
 function TechCard({ name, icon, category }: TechItem) {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div className="group/card mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/20 hover:shadow-[0_0_18px_rgba(109,40,217,0.15)]">
+        <div
+            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/20 hover:shadow-[0_0_18px_rgba(109,40,217,0.15)]"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Tooltip */}
+            <AnimatePresence>
+                {isHovered && TOOLTIPS[name] && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                        transition={{ duration: 0.2 }}
+                        className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-3 -translate-x-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-neutral-900/90 px-3 py-1.5 text-xs text-zinc-300 shadow-xl backdrop-blur-sm"
+                    >
+                        {TOOLTIPS[name]}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Icon */}
             <span aria-hidden="true" className="text-zinc-600 transition-colors duration-300 group-hover/card:text-violet-400">
                 {icon}

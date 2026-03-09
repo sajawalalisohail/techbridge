@@ -46,6 +46,7 @@ const SERVICES_LINKS = [
 
 const COMPANY_LINKS = [
     { label: "Work", href: "/work" },
+    { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
 ];
@@ -194,9 +195,19 @@ export default function Footer() {
                         <p className="text-xs text-zinc-600">
                             <span className="font-mono tabular-nums">&copy; {year}</span> TechBridge. All rights reserved.
                         </p>
-                        <p className="text-xs text-zinc-700">
-                            Engineered with precision.
-                        </p>
+                        <div className="flex items-center gap-4">
+                            <Link href="/privacy" className="text-xs text-zinc-700 transition-colors hover:text-zinc-400">
+                                Privacy Policy
+                            </Link>
+                            <span className="text-zinc-800">·</span>
+                            <Link href="/terms" className="text-xs text-zinc-700 transition-colors hover:text-zinc-400">
+                                Terms
+                            </Link>
+                            <span className="text-zinc-800">·</span>
+                            <p className="text-xs text-zinc-700">
+                                Engineered with precision.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </footer>

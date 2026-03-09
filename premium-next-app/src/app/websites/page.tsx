@@ -588,6 +588,7 @@ const SOCIAL_PROOF_PROJECTS = [
         client: "NextLex",
         metrics: "14 Days",
         metricSubtitle: "From Idea To Live",
+        engagementType: "Extended Engagement",
         desc: "A premium marketing website for a legal document automation SaaS. Designed and deployed rapidly to support their high-growth acquisition strategy.",
         link: "https://nextlex.com",
         tags: ["Next.js", "Marketing Site", "SEO"],
@@ -598,6 +599,7 @@ const SOCIAL_PROOF_PROJECTS = [
         client: "PrimeMark Apparel",
         metrics: "12x",
         metricSubtitle: "Lead Quality",
+        engagementType: "Extended Engagement",
         desc: "High-performance digital storefront streamlining global supply chain operations. A premium web presence built to capture enterprise leads.",
         link: "https://primemarkapparel.com",
         tags: ["Corporate Site", "Lead Gen", "Performance"],
@@ -608,11 +610,34 @@ const SOCIAL_PROOF_PROJECTS = [
         client: "AliWali Trading Co.",
         metrics: "35+",
         metricSubtitle: "Years of Legacy",
+        engagementType: "24-Hour Build",
         desc: "A fast, modern digital presence for a direct buyer of industrial plied rubber conveyor belts. Replacing an outdated platform with zero downtime.",
         link: "https://aliwalitradingco.com",
         tags: ["Next.js", "Global Reach", "B2B Portal"],
         assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png"],
         accentColor: "rgb(109,40,217)", // violet-700
+    },
+    {
+        client: "Rapid Deploy Co.",
+        metrics: "24 hrs",
+        metricSubtitle: "Concept to Live",
+        engagementType: "24-Hour Build",
+        desc: "A conversion-optimized landing page for a B2B consulting firm. Custom-coded, SEO-ready, and deployed in a single working day.",
+        link: "#",
+        tags: ["Landing Page", "24-Hour", "SEO"],
+        assets: [],
+        accentColor: "rgb(139,92,246)",
+    },
+    {
+        client: "Studio Placeholder",
+        metrics: "24 hrs",
+        metricSubtitle: "Design to Deploy",
+        engagementType: "24-Hour Build",
+        desc: "A premium brand presence for a creative studio. Fully custom UI, performance-optimized, and production-ready in under 24 hours.",
+        link: "#",
+        tags: ["Brand Site", "24-Hour", "Performance"],
+        assets: [],
+        accentColor: "rgb(99,102,241)",
     },
 ];
 
@@ -652,10 +677,13 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
 
                 {/* Text Data */}
                 <div className="flex-1">
-                    <div className="flex items-center gap-4 mb-2">
+                    <div className="flex items-center gap-4 mb-2 flex-wrap">
                         <span className="font-mono text-3xl font-extrabold text-white">{project.metrics}</span>
                         <div className="h-4 w-px bg-white/20" />
                         <h4 className="text-xl font-bold tracking-tight text-white">{project.client}</h4>
+                        <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest ${project.engagementType === "24-Hour Build" ? "border border-green-500/30 bg-green-950/40 text-green-400" : "border border-white/10 bg-white/[0.04] text-zinc-500"}`}>
+                            {project.engagementType}
+                        </span>
                     </div>
 
                     {isExpanded && (

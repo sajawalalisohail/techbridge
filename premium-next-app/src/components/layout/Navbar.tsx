@@ -10,6 +10,7 @@ const NAV_LINKS = [
     { label: "Services", href: "/services" },
     { label: "24-Hr Studio", href: "/websites" },
     { label: "Work", href: "/work" },
+    { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
 ];
@@ -43,6 +44,13 @@ export default function Navbar() {
         window.addEventListener("force-hide-navbar", handleForceHide as EventListener);
         return () => window.removeEventListener("force-hide-navbar", handleForceHide as EventListener);
     }, []);
+
+    // Phase 1: Auto-dismiss banner after 8 seconds
+    useEffect(() => {
+        if (!bannerVisible || pathname === "/websites") return;
+        const timer = setTimeout(() => setBannerVisible(false), 8000);
+        return () => clearTimeout(timer);
+    }, [bannerVisible, pathname]);
 
     const isActive = (href: string) => pathname === href;
 

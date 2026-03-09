@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import HeroBlobBackground from "./HeroBlobBackground";
+import { CountUp } from "@/components/shared/CountUp";
 
 // Dynamically import 3D background for performance
 const HybridBackground = dynamic(
@@ -33,10 +34,12 @@ const fadeUp = {
 };
 
 const STATS = [
-    { value: "50+", label: "Projects Shipped" },
-    { value: "98%", label: "Client Retention" },
-    { value: "3×", label: "Avg. Efficiency Gain" },
+    { value: 50, suffix: "+", label: "Projects Shipped" },
+    { value: 98, suffix: "%", label: "Client Retention" },
+    { value: 3, suffix: "×", label: "Avg. Efficiency Gain" },
 ];
+
+
 
 export default function Hero() {
     const canvasRef = useRef<HTMLDivElement>(null);
@@ -136,8 +139,13 @@ export default function Hero() {
                 >
                     {STATS.map((stat) => (
                         <div key={stat.label} className="flex flex-col items-center gap-2">
-                            <dd className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                                {stat.value}
+                            <dd>
+                                <CountUp
+                                    value={stat.value}
+                                    suffix={stat.suffix}
+                                    from={20}
+                                    className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                                />
                             </dd>
                             <dt className="text-xs tracking-wider text-zinc-500 uppercase text-center">
                                 {stat.label}

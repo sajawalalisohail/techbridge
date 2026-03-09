@@ -1,10 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { Layers, Users, Zap } from "lucide-react";
+import {
+    Layers, Users, Zap, Shield, Clock, Code2, ArrowUpRight,
+    CheckCircle2, XCircle, Lock, FileCheck, Globe,
+} from "lucide-react";
 
-/* ─── Ease constant (fixes TS Variants type error) ────────── */
+/* ─── Ease constant ───────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /* ─── Animation helpers ───────────────────────────────────── */
@@ -30,22 +34,108 @@ const childFade = {
 /* ─── Core Values ─────────────────────────────────────────── */
 const VALUES = [
     {
-        icon: Layers,
-        title: "Architected for Scale",
+        icon: Code2,
+        title: "First-Principles Thinking",
         description:
-            "No fragile code. Every system we deliver is built on enterprise-ready foundations — designed to be extended, audited, and scaled without a painful rewrite.",
+            "We don't copy-paste boilerplate. Every architecture decision is traced back to the actual constraint — not a blog post or a trend.",
     },
     {
-        icon: Users,
-        title: "Direct Access",
+        icon: Shield,
+        title: "Ownership Over Output",
         description:
-            "No layers of account managers. No offshore handoffs. You work directly with the senior engineers building your product, every step of the way.",
+            "We don't hand off and disappear. Every system we ship, we stand behind. We monitor, we iterate, we answer the phone at 2 AM if something breaks.",
     },
     {
-        icon: Zap,
-        title: "Relentless Execution",
+        icon: Clock,
+        title: "Velocity Without Shortcuts",
         description:
-            "Speed is a competitive feature, not a luxury. We ship complex, production-ready systems faster than other agencies run their discovery calls.",
+            "Fast doesn't mean hacky. We ship production-ready code at a pace that surprises agencies twice our size — without accruing technical debt.",
+    },
+    {
+        icon: Globe,
+        title: "Global Architecture, Local Precision",
+        description:
+            "Our hybrid model combines US-based strategy with elite distributed engineering — letting us scale output without compromising quality or oversight.",
+    },
+];
+
+/* ─── Timeline ────────────────────────────────────────────── */
+const TIMELINE = [
+    {
+        year: "2022",
+        title: "Founded in Morgantown, WV",
+        description:
+            "TechBridge was founded by Sajawal Ali Sohail at West Virginia University, combining a pure computer science background with a vision for B2B enterprise engineering.",
+    },
+    {
+        year: "2023",
+        title: "First Enterprise Clients",
+        description:
+            "Shipped production systems for NextLex, PrimeMark Apparel, and AliWali Trading Co. — establishing our reputation for rapid, high-quality delivery.",
+    },
+    {
+        year: "2024",
+        title: "Hybrid Model & Scale",
+        description:
+            "Expanded to a hybrid engineering model with distributed cells, enabling parallel execution on multiple enterprise projects without sacrificing oversight.",
+    },
+    {
+        year: "2025",
+        title: "AI Integration & SaaS",
+        description:
+            "Launched AI workflow automation capabilities and began building custom SaaS platforms, processing millions of events for B2B analytics clients.",
+    },
+];
+
+/* ─── Team Data ───────────────────────────────────────────── */
+const TEAM = [
+    {
+        name: "Sajawal Ali Sohail",
+        role: "Founder & Lead Architect",
+        location: "WV",
+        bio: "WVU Computer Science alumnus. Leads business strategy, system architecture, UI/UX design, and end-to-end project orchestration. The single point of accountability for every TechBridge engagement.",
+    },
+    {
+        name: "Engineering Cell Lead",
+        role: "Senior Full-Stack Engineer",
+        location: "PK",
+        bio: "Specialized senior engineer handling large-scale enterprise builds, backend architecture, and API design under direct architectural oversight from Sajawal.",
+    },
+];
+
+/* ─── Comparison Table ────────────────────────────────────── */
+const COMPARISON = [
+    { feature: "Code review by senior architects", us: true, them: false },
+    { feature: "Direct access to the builders", us: true, them: false },
+    { feature: "Custom architecture per project", us: true, them: false },
+    { feature: "No offshore handoff surprises", us: true, them: false },
+    { feature: "Sub-24hr response time", us: true, them: false },
+    { feature: "Post-launch monitoring included", us: true, them: false },
+    { feature: "AI/ML integration capability", us: true, them: false },
+    { feature: "Fixed-price estimates up front", us: true, them: true },
+];
+
+/* ─── Security Badges ─────────────────────────────────────── */
+const SECURITY_ITEMS = [
+    {
+        icon: Lock,
+        title: "End-to-End Encryption",
+        description: "All data in transit and at rest is encrypted using industry-standard protocols.",
+    },
+    {
+        icon: FileCheck,
+        title: "Code Audit Trail",
+        description: "Every commit is reviewed, every deployment is logged, every change is traceable.",
+    },
+    {
+        icon: Shield,
+        title: "OWASP Compliance",
+        description: "All systems are built against the OWASP Top 10, with automated vulnerability scanning.",
+    },
+    {
+        icon: Globe,
+        title: "Data Residency Control",
+        description: "Choose where your data lives. We deploy to the regions your compliance team requires.",
     },
 ];
 
@@ -94,118 +184,29 @@ function FounderCard() {
     );
 }
 
-/* ─── Leadership / Engineering Foundation section ─────────── */
-function LeadershipSection({ isInView }: { isInView: boolean }) {
-    return (
-        <section className="py-24 lg:py-28">
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                {/* Section label */}
-                <motion.div
-                    variants={fadeUp(0)}
-                    initial="hidden"
-                    animate={isInView ? "show" : "hidden"}
-                    className="mb-14"
-                >
-                    <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-px w-6 bg-zinc-700" />
-                        The Engineering Foundation
-                    </span>
-                    <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                        Who builds your systems.
-                    </h2>
-                </motion.div>
-
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
-                    {/* Left & Right - Hybrid Partnership Grid */}
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        {/* Morgantown Founder Card */}
-                        <motion.div
-                            variants={fadeUp(0.1)}
-                            initial="hidden"
-                            animate={isInView ? "show" : "hidden"}
-                            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
-                        >
-                            <div className="mb-6 flex items-center justify-between">
-                                <span className="inline-flex h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 text-xs font-bold uppercase tracking-widest text-zinc-400 select-none">
-                                    WV
-                                </span>
-                            </div>
-                            <h3 className="mb-2 text-xl font-bold tracking-tight text-white">Founder & Lead Designer</h3>
-                            <p className="mb-6 text-sm leading-relaxed text-zinc-400">
-                                WVU Computer Science alumnus leading business strategy, UI/UX architecture, and project orchestration from Morgantown, WV.
-                            </p>
-                            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 100% 100%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 60%)" }} />
-                        </motion.div>
-
-                        {/* Pakistan Engineering Card */}
-                        <motion.div
-                            variants={fadeUp(0.2)}
-                            initial="hidden"
-                            animate={isInView ? "show" : "hidden"}
-                            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
-                        >
-                            <div className="mb-6 flex items-center justify-between">
-                                <span className="inline-flex h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 text-xs font-bold uppercase tracking-widest text-zinc-400 select-none">
-                                    PK
-                                </span>
-                            </div>
-                            <h3 className="mb-2 text-xl font-bold tracking-tight text-white">Lead Engineering Cell (Pakistan)</h3>
-                            <p className="mb-6 text-sm leading-relaxed text-zinc-400">
-                                Specialized senior backend and full-stack developers handling large-scale enterprise builds under our direct architectural oversight.
-                            </p>
-                            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 0% 100%, rgba(79,70,229,0.12) 0%, rgba(79,70,229,0) 60%)" }} />
-                        </motion.div>
-                    </div>
-
-                    {/* Bottom Bio / Intro */}
-                    <motion.div
-                        variants={fadeUp(0.3)}
-                        initial="hidden"
-                        animate={isInView ? "show" : "hidden"}
-                        className="mt-16 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12"
-                    >
-                        <div className="flex-1">
-                            <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                TechBridge operates as a hybrid engineering firm. Headquartered in Morgantown, WV, and powered by elite distributed engineering cells in Pakistan. This allows us to scale development output massively while maintaining pure computer science quality standards and rigorous US-based architecture oversight.
-                            </p>
-                        </div>
-                        <div className="grid flex-1 grid-cols-2 gap-4">
-                            {[
-                                { label: "Discipline", value: "Computer Science" },
-                                { label: "Scale", value: "Distributed Teams" },
-                                { label: "Oversight", value: "WV Headquarters" },
-                                { label: "Model", value: "Hybrid Precision" },
-                            ].map((item) => (
-                                <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-                                    <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
-                                    <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
 /* ─── Main Page ──────────────────────────────────────────── */
 export default function AboutPage() {
     const heroRef = useRef<HTMLElement>(null);
     const storyRef = useRef<HTMLElement>(null);
+    const teamRef = useRef<HTMLElement>(null);
+    const timelineRef = useRef<HTMLElement>(null);
     const valuesRef = useRef<HTMLElement>(null);
-    const leaderRef = useRef<HTMLElement>(null);
+    const diffRef = useRef<HTMLElement>(null);
+    const securityRef = useRef<HTMLElement>(null);
 
     const isHeroInView = useInView(heroRef, { once: true });
     const isStoryInView = useInView(storyRef, { once: true, margin: "-80px" });
+    const isTeamInView = useInView(teamRef, { once: true, margin: "-80px" });
+    const isTimelineInView = useInView(timelineRef, { once: true, margin: "-80px" });
     const isValuesInView = useInView(valuesRef, { once: true, margin: "-80px" });
-    const isLeaderInView = useInView(leaderRef, { once: true, margin: "-80px" });
+    const isDiffInView = useInView(diffRef, { once: true, margin: "-80px" });
+    const isSecurityInView = useInView(securityRef, { once: true, margin: "-80px" });
 
     return (
         <div className="relative text-white">
             <div className="relative z-10 overflow-hidden min-h-screen">
 
-                {/* ── Hero ── */}
+                {/* ── 1. Hero ── */}
                 <section ref={heroRef} className="relative flex min-h-[55vh] items-center overflow-hidden border-b border-white/5">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%)" }} />
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
@@ -230,7 +231,7 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ── Story ── */}
+                {/* ── 2. Founder Story ── */}
                 <section ref={storyRef} className="relative py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
@@ -245,7 +246,7 @@ export default function AboutPage() {
                                 </h2>
                                 <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
                                     Headquartered in Morgantown, West Virginia, TechBridge was
-                                    founded on a pure computer science background to solve a
+                                    founded by Sajawal Ali Sohail — a WVU Computer Science alumnus — to solve a
                                     critical gap in the B2B market: too many agencies focus on
                                     surface-level design while ignoring scalable architecture.
                                 </p>
@@ -257,11 +258,11 @@ export default function AboutPage() {
                                 </p>
                                 <div className="mt-10 border-l-2 border-violet-500/60 pl-6">
                                     <p className="text-base font-medium italic text-zinc-300 lg:text-lg">
-                                        "Technology should compound your advantage over time —
-                                        not create technical debt that slows you down."
+                                        &quot;Technology should compound your advantage over time —
+                                        not create technical debt that slows you down.&quot;
                                     </p>
                                     <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                        — TechBridge Founding Principle
+                                        — Sajawal Ali Sohail, Founder
                                     </p>
                                 </div>
                             </motion.div>
@@ -274,9 +275,81 @@ export default function AboutPage() {
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
 
-                {/* ── Leadership ── */}
-                <section ref={leaderRef}>
-                    <LeadershipSection isInView={isLeaderInView} />
+                {/* ── 3. Team ── */}
+                <section ref={teamRef} className="py-24 lg:py-32">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                <span className="h-px w-6 bg-zinc-700" />
+                                The Engineering Foundation
+                            </span>
+                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                Who builds your systems.
+                            </h2>
+                        </motion.div>
+
+                        <motion.div
+                            variants={staggerContainer}
+                            initial="hidden"
+                            animate={isTeamInView ? "show" : "hidden"}
+                            className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+                        >
+                            {TEAM.map((member) => (
+                                <motion.div
+                                    key={member.name}
+                                    variants={childFade}
+                                    className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
+                                >
+                                    <div className="mb-6 flex items-center justify-between">
+                                        <span className="inline-flex h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 text-xs font-bold uppercase tracking-widest text-zinc-400 select-none">
+                                            {member.location}
+                                        </span>
+                                    </div>
+                                    <h3 className="mb-1 text-xl font-bold tracking-tight text-white">
+                                        {member.name}
+                                    </h3>
+                                    <p className="mb-4 text-sm font-medium text-violet-400/70">
+                                        {member.role}
+                                    </p>
+                                    <p className="text-sm leading-relaxed text-zinc-400">
+                                        {member.bio}
+                                    </p>
+                                    <div
+                                        aria-hidden="true"
+                                        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                                        style={{ background: "radial-gradient(circle at 100% 100%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 60%)" }}
+                                    />
+                                </motion.div>
+                            ))}
+                        </motion.div>
+
+                        {/* Hybrid model summary */}
+                        <motion.div
+                            variants={fadeUp(0.3)}
+                            initial="hidden"
+                            animate={isTeamInView ? "show" : "hidden"}
+                            className="mt-16 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12"
+                        >
+                            <div className="flex-1">
+                                <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
+                                    TechBridge operates as a hybrid engineering firm. Headquartered in Morgantown, WV, and powered by elite distributed engineering cells in Pakistan. This allows us to scale development output massively while maintaining pure computer science quality standards and rigorous US-based architecture oversight.
+                                </p>
+                            </div>
+                            <div className="grid flex-1 grid-cols-2 gap-4">
+                                {[
+                                    { label: "Discipline", value: "Computer Science" },
+                                    { label: "Scale", value: "Distributed Teams" },
+                                    { label: "Oversight", value: "WV Headquarters" },
+                                    { label: "Model", value: "Hybrid Precision" },
+                                ].map((item) => (
+                                    <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+                                        <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
+                                        <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
                 </section>
 
                 {/* ── Separator ── */}
@@ -284,7 +357,73 @@ export default function AboutPage() {
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
 
-                {/* ── Core Values ── */}
+                {/* ── 4. Timeline ── */}
+                <section ref={timelineRef} className="py-24 lg:py-32">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <motion.div variants={fadeUp(0)} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="mb-14">
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                <span className="h-px w-6 bg-zinc-700" />
+                                Milestones
+                            </span>
+                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                How we got here.
+                            </h2>
+                        </motion.div>
+
+                        <motion.div
+                            variants={staggerContainer}
+                            initial="hidden"
+                            animate={isTimelineInView ? "show" : "hidden"}
+                            className="relative"
+                        >
+                            {/* Vertical line */}
+                            <div
+                                aria-hidden="true"
+                                className="absolute left-[27px] top-0 hidden h-full w-px bg-gradient-to-b from-violet-500/40 via-white/8 to-transparent lg:block"
+                            />
+
+                            <div className="space-y-12 lg:space-y-16">
+                                {TIMELINE.map((event, i) => (
+                                    <motion.div
+                                        key={event.year}
+                                        variants={childFade}
+                                        className="flex flex-col gap-4 lg:flex-row lg:gap-12"
+                                    >
+                                        {/* Year marker */}
+                                        <div className="flex items-center gap-4 lg:w-32 lg:flex-shrink-0">
+                                            <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-neutral-900/80 font-mono text-lg font-bold text-white backdrop-blur-sm">
+                                                {event.year.slice(-2)}
+                                            </div>
+                                            <span className="font-mono text-sm font-semibold text-zinc-500 lg:hidden">
+                                                {event.year}
+                                            </span>
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="flex-1 rounded-2xl border border-white/8 bg-neutral-900/30 p-6 backdrop-blur-sm lg:p-8">
+                                            <p className="mb-1 hidden font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 lg:block">
+                                                {event.year}
+                                            </p>
+                                            <h3 className="mb-3 text-lg font-bold tracking-tight text-white">
+                                                {event.title}
+                                            </h3>
+                                            <p className="text-sm leading-relaxed text-zinc-400">
+                                                {event.description}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* ── Separator ── */}
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* ── 5. Core Values ── */}
                 <section ref={valuesRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isValuesInView ? "show" : "hidden"} className="mb-16">
@@ -300,7 +439,7 @@ export default function AboutPage() {
                             variants={staggerContainer}
                             initial="hidden"
                             animate={isValuesInView ? "show" : "hidden"}
-                            className="grid grid-cols-1 gap-5 md:grid-cols-3"
+                            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
                         >
                             {VALUES.map((v) => {
                                 const Icon = v.icon;
@@ -316,6 +455,141 @@ export default function AboutPage() {
                                 );
                             })}
                         </motion.div>
+                    </div>
+                </section>
+
+                {/* ── Separator ── */}
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* ── 6. How We're Different ── */}
+                <section ref={diffRef} className="py-24 lg:py-32">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <motion.div variants={fadeUp(0)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="mb-14">
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                <span className="h-px w-6 bg-zinc-700" />
+                                The Difference
+                            </span>
+                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                TechBridge vs. the typical agency.
+                            </h2>
+                        </motion.div>
+
+                        <motion.div
+                            variants={fadeUp(0.1)}
+                            initial="hidden"
+                            animate={isDiffInView ? "show" : "hidden"}
+                            className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/30 backdrop-blur-sm"
+                        >
+                            {/* Table header */}
+                            <div className="grid grid-cols-[1fr_80px_80px] items-center border-b border-white/8 px-6 py-4 sm:grid-cols-[1fr_120px_120px] sm:px-8">
+                                <span className="text-xs font-semibold uppercase tracking-widest text-zinc-600">Feature</span>
+                                <span className="text-center text-xs font-semibold uppercase tracking-widest text-violet-400">Us</span>
+                                <span className="text-center text-xs font-semibold uppercase tracking-widest text-zinc-600">Them</span>
+                            </div>
+
+                            {/* Rows */}
+                            {COMPARISON.map((row, i) => (
+                                <div
+                                    key={row.feature}
+                                    className={`grid grid-cols-[1fr_80px_80px] items-center px-6 py-3.5 sm:grid-cols-[1fr_120px_120px] sm:px-8 ${i < COMPARISON.length - 1 ? "border-b border-white/5" : ""
+                                        }`}
+                                >
+                                    <span className="text-sm text-zinc-400">{row.feature}</span>
+                                    <span className="flex justify-center">
+                                        {row.us ? (
+                                            <CheckCircle2 size={18} className="text-violet-400" />
+                                        ) : (
+                                            <XCircle size={18} className="text-zinc-700" />
+                                        )}
+                                    </span>
+                                    <span className="flex justify-center">
+                                        {row.them ? (
+                                            <CheckCircle2 size={18} className="text-zinc-500" />
+                                        ) : (
+                                            <XCircle size={18} className="text-zinc-700" />
+                                        )}
+                                    </span>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* ── Separator ── */}
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* ── 7. Security & Compliance ── */}
+                <section ref={securityRef} className="py-24 lg:py-32">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <motion.div variants={fadeUp(0)} initial="hidden" animate={isSecurityInView ? "show" : "hidden"} className="mb-14">
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                <span className="h-px w-6 bg-zinc-700" />
+                                Trust & Security
+                            </span>
+                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                Enterprise-grade security, not afterthought checkboxes.
+                            </h2>
+                        </motion.div>
+
+                        <motion.div
+                            variants={staggerContainer}
+                            initial="hidden"
+                            animate={isSecurityInView ? "show" : "hidden"}
+                            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+                        >
+                            {SECURITY_ITEMS.map((item) => {
+                                const Icon = item.icon;
+                                return (
+                                    <motion.div
+                                        key={item.title}
+                                        variants={childFade}
+                                        className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
+                                    >
+                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-green-500/30 group-hover:bg-green-950/30 group-hover:text-green-400">
+                                            <Icon size={20} strokeWidth={1.5} />
+                                        </div>
+                                        <h3 className="mb-2 text-base font-bold tracking-tight text-white">{item.title}</h3>
+                                        <p className="text-sm leading-relaxed text-zinc-500">{item.description}</p>
+                                    </motion.div>
+                                );
+                            })}
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* ── Separator ── */}
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* ── 8. CTA ── */}
+                <section className="py-24 lg:py-32">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+                            <div className="max-w-xl">
+                                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                    Ready to work with engineers who{" "}
+                                    <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                                        actually build?
+                                    </span>
+                                </h2>
+                                <p className="mt-4 text-base leading-relaxed text-zinc-400">
+                                    Book a discovery call and talk directly to the team that will design,
+                                    architect, and ship your system.
+                                </p>
+                            </div>
+                            <Link
+                                href="/contact"
+                                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-[0_0_48px_rgba(109,40,217,0.5)] whitespace-nowrap"
+                            >
+                                Start a Project
+                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </Link>
+                        </div>
                     </div>
                 </section>
 

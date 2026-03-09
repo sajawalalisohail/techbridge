@@ -33,8 +33,9 @@ const SECTIONS = [
         ],
         stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Redis", "Docker", "AWS"],
         callout: {
-            label: "Our Standard",
+            label: "Founder's Principle",
             text: "Every system we build can be picked up and extended by any senior engineer — not just ours. Clean code, clear abstractions, and thorough documentation are non-negotiable.",
+            attribution: "Sajawal Ali Sohail",
         },
     },
     {
@@ -57,8 +58,9 @@ const SECTIONS = [
         ],
         stack: ["Python", "LangChain", "OpenAI", "Anthropic", "Pinecone", "FastAPI", "n8n", "Zapier"],
         callout: {
-            label: "Production Standard",
+            label: "Founder's Principle",
             text: "We don't suggest prompts. We build production-ready AI systems that run reliably, can be monitored, and improve over time — with full observability and fallback handling.",
+            attribution: "Sajawal Ali Sohail",
         },
     },
     {
@@ -81,8 +83,9 @@ const SECTIONS = [
         ],
         stack: ["Next.js", "Tailwind CSS", "Framer Motion", "Sanity", "Vercel", "Cloudflare"],
         callout: {
-            label: "The Reality",
+            label: "Founder's Principle",
             text: "Most agencies charge $15k and take 3 months. We deliver in 24 hours — not because we cut corners, but because we've engineered the process to remove wasted time and deliver only what matters.",
+            attribution: "Sajawal Ali Sohail",
         },
     },
 ];
@@ -181,13 +184,18 @@ function ServiceSection({
                 </div>
 
                 {/* Callout */}
-                <div className="rounded-xl border border-violet-500/20 bg-violet-950/20 p-5">
-                    <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-violet-400">
+                <div className="border-l-2 border-violet-500/60 bg-violet-950/10 rounded-r-xl p-5 pl-6">
+                    <p className="mb-2 text-xs font-bold uppercase tracking-widest text-violet-400">
                         {section.callout.label}
                     </p>
                     <p className="text-sm leading-relaxed text-zinc-400 italic">
-                        "{section.callout.text}"
+                        &quot;{section.callout.text}&quot;
                     </p>
+                    {section.callout.attribution && (
+                        <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            — {section.callout.attribution}
+                        </p>
+                    )}
                 </div>
             </div>
         </motion.section>

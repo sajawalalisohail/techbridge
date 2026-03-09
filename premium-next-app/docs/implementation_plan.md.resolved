@@ -1,0 +1,439 @@
+# TechBridge Feature Expansion — 6-Phase Implementation Plan
+
+Detailed build plan for expanding the TechBridge website across 6 phases, each completable in one focused session and safe to deploy independently.
+
+> [!IMPORTANT]
+> **No coding until this plan is approved.** Each phase will be submitted for review before work begins on the next.
+
+---
+
+## Phase 1 — Homepage Quick Wins
+
+**Goal:** Improve the homepage with quick wins that don't require new routes.  
+**Estimated complexity:** Moderate — 5 independent changes touching 4 existing files + 1 new file.
+
+### Proposed Changes
+
+---
+
+#### Homepage Components
+
+##### [NEW] `src/components/home/TrustedBy.tsx`
+- New section placed directly below `<Hero />` in the homepage composition.
+- Displays a "Trusted By" client logo bar for NextLex, PrimeMark Apparel, and AliWali Trading Co.
+- Uses **text-based logo placeholders** styled with `font-mono font-bold text-white tracking-widest uppercase` inside a glass-card border treatment (`border border-white/8 bg-white/[0.03] rounded-xl`). No SVG logos exist in the project.
+- Follows the section wrapper pattern (`relative overflow-hidden py-20 lg:py-28` — lighter padding since this is a slim trust bar, not a content section).
+- Uses a simple [fadeUp](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx#13-22) animation triggered by `useInView({ once: true })`.
+- Eyebrow text: none (this section is intentionally minimal — just logos with a subtle leading text like "Trusted by teams at" in `text-xs text-zinc-600`).
+
+##### [MODIFY] [src/components/home/Hero.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/Hero.tsx)
+- Upgrade the `STATS` bar (`50+`, `98%`, `3×`) with **count-up animations**.
+- Implementation: Extract a `CountUp` helper component that uses `useMotionValue` + `animate()` from Framer Motion (not a third-party library).
+- On `useInView` trigger, animate each `MotionValue` from `0` to the target number over ~1.5s with the global `EASE` curve.
+- Parse the stat value to extract the numeric part and suffix (e.g., `"50+"` → animate `0 → 50`, then append `"+"`; `"98%"` → animate `0 → 98`, then append `"%"`; `"3×"` → animate `0 → 3`, then append `"×"`).
+- Use `useTransform` to round the animated value to an integer for display.
+
+##### [MODIFY] [src/components/home/TechStackMarquee.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/TechStackMarquee.tsx)
+- Add hover tooltips to each [TechCard](file:///f:/Techbridge/premium-next-app/src/components/home/TechStackMarquee.tsx#109-129) component.
+- Add a `tooltip` field to the [TechItem](file:///f:/Techbridge/premium-next-app/src/components/home/TechStackMarquee.tsx#10-15) interface and populate the `STACK` data array with 1-line descriptions (e.g., `"Next.js — Server-first React framework for SEO and performance"`).
+- On hover, show a small tooltip div positioned absolutely above the card: `absolute bottom-full left-1/2 -translate-x-1/2 mb-2 rounded-lg border border-white/10 bg-neutral-900/90 backdrop-blur-sm px-3 py-1.5 text-xs text-zinc-300 whitespace-nowrap`.
+- Use `AnimatePresence` + `motion.div` for a smooth fade-in/out (`opacity: 0 → 1`, `y: 4 → 0`, duration: 0.2s).
+- Managed via local `useState<string | null>` on each [TechCard](file:///f:/Techbridge/premium-next-app/src/components/home/TechStackMarquee.tsx#109-129) (no global state needed).
+
+##### [MODIFY] [src/components/home/CaseStudies.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/CaseStudies.tsx)
+- Convert to a **teaser style**: show only client name, one key metric, and one sentence (truncate `description` to first sentence or max 80 chars).
+- Remove the scroll-pinned [PinnedCaseStudy](file:///f:/Techbridge/premium-next-app/src/components/home/CaseStudies.tsx#55-161) component and the Remotion `CaseStudyReel` player integration. Replace with a simpler horizontal card layout or tight grid.
+- Add a prominent "See All Work →" link at the bottom, using the existing text-link CTA pattern, linking to `/work`.
+- Remove `@remotion/player` import from this file (the full experience lives on `/work` now).
+
+> [!NOTE]
+> The full case study experience (scroll-scrubbed Remotion players) will still live on `/work`. This change reduces homepage weight and eliminates content duplication.
+
+##### [MODIFY] [src/components/layout/Navbar.tsx](file:///f:/Techbridge/premium-next-app/src/components/layout/Navbar.tsx)
+- Add an **8-second auto-dismiss timer** to the announcement banner.
+- Implementation: Add a `useEffect` that starts a `setTimeout(8000)` calling `setBannerVisible(false)` when the banner is visible. Clear the timeout on manual dismiss or unmount.
+- The existing `AnimatePresence` + `exit` animation (`height: 0, opacity: 0`) already provides the smooth fade-out — no additional animation work needed.
+
+##### [MODIFY] [src/app/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/page.tsx)
+- Import and insert `<TrustedBy />` between `<Hero />` and `<Services />`.
+- Updated section order: `Hero → TrustedBy → Services → HowItWorks → WhyChooseUs → TechStackMarquee → CaseStudies → CTA`.
+
+### Work Order
+1. `TrustedBy.tsx` (new, self-contained)
+2. [Hero.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/Hero.tsx) count-up (isolated to STATS rendering)
+3. [TechStackMarquee.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/TechStackMarquee.tsx) tooltips (isolated to TechCard)
+4. [CaseStudies.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/CaseStudies.tsx) teaser conversion (most complex — structural change)
+5. [Navbar.tsx](file:///f:/Techbridge/premium-next-app/src/components/layout/Navbar.tsx) auto-dismiss timer (simple timer addition)
+6. [page.tsx](file:///f:/Techbridge/premium-next-app/src/app/page.tsx) import insertion (trivial, last step)
+
+### Decisions Needed
+1. **CaseStudies layout:** Should the teaser cards be a **3-column grid** (compact) or a **horizontal scroll row** (more visual)? I recommend 3-column grid on desktop, stacked on mobile.
+2. **TrustedBy position:** Confirmed directly below Hero? Or would you prefer it at the very bottom above CTA as a "credibility close"?
+
+---
+
+## Phase 2 — Testimonials & Social Proof
+
+**Goal:** Add a new testimonial carousel section to the homepage.  
+**Estimated complexity:** Moderate — 1 new file + 1 modified file.
+
+### Proposed Changes
+
+---
+
+#### Homepage Components
+
+##### [NEW] `src/components/home/Testimonials.tsx`
+- New section component following the standard section wrapper pattern.
+- **Section header:** Eyebrow "Client Voices" → H2 "What Our Partners Say." → No subtitle.
+- **Design:** Carousel/slider showing 1 testimonial card at a time (3 total), with horizontal slide transitions.
+- **Card structure** (glass card pattern):
+  - Large opening quote mark (`"`) as a decorative element in `text-6xl text-violet-500/20 font-serif`.
+  - Quote text: `text-base lg:text-lg leading-relaxed text-zinc-300 italic` (2-3 sentences).
+  - Client info block: Name (`text-sm font-semibold text-white`), Title + Company (`text-xs text-zinc-500`).
+  - Optional avatar: styled `div` with initials (`h-10 w-10 rounded-full bg-violet-950/60 border border-violet-500/20 flex items-center justify-center font-mono text-xs text-violet-300`).
+- **Data:** `TESTIMONIALS` const array at module scope, 3 placeholder entries. Easy to swap — just edit the array.
+- **Auto-advance:** `useEffect` with `setInterval(6000)` cycling `activeIndex`. Resets interval on manual navigation.
+- **Navigation:** Dot indicators below the card (`h-1.5 w-1.5 rounded-full` — `bg-violet-400` active, `bg-zinc-700` inactive), clickable.
+- **Animation:** `AnimatePresence` with horizontal slide transition (`x: 60 → 0 → -60`), duration 0.5s with `EASE`.
+
+##### [MODIFY] [src/app/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/page.tsx)
+- Import `Testimonials` and insert between `<CaseStudies />` and `<CTA />`.
+- Updated order: `Hero → TrustedBy → Services → HowItWorks → WhyChooseUs → TechStackMarquee → CaseStudies → Testimonials → CTA`.
+
+### Work Order
+1. `Testimonials.tsx` (self-contained build + test)
+2. [page.tsx](file:///f:/Techbridge/premium-next-app/src/app/page.tsx) insertion
+
+### Decisions Needed
+1. **Carousel vs stacked cards:** I recommend a carousel (1 visible at a time) for testimonials since quotes are personal and benefit from focused reading. Alternatively, show all 3 in a grid. Preference?
+
+---
+
+## Phase 3 — Detailed Case Study Pages
+
+**Goal:** Create dynamic case study detail pages with individual routes.  
+**Estimated complexity:** Complex — 2 new files + 1 new data file + 3 existing files modified.
+
+### Proposed Changes
+
+---
+
+#### Case Study Data & Routing
+
+##### [NEW] `src/data/case-studies.ts`
+- Centralized case study data file. Exports a `CASE_STUDIES` typed array and a `getCaseStudy(slug: string)` helper function.
+- Each entry contains: `slug`, `client`, `sector`, `metric`, `metricLabel`, `heroDescription` (1-liner), `problem` (2-3 paragraphs placeholder), `solution` (2-3 paragraphs placeholder), `results` (array of `{ stat, label }` objects for count-up), `techStack` (string array), `tags` (string array), `assets` (image paths from `/proofs/`), `liveUrl`, `accentColor`.
+- **Existing 3 entries:** `nextlex`, `primemark`, `aliwali`.
+- **2 new placeholder entries:** e.g., `internal-ops-dashboard` (internal tool project), `saas-analytics-platform` (SaaS project). These get placeholder content to flesh out the portfolio. Assets can reuse generic screenshots or use styled placeholder divs.
+
+##### [NEW] `src/app/work/[slug]/page.tsx`
+- Server Component with `generateStaticParams()` returning all slugs from the data file.
+- Imports the data and renders client sub-components.
+- **Page structure (6 sections):**
+  1. **Hero:** Project name (h1), key metric (large `font-mono`), industry tag pill, 1-line description, gradient accent based on `accentColor`.
+  2. **Problem:** Eyebrow "The Challenge" → 2-3 paragraph block with left-aligned content.
+  3. **Solution:** Eyebrow "Our Approach" → 2-3 paragraph block. Optionally include a tech decision callout card (glass card with icon).
+  4. **Results:** Eyebrow "The Impact" → Grid of 3-4 metric cards with count-up animation (reuse the `CountUp` component from Phase 1's [Hero.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/Hero.tsx)— extract it to `src/components/shared/CountUp.tsx` for reuse).
+  5. **Tech Stack:** Simple tag pill list of technologies used.
+  6. **Screenshots:** Image gallery using `public/proofs/[Project]/` images. Grid layout with `rounded-2xl border border-white/8 overflow-hidden`. Clicking opens a lightbox-style modal.
+  7. **CTA:** Section with "Ready to build something like this?" heading + "Book a Discovery Call" primary CTA + "View Live Site ↗" secondary link to `liveUrl`.
+- Each section uses the standard section wrapper, header, and fadeUp animation patterns.
+- Per-page SEO metadata via `generateMetadata()`: `"[Client] Case Study | [Sector] — TechBridge"`.
+
+##### [NEW] `src/components/shared/CountUp.tsx`
+- Extract the count-up animation logic from Phase 1's Hero.tsx modification into a reusable component.
+- Props: `value: number`, `suffix?: string`, `prefix?: string`, `duration?: number`, `className?: string`.
+- Used by: Hero stats bar, case study results sections.
+
+##### [MODIFY] [src/components/home/CaseStudies.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/CaseStudies.tsx)
+- Update teaser cards to link to `/work/[slug]` instead of external `liveUrl`.
+- Each card uses `<Link href={'/work/${study.slug}'}'>` as the primary action.
+
+##### [MODIFY] [src/app/work/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/work/page.tsx)
+- Import case study data from `src/data/case-studies.ts` instead of the inline `PROJECTS` array.
+- Update card links: primary click → `/work/[slug]`, secondary "View Live Site ↗" link kept for external URL.
+- Add the 2 new placeholder entries to the rendered list, styled identically to existing cards.
+- Ensure the parallax SVG patterns rotate through for new entries (existing pattern system handles this).
+
+##### [MODIFY] [src/app/websites/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx)
+- Update `SOCIAL_PROOF_PROJECTS` data to reference centralized `src/data/case-studies.ts` where overlapping (NextLex, PrimeMark, AliWali). Or keep separate since the 24-Hr Studio page has its own presentation context — this is a judgment call.
+
+### Work Order
+1. `src/data/case-studies.ts` (data foundation — everything depends on this)
+2. `src/components/shared/CountUp.tsx` (extract from Hero.tsx Phase 1 work)
+3. `src/app/work/[slug]/page.tsx` (new route, biggest piece)
+4. [src/components/home/CaseStudies.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/CaseStudies.tsx) (link updates)
+5. [src/app/work/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/work/page.tsx) (data source swap + new entries)
+6. [src/app/websites/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx) (optional data alignment)
+
+### Decisions Needed
+1. **Shared data vs duplicate:** Should [websites/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx) import from the centralized data file, or keep its own `SOCIAL_PROOF_PROJECTS` array? The websites page has different fields (`metrics`, `metricSubtitle`, Remotion player config). I recommend **keeping separate** with a comment referencing the shared source.
+2. **Screenshot gallery interaction:** Simple grid, or lightbox modal on click? I recommend lightbox for premium feel.
+3. **Placeholder project names:** Are `Internal Ops Dashboard` and `SaaS Analytics Platform` acceptable placeholder names, or do you have real projects to use?
+
+---
+
+## Phase 4 — About Page Overhaul
+
+**Goal:** Restructure the About page with new sections for depth and credibility.  
+**Estimated complexity:** Complex — 1 major file rewrite, potentially extracting sections into sub-components.
+
+### Proposed Changes
+
+---
+
+#### About Page
+
+##### [MODIFY] [src/app/about/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/about/page.tsx) (major rewrite)
+
+Keep the existing hero heading ("Engineering as a discipline. Not an afterthought.") but restructure everything below it into 7 sections:
+
+**Section 1 — Founder Story** (Eyebrow: "The Founder")
+- Name placeholder, headshot placeholder (styled `div` with initials: `h-24 w-24 rounded-2xl bg-gradient-to-br from-violet-950 to-indigo-950 border border-violet-500/20 flex items-center justify-center font-mono text-2xl text-violet-300`).
+- 2-paragraph founder bio following content-guide.md voice: personal, principled, using "we believe" and first-person.
+- Layout: 2-column — image left, text right (stacked on mobile).
+
+**Section 2 — Team** (Eyebrow: "The Engineering Team")
+- 3 team member cards (2 engineering, 1 design/ops placeholder).
+- Each card: headshot placeholder (initials div), name, role, 2-line bio.
+- Lahore engineering team framed as **core engineering team**, not outsourced — language like "Our Lahore studio leads the engineering on every build" per the content guide's tone.
+- Glass card pattern with stagger animation.
+
+**Section 3 — Company Timeline** (Eyebrow: "Our Journey")
+- Vertical timeline with **5 milestone entries** (founding, first client, first SaaS launch, Lahore office established, 50th project shipped).
+- Reuse the timeline/vertical-rail pattern from [HowItWorks.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/HowItWorks.tsx) and [websites/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx) Timeline component: dot rail + glass cards with scroll-linked glow line.
+- Placeholder dates that are easy to swap.
+
+**Section 4 — Core Values** (Eyebrow: "What We Stand For")
+- Differentiated from homepage "TechBridge Advantage" by going deeper: each value gets a short **story or example** (2-3 sentences), not just a bullet point.
+- 3-4 values max. Layout: single column, full-width cards with quote-style callouts.
+- Different values than the homepage (e.g., "Transparency in Timelines", "Code That Outlives Us", "Direct Communication") to avoid repetition.
+
+**Section 5 — How We're Different** (Eyebrow: "The Comparison")
+- Comparison table identical in structure to the one on `/websites` ([ComparisonTable](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx#197-260) component).
+- Columns: `Typical Agency` | `Freelancer` | `TechBridge`.
+- Rows: Team composition, Code ownership, Timeline accuracy, Post-launch support, Tech stack modernity, Communication model.
+
+**Section 6 — Security & Compliance** (Eyebrow: "Trust & Security")
+- Small block (not a full section — more of a feature strip).
+- 4 items in a horizontal grid: GDPR Awareness, Secure Coding Practices, Encrypted Communications, SOC 2 Readiness.
+- Each item: icon (from Lucide: `Shield`, `Lock`, `ShieldCheck`, `FileCheck`) + title + 1-line description.
+- Glass card pattern, compact sizing.
+
+**Section 7 — CTA** (Eyebrow: "Start a Conversation")
+- Reuse the CTA pattern from the homepage CTA.tsx.
+- Heading: "Ready to meet the team behind the code?" with "meet the team" in gradient.
+- Primary CTA: "Book a Discovery Call" → `/contact`.
+- Secondary CTA: "View Our Work" → `/work`.
+
+### Work Order
+1. Plan the section component breakdown — decide if sections should be extracted into `src/components/about/` sub-files or kept inline (recommendation: **keep inline** since this is one page and the file will be ~500-600 LOC, similar to existing [services/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/services/page.tsx) and [work/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/work/page.tsx)).
+2. Rewrite from top to bottom, section by section.
+3. Test each section's responsive layout and animations.
+
+### Decisions Needed
+1. **Founder name:** Should I use a placeholder like "Sajawal Ali Sohail" or a generic "Founder Name"? I'll use a placeholder that's easy to find-and-replace.
+2. **Team member count:** The plan has 3. Want more?
+3. **Core Values:** The plan differentiates from homepage by using different values and adding stories. Do you want to keep any of the 4 existing values (AI-Native Engineering, Zero Bloat, Rapid Execution, Enterprise-Grade Foundations), or completely fresh ones?
+
+---
+
+## Phase 5 — Blog/Insights Infrastructure
+
+**Goal:** Build blog listing and post pages with local data.  
+**Estimated complexity:** Moderate — 3 new files + 2 modified files.
+
+### Proposed Changes
+
+---
+
+#### Blog Data & Pages
+
+##### [NEW] `src/data/posts.ts`
+- Typed data file exporting a `POSTS` array and helper functions: `getAllPosts()`, `getPostBySlug(slug)`, `getLatestPosts(count)`.
+- Each post: `slug`, `title`, `excerpt` (2 sentences), `category` (`"Engineering"` | `"AI"` | `"Case Study"` | `"Process"`), `author`, [date](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx#514-522) (ISO string), `readTime` (string, e.g., `"6 min read"`), `body` (multi-paragraph string content — plain text, not markdown for simplicity).
+- 4 placeholder posts covering each category:
+  1. "Why We Chose Next.js App Router Over Pages Router" (Engineering)
+  2. "Automating Client Onboarding with AI Workflows" (AI)
+  3. "How We Built NextLex in 14 Days" (Case Study)
+  4. "Our 4-Phase Engineering Process, Explained" (Process)
+
+##### [NEW] `src/app/blog/page.tsx`
+- Blog listing page (Server Component).
+- Section header: Eyebrow "Insights" → H2 "Engineering Thinking. → Shared Openly." (gradient on "Shared Openly").
+- Card grid: 2 columns desktop, 1 mobile. Each card follows the glass card pattern:
+  - Category tag pill at top.
+  - Title: `text-lg font-semibold text-white`.
+  - Excerpt: `text-sm text-zinc-500`, 2 lines max.
+  - Footer: author name + date + read time in `text-xs text-zinc-600 font-mono`.
+  - "Read →" text link CTA.
+  - Whole card is a `<Link>` to `/blog/[slug]`.
+- SEO: `title: "Blog | Engineering Insights — TechBridge"`, `description: "..."`.
+
+##### [NEW] `src/app/blog/[slug]/page.tsx`
+- Individual blog post page (Server Component with `generateStaticParams`).
+- Clean reading layout: `max-w-3xl mx-auto`.
+- Top block: category pill, title (h1), author + date + read time, back link ("← Back to Insights" text link).
+- Body: rendered as paragraphs with proper spacing (`space-y-6 text-base leading-relaxed text-zinc-400`). Simple paragraph splitting on double newlines.
+- Bottom: "Continue Reading" section showing 2 other posts (not the current one) as mini teaser cards.
+- SEO: `generateMetadata` → `"[Post Title] | TechBridge Blog"`.
+
+##### [MODIFY] [src/components/layout/Navbar.tsx](file:///f:/Techbridge/premium-next-app/src/components/layout/Navbar.tsx)
+- Add `{ label: "Blog", href: "/blog" }` to the `NAV_LINKS` array. Insert before "About" to keep the nav flow logical: `Services | 24-Hr Studio | Work | Blog | About | Contact`.
+
+##### [NEW] `src/components/home/LatestInsights.tsx`
+- New homepage section placed after Testimonials, before CTA.
+- Section header: Eyebrow "Latest Insights" → H2 "From the Engineering Team."
+- Shows the 2 most recent posts as teaser cards (import `getLatestPosts(2)` from data file).
+- "View All Insights →" text link CTA at box bottom, linking to `/blog`.
+- Glass card pattern, stagger animation.
+
+##### [MODIFY] [src/app/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/page.tsx)
+- Import `LatestInsights` and insert between `<Testimonials />` and `<CTA />`.
+- Final order: `Hero → TrustedBy → Services → HowItWorks → WhyChooseUs → TechStackMarquee → CaseStudies → Testimonials → LatestInsights → CTA`.
+
+### Work Order
+1. `src/data/posts.ts` (data foundation)
+2. `src/app/blog/page.tsx` (listing page)
+3. `src/app/blog/[slug]/page.tsx` (detail page)
+4. [Navbar.tsx](file:///f:/Techbridge/premium-next-app/src/components/layout/Navbar.tsx) (add link)
+5. `LatestInsights.tsx` (homepage section)
+6. [page.tsx](file:///f:/Techbridge/premium-next-app/src/app/page.tsx) (insertion)
+
+### Decisions Needed
+1. **Blog link label:** "Blog" or "Insights"? I recommend "Insights" — more premium-sounding and aligns with the section name "Latest Insights."
+2. **Markdown rendering:** Should post bodies support basic markdown (bold, links, code blocks), or is plain paragraph text sufficient for now? I recommend **plain text for now** to keep the scope tight — markdown support can be added later.
+
+---
+
+## Phase 6 — Final Polish & Integration
+
+**Goal:** Cross-cutting refinements to existing pages.  
+**Estimated complexity:** Moderate — 6 existing files modified, 2 new placeholder pages.
+
+### Proposed Changes
+
+---
+
+#### Services Page
+
+##### [MODIFY] [src/app/services/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/services/page.tsx)
+- Rename the self-attributed quotes ("Our Standard", "Production Standard", "The Reality") to **named philosophy statements from the founder**: e.g., "Founder's Principle: …" in a styled blockquote, attributed to the founder name placeholder. Style with a left violet border and `italic text-zinc-400`.
+- Add a small animated icon placeholder area above each service tab's content — a `div` with a subtle `mesh-drift` CSS animation and a centered Lucide icon in `text-violet-400/30`.
+
+#### Contact Page
+
+##### [MODIFY] [src/app/contact/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/contact/page.tsx)
+- Add a new section below the form: "Or book a time directly" using the section header pattern.
+- Embed a Cal.com scheduling iframe: `<iframe src="https://cal.com/techbridge" className="w-full rounded-2xl border border-white/8 bg-neutral-900/40" style={{ height: '650px' }} />`.
+- Wrapped in a glass card container for consistent styling.
+- Placeholder URL — marked with a `TODO` comment for the user to update.
+
+#### Work Page
+
+##### [MODIFY] [src/app/work/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/work/page.tsx)
+- Make case study cards **larger** with more prominent screenshot previews: increase the image container aspect ratio and card padding.
+- Ensure all cards link to `/work/[slug]` detail pages (should already be done in Phase 3 — this is verification and visual polish).
+
+#### Websites / 24-Hr Studio Page
+
+##### [MODIFY] [src/app/websites/page.tsx](file:///f:/Techbridge/premium-next-app/src/app/websites/page.tsx)
+- In the "Live Examples" section, add a small distinguishing tag to each project: "24-Hour Build" vs "Extended Engagement".
+- Add 1-2 placeholder entries for actual 24-hour build examples. Each entry: client name placeholder, "24 hours" metric, 1-line description, placeholder assets (reuse existing images or use styled empty-state cards).
+
+#### Footer
+
+##### [MODIFY] [src/components/layout/Footer.tsx](file:///f:/Techbridge/premium-next-app/src/components/layout/Footer.tsx)
+- Verify live clock timezone handling for `America/New_York` (Morgantown) and `Asia/Karachi` (Lahore) — review the `Intl.DateTimeFormat` usage for production correctness (it should work as-is, but verify edge cases with DST).
+- Add "Privacy Policy" and "Terms" links to the footer bottom bar, linking to `/privacy` and `/terms`.
+
+##### [NEW] `src/app/privacy/page.tsx`
+- Placeholder page: simple heading "Privacy Policy" + paragraph: "This page is under construction. For inquiries, contact us at [email placeholder]."
+- Follows section header pattern, minimal content.
+
+##### [NEW] `src/app/terms/page.tsx`
+- Same placeholder structure as privacy page.
+
+#### SEO
+
+##### [MODIFY] [src/app/layout.tsx](file:///f:/Techbridge/premium-next-app/src/app/layout.tsx)
+- Remove the shared `metadata` export (title + description) from the root layout — or change it to a **default/fallback** with `template: "%s | TechBridge"`.
+
+##### Per-page metadata (verify/add to each page file):
+Each page file exports its own `metadata` object:
+
+| Route | Title | Description |
+|---|---|---|
+| `/` | `"TechBridge \| Premium Software & AI Engineering"` | `"Senior engineering team building..."` |
+| `/about` | `"About \| The Team Behind TechBridge"` | `"Meet the engineers who build..."` |
+| `/contact` | `"Contact \| Start Your Project — TechBridge"` | `"Book a discovery call or send us..."` |
+| `/services` | `"Services \| Custom Software, AI & SaaS — TechBridge"` | `"From enterprise platforms to..."` |
+| `/work` | `"Work \| Case Studies & Portfolio — TechBridge"` | `"See how we've helped businesses..."` |
+| `/websites` | `"24-Hour Websites \| Premium Web Presence — TechBridge"` | `"Launch a custom-coded website..."` |
+| `/blog` | `"Insights \| Engineering Blog — TechBridge"` | `"Thinking from the TechBridge..."` |
+| `/privacy` | `"Privacy Policy — TechBridge"` | `"Our privacy practices and data..."` |
+| `/terms` | `"Terms of Service — TechBridge"` | `"Terms governing use of TechBridge..."` |
+
+> [!NOTE]
+> The `/work/[slug]` and `/blog/[slug]` pages already get per-page metadata via `generateMetadata()` in Phases 3 and 5.
+
+### Work Order
+1. SEO metadata (layout.tsx + all page files — quick systematic pass)
+2. Services page reframe (quote rename + icon area)
+3. Contact page Cal.com embed (new section)
+4. Work page card sizing (CSS adjustments)
+5. Websites page tags + placeholder entries
+6. Footer links + clock verification
+7. Privacy + Terms placeholder pages
+
+### Decisions Needed
+1. **Cal.com URL:** Is `https://cal.com/techbridge` the correct placeholder, or do you have a real Cal.com link to use?
+2. **Metadata template:** Should the root layout use Next.js `title.template` (e.g., `"%s — TechBridge"`) so child pages only set `title: "About"` and it auto-appends? I recommend yes.
+
+---
+
+## Verification Plan
+
+Since the project has no existing test infrastructure (no test files in `src/`), verification will be visual + build-based.
+
+### Automated Verification (every phase)
+```bash
+# 1. TypeScript compilation check
+npm run build
+
+# 2. Linting
+npm run lint
+
+# 3. Dev server smoke test
+npm run dev
+# Verify no console errors on every affected route
+```
+
+### Visual Verification (browser-based, every phase)
+
+After each phase, I will use the browser tool to:
+1. Navigate to every affected route
+2. Verify sections render correctly (layout, spacing, content)
+3. Verify animations trigger on scroll
+4. Check responsive layout at mobile viewport (375px width)
+5. Verify no broken links or missing images
+6. Capture screenshots for the walkthrough
+
+### Phase-Specific Checks
+
+| Phase | Routes to verify | Key checks |
+|---|---|---|
+| 1 | `/` | TrustedBy visible below hero · Count-up animates on scroll · Tooltips show on marquee hover · CaseStudies is teaser-style · Banner auto-dismisses after 8s |
+| 2 | `/` | Testimonials carousel auto-advances · Dots navigate · Animation smooth |
+| 3 | `/`, `/work`, `/work/nextlex`, `/work/primemark`, `/work/aliwali` | Detail pages render · Links from homepage and /work go to detail pages · Count-up works on results · Image gallery renders |
+| 4 | `/about` | All 7 sections render · Timeline scrolls correctly · Comparison table renders · CTA section present |
+| 5 | `/blog`, `/blog/[slug]`, `/` | Listing page shows 4 posts · Detail page renders cleanly · Nav link works · Homepage shows 2 latest |
+| 6 | All routes | Per-page titles verified · Cal.com iframe visible · Cards larger on /work · Footer links work · Privacy/Terms pages render |
+
+### Manual Verification (user)
+After all 6 phases are complete, the user should:
+1. Review all pages in a browser at desktop and mobile widths
+2. Verify placeholder text is easy to find and replace (search for `TODO` and `placeholder` comments)
+3. Confirm the timezone clocks show correct local times
+4. Replace the Cal.com iframe URL with the real scheduling link

@@ -327,6 +327,34 @@ export default function ContactPage() {
                         </div>
                     </section>
 
+                    {/* ── Cal.com Scheduling ── */}
+                    <section className="py-24 lg:py-32">
+                        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                            <div className="mb-10">
+                                <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                    <span className="h-px w-6 bg-zinc-700" />
+                                    Or Book a Time Directly
+                                </span>
+                                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                    Skip the form. Pick a slot.
+                                </h2>
+                                <p className="mt-3 max-w-lg text-base text-zinc-400">
+                                    Choose a time that works for you and meet directly with a senior engineer.
+                                </p>
+                            </div>
+
+                            <div className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 backdrop-blur-sm">
+                                {/* TODO: Replace with your actual Cal.com scheduling URL */}
+                                <iframe
+                                    src="https://cal.com/techbridge"
+                                    className="w-full rounded-2xl"
+                                    style={{ height: "650px", border: "none" }}
+                                    title="Schedule a discovery call with TechBridge"
+                                />
+                            </div>
+                        </div>
+                    </section>
+
                     {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
                     <div
                         aria-hidden="true"

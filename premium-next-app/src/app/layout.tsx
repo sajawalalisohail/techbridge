@@ -19,7 +19,10 @@ const jetbrainsMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "TechBridge | Premium Software & AI Engineering",
+  title: {
+    default: "TechBridge | Premium Software & AI Engineering",
+    template: "%s — TechBridge",
+  },
   description:
     "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
 };

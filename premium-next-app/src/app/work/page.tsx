@@ -8,7 +8,8 @@ import {
     useTransform,
     useInView,
 } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { CASE_STUDIES } from "@/data/case-studies";
 
 /* ─── Keyframes ──────────────────────────────────────────── */
 const CSS = `
@@ -186,75 +187,20 @@ function PatternDiagFlow() {
     );
 }
 
-/* ─── Project data ───────────────────────────────────────── */
-interface Project {
-    slug: string;
-    sector: string;
-    title: string;
-    metric: string;
-    metricLabel: string;
-    description: string;
-    tags: string[];
-    liveUrl?: string;
-    liveLabel?: string;
-    pattern: React.ReactNode;
-    accentGlow: string;
-    accentOpacity: number;
-}
+/* ─── Pattern mapping for work page cards ─────────────── */
+const PATTERNS = [<PatternDotScan key="dot" />, <PatternGlobalNodeMap key="globe" />, <PatternDiagFlow key="diag" />];
 
-const PROJECTS: Project[] = [
-    {
-        slug: "nextlex",
-        sector: "Legal SaaS Platform",
-        title: "NextLex",
-        metric: "10k+",
-        metricLabel: "Active Users Scaled To",
-        description:
-            "Complete architectural redesign of a fragile monolith into a resilient, multi-tenant SaaS platform powering law firms across three continents. We integrated AI-driven document workflow automation — classifying, summarising, and routing legal documents at scale — reducing manual review time by over 70% and eliminating the bottlenecks that were blocking growth.",
-        tags: ["Next.js", "AI Automation", "Dashboard", "Multi-tenant SaaS"],
-        liveUrl: "https://nextlex.com",
-        liveLabel: "View Live Platform",
-        pattern: <PatternDotScan />,
-        accentGlow: "109,40,217", // violet-700
-        accentOpacity: 0.18,
-    },
-    {
-        slug: "ali-wali",
-        sector: "Global Industrial Trade & Logistics",
-        title: "Ali Wali Trading Company",
-        metric: "35+",
-        metricLabel: "Years of Global Trade",
-        description:
-            "Digitized the global presence for a direct buyer of industrial plied rubber conveyor belts. Architected a streamlined, professional platform to coordinate international pickups, container shipping, and evaluations for mines, quarries, and cement plants worldwide. We focus exclusively on reliability and speed for complex international transactions.",
-        tags: ["Global Logistics", "Next.js", "B2B Portal"],
-        liveUrl: "https://aliwalitrading.com",
-        liveLabel: "View Live Platform",
-        pattern: <PatternGlobalNodeMap />,
-        accentGlow: "79,70,229", // indigo-600
-        accentOpacity: 0.15,
-    },
-    {
-        slug: "primemark",
-        sector: "B2B Manufacturing Portal",
-        title: "PrimeMark Apparel",
-        metric: "300%",
-        metricLabel: "Faster Order Routing",
-        description:
-            "Engineered a high-performance digital storefront to streamline global B2B supply chain operations for a large-scale apparel manufacturer. The platform unified order management, supplier coordination, and logistics tracking into a single, real-time interface — cutting order routing time by 300% and eliminating the manual email chains that were slowing international fulfillment.",
-        tags: ["E-Commerce", "API Integration", "Supply Chain", "B2B"],
-        liveUrl: "https://primemarkapparel.com",
-        liveLabel: "View Live Platform",
-        pattern: <PatternDiagFlow />,
-        accentGlow: "99,102,241", // indigo-500
-        accentOpacity: 0.14,
-    },
-];
+function getPattern(index: number) {
+    return PATTERNS[index % PATTERNS.length];
+}
 
 /* ─── Parallax Visual Block ──────────────────────────────── */
 function ProjectVisual({
     project,
+    pattern,
 }: {
-    project: Project;
+    project: (typeof CASE_STUDIES)[number];
+    pattern: React.ReactNode;
 }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -268,14 +214,13 @@ function ProjectVisual({
     return (
         <div
             ref={containerRef}
-            className="relative h-[55vh] w-full overflow-hidden rounded-2xl bg-neutral-950 lg:h-[60vh]"
+            className="relative h-[60vh] w-full overflow-hidden rounded-2xl bg-neutral-950 lg:h-[70vh]"
         >
-            {/* Parallax inner */}
             <motion.div
                 style={{ y: patternY }}
                 className="absolute inset-[-10%] h-[120%] w-[120%]"
             >
-                {project.pattern}
+                {pattern}
             </motion.div>
 
             {/* Gradient fade at bottom */}
@@ -302,7 +247,7 @@ function ProjectVisual({
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-50"
                 style={{
-                    background: `radial-gradient(ellipse at 30% 50%, rgba(${project.accentGlow},${project.accentOpacity}) 0%, rgba(${project.accentGlow},0) 100%)`,
+                    background: `radial-gradient(ellipse at 30% 50%, rgba(${project.accentColor},0.15) 0%, rgba(${project.accentColor},0) 100%)`,
                 }}
             />
         </div>
@@ -310,7 +255,7 @@ function ProjectVisual({
 }
 
 /* ─── Project Card ───────────────────────────────────────── */
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project, index }: { project: (typeof CASE_STUDIES)[number]; index: number }) {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -322,17 +267,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
             {/* Visual */}
-            <ProjectVisual project={project} />
+            <ProjectVisual project={project} pattern={getPattern(index)} />
 
             {/* Content — 2-column below visual */}
             <div className="mt-8 grid grid-cols-1 gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-16">
                 {/* LEFT — Title + Big metric */}
                 <div>
                     <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        {String(index + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
+                        {String(index + 1).padStart(2, "0")} / {String(CASE_STUDIES.length).padStart(2, "0")}
                     </p>
                     <h2 className="mb-6 text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                        {project.title}
+                        {project.client}
                     </h2>
                     <div>
                         <span className="block font-mono text-7xl font-extrabold leading-none tracking-tight text-white lg:text-8xl">
@@ -347,7 +292,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 {/* RIGHT — Description + tags + CTA */}
                 <div className="flex flex-col justify-between">
                     <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                        {project.description}
+                        {project.heroDescription}
                     </p>
 
                     <div className="mt-8 space-y-4">
@@ -363,21 +308,31 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                             ))}
                         </div>
 
-                        {/* Live link (Ali Wali only) */}
-                        {project.liveUrl && (
-                            <a
-                                href={project.liveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-950/30 hover:shadow-[0_0_20px_rgba(109,40,217,0.18)]"
+                        {/* Action links */}
+                        <div className="flex items-center gap-3">
+                            {project.liveUrl && (
+                                <a
+                                    href={project.liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-950/30 hover:shadow-[0_0_20px_rgba(109,40,217,0.18)]"
+                                >
+                                    View Live Platform
+                                    <ArrowUpRight
+                                        size={14}
+                                        className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                    />
+                                </a>
+                            )}
+                            <Link
+                                href={`/work/${project.slug}`}
+                                className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
                             >
-                                {project.liveLabel ?? "View Live Platform"}
-                                <ArrowUpRight
-                                    size={14}
-                                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                                />
-                            </a>
-                        )}
+                                Case Study
+                                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -442,7 +397,7 @@ export default function WorkPage() {
                     {/* ── Project Stack ── */}
                     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12 lg:py-32">
                         <div className="space-y-0">
-                            {PROJECTS.map((project, index) => (
+                            {CASE_STUDIES.map((project, index) => (
                                 <div key={project.slug} className={index > 0 ? "mt-28 lg:mt-36" : ""}>
                                     <ProjectCard project={project} index={index} />
                                 </div>

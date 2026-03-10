@@ -73,8 +73,8 @@ docs/                       # Deep-reference documentation
 
 ## Hard Rules
 
-- **Section padding:** `py-28 lg:py-36` (standard) or `py-20 lg:py-28` (lighter)
-- **Content max-width:** `mx-auto max-w-7xl px-6 lg:px-12` — never deviate
+- **Section padding:** `py-32 lg:py-44` (standard) or `py-28 lg:py-36` (lighter)
+- **Content max-width:** `mx-auto max-w-[90rem] px-6 lg:px-16` — never deviate
 - **Decorative elements:** Always `aria-hidden="true"` + `pointer-events-none`
 - **Animations play once:** `useInView` always `{ once: true }`
 - **Variant names:** Always `hidden` / `show` — never `visible` or `initial`

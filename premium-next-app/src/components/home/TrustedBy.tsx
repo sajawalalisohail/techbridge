@@ -36,7 +36,7 @@ export default function TrustedBy() {
                 className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent"
             />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"

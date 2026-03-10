@@ -239,7 +239,7 @@ export default function Services() {
         <section
             id="services"
             ref={ref}
-            className="relative overflow-hidden py-28 lg:py-36"
+            className="relative overflow-hidden py-32 lg:py-44"
         >
             {/* Section ambient glow */}
             <div
@@ -252,26 +252,26 @@ export default function Services() {
                 style={{ background: "radial-gradient(ellipse at 100% 30%, rgba(139,92,246,0.03) 0%, rgba(139,92,246,0) 50%)" }}
             />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 {/* ── Section Header ── */}
                 <motion.div
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
                     variants={headerVariants}
-                    className="mb-16 max-w-2xl lg:mb-20"
+                    className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                         <span className="h-px w-6 bg-zinc-700" />
                         Our Capabilities
                     </span>
-                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
+                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         Engineering the{" "}
                         <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
                             Future
                         </span>{" "}
                         of Your Business
                     </h2>
-                    <p className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-lg">
+                    <p className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-xl">
                         From intelligent automation to enterprise platforms - we build the systems that give your business an unfair competitive advantage.
                     </p>
                 </motion.div>

@@ -152,7 +152,7 @@ export default function WhyChooseUs() {
             <section
                 id="why-choose-us"
                 ref={ref}
-                className="relative overflow-hidden py-28 lg:py-36"
+                className="relative overflow-hidden py-32 lg:py-44"
             >
                 {/* Top separator */}
                 <div
@@ -167,7 +167,7 @@ export default function WhyChooseUs() {
                     style={{ background: "radial-gradient(circle at 100% 50%, rgba(139,92,246,0.04) 0%, rgba(139,92,246,0) 50%)" }}
                 />
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                     {/* ── Section Header ── */}
                     <motion.div
                         ref={headerRef}
@@ -181,7 +181,7 @@ export default function WhyChooseUs() {
                             The TechBridge Advantage
                         </span>
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                            <h2 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
+                            <h2 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                                 We don&apos;t just write code.{" "}
                                 <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                                     We build leverage.

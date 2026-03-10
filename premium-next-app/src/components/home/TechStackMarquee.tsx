@@ -170,7 +170,7 @@ export default function TechStackMarquee() {
     return (
         <section ref={ref} className="relative overflow-hidden py-20 lg:py-24">
             {/* Subtle top + bottom hairlines */}
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 <div className="mb-12 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 

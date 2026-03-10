@@ -74,13 +74,13 @@ export default function Hero() {
                 variants={container}
                 initial="hidden"
                 animate="show"
-                className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-12"
+                className="relative z-10 mx-auto flex min-h-screen max-w-[90rem] flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-16"
             >
 
                 {/* Primary headline */}
                 <motion.h1
                     variants={fadeUp}
-                    className="max-w-4xl text-center text-[2.25rem] font-bold leading-[1.05] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[4.75rem]"
+                    className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]"
                 >
                     <span className="block">We Build the Systems That Drive</span>{" "}
                     <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
@@ -91,7 +91,7 @@ export default function Hero() {
                 {/* Sub-headline */}
                 <motion.p
                     variants={fadeUp}
-                    className="mt-6 max-w-2xl text-center text-sm leading-relaxed text-zinc-400 sm:text-base lg:text-lg"
+                    className="mt-6 max-w-2xl text-center text-base leading-relaxed text-zinc-400 sm:text-lg lg:text-xl"
                 >
                     TechBridge delivers custom software, AI automation, and scalable SaaS
                     platforms — engineered for precision, built for growth.

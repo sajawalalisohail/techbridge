@@ -79,7 +79,7 @@ export default function Testimonials() {
     const testimonial = TESTIMONIALS[activeIndex];
 
     return (
-        <section ref={ref} className="relative overflow-hidden py-24 lg:py-32">
+        <section ref={ref} className="relative overflow-hidden py-28 lg:py-36">
             {/* Top separator */}
             <div
                 aria-hidden="true"
@@ -95,7 +95,7 @@ export default function Testimonials() {
                 }}
             />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 {/* ── Section Header ── */}
                 <motion.div
                     ref={headerRef}
@@ -109,7 +109,7 @@ export default function Testimonials() {
                         Client Voices
                         <span className="h-px w-6 bg-zinc-700" />
                     </span>
-                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl">
+                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         What Our Partners Say.
                     </h2>
                 </motion.div>
@@ -122,7 +122,7 @@ export default function Testimonials() {
                     className="mx-auto max-w-3xl"
                 >
                     {/* Card container — fixed height for smooth transitions */}
-                    <div className="relative min-h-[320px] sm:min-h-[280px]">
+                    <div className="relative min-h-[380px] sm:min-h-[320px]">
                         <AnimatePresence mode="wait" custom={direction}>
                             <motion.div
                                 key={activeIndex}

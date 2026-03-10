@@ -125,7 +125,7 @@ export default function CaseStudies() {
         <section
             id="case-studies"
             ref={ref}
-            className="relative overflow-hidden py-28 lg:py-36"
+            className="relative overflow-hidden py-32 lg:py-44"
         >
             {/* Top separator */}
             <div
@@ -142,7 +142,7 @@ export default function CaseStudies() {
                 }}
             />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 {/* ── Section Header ── */}
                 <motion.div
                     ref={headerRef}
@@ -156,7 +156,7 @@ export default function CaseStudies() {
                             <span className="h-px w-6 bg-zinc-700" />
                             Proven Impact
                         </span>
-                        <h2 className="max-w-lg text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
+                        <h2 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                             Engineered for Scale.{" "}
                             <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
                                 Built for Results.

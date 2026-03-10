@@ -30,14 +30,14 @@ export default function LatestInsights() {
     const latest = INSIGHTS.slice(0, 2);
 
     return (
-        <section ref={ref} className="relative overflow-hidden py-24 lg:py-32">
+        <section ref={ref} className="relative overflow-hidden py-28 lg:py-36">
             {/* Top separator */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
             />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 {/* ── Header ── */}
                 <motion.div
                     ref={headerRef}
@@ -51,7 +51,7 @@ export default function LatestInsights() {
                             <span className="h-px w-6 bg-zinc-700" />
                             Latest Insights
                         </span>
-                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl">
+                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                             From the{" "}
                             <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
                                 Build.

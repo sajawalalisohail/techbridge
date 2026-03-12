@@ -5,6 +5,7 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/shared/JsonLd";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -19,12 +20,42 @@ const jetbrainsMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://techbridge.dev"),
   title: {
     default: "TechBridge | Premium Software & AI Engineering",
     template: "%s — TechBridge",
   },
   description:
     "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
+  keywords: [
+    "custom software development",
+    "AI automation",
+    "SaaS development",
+    "enterprise engineering",
+    "TechBridge",
+    "web application development",
+    "API integration",
+  ],
+  authors: [{ name: "TechBridge" }],
+  creator: "TechBridge",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://techbridge.dev",
+    siteName: "TechBridge",
+    title: "TechBridge | Premium Software & AI Engineering",
+    description:
+      "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TechBridge | Premium Software & AI Engineering",
+    description:
+      "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
+  },
+  alternates: {
+    canonical: "https://techbridge.dev",
+  },
 };
 
 export default function RootLayout({
@@ -37,6 +68,7 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} bg-black text-white antialiased font-sans`}
       >
+        <JsonLd />
         <div className="relative min-h-screen bg-black w-full">
           <div className="relative w-full z-10 bg-black">
             <div className="absolute inset-0 z-0 pointer-events-none">

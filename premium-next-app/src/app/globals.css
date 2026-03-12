@@ -370,6 +370,12 @@ body {
     }
   }
 
+  /* ─── Cursor Blink (code editor / chat mockups) ────── */
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
   .tb-marquee-track {
     animation: tb-marquee-scroll 35s linear infinite;
     will-change: transform;

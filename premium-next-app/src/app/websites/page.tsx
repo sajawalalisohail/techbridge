@@ -154,7 +154,7 @@ function Hero() {
                         <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     </a>
                     <a
-                        href="https://cal.com"
+                        href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:bg-white/[0.08]"
@@ -1015,7 +1015,7 @@ function Pricing() {
 
                         <div className="mt-auto px-8 pb-8">
                             <a
-                                href="https://cal.com"
+                                href="/contact"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={`group relative w-full inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300
@@ -1120,7 +1120,7 @@ function CarePlans() {
                                 ))}
                             </ul>
                             <a
-                                href="https://cal.com"
+                                href="/contact"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300
@@ -1269,7 +1269,7 @@ function FinalCTA() {
                     className="flex flex-col items-center justify-center gap-4 sm:flex-row"
                 >
                     <a
-                        href="https://cal.com"
+                        href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-10 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_52px_rgba(109,40,217,0.55)]"

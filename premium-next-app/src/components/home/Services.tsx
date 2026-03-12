@@ -11,9 +11,18 @@ import {
     GitMerge,
     Zap,
 } from "lucide-react";
+import {
+    WorkflowDiagramMockup,
+    ChatUIMockup,
+    DashboardMockup,
+    MetricCounterMockup,
+    DataFlowMockup,
+    BrowserLoadMockup,
+} from "@/components/home/mockups";
 
 /* ─── Types ──────────────────────────────────────────────── */
 import type { LucideIcon } from "lucide-react";
+import type { ComponentType } from "react";
 
 interface ServiceCard {
     id: number;
@@ -21,10 +30,11 @@ interface ServiceCard {
     eyebrow: string;
     title: string;
     description: string;
-    colSpan?: string; // Tailwind col-span class
-    highlight?: boolean; // special accent treatment
-    accentColor: string; // radial glow color on hover
-    href?: string; // target link for the whole card
+    colSpan?: string;
+    highlight?: boolean;
+    accentColor: string;
+    href?: string;
+    Mockup: ComponentType;
 }
 
 /* ─── Data ───────────────────────────────────────────────── */
@@ -39,6 +49,7 @@ const SERVICES: ServiceCard[] = [
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#custom-software",
+        Mockup: WorkflowDiagramMockup,
     },
     {
         id: 2,
@@ -50,6 +61,7 @@ const SERVICES: ServiceCard[] = [
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#ai-automation",
+        Mockup: ChatUIMockup,
     },
     {
         id: 3,
@@ -60,6 +72,7 @@ const SERVICES: ServiceCard[] = [
             "Custom dashboards, CRMs, and operational platforms that give your team real-time visibility and control.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#internal-tools",
+        Mockup: DashboardMockup,
     },
     {
         id: 4,
@@ -70,6 +83,7 @@ const SERVICES: ServiceCard[] = [
             "End-to-end product development - from architecture and auth to billing and beyond. Built to scale from day one.",
         accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.07) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#saas-platforms",
+        Mockup: MetricCounterMockup,
     },
     {
         id: 5,
@@ -80,6 +94,7 @@ const SERVICES: ServiceCard[] = [
             "Connect your existing tools and data sources into a unified, reliable ecosystem that flows without friction.",
         accentColor: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#api-integrations",
+        Mockup: DataFlowMockup,
     },
     {
         id: 6,
@@ -91,6 +106,7 @@ const SERVICES: ServiceCard[] = [
         highlight: true,
         accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.11) 0%, rgba(167,139,250,0) 100%)",
         href: "/websites",
+        Mockup: BrowserLoadMockup,
     },
 ];
 
@@ -127,6 +143,7 @@ const headerVariants = {
 /* ─── Sub-components ─────────────────────────────────────── */
 function ServiceCardItem({ card }: { card: ServiceCard }) {
     const Icon = card.icon;
+    const { Mockup } = card;
 
     return (
         <motion.div
@@ -184,47 +201,54 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 </h3>
 
                 {/* Description */}
-                <p className="flex-1 text-sm leading-relaxed text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300">
+                <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300">
                     {card.description}
                 </p>
 
-                {card.href ? (
-                    <Link
-                        href={card.href}
-                        aria-label={`Learn more about ${card.title}`}
-                        className={`mt-6 inline-flex items-center gap-1.5 text-xs font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-violet-400" : "text-zinc-600 group-hover:text-white"
-                            }`}
-                    >
-                        <span>Learn more</span>
-                        <svg
-                            className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2.5}
+                {/* Interactive mockup demo */}
+                <div className="my-5">
+                    <Mockup />
+                </div>
+
+                <div className="mt-auto">
+                    {card.href ? (
+                        <Link
+                            href={card.href}
+                            aria-label={`Learn more about ${card.title}`}
+                            className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-violet-400" : "text-zinc-600 group-hover:text-white"
+                                }`}
                         >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </Link>
-                ) : (
-                    <div
-                        className={`mt-6 flex items-center gap-1.5 text-xs font-medium transition-colors duration-300 ${card.highlight
-                            ? "text-violet-400"
-                            : "text-zinc-600 group-hover:text-white"
-                            }`}
-                    >
-                        <span>Learn more</span>
-                        <svg
-                            className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2.5}
+                            <span>Learn more</span>
+                            <svg
+                                className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2.5}
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </Link>
+                    ) : (
+                        <div
+                            className={`mt-6 flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 ${card.highlight
+                                ? "text-violet-400"
+                                : "text-zinc-600 group-hover:text-white"
+                                }`}
                         >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </div>
-                )}
+                            <span>Learn more</span>
+                            <svg
+                                className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2.5}
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </div>
+                    )}
+                </div>
             </div>
         </motion.div>
     );
@@ -239,7 +263,7 @@ export default function Services() {
         <section
             id="services"
             ref={ref}
-            className="relative overflow-hidden py-32 lg:py-44"
+            className="relative overflow-hidden py-24 lg:py-32 scroll-mt-24"
         >
             {/* Section ambient glow */}
             <div

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Contact | Start Your Project",
-    description: "Book a discovery call or send us a message. Talk directly to the senior engineers building your system.",
+    title: "Contact TechBridge | Start Your Custom Software Project",
+    description: "Book a discovery call or send us a message. Talk directly to senior engineers who will architect and build your custom software, AI, or SaaS solution.",
+    alternates: { canonical: "/contact" },
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

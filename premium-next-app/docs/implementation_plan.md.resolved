@@ -145,6 +145,7 @@ Detailed build plan for expanding the TechBridge website across 6 phases, each c
 - Extract the count-up animation logic from Phase 1's Hero.tsx modification into a reusable component.
 - Props: `value: number`, `suffix?: string`, `prefix?: string`, `duration?: number`, `className?: string`.
 - Used by: Hero stats bar, case study results sections.
+- In Hero stats bar, the count up should start from 20 and go up to the value.
 
 ##### [MODIFY] [src/components/home/CaseStudies.tsx](file:///f:/Techbridge/premium-next-app/src/components/home/CaseStudies.tsx)
 - Update teaser cards to link to `/work/[slug]` instead of external `liveUrl`.

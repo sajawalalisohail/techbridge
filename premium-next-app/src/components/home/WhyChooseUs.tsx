@@ -3,6 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-react";
+import {
+    AINativeIllustration,
+    ZeroBloatIllustration,
+    VelocityIllustration,
+    ResilienceIllustration
+} from "./illustrations";
 
 /* ─── Data ───────────────────────────────────────────────── */
 interface Advantage {
@@ -13,6 +19,7 @@ interface Advantage {
     detail: string; // Bold pull-quote / differentiator
     accentA: string; // Orb A color
     accentB: string; // Orb B color
+    Illustration: React.ComponentType;
 }
 
 const ADVANTAGES: Advantage[] = [
@@ -25,6 +32,7 @@ const ADVANTAGES: Advantage[] = [
         detail: "Built with AI from line one.",
         accentA: "rgba(139,92,246,0.18)",
         accentB: "rgba(99,102,241,0.12)",
+        Illustration: AINativeIllustration,
     },
     {
         icon: Users,
@@ -35,6 +43,7 @@ const ADVANTAGES: Advantage[] = [
         detail: "You talk to the builder.",
         accentA: "rgba(99,102,241,0.15)",
         accentB: "rgba(167,139,250,0.10)",
+        Illustration: ZeroBloatIllustration,
     },
     {
         icon: Rocket,
@@ -45,6 +54,7 @@ const ADVANTAGES: Advantage[] = [
         detail: "Production-ready in days.",
         accentA: "rgba(167,139,250,0.16)",
         accentB: "rgba(99,102,241,0.12)",
+        Illustration: VelocityIllustration,
     },
     {
         icon: Shield,
@@ -55,6 +65,7 @@ const ADVANTAGES: Advantage[] = [
         detail: "Built to handle your growth.",
         accentA: "rgba(109,40,217,0.15)",
         accentB: "rgba(139,92,246,0.10)",
+        Illustration: ResilienceIllustration,
     },
 ];
 
@@ -127,8 +138,13 @@ function AdvantageCard({ item }: { item: Advantage }) {
                     {item.description}
                 </p>
 
+                {/* Illustration Block */}
+                <div className="mt-6 mb-2">
+                    <item.Illustration />
+                </div>
+
                 {/* Pull-quote differentiator */}
-                <div className="mt-8 flex items-center gap-3 border-t border-white/5 pt-6">
+                <div className="mt-4 flex items-center gap-3 border-t border-white/5 pt-6">
                     <span className="h-px w-5 flex-shrink-0 bg-violet-500/60" />
                     <p className="text-sm font-semibold text-zinc-300 transition-colors duration-300 group-hover:text-white">
                         {item.detail}
@@ -152,7 +168,7 @@ export default function WhyChooseUs() {
             <section
                 id="why-choose-us"
                 ref={ref}
-                className="relative overflow-hidden py-32 lg:py-44"
+                className="relative overflow-hidden py-24 lg:py-32 scroll-mt-24"
             >
                 {/* Top separator */}
                 <div

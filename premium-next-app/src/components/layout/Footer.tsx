@@ -28,7 +28,7 @@ function LiveClock({ tz, label }: { tz: string; label: string }) {
             <p className="text-xs uppercase tracking-widest text-zinc-600 mb-1.5">
                 {label}
             </p>
-            <p className="font-mono text-sm tabular-nums text-zinc-400">
+            <p className="font-mono text-sm tabular-nums text-zinc-400" suppressHydrationWarning>
                 {time || "--:--:--"}
             </p>
         </div>

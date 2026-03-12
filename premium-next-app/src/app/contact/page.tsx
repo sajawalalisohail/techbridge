@@ -344,13 +344,16 @@ export default function ContactPage() {
                             </div>
 
                             <div className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 backdrop-blur-sm">
-                                {/* TODO: Replace with your actual Cal.com scheduling URL */}
-                                <iframe
-                                    src="https://cal.com/techbridge"
-                                    className="w-full rounded-2xl"
-                                    style={{ height: "650px", border: "none" }}
-                                    title="Schedule a discovery call with TechBridge"
-                                />
+                                {/* Cal.com embed — replace src with your actual booking URL */}
+                                <div className="flex flex-col items-center justify-center py-20 text-center">
+                                    <p className="text-lg font-semibold text-white">Scheduling Coming Soon</p>
+                                    <p className="mt-2 max-w-sm text-sm text-zinc-400">
+                                        In the meantime, fill out the form above or email us directly at{" "}
+                                        <a href="mailto:hello@techbridge.dev" className="text-violet-400 hover:underline">
+                                            hello@techbridge.dev
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </section>

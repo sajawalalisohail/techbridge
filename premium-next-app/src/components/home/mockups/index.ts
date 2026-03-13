@@ -1,7 +1,4 @@
-export { default as PricingToggleMockup } from "./PricingToggleMockup";
 export { default as CodeEditorMockup } from "./CodeEditorMockup";
-export { default as RadialGaugesMockup } from "./RadialGaugesMockup";
-export { default as DeploymentPipelineMockup } from "./DeploymentPipelineMockup";
 export { default as WorkflowDiagramMockup } from "./WorkflowDiagramMockup";
 export { default as ChatUIMockup } from "./ChatUIMockup";
 export { default as DashboardMockup } from "./DashboardMockup";

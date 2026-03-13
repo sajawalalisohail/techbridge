@@ -39,7 +39,7 @@ const ADVANTAGES: Advantage[] = [
         eyebrow: "Direct Access",
         title: "Zero Bloat. Senior Engineers Only.",
         description:
-            "No layers of account managers, no offshore handoffs, no junior devs flying blind. You work directly with senior engineers who own the outcome - meaning faster decisions and zero information loss.",
+            "No layers of middlemen. No junior devs flying blind. You work directly with the engineers building your system — faster decisions, zero information loss.",
         detail: "You talk to the builder.",
         accentA: "rgba(99,102,241,0.15)",
         accentB: "rgba(167,139,250,0.10)",

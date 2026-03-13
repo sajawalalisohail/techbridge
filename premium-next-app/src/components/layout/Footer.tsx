@@ -122,7 +122,7 @@ export default function Footer() {
                                 </span>
                             </Link>
                             <p className="text-sm leading-relaxed text-zinc-500">
-                                Engineering the future of business - one system at a time.
+                                Precision-engineered systems for businesses that refuse to settle.
                             </p>
 
                             {/* Social row */}

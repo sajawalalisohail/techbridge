@@ -45,7 +45,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Foundation",
         title: "Custom Software Development",
         description:
-            "Scalable, enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths - engineered right the first time.",
+            "Enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths.",
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#custom-software",
@@ -57,7 +57,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Intelligence",
         title: "AI Workflow Automation",
         description:
-            "Intelligent systems that identify, replace, and continuously improve manual processes - freeing your team to focus on what only humans can do.",
+            "Systems that identify and replace manual processes — freeing your team to focus on what only humans can do.",
         colSpan: "md:col-span-2",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#ai-automation",
@@ -69,7 +69,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Operations",
         title: "Internal Business Tools",
         description:
-            "Custom dashboards, CRMs, and operational platforms that give your team real-time visibility and control.",
+            "Custom dashboards, CRMs, and operational tools that give your team real-time visibility and control.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#internal-tools",
         Mockup: DashboardMockup,
@@ -80,7 +80,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Products",
         title: "SaaS Platform Development",
         description:
-            "End-to-end product development - from architecture and auth to billing and beyond. Built to scale from day one.",
+            "End-to-end product development — architecture, auth, billing, and beyond. Built to scale from day one.",
         accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.07) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#saas-platforms",
         Mockup: MetricCounterMockup,
@@ -91,7 +91,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Integration",
         title: "API Integrations & Data Pipelines",
         description:
-            "Connect your existing tools and data sources into a unified, reliable ecosystem that flows without friction.",
+            "Connect your tools and data sources into a unified ecosystem that flows without friction.",
         accentColor: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#api-integrations",
         Mockup: DataFlowMockup,
@@ -102,7 +102,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Speed",
         title: "24-Hour Rapid Deploy Websites",
         description:
-            "Premium web presence, delivered in a day. Performance-first, conversion-optimized, and polished to perfection - without the wait.",
+            "Premium web presence, delivered in a day. Performance-first, conversion-optimized — without the wait.",
         highlight: true,
         accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.11) 0%, rgba(167,139,250,0) 100%)",
         href: "/websites",
@@ -289,11 +289,10 @@ export default function Services() {
                         Our Capabilities
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                        Engineering the{" "}
+                        What We{" "}
                         <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
-                            Future
-                        </span>{" "}
-                        of Your Business
+                            Build
+                        </span>
                     </h2>
                     <p className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-xl">
                         From intelligent automation to enterprise platforms - we build the systems that give your business an unfair competitive advantage.

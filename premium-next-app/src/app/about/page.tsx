@@ -55,7 +55,7 @@ const VALUES = [
         icon: Globe,
         title: "Global Architecture, Local Precision",
         description:
-            "Our hybrid model combines US-based strategy with elite distributed engineering — letting us scale output without compromising quality or oversight.",
+            "US-based architecture and strategy paired with a dedicated engineering team — scaling execution without compromising quality or oversight.",
     },
 ];
 
@@ -88,18 +88,35 @@ const TIMELINE = [
 ];
 
 /* ─── Team Data ───────────────────────────────────────────── */
-const TEAM = [
+interface TeamMember {
+    name: string;
+    role: string;
+    location: string;
+    bio: string;
+    /** @internal Never rendered in DOM */
+    partnerCompany?: string;
+    /** @internal Never rendered in DOM */
+    partnerRole?: string;
+}
+
+const TEAM: TeamMember[] = [
     {
         name: "Sajawal Ali Sohail",
         role: "Founder & Lead Architect",
         location: "WV",
         bio: "WVU Computer Science alumnus. Leads business strategy, system architecture, UI/UX design, and end-to-end project orchestration. The single point of accountability for every TechBridge engagement.",
     },
+    // Hamza Majeed — Co-Founder & CTO
+    // Also founder/owner of SydStack — TechBridge's strategic engineering partner
+    // SydStack manages the Pakistan-based dev teams for TechBridge client engagements
+    // This partnership is internal and not displayed publicly on the website
     {
-        name: "Engineering Cell Lead",
-        role: "Senior Full-Stack Engineer",
+        name: "Hamza Majeed",
+        role: "Co-Founder & CTO",
         location: "PK",
-        bio: "Specialized senior engineer handling large-scale enterprise builds, backend architecture, and API design under direct architectural oversight from Sajawal.",
+        bio: "Leads technical operations, engineering team management, and delivery execution. Brings deep full-stack expertise and a track record of scaling distributed engineering teams across complex enterprise projects.",
+        partnerCompany: "SydStack",
+        partnerRole: "owner",
     },
 ];
 
@@ -108,7 +125,6 @@ const COMPARISON = [
     { feature: "Code review by senior architects", us: true, them: false },
     { feature: "Direct access to the builders", us: true, them: false },
     { feature: "Custom architecture per project", us: true, them: false },
-    { feature: "No offshore handoff surprises", us: true, them: false },
     { feature: "Sub-24hr response time", us: true, them: false },
     { feature: "Post-launch monitoring included", us: true, them: false },
     { feature: "AI/ML integration capability", us: true, them: false },
@@ -332,7 +348,7 @@ export default function AboutPage() {
                         >
                             <div className="flex-1">
                                 <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                    TechBridge operates as a hybrid engineering firm. Headquartered in Morgantown, WV, and powered by elite distributed engineering cells in Pakistan. This allows us to scale development output massively while maintaining pure computer science quality standards and rigorous US-based architecture oversight.
+                                    TechBridge operates as a hybrid engineering firm headquartered in Morgantown, WV, with a dedicated engineering team in Lahore. This model lets us scale execution without compromising on quality standards or architectural oversight.
                                 </p>
                             </div>
                             <div className="grid flex-1 grid-cols-2 gap-4">

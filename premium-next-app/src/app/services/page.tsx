@@ -45,7 +45,7 @@ const SECTIONS = [
         icon: BrainCircuit,
         subHeadline: "Replace 20 hours of manual work per week with one intelligent workflow.",
         description:
-            "We identify your highest-cost manual processes and replace them with LLM-powered automations, custom AI agents, and intelligent data pipelines — seamlessly integrated with your existing tools and business logic.",
+            "We identify your highest-cost manual processes and replace them with LLM-powered automations, custom AI agents, and intelligent data pipelines — seamlessly integrated with your existing tools and business logic. Clients typically see 30-50% reduction in operational overhead within the first quarter.",
         capabilities: [
             "LLM integration (GPT-4o, Claude, Gemini)",
             "Custom AI agents & autonomous workflows",

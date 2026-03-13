@@ -37,7 +37,7 @@ TechBridge's voice is **confident, technical, and restrained** — it reads like
 4. **"No X. No Y. Just Z." triple-negative pattern:**
    - "No retainers. No bloat. Just senior engineers and results."
    - "No templates. No bloated agency timelines. No waiting."
-   - "No layers of account managers. No offshore handoffs."
+   - "No layers of middlemen. No junior devs flying blind."
 
 ---
 

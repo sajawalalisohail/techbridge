@@ -81,7 +81,7 @@ function TeaserCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
 
                 {/* Key metric */}
                 <div className="mb-4">
-                    <span className="block font-mono text-5xl font-extrabold leading-none tracking-tight text-white mb-2">
+                    <span className="block font-mono text-5xl font-extrabold leading-none tracking-tight bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent mb-2">
                         {study.metric}
                     </span>
                     <span className="text-xs uppercase tracking-wider text-zinc-400">
@@ -153,19 +153,19 @@ export default function CaseStudies() {
                 >
                     <div>
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-px w-6 bg-zinc-700" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                             Proven Impact
                         </span>
                         <h2 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                             Engineered for Scale.{" "}
-                            <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                                 Built for Results.
                             </span>
                         </h2>
                     </div>
                     <Link
                         href="/work"
-                        className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                        className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-400"
                     >
                         See All Work
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -188,7 +188,7 @@ export default function CaseStudies() {
                 <div className="mt-10 lg:hidden">
                     <Link
                         href="/work"
-                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-400"
                     >
                         See All Work
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />

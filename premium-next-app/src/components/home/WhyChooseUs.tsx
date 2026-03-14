@@ -193,7 +193,7 @@ export default function WhyChooseUs() {
                         className="mb-16 lg:mb-20"
                     >
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-px w-6 bg-zinc-700" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                             The TechBridge Advantage
                         </span>
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">

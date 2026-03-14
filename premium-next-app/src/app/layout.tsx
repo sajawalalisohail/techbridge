@@ -7,6 +7,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/shared/JsonLd";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
+import CursorFollower from "@/components/shared/CursorFollowerWrapper";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -84,6 +85,7 @@ export default function RootLayout({
           </div>
 
           <Footer />
+          <CursorFollower />
         </div>
       </body>
     </html>

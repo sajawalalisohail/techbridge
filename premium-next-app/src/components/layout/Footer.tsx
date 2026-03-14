@@ -132,7 +132,7 @@ export default function Footer() {
                                         key={s.label}
                                         href={s.href}
                                         aria-label={s.label}
-                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-violet-500/30 hover:bg-violet-950/30 hover:text-violet-400"
                                     >
                                         {s.icon}
                                     </a>
@@ -150,7 +150,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-violet-400"
                                         >
                                             {link.label}
                                         </Link>
@@ -169,7 +169,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-white"
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-violet-400"
                                         >
                                             {link.label}
                                         </Link>

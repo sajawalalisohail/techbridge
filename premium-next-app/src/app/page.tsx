@@ -1,12 +1,6 @@
 import Hero from "@/components/home/Hero";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
-import HowItWorks from "@/components/home/HowItWorks";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
-import TechStackMarquee from "@/components/home/TechStackMarquee";
-import CaseStudies from "@/components/home/CaseStudies";
-import Testimonials from "@/components/home/Testimonials";
-import LatestInsights from "@/components/home/LatestInsights";
 import CTA from "@/components/home/CTA";
 
 export default function Home() {
@@ -17,12 +11,6 @@ export default function Home() {
 
       <TrustedBy />
       <Services />
-      <HowItWorks />
-      <WhyChooseUs />
-      <TechStackMarquee />
-      <CaseStudies />
-      <Testimonials />
-      <LatestInsights />
       <CTA />
 
       {/* Subtle violet border glow separating the scrolling content from the reveal footer */}

@@ -48,12 +48,12 @@ export default function LatestInsights() {
                 >
                     <div>
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-px w-6 bg-zinc-700" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                             Latest Insights
                         </span>
                         <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                             From the{" "}
-                            <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                                 Build.
                             </span>
                         </h2>

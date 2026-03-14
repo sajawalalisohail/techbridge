@@ -7,17 +7,17 @@ import {
     Code2,
     BrainCircuit,
     LayoutDashboard,
-    Layers,
-    GitMerge,
     Zap,
+    Smartphone,
+    Palette,
 } from "lucide-react";
 import {
     WorkflowDiagramMockup,
     ChatUIMockup,
     DashboardMockup,
+    BrowserLoadMockup,
     MetricCounterMockup,
     DataFlowMockup,
-    BrowserLoadMockup,
 } from "@/components/home/mockups";
 
 /* ─── Types ──────────────────────────────────────────────── */
@@ -30,7 +30,6 @@ interface ServiceCard {
     eyebrow: string;
     title: string;
     description: string;
-    colSpan?: string;
     highlight?: boolean;
     accentColor: string;
     href?: string;
@@ -43,10 +42,9 @@ const SERVICES: ServiceCard[] = [
         id: 1,
         icon: Code2,
         eyebrow: "Foundation",
-        title: "Custom Software Development",
+        title: "Custom Software & SaaS",
         description:
-            "Enterprise-grade architectures built to evolve with your business. From distributed systems to elegant monoliths.",
-        colSpan: "md:col-span-2",
+            "Scalable platforms, multi-tenant architectures, and enterprise systems — built to evolve.",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#custom-software",
         Mockup: WorkflowDiagramMockup,
@@ -57,8 +55,7 @@ const SERVICES: ServiceCard[] = [
         eyebrow: "Intelligence",
         title: "AI Workflow Automation",
         description:
-            "Systems that identify and replace manual processes — freeing your team to focus on what only humans can do.",
-        colSpan: "md:col-span-2",
+            "Replace manual processes with intelligent systems that learn and scale.",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#ai-automation",
         Mockup: ChatUIMockup,
@@ -67,46 +64,46 @@ const SERVICES: ServiceCard[] = [
         id: 3,
         icon: LayoutDashboard,
         eyebrow: "Operations",
-        title: "Internal Business Tools",
+        title: "Internal Tools & Integrations",
         description:
-            "Custom dashboards, CRMs, and operational tools that give your team real-time visibility and control.",
+            "Dashboards, CRMs, and connected data pipelines — real-time control for your team.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#internal-tools",
         Mockup: DashboardMockup,
     },
     {
         id: 4,
-        icon: Layers,
-        eyebrow: "Products",
-        title: "SaaS Platform Development",
-        description:
-            "End-to-end product development — architecture, auth, billing, and beyond. Built to scale from day one.",
-        accentColor: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.07) 0%, rgba(99,102,241,0) 100%)",
-        href: "/services#saas-platforms",
-        Mockup: MetricCounterMockup,
-    },
-    {
-        id: 5,
-        icon: GitMerge,
-        eyebrow: "Integration",
-        title: "API Integrations & Data Pipelines",
-        description:
-            "Connect your tools and data sources into a unified ecosystem that flows without friction.",
-        accentColor: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
-        href: "/services#api-integrations",
-        Mockup: DataFlowMockup,
-    },
-    {
-        id: 6,
         icon: Zap,
         eyebrow: "Speed",
-        title: "24-Hour Rapid Deploy Websites",
+        title: "24-Hour Rapid Websites",
         description:
-            "Premium web presence, delivered in a day. Performance-first, conversion-optimized — without the wait.",
+            "Premium web presence, delivered in a day. Performance-first, conversion-optimized.",
         highlight: true,
         accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.11) 0%, rgba(167,139,250,0) 100%)",
         href: "/websites",
         Mockup: BrowserLoadMockup,
+    },
+    {
+        id: 5,
+        icon: Smartphone,
+        eyebrow: "Mobile",
+        title: "Mobile App Development",
+        description:
+            "Native and cross-platform iOS & Android apps — from concept to App Store.",
+        accentColor: "radial-gradient(ellipse at 20% 80%, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0) 100%)",
+        href: "/services#mobile-apps",
+        Mockup: MetricCounterMockup,
+    },
+    {
+        id: 6,
+        icon: Palette,
+        eyebrow: "Design",
+        title: "UI/UX Design & Branding",
+        description:
+            "Research-driven design systems and brand identities that convert.",
+        accentColor: "radial-gradient(ellipse at 80% 80%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
+        href: "/services#design-branding",
+        Mockup: DataFlowMockup,
     },
 ];
 
@@ -148,7 +145,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
     return (
         <motion.div
             variants={cardVariants}
-            className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${card.colSpan ?? ""} ${card.highlight
+            className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${card.highlight
                 ? "border-violet-500/30 shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
                 : "border-white/8 hover:border-white/15"
                 }`}
@@ -285,12 +282,12 @@ export default function Services() {
                     className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-px w-6 bg-zinc-700" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                         Our Capabilities
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         What We{" "}
-                        <span className="bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                             Build
                         </span>
                     </h2>
@@ -304,15 +301,9 @@ export default function Services() {
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+                    className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5"
                 >
-                    {/* Row 1: two large cards spanning 2 cols each */}
-                    {SERVICES.slice(0, 2).map((card) => (
-                        <ServiceCardItem key={card.id} card={card} />
-                    ))}
-
-                    {/* Row 2: four standard cards */}
-                    {SERVICES.slice(2).map((card) => (
+                    {SERVICES.map((card) => (
                         <ServiceCardItem key={card.id} card={card} />
                     ))}
                 </motion.div>

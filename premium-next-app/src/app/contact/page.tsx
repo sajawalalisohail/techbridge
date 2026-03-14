@@ -98,7 +98,7 @@ export default function ContactPage() {
                                         animate={isInView ? "show" : "hidden"}
                                         className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"
                                     >
-                                        <span className="h-px w-6 bg-zinc-700" />
+                                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                         Get In Touch
                                     </motion.span>
 
@@ -332,7 +332,7 @@ export default function ContactPage() {
                         <div className="mx-auto max-w-7xl px-6 lg:px-12">
                             <div className="mb-10">
                                 <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    <span className="h-px w-6 bg-zinc-700" />
+                                    <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                     Or Book a Time Directly
                                 </span>
                                 <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">

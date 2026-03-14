@@ -20,7 +20,7 @@ export default function TermsPage() {
                     />
                     <div className="relative z-10 mx-auto max-w-3xl px-6 py-32 lg:px-12">
                         <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-px w-6 bg-zinc-700" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                             Legal
                         </span>
                         <h1 className="text-5xl font-bold tracking-tight text-white lg:text-6xl">

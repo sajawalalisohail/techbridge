@@ -259,7 +259,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             animate={isProblemInView ? "show" : "hidden"}
                         >
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 The Challenge
                             </span>
                             <div className="max-w-3xl space-y-6">
@@ -290,7 +290,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             animate={isSolutionInView ? "show" : "hidden"}
                         >
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 Our Approach
                             </span>
                             <div className="max-w-3xl space-y-6">
@@ -322,7 +322,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             className="mb-14"
                         >
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 The Impact
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -373,7 +373,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 <section className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-px w-6 bg-zinc-700" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                             Tech Stack
                         </span>
                         <div className="flex flex-wrap gap-2.5">
@@ -390,55 +390,70 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 </section>
 
                 {/* ── 6. Screenshots ── */}
-                {study.assets.length > 0 && (
-                    <>
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+                {study.assets.length > 0 ? (
+                    <section ref={screenshotsRef} className="py-24 lg:py-32">
                         <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                            <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-                        </div>
-                        <section ref={screenshotsRef} className="py-24 lg:py-32">
-                            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                                <motion.div
-                                    variants={fadeUp(0)}
-                                    initial="hidden"
-                                    animate={isScreenshotsInView ? "show" : "hidden"}
-                                    className="mb-10"
-                                >
-                                    <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                        <span className="h-px w-6 bg-zinc-700" />
-                                        Screenshots
-                                    </span>
-                                    <p className="text-sm text-zinc-500">
-                                        Click any screenshot to expand.
-                                    </p>
-                                </motion.div>
+                            <motion.div
+                                variants={fadeUp(0)}
+                                initial="hidden"
+                                animate={isScreenshotsInView ? "show" : "hidden"}
+                                className="mb-10"
+                            >
+                                <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                                    Screenshots
+                                </span>
+                                <p className="text-sm text-zinc-500">
+                                    Click any screenshot to expand.
+                                </p>
+                            </motion.div>
 
-                                <motion.div
-                                    variants={staggerContainer}
-                                    initial="hidden"
-                                    animate={isScreenshotsInView ? "show" : "hidden"}
-                                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-                                >
-                                    {study.assets.map((asset, i) => (
-                                        <motion.button
-                                            key={asset}
-                                            variants={childFade}
-                                            onClick={() => openLightbox(i)}
-                                            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-950 transition-all duration-300 hover:border-white/15"
-                                        >
-                                            <Image
-                                                src={asset}
-                                                alt={`${study.client} screenshot ${i + 1}`}
-                                                width={800}
-                                                height={500}
-                                                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                                        </motion.button>
-                                    ))}
-                                </motion.div>
+                            <motion.div
+                                variants={staggerContainer}
+                                initial="hidden"
+                                animate={isScreenshotsInView ? "show" : "hidden"}
+                                className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                            >
+                                {study.assets.map((asset, i) => (
+                                    <motion.button
+                                        key={asset}
+                                        variants={childFade}
+                                        onClick={() => openLightbox(i)}
+                                        className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-950 transition-all duration-300 hover:border-white/15"
+                                    >
+                                        <Image
+                                            src={asset}
+                                            alt={`${study.client} screenshot ${i + 1}`}
+                                            width={800}
+                                            height={500}
+                                            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                    </motion.button>
+                                ))}
+                            </motion.div>
+                        </div>
+                    </section>
+                ) : (
+                    <section className="py-24 lg:py-32">
+                        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                            <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/30 p-12 text-center backdrop-blur-sm">
+                                <div
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute inset-0"
+                                    style={{
+                                        background: `radial-gradient(ellipse at 50% 50%, rgba(${study.accentColor},0.06) 0%, rgba(${study.accentColor},0) 70%)`,
+                                    }}
+                                />
+                                <p className="relative z-10 text-sm font-medium text-zinc-600">
+                                    Screenshots coming soon.
+                                </p>
                             </div>
-                        </section>
-                    </>
+                        </div>
+                    </section>
                 )}
 
                 {/* ── 7. CTA ── */}

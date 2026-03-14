@@ -59,7 +59,7 @@ function Section({
 function Eyebrow({ children }: { children: React.ReactNode }) {
     return (
         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-            <span className="h-px w-6 bg-zinc-700" />
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
             {children}
         </span>
     );
@@ -616,28 +616,6 @@ const SOCIAL_PROOF_PROJECTS = [
         tags: ["Next.js", "Global Reach", "B2B Portal"],
         assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png"],
         accentColor: "rgb(109,40,217)", // violet-700
-    },
-    {
-        client: "Rapid Deploy Co.",
-        metrics: "24 hrs",
-        metricSubtitle: "Concept to Live",
-        engagementType: "24-Hour Build",
-        desc: "A conversion-optimized landing page for a B2B consulting firm. Custom-coded, SEO-ready, and deployed in a single working day.",
-        link: "#",
-        tags: ["Landing Page", "24-Hour", "SEO"],
-        assets: [],
-        accentColor: "rgb(139,92,246)",
-    },
-    {
-        client: "Studio Placeholder",
-        metrics: "24 hrs",
-        metricSubtitle: "Design to Deploy",
-        engagementType: "24-Hour Build",
-        desc: "A premium brand presence for a creative studio. Fully custom UI, performance-optimized, and production-ready in under 24 hours.",
-        link: "#",
-        tags: ["Brand Site", "24-Hour", "Performance"],
-        assets: [],
-        accentColor: "rgb(99,102,241)",
     },
 ];
 

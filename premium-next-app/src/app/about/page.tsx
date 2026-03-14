@@ -7,6 +7,7 @@ import {
     Layers, Users, Zap, Shield, Clock, Code2, ArrowUpRight,
     CheckCircle2, XCircle, Lock, FileCheck, Globe,
 } from "lucide-react";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 
 /* ─── Ease constant ───────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -228,7 +229,7 @@ export default function AboutPage() {
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
                         <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"}
                             className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-px w-6 bg-zinc-700" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                             The TechBridge Ethos
                         </motion.span>
                         <motion.h1 variants={fadeUp(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"}
@@ -296,7 +297,7 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 The Engineering Foundation
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -378,7 +379,7 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 Milestones
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -439,12 +440,20 @@ export default function AboutPage() {
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
 
+                {/* ── The TechBridge Advantage ── */}
+                <WhyChooseUs />
+
+                {/* ── Separator ── */}
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
                 {/* ── 5. Core Values ── */}
                 <section ref={valuesRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isValuesInView ? "show" : "hidden"} className="mb-16">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 Core Values
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -484,7 +493,7 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 The Difference
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -543,7 +552,7 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isSecurityInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 Trust & Security
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">

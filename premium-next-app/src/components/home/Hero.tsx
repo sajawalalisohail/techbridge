@@ -82,7 +82,7 @@ export default function Hero() {
                     variants={fadeUp}
                     className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]"
                 >
-                    <span className="block">We Engineer the Infrastructure Behind</span>{" "}
+                    <span className="block">Engineering the Infrastructure Behind</span>{" "}
                     <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Scalable Businesses
                     </span>
@@ -144,7 +144,7 @@ export default function Hero() {
                                     value={stat.value}
                                     suffix={stat.suffix}
                                     from={20}
-                                    className="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                                    className="font-mono text-3xl font-bold tracking-tight bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent sm:text-4xl"
                                 />
                             </dd>
                             <dt className="text-xs tracking-wider text-zinc-500 uppercase text-center">

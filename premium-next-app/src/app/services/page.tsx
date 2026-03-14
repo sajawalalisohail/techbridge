@@ -7,9 +7,13 @@ import {
     Code2,
     BrainCircuit,
     Zap,
+    Smartphone,
+    Palette,
     CheckCircle2,
     ArrowRight,
 } from "lucide-react";
+import HowItWorks from "@/components/home/HowItWorks";
+import TechStackMarquee from "@/components/home/TechStackMarquee";
 
 /* ─── Data ───────────────────────────────────────────────── */
 const SECTIONS = [
@@ -85,6 +89,56 @@ const SECTIONS = [
         callout: {
             label: "Founder's Principle",
             text: "Most agencies charge $15k and take 3 months. We deliver in 24 hours — not because we cut corners, but because we've engineered the process to remove wasted time and deliver only what matters.",
+            attribution: "Sajawal Ali Sohail",
+        },
+    },
+    {
+        id: "mobile-apps",
+        number: "04",
+        category: "Mobile App Development",
+        icon: Smartphone,
+        subHeadline: "Your product, in every pocket.",
+        description:
+            "We build native and cross-platform mobile applications that feel fast, look premium, and scale to millions of users. From MVP to App Store — we handle the full lifecycle with the same engineering rigour we bring to every platform.",
+        capabilities: [
+            "React Native & Flutter cross-platform",
+            "Native iOS (Swift) & Android (Kotlin)",
+            "App Store deployment & optimization",
+            "Push notifications & real-time sync",
+            "Offline-first architecture",
+            "Mobile CI/CD pipelines",
+            "Performance profiling & optimization",
+            "Deep linking & universal links",
+        ],
+        stack: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "Expo", "Fastlane", "TestFlight"],
+        callout: {
+            label: "Founder's Principle",
+            text: "A mobile app isn't a smaller website. We engineer for constrained devices, unreliable networks, and users who uninstall after one bad experience. Every millisecond of startup time matters.",
+            attribution: "Sajawal Ali Sohail",
+        },
+    },
+    {
+        id: "design-branding",
+        number: "05",
+        category: "UI/UX Design & Branding",
+        icon: Palette,
+        subHeadline: "Design that converts, not just decorates.",
+        description:
+            "We create research-driven design systems, brand identities, and user experiences that drive measurable business outcomes. Every pixel is intentional — backed by user research, tested against real behaviour, and built for production handoff.",
+        capabilities: [
+            "User research & persona development",
+            "Wireframing & interactive prototyping",
+            "Design systems & component libraries",
+            "Brand identity & visual language",
+            "Motion design & micro-interactions",
+            "Accessibility audits (WCAG 2.1 AA)",
+            "Conversion rate optimization",
+            "Figma-to-code production handoff",
+        ],
+        stack: ["Figma", "Adobe Creative Suite", "Framer", "Principle", "Lottie", "Storybook"],
+        callout: {
+            label: "Founder's Principle",
+            text: "Design without engineering context creates beautiful things that can't be built. We design inside the constraints of real systems — so what ships is exactly what was designed.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -226,7 +280,7 @@ export default function ServicesPage() {
                             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         >
                             <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-px w-6 bg-zinc-700" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                                 Our Expertise
                             </span>
                             <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
@@ -236,7 +290,7 @@ export default function ServicesPage() {
                                 </span>
                             </h1>
                             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
-                                Three core service lines — each engineered with the same obsession for precision,
+                                Five core service lines — each engineered with the same obsession for precision,
                                 performance, and long-term value.
                             </p>
 
@@ -256,6 +310,11 @@ export default function ServicesPage() {
                         </motion.div>
                     </div>
                 </section>
+
+                {/* ── Our Process ── */}
+                <div id="our-process">
+                    <HowItWorks variant="timeline" />
+                </div>
 
                 {/* ── Sticky Sidebar Layout ── */}
                 <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
@@ -347,6 +406,9 @@ export default function ServicesPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* ── Tech Stack ── */}
+                <TechStackMarquee />
 
                 {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
                 <div

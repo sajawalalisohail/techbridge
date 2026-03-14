@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
+import CaseStudies from "@/components/home/CaseStudies";
 import CTA from "@/components/home/CTA";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
 
       <TrustedBy />
       <Services />
+      <CaseStudies />
       <CTA />
 
       {/* Subtle violet border glow separating the scrolling content from the reveal footer */}

@@ -1,5 +1,3 @@
-/* ─── Case Study Data (Single Source of Truth) ───────────── */
-
 export interface CaseStudyResult {
     stat: string;
     label: string;
@@ -12,6 +10,21 @@ export type CaseStudyCategory =
     | "e-commerce"
     | "saas"
     | "branding-design";
+
+export type CaseStudyEngagementType =
+    | "platform"
+    | "internal-tool"
+    | "mobile-app"
+    | "website"
+    | "branding";
+
+export type CaseStudyHomepageHighlight = "standard" | "rapid-website";
+
+export type CaseStudyWorkSection =
+    | "flagship-platforms"
+    | "systems-tools"
+    | "mobile-products"
+    | "rapid-websites";
 
 export interface CaseStudy {
     slug: string;
@@ -30,9 +43,12 @@ export interface CaseStudy {
     accentColor: string;
     category: CaseStudyCategory;
     featured?: boolean;
+    engagementType: CaseStudyEngagementType;
+    homepageFeatured?: boolean;
+    homepageHighlight?: CaseStudyHomepageHighlight;
+    workSection?: CaseStudyWorkSection;
 }
 
-/* ─── Filter Categories ─────────────────────────────────── */
 export const CATEGORIES = [
     { key: "all", label: "All" },
     { key: "web-platforms", label: "Web Platforms" },
@@ -43,87 +59,88 @@ export const CATEGORIES = [
     { key: "branding-design", label: "Branding / Design" },
 ] as const;
 
-/* ─── Case Studies ──────────────────────────────────────── */
 export const CASE_STUDIES: CaseStudy[] = [
-    /* ══════════════════════════════════════════════════════
-       FEATURED — Original TechBridge projects (with assets)
-    ══════════════════════════════════════════════════════ */
     {
         slug: "nextlex",
         client: "NextLex",
-        sector: "Legal SaaS Platform",
-        metric: "10k+",
-        metricLabel: "Active Users Scaled To",
+        sector: "Legal SaaS Marketing Website",
+        metric: "14 Days",
+        metricLabel: "From Concept to Live",
         heroDescription:
-            "Complete architectural redesign and AI-driven document workflow automation for a legal SaaS platform.",
+            "Premium marketing website for a legal document automation company, built to sharpen positioning and accelerate growth.",
         problem:
-            "NextLex was operating on a fragile monolithic architecture that buckled under load. Every new feature deployment risked cascading failures, and their document processing pipeline — the core of their product — relied on manual human review that couldn't scale.\n\nThe founding team knew they needed to move to a multi-tenant SaaS model to serve law firms across multiple jurisdictions, but their existing codebase made that migration feel impossible without a full rewrite.",
+            "NextLex needed a modern digital presence that communicated trust, product sophistication, and category authority. Their older web experience undersold the brand and failed to support their outbound and inbound growth efforts.\n\nThe team needed a website that could explain the product clearly, present the company credibly, and convert legal prospects without feeling generic or slow.",
         solution:
-            "We re-architected the entire platform from the ground up into a resilient, multi-tenant system using Next.js on the frontend and a serverless Node.js + PostgreSQL backend. The document pipeline was replaced with an AI-driven workflow that classifies, summarises, and routes legal documents automatically.\n\nWe implemented tenant isolation at the database level, built a real-time collaboration layer, and deployed the entire stack on a globally distributed edge network for sub-200ms response times across three continents.",
+            "We designed and launched a premium marketing website with clear product positioning, stronger information architecture, and polished visuals tailored to a legal-tech audience. The experience focused on fast performance, clearer messaging, and a higher-end brand presentation.\n\nThe final site gave the team a sharper top-of-funnel asset for demos, campaigns, and investor conversations without the drag of a long agency timeline.",
         results: [
-            { stat: "10,000+", label: "Active Users" },
-            { stat: "70%", label: "Reduction in Manual Review" },
-            { stat: "99.9%", label: "Uptime Achieved" },
-            { stat: "3", label: "Continents Served" },
+            { stat: "14 Days", label: "Concept to Launch" },
+            { stat: "Premium", label: "Brand Positioning Upgrade" },
+            { stat: "< 1s", label: "Fast Page Loads" },
+            { stat: "Live", label: "Campaign-Ready Delivery" },
         ],
-        techStack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "OpenAI", "Vercel", "AWS"],
-        tags: ["Next.js", "AI Automation", "Dashboard", "Multi-tenant SaaS"],
+        techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+        tags: ["Marketing Website", "Legal Tech", "Next.js", "Conversion Design"],
         assets: ["/proofs/NextLex/1.png", "/proofs/NextLex/2.png", "/proofs/NextLex/3.png", "/proofs/NextLex/4.png", "/proofs/NextLex/5.png"],
         liveUrl: "https://nextlex.com",
         accentColor: "109,40,217",
-        category: "saas",
-        featured: true,
+        category: "web-platforms",
+        engagementType: "website",
+        workSection: "rapid-websites",
     },
     {
         slug: "ali-wali",
         client: "Ali Wali Trading Company",
-        sector: "Global Industrial Trade & Logistics",
-        metric: "35+",
-        metricLabel: "Years of Global Trade",
+        sector: "B2B Industrial Website",
+        metric: "24 Hours",
+        metricLabel: "Rapid Launch Delivery",
         heroDescription:
-            "Digitized the global presence for a direct buyer of industrial plied rubber conveyor belts.",
+            "Premium 24-hour website for a long-standing industrial trading company, built to modernize credibility and inbound lead flow.",
         problem:
             "Ali Wali Trading Company had operated for over 35 years using phone calls, faxes, and manual paperwork to coordinate international pickups and container shipping. Their web presence was a static brochure site from the early 2010s that conveyed none of the scale or professionalism of their global operation.\n\nProspective clients in mining, quarries, and cement manufacturing needed a fast way to request evaluations and quotes, but the existing process involved multiple emails and days of back-and-forth.",
         solution:
-            "We built a streamlined, professional platform that digitized their entire international request-for-quote flow. The new site serves as both a credibility anchor and a lead generation tool — allowing prospective buyers to submit detailed evaluation requests directly.\n\nThe platform was deployed with zero downtime, replacing the legacy site seamlessly during a scheduled maintenance window. Every page loads in under 1 second, with full mobile optimization for clients working from remote mining sites.",
+            "We built a streamlined, professional website that digitized their request-for-quote flow while dramatically upgrading how the business presented itself online. The new experience functions as both a credibility anchor and a lead generation asset for industrial buyers.\n\nThe site was delivered on a 24-hour turnaround, deployed with zero downtime, and optimized for speed on desktop and mobile for buyers working across harsh field conditions.",
         results: [
-            { stat: "35+", label: "Years of Trade Legacy Preserved" },
+            { stat: "24 Hours", label: "Delivery Window" },
             { stat: "< 1s", label: "Page Load Time" },
             { stat: "0", label: "Downtime During Migration" },
-            { stat: "4×", label: "Increase in Inbound Inquiries" },
+            { stat: "4x", label: "Increase in Inbound Inquiries" },
         ],
         techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-        tags: ["Global Logistics", "Next.js", "B2B Portal"],
+        tags: ["Rapid Website", "Global Logistics", "Next.js", "B2B Lead Gen"],
         assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png", "/proofs/AliWali/5.png", "/proofs/AliWali/6.png"],
         liveUrl: "https://aliwalitrading.com",
         accentColor: "79,70,229",
         category: "web-platforms",
-        featured: true,
+        engagementType: "website",
+        homepageFeatured: true,
+        homepageHighlight: "rapid-website",
+        workSection: "rapid-websites",
     },
     {
         slug: "primemark",
         client: "PrimeMark Apparel",
-        sector: "B2B Manufacturing Portal",
-        metric: "300%",
-        metricLabel: "Faster Order Routing",
+        sector: "B2B Apparel Website",
+        metric: "12x",
+        metricLabel: "Lead Quality Improvement",
         heroDescription:
-            "High-performance digital storefront streamlining global supply chain operations for large-scale apparel manufacturing.",
+            "High-performance website for a large-scale apparel manufacturer, built to present capability clearly and capture stronger enterprise leads.",
         problem:
-            "PrimeMark Apparel managed a sprawling global supply chain using spreadsheets, manual email chains, and fragmented tools. Order routing from international buyers to their manufacturing facilities took days, with frequent miscommunications that led to production delays and fulfillment errors.\n\nTheir sales team had no unified view of order status, and supplier coordination was handled through disconnected communication channels that made scaling impossible.",
+            "PrimeMark Apparel needed a more credible digital presence for international buyers. Their existing website did not reflect the quality, scale, or responsiveness of the business, which made it harder to convert enterprise inquiries.\n\nThe team needed a cleaner, more premium site that could communicate manufacturing capability and reduce friction in the lead process.",
         solution:
-            "We engineered a unified digital storefront and operations platform that consolidated order management, supplier coordination, and logistics tracking into a single, real-time interface. The system automatically routes incoming orders to the optimal manufacturing facility based on capacity, geography, and material availability.\n\nA dedicated supplier portal gives manufacturing partners direct visibility into order queues and delivery schedules, eliminating the email chains that were bottlenecking fulfillment.",
+            "We designed and launched a conversion-focused B2B website with stronger positioning, clearer service architecture, and a sharper visual presentation. The experience was built to give enterprise buyers confidence quickly and make contact intent more actionable.\n\nThe finished site improved lead quality while giving the sales team a much stronger asset for outbound and inbound business development.",
         results: [
-            { stat: "300%", label: "Faster Order Routing" },
-            { stat: "85%", label: "Reduction in Email Chains" },
-            { stat: "12×", label: "Lead Quality Improvement" },
+            { stat: "12x", label: "Lead Quality Improvement" },
+            { stat: "Fast", label: "Performance-First Delivery" },
+            { stat: "Premium", label: "Brand Presentation Upgrade" },
         ],
-        techStack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "Vercel"],
-        tags: ["E-Commerce", "API Integration", "Supply Chain", "B2B"],
+        techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+        tags: ["B2B Website", "Manufacturing", "Lead Generation", "Next.js"],
         assets: ["/proofs/PrimeMark/1.png", "/proofs/PrimeMark/2.png", "/proofs/PrimeMark/3.png", "/proofs/PrimeMark/4.png", "/proofs/PrimeMark/5.png", "/proofs/PrimeMark/6.png"],
         liveUrl: "https://primemarkapparel.com",
         accentColor: "99,102,241",
-        category: "e-commerce",
-        featured: true,
+        category: "web-platforms",
+        engagementType: "website",
+        workSection: "rapid-websites",
     },
     {
         slug: "internal-ops-dashboard",
@@ -134,12 +151,12 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Custom internal operations dashboard consolidating fragmented business tools into a single real-time command center.",
         problem:
-            "A mid-size enterprise client was running day-to-day operations across seven disconnected SaaS tools. Team leads spent hours each morning aggregating data from different platforms just to get a basic status update. Critical alerts were lost in email inboxes, and no one had a unified view of operational health.\n\nThe lack of integration meant that simple decisions — like reallocating resources between projects — required manual data pulls that took half a day.",
+            "A mid-size enterprise client was running day-to-day operations across seven disconnected SaaS tools. Team leads spent hours each morning aggregating data from different platforms just to get a basic status update. Critical alerts were lost in email inboxes, and no one had a unified view of operational health.\n\nThe lack of integration meant that simple decisions like reallocating resources between projects required manual data pulls that took half a day.",
         solution:
-            "We designed and deployed a custom internal operations dashboard that aggregates data from all seven existing tools via API integrations. The dashboard provides real-time KPIs, automated alerts with escalation logic, and a drag-and-drop resource allocation interface.\n\nAdmins get a single-pane-of-glass view of all active projects, team capacity, and system health. The entire solution was built as an internal tool — no public-facing pages — optimized for speed and information density.",
+            "We designed and deployed a custom internal operations dashboard that aggregates data from all seven existing tools via API integrations. The dashboard provides real-time KPIs, automated alerts with escalation logic, and a drag-and-drop resource allocation interface.\n\nAdmins get a single-pane-of-glass view of all active projects, team capacity, and system health. The entire solution was built as an internal tool optimized for speed and information density.",
         results: [
             { stat: "40%", label: "Reduction in Ops Overhead" },
-            { stat: "7→1", label: "Tool Consolidation" },
+            { stat: "7 to 1", label: "Tool Consolidation" },
             { stat: "Real-time", label: "KPI Visibility" },
         ],
         techStack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "REST APIs", "Tailwind CSS"],
@@ -148,6 +165,10 @@ export const CASE_STUDIES: CaseStudy[] = [
         accentColor: "139,92,246",
         category: "ai-automation",
         featured: true,
+        engagementType: "internal-tool",
+        homepageFeatured: true,
+        homepageHighlight: "standard",
+        workSection: "systems-tools",
     },
     {
         slug: "saas-analytics-platform",
@@ -158,9 +179,9 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "High-throughput analytics platform processing millions of events daily for B2B SaaS companies.",
         problem:
-            "A growing B2B SaaS company needed a custom analytics layer that went beyond what off-the-shelf tools like Mixpanel or Amplitude could provide. Their product generated millions of events daily, and they needed real-time cohort analysis, custom funnel visualization, and predictive churn scoring — all within their own infrastructure for data privacy compliance.\n\nExisting solutions either couldn't handle the event volume at an acceptable cost, or required exporting sensitive customer data to third-party platforms that violated their enterprise clients' security requirements.",
+            "A growing B2B SaaS company needed a custom analytics layer that went beyond what off-the-shelf tools like Mixpanel or Amplitude could provide. Their product generated millions of events daily, and they needed real-time cohort analysis, custom funnel visualization, and predictive churn scoring all within their own infrastructure for data privacy compliance.\n\nExisting solutions either could not handle the event volume at an acceptable cost, or required exporting sensitive customer data to third-party platforms that violated their enterprise clients' security requirements.",
         solution:
-            "We architected a custom analytics platform built on a high-throughput event ingestion pipeline. The system processes and enriches events in real-time, stores them in a columnar database optimized for analytical queries, and surfaces insights through a custom dashboard with sub-second query response times.\n\nThe platform includes real-time cohort analysis, configurable funnel builders, and a machine learning pipeline for predictive churn scoring — all running entirely within the client's own infrastructure.",
+            "We architected a custom analytics platform built on a high-throughput event ingestion pipeline. The system processes and enriches events in real-time, stores them in a columnar database optimized for analytical queries, and surfaces insights through a custom dashboard with sub-second query response times.\n\nThe platform includes real-time cohort analysis, configurable funnel builders, and a machine learning pipeline for predictive churn scoring all running entirely within the client's own infrastructure.",
         results: [
             { stat: "5M+", label: "Events Processed Daily" },
             { stat: "< 500ms", label: "Avg. Query Response" },
@@ -172,11 +193,11 @@ export const CASE_STUDIES: CaseStudy[] = [
         accentColor: "99,102,241",
         category: "saas",
         featured: true,
+        engagementType: "platform",
+        homepageFeatured: true,
+        homepageHighlight: "standard",
+        workSection: "flagship-platforms",
     },
-
-    /* ══════════════════════════════════════════════════════
-       PARTNERSHIP — Sydstack portfolio projects
-    ══════════════════════════════════════════════════════ */
     {
         slug: "buff-dudes",
         client: "Buff Dudes",
@@ -186,19 +207,21 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Full-featured fitness companion app with workout tracking, nutrition plans, and community features for a major fitness brand.",
         problem:
-            "Buff Dudes had a massive following across YouTube and social media but no dedicated mobile product to monetize their audience directly. Their fans relied on scattered PDFs, spreadsheets, and third-party apps to follow workout programs — leading to poor retention and zero data on user engagement.\n\nThe team needed a branded, native mobile experience that could deliver structured workout plans, track progress, and foster community — all while handling the traffic spikes that come with viral content drops.",
+            "Buff Dudes had a massive following across YouTube and social media but no dedicated mobile product to monetize their audience directly. Their fans relied on scattered PDFs, spreadsheets, and third-party apps to follow workout programs leading to poor retention and zero data on user engagement.\n\nThe team needed a branded, native mobile experience that could deliver structured workout plans, track progress, and foster community while handling traffic spikes from viral content drops.",
         solution:
             "We built a cross-platform mobile app with structured workout programs, progress tracking with visual analytics, nutrition logging with macro breakdowns, and a community feed for user accountability. The app syncs seamlessly across devices and handles burst traffic from social media promotions.\n\nPush notification sequences drive daily engagement, and an admin dashboard lets the Buff Dudes team publish new programs without developer involvement.",
         results: [
             { stat: "50,000+", label: "Downloads in First Quarter" },
             { stat: "68%", label: "Day-30 Retention" },
-            { stat: "4.7★", label: "App Store Rating" },
+            { stat: "4.7 stars", label: "App Store Rating" },
         ],
         techStack: ["React Native", "TypeScript", "Firebase", "Node.js", "Expo"],
         tags: ["Mobile App", "Fitness", "iOS/Android", "Community"],
         assets: [],
         accentColor: "234,88,12",
         category: "mobile-apps",
+        engagementType: "mobile-app",
+        workSection: "mobile-products",
     },
     {
         slug: "truck-adda",
@@ -209,19 +232,23 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Real-time fleet management and logistics platform connecting truck owners with shippers across South Asia.",
         problem:
-            "The trucking industry in South Asia operates largely through phone-based brokers, with zero digital visibility into fleet availability, pricing, or shipment tracking. Truck owners waste hours waiting for loads while shippers overpay for last-minute bookings. Both sides lacked trust and transparency.\n\nExisting logistics apps focused on last-mile delivery — nobody was solving the long-haul freight matching problem with the real-time tracking and payment guarantees that enterprise shippers demand.",
+            "The trucking industry in South Asia operates largely through phone-based brokers, with zero digital visibility into fleet availability, pricing, or shipment tracking. Truck owners waste hours waiting for loads while shippers overpay for last-minute bookings. Both sides lacked trust and transparency.\n\nExisting logistics apps focused on last-mile delivery, but nobody was solving the long-haul freight matching problem with the real-time tracking and payment guarantees that enterprise shippers demand.",
         solution:
-            "We designed and built a two-sided marketplace connecting truck owners directly with shippers. The platform features real-time GPS tracking, automated load matching based on route and capacity, digital documentation for each shipment, and an escrow-based payment system.\n\nA driver-side mobile app optimized for low-bandwidth environments lets fleet operators manage bookings, track earnings, and receive push alerts for nearby loads — all in Urdu and English.",
+            "We designed and built a two-sided marketplace connecting truck owners directly with shippers. The platform features real-time GPS tracking, automated load matching based on route and capacity, digital documentation for each shipment, and an escrow-based payment system.\n\nA driver-side mobile app optimized for low-bandwidth environments lets fleet operators manage bookings, track earnings, and receive push alerts for nearby loads in Urdu and English.",
         results: [
             { stat: "2,000+", label: "Active Fleet Vehicles" },
             { stat: "35%", label: "Cost Reduction for Shippers" },
             { stat: "< 4hr", label: "Avg. Load Matching Time" },
         ],
         techStack: ["React Native", "Node.js", "PostgreSQL", "Google Maps API", "Firebase", "Socket.io"],
-        tags: ["Mobile App", "Logistics", "Marketplace", "Real-time"],
+        tags: ["Marketplace", "Logistics", "Real-time", "Fleet Tech"],
         assets: [],
         accentColor: "14,165,233",
         category: "mobile-apps",
+        engagementType: "platform",
+        homepageFeatured: true,
+        homepageHighlight: "standard",
+        workSection: "flagship-platforms",
     },
     {
         slug: "tree-tracker-pro",
@@ -232,7 +259,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "GPS-enabled environmental monitoring app for cataloguing, tracking, and reporting on urban and rural tree populations.",
         problem:
-            "Environmental agencies and urban planning departments needed a scalable way to catalogue tree populations, monitor health over time, and generate compliance reports for sustainability mandates. Existing methods relied on paper surveys, disconnected spreadsheets, and expensive specialized GIS software that field workers couldn't use on mobile devices.\n\nThere was no affordable, field-ready tool that combined GPS mapping, photo documentation, health scoring, and automated reporting in a single mobile interface.",
+            "Environmental agencies and urban planning departments needed a scalable way to catalogue tree populations, monitor health over time, and generate compliance reports for sustainability mandates. Existing methods relied on paper surveys, disconnected spreadsheets, and expensive specialized GIS software that field workers could not use on mobile devices.\n\nThere was no affordable, field-ready tool that combined GPS mapping, photo documentation, health scoring, and automated reporting in a single mobile interface.",
         solution:
             "We built a mobile-first platform that lets field workers tag and catalogue trees using GPS coordinates, capture multi-angle photos, record health assessments, and sync everything to a central dashboard in real-time. The app works offline for remote areas and syncs when connectivity returns.\n\nThe admin dashboard generates automated compliance reports, visualizes tree density on interactive maps, and tracks health trends across seasons with historical comparison tools.",
         results: [
@@ -245,6 +272,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         assets: [],
         accentColor: "34,197,94",
         category: "mobile-apps",
+        engagementType: "mobile-app",
+        workSection: "systems-tools",
     },
     {
         slug: "muraqaba",
@@ -255,12 +284,12 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Culturally-aware mindfulness and meditation app featuring guided sessions, habit tracking, and community accountability.",
         problem:
-            "The global mindfulness app market is dominated by Western-centric products. There was no dedicated platform serving South Asian and Muslim communities with culturally relevant guided meditation, dhikr tracking, and prayer-time-aware scheduling.\n\nExisting apps felt alienating to the target demographic — wrong language, wrong cultural references, and meditation styles that didn't resonate. The opportunity was a premium, beautifully designed app that felt native to the audience.",
+            "The global mindfulness app market is dominated by Western-centric products. There was no dedicated platform serving South Asian and Muslim communities with culturally relevant guided meditation, dhikr tracking, and prayer-time-aware scheduling.\n\nExisting apps felt alienating to the target demographic. The opportunity was a premium, beautifully designed app that felt native to the audience.",
         solution:
             "We built a cross-platform mobile app with guided meditation sessions in Urdu and English, dhikr counters with haptic feedback, prayer-time integration, and streak-based habit tracking. The design system draws from Islamic geometric patterns while maintaining a modern, premium aesthetic.\n\nA community feature lets practitioners share milestones and form accountability groups. Push notifications are prayer-time-aware, delivering mindfulness prompts at culturally appropriate moments.",
         results: [
             { stat: "25,000+", label: "Active Practitioners" },
-            { stat: "4.8★", label: "App Store Rating" },
+            { stat: "4.8 stars", label: "App Store Rating" },
             { stat: "12 min", label: "Avg. Daily Session" },
         ],
         techStack: ["Flutter", "Dart", "Firebase", "Node.js", "Adhan API"],
@@ -268,6 +297,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         assets: [],
         accentColor: "168,85,247",
         category: "mobile-apps",
+        engagementType: "mobile-app",
+        workSection: "mobile-products",
     },
     {
         slug: "swap-fans",
@@ -278,19 +309,21 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Two-sided social engagement platform connecting creators with fans through exclusive content, digital collectibles, and live interactions.",
         problem:
-            "Content creators on mainstream platforms have limited monetization options and zero ownership of their audience relationships. Fans want deeper engagement — exclusive content, direct interaction, digital collectibles — but existing platforms take 30-50% cuts and offer no meaningful community features.\n\nThe founders needed a platform that gave creators full control over pricing, content distribution, and fan relationships, while providing fans a premium experience worth paying for.",
+            "Content creators on mainstream platforms have limited monetization options and zero ownership of their audience relationships. Fans want deeper engagement through exclusive content, direct interaction, and digital collectibles, but existing platforms take large cuts and offer weak community features.\n\nThe founders needed a platform that gave creators full control over pricing, distribution, and fan relationships while still feeling premium for users.",
         solution:
-            "We engineered a creator-first social platform with tiered subscription models, exclusive content vaults, live streaming with real-time tipping, and digital collectible drops. Creators get a branded profile page, analytics dashboard, and automated payout scheduling.\n\nThe fan experience includes personalized content feeds, direct messaging with creators, collectible display galleries, and community forums — all built for engagement and retention.",
+            "We engineered a creator-first social platform with tiered subscription models, exclusive content vaults, live streaming with real-time tipping, and digital collectible drops. Creators get a branded profile page, analytics dashboard, and automated payout scheduling.\n\nThe fan experience includes personalized content feeds, direct messaging with creators, collectible display galleries, and community forums built for engagement and retention.",
         results: [
             { stat: "40,000+", label: "Registered Users" },
             { stat: "15%", label: "Creator-to-Fan Conversion" },
-            { stat: "3.2×", label: "Revenue vs. Prior Platform" },
+            { stat: "3.2x", label: "Revenue vs. Prior Platform" },
         ],
         techStack: ["React Native", "Next.js", "Node.js", "PostgreSQL", "Stripe", "WebSocket", "AWS"],
-        tags: ["Mobile App", "Social Platform", "Marketplace", "Creators"],
+        tags: ["Social Platform", "Marketplace", "Creators", "Subscriptions"],
         assets: [],
         accentColor: "244,63,94",
         category: "mobile-apps",
+        engagementType: "platform",
+        workSection: "systems-tools",
     },
     {
         slug: "face-bloom",
@@ -301,19 +334,20 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "AI-powered beauty and selfie enhancement app with a design-led brand identity from concept to App Store.",
         problem:
-            "The beauty tech space is crowded with poorly designed filter apps that look cheap and feel invasive. FaceBloom's founders wanted a premium product that used AI for subtle, natural-looking enhancements — not cartoonish filters. They needed both the technical AI pipeline and a brand identity that communicated elegance and trust.\n\nThe challenge was building an app that processed photos in real-time on-device while maintaining the visual quality users expect from a premium beauty brand.",
+            "The beauty tech space is crowded with poorly designed filter apps that look cheap and feel invasive. FaceBloom's founders wanted a premium product that used AI for subtle, natural-looking enhancements and needed both the technical pipeline and a brand identity that communicated elegance.\n\nThe challenge was building an app that processed photos in real-time on-device while maintaining premium visual quality.",
         solution:
-            "We delivered end-to-end: brand identity (logo, color system, typography, packaging), UI/UX design (complete Figma design system with 40+ screens), and the mobile app itself. The AI pipeline runs on-device using CoreML and TensorFlow Lite for real-time processing without server costs.\n\nThe app features natural skin smoothing, lighting correction, color grading presets, and a before/after comparison tool — all wrapped in a brand experience that feels luxury, not gimmicky.",
+            "We delivered end-to-end brand identity, UI and UX design, and the mobile app itself. The AI pipeline runs on-device using CoreML and TensorFlow Lite for real-time processing without constant server dependency.\n\nThe app features natural skin smoothing, lighting correction, color grading presets, and before/after comparison inside a luxury-feeling brand system.",
         results: [
             { stat: "200,000+", label: "Photos Processed" },
             { stat: "< 200ms", label: "On-device Processing" },
-            { stat: "4.6★", label: "App Store Rating" },
+            { stat: "4.6 stars", label: "App Store Rating" },
         ],
         techStack: ["Swift", "CoreML", "TensorFlow Lite", "Figma", "After Effects"],
         tags: ["Mobile App", "AI/ML", "Branding", "UI/UX Design"],
         assets: [],
         accentColor: "236,72,153",
         category: "branding-design",
+        engagementType: "branding",
     },
     {
         slug: "win-the-day",
@@ -324,19 +358,21 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Minimalist daily planning app focused on prioritization, time-blocking, and evening reflection rituals.",
         problem:
-            "Productivity apps are overwhelming. Most pack in every feature imaginable — Gantt charts, Kanban boards, calendar sync, team collaboration — and end up being tools that create more work than they eliminate. The founder wanted a deliberately simple app focused on one thing: helping individuals win each day by planning intentionally.\n\nThe core insight was that people don't need another project manager — they need a daily ritual that takes 5 minutes in the morning and 2 minutes at night.",
+            "Productivity apps are often overloaded with features and complexity. The founder wanted a deliberately simple app focused on helping individuals win each day by planning intentionally.\n\nThe core insight was that people do not need another project manager. They need a daily ritual that is calm, quick, and repeatable.",
         solution:
-            "We built a mobile app centered around a three-step daily ritual: morning planning (pick 3 priorities), time-blocking (drag tasks into hourly slots), and evening reflection (rate your day and journal). No team features, no complex integrations — radical simplicity by design.\n\nThe UI is calm, minimal, and fast. A weekly review screen surfaces trends in productivity, mood, and goal completion. Streak tracking and gentle push notifications build the habit without being annoying.",
+            "We built a mobile app centered around a three-step daily ritual: morning planning, time-blocking, and evening reflection. No team features, no bloated integrations, and a calm interface optimized for speed.\n\nA weekly review screen surfaces trends in productivity, mood, and goal completion while streak tracking and gentle push notifications reinforce the habit.",
         results: [
             { stat: "15,000+", label: "Daily Active Users" },
             { stat: "82%", label: "7-Day Streak Rate" },
-            { stat: "4.9★", label: "App Store Rating" },
+            { stat: "4.9 stars", label: "App Store Rating" },
         ],
         techStack: ["React Native", "TypeScript", "Firebase", "Expo", "Lottie"],
         tags: ["Mobile App", "Productivity", "Habit Tracking", "Minimal UI"],
         assets: [],
         accentColor: "245,158,11",
         category: "mobile-apps",
+        engagementType: "mobile-app",
+        workSection: "mobile-products",
     },
     {
         slug: "cooling-on-demand",
@@ -347,9 +383,9 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Full-stack e-commerce platform for on-demand HVAC equipment rental and purchase with real-time inventory management.",
         problem:
-            "CoolingOnDemand served industrial clients needing temporary cooling solutions for events, construction sites, and emergency breakdowns. Their ordering process was entirely manual — phone calls, PDF catalogs, and handwritten quotes. Clients couldn't see real-time inventory, compare units, or book equipment without a salesperson.\n\nAs demand grew, the manual process became a bottleneck. Orders were lost, double-bookings happened, and the sales team spent more time on logistics than selling.",
+            "CoolingOnDemand served industrial clients needing temporary cooling solutions for events, construction sites, and emergency breakdowns. Their ordering process was entirely manual, which caused delays, lost orders, and double-bookings.\n\nAs demand grew, the manual process became a serious bottleneck for sales and logistics.",
         solution:
-            "We built a full e-commerce platform with real-time inventory visibility, equipment comparison tools, instant quoting, and online booking with delivery scheduling. The admin panel tracks equipment location, maintenance schedules, and utilization rates across the entire fleet.\n\nIntegration with their logistics system enables automated dispatch notifications and delivery tracking. The platform handles both rental and purchase flows with different pricing logic and contract terms.",
+            "We built a full e-commerce platform with real-time inventory visibility, equipment comparison tools, instant quoting, and online booking with delivery scheduling. The admin panel tracks equipment location, maintenance schedules, and utilization rates across the fleet.\n\nIntegration with their logistics system enables automated dispatch notifications and delivery tracking for both rental and purchase flows.",
         results: [
             { stat: "500+", label: "Monthly Orders" },
             { stat: "60%", label: "Reduction in Booking Time" },
@@ -360,6 +396,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         assets: [],
         accentColor: "6,182,212",
         category: "e-commerce",
+        engagementType: "platform",
     },
     {
         slug: "table-tapp",
@@ -370,19 +407,21 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Restaurant management platform combining table reservations, digital menus, and order management into a unified hospitality system.",
         problem:
-            "Independent restaurants were juggling multiple disconnected tools — one for reservations, another for digital menus, a separate POS for ordering, and yet another for customer feedback. The cost and complexity made digital transformation feel out of reach for most small-to-mid-size restaurants.\n\nDuring peak hours, the friction between these systems created delays, order errors, and frustrated customers. Restaurant owners needed one platform that did everything.",
+            "Independent restaurants were juggling multiple disconnected tools for reservations, digital menus, ordering, and customer feedback. The cost and complexity made digital transformation feel out of reach for most small-to-mid-size restaurants.\n\nDuring peak hours, the friction between these systems created delays, order errors, and frustrated customers.",
         solution:
-            "We built a unified web and mobile platform that handles reservations, QR-code digital menus, tableside ordering, kitchen display routing, and customer feedback — all in one system. Restaurants set up in under 30 minutes with a guided onboarding flow.\n\nThe platform integrates with existing POS systems and payment processors, supports multi-location management, and provides analytics on table turnover, popular items, and peak hour patterns.",
+            "We built a unified web and mobile platform that handles reservations, QR-code digital menus, tableside ordering, kitchen display routing, and customer feedback in one system. Restaurants set up quickly with a guided onboarding flow.\n\nThe platform integrates with existing POS systems and payment processors, supports multi-location management, and provides analytics on turnover and demand.",
         results: [
             { stat: "150+", label: "Restaurants Onboarded" },
             { stat: "25%", label: "Faster Table Turnover" },
             { stat: "40%", label: "Reduction in Order Errors" },
         ],
         techStack: ["Next.js", "React Native", "Node.js", "PostgreSQL", "Socket.io", "Stripe"],
-        tags: ["Web Platform", "Mobile App", "Hospitality", "SaaS"],
+        tags: ["Hospitality", "SaaS", "Web Platform", "Mobile App"],
         assets: [],
         accentColor: "249,115,22",
         category: "web-platforms",
+        engagementType: "platform",
+        workSection: "flagship-platforms",
     },
     {
         slug: "mall-buddy",
@@ -393,19 +432,20 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Shopping companion marketplace app connecting mall visitors with real-time deals, store navigation, and loyalty rewards.",
         problem:
-            "Shopping malls were losing foot traffic to online retail and had no digital tools to compete. Individual stores ran disconnected promotions, shoppers had no way to discover deals across the mall, and mall management lacked data on visitor behavior and store performance.\n\nThe challenge was building a platform that served three stakeholders simultaneously: shoppers wanting deals, stores wanting traffic, and mall operators wanting analytics.",
+            "Shopping malls were losing foot traffic to online retail and had no digital tools to compete. Stores ran disconnected promotions, shoppers could not discover deals across the mall, and operators lacked meaningful analytics.\n\nThe challenge was building a platform that served shoppers, stores, and mall operators at the same time.",
         solution:
-            "We built a mobile marketplace app where shoppers discover real-time deals, navigate to stores with indoor wayfinding, collect cross-store loyalty points, and share recommendations. Stores get a self-service dashboard to publish promotions and track redemption rates.\n\nMall operators see aggregated foot traffic analytics, store performance comparisons, and can push targeted promotions to shoppers based on location and shopping history. The entire system runs on BLE beacons for precise indoor positioning.",
+            "We built a mobile marketplace app where shoppers discover real-time deals, navigate to stores with indoor wayfinding, collect loyalty points, and share recommendations. Stores get a self-service dashboard while mall operators see aggregated performance analytics.\n\nThe system uses BLE beacons for precise indoor positioning and targeted promotions.",
         results: [
             { stat: "30+", label: "Malls Integrated" },
-            { stat: "22%", label: "Increase in Store Foot Traffic" },
-            { stat: "3.5×", label: "Deal Redemption Rate" },
+            { stat: "22%", label: "Increase in Foot Traffic" },
+            { stat: "3.5x", label: "Deal Redemption Rate" },
         ],
         techStack: ["React Native", "Next.js", "Node.js", "PostgreSQL", "BLE Beacons", "Firebase"],
-        tags: ["Mobile App", "Marketplace", "Retail", "Location-based"],
+        tags: ["Marketplace", "Retail", "Location-based", "Mobile App"],
         assets: [],
         accentColor: "139,92,246",
         category: "e-commerce",
+        engagementType: "platform",
     },
     {
         slug: "aggadoo",
@@ -416,19 +456,20 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Design-led website and complete brand identity for a creative entertainment agency expanding into digital.",
         problem:
-            "Aggadoo was a well-known entertainment agency with strong offline presence but a dated, template-based website that didn't reflect their creative caliber. Their online conversion rate was below 2%, and they were losing potential corporate clients who judged them by their digital presence.\n\nThey needed a website that felt as creative and energetic as their live events — not a corporate brochure, but an experience that demonstrated their creative capabilities through the design itself.",
+            "Aggadoo had strong offline brand recognition but a dated, template-based site that did not reflect their creative caliber. Their online conversion rate was low, and they were losing potential corporate clients who judged them by their digital presence.\n\nThey needed a website that felt as energetic and creative as their live events.",
         solution:
-            "We led with design: full brand refresh (color system, typography, motion language), then built an immersive website with scroll-driven animations, video-heavy case study layouts, and an interactive booking flow. Every page transition feels intentional, with micro-animations that reinforce the brand's energetic personality.\n\nThe site architecture was rebuilt around conversion — clear service tiers, prominent social proof, and a streamlined inquiry form that reduced booking friction by 60%.",
+            "We led with design: full brand refresh, then an immersive website with scroll-driven animations, video-heavy case study layouts, and a streamlined inquiry flow. Every page transition was crafted to reinforce the brand's energetic personality.\n\nThe site architecture was rebuilt around conversion with clearer service tiers and stronger social proof.",
         results: [
             { stat: "45%", label: "Increase in Conversions" },
-            { stat: "3×", label: "Average Session Duration" },
+            { stat: "3x", label: "Average Session Duration" },
             { stat: "60%", label: "Reduction in Booking Friction" },
         ],
         techStack: ["Next.js", "Framer Motion", "Figma", "Tailwind CSS", "Sanity CMS", "Vercel"],
-        tags: ["Web Platform", "UI/UX Design", "Branding", "Animation"],
+        tags: ["Website", "UI/UX Design", "Branding", "Animation"],
         assets: [],
         accentColor: "99,102,241",
         category: "branding-design",
+        engagementType: "branding",
     },
     {
         slug: "new-leaf",
@@ -439,23 +480,57 @@ export const CASE_STUDIES: CaseStudy[] = [
         heroDescription:
             "Complete brand identity and web presence for an eco-conscious lifestyle brand launching into a competitive market.",
         problem:
-            "New Leaf was launching a sustainability-focused lifestyle brand but had no visual identity, no web presence, and no design system to build from. The founders had a clear mission — make sustainable living accessible and aspirational — but needed a creative partner to translate that vision into a cohesive brand.\n\nThe competitive landscape was saturated with green-washed brands using predictable earthy tones and leaf motifs. New Leaf needed to stand apart while still communicating authenticity.",
+            "New Leaf was launching a sustainability-focused lifestyle brand but had no visual identity, no web presence, and no design system to build from. The founders had a clear mission but needed a creative partner to translate that vision into a cohesive brand.\n\nThe competitive landscape was saturated with predictable sustainability tropes, so the brand needed a sharper point of view.",
         solution:
-            "We developed a complete brand identity: logo system with responsive variants, a color palette that breaks from sustainability clichés (warm neutrals + electric green accents), custom typography pairings, photography direction, and a comprehensive brand guidelines document.\n\nThe website was built as a content-rich platform with editorial-style storytelling, product showcases with sustainability scoring, and an impact tracker showing collective environmental contribution from the community.",
+            "We developed a complete brand identity including logo system, color palette, typography pairings, photography direction, and brand guidelines. The website was built as a content-rich experience with editorial storytelling, product showcases, and an impact tracker.\n\nThe end result gave the brand a distinctive visual system and a launch-ready web presence.",
         results: [
             { stat: "Brand", label: "Complete Identity Delivered" },
             { stat: "50+", label: "Brand Assets Created" },
             { stat: "2 weeks", label: "Concept to Launch" },
         ],
         techStack: ["Figma", "Adobe Illustrator", "Next.js", "Tailwind CSS", "Sanity CMS"],
-        tags: ["Branding", "UI/UX Design", "Web Platform", "Sustainability"],
+        tags: ["Branding", "Website", "UI/UX Design", "Sustainability"],
         assets: [],
         accentColor: "34,197,94",
         category: "branding-design",
+        engagementType: "branding",
     },
 ];
 
-/* ─── Helper ─────────────────────────────────────────────── */
+export const WORK_SECTION_META: Record<
+    CaseStudyWorkSection,
+    { title: string; description: string; highlightSlug?: string }
+> = {
+    "flagship-platforms": {
+        title: "Flagship Platforms",
+        description: "Larger products built around workflows, scale, and operational leverage.",
+        highlightSlug: "saas-analytics-platform",
+    },
+    "systems-tools": {
+        title: "Systems & Internal Tools",
+        description: "Operational systems, dashboards, and deeper product infrastructure.",
+        highlightSlug: "internal-ops-dashboard",
+    },
+    "mobile-products": {
+        title: "Mobile Products",
+        description: "Consumer and business mobile experiences engineered for repeat use.",
+        highlightSlug: "buff-dudes",
+    },
+    "rapid-websites": {
+        title: "Rapid Websites",
+        description: "Premium web presences delivered fast without positioning them as full software platforms.",
+        highlightSlug: "ali-wali",
+    },
+};
+
 export function getCaseStudy(slug: string): CaseStudy | undefined {
     return CASE_STUDIES.find((cs) => cs.slug === slug);
+}
+
+export function getHomepageCaseStudies() {
+    return CASE_STUDIES.filter((study) => study.homepageFeatured);
+}
+
+export function getWorkSectionStudies(section: CaseStudyWorkSection) {
+    return CASE_STUDIES.filter((study) => study.workSection === section);
 }

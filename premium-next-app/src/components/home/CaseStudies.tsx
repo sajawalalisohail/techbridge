@@ -3,197 +3,175 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { getHomepageCaseStudies, type CaseStudy } from "@/data/case-studies";
 
-/* ─── Data ───────────────────────────────────────────────── */
-const CASE_STUDIES = [
-    {
-        id: 1,
-        slug: "nextlex",
-        client: "NextLex",
-        sector: "Legal SaaS Marketing",
-        metric: "14 Days",
-        metricLabel: "From Concept to Live",
-        description:
-            "A premium marketing website for a legal document automation SaaS. Designed and deployed rapidly to support their high-growth acquisition strategy.",
-        accentColor: "139,92,246", // violet
-    },
-    {
-        id: 2,
-        slug: "primemark",
-        client: "PrimeMark Apparel",
-        sector: "B2B Manufacturing",
-        metric: "12×",
-        metricLabel: "Increase in Lead Quality",
-        description:
-            "High-performance digital storefront streamlining global supply chain operations. A premium web presence built to capture enterprise leads.",
-        accentColor: "99,102,241", // indigo
-    },
-    {
-        id: 3,
-        slug: "ali-wali",
-        client: "AliWali Trading Co.",
-        sector: "Global Logistics",
-        metric: "35+",
-        metricLabel: "Years of Trade Legacy",
-        description:
-            "A fast, modern digital presence for a direct buyer of industrial plied rubber conveyor belts. Replacing an outdated platform with zero downtime.",
-        accentColor: "109,40,217", // violet-700
-    },
-];
-
-/* ─── Animation variants ─────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
+const HOMEPAGE_STUDIES = getHomepageCaseStudies();
 
-const containerVariants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12 } },
-};
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 32 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
-
-/* ─── Teaser Card ────────────────────────────────────────── */
-function TeaserCard({ study }: { study: (typeof CASE_STUDIES)[number] }) {
+function StandardCard({ study }: { study: CaseStudy }) {
     return (
-        <motion.div
-            variants={cardVariants}
-            className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
-        >
-            {/* Hover glow */}
+        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-neutral-900/55">
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 style={{
-                    background: `radial-gradient(ellipse at 50% 0%, rgba(${study.accentColor},0.15) 0%, rgba(${study.accentColor},0) 100%)`,
+                    background: `radial-gradient(circle at 100% 0%, rgba(${study.accentColor},0.18) 0%, rgba(${study.accentColor},0) 55%)`,
                 }}
             />
-
-            <div className="relative z-10 flex h-full flex-col">
-                {/* Sector label */}
-                <div className="mb-6 flex items-center justify-between">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        {study.sector}
-                    </p>
-                </div>
-
-                {/* Key metric */}
-                <div className="mb-4">
-                    <span className="block font-mono text-5xl font-extrabold leading-none tracking-tight bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent mb-2">
-                        {study.metric}
-                    </span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-400">
-                        {study.metricLabel}
-                    </span>
-                </div>
-
-                {/* Client name */}
-                <h3 className="mb-2 text-xl font-semibold text-white">
+            <div className="relative z-10">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-600">
+                    {study.sector}
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
                     {study.client}
                 </h3>
-
-                {/* Description (truncated to first sentence) */}
-                <p className="text-sm leading-relaxed text-zinc-500 flex-1">
-                    {study.description.split(". ")[0]}.
+                <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+                    {study.heroDescription}
                 </p>
-
-                {/* CTA */}
-                <div className="mt-8">
-                    <Link
-                        href={`/work/${study.slug}`}
-                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-violet-400"
-                    >
-                        View Case Study
-                        <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
+                <div className="mt-5">
+                    <p className="font-mono text-4xl font-extrabold tracking-tight text-white">
+                        {study.metric}
+                    </p>
+                    <p className="mt-1 text-[11px] uppercase tracking-[0.24em] text-zinc-500">
+                        {study.metricLabel}
+                    </p>
                 </div>
+                <Link
+                    href={`/work/${study.slug}`}
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-violet-400"
+                >
+                    View Case Study
+                    <ArrowRight size={14} />
+                </Link>
             </div>
-        </motion.div>
+        </article>
     );
 }
 
-/* ─── Main Export ────────────────────────────────────────── */
-export default function CaseStudies() {
-    const ref = useRef<HTMLElement>(null);
-    const headerRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-80px" });
-    const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
-
+function RapidWebsiteFeature({ study }: { study: CaseStudy }) {
     return (
-        <section
-            id="case-studies"
-            ref={ref}
-            className="relative overflow-hidden py-32 lg:py-44"
-        >
-            {/* Top separator */}
+        <article className="relative overflow-hidden rounded-[2rem] border border-violet-500/20 bg-neutral-950/70 p-7 shadow-[0_0_40px_rgba(109,40,217,0.12)] backdrop-blur-sm lg:col-span-2 lg:p-8">
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                    background: `radial-gradient(circle at 10% 20%, rgba(${study.accentColor},0.24) 0%, rgba(${study.accentColor},0) 50%)`,
+                }}
             />
-            {/* Ambient glow */}
+            <div className="relative z-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+                <div>
+                    <span className="inline-flex rounded-full border border-violet-500/30 bg-violet-950/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-violet-300">
+                        24-Hour Rapid Website
+                    </span>
+                    <h3 className="mt-4 text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                        {study.client}
+                    </h3>
+                    <p className="mt-4 text-base leading-relaxed text-zinc-400">
+                        {study.heroDescription}
+                    </p>
+                </div>
+                <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-600">
+                        Why it stands out
+                    </p>
+                    <p className="mt-3 font-mono text-5xl font-extrabold tracking-tight text-white">
+                        {study.metric}
+                    </p>
+                    <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-zinc-500">
+                        {study.metricLabel}
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+                        A premium web presence delivered fast, positioned correctly as website work rather than a software platform.
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                        <Link
+                            href={`/work/${study.slug}`}
+                            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-3 text-sm font-semibold text-white"
+                        >
+                            See the Breakdown
+                            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                        </Link>
+                        {study.liveUrl && (
+                            <a
+                                href={study.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white"
+                            >
+                                Visit Live Site
+                                <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </a>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </article>
+    );
+}
+
+export default function CaseStudies() {
+    const ref = useRef<HTMLElement>(null);
+    const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+    const rapidWebsite = HOMEPAGE_STUDIES.find(
+        (study) => study.homepageHighlight === "rapid-website"
+    );
+    const standardStudies = HOMEPAGE_STUDIES.filter(
+        (study) => study.homepageHighlight !== "rapid-website"
+    );
+
+    return (
+        <section id="case-studies" ref={ref} className="relative overflow-hidden py-28 lg:py-36">
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 0% 50%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)",
+                        "radial-gradient(ellipse at 0% 50%, rgba(79,70,229,0.05) 0%, rgba(79,70,229,0) 50%)",
                 }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
-                {/* ── Section Header ── */}
                 <motion.div
-                    ref={headerRef}
                     initial={{ opacity: 0, y: 24 }}
-                    animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7, ease: EASE }}
                     className="mb-14 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
                 >
-                    <div>
+                    <div className="max-w-3xl">
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                            Proven Impact
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
+                            <span className="h-px w-4 bg-violet-500/40" />
+                            Selected Work
                         </span>
-                        <h2 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                            Engineered for Scale.{" "}
-                            <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                Built for Results.
-                            </span>
+                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl">
+                            A shorter homepage, now with the right proof.
                         </h2>
+                        <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
+                            Three stronger product and systems examples, plus one premium rapid website to show range without confusing website work for platform work.
+                        </p>
                     </div>
-                    <Link
-                        href="/work"
-                        className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-400"
-                    >
-                        See All Work
-                        <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                </motion.div>
-
-                {/* ── 3-Column Grid ── */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate={isInView ? "show" : "hidden"}
-                    className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-                >
-                    {CASE_STUDIES.map((study) => (
-                        <TeaserCard key={study.id} study={study} />
-                    ))}
-                </motion.div>
-
-                {/* Mobile "See All Work" Link */}
-                <div className="mt-10 lg:hidden">
                     <Link
                         href="/work"
                         className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-400"
                     >
-                        See All Work
+                        Explore All Work
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
-                </div>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
+                    className="grid gap-6 lg:grid-cols-2"
+                >
+                    {standardStudies.map((study) => (
+                        <StandardCard key={study.slug} study={study} />
+                    ))}
+                    {rapidWebsite && <RapidWebsiteFeature study={rapidWebsite} />}
+                </motion.div>
             </div>
         </section>
     );

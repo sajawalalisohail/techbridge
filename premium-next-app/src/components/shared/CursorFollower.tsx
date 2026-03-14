@@ -4,14 +4,22 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /* ─── Spring configs ─────────────────────────────────────── */
-const DOT_SPRING = { stiffness: 500, damping: 30, mass: 0.1 };
-const RING_SPRING = { stiffness: 150, damping: 15, mass: 0.1 };
+const DOT_SPRING = { stiffness: 560, damping: 28, mass: 0.1 };
+const RING_SPRING = { stiffness: 220, damping: 18, mass: 0.1 };
 
 /* ─── Main Export ────────────────────────────────────────── */
 export default function CursorFollower() {
     const [isHovering, setIsHovering] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [enabled, setEnabled] = useState(false);
+    const [enabled] = useState(() => {
+        if (typeof window === "undefined") return false;
+
+        const isTouch =
+            window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        return !isTouch && !prefersReduced;
+    });
 
     /* Raw mouse position */
     const mouseX = useMotionValue(-100);
@@ -30,8 +38,6 @@ export default function CursorFollower() {
         const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
         const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (isTouch || prefersReduced) return;
-
-        setEnabled(true);
 
         const onMove = (e: MouseEvent) => {
             mouseX.set(e.clientX);
@@ -62,22 +68,11 @@ export default function CursorFollower() {
         document.addEventListener("mouseout", onLeave);
         document.addEventListener("mouseleave", onOut);
 
-        /* Hide default cursor on desktop */
-        document.documentElement.style.cursor = "none";
-        const style = document.createElement("style");
-        style.id = "cursor-follower-style";
-        style.textContent = `
-            *, *::before, *::after { cursor: none !important; }
-        `;
-        document.head.appendChild(style);
-
         return () => {
             window.removeEventListener("mousemove", onMove);
             document.removeEventListener("mouseover", onEnter);
             document.removeEventListener("mouseout", onLeave);
             document.removeEventListener("mouseleave", onOut);
-            document.documentElement.style.cursor = "";
-            style.remove();
         };
     }, [mouseX, mouseY, visible]);
 

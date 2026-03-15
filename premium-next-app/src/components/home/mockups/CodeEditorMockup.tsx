@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 /* ─── Data ───────────────────────────────────────────────── */
 const CODE_LINES = [
-    { tokens: [{ text: "const", color: "text-violet-400" }, { text: " app ", color: "text-zinc-300" }, { text: "=", color: "text-zinc-500" }, { text: " createApp", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  runtime", color: "text-indigo-300" }, { text: ":", color: "text-zinc-500" }, { text: ' "edge"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  framework", color: "text-indigo-300" }, { text: ":", color: "text-zinc-500" }, { text: ' "next@16"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  auth", color: "text-indigo-300" }, { text: ":", color: "text-zinc-500" }, { text: " withOAuth", color: "text-emerald-400" }, { text: "(),", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  db", color: "text-indigo-300" }, { text: ":", color: "text-zinc-500" }, { text: " postgres", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
-    { tokens: [{ text: "    pool", color: "text-indigo-300" }, { text: ":", color: "text-zinc-500" }, { text: " 20", color: "text-orange-300" }, { text: ",", color: "text-zinc-500" }] },
+    { tokens: [{ text: "const", color: "text-lime-400" }, { text: " app ", color: "text-zinc-300" }, { text: "=", color: "text-zinc-500" }, { text: " createApp", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  runtime", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: ' "edge"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  framework", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: ' "next@16"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  auth", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: " withOAuth", color: "text-emerald-400" }, { text: "(),", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  db", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: " postgres", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
+    { tokens: [{ text: "    pool", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: " 20", color: "text-orange-300" }, { text: ",", color: "text-zinc-500" }] },
     { tokens: [{ text: "  }),", color: "text-zinc-500" }] },
     { tokens: [{ text: "});", color: "text-zinc-500" }] },
 ];
@@ -69,7 +69,7 @@ export default function CodeEditorMockup() {
                         ))}
                         {/* Blinking cursor on last line */}
                         {i === CODE_LINES.length - 1 && (
-                            <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-violet-400" />
+                            <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-lime-400" />
                         )}
                     </motion.div>
                 ))}

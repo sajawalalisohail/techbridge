@@ -42,7 +42,7 @@ export default function DeploymentSuccessMockup() {
             {/* Top Bar - Status */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Rocket size={16} className={isComplete ? "text-violet-400" : "text-zinc-500"} />
+                    <Rocket size={16} className={isComplete ? "text-lime-400" : "text-zinc-500"} />
                     <span className="font-mono text-xs font-medium text-zinc-300">
                         system_deploy.sh
                     </span>
@@ -88,12 +88,12 @@ export default function DeploymentSuccessMockup() {
                     <svg className="absolute inset-0 h-full w-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
                         <defs>
                             <linearGradient id="chart-area" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgb(139,92,246)" stopOpacity="0.4" />
-                                <stop offset="100%" stopColor="rgb(139,92,246)" stopOpacity="0.0" />
+                                <stop offset="0%" stopColor="rgb(132,204,22)" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="rgb(132,204,22)" stopOpacity="0.0" />
                             </linearGradient>
                             <linearGradient id="chart-line" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="rgb(99,102,241)" />
-                                <stop offset="100%" stopColor="rgb(167,139,250)" />
+                                <stop offset="0%" stopColor="rgb(163,230,53)" />
+                                <stop offset="100%" stopColor="rgb(163,230,53)" />
                             </linearGradient>
                         </defs>
 
@@ -120,12 +120,12 @@ export default function DeploymentSuccessMockup() {
                 {/* Uplift Stat */}
                 {isComplete && (
                     <motion.div
-                        className="absolute right-0 top-0 flex items-center gap-1 rounded-lg border border-violet-500/20 bg-violet-900/30 px-2.5 py-1.5 backdrop-blur-sm"
+                        className="absolute right-0 top-0 flex items-center gap-1 rounded-lg border border-lime-500/20 bg-lime-900/30 px-2.5 py-1.5 backdrop-blur-sm"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.2, duration: 0.5, ease: "backOut" }}
                     >
-                        <ArrowUpRight size={14} className="text-violet-400" />
+                        <ArrowUpRight size={14} className="text-lime-400" />
                         <span className="font-mono text-xs font-bold text-white">2.4x ROI</span>
                     </motion.div>
                 )}
@@ -135,11 +135,11 @@ export default function DeploymentSuccessMockup() {
             <div>
                 <div className="mb-2 flex justify-between text-[10px] font-medium uppercase tracking-wider text-zinc-500">
                     <span>Performance Optimization</span>
-                    <span className={isComplete ? "text-violet-400" : ""}>{progress}%</span>
+                    <span className={isComplete ? "text-lime-400" : ""}>{progress}%</span>
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
                     <motion.div
-                        className="h-full bg-gradient-to-r from-indigo-500 to-violet-500"
+                        className="h-full bg-gradient-to-r from-yellow-500 to-lime-500"
                         initial={{ width: "0%" }}
                         animate={{ width: `${progress}%` }}
                         transition={{ ease: "linear", duration: 0.1 }} // Smooth snap between tick values

@@ -92,7 +92,7 @@ export default function Testimonials() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.04) 0%, rgba(139,92,246,0) 60%)",
+                        "radial-gradient(ellipse at 50% 50%, rgba(132,204,22,0.04) 0%, rgba(132,204,22,0) 60%)",
                 }}
             />
 
@@ -106,9 +106,9 @@ export default function Testimonials() {
                     className="mb-14 text-center"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                         from actual clients
-                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                     </span>
                     <motion.h2
                         variants={wordContainerVariants}
@@ -149,7 +149,7 @@ export default function Testimonials() {
                                     {/* Decorative quote mark */}
                                     <span
                                         aria-hidden="true"
-                                        className="absolute left-8 top-6 select-none font-serif text-6xl leading-none text-violet-500/20 sm:left-12 sm:top-8 sm:text-7xl"
+                                        className="absolute left-8 top-6 select-none font-serif text-6xl leading-none text-lime-500/20 sm:left-12 sm:top-8 sm:text-7xl"
                                     >
                                         &ldquo;
                                     </span>
@@ -161,7 +161,7 @@ export default function Testimonials() {
 
                                     {/* Attribution */}
                                     <div className="relative z-10 mt-8 flex items-center gap-4">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-violet-500/20 bg-violet-950/60 font-mono text-xs font-semibold text-violet-300">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-lime-500/20 bg-lime-950/60 font-mono text-xs font-semibold text-lime-300">
                                             {testimonial.initials}
                                         </div>
                                         <div>
@@ -186,8 +186,8 @@ export default function Testimonials() {
                                 onClick={() => paginate(i)}
                                 aria-label={`Go to testimonial ${i + 1}`}
                                 className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex
-                                        ? "w-6 bg-violet-400"
-                                        : "w-1.5 bg-zinc-700 hover:bg-violet-500/5"
+                                        ? "w-6 bg-lime-400"
+                                        : "w-1.5 bg-zinc-700 hover:bg-lime-500/5"
                                     }`}
                             />
                         ))}

@@ -40,7 +40,7 @@ export default function BrowserLoadMockup() {
 
             {/* Loading progress bar */}
             <motion.div
-                className="h-[2px] bg-gradient-to-r from-violet-500 to-indigo-500"
+                className="h-[2px] bg-gradient-to-r from-lime-500 to-yellow-500"
                 style={{ transformOrigin: "left" }}
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
@@ -75,7 +75,7 @@ export default function BrowserLoadMockup() {
                 >
                     <div className="h-3 w-3/4 rounded-sm bg-white/10" />
                     <div className="h-3 w-1/2 rounded-sm bg-white/8" />
-                    <div className="mt-2 h-2 w-1/3 rounded-sm bg-violet-500/20" />
+                    <div className="mt-2 h-2 w-1/3 rounded-sm bg-lime-500/20" />
                 </motion.div>
 
                 {/* Two column cards */}

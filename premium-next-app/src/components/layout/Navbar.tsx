@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import GlowButton from "@/components/shared/GlowButton";
 
 const NAV_LINKS = [
     { label: "Services", href: "/services" },
@@ -66,12 +67,14 @@ export default function Navbar() {
             {/* Banner + Navbar anchor: relative wrapper so navbar can float below banner */}
             <div className="relative z-50">
                 {/* Announcement Banner — in normal flow, pushes hero down by its height */}
-                <AnimatePresence>
+                <AnimatePresence mode="popLayout">
                     {bannerVisible && pathname !== "/websites" && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
+                            key="announcement-banner"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
                             className="relative overflow-hidden border-b border-white/[0.06] bg-black"
                         >
                             {/* Matching Hero Noise Overlay */}
@@ -87,7 +90,7 @@ export default function Navbar() {
                             <div className="relative z-10 mx-auto flex w-full items-center justify-center py-2.5 px-12 sm:px-16">
                                 <p className="text-center text-sm font-medium text-zinc-300">
                                     Need a website fast? Custom-coded and live in 24 hours.{" "}
-                                    <Link href="/websites" className="text-white hover:text-violet-300 underline underline-offset-4 transition-colors">
+                                    <Link href="/websites" className="text-white hover:text-lime-300 underline underline-offset-4 transition-colors">
                                         See how &rarr;
                                     </Link>
                                 </p>
@@ -95,7 +98,7 @@ export default function Navbar() {
 
                             <button
                                 onClick={() => setBannerVisible(false)}
-                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-violet-500/5 hover:text-violet-300 transition-colors sm:right-5"
+                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-lime-500/5 hover:text-lime-300 transition-colors sm:right-5"
                                 aria-label="Dismiss banner"
                             >
                                 <X size={16} />
@@ -113,7 +116,7 @@ export default function Navbar() {
                 >
                     <div
                         className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navState === "pill"
-                            ? "mt-4 max-w-5xl rounded-full border border-violet-500/20 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-xl"
+                            ? "mt-4 max-w-5xl rounded-full border border-lime-500/20 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(132,204,22,0.15)] backdrop-blur-xl"
                             : "max-w-full rounded-none border-b border-transparent bg-transparent"
                             }`}
                     >
@@ -126,7 +129,7 @@ export default function Navbar() {
                             {/* Logo */}
                             <Link href="/" className="group flex items-center gap-2.5">
                                 <span className="relative flex h-6 w-6 items-center justify-center">
-                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 opacity-80 blur-sm group-hover:blur group-hover:opacity-100 transition-all duration-300" />
+                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 opacity-80 blur-sm group-hover:blur group-hover:opacity-100 transition-all duration-300" />
                                     <span className="relative h-3 w-3 rounded-full bg-white" />
                                 </span>
                                 <span className="text-sm font-semibold tracking-widest text-white uppercase">
@@ -146,8 +149,8 @@ export default function Navbar() {
                                                 className={`relative whitespace-nowrap text-sm transition-colors duration-200
                                             after:absolute after:-bottom-0.5 after:left-0 after:h-px after:transition-all after:duration-300
                                             ${active
-                                                        ? "text-white after:w-full after:bg-violet-400 drop-shadow-[0_0_8px_rgba(167,139,250,0.6)]"
-                                                        : "text-zinc-400 hover:text-violet-300 after:w-0 after:bg-white hover:after:w-full"
+                                                        ? "text-white after:w-full after:bg-lime-400 drop-shadow-[0_0_8px_rgba(163,230,53,0.6)]"
+                                                        : "text-zinc-400 hover:text-lime-300 after:w-0 after:bg-white hover:after:w-full"
                                                     }`}
                                             >
                                                 {link.label}
@@ -159,20 +162,18 @@ export default function Navbar() {
 
                             {/* CTA */}
                             <div className="hidden md:flex items-center gap-4">
-                                <Link
+                                <GlowButton
                                     href="/contact"
-                                    className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/15 bg-white/5 text-sm font-medium text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 ${navState === "pill" ? "px-4 py-1.5 text-xs" : "px-5 py-2"
-                                        }`}
+                                    size={navState === "pill" ? "sm" : "md"}
                                 >
-                                    <span className="relative z-10">Talk to Us</span>
+                                    Talk to Us
                                     <svg
-                                        className="relative z-10 h-3.5 w-3.5 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
+                                        className="h-3.5 w-3.5 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                                     >
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
-                                    <span className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-violet-600/20 to-indigo-600/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                                </Link>
+                                </GlowButton>
                             </div>
 
                             {/* Mobile hamburger */}
@@ -180,6 +181,7 @@ export default function Navbar() {
                                 className="md:hidden flex flex-col gap-1.5 p-2"
                                 onClick={() => setMobileOpen((v) => !v)}
                                 aria-label="Toggle menu"
+                                aria-expanded={mobileOpen}
                             >
                                 <span className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "translate-y-2.5 rotate-45" : ""}`} />
                                 <span className={`block h-px w-6 bg-white transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
@@ -189,9 +191,10 @@ export default function Navbar() {
                     </div>
 
                     {/* Mobile drawer */}
-                    <AnimatePresence>
+                    <AnimatePresence mode="popLayout">
                         {mobileOpen && (
                             <motion.div
+                                key="mobile-drawer"
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
@@ -206,7 +209,7 @@ export default function Navbar() {
                                                 <Link
                                                     href={link.href}
                                                     onClick={() => setMobileOpen(false)}
-                                                    className={`text-base transition-colors ${active ? "text-violet-400 font-medium" : "text-zinc-300 hover:text-violet-300"}`}
+                                                    className={`text-base transition-colors ${active ? "text-lime-400 font-medium" : "text-zinc-300 hover:text-lime-300"}`}
                                                 >
                                                     {link.label}
                                                 </Link>

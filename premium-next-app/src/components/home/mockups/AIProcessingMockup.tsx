@@ -23,21 +23,21 @@ export default function AIProcessingMockup() {
             <svg className="absolute inset-0 h-full w-full">
                 <motion.line
                     x1="20%" y1="50%" x2="45%" y2="50%"
-                    stroke="rgba(167,139,250,0.3)" strokeWidth="2" strokeDasharray="4 4"
+                    stroke="rgba(163,230,53,0.3)" strokeWidth="2" strokeDasharray="4 4"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: EASE, delay: 0.3 }}
                 />
                 <motion.line
                     x1="55%" y1="50%" x2="80%" y2="25%"
-                    stroke="rgba(167,139,250,0.3)" strokeWidth="2" strokeDasharray="4 4"
+                    stroke="rgba(163,230,53,0.3)" strokeWidth="2" strokeDasharray="4 4"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: EASE, delay: 0.5 }}
                 />
                 <motion.line
                     x1="55%" y1="50%" x2="80%" y2="75%"
-                    stroke="rgba(167,139,250,0.3)" strokeWidth="2" strokeDasharray="4 4"
+                    stroke="rgba(163,230,53,0.3)" strokeWidth="2" strokeDasharray="4 4"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: EASE, delay: 0.7 }}
@@ -60,12 +60,12 @@ export default function AIProcessingMockup() {
             />
 
             {/* Central AI Core */}
-            <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/40 bg-violet-950/80 shadow-[0_0_30px_rgba(139,92,246,0.4)] backdrop-blur-md">
-                <BrainCircuit className="text-violet-400" size={28} />
+            <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border border-lime-500/40 bg-lime-950/80 shadow-[0_0_30px_rgba(132,204,22,0.4)] backdrop-blur-md">
+                <BrainCircuit className="text-lime-400" size={28} />
 
                 {/* Core Pulse */}
                 <motion.div
-                    className="absolute inset-0 rounded-2xl border border-violet-400"
+                    className="absolute inset-0 rounded-2xl border border-lime-400"
                     initial={{ scale: 1, opacity: 0.5 }}
                     animate={{ scale: 1.4, opacity: 0 }}
                     transition={{
@@ -76,9 +76,9 @@ export default function AIProcessingMockup() {
                 />
             </div>
 
-            {/* Output Packets (Transforming to Violet) */}
+            {/* Output Packets (Transforming to Lime) */}
             <motion.div
-                className="absolute left-[55%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(139,92,246,0.8)]"
+                className="absolute left-[55%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-lime-400 shadow-[0_0_8px_rgba(132,204,22,0.8)]"
                 initial={{ opacity: 0, x: 0, y: 0 }}
                 animate={isInView ? {
                     opacity: [0, 1, 1, 0],
@@ -94,7 +94,7 @@ export default function AIProcessingMockup() {
             />
 
             <motion.div
-                className="absolute left-[55%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(99,102,241,0.8)]"
+                className="absolute left-[55%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-lime-400 shadow-[0_0_8px_rgba(163,230,53,0.8)]"
                 initial={{ opacity: 0, x: 0, y: 0 }}
                 animate={isInView ? {
                     opacity: [0, 1, 1, 0],
@@ -116,7 +116,7 @@ export default function AIProcessingMockup() {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.8, duration: 0.5, ease: EASE }}
             >
-                <Cpu size={14} className="text-violet-400" />
+                <Cpu size={14} className="text-lime-400" />
                 <span className="text-[9px] font-medium text-zinc-300">LLM Engine</span>
             </motion.div>
 
@@ -126,7 +126,7 @@ export default function AIProcessingMockup() {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 1, duration: 0.5, ease: EASE }}
             >
-                <Merge size={14} className="text-indigo-400" />
+                <Merge size={14} className="text-lime-400" />
                 <span className="text-[9px] font-medium text-zinc-300">Auto-Routing</span>
             </motion.div>
 

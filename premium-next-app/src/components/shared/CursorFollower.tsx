@@ -97,7 +97,7 @@ export default function CursorFollower() {
                 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
             >
-                <div className="h-full w-full rounded-full border border-violet-400/40" />
+                <div className="h-full w-full rounded-full border border-lime-400/40" />
             </motion.div>
 
             {/* Inner dot */}
@@ -117,7 +117,7 @@ export default function CursorFollower() {
                 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
             >
-                <div className="h-full w-full rounded-full bg-violet-400" />
+                <div className="h-full w-full rounded-full bg-lime-400" />
             </motion.div>
         </>
     );

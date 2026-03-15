@@ -11,8 +11,8 @@ const inputFocusCSS = `
   .tb-select:focus,
   .tb-textarea:focus {
     outline: none;
-    border-bottom-color: rgba(139, 92, 246, 0.8);
-    box-shadow: 0 2px 16px rgba(109, 40, 217, 0.2);
+    border-bottom-color: rgba(132, 204, 22, 0.8);
+    box-shadow: 0 2px 16px rgba(101, 163, 13, 0.2);
   }
   .tb-input::placeholder,
   .tb-textarea::placeholder {
@@ -84,8 +84,8 @@ export default function ContactPage() {
                     >
                         {/* Ambient glows */}
                         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%)" }} />
-                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(79,70,229,0.04) 0%, rgba(79,70,229,0) 50%)" }} />
+                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 60%)" }} />
+                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(101,163,13,0.04) 0%, rgba(101,163,13,0) 50%)" }} />
                         </div>
 
                         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-32">
@@ -99,7 +99,7 @@ export default function ContactPage() {
                                         animate={isInView ? "show" : "hidden"}
                                         className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"
                                     >
-                                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                                         let&apos;s talk
                                     </motion.span>
 
@@ -110,7 +110,7 @@ export default function ContactPage() {
                                         className="text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
                                     >
                                         Tell us what you need{" "}
-                                        <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                                        <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                                             built.
                                         </span>
                                     </motion.h1>
@@ -134,16 +134,16 @@ export default function ContactPage() {
                                     >
                                         <a
                                             href="mailto:hello@techbridge.dev"
-                                            className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5"
+                                            className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5"
                                         >
-                                            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-500 transition-colors duration-300 group-hover:border-violet-500/40 group-hover:text-violet-300">
+                                            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-500 transition-colors duration-300 group-hover:border-lime-500/40 group-hover:text-lime-300">
                                                 <Mail size={16} strokeWidth={1.5} />
                                             </div>
                                             <div>
                                                 <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                                     Email
                                                 </p>
-                                                <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-violet-300">
+                                                <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-lime-300">
                                                     hello@techbridge.dev
                                                 </p>
                                             </div>
@@ -189,7 +189,7 @@ export default function ContactPage() {
                                         <div
                                             aria-hidden="true"
                                             className="pointer-events-none absolute inset-0"
-                                            style={{ background: "radial-gradient(circle at 100% 0%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 50%)" }}
+                                            style={{ background: "radial-gradient(circle at 100% 0%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 50%)" }}
                                         />
 
                                         {!submitted ? (
@@ -285,7 +285,7 @@ export default function ContactPage() {
                                                 {/* Submit */}
                                                 <button
                                                     type="submit"
-                                                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-violet-500/10"
+                                                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-lime-600 to-lime-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-lime-500/10"
                                                 >
                                                     <span className="relative z-10 inline-flex items-center justify-center gap-2">
                                                         Send It
@@ -305,8 +305,8 @@ export default function ContactPage() {
                                         ) : (
                                             /* ── Success state ── */
                                             <div className="relative z-10 flex flex-col items-center justify-center py-16 text-center">
-                                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-violet-500/30 bg-violet-950/40">
-                                                    <CheckCircle2 size={28} className="text-violet-400" strokeWidth={1.5} />
+                                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-lime-500/30 bg-lime-950/40">
+                                                    <CheckCircle2 size={28} className="text-lime-400" strokeWidth={1.5} />
                                                 </div>
                                                 <h3 className="text-2xl font-bold text-white">
                                                     Got it.
@@ -332,7 +332,7 @@ export default function ContactPage() {
                         <div className="mx-auto max-w-7xl px-6 lg:px-12">
                             <div className="mb-10">
                                 <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                                     prefer a call?
                                 </span>
                                 <motion.h2
@@ -359,7 +359,7 @@ export default function ContactPage() {
                                     <p className="text-lg font-semibold text-white">Scheduling Coming Soon</p>
                                     <p className="mt-2 max-w-sm text-sm text-zinc-400">
                                         In the meantime, fill out the form above or email us directly at{" "}
-                                        <a href="mailto:hello@techbridge.dev" className="text-violet-400 hover:underline">
+                                        <a href="mailto:hello@techbridge.dev" className="text-lime-400 hover:underline">
                                             hello@techbridge.dev
                                         </a>
                                     </p>
@@ -368,13 +368,13 @@ export default function ContactPage() {
                         </div>
                     </section>
 
-                    {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
+                    {/* Subtle lime border glow separating the scrolling content from the reveal footer */}
                     <div
                         aria-hidden="true"
                         className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                         style={{
-                            background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
-                            boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                            background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
+                            boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
                         }}
                     />
                 </div>

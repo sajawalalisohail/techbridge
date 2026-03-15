@@ -67,7 +67,7 @@ export default function ChatUIMockup() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
-                className="ml-auto max-w-[85%] rounded-xl rounded-br-sm border border-violet-500/20 bg-violet-600/15 px-3 py-2"
+                className="ml-auto max-w-[85%] rounded-xl rounded-br-sm border border-lime-500/20 bg-lime-600/15 px-3 py-2"
             >
                 <p className="text-[11px] leading-relaxed text-zinc-300">{USER_MESSAGE}</p>
             </motion.div>
@@ -98,7 +98,7 @@ export default function ChatUIMockup() {
                             <p className="text-[11px] leading-relaxed text-zinc-300">
                                 {AI_WORDS.slice(0, wordIndex).join(" ")}
                                 {wordIndex < AI_WORDS.length && (
-                                    <span className="ml-0.5 inline-block h-3 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-violet-400" />
+                                    <span className="ml-0.5 inline-block h-3 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-lime-400" />
                                 )}
                             </p>
                         </motion.div>

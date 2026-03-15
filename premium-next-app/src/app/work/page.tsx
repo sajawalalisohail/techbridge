@@ -41,8 +41,8 @@ const WORK_SECTION_ANIMATIONS = [
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
     return (
         <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
-            <span className="h-px w-4 bg-violet-500/40" />
+            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
+            <span className="h-px w-4 bg-lime-500/40" />
             {children}
         </span>
     );
@@ -104,7 +104,7 @@ function LeadProject({ project }: { project: CaseStudy }) {
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
                         <Link
                             href={`/work/${project.slug}`}
-                            className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(109,40,217,0.25)] transition-all duration-300 hover:shadow-violet-500/10"
+                            className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-lime-600 to-lime-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(101,163,13,0.25)] transition-all duration-300 hover:shadow-lime-500/10"
                         >
                             Read Case Study
                             <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -114,7 +114,7 @@ function LeadProject({ project }: { project: CaseStudy }) {
                                 href={project.liveUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5"
+                                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5"
                             >
                                 Visit Live Site
                                 <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -129,7 +129,7 @@ function LeadProject({ project }: { project: CaseStudy }) {
 
 function ProjectCard({ project }: { project: CaseStudy }) {
     return (
-        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
+        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5">
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -175,7 +175,7 @@ function ProjectCard({ project }: { project: CaseStudy }) {
                 <div className="mt-6 flex items-center justify-between">
                     <Link
                         href={`/work/${project.slug}`}
-                        className="group/link inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-violet-300"
+                        className="group/link inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-lime-300"
                     >
                         View Case Study
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -185,7 +185,7 @@ function ProjectCard({ project }: { project: CaseStudy }) {
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-200 hover:text-violet-300"
+                            className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-200 hover:text-lime-300"
                         >
                             Live
                         </a>
@@ -281,7 +281,7 @@ export default function WorkPage() {
                         className="pointer-events-none absolute inset-0"
                         style={{
                             background:
-                                "radial-gradient(ellipse at 72% 28%, rgba(139,92,246,0.10) 0%, rgba(139,92,246,0) 55%), radial-gradient(circle at 0% 100%, rgba(79,70,229,0.08) 0%, rgba(79,70,229,0) 40%)",
+                                "radial-gradient(ellipse at 72% 28%, rgba(132,204,22,0.10) 0%, rgba(132,204,22,0) 55%), radial-gradient(circle at 0% 100%, rgba(101,163,13,0.08) 0%, rgba(101,163,13,0) 40%)",
                         }}
                     />
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-12">
@@ -320,7 +320,7 @@ export default function WorkPage() {
                             <a
                                 key={section}
                                 href={`#${section}`}
-                                className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300"
+                                className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300"
                             >
                                 {WORK_SECTION_META[section].title}
                             </a>
@@ -355,7 +355,7 @@ export default function WorkPage() {
                             </div>
                             <Link
                                 href="/contact"
-                                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-violet-500/10"
+                                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-lime-600 to-lime-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.3)] transition-all duration-300 hover:shadow-lime-500/10"
                             >
                                 Talk to an Engineer
                                 <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />

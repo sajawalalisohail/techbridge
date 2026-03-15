@@ -1,18 +1,21 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { fadeUp, slideFromRightContainer, slideFromRightItem, splitWords } from "@/components/shared/headingAnimations";
+import { ArrowRight } from "lucide-react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getHomepageCaseStudies, type CaseStudy } from "@/data/case-studies";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
 const HOMEPAGE_STUDIES = getHomepageCaseStudies();
 
-function StandardCard({ study }: { study: CaseStudy }) {
+/* ─── Single Card ────── */
+function StudyCard({ study, index }: { study: CaseStudy; index: number }) {
     return (
-        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
+        <article
+            className="case-card group relative flex h-[28rem] w-[22rem] flex-shrink-0 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5 sm:w-[26rem] lg:w-[28rem]"
+            style={{ opacity: 0, transform: "translateY(40px)" }}
+        >
+            {/* Accent glow on hover */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -20,6 +23,7 @@ function StandardCard({ study }: { study: CaseStudy }) {
                     background: `radial-gradient(circle at 100% 0%, rgba(${study.accentColor},0.18) 0%, rgba(${study.accentColor},0) 55%)`,
                 }}
             />
+
             <div className="relative z-10">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-600">
                     {study.sector}
@@ -27,9 +31,12 @@ function StandardCard({ study }: { study: CaseStudy }) {
                 <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
                     {study.client}
                 </h3>
-                <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+                <p className="mt-4 text-sm leading-relaxed text-zinc-400 line-clamp-3">
                     {study.heroDescription}
                 </p>
+            </div>
+
+            <div className="relative z-10">
                 <div className="mt-5">
                     <p className="font-mono text-4xl font-extrabold tracking-tight text-white">
                         {study.metric}
@@ -40,164 +47,158 @@ function StandardCard({ study }: { study: CaseStudy }) {
                 </div>
                 <Link
                     href={`/work/${study.slug}`}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-violet-300"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-lime-300"
                 >
                     View Case Study
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
             </div>
         </article>
     );
 }
 
-function RapidWebsiteFeature({ study }: { study: CaseStudy }) {
-    return (
-        <article className="relative overflow-hidden rounded-[2rem] border border-violet-500/20 bg-neutral-950/70 p-7 shadow-[0_0_40px_rgba(109,40,217,0.12)] backdrop-blur-sm lg:col-span-2 lg:p-8">
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                    background: `radial-gradient(circle at 10% 20%, rgba(${study.accentColor},0.24) 0%, rgba(${study.accentColor},0) 50%)`,
-                }}
-            />
-            <div className="relative z-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-                <div>
-                    <span className="inline-flex rounded-full border border-violet-500/30 bg-violet-950/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-violet-300">
-                        24-hour build
-                    </span>
-                    <h3 className="mt-4 text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                        {study.client}
-                    </h3>
-                    <p className="mt-4 text-base leading-relaxed text-zinc-400">
-                        {study.heroDescription}
-                    </p>
-                </div>
-                <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-600">
-                        why this is different
-                    </p>
-                    <p className="mt-3 font-mono text-5xl font-extrabold tracking-tight text-white">
-                        {study.metric}
-                    </p>
-                    <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-zinc-500">
-                        {study.metricLabel}
-                    </p>
-                    <p className="mt-4 text-sm leading-relaxed text-zinc-400">
-                        A real custom website shipped in 24 hours. Not a template. Not a WordPress install. Actual code.
-                    </p>
-                    <div className="mt-6 flex flex-wrap gap-3">
-                        <Link
-                            href={`/work/${study.slug}`}
-                            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-3 text-sm font-semibold text-white"
-                        >
-                            See the Breakdown
-                            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                        </Link>
-                        {study.liveUrl && (
-                            <a
-                                href={study.liveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white"
-                            >
-                                Visit Live Site
-                            <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                            </a>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </article>
-    );
-}
-
+/* ─── Main Section ────── */
 export default function CaseStudies() {
-    const ref = useRef<HTMLElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-80px" });
+    const sectionRef = useRef<HTMLElement>(null);
+    const trackRef = useRef<HTMLDivElement>(null);
+    const progressRef = useRef<HTMLDivElement>(null);
 
-    const rapidWebsite = HOMEPAGE_STUDIES.find(
-        (study) => study.homepageHighlight === "rapid-website"
-    );
-    const standardStudies = HOMEPAGE_STUDIES.filter(
-        (study) => study.homepageHighlight !== "rapid-website"
-    );
+    useEffect(() => {
+        const section = sectionRef.current;
+        const track = trackRef.current;
+        const progress = progressRef.current;
+        if (!section || !track || !progress) return;
+
+        const ctx = gsap.context(() => {
+            // Calculate scroll distance
+            const getScrollAmount = () => {
+                return -(track.scrollWidth - window.innerWidth);
+            };
+
+            // Mobile: vertical stacked (no pin)
+            const mm = ScrollTrigger.matchMedia({
+                // Desktop: horizontal scroll
+                "(min-width: 768px)": function () {
+                    const tween = gsap.to(track, {
+                        x: getScrollAmount,
+                        ease: "none",
+                    });
+
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: "top top",
+                        end: () => `+=${Math.abs(getScrollAmount())}`,
+                        pin: true,
+                        pinType: "transform",
+                        scrub: 1,
+                        animation: tween,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            gsap.set(progress, { scaleX: self.progress });
+                        },
+                    });
+
+                    // Stagger card entrance
+                    gsap.fromTo(
+                        ".case-card",
+                        { opacity: 0, y: 40 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            stagger: 0.08,
+                            duration: 0.6,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 80%",
+                            },
+                        }
+                    );
+                },
+                // Mobile: simple scroll reveal
+                "(max-width: 767px)": function () {
+                    gsap.fromTo(
+                        ".case-card",
+                        { opacity: 0, y: 40 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            stagger: 0.1,
+                            duration: 0.6,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 80%",
+                            },
+                        }
+                    );
+                },
+            });
+        }, section);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <section id="case-studies" ref={ref} className="relative overflow-hidden py-28 lg:py-36">
+        <section
+            id="case-studies"
+            ref={sectionRef}
+            className="relative overflow-hidden"
+        >
+            {/* Ambient background glow */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 0% 50%, rgba(79,70,229,0.05) 0%, rgba(79,70,229,0) 50%)",
+                        "radial-gradient(ellipse at 0% 50%, rgba(101,163,13,0.05) 0%, rgba(101,163,13,0) 50%)",
                 }}
             />
 
-            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
+            {/* Header */}
+            <div className="mx-auto max-w-[90rem] px-6 pt-28 lg:px-16 lg:pt-36">
                 <div className="mb-14 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-3xl">
-                        <motion.span
-                            variants={fadeUp()}
-                            initial="hidden"
-                            animate={isInView ? "show" : "hidden"}
-                            className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
-                        >
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
-                            <span className="h-px w-4 bg-violet-500/40" />
+                        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
+                            <span className="h-px w-4 bg-lime-500/40" />
                             proof, not promises
-                        </motion.span>
-                        <motion.h2
-                            variants={slideFromRightContainer}
-                            initial="hidden"
-                            animate={isInView ? "show" : "hidden"}
-                            className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl"
-                            style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
-                        >
-                            {splitWords("Real clients. Real numbers.").map((word, index) => (
-                                <motion.span
-                                    key={`${word}-${index}`}
-                                    variants={slideFromRightItem}
-                                    style={{ display: "inline-block" }}
-                                >
-                                    {word}
-                                </motion.span>
-                            ))}
-                        </motion.h2>
-                        <motion.p
-                            variants={fadeUp()}
-                            initial="hidden"
-                            animate={isInView ? "show" : "hidden"}
-                            className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg"
-                        >
-                            Platforms we architected, systems we built, and a rapid website to show we can move fast without cutting corners.
-                        </motion.p>
+                        </span>
+                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl">
+                            Real clients. Real numbers.
+                        </h2>
+                        <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
+                            Platforms we architected, systems we built, and rapid websites to show we can move fast without cutting corners.
+                        </p>
                     </div>
-                    <motion.div
-                        variants={fadeUp()}
-                        initial="hidden"
-                        animate={isInView ? "show" : "hidden"}
+                    <Link
+                        href="/work"
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-lime-300"
                     >
-                        <Link
-                            href="/work"
-                            className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-300"
-                        >
-                            See All Projects
-                            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                        </Link>
-                    </motion.div>
+                        See All Projects
+                        <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
                 </div>
+            </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
-                    className="grid gap-6 lg:grid-cols-2"
-                >
-                    {standardStudies.map((study) => (
-                        <StandardCard key={study.slug} study={study} />
-                    ))}
-                    {rapidWebsite && <RapidWebsiteFeature study={rapidWebsite} />}
-                </motion.div>
+            {/* Horizontal scroll track */}
+            <div
+                ref={trackRef}
+                className="flex gap-6 px-6 pb-28 md:flex-nowrap md:pb-12 flex-wrap lg:px-16"
+                style={{ willChange: "transform" }}
+            >
+                {HOMEPAGE_STUDIES.map((study, i) => (
+                    <StudyCard key={study.slug} study={study} index={i} />
+                ))}
+            </div>
+
+            {/* Progress bar (desktop only) */}
+            <div className="hidden md:block absolute bottom-6 left-1/2 -translate-x-1/2 w-48 h-0.5 rounded-full bg-white/10 overflow-hidden">
+                <div
+                    ref={progressRef}
+                    className="h-full w-full origin-left bg-lime-500/60 rounded-full"
+                    style={{ transform: "scaleX(0)" }}
+                />
             </div>
         </section>
     );

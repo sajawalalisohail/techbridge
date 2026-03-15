@@ -45,8 +45,8 @@ export default function CTA() {
                     className="pointer-events-none absolute inset-0 z-0"
                     style={{
                         background: `
-                            radial-gradient(ellipse at 20% 80%, rgba(109,40,217,0.05) 0%, rgba(109,40,217,0) 100%),
-                            radial-gradient(ellipse at 80% 20%, rgba(79,70,229,0.04) 0%, rgba(79,70,229,0) 100%)
+                            radial-gradient(ellipse at 20% 80%, rgba(101,163,13,0.05) 0%, rgba(101,163,13,0) 100%),
+                            radial-gradient(ellipse at 80% 20%, rgba(132,204,22,0.04) 0%, rgba(132,204,22,0) 100%)
                         `,
                     }}
                 />
@@ -57,7 +57,7 @@ export default function CTA() {
                     className="pointer-events-none absolute inset-0 z-0 cta-glow"
                     style={{
                         background:
-                            "radial-gradient(ellipse at center, rgba(109,40,217,0.12) 0%, rgba(79,70,229,0.04) 40%, rgba(79,70,229,0) 70%)",
+                            "radial-gradient(ellipse at center, rgba(101,163,13,0.12) 0%, rgba(132,204,22,0.04) 40%, rgba(132,204,22,0) 70%)",
                     }}
                 />
 
@@ -76,9 +76,9 @@ export default function CTA() {
                     >
                         {/* Eyebrow */}
                         <span className="mb-6 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                             next step
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                         </span>
                     </motion.div>
 
@@ -100,7 +100,7 @@ export default function CTA() {
                         ))}
                         <motion.span
                             variants={slideFromLeftItem}
-                            className="bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-300 bg-clip-text text-transparent"
+                            className="bg-gradient-to-r from-lime-400 via-lime-300 to-yellow-300 bg-clip-text text-transparent"
                             style={{ display: "inline-block" }}
                         >
                             Start Building.
@@ -127,7 +127,7 @@ export default function CTA() {
                         {/* Primary — gradient fill */}
                         <Link
                             href="/contact"
-                            className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_40px_rgba(109,40,217,0.35)] transition-all duration-300 hover:shadow-violet-500/10"
+                            className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-lime-600 to-lime-500 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_40px_rgba(101,163,13,0.35)] transition-all duration-300 hover:shadow-lime-500/10"
                         >
                             <span className="relative z-10">Book a Call, Free</span>
                             <ArrowRight
@@ -138,12 +138,12 @@ export default function CTA() {
                             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                         </Link>
 
-                        {/* Secondary — ghost with violet glow */}
+                        {/* Secondary — ghost with lime glow */}
                         <Link
                             href="/websites"
-                            className="group inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-7 py-4 text-sm font-medium text-zinc-300 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300 hover:shadow-violet-500/10"
+                            className="group inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-7 py-4 text-sm font-medium text-zinc-300 backdrop-blur-sm transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300 hover:shadow-lime-500/10"
                         >
-                            <Zap size={14} strokeWidth={1.8} className="text-violet-400" />
+                            <Zap size={14} strokeWidth={1.8} className="text-lime-400" />
                             Or Get a Website in 24hrs
                         </Link>
                     </motion.div>

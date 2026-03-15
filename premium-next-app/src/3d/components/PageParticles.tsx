@@ -50,13 +50,13 @@ function ConnectionLines({ positionsRef, count, maxDistance = 3.0 }: ConnectionL
           linePositions[idx + 4] = positions[j * 3 + 1];
           linePositions[idx + 5] = positions[j * 3 + 2];
 
-          // Violet tint with distance-based fade
-          lineColors[idx] = 0.55 * alpha;
-          lineColors[idx + 1] = 0.36 * alpha;
-          lineColors[idx + 2] = 0.96 * alpha;
-          lineColors[idx + 3] = 0.55 * alpha;
-          lineColors[idx + 4] = 0.36 * alpha;
-          lineColors[idx + 5] = 0.96 * alpha;
+          // Lime tint with distance-based fade
+          lineColors[idx] = 0.52 * alpha;
+          lineColors[idx + 1] = 0.80 * alpha;
+          lineColors[idx + 2] = 0.09 * alpha;
+          lineColors[idx + 3] = 0.52 * alpha;
+          lineColors[idx + 4] = 0.80 * alpha;
+          lineColors[idx + 5] = 0.09 * alpha;
 
           lineCount++;
         }
@@ -142,9 +142,9 @@ function ParticlesField({ count = 80, positionsRef }: ParticlesFieldProps) {
   const particleColors = useMemo(() => {
     const colors = new Float32Array(count * 3);
     const colorPalette = [
-      new THREE.Color('#8b5cf6'),
-      new THREE.Color('#6366f1'),
-      new THREE.Color('#a855f7'),
+      new THREE.Color('#84cc16'),
+      new THREE.Color('#a3e635'),
+      new THREE.Color('#65a30d'),
       new THREE.Color('#ffffff'),
     ];
 

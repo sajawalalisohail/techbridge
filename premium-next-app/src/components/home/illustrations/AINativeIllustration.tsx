@@ -17,34 +17,34 @@ export default function AINativeIllustration() {
     return (
         <div ref={ref} className="relative h-32 w-full overflow-hidden rounded-xl bg-black/40 border border-white/5 my-4 flex items-center justify-center">
             {/* Ambient Background Glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-500/10 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-lime-500/10 via-transparent to-transparent" />
 
             <svg viewBox="0 0 100 120" className="w-full h-full max-w-[150px]">
                 {/* Connecting Lines */}
                 <motion.line
                     x1={nodes[0].cx} y1={nodes[0].cy} x2={nodes[1].cx} y2={nodes[1].cy}
-                    stroke="rgba(139,92,246,0.3)" strokeWidth="1"
+                    stroke="rgba(132,204,22,0.3)" strokeWidth="1"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
                 />
                 <motion.line
                     x1={nodes[0].cx} y1={nodes[0].cy} x2={nodes[2].cx} y2={nodes[2].cy}
-                    stroke="rgba(139,92,246,0.3)" strokeWidth="1"
+                    stroke="rgba(132,204,22,0.3)" strokeWidth="1"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
                 />
                 <motion.line
                     x1={nodes[1].cx} y1={nodes[1].cy} x2={nodes[3].cx} y2={nodes[3].cy}
-                    stroke="rgba(139,92,246,0.2)" strokeWidth="1"
+                    stroke="rgba(132,204,22,0.2)" strokeWidth="1"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
                 />
                 <motion.line
                     x1={nodes[2].cx} y1={nodes[2].cy} x2={nodes[3].cx} y2={nodes[3].cy}
-                    stroke="rgba(139,92,246,0.2)" strokeWidth="1"
+                    stroke="rgba(132,204,22,0.2)" strokeWidth="1"
                     initial={{ pathLength: 0 }}
                     animate={isInView ? { pathLength: 1 } : {}}
                     transition={{ duration: 1, ease: "easeInOut", delay: 0.8 }}
@@ -53,7 +53,7 @@ export default function AINativeIllustration() {
                 {/* Animated Data Pulses along lines */}
                 {isInView && (
                     <>
-                        <motion.circle r="1.5" fill="#a78bfa"
+                        <motion.circle r="1.5" fill="#a3e635"
                             animate={{
                                 cx: [nodes[0].cx, nodes[1].cx],
                                 cy: [nodes[0].cy, nodes[1].cy],
@@ -61,7 +61,7 @@ export default function AINativeIllustration() {
                             }}
                             transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 1 }}
                         />
-                        <motion.circle r="1.5" fill="#a78bfa"
+                        <motion.circle r="1.5" fill="#a3e635"
                             animate={{
                                 cx: [nodes[0].cx, nodes[2].cx],
                                 cy: [nodes[0].cy, nodes[2].cy],
@@ -78,7 +78,7 @@ export default function AINativeIllustration() {
                         {/* Outer glow pulse */}
                         <motion.circle
                             cx={node.cx} cy={node.cy} r={node.r * 2.5}
-                            fill="rgba(139,92,246,0.2)"
+                            fill="rgba(132,204,22,0.2)"
                             initial={{ scale: 0.5, opacity: 0 }}
                             animate={isInView ? {
                                 scale: [1, 1.5, 1],
@@ -89,7 +89,7 @@ export default function AINativeIllustration() {
                         {/* Solid core */}
                         <motion.circle
                             cx={node.cx} cy={node.cy} r={node.r}
-                            fill="#8b5cf6"
+                            fill="#84cc16"
                             initial={{ scale: 0 }}
                             animate={isInView ? { scale: 1 } : {}}
                             transition={{ duration: 0.5, type: "spring", delay: 0.2 + (i * 0.1) }}

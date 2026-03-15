@@ -126,7 +126,7 @@ function TechCard({ name, icon, category }: TechItem) {
 
     return (
         <div
-            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:shadow-violet-500/10"
+            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:shadow-lime-500/10"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -146,7 +146,7 @@ function TechCard({ name, icon, category }: TechItem) {
             </AnimatePresence>
 
             {/* Icon */}
-            <span aria-hidden="true" className="text-zinc-600 transition-colors duration-300 group-hover/card:text-violet-400">
+            <span aria-hidden="true" className="text-zinc-600 transition-colors duration-300 group-hover/card:text-lime-400">
                 {icon}
             </span>
             {/* Text */}

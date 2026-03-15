@@ -32,8 +32,8 @@ function PhaseTextCard({
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.75, ease: EASE }}
             className={`group relative overflow-hidden rounded-2xl border transition-all duration-700 p-7 backdrop-blur-sm lg:p-8 ${isActive
-                ? "border-violet-500/50 bg-violet-500/10 shadow-[0_0_40px_rgba(139,92,246,0.15)] scale-[1.01]"
-                : "border-white/8 bg-neutral-900/40 hover:border-violet-500/40"
+                ? "border-lime-500/50 bg-lime-500/10 shadow-[0_0_40px_rgba(132,204,22,0.15)] scale-[1.01]"
+                : "border-white/8 bg-neutral-900/40 hover:border-lime-500/40"
                 }`}
         >
             {/* Active glow gradient */}
@@ -41,7 +41,7 @@ function PhaseTextCard({
                 aria-hidden="true"
                 className={`pointer-events-none absolute inset-0 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
                 style={{
-                    background: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 100%)",
+                    background: "radial-gradient(ellipse at 0% 50%, rgba(132,204,22,0.15) 0%, rgba(132,204,22,0) 100%)",
                 }}
             />
 
@@ -49,27 +49,27 @@ function PhaseTextCard({
             <div className="relative z-10 mb-5 flex items-center justify-between">
                 <span
                     className={`font-mono text-5xl font-bold leading-none tracking-tighter select-none transition-all duration-700 ${isActive
-                        ? "text-white drop-shadow-[0_0_20px_rgba(167,139,250,0.6)]"
+                        ? "text-white drop-shadow-[0_0_20px_rgba(132,204,22,0.6)]"
                         : "text-white/[0.06]"
                         }`}
                 >
                     {phase.number}
                 </span>
                 <div className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-500 ${isActive
-                    ? "border-violet-500/40 bg-violet-950/50 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.3)]"
-                    : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300"
+                    ? "border-lime-500/40 bg-lime-950/50 text-lime-400 shadow-[0_0_15px_rgba(132,204,22,0.3)]"
+                    : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-lime-500/40 group-hover:bg-lime-500/5 group-hover:text-lime-300"
                     }`}>
                     <Icon size={18} strokeWidth={1.5} />
                 </div>
             </div>
 
             {/* Title */}
-            <h3 className={`relative z-10 mb-3 text-xl font-semibold leading-snug lg:text-2xl transition-colors duration-500 ${isActive ? "text-white" : "text-white/90 group-hover:text-violet-300"}`}>
+            <h3 className={`relative z-10 mb-3 text-xl font-semibold leading-snug lg:text-2xl transition-colors duration-500 ${isActive ? "text-white" : "text-white/90 group-hover:text-lime-300"}`}>
                 {phase.label}
             </h3>
 
             {/* Description */}
-            <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-500 ${isActive ? "text-zinc-300" : "text-zinc-500 group-hover:text-violet-300"}`}>
+            <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-500 ${isActive ? "text-zinc-300" : "text-zinc-500 group-hover:text-lime-300"}`}>
                 {phase.description}
             </p>
 
@@ -79,7 +79,7 @@ function PhaseTextCard({
                     <span
                         key={tag}
                         className={`rounded-full border px-3 py-1 text-xs transition-colors duration-500 ${isActive
-                            ? "border-violet-500/30 bg-violet-500/10 text-violet-300"
+                            ? "border-lime-500/30 bg-lime-500/10 text-lime-300"
                             : "border-white/8 bg-white/[0.04] text-zinc-500"
                             }`}
                     >
@@ -108,8 +108,8 @@ function TimelineDot({
                 transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
                 className="relative flex h-5 w-5 items-center justify-center"
             >
-                <span className={`absolute inset-0 rounded-full blur-sm transition-all duration-700 ${isActive ? "bg-violet-500/60 scale-150" : "bg-violet-500/30"}`} />
-                <span className={`relative h-2.5 w-2.5 rounded-full ring-2 ring-offset-2 ring-offset-black transition-all duration-700 ${isActive ? "bg-white ring-violet-400" : "bg-violet-400 ring-violet-400/30"}`} />
+                <span className={`absolute inset-0 rounded-full blur-sm transition-all duration-700 ${isActive ? "bg-lime-500/60 scale-150" : "bg-lime-500/30"}`} />
+                <span className={`relative h-2.5 w-2.5 rounded-full ring-2 ring-offset-2 ring-offset-black transition-all duration-700 ${isActive ? "bg-white ring-lime-400" : "bg-lime-400 ring-lime-400/30"}`} />
             </motion.div>
         </div>
     );
@@ -240,7 +240,7 @@ export default function ProcessTimeline() {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
+                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(101,163,13,0.03) 0%, rgba(101,163,13,0) 50%)" }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
@@ -253,12 +253,12 @@ export default function ProcessTimeline() {
                     className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                         {SECTION_HEADER.eyebrow}
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         {SECTION_HEADER.heading}{" "}
-                        <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                             {SECTION_HEADER.headingAccent}
                         </span>
                     </h2>
@@ -288,8 +288,8 @@ export default function ProcessTimeline() {
                         }}
                         className="pointer-events-none absolute left-1/2 hidden w-px -translate-x-1/2 lg:block"
                     >
-                        <div className="h-full w-full bg-gradient-to-b from-violet-500 via-indigo-500 to-violet-500/10" />
-                        <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/60 blur-md" />
+                        <div className="h-full w-full bg-gradient-to-b from-lime-500 via-yellow-500 to-lime-500/10" />
+                        <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-500/60 blur-md" />
                     </motion.div>
 
                     {/* Phase rows */}

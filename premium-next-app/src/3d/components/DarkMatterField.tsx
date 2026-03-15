@@ -103,7 +103,7 @@ function DarkMatterMotes({
   const texture = useMemo(() => createParticleTexture(), []);
   const settings = useMemo(() => getVariantSettings(variant), [variant]);
   const palette = useMemo(
-    () => [new THREE.Color("#8b5cf6"), new THREE.Color("#6366f1"), new THREE.Color("#7c3aed")],
+    () => [new THREE.Color("#84cc16"), new THREE.Color("#a3e635"), new THREE.Color("#84cc16")],
     []
   );
 
@@ -319,14 +319,14 @@ export function DarkMatterField({ variant = "page" }: { variant?: DarkMatterVari
       float edgeVignette = smoothstep(1.65, 0.45, length(uv));
       float verticalFade = smoothstep(1.05, -0.85, uv.y);
 
-      vec3 violet = vec3(0.545, 0.361, 0.965);
-      vec3 indigo = vec3(0.388, 0.4, 0.945);
-      vec3 dusk = vec3(0.163, 0.09, 0.325);
+      vec3 lime = vec3(0.518, 0.8, 0.086);
+      vec3 limeLight = vec3(0.639, 0.902, 0.208);
+      vec3 dusk = vec3(0.1, 0.2, 0.02);
 
       vec3 color = vec3(0.0);
       color += dusk * (halo * 0.9 + secondaryHalo * 0.55);
-      color += indigo * (contour * 0.16 + halo * 0.26 + frame);
-      color += violet * (halo * 0.34 + pointerHalo * 0.4 + dust * 0.45);
+      color += limeLight * (contour * 0.16 + halo * 0.26 + frame);
+      color += lime * (halo * 0.34 + pointerHalo * 0.4 + dust * 0.45);
 
       float alpha = (halo * 0.75 + contour * 0.16 + secondaryHalo * 0.42 + pointerHalo * 0.32 + dust * 0.22 + frame);
       alpha *= edgeVignette * verticalFade;

@@ -82,15 +82,15 @@ function ProgressDots({ activePhase }: { activePhase: number }) {
                 <div key={phase.number} className="flex items-center gap-2">
                     <span
                         className={`block h-2 w-2 rounded-full transition-all duration-500 ${i === activePhase
-                            ? "bg-violet-500 scale-125 shadow-[0_0_10px_rgba(139,92,246,0.6)]"
+                            ? "bg-lime-500 scale-125 shadow-[0_0_10px_rgba(132,204,22,0.6)]"
                             : i < activePhase
-                                ? "bg-violet-500/50"
+                                ? "bg-lime-500/50"
                                 : "bg-white/10"
                             }`}
                     />
                     {i < PHASES.length - 1 && (
                         <span
-                            className={`block h-px w-6 transition-colors duration-500 ${i < activePhase ? "bg-violet-500/40" : "bg-white/5"
+                            className={`block h-px w-6 transition-colors duration-500 ${i < activePhase ? "bg-lime-500/40" : "bg-white/5"
                                 }`}
                         />
                     )}
@@ -126,8 +126,8 @@ function StickyHeader({ progress, isInView }: { progress: MotionValue<number>; i
                         animate={isInView ? "show" : "hidden"}
                         className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                     >
-                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
-                        <span className="h-px w-4 bg-violet-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
+                        <span className="h-px w-4 bg-lime-500/40" />
                         {SECTION_HEADER.eyebrow}
                     </motion.span>
                     <motion.h2
@@ -148,7 +148,7 @@ function StickyHeader({ progress, isInView }: { progress: MotionValue<number>; i
                         ))}
                         <motion.span
                             variants={slideFromLeftItem}
-                            className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent"
+                            className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent"
                             style={{ display: "inline-block" }}
                         >
                             {SECTION_HEADER.headingAccent}
@@ -210,7 +210,7 @@ function PhaseSlide({
 
                         <div className="relative z-10">
                             {/* Icon */}
-                            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-violet-500/40 bg-violet-950/50 text-violet-400 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+                            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-lime-500/40 bg-lime-950/50 text-lime-400 shadow-[0_0_20px_rgba(132,204,22,0.15)]">
                                 <Icon size={22} strokeWidth={1.5} />
                             </div>
 
@@ -304,7 +304,7 @@ export default function ProcessScroll() {
                     className="pointer-events-none absolute inset-0"
                     style={{
                         background:
-                            "radial-gradient(ellipse at 20% 40%, rgba(79,70,229,0.04) 0%, rgba(79,70,229,0) 55%), radial-gradient(ellipse at 80% 60%, rgba(139,92,246,0.03) 0%, rgba(139,92,246,0) 50%)",
+                            "radial-gradient(ellipse at 20% 40%, rgba(101,163,13,0.04) 0%, rgba(101,163,13,0) 55%), radial-gradient(ellipse at 80% 60%, rgba(132,204,22,0.03) 0%, rgba(132,204,22,0) 50%)",
                     }}
                 />
 

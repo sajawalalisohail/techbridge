@@ -31,8 +31,8 @@ const ADVANTAGES: Advantage[] = [
         description:
             "We don't bolt AI on at the end. Every system we build ships with machine-readable APIs and automation hooks from day one. So you're not paying us again in six months to retrofit it.",
         detail: "Not bolted on later.",
-        accentA: "rgba(139,92,246,0.18)",
-        accentB: "rgba(99,102,241,0.12)",
+        accentA: "rgba(132,204,22,0.18)",
+        accentB: "rgba(163,230,53,0.12)",
         Illustration: AINativeIllustration,
     },
     {
@@ -42,8 +42,8 @@ const ADVANTAGES: Advantage[] = [
         description:
             "You talk to the person writing your code. Not a project manager who translates your requirements wrong, not a junior dev learning on your dime.",
         detail: "Slack the person writing your code.",
-        accentA: "rgba(99,102,241,0.15)",
-        accentB: "rgba(167,139,250,0.10)",
+        accentA: "rgba(163,230,53,0.15)",
+        accentB: "rgba(163,230,53,0.10)",
         Illustration: ZeroBloatIllustration,
     },
     {
@@ -53,8 +53,8 @@ const ADVANTAGES: Advantage[] = [
         description:
             "MVPs in weeks, websites in 24 hours. Not because we skip testing or write sloppy code. We've done this enough to know exactly where time gets wasted.",
         detail: "Weeks, not quarters.",
-        accentA: "rgba(167,139,250,0.16)",
-        accentB: "rgba(99,102,241,0.12)",
+        accentA: "rgba(163,230,53,0.16)",
+        accentB: "rgba(163,230,53,0.12)",
         Illustration: VelocityIllustration,
     },
     {
@@ -64,8 +64,8 @@ const ADVANTAGES: Advantage[] = [
         description:
             "Every system gets proper auth, monitoring, and test coverage from sprint one. We've seen too many startups hit growth then spend six months rewriting everything.",
         detail: "No rewrites in 18 months.",
-        accentA: "rgba(109,40,217,0.15)",
-        accentB: "rgba(139,92,246,0.10)",
+        accentA: "rgba(101,163,13,0.15)",
+        accentB: "rgba(132,204,22,0.10)",
         Illustration: ResilienceIllustration,
     },
 ];
@@ -92,7 +92,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
     return (
         <motion.div
             variants={cardVariants}
-            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5 lg:p-10"
+            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5 lg:p-10"
         >
             {/* ── Gradient mesh - always mounted, fades in on hover ── */}
             <div
@@ -114,18 +114,18 @@ function AdvantageCard({ item }: { item: Advantage }) {
             {/* Edge accent line - top */}
             <div
                 aria-hidden="true"
-                className="absolute left-0 top-0 h-px w-0 bg-gradient-to-r from-violet-500/60 to-transparent transition-all duration-700 group-hover:w-full"
+                className="absolute left-0 top-0 h-px w-0 bg-gradient-to-r from-lime-500/60 to-transparent transition-all duration-700 group-hover:w-full"
             />
 
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col">
                 {/* Icon */}
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300">
+                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-lime-500/40 group-hover:bg-lime-500/5 group-hover:text-lime-300">
                     <Icon size={22} strokeWidth={1.5} />
                 </div>
 
                 {/* Eyebrow */}
-                <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 transition-colors duration-300 group-hover:text-violet-300">
+                <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 transition-colors duration-300 group-hover:text-lime-300">
                     {item.eyebrow}
                 </p>
 
@@ -135,7 +135,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
                 </h3>
 
                 {/* Description */}
-                <p className="flex-1 text-sm leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-violet-300 lg:text-base">
+                <p className="flex-1 text-sm leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-lime-300 lg:text-base">
                     {item.description}
                 </p>
 
@@ -146,8 +146,8 @@ function AdvantageCard({ item }: { item: Advantage }) {
 
                 {/* Pull-quote differentiator */}
                 <div className="mt-4 flex items-center gap-3 border-t border-white/5 pt-6">
-                    <span className="h-px w-5 flex-shrink-0 bg-violet-500/60" />
-                    <p className="text-sm font-semibold text-zinc-300 transition-colors duration-300 group-hover:text-violet-300">
+                    <span className="h-px w-5 flex-shrink-0 bg-lime-500/60" />
+                    <p className="text-sm font-semibold text-zinc-300 transition-colors duration-300 group-hover:text-lime-300">
                         {item.detail}
                     </p>
                 </div>
@@ -181,7 +181,7 @@ export default function WhyChooseUs() {
                 <div
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0"
-                    style={{ background: "radial-gradient(circle at 100% 50%, rgba(139,92,246,0.04) 0%, rgba(139,92,246,0) 50%)" }}
+                    style={{ background: "radial-gradient(circle at 100% 50%, rgba(132,204,22,0.04) 0%, rgba(132,204,22,0) 50%)" }}
                 />
 
                 <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
@@ -196,7 +196,7 @@ export default function WhyChooseUs() {
                             animate={isHeaderInView ? "show" : "hidden"}
                             className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                         >
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                             why us, honestly
                         </motion.span>
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -207,7 +207,7 @@ export default function WhyChooseUs() {
                                 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
                             >
                                 Four reasons we&apos;re different.{" "}
-                                <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                                     Judge for yourself.
                                 </span>
                             </motion.h2>

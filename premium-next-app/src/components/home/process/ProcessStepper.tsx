@@ -53,7 +53,7 @@ export default function ProcessStepper() {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
+                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(101,163,13,0.03) 0%, rgba(101,163,13,0) 50%)" }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
@@ -66,12 +66,12 @@ export default function ProcessStepper() {
                     className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                         {SECTION_HEADER.eyebrow}
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         {SECTION_HEADER.heading}{" "}
-                        <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                             {SECTION_HEADER.headingAccent}
                         </span>
                     </h2>
@@ -90,7 +90,7 @@ export default function ProcessStepper() {
                         {/* Active progress line */}
                         <motion.div
                             aria-hidden="true"
-                            className="absolute left-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-violet-500 to-indigo-500"
+                            className="absolute left-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-lime-500 to-yellow-500"
                             initial={{ width: "0%" }}
                             animate={{
                                 width: `${(activeIndex / (PHASES.length - 1)) * 100}%`,
@@ -117,31 +117,31 @@ export default function ProcessStepper() {
                                     {/* Circle node */}
                                     <div
                                         className={`relative flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-500 lg:h-14 lg:w-14 ${isActive
-                                            ? "border-violet-500 bg-violet-950 shadow-[0_0_24px_rgba(139,92,246,0.5)]"
+                                            ? "border-lime-500 bg-lime-950 shadow-[0_0_24px_rgba(132,204,22,0.5)]"
                                             : isPast
-                                                ? "border-violet-500/50 bg-violet-950/50"
-                                                : "border-white/15 bg-neutral-900/60 group-hover:border-violet-500/40"
+                                                ? "border-lime-500/50 bg-lime-950/50"
+                                                : "border-white/15 bg-neutral-900/60 group-hover:border-lime-500/40"
                                             }`}
                                     >
                                         {/* Pulse ring on active */}
                                         {isActive && (
-                                            <span className="absolute inset-0 rounded-full animate-ping bg-violet-500/20" style={{ animationDuration: "2s" }} />
+                                            <span className="absolute inset-0 rounded-full animate-ping bg-lime-500/20" style={{ animationDuration: "2s" }} />
                                         )}
                                         <NodeIcon
                                             size={20}
                                             strokeWidth={1.5}
                                             className={`relative z-10 transition-colors duration-300 ${isActive
-                                                ? "text-violet-300"
+                                                ? "text-lime-300"
                                                 : isPast
-                                                    ? "text-violet-400/60"
-                                                    : "text-zinc-500 group-hover:text-violet-300"
+                                                    ? "text-lime-400/60"
+                                                    : "text-zinc-500 group-hover:text-lime-300"
                                                 }`}
                                         />
                                     </div>
 
                                     {/* Label below */}
                                     <div className="text-center">
-                                        <span className={`block font-mono text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? "text-violet-400" : "text-zinc-600"}`}>
+                                        <span className={`block font-mono text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? "text-lime-400" : "text-zinc-600"}`}>
                                             {phase.number}
                                         </span>
                                         <span className={`mt-0.5 block text-xs font-medium transition-colors duration-300 lg:text-sm ${isActive ? "text-white" : "text-zinc-500"}`}>
@@ -168,7 +168,7 @@ export default function ProcessStepper() {
                                 aria-hidden="true"
                                 className="pointer-events-none absolute inset-0"
                                 style={{
-                                    background: "radial-gradient(ellipse at 0% 50%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 100%)",
+                                    background: "radial-gradient(ellipse at 0% 50%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 100%)",
                                 }}
                             />
 
@@ -176,10 +176,10 @@ export default function ProcessStepper() {
                                 {/* Text content */}
                                 <div className="flex flex-col justify-center">
                                     <div className="mb-5 flex items-center gap-4">
-                                        <span className="font-mono text-5xl font-bold leading-none tracking-tighter text-white drop-shadow-[0_0_20px_rgba(167,139,250,0.6)]">
+                                        <span className="font-mono text-5xl font-bold leading-none tracking-tighter text-white drop-shadow-[0_0_20px_rgba(132,204,22,0.6)]">
                                             {activePhase.number}
                                         </span>
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-500/40 bg-violet-950/50 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-lime-500/40 bg-lime-950/50 text-lime-400 shadow-[0_0_15px_rgba(132,204,22,0.3)]">
                                             <Icon size={18} strokeWidth={1.5} />
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@ export default function ProcessStepper() {
                                         {activePhase.tags.map((tag) => (
                                             <span
                                                 key={tag}
-                                                className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs text-violet-300"
+                                                className="rounded-full border border-lime-500/30 bg-lime-500/10 px-3 py-1 text-xs text-lime-300"
                                             >
                                                 {tag}
                                             </span>

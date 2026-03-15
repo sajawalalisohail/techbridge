@@ -83,7 +83,7 @@ export default function Hero() {
                 <ClipReveal>
                     <h1 className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]">
                         <span className="block">Custom Software. AI Systems.</span>{" "}
-                        <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-lime-400 via-lime-300 to-yellow-300 bg-clip-text text-transparent">
                             Senior Engineers.
                         </span>
                     </h1>
@@ -105,7 +105,7 @@ export default function Hero() {
                 >
                     <Link
                         href="/contact"
-                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-violet-500/10"
+                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-lime-500/10"
                     >
                         <span className="relative z-10">Talk to an Engineer</span>
                         <svg
@@ -123,7 +123,7 @@ export default function Hero() {
 
                     <Link
                         href="/work"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-300"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-lime-300"
                     >
                         See What We Shipped
                         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -145,7 +145,7 @@ export default function Hero() {
                                     value={stat.value}
                                     suffix={stat.suffix}
                                     from={20}
-                                    className="font-mono text-3xl font-bold tracking-tight bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent sm:text-4xl"
+                                    className="font-mono text-3xl font-bold tracking-tight bg-gradient-to-br from-lime-400 to-lime-300 bg-clip-text text-transparent sm:text-4xl"
                                 />
                             </dd>
                             <dt className="text-xs tracking-wider text-zinc-500 uppercase text-center">

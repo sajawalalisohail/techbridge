@@ -58,8 +58,8 @@ export default function WorkflowDiagramMockup() {
                             className="flex items-center"
                             style={{ transformOrigin: "left" }}
                         >
-                            <div className="h-px w-6 bg-gradient-to-r from-violet-500/50 to-indigo-500/50 lg:w-10" />
-                            <div className="h-0 w-0 border-y-[3px] border-l-[5px] border-y-transparent border-l-indigo-500/50" />
+                            <div className="h-px w-6 bg-gradient-to-r from-lime-500/50 to-yellow-500/50 lg:w-10" />
+                            <div className="h-0 w-0 border-y-[3px] border-l-[5px] border-y-transparent border-l-yellow-500/50" />
                         </motion.div>
                     )}
                 </div>
@@ -68,7 +68,7 @@ export default function WorkflowDiagramMockup() {
             {/* Animated data dot traveling along the path */}
             <motion.div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-[15%] h-1.5 w-1.5 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(139,92,246,0.6)]"
+                className="pointer-events-none absolute left-[15%] h-1.5 w-1.5 rounded-full bg-lime-400 shadow-[0_0_8px_rgba(132,204,22,0.6)]"
                 initial={{ opacity: 0 }}
                 animate={isInView ? {
                     opacity: [0, 1, 1, 0],

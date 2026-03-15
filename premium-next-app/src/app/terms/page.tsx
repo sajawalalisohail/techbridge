@@ -15,12 +15,12 @@ export default function TermsPage() {
                         className="pointer-events-none absolute inset-0"
                         style={{
                             background:
-                                "radial-gradient(ellipse at 50% 30%, rgba(139,92,246,0.04) 0%, rgba(139,92,246,0) 70%)",
+                                "radial-gradient(ellipse at 50% 30%, rgba(132,204,22,0.04) 0%, rgba(132,204,22,0) 70%)",
                         }}
                     />
                     <div className="relative z-10 mx-auto max-w-3xl px-6 py-32 lg:px-12">
                         <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                             Legal
                         </span>
                         <h1 className="text-5xl font-bold tracking-tight text-white lg:text-6xl">
@@ -35,7 +35,7 @@ export default function TermsPage() {
                             For immediate inquiries, please contact us at{" "}
                             <a
                                 href="mailto:hello@techbridge.dev"
-                                className="font-medium text-violet-400 transition-colors hover:text-violet-300"
+                                className="font-medium text-lime-400 transition-colors hover:text-lime-300"
                             >
                                 hello@techbridge.dev
                             </a>
@@ -57,8 +57,8 @@ export default function TermsPage() {
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
                         background:
-                            "linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)",
-                        boxShadow: "0 0 20px 4px rgba(109,40,217,0.25)",
+                            "linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)",
+                        boxShadow: "0 0 20px 4px rgba(101,163,13,0.25)",
                     }}
                 />
             </div>

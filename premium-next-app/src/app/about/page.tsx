@@ -158,12 +158,12 @@ const SECURITY_ITEMS = [
 function FounderCard() {
     return (
         <div className="relative h-full min-h-[480px] overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/50 backdrop-blur-sm lg:min-h-[560px]">
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 0% 0%, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 50%)" }} />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 100% 100%, rgba(79,70,229,0.12) 0%, rgba(79,70,229,0) 50%)" }} />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 0% 0%, rgba(132,204,22,0.15) 0%, rgba(132,204,22,0) 50%)" }} />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 100% 100%, rgba(101,163,13,0.12) 0%, rgba(101,163,13,0) 50%)" }} />
             <div className="relative z-10 flex h-full flex-col justify-between p-10">
                 <div className="flex items-center gap-3">
                     <span className="relative flex h-8 w-8 items-center justify-center">
-                        <span className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 opacity-80 blur-sm" />
+                        <span className="absolute inset-0 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 opacity-80 blur-sm" />
                         <span className="relative h-4 w-4 rounded-full bg-white" />
                     </span>
                     <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">TechBridge</span>
@@ -212,16 +212,16 @@ export default function AboutPage() {
         <div className="relative text-white">
             <div className="relative z-10 min-h-screen overflow-hidden">
                 <section ref={heroRef} className="relative flex min-h-[55vh] items-center overflow-hidden border-b border-white/5">
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 60%)" }} />
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 60%)" }} />
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
                         <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
-                            <span className="h-px w-4 bg-violet-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
+                            <span className="h-px w-4 bg-lime-500/40" />
                             about us
                         </motion.span>
                         <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                             We&apos;re engineers.{" "}
-                            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                                 Not an agency wearing a tech hat.
                             </span>
                         </motion.h1>
@@ -252,7 +252,7 @@ export default function AboutPage() {
                             <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
                                 We bring actual engineering rigor to B2B companies that need their tech to be an asset, not a liability that slows them down in six months.
                             </p>
-                            <div className="mt-10 border-l-2 border-violet-500/60 pl-6">
+                            <div className="mt-10 border-l-2 border-lime-500/60 pl-6">
                                 <p className="text-base font-medium italic text-zinc-300 lg:text-lg">
                                     &quot;Your tech stack should be a weapon, not a weight.&quot;
                                 </p>
@@ -270,7 +270,7 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                                 who builds your system
                             </span>
                             <motion.h2
@@ -285,7 +285,7 @@ export default function AboutPage() {
 
                         <motion.div variants={staggerContainer} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             {TEAM.map((member) => (
-                                <motion.article key={member.name} variants={childFade} className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
+                                <motion.article key={member.name} variants={childFade} className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5">
                                     <div className="relative z-10">
                                         <div className="mb-6 flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-4">
@@ -297,14 +297,14 @@ export default function AboutPage() {
                                                     <h3 className="mt-3 text-xl font-bold tracking-tight text-white">{member.name}</h3>
                                                 </div>
                                             </div>
-                                            <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} LinkedIn`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300">
+                                            <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} LinkedIn`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300">
                                                 <Linkedin size={18} />
                                             </a>
                                         </div>
-                                        <p className="mb-4 text-sm font-medium text-violet-300/80">{member.role}</p>
+                                        <p className="mb-4 text-sm font-medium text-lime-300/80">{member.role}</p>
                                         <p className="text-sm leading-relaxed text-zinc-400">{member.bio}</p>
                                     </div>
-                                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 100% 100%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 60%)" }} />
+                                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 100% 100%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 60%)" }} />
                                 </motion.article>
                             ))}
                         </motion.div>
@@ -337,7 +337,7 @@ export default function AboutPage() {
                 <section ref={timelineRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />Milestones</span>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />Milestones</span>
                             <motion.h2
                                 variants={wordContainerVariants}
                                 initial="hidden"
@@ -377,7 +377,7 @@ export default function AboutPage() {
                 <section ref={valuesRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isValuesInView ? "show" : "hidden"} className="mb-16">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />what we won&apos;t compromise</span>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />what we won&apos;t compromise</span>
                             <motion.h2
                                 variants={blurFocusIn()}
                                 initial="hidden"
@@ -391,8 +391,8 @@ export default function AboutPage() {
                             {VALUES.map((value) => {
                                 const Icon = value.icon;
                                 return (
-                                    <motion.div key={value.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
-                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300"><Icon size={20} strokeWidth={1.5} /></div>
+                                    <motion.div key={value.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5">
+                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-lime-500/40 group-hover:bg-lime-500/5 group-hover:text-lime-300"><Icon size={20} strokeWidth={1.5} /></div>
                                         <h3 className="mb-3 text-lg font-bold tracking-tight text-white">{value.title}</h3>
                                         <p className="text-sm leading-relaxed text-zinc-500">{value.description}</p>
                                     </motion.div>
@@ -407,7 +407,7 @@ export default function AboutPage() {
                 <section ref={diffRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />honest comparison</span>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />honest comparison</span>
                             <motion.h2
                                 variants={slideFromLeft}
                                 initial="hidden"
@@ -420,13 +420,13 @@ export default function AboutPage() {
                         <motion.div variants={fadeUp(0.1)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/30 backdrop-blur-sm">
                             <div className="grid grid-cols-[1fr_80px_80px] items-center border-b border-white/8 px-6 py-4 sm:grid-cols-[1fr_120px_120px] sm:px-8">
                                 <span className="text-xs font-semibold uppercase tracking-widest text-zinc-600">Feature</span>
-                                <span className="text-center text-xs font-semibold uppercase tracking-widest text-violet-400">Us</span>
+                                <span className="text-center text-xs font-semibold uppercase tracking-widest text-lime-400">Us</span>
                                 <span className="text-center text-xs font-semibold uppercase tracking-widest text-zinc-600">Them</span>
                             </div>
                             {COMPARISON.map((row, index) => (
                                 <div key={row.feature} className={`grid grid-cols-[1fr_80px_80px] items-center px-6 py-3.5 sm:grid-cols-[1fr_120px_120px] sm:px-8 ${index < COMPARISON.length - 1 ? "border-b border-white/5" : ""}`}>
                                     <span className="text-sm text-zinc-400">{row.feature}</span>
-                                    <span className="flex justify-center">{row.us ? <CheckCircle2 size={18} className="text-violet-400" /> : <XCircle size={18} className="text-zinc-700" />}</span>
+                                    <span className="flex justify-center">{row.us ? <CheckCircle2 size={18} className="text-lime-400" /> : <XCircle size={18} className="text-zinc-700" />}</span>
                                     <span className="flex justify-center">{row.them ? <CheckCircle2 size={18} className="text-zinc-500" /> : <XCircle size={18} className="text-zinc-700" />}</span>
                                 </div>
                             ))}
@@ -439,7 +439,7 @@ export default function AboutPage() {
                 <section ref={securityRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isSecurityInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />security</span>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />security</span>
                             <motion.h2
                                 variants={slideFromRight}
                                 initial="hidden"
@@ -453,8 +453,8 @@ export default function AboutPage() {
                             {SECURITY_ITEMS.map((item) => {
                                 const Icon = item.icon;
                                 return (
-                                    <motion.div key={item.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
-                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300"><Icon size={20} strokeWidth={1.5} /></div>
+                                    <motion.div key={item.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5">
+                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-lime-500/40 group-hover:bg-lime-500/5 group-hover:text-lime-300"><Icon size={20} strokeWidth={1.5} /></div>
                                         <h3 className="mb-2 text-base font-bold tracking-tight text-white">{item.title}</h3>
                                         <p className="text-sm leading-relaxed text-zinc-500">{item.description}</p>
                                     </motion.div>
@@ -472,12 +472,12 @@ export default function AboutPage() {
                             <div className="max-w-xl">
                                 <ClipReveal>
                                     <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                                        Ready to talk to the people who&apos;ll <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">actually write your code?</span>
+                                        Ready to talk to the people who&apos;ll <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">actually write your code?</span>
                                     </h2>
                                 </ClipReveal>
                                 <p className="mt-4 text-base leading-relaxed text-zinc-400">30 minutes. No sales pitch. Just the engineer who&apos;ll architect your system.</p>
                             </div>
-                            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-violet-500/10">
+                            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-lime-600 to-lime-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.3)] transition-all duration-300 hover:shadow-lime-500/10">
                                 Book a Call
                                 <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
                             </Link>

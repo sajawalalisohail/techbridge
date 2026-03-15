@@ -53,11 +53,11 @@ export function Particles({ count = 40 }: ParticlesProps) {
 
   const particleColors = useMemo(() => {
     const colors = new Float32Array(count * 3);
-    // TechBridge color palette: violet, indigo, purple, white
+    // TechBridge color palette: lime, green, yellow, white
     const colorPalette = [
-      new THREE.Color('#8b5cf6'), // violet-500
-      new THREE.Color('#6366f1'), // indigo-500
-      new THREE.Color('#a855f7'), // purple-500
+      new THREE.Color('#84cc16'), // lime-500
+      new THREE.Color('#a3e635'), // lime-300
+      new THREE.Color('#65a30d'), // lime-700
       new THREE.Color('#ffffff'), // white
     ];
 

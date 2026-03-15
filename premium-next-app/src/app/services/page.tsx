@@ -186,7 +186,7 @@ function ServiceSection({
                 </span>
                 <div className="h-px flex-1 bg-white/5" />
                 <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1">
-                    <Icon size={12} strokeWidth={1.5} className="text-violet-400" />
+                    <Icon size={12} strokeWidth={1.5} className="text-lime-400" />
                     <span className="text-xs font-medium text-zinc-400">{section.category}</span>
                 </div>
             </div>
@@ -212,7 +212,7 @@ function ServiceSection({
                             <div key={cap} className="flex items-start gap-2.5">
                                 <CheckCircle2
                                     size={14}
-                                    className="mt-0.5 flex-shrink-0 text-violet-500"
+                                    className="mt-0.5 flex-shrink-0 text-lime-500"
                                     strokeWidth={2}
                                 />
                                 <span className="text-sm text-zinc-400">{cap}</span>
@@ -239,8 +239,8 @@ function ServiceSection({
                 </div>
 
                 {/* Callout */}
-                <div className="border-l-2 border-violet-500/60 bg-violet-950/10 rounded-r-xl p-5 pl-6">
-                    <p className="mb-2 text-xs font-bold uppercase tracking-widest text-violet-400">
+                <div className="border-l-2 border-lime-500/60 bg-lime-950/10 rounded-r-xl p-5 pl-6">
+                    <p className="mb-2 text-xs font-bold uppercase tracking-widest text-lime-400">
                         {section.callout.label}
                     </p>
                     <p className="text-sm leading-relaxed text-zinc-400 italic">
@@ -272,8 +272,8 @@ export default function ServicesPage() {
                 <section ref={heroRef} className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">
                     {/* Ambient glow */}
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 50%)" }} />
-                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(79,70,229,0.06) 0%, rgba(79,70,229,0) 50%)" }} />
+                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 50%)" }} />
+                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(101,163,13,0.06) 0%, rgba(101,163,13,0) 50%)" }} />
                     </div>
 
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
@@ -283,7 +283,7 @@ export default function ServicesPage() {
                             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         >
                             <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                                 services
                             </span>
                             <ClipReveal>
@@ -301,7 +301,7 @@ export default function ServicesPage() {
                                     <a
                                         key={s.id}
                                         href={`#${s.id}`}
-                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300"
+                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300"
                                     >
                                         <span className="font-mono text-xs text-zinc-600">{s.number}</span>
                                         {s.category}
@@ -352,7 +352,7 @@ export default function ServicesPage() {
                                                 href={`#${s.id}`}
                                                 className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-300 ${isActive
                                                     ? "text-white"
-                                                    : "text-zinc-600 hover:text-violet-300"
+                                                    : "text-zinc-600 hover:text-lime-300"
                                                     }`}
                                             >
                                                 {isActive && (
@@ -363,7 +363,7 @@ export default function ServicesPage() {
                                                     />
                                                 )}
                                                 <span
-                                                    className={`relative z-10 h-1.5 w-1.5 rounded-full flex-shrink-0 transition-colors duration-300 ${isActive ? "bg-violet-400" : "bg-zinc-700"
+                                                    className={`relative z-10 h-1.5 w-1.5 rounded-full flex-shrink-0 transition-colors duration-300 ${isActive ? "bg-lime-400" : "bg-zinc-700"
                                                         }`}
                                                 />
                                                 <span className="relative z-10 font-mono text-xs mr-1 opacity-40">{s.number}</span>
@@ -383,7 +383,7 @@ export default function ServicesPage() {
                                     </p>
                                     <Link
                                         href="/contact"
-                                        className="group inline-flex items-center gap-2 text-sm font-medium text-violet-400 transition-colors duration-200 hover:text-violet-300"
+                                        className="group inline-flex items-center gap-2 text-sm font-medium text-lime-400 transition-colors duration-200 hover:text-lime-300"
                                     >
                                         Book a Call
                                         <ArrowRight
@@ -411,13 +411,13 @@ export default function ServicesPage() {
                 {/* ── Tech Stack ── */}
                 <TechStackMarquee />
 
-                {/* Subtle violet border glow separating the scrolling content from the reveal footer */}
+                {/* Subtle lime border glow separating the scrolling content from the reveal footer */}
                 <div
                     aria-hidden="true"
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
-                        background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
-                        boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                        background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
                     }}
                 />
             </div>

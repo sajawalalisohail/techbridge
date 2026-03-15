@@ -6,6 +6,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/shared/JsonLd";
+import SmoothScroll from "@/components/shared/SmoothScroll";
+import ScrollTriggerCleanup from "@/components/shared/ScrollTriggerCleanup";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
 import CursorFollower from "@/components/shared/CursorFollowerWrapper";
 
@@ -65,13 +67,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} bg-black text-white antialiased font-sans`}
+        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} bg-[var(--surface-0)] text-white antialiased font-sans`}
+        suppressHydrationWarning
       >
+        <SmoothScroll />
+        <ScrollTriggerCleanup />
         <JsonLd />
-        <div className="relative min-h-screen bg-black w-full">
-          <div className="relative w-full z-10 bg-black">
+        <div className="relative min-h-screen bg-[var(--surface-0)] w-full">
+          <div className="relative w-full z-10 bg-[var(--surface-0)]">
             <div className="absolute inset-0 z-0 pointer-events-none">
               <div className="sticky top-0 h-screen w-full overflow-hidden">
                 <PageParticlesWrapper />

@@ -46,7 +46,7 @@ export default function DashboardMockup() {
                         {/* Bar container */}
                         <div className="relative h-20 w-8 overflow-hidden rounded-t-sm lg:h-28 lg:w-10">
                             <motion.div
-                                className="absolute inset-x-0 bottom-0 rounded-t-sm bg-gradient-to-t from-violet-600 to-indigo-500"
+                                className="absolute inset-x-0 bottom-0 rounded-t-sm bg-gradient-to-t from-lime-600 to-yellow-500"
                                 style={{ height: bar.height, transformOrigin: "bottom" }}
                                 initial={{ scaleY: 0 }}
                                 animate={isInView ? { scaleY: 1 } : {}}

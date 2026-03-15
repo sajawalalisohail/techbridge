@@ -56,7 +56,7 @@ export default function InsightsPage() {
                     <div
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0"
-                        style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0) 70%)" }}
+                        style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 70%)" }}
                     />
 
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-12">
@@ -66,7 +66,7 @@ export default function InsightsPage() {
                             animate={isHeroInView ? "show" : "hidden"}
                         >
                             <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                                 Engineering Insights
                             </span>
                         </motion.div>
@@ -78,7 +78,7 @@ export default function InsightsPage() {
                             className="text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
                         >
                             Insights{" "}
-                            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                                 from the Build.
                             </span>
                         </motion.h1>
@@ -115,14 +115,14 @@ export default function InsightsPage() {
                                             aria-hidden="true"
                                             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
                                             style={{
-                                                background: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 100%)",
+                                                background: "radial-gradient(ellipse at 50% 0%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 100%)",
                                             }}
                                         />
 
                                         <div className="relative z-10 flex h-full flex-col">
                                             {/* Meta */}
                                             <div className="mb-5 flex items-center gap-3">
-                                                <span className="rounded-full border border-violet-500/20 bg-violet-950/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-violet-300">
+                                                <span className="rounded-full border border-lime-500/20 bg-lime-950/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-lime-300">
                                                     {post.category}
                                                 </span>
                                                 <span className="flex items-center gap-1 text-xs text-zinc-600">
@@ -132,7 +132,7 @@ export default function InsightsPage() {
                                             </div>
 
                                             {/* Title */}
-                                            <h2 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-violet-300">
+                                            <h2 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-lime-300">
                                                 {post.title}
                                             </h2>
 
@@ -146,7 +146,7 @@ export default function InsightsPage() {
                                                 <span className="text-xs text-zinc-600">
                                                     {formatDate(post.publishedAt)}
                                                 </span>
-                                                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-violet-400">
+                                                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-lime-400">
                                                     Read
                                                     <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                                                 </span>
@@ -164,8 +164,8 @@ export default function InsightsPage() {
                     aria-hidden="true"
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
-                        background: 'linear-gradient(90deg, rgba(139,92,246,0) 0%, rgba(139,92,246,0.4) 30%, rgba(99,102,241,0.6) 50%, rgba(139,92,246,0.4) 70%, rgba(139,92,246,0) 100%)',
-                        boxShadow: '0 0 20px 4px rgba(109,40,217,0.25)',
+                        background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
                     }}
                 />
             </div>

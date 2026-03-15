@@ -29,9 +29,9 @@ export default function DataFlowMockup() {
             <svg viewBox="0 0 200 80" className="h-auto w-full">
                 <defs>
                     <linearGradient id="flow-line" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="rgb(139,92,246)" stopOpacity="0.15" />
-                        <stop offset="50%" stopColor="rgb(139,92,246)" stopOpacity="0.4" />
-                        <stop offset="100%" stopColor="rgb(99,102,241)" stopOpacity="0.15" />
+                        <stop offset="0%" stopColor="rgb(132,204,22)" stopOpacity="0.15" />
+                        <stop offset="50%" stopColor="rgb(132,204,22)" stopOpacity="0.4" />
+                        <stop offset="100%" stopColor="rgb(163,230,53)" stopOpacity="0.15" />
                     </linearGradient>
                 </defs>
 
@@ -59,7 +59,7 @@ export default function DataFlowMockup() {
                         {/* Glow */}
                         <motion.circle
                             cx={node.x / 100 * 200} cy="40" r="18"
-                            fill="rgba(139,92,246,0.08)"
+                            fill="rgba(132,204,22,0.08)"
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
                             transition={{ duration: 0.5, ease: EASE, delay: i * 0.2 }}
@@ -68,7 +68,7 @@ export default function DataFlowMockup() {
                         <motion.circle
                             cx={node.x / 100 * 200} cy="40" r="12"
                             fill="rgba(23,23,23,0.8)"
-                            stroke="rgba(139,92,246,0.3)"
+                            stroke="rgba(132,204,22,0.3)"
                             strokeWidth="1"
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -89,7 +89,7 @@ export default function DataFlowMockup() {
                         <motion.text
                             x={node.x / 100 * 200} y="44"
                             textAnchor="middle"
-                            className="fill-violet-400 font-mono text-[8px] font-bold"
+                            className="fill-lime-400 font-mono text-[8px] font-bold"
                             initial={{ opacity: 0 }}
                             animate={isInView ? { opacity: 1 } : {}}
                             transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
@@ -104,7 +104,7 @@ export default function DataFlowMockup() {
                     <motion.circle
                         key={`packet-${line}`}
                         r="2"
-                        fill="rgb(167,139,250)"
+                        fill="rgb(163,230,53)"
                         filter="url(#glow)"
                         initial={{ opacity: 0 }}
                         animate={isInView ? {

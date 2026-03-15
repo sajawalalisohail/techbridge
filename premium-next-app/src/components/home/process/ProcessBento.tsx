@@ -53,7 +53,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-[transform,border-color] duration-300 ease-out hover:border-violet-500/40"
+                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-[transform,border-color] duration-300 ease-out hover:border-lime-500/40"
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* Border gradient pseudo-effect */}
@@ -61,28 +61,28 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
-                        background: "linear-gradient(135deg, rgba(139,92,246,0.15) 0%, transparent 50%, rgba(99,102,241,0.1) 100%)",
+                        background: "linear-gradient(135deg, rgba(132,204,22,0.15) 0%, transparent 50%, rgba(163,230,53,0.1) 100%)",
                     }}
                 />
 
                 <div className="relative z-10 p-7 lg:p-8">
                     {/* Phase number + icon */}
                     <div className="mb-5 flex items-center justify-between">
-                        <span className="font-mono text-4xl font-bold leading-none tracking-tighter text-white/[0.08] select-none group-hover:text-violet-300 transition-colors duration-500">
+                        <span className="font-mono text-4xl font-bold leading-none tracking-tighter text-white/[0.08] select-none group-hover:text-lime-300 transition-colors duration-500">
                             {phase.number}
                         </span>
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-all duration-500 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-all duration-500 group-hover:border-lime-500/40 group-hover:bg-lime-500/5 group-hover:text-lime-300">
                             <Icon size={18} strokeWidth={1.5} />
                         </div>
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-3 text-xl font-semibold leading-snug text-white/90 group-hover:text-violet-300 transition-colors duration-500 lg:text-2xl">
+                    <h3 className="mb-3 text-xl font-semibold leading-snug text-white/90 group-hover:text-lime-300 transition-colors duration-500 lg:text-2xl">
                         {phase.label}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-violet-300 transition-colors duration-500">
+                    <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-lime-300 transition-colors duration-500">
                         {phase.description}
                     </p>
 
@@ -91,7 +91,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                         {phase.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500 transition-colors duration-500 group-hover:border-violet-500/40 group-hover:text-violet-300"
+                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500 transition-colors duration-500 group-hover:border-lime-500/40 group-hover:text-lime-300"
                             >
                                 {tag}
                             </span>
@@ -131,7 +131,7 @@ export default function ProcessBento() {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0) 50%)" }}
+                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(101,163,13,0.03) 0%, rgba(101,163,13,0) 50%)" }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
@@ -144,12 +144,12 @@ export default function ProcessBento() {
                     className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
                         {SECTION_HEADER.eyebrow}
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         {SECTION_HEADER.heading}{" "}
-                        <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
                             {SECTION_HEADER.headingAccent}
                         </span>
                     </h2>

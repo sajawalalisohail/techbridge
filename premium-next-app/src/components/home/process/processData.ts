@@ -25,7 +25,7 @@ export const PHASES: Phase[] = [
         icon: Search,
         label: "Discovery & Blueprinting",
         description:
-            "We map your architecture, business logic, and success metrics before writing a single line of code. This phase eliminates costly re-work and ensures every engineering decision is deliberate.",
+            "We map your architecture, business logic, and success metrics before writing a single line of code. Skipping this is how you end up rewriting everything in six months.",
         tags: ["Stakeholder Workshops", "Technical Scoping", "Architecture Design"],
         Mockup: ArchitectureBlueprintMockup,
     },
@@ -34,16 +34,16 @@ export const PHASES: Phase[] = [
         icon: Code2,
         label: "Core Engineering",
         description:
-            "Building your custom software, SaaS platform, or internal tools using modern, scalable stacks. Clean code, proper abstractions, and thorough documentation - always.",
+            "We build your system. Clean code, documented APIs, proper abstractions. The kind of codebase your next hire can actually onboard into without a Rosetta Stone.",
         tags: ["Full-Stack Development", "API Design", "QA & Testing"],
         Mockup: CodeEditorMockup,
     },
     {
         number: "03",
         icon: BrainCircuit,
-        label: "AI & Automation Integration",
+        label: "AI & Automation",
         description:
-            "Implementing intelligent workflows that reduce overhead and scale operations. We identify the highest-leverage automation opportunities and execute with precision.",
+            "We find the parts of your operation where humans are doing copy-paste work a machine should handle, and we automate those first. Highest ROI, lowest risk.",
         tags: ["AI Workflow Design", "LLM Integration", "Process Automation"],
         Mockup: AIProcessingMockup,
     },
@@ -52,7 +52,7 @@ export const PHASES: Phase[] = [
         icon: Rocket,
         label: "Launch & Deployment",
         description:
-            "MVPs and premium web presences launched in record time to establish immediate ROI and create a feedback loop with real users - not assumptions.",
+            "Your system goes live with monitoring, error tracking, and a deployment pipeline. Not a zip file and a prayer. Real users, real feedback, from day one.",
         tags: ["MVP Launch", "Performance Budgets", "Conversion Architecture"],
         Mockup: DeploymentSuccessMockup,
     },
@@ -63,9 +63,9 @@ export const EASE = [0.22, 1, 0.36, 1] as const;
 
 /* ─── Section Header Data ────────────────────────────────── */
 export const SECTION_HEADER = {
-    eyebrow: "Our Process",
-    heading: "From Concept to",
-    headingAccent: "Scalable Architecture",
+    eyebrow: "how it actually works",
+    heading: "Four phases.",
+    headingAccent: "No surprises.",
     subtitle:
-        "A four-phase methodology that turns ambiguity into precision-engineered systems - on time, every time.",
+        "We don't start coding on day one. Here's what actually happens between 'yes' and 'deployed.'",
 };

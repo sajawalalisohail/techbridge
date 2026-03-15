@@ -4,7 +4,17 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Check, X, ChevronDown, ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { WebsitePlayer } from "@/components/remotion/WebsiteShowcase";
+import {
+    ClipReveal,
+    blurFocusIn,
+    slideFromLeftContainer,
+    slideFromLeftItem,
+    slideFromRightContainer,
+    slideFromRightItem,
+    splitWords,
+    wordContainerVariants,
+    wordVariants,
+} from "@/components/shared/headingAnimations";
 
 
 /* ─── Global ease constant ───────────────────────────────── */
@@ -31,30 +41,6 @@ const childFade = {
 };
 
 /* ─── Section wrapper ────────────────────────────────────── */
-function Section({
-    id,
-    children,
-    className = "",
-}: {
-    id?: string;
-    children: React.ReactNode;
-    className?: string;
-}) {
-    const ref = useRef<HTMLElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-80px" });
-    return (
-        <section id={id} ref={ref} className={`relative ${className}`}>
-            <motion.div
-                variants={fadeUp()}
-                initial="hidden"
-                animate={isInView ? "show" : "hidden"}
-            >
-                {children}
-            </motion.div>
-        </section>
-    );
-}
-
 /* ─── Eyebrow ────────────────────────────────────────────── */
 function Eyebrow({ children }: { children: React.ReactNode }) {
     return (
@@ -111,21 +97,18 @@ function Hero() {
                 >
                     <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shadow-[0_0_6px_rgba(167,139,250,0.8)]" />
                     <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                        TechBridge 24-Hour Studio
+                        24-hour studio
                     </span>
                 </motion.div>
 
-                <motion.h1
-                    variants={fadeUp(0.1)}
-                    initial="hidden"
-                    animate={isInView ? "show" : "hidden"}
-                    className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
-                >
-                    A Premium Website for Your Business.{" "}
-                    <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                        Live in 24 Hours.
-                    </span>
-                </motion.h1>
+                <ClipReveal>
+                    <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+                        Your Website. Custom-Coded.{" "}
+                        <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                            Live Tomorrow.
+                        </span>
+                    </h1>
+                </ClipReveal>
 
                 <motion.p
                     variants={fadeUp(0.2)}
@@ -133,9 +116,9 @@ function Hero() {
                     animate={isInView ? "show" : "hidden"}
                     className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed text-zinc-400"
                 >
-                    Starting from{" "}
+                    From{" "}
                     <span className="font-semibold text-white">$997.</span>{" "}
-                    No templates. No bloated agency timelines. No waiting.
+                    No templates. No WordPress. No three-month timeline. Just a real website, built by engineers, deployed today.
                 </motion.p>
 
                 {/* CTAs */}
@@ -147,9 +130,9 @@ function Hero() {
                 >
                     <a
                         href="#pricing"
-                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_48px_rgba(109,40,217,0.55)]"
+                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-violet-500/10"
                     >
-                        <span className="relative z-10">View Pricing</span>
+                        <span className="relative z-10">See Pricing</span>
                         <ChevronDown size={15} className="relative z-10" />
                         <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     </a>
@@ -157,7 +140,7 @@ function Hero() {
                         href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:bg-white/[0.08]"
+                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300"
                     >
                         Book a Call
                         <ExternalLink size={13} className="text-zinc-500" />
@@ -171,7 +154,7 @@ function Hero() {
                     animate={isInView ? "show" : "hidden"}
                     className="mt-14 flex flex-wrap items-center justify-center gap-8"
                 >
-                    {["Custom-coded - not Wix", "100% satisfaction guarantee", "Built by CS engineers"].map((t) => (
+                    {["Custom code, not a page builder", "100% satisfaction guarantee", "Built by actual engineers"].map((t) => (
                         <span key={t} className="flex items-center gap-2 text-xs text-zinc-600">
                             <Check size={12} className="text-violet-500" />
                             {t}
@@ -201,10 +184,20 @@ function ComparisonTable() {
     return (
         <div ref={ref} className="mx-auto max-w-5xl px-6 lg:px-12">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
-                <Eyebrow>The Credibility Gap</Eyebrow>
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    Not all web studios are equal.
-                </h2>
+                <Eyebrow>the comparison</Eyebrow>
+                <motion.h2
+                    variants={slideFromLeftContainer}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                >
+                    {splitWords("What $997 gets you vs. the alternatives.").map((word, index) => (
+                        <motion.span key={`${word}-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                            {word}
+                        </motion.span>
+                    ))}
+                </motion.h2>
             </motion.div>
 
             <motion.div
@@ -297,12 +290,12 @@ const marqueeCSS = `
 /* Individual pill */
 function StackPill({ name, label }: { name: string; label: string }) {
     return (
-        <div className="group mx-3 flex-shrink-0 flex items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/25 hover:shadow-[0_0_20px_rgba(109,40,217,0.15)]">
+        <div className="group mx-3 flex-shrink-0 flex items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:shadow-violet-500/10">
             {/* Glow dot */}
-            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500/60 shadow-[0_0_6px_rgba(167,139,250,0.6)] group-hover:bg-violet-400" />
+            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500/60 shadow-[0_0_6px_rgba(167,139,250,0.6)] group-hover:bg-violet-500/5" />
             <div>
                 <p className="whitespace-nowrap text-sm font-semibold text-white">{name}</p>
-                <p className="whitespace-nowrap text-xs text-zinc-600 group-hover:text-zinc-500">{label}</p>
+                <p className="whitespace-nowrap text-xs text-zinc-600 group-hover:text-violet-300">{label}</p>
             </div>
         </div>
     );
@@ -319,17 +312,25 @@ function TechStack() {
             {/* Header */}
             <div className="mx-auto mb-16 max-w-5xl px-6 text-center lg:px-12">
                 <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"}>
-                    <Eyebrow>The Arsenal</Eyebrow>
-                    <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                        Silicon Valley Infrastructure.{" "}
-                        <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                            Zero WordPress Bloat.
-                        </span>
-                    </h2>
+                    <Eyebrow>the stack</Eyebrow>
+                    <motion.h2
+                        variants={slideFromRightContainer}
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                    >
+                        {splitWords("Same stack as the fastest sites on the internet.").map((word, index) => (
+                            <motion.span key={`${word}-${index}`} variants={slideFromRightItem} style={{ display: "inline-block" }}>
+                                {word}
+                            </motion.span>
+                        ))}
+                        <motion.span variants={slideFromRightItem} className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent" style={{ display: "inline-block" }}>
+                            None of the bloat.
+                        </motion.span>
+                    </motion.h2>
                     <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-zinc-500">
-                        We don&apos;t use cheap drag-and-drop builders. Your site is engineered on
-                        the exact same modern tech stack used by the world&apos;s fastest tech
-                        companies, deployed globally to the edge.
+                        No drag-and-drop builders. Your site runs on Next.js, deploys to Vercel&apos;s edge network, and loads faster than most sites built at 10x the cost.
                     </p>
                 </motion.div>
             </div>
@@ -381,7 +382,7 @@ function TechStack() {
                     ].map((item) => (
                         <div
                             key={item.label}
-                            className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-white/15"
+                            className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5"
                         >
                             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(109,40,217,0.1) 0%, rgba(109,40,217,0) 100%)" }} />
                             <p className="font-mono text-3xl font-extrabold text-white">{item.stat}</p>
@@ -462,7 +463,7 @@ function TimelineStep({
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                 className={`group relative overflow-hidden rounded-xl border transition-all duration-700 p-6 backdrop-blur-sm ${isCenterInView
                     ? "border-violet-500/50 bg-violet-500/10 shadow-[0_0_30px_rgba(139,92,246,0.15)] scale-[1.01]"
-                    : "border-white/8 bg-neutral-900/50 hover:border-white/15"
+                    : "border-white/8 bg-neutral-900/50 hover:border-violet-500/40"
                     }`}
             >
                 {/* Active glow gradient */}
@@ -486,10 +487,10 @@ function TimelineStep({
                         {step.time}
                     </span>
                 </div>
-                <h3 className={`relative z-10 mb-2 border-none text-base font-bold transition-colors duration-700 ${isCenterInView ? "text-white" : "text-zinc-400 group-hover:text-white"}`}>
+                <h3 className={`relative z-10 mb-2 border-none text-base font-bold transition-colors duration-700 ${isCenterInView ? "text-white" : "text-zinc-400 group-hover:text-violet-300"}`}>
                     {step.title}
                 </h3>
-                <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-700 ${isCenterInView ? "text-zinc-300" : "text-zinc-500 group-hover:text-zinc-400"}`}>
+                <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-700 ${isCenterInView ? "text-zinc-300" : "text-zinc-500 group-hover:text-violet-300"}`}>
                     {step.desc}
                 </p>
             </motion.div>
@@ -536,10 +537,20 @@ function Timeline() {
     return (
         <div ref={sectionRef} className="mx-auto max-w-3xl px-6 lg:px-12">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isHeaderInView ? "show" : "hidden"} className="mb-14 text-center">
-                <Eyebrow>The 24-Hour Process</Eyebrow>
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    From kickoff to live - in a single day.
-                </h2>
+                <Eyebrow>the timeline</Eyebrow>
+                <motion.h2
+                    variants={wordContainerVariants}
+                    initial="hidden"
+                    animate={isHeaderInView ? "show" : "hidden"}
+                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                >
+                    {splitWords("Kickoff at 9am. Live by midnight.").map((word, index) => (
+                        <motion.span key={`${word}-${index}`} variants={wordVariants} style={{ display: "inline-block" }}>
+                            {word}
+                        </motion.span>
+                    ))}
+                </motion.h2>
             </motion.div>
 
             <div
@@ -649,7 +660,7 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
             layout
             onHoverStart={() => setExpanded(index)}
             onClick={() => isExpanded ? onSelect(project) : setExpanded(index)}
-            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'border-white/20 bg-neutral-900/60' : 'border-white/5 bg-neutral-900/20 hover:bg-neutral-900/40'}`}
+            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'border-white/20 bg-neutral-900/60' : 'border-white/5 bg-neutral-900/20 hover:border-violet-500/40 hover:bg-violet-500/5'}`}
         >
             <div className={`p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-opacity ${isExpanded ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}>
 
@@ -672,7 +683,7 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                                     <span key={t} className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500">{t}</span>
                                 ))}
                             </div>
-                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-white tracking-widest uppercase hover:text-violet-400 transition-colors">
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-white tracking-widest uppercase hover:text-violet-300 transition-colors">
                                 View Live Site <ExternalLink size={14} />
                             </a>
                         </motion.div>
@@ -682,7 +693,7 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                 {/* Video Player */}
                 <motion.div
                     layout
-                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-white/20'}`}
+                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-violet-500/40'}`}
                     style={{
                         boxShadow: `0 0 20px ${project.accentColor.replace("rgb", "rgba").replace(")", ", 0.15)")}`
                     }}
@@ -757,10 +768,15 @@ function SocialProof() {
     return (
         <div ref={ref} className="mx-auto max-w-5xl px-6 lg:px-12 py-10">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
-                <Eyebrow>Live Examples</Eyebrow>
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    Built by us. Already live.
-                </h2>
+                <Eyebrow>live proof</Eyebrow>
+                <motion.h2
+                    variants={blurFocusIn()}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                >
+                    These are running right now.
+                </motion.h2>
                 <p className="mt-4 text-sm text-zinc-500 font-mono tracking-widest uppercase">{"//"} INTERACTIVE WALKTHROUGH</p>
             </motion.div>
 
@@ -781,10 +797,10 @@ function SocialProof() {
                         onClick={() => setSelectedProject(null)}
                     >
                         {/* Level 1 Nav: Project Switchers */}
-                        <button onClick={handlePrevProject} className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md">
+                        <button onClick={handlePrevProject} className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-violet-300 hover:bg-violet-500/5 hover:border-violet-500/40 transition-all backdrop-blur-md">
                             <ChevronLeft size={24} />
                         </button>
-                        <button onClick={handleNextProject} className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md">
+                        <button onClick={handleNextProject} className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-violet-300 hover:bg-violet-500/5 hover:border-violet-500/40 transition-all backdrop-blur-md">
                             <ChevronRight size={24} />
                         </button>
                         <motion.div
@@ -798,7 +814,7 @@ function SocialProof() {
                             {/* Close Button */}
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="absolute right-4 md:right-6 top-4 md:top-6 z-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+                                className="absolute right-4 md:right-6 top-4 md:top-6 z-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-2 text-zinc-400 transition-colors hover:bg-violet-500/5 hover:text-violet-300"
                             >
                                 <X size={20} />
                             </button>
@@ -829,13 +845,13 @@ function SocialProof() {
                                 {/* Inner Image Nav Buttons */}
                                 <button
                                     onClick={handlePrevImage}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-white hover:bg-white/15 transition-all"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-violet-300 hover:bg-violet-500/5 transition-all"
                                 >
                                     <ChevronLeft size={18} />
                                 </button>
                                 <button
                                     onClick={handleNextImage}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-white hover:bg-white/15 transition-all"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-violet-300 hover:bg-violet-500/5 transition-all"
                                 >
                                     <ChevronRight size={18} />
                                 </button>
@@ -863,7 +879,7 @@ function SocialProof() {
                                 href={selectedProject.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-900/20"
+                                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5"
                             >
                                 <span className="relative z-10 tracking-widest uppercase">Explore Live Platform</span>
                                 <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -936,11 +952,21 @@ function Pricing() {
     return (
         <div ref={ref} id="pricing" className="mx-auto max-w-6xl px-6 lg:px-12">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
-                <Eyebrow>Transparent Pricing</Eyebrow>
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    Pick your launch tier.
-                </h2>
-                <p className="mt-4 text-zinc-500">All tiers delivered in 24 hours. No hidden fees.</p>
+                <Eyebrow>pricing</Eyebrow>
+                <motion.h2
+                    variants={slideFromLeftContainer}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                >
+                    {splitWords("Three tiers. All shipped in 24 hours.").map((word, index) => (
+                        <motion.span key={`${word}-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                            {word}
+                        </motion.span>
+                    ))}
+                </motion.h2>
+                <p className="mt-4 text-zinc-500">No hidden fees. No surprise invoices. Pick one.</p>
             </motion.div>
 
             <motion.div
@@ -953,10 +979,10 @@ function Pricing() {
                     <motion.div
                         key={tier.name}
                         variants={childFade}
-                        className={`relative flex flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:border-white/20
+                        className={`relative flex flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40
               ${tier.highlight
                                 ? "border-violet-500/40 bg-violet-950/30 shadow-[0_0_40px_rgba(109,40,217,0.2)]"
-                                : "border-white/8 bg-neutral-900/40 hover:bg-neutral-900/60"
+                                : "border-white/8 bg-neutral-900/40 hover:bg-violet-500/5"
                             }`}
                     >
                         {/* Top glow for highlight */}
@@ -998,12 +1024,12 @@ function Pricing() {
                                 rel="noopener noreferrer"
                                 className={`group relative w-full inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300
                   ${tier.highlight
-                                        ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-[0_0_24px_rgba(109,40,217,0.3)] hover:shadow-[0_0_36px_rgba(109,40,217,0.5)] hover:scale-[1.02]"
-                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-white/20 hover:bg-white/[0.08]"
+                                        ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-[0_0_24px_rgba(109,40,217,0.3)] hover:shadow-violet-500/10 hover:scale-[1.02]"
+                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-violet-500/40 hover:bg-violet-500/5"
                                     }`}
                             >
                                 <span className="relative z-10">Book This Plan</span>
-                                <ArrowRight size={14} className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5" />
+                                <ArrowRight size={14} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
                                 {tier.highlight && (
                                     <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                                 )}
@@ -1057,9 +1083,19 @@ function CarePlans() {
         <div ref={ref} className="mx-auto max-w-4xl px-6 lg:px-12">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
                 <Eyebrow>Post-Launch Protection</Eyebrow>
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    Keep it live. Keep it growing.
-                </h2>
+                <motion.h2
+                    variants={slideFromRightContainer}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                >
+                    {splitWords("Keep it live. Keep it growing.").map((word, index) => (
+                        <motion.span key={`${word}-${index}`} variants={slideFromRightItem} style={{ display: "inline-block" }}>
+                            {word}
+                        </motion.span>
+                    ))}
+                </motion.h2>
                 <p className="mt-4 text-zinc-500">Retain us monthly. Cancel anytime.</p>
             </motion.div>
 
@@ -1103,8 +1139,8 @@ function CarePlans() {
                                 rel="noopener noreferrer"
                                 className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300
                   ${plan.highlight
-                                        ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:opacity-90"
-                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-white/20"
+                                        ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-violet-500/10"
+                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-violet-500/40 hover:bg-violet-500/5"
                                     }`}
                             >
                                 Get Started
@@ -1152,9 +1188,19 @@ function FAQ() {
         <div ref={ref} className="mx-auto max-w-3xl px-6 lg:px-12">
             <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"} className="mb-14 text-center">
                 <Eyebrow>Common Questions</Eyebrow>
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    Everything you need to know.
-                </h2>
+                <motion.h2
+                    variants={wordContainerVariants}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                >
+                    {splitWords("Everything you need to know.").map((word, index) => (
+                        <motion.span key={`${word}-${index}`} variants={wordVariants} style={{ display: "inline-block" }}>
+                            {word}
+                        </motion.span>
+                    ))}
+                </motion.h2>
             </motion.div>
 
             <motion.div
@@ -1170,7 +1216,7 @@ function FAQ() {
                             key={i}
                             variants={childFade}
                             className={`overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300
-                ${open ? "border-violet-500/30 bg-violet-950/20" : "border-white/8 bg-neutral-900/40 hover:border-white/15"}`}
+                ${open ? "border-violet-500/30 bg-violet-950/20" : "border-white/8 bg-neutral-900/40 hover:border-violet-500/40 hover:bg-violet-500/5"}`}
                         >
                             <button
                                 onClick={() => setOpenIdx(open ? null : i)}
@@ -1219,15 +1265,20 @@ function FinalCTA() {
                 </motion.div>
 
                 <motion.h2
-                    variants={fadeUp(0.1)}
+                    variants={wordContainerVariants}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
                     className="mb-5 text-4xl font-bold tracking-tight text-white lg:text-5xl xl:text-6xl"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
                 >
-                    Ready to launch{" "}
-                    <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                    {splitWords("Ready to launch").map((word, index) => (
+                        <motion.span key={`${word}-${index}`} variants={wordVariants} style={{ display: "inline-block" }}>
+                            {word}
+                        </motion.span>
+                    ))}
+                    <motion.span variants={wordVariants} className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent" style={{ display: "inline-block" }}>
                         tomorrow?
-                    </span>
+                    </motion.span>
                 </motion.h2>
 
                 <motion.p
@@ -1250,15 +1301,15 @@ function FinalCTA() {
                         href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-10 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_52px_rgba(109,40,217,0.55)]"
+                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-10 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-violet-500/10"
                     >
                         <span className="relative z-10">Book Your Slot</span>
-                        <ArrowRight size={15} className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5" />
+                        <ArrowRight size={15} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
                         <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     </a>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-white"
+                        className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-violet-300"
                     >
                         Or send us a message first →
                     </Link>

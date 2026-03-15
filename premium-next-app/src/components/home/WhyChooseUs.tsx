@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-react";
+import { blurFocusIn, fadeUp } from "@/components/shared/headingAnimations";
 import {
     AINativeIllustration,
     ZeroBloatIllustration,
@@ -25,44 +26,44 @@ interface Advantage {
 const ADVANTAGES: Advantage[] = [
     {
         icon: BrainCircuit,
-        eyebrow: "Modern Stack",
-        title: "AI-Native Engineering",
+        eyebrow: "how we build",
+        title: "AI From Line One",
         description:
-            "We don't bolt AI on at the end. Every system we build is designed from the ground up with modern AI stacks, intelligent automation, and machine-readable APIs - so your business can compound its advantage over time.",
-        detail: "Built with AI from line one.",
+            "We don't bolt AI on at the end. Every system we build ships with machine-readable APIs and automation hooks from day one. So you're not paying us again in six months to retrofit it.",
+        detail: "Not bolted on later.",
         accentA: "rgba(139,92,246,0.18)",
         accentB: "rgba(99,102,241,0.12)",
         Illustration: AINativeIllustration,
     },
     {
         icon: Users,
-        eyebrow: "Direct Access",
-        title: "Zero Bloat. Senior Engineers Only.",
+        eyebrow: "who you work with",
+        title: "No Middlemen. No Juniors.",
         description:
-            "No layers of middlemen. No junior devs flying blind. You work directly with the engineers building your system — faster decisions, zero information loss.",
-        detail: "You talk to the builder.",
+            "You talk to the person writing your code. Not a project manager who translates your requirements wrong, not a junior dev learning on your dime.",
+        detail: "Slack the person writing your code.",
         accentA: "rgba(99,102,241,0.15)",
         accentB: "rgba(167,139,250,0.10)",
         Illustration: ZeroBloatIllustration,
     },
     {
         icon: Rocket,
-        eyebrow: "Velocity",
-        title: "Rapid Execution",
+        eyebrow: "speed",
+        title: "We Ship Fast Because We're Good",
         description:
-            "Speed is a competitive moat, not a luxury. We ship MVPs in weeks, premium web presences in 24 hours, and maintain that velocity through every phase - without sacrificing engineering quality.",
-        detail: "Production-ready in days.",
+            "MVPs in weeks, websites in 24 hours. Not because we skip testing or write sloppy code. We've done this enough to know exactly where time gets wasted.",
+        detail: "Weeks, not quarters.",
         accentA: "rgba(167,139,250,0.16)",
         accentB: "rgba(99,102,241,0.12)",
         Illustration: VelocityIllustration,
     },
     {
         icon: Shield,
-        eyebrow: "Resilience",
-        title: "Enterprise-Grade Foundations",
+        eyebrow: "longevity",
+        title: "Code That Survives Your Series B",
         description:
-            "Every system is architected for scale, security, and observability from the start. We write the kind of code that survives your Series B - not a re-write every 18 months.",
-        detail: "Built to handle your growth.",
+            "Every system gets proper auth, monitoring, and test coverage from sprint one. We've seen too many startups hit growth then spend six months rewriting everything.",
+        detail: "No rewrites in 18 months.",
         accentA: "rgba(109,40,217,0.15)",
         accentB: "rgba(139,92,246,0.10)",
         Illustration: ResilienceIllustration,
@@ -91,7 +92,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
     return (
         <motion.div
             variants={cardVariants}
-            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15 lg:p-10"
+            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5 lg:p-10"
         >
             {/* ── Gradient mesh - always mounted, fades in on hover ── */}
             <div
@@ -119,12 +120,12 @@ function AdvantageCard({ item }: { item: Advantage }) {
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col">
                 {/* Icon */}
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400">
+                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300">
                     <Icon size={22} strokeWidth={1.5} />
                 </div>
 
                 {/* Eyebrow */}
-                <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 transition-colors duration-300 group-hover:text-zinc-500">
+                <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 transition-colors duration-300 group-hover:text-violet-300">
                     {item.eyebrow}
                 </p>
 
@@ -134,7 +135,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
                 </h3>
 
                 {/* Description */}
-                <p className="flex-1 text-sm leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-zinc-400 lg:text-base">
+                <p className="flex-1 text-sm leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-violet-300 lg:text-base">
                     {item.description}
                 </p>
 
@@ -146,7 +147,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
                 {/* Pull-quote differentiator */}
                 <div className="mt-4 flex items-center gap-3 border-t border-white/5 pt-6">
                     <span className="h-px w-5 flex-shrink-0 bg-violet-500/60" />
-                    <p className="text-sm font-semibold text-zinc-300 transition-colors duration-300 group-hover:text-white">
+                    <p className="text-sm font-semibold text-zinc-300 transition-colors duration-300 group-hover:text-violet-300">
                         {item.detail}
                     </p>
                 </div>
@@ -185,30 +186,41 @@ export default function WhyChooseUs() {
 
                 <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                     {/* ── Section Header ── */}
-                    <motion.div
+                    <div
                         ref={headerRef}
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         className="mb-16 lg:mb-20"
                     >
-                        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                        <motion.span
+                            variants={fadeUp()}
+                            initial="hidden"
+                            animate={isHeaderInView ? "show" : "hidden"}
+                            className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                        >
                             <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                            The TechBridge Advantage
-                        </span>
+                            why us, honestly
+                        </motion.span>
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                            <h2 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                                We don&apos;t just write code.{" "}
+                            <motion.h2
+                                variants={blurFocusIn()}
+                                initial="hidden"
+                                animate={isHeaderInView ? "show" : "hidden"}
+                                className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                            >
+                                Four reasons we&apos;re different.{" "}
                                 <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                    We build leverage.
+                                    Judge for yourself.
                                 </span>
-                            </h2>
-                            <p className="max-w-sm text-base leading-relaxed text-zinc-500 lg:text-right">
-                                Four principles that separate precision engineering
-                                from expensive mediocrity.
-                            </p>
+                            </motion.h2>
+                            <motion.p
+                            variants={fadeUp()}
+                            initial="hidden"
+                            animate={isHeaderInView ? "show" : "hidden"}
+                            className="max-w-sm text-base leading-relaxed text-zinc-500 lg:text-right"
+                            >
+                                Every agency claims to be different. Here&apos;s what we actually do that most won&apos;t.
+                            </motion.p>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* ── 2×2 Grid ── */}
                     <motion.div

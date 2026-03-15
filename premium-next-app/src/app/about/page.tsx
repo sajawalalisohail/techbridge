@@ -17,6 +17,7 @@ import {
     XCircle,
 } from "lucide-react";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import { blurFocusIn, slideFromLeft, slideFromRight, wordContainerVariants, wordVariants, ClipReveal } from "@/components/shared/headingAnimations";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -42,27 +43,27 @@ const childFade = {
 const VALUES = [
     {
         icon: Code2,
-        title: "First-Principles Thinking",
+        title: "First Principles Over Trends",
         description:
-            "We trace architecture decisions back to real constraints instead of trends, templates, or agency habits.",
+            "We make architecture decisions based on your actual constraints, not whatever framework is trending on Twitter this week.",
     },
     {
         icon: Shield,
-        title: "Ownership Over Output",
+        title: "We Ship It, We Own It",
         description:
-            "We stay close to what we ship. The goal is not delivery theater, it is dependable software and accountable execution.",
+            "No delivery theater. If we built it, we're accountable for it. The goal is dependable software, not impressive slide decks.",
     },
     {
         icon: Clock,
-        title: "Velocity Without Shortcuts",
+        title: "Fast Because We're Disciplined",
         description:
-            "We move fast by tightening process and reducing waste, not by cutting quality or piling on technical debt.",
+            "We move fast by eliminating waste from the process, not by skipping tests or writing code that future-you will regret.",
     },
     {
         icon: Globe,
-        title: "Global Execution, Clear Oversight",
+        title: "Two Time Zones, One Standard",
         description:
-            "US-based leadership and architecture paired with a dedicated engineering function in Pakistan for reliable delivery scale.",
+            "Architecture and oversight in West Virginia. Engineering execution in Lahore. Same code reviews, same standards, same accountability.",
     },
 ];
 
@@ -134,22 +135,22 @@ const COMPARISON = [
 const SECURITY_ITEMS = [
     {
         icon: Lock,
-        title: "End-to-End Encryption",
+        title: "Encryption in Transit and at Rest",
         description: "All data in transit and at rest is handled with industry-standard encryption practices.",
     },
     {
         icon: FileCheck,
-        title: "Code Audit Trail",
+        title: "Every Change Is Traceable",
         description: "Every deployment and change is traceable, reviewable, and easy to reason about.",
     },
     {
         icon: Shield,
-        title: "OWASP-Aligned Delivery",
+        title: "OWASP During Development, Not After",
         description: "Security posture is considered during architecture and implementation, not bolted on later.",
     },
     {
         icon: Globe,
-        title: "Data Residency Control",
+        title: "Your Data Stays Where You Need It",
         description: "We deploy to the regions your compliance and operations teams actually need.",
     },
 ];
@@ -216,16 +217,16 @@ export default function AboutPage() {
                         <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
                             <span className="h-px w-4 bg-violet-500/40" />
-                            The TechBridge Ethos
+                            about us
                         </motion.span>
-                        <motion.h1 variants={fadeUp(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                            Engineering as a discipline.{" "}
+                        <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
+                            We&apos;re engineers.{" "}
                             <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                Not an afterthought.
+                                Not an agency wearing a tech hat.
                             </span>
                         </motion.h1>
                         <motion.p variants={fadeUp(0.22)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
-                            We build with computer science fundamentals, disciplined execution, and a bias toward systems that stay dependable as they grow.
+                            CS fundamentals, disciplined execution, and a deep discomfort with shipping anything we wouldn&apos;t maintain ourselves.
                         </motion.p>
                     </div>
                 </section>
@@ -236,19 +237,24 @@ export default function AboutPage() {
                             <FounderCard />
                         </motion.div>
                         <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isStoryInView ? "show" : "hidden"} className="flex flex-col justify-center">
-                            <span className="mb-4 text-xs font-semibold uppercase tracking-widest text-zinc-600">Our Story</span>
-                            <h2 className="mb-7 text-3xl font-bold leading-snug tracking-tight text-white lg:text-4xl">
-                                Built from first principles.
-                            </h2>
+                            <span className="mb-4 text-xs font-semibold uppercase tracking-widest text-zinc-600">the short version</span>
+                            <motion.h2
+                                variants={slideFromLeft}
+                                initial="hidden"
+                                animate={isStoryInView ? "show" : "hidden"}
+                                className="mb-7 text-3xl font-bold leading-snug tracking-tight text-white lg:text-4xl"
+                            >
+                                Started because agencies kept disappointing us too.
+                            </motion.h2>
                             <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                Headquartered in Morgantown, West Virginia, TechBridge was founded to solve a familiar B2B problem: too much digital work looks polished on the surface but falls apart at the architecture layer.
+                                Based in Morgantown, WV. Founded because we kept seeing the same thing: agencies delivering beautiful front-ends on top of architectures that collapse under real load.
                             </p>
                             <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                We bring deeper engineering discipline to businesses that need technology to compound advantage over time, not create drag six months after launch.
+                                We bring actual engineering rigor to B2B companies that need their tech to be an asset, not a liability that slows them down in six months.
                             </p>
                             <div className="mt-10 border-l-2 border-violet-500/60 pl-6">
                                 <p className="text-base font-medium italic text-zinc-300 lg:text-lg">
-                                    &quot;Technology should compound your advantage over time, not create debt that slows you down.&quot;
+                                    &quot;Your tech stack should be a weapon, not a weight.&quot;
                                 </p>
                                 <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                     Sajawal Ali Sohail, Founder
@@ -265,14 +271,21 @@ export default function AboutPage() {
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                                The Engineering Foundation
+                                who builds your system
                             </span>
-                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">Who builds your systems.</h2>
+                            <motion.h2
+                                variants={slideFromRight}
+                                initial="hidden"
+                                animate={isTeamInView ? "show" : "hidden"}
+                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                            >
+                                Names, not titles.
+                            </motion.h2>
                         </motion.div>
 
                         <motion.div variants={staggerContainer} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             {TEAM.map((member) => (
-                                <motion.article key={member.name} variants={childFade} className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15">
+                                <motion.article key={member.name} variants={childFade} className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
                                     <div className="relative z-10">
                                         <div className="mb-6 flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-4">
@@ -284,7 +297,7 @@ export default function AboutPage() {
                                                     <h3 className="mt-3 text-xl font-bold tracking-tight text-white">{member.name}</h3>
                                                 </div>
                                             </div>
-                                            <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} LinkedIn`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/40 hover:text-violet-300">
+                                            <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} LinkedIn`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300">
                                                 <Linkedin size={18} />
                                             </a>
                                         </div>
@@ -325,7 +338,19 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="mb-14">
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />Milestones</span>
-                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">How we got here.</h2>
+                            <motion.h2
+                                variants={wordContainerVariants}
+                                initial="hidden"
+                                animate={isTimelineInView ? "show" : "hidden"}
+                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                            >
+                                {["How", "we", "got", "here."].map((word, index) => (
+                                    <motion.span key={`${word}-${index}`} variants={wordVariants} style={{ display: "inline-block" }}>
+                                        {word}
+                                    </motion.span>
+                                ))}
+                            </motion.h2>
                         </motion.div>
                         <motion.div variants={staggerContainer} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="space-y-12 lg:space-y-16">
                             {TIMELINE.map((event) => (
@@ -352,15 +377,22 @@ export default function AboutPage() {
                 <section ref={valuesRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isValuesInView ? "show" : "hidden"} className="mb-16">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />Core Values</span>
-                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">The principles we do not compromise on.</h2>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />what we won&apos;t compromise</span>
+                            <motion.h2
+                                variants={blurFocusIn()}
+                                initial="hidden"
+                                animate={isValuesInView ? "show" : "hidden"}
+                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                            >
+                                Four things we actually mean.
+                            </motion.h2>
                         </motion.div>
                         <motion.div variants={staggerContainer} initial="hidden" animate={isValuesInView ? "show" : "hidden"} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                             {VALUES.map((value) => {
                                 const Icon = value.icon;
                                 return (
-                                    <motion.div key={value.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-neutral-900/60">
-                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400"><Icon size={20} strokeWidth={1.5} /></div>
+                                    <motion.div key={value.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
+                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300"><Icon size={20} strokeWidth={1.5} /></div>
                                         <h3 className="mb-3 text-lg font-bold tracking-tight text-white">{value.title}</h3>
                                         <p className="text-sm leading-relaxed text-zinc-500">{value.description}</p>
                                     </motion.div>
@@ -375,8 +407,15 @@ export default function AboutPage() {
                 <section ref={diffRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />The Difference</span>
-                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">TechBridge vs. the typical agency.</h2>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />honest comparison</span>
+                            <motion.h2
+                                variants={slideFromLeft}
+                                initial="hidden"
+                                animate={isDiffInView ? "show" : "hidden"}
+                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                            >
+                                Us vs. the last agency you hired.
+                            </motion.h2>
                         </motion.div>
                         <motion.div variants={fadeUp(0.1)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/30 backdrop-blur-sm">
                             <div className="grid grid-cols-[1fr_80px_80px] items-center border-b border-white/8 px-6 py-4 sm:grid-cols-[1fr_120px_120px] sm:px-8">
@@ -400,15 +439,22 @@ export default function AboutPage() {
                 <section ref={securityRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isSecurityInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />Trust & Security</span>
-                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">Enterprise-grade security, not afterthought checkboxes.</h2>
+                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />security</span>
+                            <motion.h2
+                                variants={slideFromRight}
+                                initial="hidden"
+                                animate={isSecurityInView ? "show" : "hidden"}
+                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                            >
+                                Security that&apos;s built in, not bolted on.
+                            </motion.h2>
                         </motion.div>
                         <motion.div variants={staggerContainer} initial="hidden" animate={isSecurityInView ? "show" : "hidden"} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                             {SECURITY_ITEMS.map((item) => {
                                 const Icon = item.icon;
                                 return (
-                                    <motion.div key={item.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15">
-                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-green-500/30 group-hover:bg-green-950/30 group-hover:text-green-400"><Icon size={20} strokeWidth={1.5} /></div>
+                                    <motion.div key={item.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
+                                        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300"><Icon size={20} strokeWidth={1.5} /></div>
                                         <h3 className="mb-2 text-base font-bold tracking-tight text-white">{item.title}</h3>
                                         <p className="text-sm leading-relaxed text-zinc-500">{item.description}</p>
                                     </motion.div>
@@ -424,14 +470,16 @@ export default function AboutPage() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
                             <div className="max-w-xl">
-                                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                                    Ready to work with engineers who <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">actually build?</span>
-                                </h2>
-                                <p className="mt-4 text-base leading-relaxed text-zinc-400">Book a discovery call and talk directly to the team that will design, architect, and ship your system.</p>
+                                <ClipReveal>
+                                    <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                        Ready to talk to the people who&apos;ll <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">actually write your code?</span>
+                                    </h2>
+                                </ClipReveal>
+                                <p className="mt-4 text-base leading-relaxed text-zinc-400">30 minutes. No sales pitch. Just the engineer who&apos;ll architect your system.</p>
                             </div>
-                            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-[0_0_48px_rgba(109,40,217,0.5)]">
-                                Start a Project
-                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-violet-500/10">
+                                Book a Call
+                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
                             </Link>
                         </div>
                     </div>

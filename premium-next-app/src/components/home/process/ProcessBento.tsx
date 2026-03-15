@@ -53,7 +53,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-[transform,border-color] duration-300 ease-out hover:border-white/20"
+                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-[transform,border-color] duration-300 ease-out hover:border-violet-500/40"
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* Border gradient pseudo-effect */}
@@ -68,21 +68,21 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                 <div className="relative z-10 p-7 lg:p-8">
                     {/* Phase number + icon */}
                     <div className="mb-5 flex items-center justify-between">
-                        <span className="font-mono text-4xl font-bold leading-none tracking-tighter text-white/[0.08] select-none group-hover:text-white/[0.15] transition-colors duration-500">
+                        <span className="font-mono text-4xl font-bold leading-none tracking-tighter text-white/[0.08] select-none group-hover:text-violet-300 transition-colors duration-500">
                             {phase.number}
                         </span>
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-all duration-500 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-all duration-500 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300">
                             <Icon size={18} strokeWidth={1.5} />
                         </div>
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-3 text-xl font-semibold leading-snug text-white/90 group-hover:text-white transition-colors duration-500 lg:text-2xl">
+                    <h3 className="mb-3 text-xl font-semibold leading-snug text-white/90 group-hover:text-violet-300 transition-colors duration-500 lg:text-2xl">
                         {phase.label}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-zinc-400 transition-colors duration-500">
+                    <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-violet-300 transition-colors duration-500">
                         {phase.description}
                     </p>
 
@@ -91,7 +91,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                         {phase.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500 transition-colors duration-500 group-hover:border-violet-500/20 group-hover:text-zinc-400"
+                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500 transition-colors duration-500 group-hover:border-violet-500/40 group-hover:text-violet-300"
                             >
                                 {tag}
                             </span>

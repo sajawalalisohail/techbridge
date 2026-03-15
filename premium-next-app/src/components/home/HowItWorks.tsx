@@ -1,10 +1,10 @@
 "use client";
 
-import { ProcessStepper, ProcessBento, ProcessTimeline } from "./process";
+import { ProcessStepper, ProcessBento, ProcessTimeline, ProcessScroll } from "./process";
 
 /* ─── Main Export ────────────────────────────────────────── */
 interface HowItWorksProps {
-    variant?: "stepper" | "bento" | "timeline";
+    variant?: "stepper" | "bento" | "timeline" | "scroll";
 }
 
 export default function HowItWorks({ variant = "timeline" }: HowItWorksProps) {
@@ -15,5 +15,7 @@ export default function HowItWorks({ variant = "timeline" }: HowItWorksProps) {
             return <ProcessBento />;
         case "timeline":
             return <ProcessTimeline />;
+        case "scroll":
+            return <ProcessScroll />;
     }
 }

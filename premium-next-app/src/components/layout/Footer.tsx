@@ -122,7 +122,7 @@ export default function Footer() {
                                 </span>
                             </Link>
                             <p className="text-sm leading-relaxed text-zinc-500">
-                                Precision-engineered systems for businesses that refuse to settle.
+                                Software that works after the demo.
                             </p>
 
                             {/* Social row */}
@@ -132,7 +132,7 @@ export default function Footer() {
                                         key={s.label}
                                         href={s.href}
                                         aria-label={s.label}
-                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-violet-500/30 hover:bg-violet-950/30 hover:text-violet-400"
+                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300"
                                     >
                                         {s.icon}
                                     </a>
@@ -150,7 +150,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-violet-400"
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-violet-300"
                                         >
                                             {link.label}
                                         </Link>
@@ -169,7 +169,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-violet-400"
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-violet-300"
                                         >
                                             {link.label}
                                         </Link>
@@ -196,16 +196,16 @@ export default function Footer() {
                             <span className="font-mono tabular-nums">&copy; {year}</span> TechBridge. All rights reserved.
                         </p>
                         <div className="flex items-center gap-4">
-                            <Link href="/privacy" className="text-xs text-zinc-700 transition-colors hover:text-zinc-400">
+                            <Link href="/privacy" className="text-xs text-zinc-700 transition-colors hover:text-violet-300">
                                 Privacy Policy
                             </Link>
                             <span className="text-zinc-800">·</span>
-                            <Link href="/terms" className="text-xs text-zinc-700 transition-colors hover:text-zinc-400">
+                            <Link href="/terms" className="text-xs text-zinc-700 transition-colors hover:text-violet-300">
                                 Terms
                             </Link>
                             <span className="text-zinc-800">·</span>
                             <p className="text-xs text-zinc-700">
-                                Engineered with precision.
+                                Built in Morgantown, WV.
                             </p>
                         </div>
                     </div>

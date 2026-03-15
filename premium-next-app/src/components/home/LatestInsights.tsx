@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
+import { slideFromLeft } from "@/components/shared/headingAnimations";
 import { INSIGHTS } from "@/data/insights";
 
 /* ─── Animation ──────────────────────────────────────────── */
@@ -39,33 +40,43 @@ export default function LatestInsights() {
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 {/* ── Header ── */}
-                <motion.div
+                <div
                     ref={headerRef}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7, ease: EASE }}
                     className="mb-14 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
                 >
                     <div>
-                        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                        <motion.span
+                            initial={{ opacity: 0, y: 24 }}
+                            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.7, ease: EASE }}
+                            className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                        >
                             <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                            Latest Insights
-                        </span>
-                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                            From the{" "}
-                            <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                Build.
-                            </span>
-                        </h2>
+                            from the blog
+                        </motion.span>
+                        <motion.h2
+                            variants={slideFromLeft}
+                            initial="hidden"
+                            animate={isHeaderInView ? "show" : "hidden"}
+                            className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                        >
+                            What we&apos;re thinking about.
+                        </motion.h2>
                     </div>
-                    <Link
-                        href="/insights"
-                        className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.7, ease: EASE }}
                     >
-                        All Insights
-                        <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                </motion.div>
+                        <Link
+                            href="/insights"
+                            className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-300"
+                        >
+                            Read More
+                            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                        </Link>
+                    </motion.div>
+                </div>
 
                 {/* ── Cards ── */}
                 <motion.div
@@ -78,7 +89,7 @@ export default function LatestInsights() {
                         <motion.article key={post.slug} variants={childFade}>
                             <Link
                                 href={`/insights/${post.slug}`}
-                                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
+                                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5"
                             >
                                 {/* Hover glow */}
                                 <div
@@ -102,7 +113,7 @@ export default function LatestInsights() {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-violet-200">
+                                    <h3 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-violet-300">
                                         {post.title}
                                     </h3>
 
@@ -112,7 +123,7 @@ export default function LatestInsights() {
                                     </p>
 
                                     {/* CTA */}
-                                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-violet-400">
+                                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-violet-300">
                                         Read Insight
                                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                                     </span>
@@ -126,9 +137,9 @@ export default function LatestInsights() {
                 <div className="mt-10 lg:hidden">
                     <Link
                         href="/insights"
-                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-300"
                     >
-                        All Insights
+                        Read More
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
                 </div>

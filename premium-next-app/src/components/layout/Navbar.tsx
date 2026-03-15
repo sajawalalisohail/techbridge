@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 
 const NAV_LINKS = [
     { label: "Services", href: "/services" },
-    { label: "24-Hr Studio", href: "/websites" },
+    { label: "24-Hr Websites", href: "/websites" },
     { label: "Work", href: "/work" },
     { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },
@@ -86,16 +86,16 @@ export default function Navbar() {
 
                             <div className="relative z-10 mx-auto flex w-full items-center justify-center py-2.5 px-12 sm:px-16">
                                 <p className="text-center text-sm font-medium text-zinc-300">
-                                    Need a premium web presence fast? Launch your site in 24 hours.{" "}
-                                    <Link href="/websites" className="text-white hover:text-indigo-300 underline underline-offset-4 transition-colors">
-                                        Explore the Studio &rarr;
+                                    Need a website fast? Custom-coded and live in 24 hours.{" "}
+                                    <Link href="/websites" className="text-white hover:text-violet-300 underline underline-offset-4 transition-colors">
+                                        See how &rarr;
                                     </Link>
                                 </p>
                             </div>
 
                             <button
                                 onClick={() => setBannerVisible(false)}
-                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors sm:right-5"
+                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-violet-500/5 hover:text-violet-300 transition-colors sm:right-5"
                                 aria-label="Dismiss banner"
                             >
                                 <X size={16} />
@@ -147,7 +147,7 @@ export default function Navbar() {
                                             after:absolute after:-bottom-0.5 after:left-0 after:h-px after:transition-all after:duration-300
                                             ${active
                                                         ? "text-white after:w-full after:bg-violet-400 drop-shadow-[0_0_8px_rgba(167,139,250,0.6)]"
-                                                        : "text-zinc-400 hover:text-white after:w-0 after:bg-white hover:after:w-full"
+                                                        : "text-zinc-400 hover:text-violet-300 after:w-0 after:bg-white hover:after:w-full"
                                                     }`}
                                             >
                                                 {link.label}
@@ -161,12 +161,12 @@ export default function Navbar() {
                             <div className="hidden md:flex items-center gap-4">
                                 <Link
                                     href="/contact"
-                                    className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/15 bg-white/5 text-sm font-medium text-white transition-all duration-300 hover:border-white/30 hover:bg-white/10 ${navState === "pill" ? "px-4 py-1.5 text-xs" : "px-5 py-2"
+                                    className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/15 bg-white/5 text-sm font-medium text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 ${navState === "pill" ? "px-4 py-1.5 text-xs" : "px-5 py-2"
                                         }`}
                                 >
-                                    <span className="relative z-10">Start a Project</span>
+                                    <span className="relative z-10">Talk to Us</span>
                                     <svg
-                                        className="relative z-10 h-3.5 w-3.5 translate-x-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                                        className="relative z-10 h-3.5 w-3.5 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                                     >
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -206,7 +206,7 @@ export default function Navbar() {
                                                 <Link
                                                     href={link.href}
                                                     onClick={() => setMobileOpen(false)}
-                                                    className={`text-base transition-colors ${active ? "text-violet-400 font-medium" : "text-zinc-300 hover:text-white"}`}
+                                                    className={`text-base transition-colors ${active ? "text-violet-400 font-medium" : "text-zinc-300 hover:text-violet-300"}`}
                                                 >
                                                     {link.label}
                                                 </Link>

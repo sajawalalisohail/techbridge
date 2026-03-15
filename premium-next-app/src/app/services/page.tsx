@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import HowItWorks from "@/components/home/HowItWorks";
 import TechStackMarquee from "@/components/home/TechStackMarquee";
+import { ClipReveal } from "@/components/shared/headingAnimations";
 
 /* ─── Data ───────────────────────────────────────────────── */
 const SECTIONS = [
@@ -22,9 +23,9 @@ const SECTIONS = [
         number: "01",
         category: "Custom Software & SaaS",
         icon: Code2,
-        subHeadline: "Architecture that evolves with your business.",
+        subHeadline: "Architecture that your next engineer can actually understand.",
         description:
-            "We design and build enterprise-grade custom software — scalable, secure, and maintainable systems architected for the long term. No shortcuts that compound into a re-write two years later.",
+            "We build custom software that doesn't need a rewrite in two years. Multi-tenant SaaS, internal platforms, enterprise systems, all with clean code and actual documentation.",
         capabilities: [
             "Multi-tenant SaaS platforms",
             "Real-time dashboards & analytics",
@@ -38,7 +39,7 @@ const SECTIONS = [
         stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Redis", "Docker", "AWS"],
         callout: {
             label: "Founder's Principle",
-            text: "Every system we build can be picked up and extended by any senior engineer — not just ours. Clean code, clear abstractions, and thorough documentation are non-negotiable.",
+            text: "Any senior engineer should be able to clone your repo and ship a feature within a week. That's the bar we hold ourselves to.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -47,9 +48,9 @@ const SECTIONS = [
         number: "02",
         category: "AI Workflow Automation",
         icon: BrainCircuit,
-        subHeadline: "Replace 20 hours of manual work per week with one intelligent workflow.",
+        subHeadline: "Your team is wasting 20 hours a week on work a machine should do.",
         description:
-            "We identify your highest-cost manual processes and replace them with LLM-powered automations, custom AI agents, and intelligent data pipelines — seamlessly integrated with your existing tools and business logic. Clients typically see 30-50% reduction in operational overhead within the first quarter.",
+            "We find your most expensive manual processes and replace them with LLM-powered workflows, custom agents, and data pipelines that plug into your existing tools. Most clients cut 30-50% of ops overhead in the first quarter.",
         capabilities: [
             "LLM integration (GPT-4o, Claude, Gemini)",
             "Custom AI agents & autonomous workflows",
@@ -63,7 +64,7 @@ const SECTIONS = [
         stack: ["Python", "LangChain", "OpenAI", "Anthropic", "Pinecone", "FastAPI", "n8n", "Zapier"],
         callout: {
             label: "Founder's Principle",
-            text: "We don't suggest prompts. We build production-ready AI systems that run reliably, can be monitored, and improve over time — with full observability and fallback handling.",
+            text: "We don't hand you a prompt library. We ship production AI systems with monitoring, fallback handling, and observability. The things that actually matter when it breaks at 2am.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -72,9 +73,9 @@ const SECTIONS = [
         number: "03",
         category: "24-Hour Web Presence",
         icon: Zap,
-        subHeadline: "Premium brand authority. Delivered in a single working day.",
+        subHeadline: "You'll be live before your competitor finishes their agency brief.",
         description:
-            "For businesses that need a high-quality web presence now — not in three months. We deploy conversion-optimized, performance-first websites with premium design execution, live and ready for traffic in 24 hours.",
+            "For founders who need a real website now, not a 12-week agency timeline. Custom-coded, conversion-optimized, and live before end of day. No templates, no page builders.",
         capabilities: [
             "Next.js App Router, performance-first",
             "Custom UI/UX — not a template",
@@ -88,7 +89,7 @@ const SECTIONS = [
         stack: ["Next.js", "Tailwind CSS", "Framer Motion", "Sanity", "Vercel", "Cloudflare"],
         callout: {
             label: "Founder's Principle",
-            text: "Most agencies charge $15k and take 3 months. We deliver in 24 hours — not because we cut corners, but because we've engineered the process to remove wasted time and deliver only what matters.",
+            text: "Most agencies charge $15k and take 3 months for a marketing site. We do it in 24 hours because we've cut every minute of waste from the process, not the quality.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -97,9 +98,9 @@ const SECTIONS = [
         number: "04",
         category: "Mobile App Development",
         icon: Smartphone,
-        subHeadline: "Your product, in every pocket.",
+        subHeadline: "Apps people actually keep installed.",
         description:
-            "We build native and cross-platform mobile applications that feel fast, look premium, and scale to millions of users. From MVP to App Store — we handle the full lifecycle with the same engineering rigour we bring to every platform.",
+            "Cross-platform and native mobile apps that feel fast on real devices, not just in the simulator. We handle the full lifecycle: architecture, build, App Store deployment, and the painful parts in between.",
         capabilities: [
             "React Native & Flutter cross-platform",
             "Native iOS (Swift) & Android (Kotlin)",
@@ -113,7 +114,7 @@ const SECTIONS = [
         stack: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "Expo", "Fastlane", "TestFlight"],
         callout: {
             label: "Founder's Principle",
-            text: "A mobile app isn't a smaller website. We engineer for constrained devices, unreliable networks, and users who uninstall after one bad experience. Every millisecond of startup time matters.",
+            text: "A mobile app isn't a responsive website in a wrapper. We build for spotty connections, impatient users, and the reality that one laggy screen means an uninstall.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -122,9 +123,9 @@ const SECTIONS = [
         number: "05",
         category: "UI/UX Design & Branding",
         icon: Palette,
-        subHeadline: "Design that converts, not just decorates.",
+        subHeadline: "Design that ships to production, not just Figma.",
         description:
-            "We create research-driven design systems, brand identities, and user experiences that drive measurable business outcomes. Every pixel is intentional — backed by user research, tested against real behaviour, and built for production handoff.",
+            "Design systems, brand identity, and UX grounded in actual user research. We design inside the constraints of real engineering systems, so what ships is exactly what was designed. Not a watered-down version.",
         capabilities: [
             "User research & persona development",
             "Wireframing & interactive prototyping",
@@ -138,7 +139,7 @@ const SECTIONS = [
         stack: ["Figma", "Adobe Creative Suite", "Framer", "Principle", "Lottie", "Storybook"],
         callout: {
             label: "Founder's Principle",
-            text: "Design without engineering context creates beautiful things that can't be built. We design inside the constraints of real systems — so what ships is exactly what was designed.",
+            text: "A Figma file isn't a product. We design with engineering constraints in mind from the start, so developers don't spend two sprints negotiating what's 'feasible.'",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -260,13 +261,15 @@ function ServiceSection({
 export default function ServicesPage() {
     const [activeId, setActiveId] = useState(SECTIONS[0].id);
     const activeSection = SECTIONS.find((s) => s.id === activeId) ?? SECTIONS[0];
+    const heroRef = useRef<HTMLElement>(null);
+    const isHeroInView = useInView(heroRef, { once: true });
 
     return (
         <div className="relative text-white">
             <div className="relative z-10 overflow-clip min-h-screen">
 
                 {/* ── Services Hero ── */}
-                <section className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">
+                <section ref={heroRef} className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">
                     {/* Ambient glow */}
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
                         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 50%)" }} />
@@ -276,22 +279,20 @@ export default function ServicesPage() {
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
                         <motion.div
                             initial={{ opacity: 0, y: 24 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         >
                             <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                                Our Expertise
+                                services
                             </span>
-                            <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                                We architect scalable systems and{" "}
-                                <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                    intelligent workflows.
-                                </span>
-                            </h1>
+                            <ClipReveal>
+                                <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
+                                    What we build, how we build it, and what it costs you to wait.
+                                </h1>
+                            </ClipReveal>
                             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
-                                Five core service lines — each engineered with the same obsession for precision,
-                                performance, and long-term value.
+                                Five service lines. Same engineering standards across all of them. Pick the one that matches your problem.
                             </p>
 
                             {/* Jump links */}
@@ -300,7 +301,7 @@ export default function ServicesPage() {
                                     <a
                                         key={s.id}
                                         href={`#${s.id}`}
-                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-white/20 hover:text-white"
+                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300"
                                     >
                                         <span className="font-mono text-xs text-zinc-600">{s.number}</span>
                                         {s.category}
@@ -313,7 +314,7 @@ export default function ServicesPage() {
 
                 {/* ── Our Process ── */}
                 <div id="our-process">
-                    <HowItWorks variant="timeline" />
+                    <HowItWorks variant="scroll" />
                 </div>
 
                 {/* ── Sticky Sidebar Layout ── */}
@@ -351,7 +352,7 @@ export default function ServicesPage() {
                                                 href={`#${s.id}`}
                                                 className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-300 ${isActive
                                                     ? "text-white"
-                                                    : "text-zinc-600 hover:text-zinc-400"
+                                                    : "text-zinc-600 hover:text-violet-300"
                                                     }`}
                                             >
                                                 {isActive && (
@@ -375,10 +376,10 @@ export default function ServicesPage() {
                                 {/* CTA */}
                                 <div className="rounded-2xl border border-white/8 bg-neutral-900/40 p-6">
                                     <p className="mb-1 text-sm font-semibold text-white">
-                                        Ready to get started?
+                                        Have a project?
                                     </p>
                                     <p className="mb-5 text-xs leading-relaxed text-zinc-500">
-                                        Book a free 30-minute discovery call with a senior engineer.
+                                        30 minutes with an engineer. No sales pitch.
                                     </p>
                                     <Link
                                         href="/contact"
@@ -387,7 +388,7 @@ export default function ServicesPage() {
                                         Book a Call
                                         <ArrowRight
                                             size={14}
-                                            className="translate-x-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                                            className="translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
                                         />
                                     </Link>
                                 </div>

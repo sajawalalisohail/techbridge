@@ -5,7 +5,17 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import {
-    CASE_STUDIES,
+    ClipReveal,
+    fadeUp,
+    slideFromLeftContainer,
+    slideFromLeftItem,
+    slideFromRightContainer,
+    slideFromRightItem,
+    splitWords,
+    wordContainerVariants,
+    wordVariants,
+} from "@/components/shared/headingAnimations";
+import {
     getCaseStudy,
     getWorkSectionStudies,
     WORK_SECTION_META,
@@ -20,6 +30,13 @@ const WORK_SECTIONS: CaseStudyWorkSection[] = [
     "mobile-products",
     "rapid-websites",
 ];
+
+const WORK_SECTION_ANIMATIONS = [
+    { container: slideFromLeftContainer, item: slideFromLeftItem },
+    { container: slideFromRightContainer, item: slideFromRightItem },
+    { container: wordContainerVariants, item: wordVariants },
+    { container: slideFromLeftContainer, item: slideFromLeftItem },
+] as const;
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
     return (
@@ -87,7 +104,7 @@ function LeadProject({ project }: { project: CaseStudy }) {
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
                         <Link
                             href={`/work/${project.slug}`}
-                            className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(109,40,217,0.25)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(109,40,217,0.4)]"
+                            className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(109,40,217,0.25)] transition-all duration-300 hover:shadow-violet-500/10"
                         >
                             Read Case Study
                             <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -97,10 +114,10 @@ function LeadProject({ project }: { project: CaseStudy }) {
                                 href={project.liveUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08]"
+                                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5"
                             >
                                 Visit Live Site
-                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
                             </a>
                         )}
                     </div>
@@ -112,7 +129,7 @@ function LeadProject({ project }: { project: CaseStudy }) {
 
 function ProjectCard({ project }: { project: CaseStudy }) {
     return (
-        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-neutral-900/55">
+        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/40 hover:bg-violet-500/5">
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -158,7 +175,7 @@ function ProjectCard({ project }: { project: CaseStudy }) {
                 <div className="mt-6 flex items-center justify-between">
                     <Link
                         href={`/work/${project.slug}`}
-                        className="group/link inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-violet-400"
+                        className="group/link inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-violet-300"
                     >
                         View Case Study
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -168,7 +185,7 @@ function ProjectCard({ project }: { project: CaseStudy }) {
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-200 hover:text-white"
+                            className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-200 hover:text-violet-300"
                         >
                             Live
                         </a>
@@ -184,20 +201,42 @@ function WorkSection({ section, index }: { section: CaseStudyWorkSection; index:
     const studies = getWorkSectionStudies(section);
     const lead = meta.highlightSlug ? getCaseStudy(meta.highlightSlug) : studies[0];
     const rest = studies.filter((study) => study.slug !== lead?.slug);
+    const sectionRef = useRef<HTMLElement>(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+    const headingAnimation = WORK_SECTION_ANIMATIONS[index];
 
     if (!lead) return null;
 
     return (
-        <section id={section} className={index > 0 ? "mt-24 lg:mt-32" : ""}>
+        <section ref={sectionRef} id={section} className={index > 0 ? "mt-24 lg:mt-32" : ""}>
             <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                 <div className="max-w-2xl">
                     <SectionEyebrow>{meta.title}</SectionEyebrow>
-                    <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                        {meta.title}
-                    </h2>
-                    <p className="mt-4 text-base leading-relaxed text-zinc-400">
+                    <motion.h2
+                        variants={headingAnimation.container}
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                        style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                    >
+                        {splitWords(meta.title).map((word, wordIndex) => (
+                            <motion.span
+                                key={`${word}-${wordIndex}`}
+                                variants={headingAnimation.item}
+                                style={{ display: "inline-block" }}
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
+                    </motion.h2>
+                    <motion.p
+                        variants={fadeUp(0.12)}
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        className="mt-4 text-base leading-relaxed text-zinc-400"
+                    >
                         {meta.description}
-                    </p>
+                    </motion.p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                     {studies.map((study) => (
@@ -227,6 +266,8 @@ function WorkSection({ section, index }: { section: CaseStudyWorkSection; index:
 export default function WorkPage() {
     const heroRef = useRef<HTMLElement>(null);
     const isHeroInView = useInView(heroRef, { once: true });
+    const ctaRef = useRef<HTMLDivElement>(null);
+    const isCtaInView = useInView(ctaRef, { once: true, margin: "-80px" });
 
     return (
         <div className="relative min-h-screen text-white">
@@ -249,14 +290,25 @@ export default function WorkPage() {
                             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.7, ease: EASE }}
                         >
-                            <SectionEyebrow>Selected Work</SectionEyebrow>
-                            <h1 className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-7xl xl:text-8xl">
-                                Products, systems, and rapid websites arranged by what they actually are.
-                            </h1>
+                            <SectionEyebrow>the work</SectionEyebrow>
+                            <motion.h1
+                                variants={wordContainerVariants}
+                                initial="hidden"
+                                animate={isHeroInView ? "show" : "hidden"}
+                                className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-7xl xl:text-8xl"
+                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                            >
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Real</motion.span>
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>projects.</motion.span>
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Real</motion.span>
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>clients.</motion.span>
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Shipped</motion.span>
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>and</motion.span>
+                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>running.</motion.span>
+                            </motion.h1>
                             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-zinc-400">
-                                {CASE_STUDIES.length}+ projects across platforms, internal systems, mobile products,
-                                and premium websites. The rapid website work is still here, just no longer framed as
-                                flagship software platforms.
+                                Platforms, internal tools, mobile apps, and rapid websites.
+                                Organized by what they actually are, not buzzword categories.
                             </p>
                         </motion.div>
                     </div>
@@ -268,7 +320,7 @@ export default function WorkPage() {
                             <a
                                 key={section}
                                 href={`#${section}`}
-                                className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.06] hover:text-white"
+                                className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:text-violet-300"
                             >
                                 {WORK_SECTION_META[section].title}
                             </a>
@@ -284,21 +336,29 @@ export default function WorkPage() {
 
                 <div className="border-t border-white/5">
                     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
-                        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+                        <div ref={ctaRef} className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
                             <div>
                                 <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    Next Engagement
+                                    your turn
                                 </p>
-                                <h2 className="text-3xl font-bold text-white lg:text-4xl">
-                                    Ready to be our next case study?
-                                </h2>
+                                <motion.div
+                                    initial="hidden"
+                                    animate={isCtaInView ? "show" : "hidden"}
+                                    variants={fadeUp()}
+                                >
+                                    <ClipReveal>
+                                    <h2 className="text-3xl font-bold text-white lg:text-4xl">
+                                        Got a project that needs to actually ship?
+                                    </h2>
+                                    </ClipReveal>
+                                </motion.div>
                             </div>
                             <Link
                                 href="/contact"
-                                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-[0_0_48px_rgba(109,40,217,0.5)]"
+                                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:shadow-violet-500/10"
                             >
-                                Book a Discovery Call
-                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                                Talk to an Engineer
+                                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
                             </Link>
                         </div>
                     </div>

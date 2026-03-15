@@ -48,7 +48,7 @@ export default function TrustedBy() {
                         variants={childVariants}
                         className="text-xs uppercase tracking-widest text-zinc-600"
                     >
-                        Trusted by teams at
+                        currently running our code
                     </motion.p>
 
                     {/* Logo bar */}

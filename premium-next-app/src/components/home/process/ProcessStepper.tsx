@@ -120,7 +120,7 @@ export default function ProcessStepper() {
                                             ? "border-violet-500 bg-violet-950 shadow-[0_0_24px_rgba(139,92,246,0.5)]"
                                             : isPast
                                                 ? "border-violet-500/50 bg-violet-950/50"
-                                                : "border-white/15 bg-neutral-900/60 group-hover:border-violet-500/30"
+                                                : "border-white/15 bg-neutral-900/60 group-hover:border-violet-500/40"
                                             }`}
                                     >
                                         {/* Pulse ring on active */}
@@ -134,7 +134,7 @@ export default function ProcessStepper() {
                                                 ? "text-violet-300"
                                                 : isPast
                                                     ? "text-violet-400/60"
-                                                    : "text-zinc-500 group-hover:text-violet-400"
+                                                    : "text-zinc-500 group-hover:text-violet-300"
                                                 }`}
                                         />
                                     </div>

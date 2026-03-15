@@ -33,7 +33,7 @@ function PhaseTextCard({
             transition={{ duration: 0.75, ease: EASE }}
             className={`group relative overflow-hidden rounded-2xl border transition-all duration-700 p-7 backdrop-blur-sm lg:p-8 ${isActive
                 ? "border-violet-500/50 bg-violet-500/10 shadow-[0_0_40px_rgba(139,92,246,0.15)] scale-[1.01]"
-                : "border-white/8 bg-neutral-900/40 hover:border-white/15"
+                : "border-white/8 bg-neutral-900/40 hover:border-violet-500/40"
                 }`}
         >
             {/* Active glow gradient */}
@@ -57,19 +57,19 @@ function PhaseTextCard({
                 </span>
                 <div className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-500 ${isActive
                     ? "border-violet-500/40 bg-violet-950/50 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.3)]"
-                    : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-violet-500/30 group-hover:bg-violet-950/50 group-hover:text-violet-400"
+                    : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-violet-500/40 group-hover:bg-violet-500/5 group-hover:text-violet-300"
                     }`}>
                     <Icon size={18} strokeWidth={1.5} />
                 </div>
             </div>
 
             {/* Title */}
-            <h3 className={`relative z-10 mb-3 text-xl font-semibold leading-snug lg:text-2xl transition-colors duration-500 ${isActive ? "text-white" : "text-white/90 group-hover:text-white"}`}>
+            <h3 className={`relative z-10 mb-3 text-xl font-semibold leading-snug lg:text-2xl transition-colors duration-500 ${isActive ? "text-white" : "text-white/90 group-hover:text-violet-300"}`}>
                 {phase.label}
             </h3>
 
             {/* Description */}
-            <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-500 ${isActive ? "text-zinc-300" : "text-zinc-500 group-hover:text-zinc-400"}`}>
+            <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-500 ${isActive ? "text-zinc-300" : "text-zinc-500 group-hover:text-violet-300"}`}>
                 {phase.description}
             </p>
 

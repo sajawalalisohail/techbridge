@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { wordContainerVariants, wordVariants } from "@/components/shared/headingAnimations";
 
 /* ─── Data ───────────────────────────────────────────────── */
 const TESTIMONIALS = [
@@ -106,12 +107,23 @@ export default function Testimonials() {
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                         <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                        Client Voices
+                        from actual clients
                         <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
                     </span>
-                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                        What Our Partners Say.
-                    </h2>
+                    <motion.h2
+                        variants={wordContainerVariants}
+                        initial="hidden"
+                        animate={isHeaderInView ? "show" : "hidden"}
+                        className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
+                    >
+                        <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Don&apos;t</motion.span>
+                        <motion.span variants={wordVariants} style={{ display: "inline-block" }}>take</motion.span>
+                        <motion.span variants={wordVariants} style={{ display: "inline-block" }}>our</motion.span>
+                        <motion.span variants={wordVariants} style={{ display: "inline-block" }}>word</motion.span>
+                        <motion.span variants={wordVariants} style={{ display: "inline-block" }}>for</motion.span>
+                        <motion.span variants={wordVariants} style={{ display: "inline-block" }}>it.</motion.span>
+                    </motion.h2>
                 </motion.div>
 
                 {/* ── Carousel ── */}
@@ -175,7 +187,7 @@ export default function Testimonials() {
                                 aria-label={`Go to testimonial ${i + 1}`}
                                 className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex
                                         ? "w-6 bg-violet-400"
-                                        : "w-1.5 bg-zinc-700 hover:bg-zinc-500"
+                                        : "w-1.5 bg-zinc-700 hover:bg-violet-500/5"
                                     }`}
                             />
                         ))}

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail, MapPin, CheckCircle2 } from "lucide-react";
+import { slideFromLeftContainer, slideFromLeftItem, slideFromRight, splitWords } from "@/components/shared/headingAnimations";
 
 /* ─── Styles ──────────────────────────────────────────────── */
 const inputFocusCSS = `
@@ -99,18 +100,18 @@ export default function ContactPage() {
                                         className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"
                                     >
                                         <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                                        Get In Touch
+                                        let&apos;s talk
                                     </motion.span>
 
                                     <motion.h1
-                                        variants={fadeUp(0.1)}
+                                        variants={slideFromRight}
                                         initial="hidden"
                                         animate={isInView ? "show" : "hidden"}
                                         className="text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
                                     >
-                                        Let&apos;s build your{" "}
+                                        Tell us what you need{" "}
                                         <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                            leverage.
+                                            built.
                                         </span>
                                     </motion.h1>
 
@@ -120,9 +121,8 @@ export default function ContactPage() {
                                         animate={isInView ? "show" : "hidden"}
                                         className="mt-6 text-lg leading-relaxed text-zinc-400"
                                     >
-                                        Partner with our engineering team to build custom software,
-                                        automate your workflows, or launch a premium web presence
-                                        that converts.
+                                        Describe the problem. We&apos;ll tell you honestly if we&apos;re
+                                        the right team, and what it&apos;ll take.
                                     </motion.p>
 
                                     {/* Contact info */}
@@ -134,16 +134,16 @@ export default function ContactPage() {
                                     >
                                         <a
                                             href="mailto:hello@techbridge.dev"
-                                            className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.06]"
+                                            className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5"
                                         >
-                                            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-500 transition-colors duration-300 group-hover:border-violet-500/30 group-hover:text-violet-400">
+                                            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-500 transition-colors duration-300 group-hover:border-violet-500/40 group-hover:text-violet-300">
                                                 <Mail size={16} strokeWidth={1.5} />
                                             </div>
                                             <div>
                                                 <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                                     Email
                                                 </p>
-                                                <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-white">
+                                                <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-violet-300">
                                                     hello@techbridge.dev
                                                 </p>
                                             </div>
@@ -173,7 +173,7 @@ export default function ContactPage() {
                                     >
                                         <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
                                         <span className="text-xs text-zinc-600">
-                                            We typically respond within 24 hours
+                                            You&apos;ll hear back within 24 hours
                                         </span>
                                     </motion.div>
                                 </div>
@@ -196,10 +196,10 @@ export default function ContactPage() {
                                             <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
                                                 <div className="mb-8">
                                                     <h2 className="text-xl font-bold text-white">
-                                                        Start a Conversation
+                                                        Project Details
                                                     </h2>
                                                     <p className="mt-1 text-sm text-zinc-500">
-                                                        Tell us about your project and we&apos;ll be in touch.
+                                                        The more detail, the better our first reply.
                                                     </p>
                                                 </div>
 
@@ -285,13 +285,13 @@ export default function ContactPage() {
                                                 {/* Submit */}
                                                 <button
                                                     type="submit"
-                                                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_48px_rgba(109,40,217,0.5)]"
+                                                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(109,40,217,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-violet-500/10"
                                                 >
                                                     <span className="relative z-10 inline-flex items-center justify-center gap-2">
-                                                        Send Inquiry
+                                                        Send It
                                                         <ArrowRight
                                                             size={15}
-                                                            className="transition-transform duration-300 group-hover:translate-x-0.5"
+                                                            className="transition-transform duration-300 group-hover:translate-x-1"
                                                         />
                                                     </span>
                                                     {/* Shimmer */}
@@ -309,11 +309,11 @@ export default function ContactPage() {
                                                     <CheckCircle2 size={28} className="text-violet-400" strokeWidth={1.5} />
                                                 </div>
                                                 <h3 className="text-2xl font-bold text-white">
-                                                    Message received.
+                                                    Got it.
                                                 </h3>
                                                 <p className="mt-3 max-w-xs text-sm leading-relaxed text-zinc-400">
-                                                    Thanks for reaching out. A senior engineer will be in
-                                                    touch within 24 hours.
+                                                    An engineer (not an account manager) will reply
+                                                    within 24 hours.
                                                 </p>
                                                 <p className="mt-6 text-xs text-zinc-600">
                                                     hello@techbridge.dev
@@ -333,13 +333,23 @@ export default function ContactPage() {
                             <div className="mb-10">
                                 <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                     <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                                    Or Book a Time Directly
+                                    prefer a call?
                                 </span>
-                                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                                    Skip the form. Pick a slot.
-                                </h2>
+                                <motion.h2
+                                    variants={slideFromLeftContainer}
+                                    initial="hidden"
+                                    animate={isInView ? "show" : "hidden"}
+                                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                    style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                                >
+                                    {splitWords("Skip the form. Grab a time.").map((word, index) => (
+                                        <motion.span key={`${word}-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                                            {word}
+                                        </motion.span>
+                                    ))}
+                                </motion.h2>
                                 <p className="mt-3 max-w-lg text-base text-zinc-400">
-                                    Choose a time that works for you and meet directly with a senior engineer.
+                                    30 minutes with the engineer who&apos;d actually work on your project. No sales rep.
                                 </p>
                             </div>
 

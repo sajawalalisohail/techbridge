@@ -132,7 +132,7 @@ export default function InsightsPage() {
                                             </div>
 
                                             {/* Title */}
-                                            <h2 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-violet-200">
+                                            <h2 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-violet-300">
                                                 {post.title}
                                             </h2>
 

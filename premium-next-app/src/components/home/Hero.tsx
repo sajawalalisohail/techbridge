@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import HeroBlobBackground from "./HeroBlobBackground";
+import { ClipReveal } from "@/components/shared/headingAnimations";
 import { CountUp } from "@/components/shared/CountUp";
 
 // Dynamically import 3D background for performance
@@ -34,18 +35,19 @@ const fadeUp = {
 };
 
 const STATS = [
-    { value: 50, suffix: "+", label: "Projects Shipped" },
+    { value: 50, suffix: "+", label: "Systems in Production" },
     { value: 98, suffix: "%", label: "Client Retention" },
-    { value: 3, suffix: "×", label: "Avg. Efficiency Gain" },
+    { value: 3, suffix: "×", label: "Faster Than In-House" },
 ];
 
 
 
 export default function Hero() {
-    const canvasRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
+    const isInView = useInView(sectionRef, { once: true });
 
     return (
-        <section className="relative min-h-screen w-full overflow-hidden">
+        <section ref={sectionRef} className="relative min-h-screen w-full overflow-hidden">
             {/* ─── 3D Hybrid Background ─── */}
             <HybridBackground />
 
@@ -73,28 +75,27 @@ export default function Hero() {
             <motion.div
                 variants={container}
                 initial="hidden"
-                animate="show"
+                animate={isInView ? "show" : "hidden"}
                 className="relative z-10 mx-auto flex min-h-screen max-w-[90rem] flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-16"
             >
 
                 {/* Primary headline */}
-                <motion.h1
-                    variants={fadeUp}
-                    className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]"
-                >
-                    <span className="block">Engineering the Infrastructure Behind</span>{" "}
-                    <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                        Scalable Businesses
-                    </span>
-                </motion.h1>
+                <ClipReveal>
+                    <h1 className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]">
+                        <span className="block">Custom Software. AI Systems.</span>{" "}
+                        <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                            Senior Engineers.
+                        </span>
+                    </h1>
+                </ClipReveal>
 
                 {/* Sub-headline */}
                 <motion.p
                     variants={fadeUp}
                     className="mt-6 max-w-2xl text-center text-base leading-relaxed text-zinc-400 sm:text-lg lg:text-xl"
                 >
-                    Custom software, AI automation, and scalable SaaS
-                    platforms — built with precision, designed for growth.
+                    Custom platforms, AI automation, and SaaS systems.
+                    Architected by senior engineers who&apos;ve shipped this before.
                 </motion.p>
 
                 {/* CTA row */}
@@ -104,11 +105,11 @@ export default function Hero() {
                 >
                     <Link
                         href="/contact"
-                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-[0_0_40px_rgba(139,92,246,0.3)]"
+                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-violet-500/10"
                     >
-                        <span className="relative z-10">Start Your Project</span>
+                        <span className="relative z-10">Talk to an Engineer</span>
                         <svg
-                            className="relative z-10 h-4 w-4 translate-x-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                            className="relative z-10 h-4 w-4 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -122,9 +123,9 @@ export default function Hero() {
 
                     <Link
                         href="/work"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-violet-300"
                     >
-                        View Our Work
+                        See What We Shipped
                         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>

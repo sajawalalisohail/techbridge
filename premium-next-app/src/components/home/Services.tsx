@@ -11,6 +11,7 @@ import {
     Smartphone,
     Palette,
 } from "lucide-react";
+import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import {
     WorkflowDiagramMockup,
     ChatUIMockup,
@@ -41,10 +42,10 @@ const SERVICES: ServiceCard[] = [
     {
         id: 1,
         icon: Code2,
-        eyebrow: "Foundation",
+        eyebrow: "core work",
         title: "Custom Software & SaaS",
         description:
-            "Scalable platforms, multi-tenant architectures, and enterprise systems — built to evolve.",
+            "Multi-tenant platforms, internal tools, and SaaS products. Architected so your next hire can actually understand the codebase.",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#custom-software",
         Mockup: WorkflowDiagramMockup,
@@ -52,10 +53,10 @@ const SERVICES: ServiceCard[] = [
     {
         id: 2,
         icon: BrainCircuit,
-        eyebrow: "Intelligence",
+        eyebrow: "automation",
         title: "AI Workflow Automation",
         description:
-            "Replace manual processes with intelligent systems that learn and scale.",
+            "Your ops team is copy-pasting between six tabs. We replace that with one system that does it in seconds.",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(99,102,241,0.09) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#ai-automation",
         Mockup: ChatUIMockup,
@@ -63,10 +64,10 @@ const SERVICES: ServiceCard[] = [
     {
         id: 3,
         icon: LayoutDashboard,
-        eyebrow: "Operations",
+        eyebrow: "internal tools",
         title: "Internal Tools & Integrations",
         description:
-            "Dashboards, CRMs, and connected data pipelines — real-time control for your team.",
+            "The admin panel, the reporting dashboard, the thing your team duct-taped together in Sheets. We build the real version.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.07) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#internal-tools",
         Mockup: DashboardMockup,
@@ -74,10 +75,10 @@ const SERVICES: ServiceCard[] = [
     {
         id: 4,
         icon: Zap,
-        eyebrow: "Speed",
-        title: "24-Hour Rapid Websites",
+        eyebrow: "fast lane",
+        title: "24-Hour Websites",
         description:
-            "Premium web presence, delivered in a day. Performance-first, conversion-optimized.",
+            "A real website. Custom code, not a template. Deployed and live before you wake up tomorrow.",
         highlight: true,
         accentColor: "radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.11) 0%, rgba(167,139,250,0) 100%)",
         href: "/websites",
@@ -87,9 +88,9 @@ const SERVICES: ServiceCard[] = [
         id: 5,
         icon: Smartphone,
         eyebrow: "Mobile",
-        title: "Mobile App Development",
+        title: "Mobile Apps",
         description:
-            "Native and cross-platform iOS & Android apps — from concept to App Store.",
+            "iOS and Android apps that don't crash, don't lag, and don't get uninstalled after the first session.",
         accentColor: "radial-gradient(ellipse at 20% 80%, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0) 100%)",
         href: "/services#mobile-apps",
         Mockup: MetricCounterMockup,
@@ -98,9 +99,9 @@ const SERVICES: ServiceCard[] = [
         id: 6,
         icon: Palette,
         eyebrow: "Design",
-        title: "UI/UX Design & Branding",
+        title: "UI/UX & Brand Identity",
         description:
-            "Research-driven design systems and brand identities that convert.",
+            "Design systems and brand work grounded in actual user research, not a mood board from Pinterest.",
         accentColor: "radial-gradient(ellipse at 80% 80%, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0) 100%)",
         href: "/services#design-branding",
         Mockup: DataFlowMockup,
@@ -147,7 +148,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
             variants={cardVariants}
             className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${card.highlight
                 ? "border-violet-500/30 shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
-                : "border-white/8 hover:border-white/15"
+                : "border-white/8 hover:border-violet-500/40"
                 }`}
         >
 
@@ -178,7 +179,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 <div
                     className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-300 ${card.highlight
                         ? "border-violet-500/40 bg-violet-950/60 text-violet-400"
-                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-white/20 group-hover:text-white"
+                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-violet-500/40 group-hover:text-violet-300"
                         }`}
                 >
                     <Icon size={20} strokeWidth={1.5} />
@@ -198,7 +199,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300">
+                <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-violet-300 transition-colors duration-300">
                     {card.description}
                 </p>
 
@@ -212,7 +213,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                         <Link
                             href={card.href}
                             aria-label={`Learn more about ${card.title}`}
-                            className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-violet-400" : "text-zinc-600 group-hover:text-white"
+                            className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-violet-400" : "text-zinc-600 group-hover:text-violet-300"
                                 }`}
                         >
                             <span>Learn more</span>
@@ -230,7 +231,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                         <div
                             className={`mt-6 flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 ${card.highlight
                                 ? "text-violet-400"
-                                : "text-zinc-600 group-hover:text-white"
+                                : "text-zinc-600 group-hover:text-violet-300"
                                 }`}
                         >
                             <span>Learn more</span>
@@ -275,26 +276,44 @@ export default function Services() {
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
                 {/* ── Section Header ── */}
-                <motion.div
-                    initial="hidden"
-                    animate={isInView ? "show" : "hidden"}
-                    variants={headerVariants}
-                    className="mb-16 max-w-3xl lg:mb-20"
-                >
-                    <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                <div className="mb-16 max-w-3xl lg:mb-20">
+                    <motion.span
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        variants={fadeUp()}
+                        className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                    >
                         <span className="h-1.5 w-1.5 rounded-full bg-violet-500" /><span className="h-px w-4 bg-violet-500/40" />
-                        Our Capabilities
-                    </span>
-                    <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                        What We{" "}
+                        what we actually do
+                    </motion.span>
+                    <motion.h2
+                        variants={slideFromLeftContainer}
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                        style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                    >
+                        {splitWords("Six things we're good at.").map((word, index) => (
+                            <motion.span
+                                key={`${word}-${index}`}
+                                variants={slideFromLeftItem}
+                                style={{ display: "inline-block" }}
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
                         <span className="bg-gradient-to-br from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                            Build
                         </span>
-                    </h2>
-                    <p className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-xl">
-                        From intelligent automation to enterprise platforms - we build the systems that give your business an unfair competitive advantage.
-                    </p>
-                </motion.div>
+                    </motion.h2>
+                    <motion.p
+                        initial="hidden"
+                        animate={isInView ? "show" : "hidden"}
+                        variants={headerVariants}
+                        className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-xl"
+                    >
+                        No buzzword bingo. These are the six categories of work we take on, and what you can expect from each.
+                    </motion.p>
+                </div>
 
                 {/* ── Bento Grid ── */}
                 <motion.div

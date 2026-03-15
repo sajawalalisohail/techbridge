@@ -126,7 +126,7 @@ function TechCard({ name, icon, category }: TechItem) {
 
     return (
         <div
-            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-950/20 hover:shadow-[0_0_18px_rgba(109,40,217,0.15)]"
+            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500/5 hover:shadow-violet-500/10"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -183,11 +183,11 @@ export default function TechStackMarquee() {
             >
                 <span className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-700">
                     <span className="h-px w-5 bg-zinc-800" />
-                    Enterprise Architecture
+                    our stack
                     <span className="h-px w-5 bg-zinc-800" />
                 </span>
                 <p className="text-sm text-zinc-600">
-                    The same stack powering the world&apos;s fastest companies.
+                    The tools we actually use every day. No filler logos.
                 </p>
             </motion.div>
 

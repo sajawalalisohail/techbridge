@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-/* ─── Live Clock ─────────────────────────────────────────── */
+/* â”€â”€â”€ Live Clock â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function LiveClock({ tz, label }: { tz: string; label: string }) {
     const [time, setTime] = useState("");
 
@@ -35,7 +35,7 @@ function LiveClock({ tz, label }: { tz: string; label: string }) {
     );
 }
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SERVICES_LINKS = [
     { label: "Custom Software", href: "/services#custom-software" },
     { label: "AI Automation", href: "/services#ai-automation" },
@@ -81,7 +81,7 @@ const SOCIAL_LINKS = [
     },
 ];
 
-/* ─── Footer ─────────────────────────────────────────────── */
+/* â”€â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function Footer() {
     const year = new Date().getFullYear();
     const footerRef = React.useRef<HTMLElement>(null);
@@ -114,7 +114,7 @@ export default function Footer() {
                         <div className="max-w-xs">
                             <Link href="/" className="group mb-5 inline-flex items-center gap-2.5">
                                 <span className="relative flex h-6 w-6 items-center justify-center">
-                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 opacity-80 blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:blur" />
+                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-accent to-brand-accent-dark opacity-80 blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:blur" />
                                     <span className="relative h-3 w-3 rounded-full bg-white" />
                                 </span>
                                 <span className="text-sm font-semibold tracking-widest text-white uppercase">
@@ -132,7 +132,7 @@ export default function Footer() {
                                         key={s.label}
                                         href={s.href}
                                         aria-label={s.label}
-                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300"
+                                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.04] text-zinc-500 transition-all duration-200 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                                     >
                                         {s.icon}
                                     </a>
@@ -150,7 +150,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-lime-300"
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-brand-accent-light"
                                         >
                                             {link.label}
                                         </Link>
@@ -169,7 +169,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-lime-300"
+                                            className="text-sm text-zinc-500 transition-colors duration-200 hover:text-brand-accent-light"
                                         >
                                             {link.label}
                                         </Link>
@@ -196,14 +196,14 @@ export default function Footer() {
                             <span className="font-mono tabular-nums">&copy; {year}</span> TechBridge. All rights reserved.
                         </p>
                         <div className="flex items-center gap-4">
-                            <Link href="/privacy" className="text-xs text-zinc-700 transition-colors hover:text-lime-300">
+                            <Link href="/privacy" className="text-xs text-zinc-700 transition-colors hover:text-brand-accent-light">
                                 Privacy Policy
                             </Link>
-                            <span className="text-zinc-800">·</span>
-                            <Link href="/terms" className="text-xs text-zinc-700 transition-colors hover:text-lime-300">
+                            <span className="text-zinc-800">Â·</span>
+                            <Link href="/terms" className="text-xs text-zinc-700 transition-colors hover:text-brand-accent-light">
                                 Terms
                             </Link>
-                            <span className="text-zinc-800">·</span>
+                            <span className="text-zinc-800">Â·</span>
                             <p className="text-xs text-zinc-700">
                                 Built in Morgantown, WV.
                             </p>
@@ -214,3 +214,4 @@ export default function Footer() {
         </>
     );
 }
+

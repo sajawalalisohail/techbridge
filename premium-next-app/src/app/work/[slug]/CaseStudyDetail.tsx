@@ -259,7 +259,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             animate={isProblemInView ? "show" : "hidden"}
                         >
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 The Challenge
                             </span>
                             <div className="max-w-3xl space-y-6">
@@ -290,7 +290,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             animate={isSolutionInView ? "show" : "hidden"}
                         >
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 Our Approach
                             </span>
                             <div className="max-w-3xl space-y-6">
@@ -322,7 +322,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             className="mb-14"
                         >
                             <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 The Impact
                             </span>
                             <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -373,7 +373,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 <section className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                             Tech Stack
                         </span>
                         <div className="flex flex-wrap gap-2.5">
@@ -403,7 +403,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                 className="mb-10"
                             >
                                 <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                     Screenshots
                                 </span>
                                 <p className="text-sm text-zinc-500">
@@ -463,7 +463,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             <div>
                                 <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
                                     Ready to build something{" "}
-                                    <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                                    <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                                         like this?
                                     </span>
                                 </h2>
@@ -475,7 +475,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             <div className="flex flex-wrap gap-4">
                                 <Link
                                     href="/contact"
-                                    className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-lime-600 to-lime-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.3)] transition-all duration-300 hover:shadow-[0_0_48px_rgba(101,163,13,0.5)]"
+                                    className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(var(--brand-accent-dark-rgb), 0.3)] transition-all duration-300 hover:shadow-[0_0_48px_rgba(var(--brand-accent-dark-rgb), 0.5)]"
                                 >
                                     Book a Discovery Call
                                     <ArrowUpRight
@@ -488,7 +488,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                         href={study.liveUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-4 text-sm font-medium text-white transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-950/30"
+                                        className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-4 text-sm font-medium text-white transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent-deep/30"
                                     >
                                         View Live Site
                                         <ArrowUpRight
@@ -508,8 +508,8 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
                         background:
-                            "linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)",
-                        boxShadow: "0 0 20px 4px rgba(101,163,13,0.25)",
+                            "linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)",
+                        boxShadow: "0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)",
                     }}
                 />
             </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { ArrowRight, Clock } from "lucide-react";
 import { slideFromLeft } from "@/components/shared/headingAnimations";
 import { INSIGHTS } from "@/data/insights";
 
-/* ─── Animation ──────────────────────────────────────────── */
+/* â”€â”€â”€ Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const staggerContainer = {
@@ -20,7 +20,7 @@ const childFade = {
     show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
-/* ─── Component ──────────────────────────────────────────── */
+/* â”€â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function LatestInsights() {
     const ref = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ export default function LatestInsights() {
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
-                {/* ── Header ── */}
+                {/* â”€â”€ Header â”€â”€ */}
                 <div
                     ref={headerRef}
                     className="mb-14 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
@@ -51,7 +51,7 @@ export default function LatestInsights() {
                             transition={{ duration: 0.7, ease: EASE }}
                             className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                         >
-                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                             from the blog
                         </motion.span>
                         <motion.h2
@@ -70,7 +70,7 @@ export default function LatestInsights() {
                     >
                         <Link
                             href="/insights"
-                            className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-lime-300"
+                            className="group hidden lg:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-brand-accent-light"
                         >
                             Read More
                             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -78,7 +78,7 @@ export default function LatestInsights() {
                     </motion.div>
                 </div>
 
-                {/* ── Cards ── */}
+                {/* â”€â”€ Cards â”€â”€ */}
                 <motion.div
                     variants={staggerContainer}
                     initial="hidden"
@@ -89,21 +89,21 @@ export default function LatestInsights() {
                         <motion.article key={post.slug} variants={childFade}>
                             <Link
                                 href={`/insights/${post.slug}`}
-                                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40 hover:bg-lime-500/5"
+                                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5"
                             >
                                 {/* Hover glow */}
                                 <div
                                     aria-hidden="true"
                                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
                                     style={{
-                                        background: "radial-gradient(ellipse at 50% 0%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 100%)",
+                                        background: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-rgb), 0.12) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
                                     }}
                                 />
 
                                 <div className="relative z-10 flex h-full flex-col">
                                     {/* Meta */}
                                     <div className="mb-5 flex items-center gap-3">
-                                        <span className="rounded-full border border-lime-500/20 bg-lime-950/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-lime-300">
+                                        <span className="rounded-full border border-brand-accent/20 bg-brand-accent-deep/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
                                             {post.category}
                                         </span>
                                         <span className="flex items-center gap-1 text-xs text-zinc-600">
@@ -113,7 +113,7 @@ export default function LatestInsights() {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-lime-300">
+                                    <h3 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-brand-accent-light">
                                         {post.title}
                                     </h3>
 
@@ -123,7 +123,7 @@ export default function LatestInsights() {
                                     </p>
 
                                     {/* CTA */}
-                                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-lime-300">
+                                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-brand-accent-light">
                                         Read Insight
                                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                                     </span>
@@ -137,7 +137,7 @@ export default function LatestInsights() {
                 <div className="mt-10 lg:hidden">
                     <Link
                         href="/insights"
-                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-lime-300"
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-brand-accent-light"
                     >
                         Read More
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -147,3 +147,4 @@ export default function LatestInsights() {
         </section>
     );
 }
+

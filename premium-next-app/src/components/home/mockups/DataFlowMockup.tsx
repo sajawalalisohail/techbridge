@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const NODES = [
     { label: "Source", x: 15, y: 50 },
     { label: "API", x: 50, y: 50 },
@@ -12,7 +12,7 @@ const NODES = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function DataFlowMockup() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -29,9 +29,9 @@ export default function DataFlowMockup() {
             <svg viewBox="0 0 200 80" className="h-auto w-full">
                 <defs>
                     <linearGradient id="flow-line" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="rgb(132,204,22)" stopOpacity="0.15" />
-                        <stop offset="50%" stopColor="rgb(132,204,22)" stopOpacity="0.4" />
-                        <stop offset="100%" stopColor="rgb(163,230,53)" stopOpacity="0.15" />
+                        <stop offset="0%" stopColor="rgb(var(--brand-accent-rgb))" stopOpacity="0.15" />
+                        <stop offset="50%" stopColor="rgb(var(--brand-accent-rgb))" stopOpacity="0.4" />
+                        <stop offset="100%" stopColor="rgb(var(--brand-accent-light-rgb))" stopOpacity="0.15" />
                     </linearGradient>
                 </defs>
 
@@ -59,7 +59,7 @@ export default function DataFlowMockup() {
                         {/* Glow */}
                         <motion.circle
                             cx={node.x / 100 * 200} cy="40" r="18"
-                            fill="rgba(132,204,22,0.08)"
+                            fill="rgba(var(--brand-accent-rgb), 0.08)"
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
                             transition={{ duration: 0.5, ease: EASE, delay: i * 0.2 }}
@@ -68,7 +68,7 @@ export default function DataFlowMockup() {
                         <motion.circle
                             cx={node.x / 100 * 200} cy="40" r="12"
                             fill="rgba(23,23,23,0.8)"
-                            stroke="rgba(132,204,22,0.3)"
+                            stroke="rgba(var(--brand-accent-rgb), 0.3)"
                             strokeWidth="1"
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -89,7 +89,7 @@ export default function DataFlowMockup() {
                         <motion.text
                             x={node.x / 100 * 200} y="44"
                             textAnchor="middle"
-                            className="fill-lime-400 font-mono text-[8px] font-bold"
+                            className="fill-brand-accent-light font-mono text-[8px] font-bold"
                             initial={{ opacity: 0 }}
                             animate={isInView ? { opacity: 1 } : {}}
                             transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
@@ -104,7 +104,7 @@ export default function DataFlowMockup() {
                     <motion.circle
                         key={`packet-${line}`}
                         r="2"
-                        fill="rgb(163,230,53)"
+                        fill="rgb(var(--brand-accent-light-rgb))"
                         filter="url(#glow)"
                         initial={{ opacity: 0 }}
                         animate={isInView ? {
@@ -124,3 +124,4 @@ export default function DataFlowMockup() {
         </motion.div>
     );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
@@ -66,7 +66,7 @@ export default function Navbar() {
         <>
             {/* Banner + Navbar anchor: relative wrapper so navbar can float below banner */}
             <div className="relative z-50">
-                {/* Announcement Banner — in normal flow, pushes hero down by its height */}
+                {/* Announcement Banner â€” in normal flow, pushes hero down by its height */}
                 <AnimatePresence mode="popLayout">
                     {bannerVisible && pathname !== "/websites" && (
                         <motion.div
@@ -90,7 +90,7 @@ export default function Navbar() {
                             <div className="relative z-10 mx-auto flex w-full items-center justify-center py-2.5 px-12 sm:px-16">
                                 <p className="text-center text-sm font-medium text-zinc-300">
                                     Need a website fast? Custom-coded and live in 24 hours.{" "}
-                                    <Link href="/websites" className="text-white hover:text-lime-300 underline underline-offset-4 transition-colors">
+                                    <Link href="/websites" className="text-white hover:text-brand-accent-light underline underline-offset-4 transition-colors">
                                         See how &rarr;
                                     </Link>
                                 </p>
@@ -98,7 +98,7 @@ export default function Navbar() {
 
                             <button
                                 onClick={() => setBannerVisible(false)}
-                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-lime-500/5 hover:text-lime-300 transition-colors sm:right-5"
+                                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-md p-1 text-zinc-400 hover:bg-brand-accent/5 hover:text-brand-accent-light transition-colors sm:right-5"
                                 aria-label="Dismiss banner"
                             >
                                 <X size={16} />
@@ -107,7 +107,7 @@ export default function Navbar() {
                     )}
                 </AnimatePresence>
 
-                {/* Navbar — absolute at top so it overlays hero; fixed when pill */}
+                {/* Navbar â€” absolute at top so it overlays hero; fixed when pill */}
                 <motion.header
                     initial={{ opacity: 0, y: -24 }}
                     animate={forceHide ? { opacity: 0, y: -24 } : headerVariants[navState]}
@@ -116,7 +116,7 @@ export default function Navbar() {
                 >
                     <div
                         className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navState === "pill"
-                            ? "mt-4 max-w-5xl rounded-full border border-lime-500/20 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(132,204,22,0.15)] backdrop-blur-xl"
+                            ? "mt-4 max-w-5xl rounded-full border border-brand-accent/20 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(var(--brand-accent-rgb), 0.15)] backdrop-blur-xl"
                             : "max-w-full rounded-none border-b border-transparent bg-transparent"
                             }`}
                     >
@@ -129,7 +129,7 @@ export default function Navbar() {
                             {/* Logo */}
                             <Link href="/" className="group flex items-center gap-2.5">
                                 <span className="relative flex h-6 w-6 items-center justify-center">
-                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-lime-500 to-lime-600 opacity-80 blur-sm group-hover:blur group-hover:opacity-100 transition-all duration-300" />
+                                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-accent to-brand-accent-dark opacity-80 blur-sm group-hover:blur group-hover:opacity-100 transition-all duration-300" />
                                     <span className="relative h-3 w-3 rounded-full bg-white" />
                                 </span>
                                 <span className="text-sm font-semibold tracking-widest text-white uppercase">
@@ -149,8 +149,8 @@ export default function Navbar() {
                                                 className={`relative whitespace-nowrap text-sm transition-colors duration-200
                                             after:absolute after:-bottom-0.5 after:left-0 after:h-px after:transition-all after:duration-300
                                             ${active
-                                                        ? "text-white after:w-full after:bg-lime-400 drop-shadow-[0_0_8px_rgba(163,230,53,0.6)]"
-                                                        : "text-zinc-400 hover:text-lime-300 after:w-0 after:bg-white hover:after:w-full"
+                                                        ? "text-white after:w-full after:bg-brand-accent-light drop-shadow-[0_0_8px_rgba(var(--brand-accent-light-rgb), 0.6)]"
+                                                        : "text-zinc-400 hover:text-brand-accent-light after:w-0 after:bg-white hover:after:w-full"
                                                     }`}
                                             >
                                                 {link.label}
@@ -209,7 +209,7 @@ export default function Navbar() {
                                                 <Link
                                                     href={link.href}
                                                     onClick={() => setMobileOpen(false)}
-                                                    className={`text-base transition-colors ${active ? "text-lime-400 font-medium" : "text-zinc-300 hover:text-lime-300"}`}
+                                                    className={`text-base transition-colors ${active ? "text-brand-accent-light font-medium" : "text-zinc-300 hover:text-brand-accent-light"}`}
                                                 >
                                                     {link.label}
                                                 </Link>
@@ -233,3 +233,4 @@ export default function Navbar() {
         </>
     );
 }
+

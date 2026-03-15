@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function NotFound() {
     return (
@@ -9,12 +9,12 @@ export default function NotFound() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 50% 40%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 60%)",
+                        "radial-gradient(ellipse at 50% 40%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 60%)",
                 }}
             />
 
             <div className="relative z-10">
-                <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-widest text-lime-400">
+                <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-widest text-brand-accent-light">
                     404
                 </p>
                 <h1 className="text-5xl font-bold tracking-tight text-white lg:text-6xl">
@@ -27,7 +27,7 @@ export default function NotFound() {
                 <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                     <Link
                         href="/"
-                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-[0_0_40px_rgba(132,204,22,0.3)]"
+                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-[0_0_40px_rgba(var(--brand-accent-rgb), 0.3)]"
                     >
                         <span className="relative z-10">Back to Home</span>
                         <svg
@@ -56,3 +56,4 @@ export default function NotFound() {
         </section>
     );
 }
+

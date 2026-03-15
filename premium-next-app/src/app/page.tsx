@@ -1,4 +1,4 @@
-import Hero from "@/components/home/Hero";
+﻿import Hero from "@/components/home/Hero";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
 import CaseStudies from "@/components/home/CaseStudies";
@@ -20,10 +20,11 @@ export default function Home() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
         style={{
-          background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
-          boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
+          background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
+          boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
         }}
       />
     </>
   );
 }
+

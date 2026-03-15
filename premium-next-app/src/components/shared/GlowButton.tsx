@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
@@ -62,7 +62,7 @@ export default function GlowButton({
                 style={
                     {
                         "--glow-angle": "0deg",
-                        background: `conic-gradient(from var(--glow-angle), transparent 0deg, transparent 80deg, #84cc16 120deg, #a3e635 180deg, #84cc16 240deg, transparent 280deg, transparent 360deg)`,
+                        background: `conic-gradient(from var(--glow-angle), transparent 0deg, transparent 80deg, var(--brand-accent) 120deg, var(--brand-accent-light) 180deg, var(--brand-accent) 240deg, transparent 280deg, transparent 360deg)`,
                     } as React.CSSProperties
                 }
             />
@@ -73,7 +73,7 @@ export default function GlowButton({
                 className="absolute inset-0 rounded-full opacity-40 blur-md"
                 style={{
                     background:
-                        "radial-gradient(circle, rgba(132,204,22,0.3) 0%, transparent 70%)",
+                        "radial-gradient(circle, rgba(var(--brand-accent-rgb), 0.3) 0%, transparent 70%)",
                 }}
             />
 
@@ -87,3 +87,4 @@ export default function GlowButton({
         </Link>
     );
 }
+

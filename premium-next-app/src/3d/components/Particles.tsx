@@ -3,6 +3,12 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { getBrandColors } from "@/lib/brand-colors";
+
+function seededUnit(seed: number) {
+  const value = Math.sin(seed * 127.1) * 43758.5453123;
+  return value - Math.floor(value);
+}
 
 interface ParticlesProps {
   count?: number;
@@ -11,6 +17,7 @@ interface ParticlesProps {
 export function Particles({ count = 40 }: ParticlesProps) {
   const meshRef = useRef<THREE.Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
+  const brandColors = useMemo(() => getBrandColors(), []);
 
   // Create circular particle texture
   const particleTexture = useMemo(() => {
@@ -39,13 +46,13 @@ export function Particles({ count = 40 }: ParticlesProps) {
     const velocities = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 30;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+      positions[i * 3] = (seededUnit(i + count * 1.1) - 0.5) * 30;
+      positions[i * 3 + 1] = (seededUnit(i + count * 2.7) - 0.5) * 20;
+      positions[i * 3 + 2] = (seededUnit(i + count * 3.9) - 0.5) * 15 - 3;
 
-      velocities[i * 3] = (Math.random() - 0.5) * 0.008;
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
+      velocities[i * 3] = (seededUnit(i + count * 4.3) - 0.5) * 0.008;
+      velocities[i * 3 + 1] = (seededUnit(i + count * 5.1) - 0.5) * 0.008;
+      velocities[i * 3 + 2] = (seededUnit(i + count * 6.5) - 0.5) * 0.004;
     }
 
     return [positions, velocities];
@@ -53,23 +60,22 @@ export function Particles({ count = 40 }: ParticlesProps) {
 
   const particleColors = useMemo(() => {
     const colors = new Float32Array(count * 3);
-    // TechBridge color palette: lime, green, yellow, white
     const colorPalette = [
-      new THREE.Color('#84cc16'), // lime-500
-      new THREE.Color('#a3e635'), // lime-300
-      new THREE.Color('#65a30d'), // lime-700
-      new THREE.Color('#ffffff'), // white
+      new THREE.Color(brandColors.accent),
+      new THREE.Color(brandColors.accentLight),
+      new THREE.Color(brandColors.accentDark),
+      new THREE.Color('#ffffff'),
     ];
 
     for (let i = 0; i < count; i++) {
-      const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      const color = colorPalette[Math.floor(seededUnit(i + count * 7.7) * colorPalette.length)];
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
     }
 
     return colors;
-  }, [count]);
+  }, [brandColors, count]);
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();

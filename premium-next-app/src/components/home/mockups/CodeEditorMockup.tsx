@@ -1,20 +1,20 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const CODE_LINES = [
-    { tokens: [{ text: "const", color: "text-lime-400" }, { text: " app ", color: "text-zinc-300" }, { text: "=", color: "text-zinc-500" }, { text: " createApp", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  runtime", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: ' "edge"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  framework", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: ' "next@16"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  auth", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: " withOAuth", color: "text-emerald-400" }, { text: "(),", color: "text-zinc-500" }] },
-    { tokens: [{ text: "  db", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: " postgres", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
-    { tokens: [{ text: "    pool", color: "text-lime-300" }, { text: ":", color: "text-zinc-500" }, { text: " 20", color: "text-orange-300" }, { text: ",", color: "text-zinc-500" }] },
+    { tokens: [{ text: "const", color: "text-brand-accent-light" }, { text: " app ", color: "text-zinc-300" }, { text: "=", color: "text-zinc-500" }, { text: " createApp", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  runtime", color: "text-brand-accent-light" }, { text: ":", color: "text-zinc-500" }, { text: ' "edge"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  framework", color: "text-brand-accent-light" }, { text: ":", color: "text-zinc-500" }, { text: ' "next@16"', color: "text-amber-300" }, { text: ",", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  auth", color: "text-brand-accent-light" }, { text: ":", color: "text-zinc-500" }, { text: " withOAuth", color: "text-emerald-400" }, { text: "(),", color: "text-zinc-500" }] },
+    { tokens: [{ text: "  db", color: "text-brand-accent-light" }, { text: ":", color: "text-zinc-500" }, { text: " postgres", color: "text-emerald-400" }, { text: "({", color: "text-zinc-500" }] },
+    { tokens: [{ text: "    pool", color: "text-brand-accent-light" }, { text: ":", color: "text-zinc-500" }, { text: " 20", color: "text-orange-300" }, { text: ",", color: "text-zinc-500" }] },
     { tokens: [{ text: "  }),", color: "text-zinc-500" }] },
     { tokens: [{ text: "});", color: "text-zinc-500" }] },
 ];
 
-/* ─── Animation variants ─────────────────────────────────── */
+/* â”€â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const containerVariants = {
@@ -27,7 +27,7 @@ const lineVariants = {
     show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: EASE } },
 };
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function CodeEditorMockup() {
     return (
         <motion.div
@@ -40,7 +40,7 @@ export default function CodeEditorMockup() {
             {/* Title bar */}
             <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
                 <span className="h-2 w-2 rounded-full bg-red-500/60" />
-                <span className="h-2 w-2 rounded-full bg-yellow-500/60" />
+                <span className="h-2 w-2 rounded-full bg-brand-accent/60" />
                 <span className="h-2 w-2 rounded-full bg-green-500/60" />
                 <span className="ml-2 font-mono text-[10px] text-zinc-600">app.config.ts</span>
             </div>
@@ -69,7 +69,7 @@ export default function CodeEditorMockup() {
                         ))}
                         {/* Blinking cursor on last line */}
                         {i === CODE_LINES.length - 1 && (
-                            <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-lime-400" />
+                            <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-brand-accent-light" />
                         )}
                     </motion.div>
                 ))}
@@ -77,3 +77,4 @@ export default function CodeEditorMockup() {
         </motion.div>
     );
 }
+

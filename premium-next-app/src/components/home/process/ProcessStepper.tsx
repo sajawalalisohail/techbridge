@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { PHASES, EASE, SECTION_HEADER } from "./processData";
 
-/* ─── Animation variants ─────────────────────────────────── */
+/* â”€â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const nodeVariants = {
     hidden: { scale: 0, opacity: 0 },
     show: (i: number) => ({
@@ -20,7 +20,7 @@ const contentVariants = {
     exit: { opacity: 0, y: -16, transition: { duration: 0.25, ease: EASE } },
 };
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ProcessStepper() {
     const sectionRef = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -53,11 +53,11 @@ export default function ProcessStepper() {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(101,163,13,0.03) 0%, rgba(101,163,13,0) 50%)" }}
+                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(var(--brand-accent-dark-rgb), 0.03) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
-                {/* ── Section Header ── */}
+                {/* â”€â”€ Section Header â”€â”€ */}
                 <motion.div
                     ref={headerRef}
                     initial={{ opacity: 0, y: 24 }}
@@ -66,12 +66,12 @@ export default function ProcessStepper() {
                     className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                         {SECTION_HEADER.eyebrow}
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         {SECTION_HEADER.heading}{" "}
-                        <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                             {SECTION_HEADER.headingAccent}
                         </span>
                     </h2>
@@ -80,7 +80,7 @@ export default function ProcessStepper() {
                     </p>
                 </motion.div>
 
-                {/* ── Horizontal Stepper ── */}
+                {/* â”€â”€ Horizontal Stepper â”€â”€ */}
                 <div ref={stepsRef}>
                     {/* Node bar */}
                     <div className="relative mb-12 flex items-center justify-between lg:mb-16">
@@ -90,7 +90,7 @@ export default function ProcessStepper() {
                         {/* Active progress line */}
                         <motion.div
                             aria-hidden="true"
-                            className="absolute left-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-lime-500 to-yellow-500"
+                            className="absolute left-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-brand-accent to-brand-accent-light"
                             initial={{ width: "0%" }}
                             animate={{
                                 width: `${(activeIndex / (PHASES.length - 1)) * 100}%`,
@@ -117,31 +117,31 @@ export default function ProcessStepper() {
                                     {/* Circle node */}
                                     <div
                                         className={`relative flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-500 lg:h-14 lg:w-14 ${isActive
-                                            ? "border-lime-500 bg-lime-950 shadow-[0_0_24px_rgba(132,204,22,0.5)]"
+                                            ? "border-brand-accent bg-brand-accent-deep shadow-[0_0_24px_rgba(var(--brand-accent-rgb), 0.5)]"
                                             : isPast
-                                                ? "border-lime-500/50 bg-lime-950/50"
-                                                : "border-white/15 bg-neutral-900/60 group-hover:border-lime-500/40"
+                                                ? "border-brand-accent/50 bg-brand-accent-deep/50"
+                                                : "border-white/15 bg-neutral-900/60 group-hover:border-brand-accent/40"
                                             }`}
                                     >
                                         {/* Pulse ring on active */}
                                         {isActive && (
-                                            <span className="absolute inset-0 rounded-full animate-ping bg-lime-500/20" style={{ animationDuration: "2s" }} />
+                                            <span className="absolute inset-0 rounded-full animate-ping bg-brand-accent/20" style={{ animationDuration: "2s" }} />
                                         )}
                                         <NodeIcon
                                             size={20}
                                             strokeWidth={1.5}
                                             className={`relative z-10 transition-colors duration-300 ${isActive
-                                                ? "text-lime-300"
+                                                ? "text-brand-accent-light"
                                                 : isPast
-                                                    ? "text-lime-400/60"
-                                                    : "text-zinc-500 group-hover:text-lime-300"
+                                                    ? "text-brand-accent-light/60"
+                                                    : "text-zinc-500 group-hover:text-brand-accent-light"
                                                 }`}
                                         />
                                     </div>
 
                                     {/* Label below */}
                                     <div className="text-center">
-                                        <span className={`block font-mono text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? "text-lime-400" : "text-zinc-600"}`}>
+                                        <span className={`block font-mono text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? "text-brand-accent-light" : "text-zinc-600"}`}>
                                             {phase.number}
                                         </span>
                                         <span className={`mt-0.5 block text-xs font-medium transition-colors duration-300 lg:text-sm ${isActive ? "text-white" : "text-zinc-500"}`}>
@@ -153,7 +153,7 @@ export default function ProcessStepper() {
                         })}
                     </div>
 
-                    {/* ── Expanded Content Panel ── */}
+                    {/* â”€â”€ Expanded Content Panel â”€â”€ */}
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex}
@@ -168,7 +168,7 @@ export default function ProcessStepper() {
                                 aria-hidden="true"
                                 className="pointer-events-none absolute inset-0"
                                 style={{
-                                    background: "radial-gradient(ellipse at 0% 50%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 100%)",
+                                    background: "radial-gradient(ellipse at 0% 50%, rgba(var(--brand-accent-rgb), 0.12) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
                                 }}
                             />
 
@@ -176,10 +176,10 @@ export default function ProcessStepper() {
                                 {/* Text content */}
                                 <div className="flex flex-col justify-center">
                                     <div className="mb-5 flex items-center gap-4">
-                                        <span className="font-mono text-5xl font-bold leading-none tracking-tighter text-white drop-shadow-[0_0_20px_rgba(132,204,22,0.6)]">
+                                        <span className="font-mono text-5xl font-bold leading-none tracking-tighter text-white drop-shadow-[0_0_20px_rgba(var(--brand-accent-rgb), 0.6)]">
                                             {activePhase.number}
                                         </span>
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-lime-500/40 bg-lime-950/50 text-lime-400 shadow-[0_0_15px_rgba(132,204,22,0.3)]">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-brand-accent/40 bg-brand-accent-deep/50 text-brand-accent-light shadow-[0_0_15px_rgba(var(--brand-accent-rgb), 0.3)]">
                                             <Icon size={18} strokeWidth={1.5} />
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@ export default function ProcessStepper() {
                                         {activePhase.tags.map((tag) => (
                                             <span
                                                 key={tag}
-                                                className="rounded-full border border-lime-500/30 bg-lime-500/10 px-3 py-1 text-xs text-lime-300"
+                                                className="rounded-full border border-brand-accent/30 bg-brand-accent/10 px-3 py-1 text-xs text-brand-accent-light"
                                             >
                                                 {tag}
                                             </span>
@@ -215,3 +215,4 @@ export default function ProcessStepper() {
         </section>
     );
 }
+

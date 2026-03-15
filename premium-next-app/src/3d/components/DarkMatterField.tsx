@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { getBrandColors, type BrandColors } from "@/lib/brand-colors";
 
 export type DarkMatterVariant = "ambient" | "page" | "hero" | "framed";
 
@@ -92,9 +93,11 @@ function getVariantSettings(variant: DarkMatterVariant) {
 }
 
 function DarkMatterMotes({
+  brandColors,
   variant,
   reducedMotion,
 }: {
+  brandColors: BrandColors;
   variant: DarkMatterVariant;
   reducedMotion: boolean;
 }) {
@@ -103,8 +106,12 @@ function DarkMatterMotes({
   const texture = useMemo(() => createParticleTexture(), []);
   const settings = useMemo(() => getVariantSettings(variant), [variant]);
   const palette = useMemo(
-    () => [new THREE.Color("#84cc16"), new THREE.Color("#a3e635"), new THREE.Color("#84cc16")],
-    []
+    () => [
+      new THREE.Color(brandColors.accent),
+      new THREE.Color(brandColors.accentLight),
+      new THREE.Color(brandColors.accentDark),
+    ],
+    [brandColors]
   );
 
   const [positions, velocities, colors] = useMemo(() => {
@@ -216,6 +223,7 @@ export function DarkMatterField({ variant = "page" }: { variant?: DarkMatterVari
   const { viewport } = useThree();
   const reducedMotion = usePrefersReducedMotion();
   const settings = useMemo(() => getVariantSettings(variant), [variant]);
+  const brandColors = useMemo(() => getBrandColors(), []);
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
@@ -224,8 +232,11 @@ export function DarkMatterField({ variant = "page" }: { variant?: DarkMatterVari
       uIntensity: { value: settings.intensity },
       uDrift: { value: settings.drift },
       uVariant: { value: variant === "hero" ? 1 : variant === "framed" ? 2 : variant === "ambient" ? 3 : 0 },
+      uBrandAccent: { value: new THREE.Vector3(...brandColors.accentVec3) },
+      uBrandAccentLight: { value: new THREE.Vector3(...brandColors.accentLightVec3) },
+      uBrandAccentDark: { value: new THREE.Vector3(...brandColors.accentDarkVec3) },
     }),
-    [settings.drift, settings.intensity, variant, viewport.height, viewport.width]
+    [brandColors, settings.drift, settings.intensity, variant, viewport.height, viewport.width]
   );
 
   const vertexShader = `
@@ -244,6 +255,9 @@ export function DarkMatterField({ variant = "page" }: { variant?: DarkMatterVari
     uniform float uIntensity;
     uniform float uTime;
     uniform float uVariant;
+    uniform vec3 uBrandAccent;
+    uniform vec3 uBrandAccentDark;
+    uniform vec3 uBrandAccentLight;
     uniform vec2 uPointer;
     uniform vec2 uResolution;
 
@@ -319,14 +333,10 @@ export function DarkMatterField({ variant = "page" }: { variant?: DarkMatterVari
       float edgeVignette = smoothstep(1.65, 0.45, length(uv));
       float verticalFade = smoothstep(1.05, -0.85, uv.y);
 
-      vec3 lime = vec3(0.518, 0.8, 0.086);
-      vec3 limeLight = vec3(0.639, 0.902, 0.208);
-      vec3 dusk = vec3(0.1, 0.2, 0.02);
-
       vec3 color = vec3(0.0);
-      color += dusk * (halo * 0.9 + secondaryHalo * 0.55);
-      color += limeLight * (contour * 0.16 + halo * 0.26 + frame);
-      color += lime * (halo * 0.34 + pointerHalo * 0.4 + dust * 0.45);
+      color += uBrandAccentDark * (halo * 0.9 + secondaryHalo * 0.55);
+      color += uBrandAccentLight * (contour * 0.16 + halo * 0.26 + frame);
+      color += uBrandAccent * (halo * 0.34 + pointerHalo * 0.4 + dust * 0.45);
 
       float alpha = (halo * 0.75 + contour * 0.16 + secondaryHalo * 0.42 + pointerHalo * 0.32 + dust * 0.22 + frame);
       alpha *= edgeVignette * verticalFade;
@@ -363,7 +373,7 @@ export function DarkMatterField({ variant = "page" }: { variant?: DarkMatterVari
           vertexShader={vertexShader}
         />
       </mesh>
-      <DarkMatterMotes reducedMotion={reducedMotion} variant={variant} />
+      <DarkMatterMotes brandColors={brandColors} reducedMotion={reducedMotion} variant={variant} />
     </>
   );
 }

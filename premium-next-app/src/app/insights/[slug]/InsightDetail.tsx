@@ -48,7 +48,7 @@ export default function InsightDetail({ post }: { post: InsightPost }) {
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0"
                         style={{
-                            background: "radial-gradient(ellipse at 30% 50%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 60%)",
+                            background: "radial-gradient(ellipse at 30% 50%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%)",
                         }}
                     />
                     <div className="relative z-10 mx-auto w-full max-w-4xl px-6 lg:px-12">
@@ -74,7 +74,7 @@ export default function InsightDetail({ post }: { post: InsightPost }) {
                             animate={isHeroInView ? "show" : "hidden"}
                             className="mb-6 flex flex-wrap items-center gap-3"
                         >
-                            <span className="rounded-full border border-lime-500/20 bg-lime-950/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-lime-300">
+                            <span className="rounded-full border border-brand-accent/20 bg-brand-accent-deep/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
                                 {post.category}
                             </span>
                             <span className="flex items-center gap-1 text-xs text-zinc-500">
@@ -146,7 +146,7 @@ export default function InsightDetail({ post }: { post: InsightPost }) {
                                     ),
                                     li: ({ children }) => (
                                         <li className="flex items-start gap-3 text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                            <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-lime-500/60" />
+                                            <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-accent/60" />
                                             <span>{children}</span>
                                         </li>
                                     ),
@@ -154,12 +154,12 @@ export default function InsightDetail({ post }: { post: InsightPost }) {
                                         <strong className="font-semibold text-zinc-200">{children}</strong>
                                     ),
                                     code: ({ children }) => (
-                                        <code className="rounded border border-white/10 bg-white/[0.05] px-1.5 py-0.5 font-mono text-sm text-lime-300">
+                                        <code className="rounded border border-white/10 bg-white/[0.05] px-1.5 py-0.5 font-mono text-sm text-brand-accent-light">
                                             {children}
                                         </code>
                                     ),
                                     blockquote: ({ children }) => (
-                                        <blockquote className="my-6 border-l-2 border-lime-500/60 pl-6 italic text-zinc-300">
+                                        <blockquote className="my-6 border-l-2 border-brand-accent/60 pl-6 italic text-zinc-300">
                                             {children}
                                         </blockquote>
                                     ),
@@ -192,8 +192,8 @@ export default function InsightDetail({ post }: { post: InsightPost }) {
                     aria-hidden="true"
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
-                        background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
-                        boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
+                        background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
                     }}
                 />
             </div>

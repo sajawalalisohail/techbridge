@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import Link from "next/link";
@@ -21,7 +21,7 @@ import {
     DataFlowMockup,
 } from "@/components/home/mockups";
 
-/* ─── Types ──────────────────────────────────────────────── */
+/* â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 import type { LucideIcon } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -37,7 +37,7 @@ interface ServiceCard {
     Mockup: ComponentType;
 }
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SERVICES: ServiceCard[] = [
     {
         id: 1,
@@ -46,7 +46,7 @@ const SERVICES: ServiceCard[] = [
         title: "Custom Software & SaaS",
         description:
             "Multi-tenant platforms, internal tools, and SaaS products. Architected so your next hire can actually understand the codebase.",
-        accentColor: "radial-gradient(ellipse at 20% 50%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 100%)",
+        accentColor: "radial-gradient(ellipse at 20% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
         href: "/services#custom-software",
         Mockup: WorkflowDiagramMockup,
     },
@@ -57,7 +57,7 @@ const SERVICES: ServiceCard[] = [
         title: "AI Workflow Automation",
         description:
             "Your ops team is copy-pasting between six tabs. We replace that with one system that does it in seconds.",
-        accentColor: "radial-gradient(ellipse at 80% 50%, rgba(163,230,53,0.09) 0%, rgba(163,230,53,0) 100%)",
+        accentColor: "radial-gradient(ellipse at 80% 50%, rgba(var(--brand-accent-light-rgb), 0.09) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
         href: "/services#ai-automation",
         Mockup: ChatUIMockup,
     },
@@ -68,7 +68,7 @@ const SERVICES: ServiceCard[] = [
         title: "Internal Tools & Integrations",
         description:
             "The admin panel, the reporting dashboard, the thing your team duct-taped together in Sheets. We build the real version.",
-        accentColor: "radial-gradient(ellipse at 50% 0%, rgba(132,204,22,0.07) 0%, rgba(132,204,22,0) 100%)",
+        accentColor: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-rgb), 0.07) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
         href: "/services#internal-tools",
         Mockup: DashboardMockup,
     },
@@ -80,7 +80,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "A real website. Custom code, not a template. Deployed and live before you wake up tomorrow.",
         highlight: true,
-        accentColor: "radial-gradient(ellipse at 50% 50%, rgba(163,230,53,0.11) 0%, rgba(163,230,53,0) 100%)",
+        accentColor: "radial-gradient(ellipse at 50% 50%, rgba(var(--brand-accent-light-rgb), 0.11) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
         href: "/websites",
         Mockup: BrowserLoadMockup,
     },
@@ -91,7 +91,7 @@ const SERVICES: ServiceCard[] = [
         title: "Mobile Apps",
         description:
             "iOS and Android apps that don't crash, don't lag, and don't get uninstalled after the first session.",
-        accentColor: "radial-gradient(ellipse at 20% 80%, rgba(163,230,53,0.08) 0%, rgba(163,230,53,0) 100%)",
+        accentColor: "radial-gradient(ellipse at 20% 80%, rgba(var(--brand-accent-light-rgb), 0.08) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
         href: "/services#mobile-apps",
         Mockup: MetricCounterMockup,
     },
@@ -102,13 +102,13 @@ const SERVICES: ServiceCard[] = [
         title: "UI/UX & Brand Identity",
         description:
             "Design systems and brand work grounded in actual user research, not a mood board from Pinterest.",
-        accentColor: "radial-gradient(ellipse at 80% 80%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 100%)",
+        accentColor: "radial-gradient(ellipse at 80% 80%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
         href: "/services#design-branding",
         Mockup: DataFlowMockup,
     },
 ];
 
-/* ─── Animation variants ─────────────────────────────────── */
+/* â”€â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const containerVariants = {
@@ -138,7 +138,7 @@ const headerVariants = {
     },
 };
 
-/* ─── Sub-components ─────────────────────────────────────── */
+/* â”€â”€â”€ Sub-components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ServiceCardItem({ card }: { card: ServiceCard }) {
     const Icon = card.icon;
     const { Mockup } = card;
@@ -147,12 +147,12 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
         <motion.div
             variants={cardVariants}
             className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${card.highlight
-                ? "border-lime-500/30 shadow-[0_0_0_1px_rgba(132,204,22,0.15)]"
-                : "border-white/8 hover:border-lime-500/40"
+                ? "border-brand-accent/30 shadow-[0_0_0_1px_rgba(var(--brand-accent-rgb), 0.15)]"
+                : "border-white/8 hover:border-brand-accent/40"
                 }`}
         >
 
-            {/* Radial glow — appears on hover */}
+            {/* Radial glow â€” appears on hover */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -170,7 +170,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
 
             {/* Top-right corner accent line for highlight card */}
             {card.highlight && (
-                <div className="absolute right-0 top-0 h-px w-24 bg-gradient-to-l from-lime-400/60 to-transparent" />
+                <div className="absolute right-0 top-0 h-px w-24 bg-gradient-to-l from-brand-accent-light/60 to-transparent" />
             )}
 
             {/* Content */}
@@ -178,8 +178,8 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 {/* Icon */}
                 <div
                     className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-300 ${card.highlight
-                        ? "border-lime-500/40 bg-lime-950/60 text-lime-400"
-                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-lime-500/40 group-hover:text-lime-300"
+                        ? "border-brand-accent/40 bg-brand-accent-deep/60 text-brand-accent-light"
+                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-brand-accent/40 group-hover:text-brand-accent-light"
                         }`}
                 >
                     <Icon size={20} strokeWidth={1.5} />
@@ -187,7 +187,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
 
                 {/* Eyebrow */}
                 <p
-                    className={`mb-2 font-mono text-xs font-semibold uppercase tracking-widest ${card.highlight ? "text-lime-400" : "text-zinc-600"
+                    className={`mb-2 font-mono text-xs font-semibold uppercase tracking-widest ${card.highlight ? "text-brand-accent-light" : "text-zinc-600"
                         }`}
                 >
                     {card.eyebrow}
@@ -199,7 +199,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-lime-300 transition-colors duration-300">
+                <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-brand-accent-light transition-colors duration-300">
                     {card.description}
                 </p>
 
@@ -213,7 +213,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                         <Link
                             href={card.href}
                             aria-label={`Learn more about ${card.title}`}
-                            className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-lime-400" : "text-zinc-600 group-hover:text-lime-300"
+                            className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-brand-accent-light" : "text-zinc-600 group-hover:text-brand-accent-light"
                                 }`}
                         >
                             <span>Learn more</span>
@@ -230,8 +230,8 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                     ) : (
                         <div
                             className={`mt-6 flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 ${card.highlight
-                                ? "text-lime-400"
-                                : "text-zinc-600 group-hover:text-lime-300"
+                                ? "text-brand-accent-light"
+                                : "text-zinc-600 group-hover:text-brand-accent-light"
                                 }`}
                         >
                             <span>Learn more</span>
@@ -252,7 +252,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
     );
 }
 
-/* ─── Main export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function Services() {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -271,11 +271,11 @@ export default function Services() {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse at 100% 30%, rgba(132,204,22,0.03) 0%, rgba(132,204,22,0) 50%)" }}
+                style={{ background: "radial-gradient(ellipse at 100% 30%, rgba(var(--brand-accent-rgb), 0.03) 0%, rgba(var(--brand-accent-rgb), 0) 50%)" }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
-                {/* ── Section Header ── */}
+                {/* â”€â”€ Section Header â”€â”€ */}
                 <div className="mb-16 max-w-3xl lg:mb-20">
                     <motion.span
                         initial="hidden"
@@ -283,7 +283,7 @@ export default function Services() {
                         variants={fadeUp()}
                         className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                     >
-                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                         what we actually do
                     </motion.span>
                     <motion.h2
@@ -302,7 +302,7 @@ export default function Services() {
                                 {word}
                             </motion.span>
                         ))}
-                        <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                         </span>
                     </motion.h2>
                     <motion.p
@@ -315,7 +315,7 @@ export default function Services() {
                     </motion.p>
                 </div>
 
-                {/* ── Bento Grid ── */}
+                {/* â”€â”€ Bento Grid â”€â”€ */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
@@ -330,3 +330,4 @@ export default function Services() {
         </section>
     );
 }
+

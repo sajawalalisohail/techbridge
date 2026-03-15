@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
 import { INSIGHTS } from "@/data/insights";
 
-/* ─── Animation ──────────────────────────────────────────── */
+/* â”€â”€â”€ Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp = (delay = 0) => ({
@@ -28,7 +28,7 @@ const childFade = {
     show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
-/* ─── Format Date ────────────────────────────────────────── */
+/* â”€â”€â”€ Format Date â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString("en-US", {
         year: "numeric",
@@ -37,7 +37,7 @@ function formatDate(dateStr: string) {
     });
 }
 
-/* ─── Main Page ──────────────────────────────────────────── */
+/* â”€â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function InsightsPage() {
     const heroRef = useRef<HTMLElement>(null);
     const gridRef = useRef<HTMLElement>(null);
@@ -48,7 +48,7 @@ export default function InsightsPage() {
         <div className="relative text-white">
             <div className="relative z-10 overflow-hidden min-h-screen">
 
-                {/* ── Hero ── */}
+                {/* â”€â”€ Hero â”€â”€ */}
                 <section
                     ref={heroRef}
                     className="relative flex min-h-[45vh] items-center overflow-hidden border-b border-white/5"
@@ -56,7 +56,7 @@ export default function InsightsPage() {
                     <div
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0"
-                        style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 70%)" }}
+                        style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 70%)" }}
                     />
 
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-12">
@@ -66,7 +66,7 @@ export default function InsightsPage() {
                             animate={isHeroInView ? "show" : "hidden"}
                         >
                             <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 Engineering Insights
                             </span>
                         </motion.div>
@@ -78,7 +78,7 @@ export default function InsightsPage() {
                             className="text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
                         >
                             Insights{" "}
-                            <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                                 from the Build.
                             </span>
                         </motion.h1>
@@ -95,7 +95,7 @@ export default function InsightsPage() {
                     </div>
                 </section>
 
-                {/* ── Article Grid ── */}
+                {/* â”€â”€ Article Grid â”€â”€ */}
                 <section ref={gridRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-12">
                         <motion.div
@@ -115,14 +115,14 @@ export default function InsightsPage() {
                                             aria-hidden="true"
                                             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
                                             style={{
-                                                background: "radial-gradient(ellipse at 50% 0%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 100%)",
+                                                background: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-rgb), 0.12) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
                                             }}
                                         />
 
                                         <div className="relative z-10 flex h-full flex-col">
                                             {/* Meta */}
                                             <div className="mb-5 flex items-center gap-3">
-                                                <span className="rounded-full border border-lime-500/20 bg-lime-950/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-lime-300">
+                                                <span className="rounded-full border border-brand-accent/20 bg-brand-accent-deep/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
                                                     {post.category}
                                                 </span>
                                                 <span className="flex items-center gap-1 text-xs text-zinc-600">
@@ -132,7 +132,7 @@ export default function InsightsPage() {
                                             </div>
 
                                             {/* Title */}
-                                            <h2 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-lime-300">
+                                            <h2 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-brand-accent-light">
                                                 {post.title}
                                             </h2>
 
@@ -146,7 +146,7 @@ export default function InsightsPage() {
                                                 <span className="text-xs text-zinc-600">
                                                     {formatDate(post.publishedAt)}
                                                 </span>
-                                                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-lime-400">
+                                                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition-colors duration-200 group-hover:text-brand-accent-light">
                                                     Read
                                                     <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                                                 </span>
@@ -164,11 +164,12 @@ export default function InsightsPage() {
                     aria-hidden="true"
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
-                        background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
-                        boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
+                        background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
                     }}
                 />
             </div>
         </div>
     );
 }
+

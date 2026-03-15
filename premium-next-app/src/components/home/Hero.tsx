@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import Link from "next/link";
@@ -37,7 +37,7 @@ const fadeUp = {
 const STATS = [
     { value: 50, suffix: "+", label: "Systems in Production" },
     { value: 98, suffix: "%", label: "Client Retention" },
-    { value: 3, suffix: "×", label: "Faster Than In-House" },
+    { value: 3, suffix: "Ã—", label: "Faster Than In-House" },
 ];
 
 
@@ -48,30 +48,30 @@ export default function Hero() {
 
     return (
         <section ref={sectionRef} className="relative min-h-screen w-full overflow-hidden">
-            {/* ─── 3D Hybrid Background ─── */}
+            {/* â”€â”€â”€ 3D Hybrid Background â”€â”€â”€ */}
             <HybridBackground />
 
-            {/* ─── Overlay: noise + hairline ─── */}
+            {/* â”€â”€â”€ Overlay: noise + hairline â”€â”€â”€ */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-                {/* ── Soft Centered Luminous Cloud Blob Background ── */}
+                {/* â”€â”€ Soft Centered Luminous Cloud Blob Background â”€â”€ */}
                 <HeroBlobBackground />
 
-                {/* Fine noise texture — dithers gradient banding across the full hero */}
+                {/* Fine noise texture â€” dithers gradient banding across the full hero */}
                 <div
                     className="absolute inset-0"
                     style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
                         backgroundRepeat: "repeat",
-                        backgroundSize: "200px 200px",
-                        opacity: 0.55,
-                        mixBlendMode: "overlay",
+                        backgroundSize: "240px 240px",
+                        opacity: 0.22,
+                        mixBlendMode: "soft-light",
                     }}
                 />
                 {/* Hairline separator at bottom of hero */}
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
-            {/* ─── Main content (above 3D background) ─── */}
+            {/* â”€â”€â”€ Main content (above 3D background) â”€â”€â”€ */}
             <motion.div
                 variants={container}
                 initial="hidden"
@@ -80,10 +80,10 @@ export default function Hero() {
             >
 
                 {/* Primary headline */}
-                <ClipReveal>
-                    <h1 className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]">
+                <ClipReveal className="pb-[0.14em]">
+                    <h1 className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]">
                         <span className="block">Custom Software. AI Systems.</span>{" "}
-                        <span className="bg-gradient-to-r from-lime-400 via-lime-300 to-yellow-300 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-brand-accent-light via-white to-brand-accent-light bg-clip-text text-transparent [text-shadow:0_0_28px_rgba(var(--brand-accent-rgb),0.14)]">
                             Senior Engineers.
                         </span>
                     </h1>
@@ -105,7 +105,7 @@ export default function Hero() {
                 >
                     <Link
                         href="/contact"
-                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-lime-500/10"
+                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-brand-accent/10"
                     >
                         <span className="relative z-10">Talk to an Engineer</span>
                         <svg
@@ -123,7 +123,7 @@ export default function Hero() {
 
                     <Link
                         href="/work"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-lime-300"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-brand-accent-light"
                     >
                         See What We Shipped
                         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -145,7 +145,7 @@ export default function Hero() {
                                     value={stat.value}
                                     suffix={stat.suffix}
                                     from={20}
-                                    className="font-mono text-3xl font-bold tracking-tight bg-gradient-to-br from-lime-400 to-lime-300 bg-clip-text text-transparent sm:text-4xl"
+                                    className="font-mono text-3xl font-bold tracking-tight bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent sm:text-4xl"
                                 />
                             </dd>
                             <dt className="text-xs tracking-wider text-zinc-500 uppercase text-center">
@@ -158,3 +158,4 @@ export default function Hero() {
         </section>
     );
 }
+

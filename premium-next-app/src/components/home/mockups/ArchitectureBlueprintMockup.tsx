@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const GRID_SIZE = 5;
 const NODES = [
     { id: "client", x: 1, y: 3, label: "Client Apps" },
@@ -42,7 +42,7 @@ export default function ArchitectureBlueprintMockup() {
 
             {/* Scanning Laser Effect */}
             <motion.div
-                className="absolute inset-y-0 left-0 z-10 w-px bg-lime-500 shadow-[0_0_15px_2px_rgba(132,204,22,0.6)]"
+                className="absolute inset-y-0 left-0 z-10 w-px bg-brand-accent shadow-[0_0_15px_2px_rgba(var(--brand-accent-rgb), 0.6)]"
                 initial={{ x: "-100%", opacity: 0 }}
                 animate={isInView ? { x: ["-100%", "500%"], opacity: [0, 1, 1, 0] } : {}}
                 transition={{
@@ -58,8 +58,8 @@ export default function ArchitectureBlueprintMockup() {
                 <svg className="absolute inset-0 h-full w-full overflow-visible">
                     <defs>
                         <linearGradient id="blueprint-line" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgb(132,204,22)" stopOpacity="0.8" />
-                            <stop offset="100%" stopColor="rgb(163,230,53)" stopOpacity="0.8" />
+                            <stop offset="0%" stopColor="rgb(var(--brand-accent-rgb))" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="rgb(var(--brand-accent-light-rgb))" stopOpacity="0.8" />
                         </linearGradient>
                     </defs>
 
@@ -115,11 +115,11 @@ export default function ArchitectureBlueprintMockup() {
                         transition={{ duration: 0.5, ease: "backOut", delay: i * 0.2 + 0.3 }}
                     >
                         {/* Node circle */}
-                        <div className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-lime-500/50 bg-lime-950/50 shadow-[0_0_10px_rgba(132,204,22,0.3)] backdrop-blur-sm">
-                            <div className="h-2 w-2 rounded-full bg-lime-400" />
+                        <div className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-brand-accent/50 bg-brand-accent-deep/50 shadow-[0_0_10px_rgba(var(--brand-accent-rgb), 0.3)] backdrop-blur-sm">
+                            <div className="h-2 w-2 rounded-full bg-brand-accent-light" />
                             {/* Pulse ring */}
                             <motion.div
-                                className="absolute inset-0 rounded-lg border border-lime-400/50"
+                                className="absolute inset-0 rounded-lg border border-brand-accent-light/50"
                                 initial={{ scale: 1, opacity: 1 }}
                                 animate={{ scale: 1.5, opacity: 0 }}
                                 transition={{
@@ -140,3 +140,4 @@ export default function ArchitectureBlueprintMockup() {
         </motion.div>
     );
 }
+

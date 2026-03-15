@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const NODES = [
     { label: "Design", sub: "Figma" },
     { label: "Build", sub: "Next.js" },
@@ -21,7 +21,7 @@ const nodeVariants = {
     }),
 };
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function WorkflowDiagramMockup() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -58,8 +58,8 @@ export default function WorkflowDiagramMockup() {
                             className="flex items-center"
                             style={{ transformOrigin: "left" }}
                         >
-                            <div className="h-px w-6 bg-gradient-to-r from-lime-500/50 to-yellow-500/50 lg:w-10" />
-                            <div className="h-0 w-0 border-y-[3px] border-l-[5px] border-y-transparent border-l-yellow-500/50" />
+                            <div className="h-px w-6 bg-gradient-to-r from-brand-accent/50 to-brand-accent-light/50 lg:w-10" />
+                            <div className="h-0 w-0 border-y-[3px] border-l-[5px] border-y-transparent border-l-brand-accent/50" />
                         </motion.div>
                     )}
                 </div>
@@ -68,7 +68,7 @@ export default function WorkflowDiagramMockup() {
             {/* Animated data dot traveling along the path */}
             <motion.div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-[15%] h-1.5 w-1.5 rounded-full bg-lime-400 shadow-[0_0_8px_rgba(132,204,22,0.6)]"
+                className="pointer-events-none absolute left-[15%] h-1.5 w-1.5 rounded-full bg-brand-accent-light shadow-[0_0_8px_rgba(var(--brand-accent-rgb), 0.6)]"
                 initial={{ opacity: 0 }}
                 animate={isInView ? {
                     opacity: [0, 1, 1, 0],
@@ -84,3 +84,4 @@ export default function WorkflowDiagramMockup() {
         </motion.div>
     );
 }
+

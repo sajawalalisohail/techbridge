@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-/* ─── Animation ──────────────────────────────────────────── */
+/* â”€â”€â”€ Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const blockVariants = {
@@ -14,7 +14,7 @@ const blockVariants = {
     }),
 };
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function BrowserLoadMockup() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -31,7 +31,7 @@ export default function BrowserLoadMockup() {
             {/* Browser chrome */}
             <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
                 <span className="h-2 w-2 rounded-full bg-red-500/60" />
-                <span className="h-2 w-2 rounded-full bg-yellow-500/60" />
+                <span className="h-2 w-2 rounded-full bg-brand-accent/60" />
                 <span className="h-2 w-2 rounded-full bg-green-500/60" />
                 <div className="ml-2 flex-1 rounded-sm bg-white/5 px-2 py-0.5">
                     <span className="font-mono text-[9px] text-zinc-600">techbridge.dev</span>
@@ -40,7 +40,7 @@ export default function BrowserLoadMockup() {
 
             {/* Loading progress bar */}
             <motion.div
-                className="h-[2px] bg-gradient-to-r from-lime-500 to-yellow-500"
+                className="h-[2px] bg-gradient-to-r from-brand-accent to-brand-accent-light"
                 style={{ transformOrigin: "left" }}
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
@@ -75,7 +75,7 @@ export default function BrowserLoadMockup() {
                 >
                     <div className="h-3 w-3/4 rounded-sm bg-white/10" />
                     <div className="h-3 w-1/2 rounded-sm bg-white/8" />
-                    <div className="mt-2 h-2 w-1/3 rounded-sm bg-lime-500/20" />
+                    <div className="mt-2 h-2 w-1/3 rounded-sm bg-brand-accent/20" />
                 </motion.div>
 
                 {/* Two column cards */}
@@ -99,3 +99,4 @@ export default function BrowserLoadMockup() {
         </motion.div>
     );
 }
+

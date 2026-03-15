@@ -3,33 +3,52 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { getBrandColors, type BrandColors } from "@/lib/brand-colors";
+
+function seededUnit(seed: number) {
+  const value = Math.sin(seed * 127.1) * 43758.5453123;
+  return value - Math.floor(value);
+}
 
 /* ─── Connection Lines ────────────────────────────────────── */
 
 interface ConnectionLinesProps {
   positionsRef: React.RefObject<Float32Array | null>;
   count: number;
+  brandColors: BrandColors;
   maxDistance?: number;
 }
 
-function ConnectionLines({ positionsRef, count, maxDistance = 3.0 }: ConnectionLinesProps) {
+function ConnectionLines({ positionsRef, count, brandColors, maxDistance = 3.0 }: ConnectionLinesProps) {
   const linesRef = useRef<THREE.LineSegments>(null);
   const MAX_LINES = 500;
 
-  const linePositions = useMemo(() => new Float32Array(MAX_LINES * 6), []);
-  const lineColors = useMemo(() => new Float32Array(MAX_LINES * 6), []);
+  useEffect(() => {
+    if (!linesRef.current) return;
 
-  const geometry = useMemo(() => {
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    geo.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
-    geo.setDrawRange(0, 0);
-    return geo;
-  }, [linePositions, lineColors]);
+    const geometry = linesRef.current.geometry;
+    const linePositions = new Float32Array(MAX_LINES * 6);
+    const lineColors = new Float32Array(MAX_LINES * 6);
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+    geometry.setDrawRange(0, 0);
+
+    return () => {
+      geometry.dispose();
+    };
+  }, []);
 
   useFrame(() => {
     if (!linesRef.current || !positionsRef.current) return;
     const positions = positionsRef.current;
+    const liveGeometry = linesRef.current.geometry;
+    const positionAttribute = liveGeometry.getAttribute('position') as THREE.BufferAttribute | undefined;
+    const colorAttribute = liveGeometry.getAttribute('color') as THREE.BufferAttribute | undefined;
+    if (!positionAttribute || !colorAttribute) return;
+
+    const linePositions = positionAttribute.array as Float32Array;
+    const lineColors = colorAttribute.array as Float32Array;
     let lineCount = 0;
 
     for (let i = 0; i < count && lineCount < MAX_LINES; i++) {
@@ -50,26 +69,27 @@ function ConnectionLines({ positionsRef, count, maxDistance = 3.0 }: ConnectionL
           linePositions[idx + 4] = positions[j * 3 + 1];
           linePositions[idx + 5] = positions[j * 3 + 2];
 
-          // Lime tint with distance-based fade
-          lineColors[idx] = 0.52 * alpha;
-          lineColors[idx + 1] = 0.80 * alpha;
-          lineColors[idx + 2] = 0.09 * alpha;
-          lineColors[idx + 3] = 0.52 * alpha;
-          lineColors[idx + 4] = 0.80 * alpha;
-          lineColors[idx + 5] = 0.09 * alpha;
+          // Brand accent tint with distance-based fade
+          lineColors[idx] = brandColors.accentVec3[0] * alpha;
+          lineColors[idx + 1] = brandColors.accentVec3[1] * alpha;
+          lineColors[idx + 2] = brandColors.accentVec3[2] * alpha;
+          lineColors[idx + 3] = brandColors.accentVec3[0] * alpha;
+          lineColors[idx + 4] = brandColors.accentVec3[1] * alpha;
+          lineColors[idx + 5] = brandColors.accentVec3[2] * alpha;
 
           lineCount++;
         }
       }
     }
 
-    geometry.setDrawRange(0, lineCount * 2);
-    geometry.attributes.position.needsUpdate = true;
-    geometry.attributes.color.needsUpdate = true;
+    liveGeometry.setDrawRange(0, lineCount * 2);
+    positionAttribute.needsUpdate = true;
+    colorAttribute.needsUpdate = true;
   });
 
   return (
-    <lineSegments ref={linesRef} geometry={geometry} frustumCulled={false}>
+    <lineSegments ref={linesRef} frustumCulled={false}>
+      <bufferGeometry />
       <lineBasicMaterial
         vertexColors
         transparent
@@ -86,9 +106,10 @@ function ConnectionLines({ positionsRef, count, maxDistance = 3.0 }: ConnectionL
 interface ParticlesFieldProps {
   count?: number;
   positionsRef: React.MutableRefObject<Float32Array | null>;
+  brandColors: BrandColors;
 }
 
-function ParticlesField({ count = 80, positionsRef }: ParticlesFieldProps) {
+function ParticlesField({ count = 80, positionsRef, brandColors }: ParticlesFieldProps) {
   const meshRef = useRef<THREE.Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -118,38 +139,38 @@ function ParticlesField({ count = 80, positionsRef }: ParticlesFieldProps) {
     const sizes = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 40;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 12; // Wider z-spread for depth
+      positions[i * 3] = (seededUnit(i + count * 1.1) - 0.5) * 40;
+      positions[i * 3 + 1] = (seededUnit(i + count * 2.3) - 0.5) * 80;
+      positions[i * 3 + 2] = (seededUnit(i + count * 3.7) - 0.5) * 12; // Wider z-spread for depth
 
       // Slower, more elegant drift
-      velocities[i * 3] = (Math.random() - 0.5) * 0.004;
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.004;
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.002;
+      velocities[i * 3] = (seededUnit(i + count * 4.9) - 0.5) * 0.004;
+      velocities[i * 3 + 1] = (seededUnit(i + count * 5.7) - 0.5) * 0.004;
+      velocities[i * 3 + 2] = (seededUnit(i + count * 6.1) - 0.5) * 0.002;
 
       // Per-particle size variation (0.10 - 0.25)
-      sizes[i] = 0.10 + Math.random() * 0.15;
+      sizes[i] = 0.10 + seededUnit(i + count * 7.9) * 0.15;
     }
 
     return [positions, velocities, sizes];
   }, [count]);
 
   // Expose positions for ConnectionLines
-  useMemo(() => {
+  useEffect(() => {
     positionsRef.current = positions;
   }, [positions, positionsRef]);
 
   const particleColors = useMemo(() => {
     const colors = new Float32Array(count * 3);
     const colorPalette = [
-      new THREE.Color('#84cc16'),
-      new THREE.Color('#a3e635'),
-      new THREE.Color('#65a30d'),
+      new THREE.Color(brandColors.accent),
+      new THREE.Color(brandColors.accentLight),
+      new THREE.Color(brandColors.accentDark),
       new THREE.Color('#ffffff'),
     ];
 
     for (let i = 0; i < count; i++) {
-      const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      const color = colorPalette[Math.floor(seededUnit(i + count * 8.7) * colorPalette.length)];
       // Dim particles further from camera for depth effect
       const zDepth = Math.abs(positions[i * 3 + 2]) / 6;
       const depthFade = Math.max(0.3, 1 - zDepth * 0.5);
@@ -159,7 +180,7 @@ function ParticlesField({ count = 80, positionsRef }: ParticlesFieldProps) {
     }
 
     return colors;
-  }, [count, positions]);
+  }, [brandColors, count, positions]);
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
@@ -228,6 +249,7 @@ export function PageParticles() {
   const positionsRef = useRef<Float32Array | null>(null);
   const [count, setCount] = useState(80);
   const [showConnections, setShowConnections] = useState(true);
+  const brandColors = useMemo(() => getBrandColors(), []);
 
   useEffect(() => {
     const mqDesktop = window.matchMedia('(min-width: 1024px)');
@@ -270,9 +292,9 @@ export function PageParticles() {
         height: '100%'
       }}
     >
-      <ParticlesField count={count} positionsRef={positionsRef} />
+      <ParticlesField brandColors={brandColors} count={count} positionsRef={positionsRef} />
       {showConnections && (
-        <ConnectionLines positionsRef={positionsRef} count={count} maxDistance={3.0} />
+        <ConnectionLines brandColors={brandColors} positionsRef={positionsRef} count={count} maxDistance={3.0} />
       )}
     </Canvas>
   );

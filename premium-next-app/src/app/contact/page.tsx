@@ -1,18 +1,18 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail, MapPin, CheckCircle2 } from "lucide-react";
 import { slideFromLeftContainer, slideFromLeftItem, slideFromRight, splitWords } from "@/components/shared/headingAnimations";
 
-/* ─── Styles ──────────────────────────────────────────────── */
+/* â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const inputFocusCSS = `
   .tb-input:focus,
   .tb-select:focus,
   .tb-textarea:focus {
     outline: none;
-    border-bottom-color: rgba(132, 204, 22, 0.8);
-    box-shadow: 0 2px 16px rgba(101, 163, 13, 0.2);
+    border-bottom-color: rgba(var(--brand-accent-rgb), 0.8);
+    box-shadow: 0 2px 16px rgba(var(--brand-accent-dark-rgb), 0.2);
   }
   .tb-input::placeholder,
   .tb-textarea::placeholder {
@@ -24,10 +24,10 @@ const inputFocusCSS = `
   }
 `;
 
-/* ─── Ease constant (fixes TS Variants type error) ────────── */
+/* â”€â”€â”€ Ease constant (fixes TS Variants type error) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Fade-up helper ──────────────────────────────────────── */
+/* â”€â”€â”€ Fade-up helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp = (delay = 0) => ({
     hidden: { opacity: 0, y: 24 },
     show: {
@@ -37,7 +37,7 @@ const fadeUp = (delay = 0) => ({
     },
 });
 
-/* ─── Input wrapper ──────────────────────────────────────── */
+/* â”€â”€â”€ Input wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Field({
     label,
     children,
@@ -55,11 +55,11 @@ function Field({
     );
 }
 
-/* ─── Shared input class ─────────────────────────────────── */
+/* â”€â”€â”€ Shared input class â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const inputClass =
     "tb-input w-full rounded-lg border-b-2 border-white/10 bg-neutral-950 px-4 py-3.5 text-sm text-white transition-all duration-300 placeholder:text-zinc-500";
 
-/* ─── Main Page ──────────────────────────────────────────── */
+/* â”€â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ContactPage() {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true });
@@ -77,21 +77,21 @@ export default function ContactPage() {
             <div className="relative text-white min-h-screen">
                 <div className="relative z-10 overflow-hidden min-h-screen">
 
-                    {/* ── Main section ── */}
+                    {/* â”€â”€ Main section â”€â”€ */}
                     <section
                         ref={ref}
                         className="relative min-h-[calc(100vh-80px)] overflow-hidden"
                     >
                         {/* Ambient glows */}
                         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 60%)" }} />
-                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(101,163,13,0.04) 0%, rgba(101,163,13,0) 50%)" }} />
+                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%)" }} />
+                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(var(--brand-accent-dark-rgb), 0.04) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
                         </div>
 
                         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-32">
                             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
 
-                                {/* ── LEFT — Hook & Info ── */}
+                                {/* â”€â”€ LEFT â€” Hook & Info â”€â”€ */}
                                 <div className="flex flex-col justify-center">
                                     <motion.span
                                         variants={fadeUp(0)}
@@ -99,7 +99,7 @@ export default function ContactPage() {
                                         animate={isInView ? "show" : "hidden"}
                                         className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"
                                     >
-                                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                         let&apos;s talk
                                     </motion.span>
 
@@ -110,7 +110,7 @@ export default function ContactPage() {
                                         className="text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
                                     >
                                         Tell us what you need{" "}
-                                        <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                                        <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                                             built.
                                         </span>
                                     </motion.h1>
@@ -134,16 +134,16 @@ export default function ContactPage() {
                                     >
                                         <a
                                             href="mailto:hello@techbridge.dev"
-                                            className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5"
+                                            className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
                                         >
-                                            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-500 transition-colors duration-300 group-hover:border-lime-500/40 group-hover:text-lime-300">
+                                            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-500 transition-colors duration-300 group-hover:border-brand-accent/40 group-hover:text-brand-accent-light">
                                                 <Mail size={16} strokeWidth={1.5} />
                                             </div>
                                             <div>
                                                 <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                                     Email
                                                 </p>
-                                                <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-lime-300">
+                                                <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-brand-accent-light">
                                                     hello@techbridge.dev
                                                 </p>
                                             </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
                                     </motion.div>
                                 </div>
 
-                                {/* ── RIGHT — Premium Form ── */}
+                                {/* â”€â”€ RIGHT â€” Premium Form â”€â”€ */}
                                 <motion.div
                                     variants={fadeUp(0.18)}
                                     initial="hidden"
@@ -189,7 +189,7 @@ export default function ContactPage() {
                                         <div
                                             aria-hidden="true"
                                             className="pointer-events-none absolute inset-0"
-                                            style={{ background: "radial-gradient(circle at 100% 0%, rgba(132,204,22,0.12) 0%, rgba(132,204,22,0) 50%)" }}
+                                            style={{ background: "radial-gradient(circle at 100% 0%, rgba(var(--brand-accent-rgb), 0.12) 0%, rgba(var(--brand-accent-rgb), 0) 50%)" }}
                                         />
 
                                         {!submitted ? (
@@ -241,7 +241,7 @@ export default function ContactPage() {
                                                             className="tb-select appearance-none w-full rounded-lg border-b-2 border-white/10 bg-neutral-950 px-4 py-3.5 text-sm text-zinc-400 transition-all duration-300 cursor-pointer"
                                                         >
                                                             <option value="" disabled>
-                                                                Select a service…
+                                                                Select a serviceâ€¦
                                                             </option>
                                                             <option value="custom-software">
                                                                 Custom Software Development
@@ -277,7 +277,7 @@ export default function ContactPage() {
                                                 <Field label="Tell us about the project">
                                                     <textarea
                                                         rows={5}
-                                                        placeholder="Describe your project, goals, and any existing tech stack…"
+                                                        placeholder="Describe your project, goals, and any existing tech stackâ€¦"
                                                         className="tb-textarea w-full resize-none rounded-lg border-b-2 border-white/10 bg-neutral-950 px-4 py-3.5 text-sm text-white transition-all duration-300 placeholder:text-zinc-500"
                                                     />
                                                 </Field>
@@ -285,7 +285,7 @@ export default function ContactPage() {
                                                 {/* Submit */}
                                                 <button
                                                     type="submit"
-                                                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-lime-600 to-lime-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-lime-500/10"
+                                                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(var(--brand-accent-dark-rgb), 0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-brand-accent/10"
                                                 >
                                                     <span className="relative z-10 inline-flex items-center justify-center gap-2">
                                                         Send It
@@ -303,10 +303,10 @@ export default function ContactPage() {
                                                 </p>
                                             </form>
                                         ) : (
-                                            /* ── Success state ── */
+                                            /* â”€â”€ Success state â”€â”€ */
                                             <div className="relative z-10 flex flex-col items-center justify-center py-16 text-center">
-                                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-lime-500/30 bg-lime-950/40">
-                                                    <CheckCircle2 size={28} className="text-lime-400" strokeWidth={1.5} />
+                                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-brand-accent/30 bg-brand-accent-deep/40">
+                                                    <CheckCircle2 size={28} className="text-brand-accent-light" strokeWidth={1.5} />
                                                 </div>
                                                 <h3 className="text-2xl font-bold text-white">
                                                     Got it.
@@ -327,12 +327,12 @@ export default function ContactPage() {
                         </div>
                     </section>
 
-                    {/* ── Cal.com Scheduling ── */}
+                    {/* â”€â”€ Cal.com Scheduling â”€â”€ */}
                     <section className="py-24 lg:py-32">
                         <div className="mx-auto max-w-7xl px-6 lg:px-12">
                             <div className="mb-10">
                                 <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                     prefer a call?
                                 </span>
                                 <motion.h2
@@ -354,12 +354,12 @@ export default function ContactPage() {
                             </div>
 
                             <div className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 backdrop-blur-sm">
-                                {/* Cal.com embed — replace src with your actual booking URL */}
+                                {/* Cal.com embed â€” replace src with your actual booking URL */}
                                 <div className="flex flex-col items-center justify-center py-20 text-center">
                                     <p className="text-lg font-semibold text-white">Scheduling Coming Soon</p>
                                     <p className="mt-2 max-w-sm text-sm text-zinc-400">
                                         In the meantime, fill out the form above or email us directly at{" "}
-                                        <a href="mailto:hello@techbridge.dev" className="text-lime-400 hover:underline">
+                                        <a href="mailto:hello@techbridge.dev" className="text-brand-accent-light hover:underline">
                                             hello@techbridge.dev
                                         </a>
                                     </p>
@@ -373,8 +373,8 @@ export default function ContactPage() {
                         aria-hidden="true"
                         className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                         style={{
-                            background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
-                            boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
+                            background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
+                            boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
                         }}
                     />
                 </div>
@@ -382,3 +382,4 @@ export default function ContactPage() {
         </>
     );
 }
+

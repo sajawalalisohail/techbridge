@@ -1,31 +1,119 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════
+   THEME SETTINGS — TechBridge Brand Accent
+
+   To change the site's accent color:
+   1. Update --brand-accent (main hex color)
+   2. Update --brand-accent-rgb (same color as R, G, B decimals)
+   3. Update the light/dark/deep variants to match
+
+   Example — switching to Electric Blue:
+     --brand-accent: #3b82f6;
+     --brand-accent-rgb: 59, 130, 246;
+     --brand-accent-light: #60a5fa;
+     --brand-accent-light-rgb: 96, 165, 250;
+     --brand-accent-dark: #2563eb;
+     --brand-accent-dark-rgb: 37, 99, 235;
+     --brand-accent-deep: #1e3a5f;
+
+   Everything else — Tailwind classes, 3D particle colors,
+   GSAP glows, blob animations, GLSL shaders — follows
+   automatically.
+   ═══════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #0a0a0a;
+
+  /* original */
+  /* --background: #0a0a0a;
   --foreground: #ededed;
-
-  /* ── Cyber Lime Accent Tokens ── */
-  --accent-400: #a3e635;
-  --accent-500: #84cc16;
-  --accent-600: #65a30d;
-  --accent-950: #1a2e05;
-
-  /* ── Surface Tokens ── */
+  --brand-accent: #84cc16;
+  --brand-accent-rgb: 132, 204, 22;
+  --brand-accent-light: #a3e635;
+  --brand-accent-light-rgb: 163, 230, 53;
+  --brand-accent-dark: #65a30d;
+  --brand-accent-dark-rgb: 101, 163, 13;
+  --brand-accent-deep: #1a2e05;
   --surface-0: #0a0a0a;
   --surface-50: #141414;
   --surface-100: #1c1c1c;
-
-  /* ── Text Tokens ── */
   --text-primary: #f5f5f5;
   --text-secondary: #a3a3a3;
-  --text-tertiary: #737373;
+  --text-tertiary: #737373; */
+
+  /* midnight orchid */
+/* --brand-accent: #a61f6b;
+--brand-accent-rgb: 166, 31, 107;
+
+--brand-accent-light: #c73786;
+--brand-accent-light-rgb: 199, 55, 134;
+
+--brand-accent-dark: #54273c;
+--brand-accent-dark-rgb: 84, 39, 60;
+
+--brand-accent-deep: #18393c;
+
+--background: #26282d;
+--foreground: #f2edf0;
+--surface-0: #1f2227;
+--surface-50: #233033;
+--surface-100: #1a2629;
+
+--text-primary: #f2edf0;
+--text-secondary: #c5bcc1;
+--text-tertiary: #878287; */
+
+/*crimson */
+--brand-accent: #c12468;
+--brand-accent-rgb: 193, 36, 104;
+--brand-accent-light: #df4c8f;
+--brand-accent-light-rgb: 223, 76, 143;
+--brand-accent-dark: #6a2a43;
+--brand-accent-dark-rgb: 106, 42, 67;
+--brand-accent-deep: #1a3d3f;
+
+--background: #202227;
+--foreground: #faf4f7;
+--surface-0: #181b1f;
+--surface-50: #202a2d;
+--surface-100: #182224;
+--text-primary: #faf4f7;
+--text-secondary: #ddd2d8;
+--text-tertiary: #9a9298;
+
+/* berry noir fav */
+/* --brand-accent: #b11f72;
+--brand-accent-rgb: 177, 31, 114;
+--brand-accent-light: #d13c8b;
+--brand-accent-light-rgb: 209, 60, 139;
+--brand-accent-dark: #5e2740;
+--brand-accent-dark-rgb: 94, 39, 64;
+--brand-accent-deep: #163739;
+
+--background: #23252a;
+--foreground: #f4eef1;
+--surface-0: #1d2025;
+--surface-50: #223033;
+--surface-100: #192628;
+--text-primary: #f4eef1;
+--text-secondary: #c9c0c5;
+--text-tertiary: #8a858a; */
+
+
+
+  
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-light: var(--brand-accent-light);
+  --color-brand-accent-dark: var(--brand-accent-dark);
+  --color-brand-accent-deep: var(--brand-accent-deep);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-jetbrains-mono);
+  --shadow-accent-glow: 0 0 40px rgba(var(--brand-accent-rgb), 0.35);
 }
 
 body {
@@ -38,70 +126,29 @@ body {
 
   /* ── Keyframes ──────────────────────────────────────────── */
 
-  /* Clockwise rotation — 25s so beacon sweep is clearly perceptible */
   @keyframes blobSpin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
-  /* 6-stage organic morph — prevents circle appearance */
   @keyframes blobMorph {
-    0% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
-
-    20% {
-      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-    }
-
-    40% {
-      border-radius: 50% 40% 60% 30% / 40% 70% 50% 60%;
-    }
-
-    60% {
-      border-radius: 40% 70% 40% 60% / 60% 40% 60% 40%;
-    }
-
-    80% {
-      border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
-    }
-
-    100% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
+    0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    20%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    40%  { border-radius: 50% 40% 60% 30% / 40% 70% 50% 60%; }
+    60%  { border-radius: 40% 70% 40% 60% / 60% 40% 60% 40%; }
+    80%  { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
   }
 
-  /* Halo gentle breathe */
   @keyframes blobPulse {
-    from {
-      transform: scale(0.97);
-      opacity: 0.6;
-    }
-
-    to {
-      transform: scale(1.03);
-      opacity: 0.9;
-    }
+    from { transform: scale(0.97); opacity: 0.6; }
+    to   { transform: scale(1.03); opacity: 0.9; }
   }
 
-  /* Shimmer subtle pulse */
   @keyframes shimmerPulse {
-    from {
-      opacity: 0.4;
-      transform: scale(0.98);
-    }
-
-    to {
-      opacity: 0.75;
-      transform: scale(1.02);
-    }
+    from { opacity: 0.4; transform: scale(0.98); }
+    to   { opacity: 0.75; transform: scale(1.02); }
   }
-
 
   /* ─── Blob Drift Keyframes ─────────────────── */
   @keyframes blobDrift {
@@ -122,100 +169,98 @@ body {
     position: relative;
   }
 
-  /* NEW: Multi-layered mesh gradient for depth */
+  /* Multi-layered mesh gradient for depth */
   .blob-mesh-layer {
     position: absolute;
     inset: -60px;
     border-radius: 50%;
     background:
-      radial-gradient(circle at 30% 40%, rgba(132,204,22,0.18), transparent 55%),
-      radial-gradient(circle at 70% 60%, rgba(163,230,53,0.14), transparent 55%),
-      radial-gradient(circle at 50% 25%, rgba(202,230,104,0.10), transparent 50%),
-      radial-gradient(circle at 60% 80%, rgba(101,163,13,0.08), transparent 45%);
+      radial-gradient(circle at 30% 40%, rgba(var(--brand-accent-rgb), 0.15), transparent 55%),
+      radial-gradient(circle at 70% 60%, rgba(var(--brand-accent-light-rgb), 0.11), transparent 55%),
+      radial-gradient(circle at 50% 25%, rgba(var(--brand-accent-light-rgb), 0.08), transparent 50%),
+      radial-gradient(circle at 60% 80%, rgba(var(--brand-accent-dark-rgb), 0.06), transparent 45%);
     mix-blend-mode: screen;
-    filter: blur(60px);
+    filter: blur(72px) brightness(0.82);
     will-change: transform;
     animation: blobDrift 25s ease-in-out infinite;
   }
 
-  /* NEW: Secondary smaller blob on offset path */
+  /* Secondary smaller blob on offset path */
   .blob-secondary {
     position: absolute;
     border-radius: 50%;
     background:
-      radial-gradient(circle, rgba(163,230,53,0.25) 0%, rgba(132,204,22,0.15) 50%, transparent 75%);
+      radial-gradient(circle, rgba(var(--brand-accent-light-rgb), 0.25) 0%, rgba(var(--brand-accent-rgb), 0.15) 50%, transparent 75%);
     mix-blend-mode: screen;
     filter: blur(50px);
     will-change: transform;
     animation: blobDriftAlt 30s ease-in-out infinite;
   }
 
-  /* NEW: Subtle dot grid texture overlay */
+  /* Subtle dot grid texture overlay */
   .blob-dot-grid {
     position: absolute;
     inset: 0;
     background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
     background-size: 24px 24px;
-    opacity: 0.03;
+    opacity: 0.012;
     pointer-events: none;
   }
 
-  /* NEW: SVG noise texture for 4K film grain */
+  /* SVG noise texture for 4K film grain */
   .blob-noise {
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 200px 200px;
-    opacity: 0.04;
-    mix-blend-mode: overlay;
+    opacity: 0.018;
+    mix-blend-mode: soft-light;
     pointer-events: none;
   }
 
-  /* Layer 1: Outer atmospheric halo — deep green + lime accent */
+  /* Layer 1: Outer atmospheric halo */
   .blob-halo {
     position: absolute;
     inset: -120px;
     border-radius: 50%;
     background: radial-gradient(circle,
-        rgba(101, 163, 13, 0.22) 0%,
-        rgba(132, 204, 22, 0.18) 12%,
-        rgba(163, 230, 53, 0.08) 25%,
-        rgba(101, 163, 13, 0.13) 35%,
-        rgba(77, 124, 15, 0.09) 48%,
+        rgba(var(--brand-accent-dark-rgb), 0.22) 0%,
+        rgba(var(--brand-accent-rgb), 0.18) 12%,
+        rgba(var(--brand-accent-light-rgb), 0.08) 25%,
+        rgba(var(--brand-accent-dark-rgb), 0.13) 35%,
+        rgba(var(--brand-accent-dark-rgb), 0.09) 48%,
         rgba(10, 20, 5, 0.06) 60%,
-        rgba(77, 124, 15, 0.02) 70%,
+        rgba(var(--brand-accent-dark-rgb), 0.02) 70%,
         transparent 78%);
     filter: blur(200px);
     will-change: transform;
     animation: blobPulse 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
-  /* Layer 2: Conic base color field — green/lime gradient */
+  /* Layer 2: Conic base color field */
   .blob-core {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     background: conic-gradient(from 0deg at 50% 50%,
-        #1a2e05 0deg,
-        #365314 40deg,
-        #4d7c0f 80deg,
-        #84cc16 120deg,
-        #65a30d 150deg,
-        #3f6212 200deg,
-        #65a30d 260deg,
-        #a3e635 310deg,
-        #1a2e05 360deg);
-    opacity: 0.55;
+        var(--brand-accent-deep) 0deg,
+        rgb(var(--brand-accent-dark-rgb)) 80deg,
+        rgb(var(--brand-accent-rgb)) 120deg,
+        rgb(var(--brand-accent-dark-rgb)) 180deg,
+        var(--brand-accent-deep) 240deg,
+        rgb(var(--brand-accent-light-rgb)) 310deg,
+        var(--brand-accent-deep) 360deg);
+    opacity: 0.42;
     mix-blend-mode: screen;
-    filter: blur(60px) saturate(200%);
+    filter: blur(80px) saturate(150%) brightness(0.82);
     will-change: transform;
     animation:
       blobSpin 25s linear infinite,
       blobMorph 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
-  /* Layer 2.5: Rotating white/lime highlight — glowing premium beacon */
+  /* Layer 2.5: Rotating highlight — glowing premium beacon */
   .blob-highlight {
     position: absolute;
     inset: 5%;
@@ -223,16 +268,16 @@ body {
     background: conic-gradient(from 0deg at 50% 50%,
         transparent 0deg,
         transparent 55deg,
-        rgba(200, 240, 180, 0.5) 72deg,
+        rgba(var(--brand-accent-light-rgb), 0.35) 72deg,
         rgba(255, 255, 255, 1.0) 85deg,
-        rgba(210, 250, 200, 1.0) 90deg,
+        rgba(var(--brand-accent-light-rgb), 0.6) 90deg,
         rgba(255, 255, 255, 1.0) 95deg,
-        rgba(200, 240, 180, 0.5) 108deg,
+        rgba(var(--brand-accent-light-rgb), 0.35) 108deg,
         transparent 125deg,
         transparent 360deg);
-    opacity: 0.75;
+    opacity: 0.52;
     mix-blend-mode: screen;
-    filter: blur(28px) brightness(1.4);
+    filter: blur(34px) brightness(1.05);
     will-change: transform;
     animation:
       blobSpin 10s linear infinite,
@@ -248,50 +293,49 @@ body {
     background: conic-gradient(from 0deg at 50% 50%,
         transparent 0deg,
         transparent 60deg,
-        rgba(180, 240, 160, 0.3) 80deg,
+        rgba(var(--brand-accent-light-rgb), 0.3) 80deg,
         rgba(255, 255, 255, 0.5) 90deg,
-        rgba(180, 240, 160, 0.3) 100deg,
+        rgba(var(--brand-accent-light-rgb), 0.3) 100deg,
         transparent 120deg,
         transparent 360deg);
     filter: blur(55px);
     mix-blend-mode: screen;
   }
 
-  /* Layer 3: Inner counter-spinner — 35s reverse, readable parallax depth */
+  /* Layer 3: Inner counter-spinner */
   .blob-inner {
     position: absolute;
     inset: 15%;
     border-radius: 50%;
     background: conic-gradient(from 180deg at 50% 50%,
-        #65a30d 0deg,
-        #84cc16 90deg,
-        #a3e635 180deg,
-        #4d7c0f 270deg,
-        #65a30d 360deg);
-    opacity: 0.30;
+        rgb(var(--brand-accent-dark-rgb)) 0deg,
+        rgb(var(--brand-accent-rgb)) 90deg,
+        rgb(var(--brand-accent-light-rgb)) 180deg,
+        rgb(var(--brand-accent-dark-rgb)) 270deg,
+        rgb(var(--brand-accent-dark-rgb)) 360deg);
+    opacity: 0.22;
     mix-blend-mode: screen;
-    filter: blur(100px) saturate(150%);
+    filter: blur(120px) saturate(135%) brightness(0.88);
     will-change: transform;
     animation: blobSpin 35s linear infinite reverse;
   }
 
-  /* Layer 4: Soft lime center shimmer — fully blended, no hard edge */
+  /* Layer 4: Soft center shimmer */
   .blob-shimmer {
     position: absolute;
     inset: 30%;
     border-radius: 50%;
     background: radial-gradient(circle,
-        rgba(132, 204, 22, 0.22) 0%,
-        rgba(163, 230, 53, 0.12) 55%,
+        rgba(var(--brand-accent-rgb), 0.22) 0%,
+        rgba(var(--brand-accent-light-rgb), 0.12) 55%,
         transparent 72%);
-    filter: blur(100px);
+    filter: blur(135px) brightness(0.9);
     will-change: transform;
     animation: shimmerPulse 32s ease-in-out infinite alternate;
   }
 
-  /* Accessibility: pause all animations including noise */
+  /* Accessibility: pause all animations */
   @media (prefers-reduced-motion: reduce) {
-
     .blob-halo,
     .blob-core,
     .blob-highlight,
@@ -304,161 +348,66 @@ body {
   }
 
   /* ─── Mesh Drift (WhyChooseUs) ───────────── */
-  @keyframes lime-pulse {
-
-    0%,
-    100% {
+  @keyframes accent-pulse {
+    0%, 100% {
       box-shadow:
-        0 -1px 0 0 rgba(132, 204, 22, 0.15),
-        0 1px 0 0 rgba(132, 204, 22, 0.15),
-        -1px 0 0 0 rgba(132, 204, 22, 0.15),
-        1px 0 0 0 rgba(132, 204, 22, 0.15),
-        inset 0 100px 100px -80px rgba(132, 204, 22, 0.05),
-        inset 0 -100px 100px -80px rgba(132, 204, 22, 0.05),
-        inset 100px 0 100px -80px rgba(132, 204, 22, 0.05),
-        inset -100px 0 100px -80px rgba(132, 204, 22, 0.05);
+        0 -1px 0 0 rgba(var(--brand-accent-rgb), 0.15),
+        0 1px 0 0 rgba(var(--brand-accent-rgb), 0.15),
+        -1px 0 0 0 rgba(var(--brand-accent-rgb), 0.15),
+        1px 0 0 0 rgba(var(--brand-accent-rgb), 0.15),
+        inset 0 100px 100px -80px rgba(var(--brand-accent-rgb), 0.05),
+        inset 0 -100px 100px -80px rgba(var(--brand-accent-rgb), 0.05),
+        inset 100px 0 100px -80px rgba(var(--brand-accent-rgb), 0.05),
+        inset -100px 0 100px -80px rgba(var(--brand-accent-rgb), 0.05);
     }
-
     50% {
       box-shadow:
-        0 -1px 0 0 rgba(132, 204, 22, 0.4),
-        0 1px 0 0 rgba(132, 204, 22, 0.4),
-        -1px 0 0 0 rgba(132, 204, 22, 0.4),
-        1px 0 0 0 rgba(132, 204, 22, 0.4),
-        inset 0 150px 120px -100px rgba(132, 204, 22, 0.15),
-        inset 0 -150px 120px -100px rgba(132, 204, 22, 0.15),
-        inset 150px 0 120px -100px rgba(132, 204, 22, 0.15),
-        inset -150px 0 120px -100px rgba(132, 204, 22, 0.15);
+        0 -1px 0 0 rgba(var(--brand-accent-rgb), 0.4),
+        0 1px 0 0 rgba(var(--brand-accent-rgb), 0.4),
+        -1px 0 0 0 rgba(var(--brand-accent-rgb), 0.4),
+        1px 0 0 0 rgba(var(--brand-accent-rgb), 0.4),
+        inset 0 150px 120px -100px rgba(var(--brand-accent-rgb), 0.15),
+        inset 0 -150px 120px -100px rgba(var(--brand-accent-rgb), 0.15),
+        inset 150px 0 120px -100px rgba(var(--brand-accent-rgb), 0.15),
+        inset -150px 0 120px -100px rgba(var(--brand-accent-rgb), 0.15);
     }
   }
 
   @keyframes mesh-drift {
-    0% {
-      transform: translate(0%, 0%) scale(1);
-    }
-
-    33% {
-      transform: translate(6%, -8%) scale(1.08);
-    }
-
-    66% {
-      transform: translate(-5%, 5%) scale(0.96);
-    }
-
-    100% {
-      transform: translate(0%, 0%) scale(1);
-    }
+    0%   { transform: translate(0%, 0%) scale(1); }
+    33%  { transform: translate(6%, -8%) scale(1.08); }
+    66%  { transform: translate(-5%, 5%) scale(0.96); }
+    100% { transform: translate(0%, 0%) scale(1); }
   }
 
   @keyframes mesh-drift-b {
-    0% {
-      transform: translate(0%, 0%) scale(1);
-    }
-
-    33% {
-      transform: translate(-7%, 5%) scale(1.06);
-    }
-
-    66% {
-      transform: translate(4%, -6%) scale(0.97);
-    }
-
-    100% {
-      transform: translate(0%, 0%) scale(1);
-    }
+    0%   { transform: translate(0%, 0%) scale(1); }
+    33%  { transform: translate(-7%, 5%) scale(1.06); }
+    66%  { transform: translate(4%, -6%) scale(0.97); }
+    100% { transform: translate(0%, 0%) scale(1); }
   }
 
-  .mesh-orb-a {
-    animation: mesh-drift 9s ease-in-out infinite;
-  }
-
-  .mesh-orb-b {
-    animation: mesh-drift-b 11s ease-in-out infinite;
-  }
+  .mesh-orb-a { animation: mesh-drift 9s ease-in-out infinite; }
+  .mesh-orb-b { animation: mesh-drift-b 11s ease-in-out infinite; }
 
   /* ─── Case Studies SVG Patterns ─────────── */
-  @keyframes scan-down {
-    0% {
-      transform: translateY(-100%);
-    }
+  @keyframes scan-down { 0% { transform: translateY(-100%); } 100% { transform: translateY(400%); } }
+  @keyframes grid-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
+  @keyframes node-ping { 0%, 100% { r: 2.5; opacity: 0.5; } 50% { r: 4; opacity: 1; } }
+  @keyframes dash-flow { to { stroke-dashoffset: -40; } }
 
-    100% {
-      transform: translateY(400%);
-    }
-  }
-
-  @keyframes grid-pulse {
-
-    0%,
-    100% {
-      opacity: 0.3;
-    }
-
-    50% {
-      opacity: 0.6;
-    }
-  }
-
-  @keyframes node-ping {
-
-    0%,
-    100% {
-      r: 2.5;
-      opacity: 0.5;
-    }
-
-    50% {
-      r: 4;
-      opacity: 1;
-    }
-  }
-
-  @keyframes dash-flow {
-    to {
-      stroke-dashoffset: -40;
-    }
-  }
-
-  .scan-line {
-    animation: scan-down 4s linear infinite;
-  }
-
-  .grid-layer {
-    animation: grid-pulse 3s ease-in-out infinite;
-  }
-
-  .node-a {
-    animation: node-ping 2.4s ease-in-out infinite;
-  }
-
-  .node-b {
-    animation: node-ping 2.4s ease-in-out 0.8s infinite;
-  }
-
-  .node-c {
-    animation: node-ping 2.4s ease-in-out 1.6s infinite;
-  }
-
-  .dash-path {
-    animation: dash-flow 2s linear infinite;
-  }
+  .scan-line { animation: scan-down 4s linear infinite; }
+  .grid-layer { animation: grid-pulse 3s ease-in-out infinite; }
+  .node-a { animation: node-ping 2.4s ease-in-out infinite; }
+  .node-b { animation: node-ping 2.4s ease-in-out 0.8s infinite; }
+  .node-c { animation: node-ping 2.4s ease-in-out 1.6s infinite; }
+  .dash-path { animation: dash-flow 2s linear infinite; }
 
   /* ─── Tech Stack Marquee ────── */
-  @keyframes tb-marquee-scroll {
-    from {
-      transform: translateX(0);
-    }
+  @keyframes tb-marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  /* ─── Cursor Blink (code editor / chat mockups) ────── */
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
+  /* ─── Cursor Blink ────── */
+  @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
   .tb-marquee-track {
     animation: tb-marquee-scroll 35s linear infinite;

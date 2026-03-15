@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -16,7 +16,7 @@ import HowItWorks from "@/components/home/HowItWorks";
 import TechStackMarquee from "@/components/home/TechStackMarquee";
 import { ClipReveal } from "@/components/shared/headingAnimations";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SECTIONS = [
     {
         id: "custom-software",
@@ -78,7 +78,7 @@ const SECTIONS = [
             "For founders who need a real website now, not a 12-week agency timeline. Custom-coded, conversion-optimized, and live before end of day. No templates, no page builders.",
         capabilities: [
             "Next.js App Router, performance-first",
-            "Custom UI/UX — not a template",
+            "Custom UI/UX â€” not a template",
             "Conversion-optimized page architecture",
             "On-page SEO & Core Web Vitals",
             "CMS integration (Sanity, Contentful)",
@@ -145,13 +145,13 @@ const SECTIONS = [
     },
 ];
 
-/* ─── Fade-up variant ─────────────────────────────────────── */
+/* â”€â”€â”€ Fade-up variant â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp = {
     hidden: { opacity: 0, y: 28 },
     show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-/* ─── Section Block ──────────────────────────────────────── */
+/* â”€â”€â”€ Section Block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ServiceSection({
     section,
     onEnter,
@@ -186,7 +186,7 @@ function ServiceSection({
                 </span>
                 <div className="h-px flex-1 bg-white/5" />
                 <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1">
-                    <Icon size={12} strokeWidth={1.5} className="text-lime-400" />
+                    <Icon size={12} strokeWidth={1.5} className="text-brand-accent-light" />
                     <span className="text-xs font-medium text-zinc-400">{section.category}</span>
                 </div>
             </div>
@@ -212,7 +212,7 @@ function ServiceSection({
                             <div key={cap} className="flex items-start gap-2.5">
                                 <CheckCircle2
                                     size={14}
-                                    className="mt-0.5 flex-shrink-0 text-lime-500"
+                                    className="mt-0.5 flex-shrink-0 text-brand-accent"
                                     strokeWidth={2}
                                 />
                                 <span className="text-sm text-zinc-400">{cap}</span>
@@ -239,8 +239,8 @@ function ServiceSection({
                 </div>
 
                 {/* Callout */}
-                <div className="border-l-2 border-lime-500/60 bg-lime-950/10 rounded-r-xl p-5 pl-6">
-                    <p className="mb-2 text-xs font-bold uppercase tracking-widest text-lime-400">
+                <div className="border-l-2 border-brand-accent/60 bg-brand-accent-deep/10 rounded-r-xl p-5 pl-6">
+                    <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-accent-light">
                         {section.callout.label}
                     </p>
                     <p className="text-sm leading-relaxed text-zinc-400 italic">
@@ -248,7 +248,7 @@ function ServiceSection({
                     </p>
                     {section.callout.attribution && (
                         <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            — {section.callout.attribution}
+                            â€” {section.callout.attribution}
                         </p>
                     )}
                 </div>
@@ -257,7 +257,7 @@ function ServiceSection({
     );
 }
 
-/* ─── Main Page ──────────────────────────────────────────── */
+/* â”€â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ServicesPage() {
     const [activeId, setActiveId] = useState(SECTIONS[0].id);
     const activeSection = SECTIONS.find((s) => s.id === activeId) ?? SECTIONS[0];
@@ -268,12 +268,12 @@ export default function ServicesPage() {
         <div className="relative text-white">
             <div className="relative z-10 overflow-clip min-h-screen">
 
-                {/* ── Services Hero ── */}
+                {/* â”€â”€ Services Hero â”€â”€ */}
                 <section ref={heroRef} className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">
                     {/* Ambient glow */}
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 50%)" }} />
-                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(101,163,13,0.06) 0%, rgba(101,163,13,0) 50%)" }} />
+                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 50%)" }} />
+                        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(var(--brand-accent-dark-rgb), 0.06) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
                     </div>
 
                     <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
@@ -283,7 +283,7 @@ export default function ServicesPage() {
                             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         >
                             <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 services
                             </span>
                             <ClipReveal>
@@ -301,7 +301,7 @@ export default function ServicesPage() {
                                     <a
                                         key={s.id}
                                         href={`#${s.id}`}
-                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300"
+                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-400 transition-all duration-200 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                                     >
                                         <span className="font-mono text-xs text-zinc-600">{s.number}</span>
                                         {s.category}
@@ -312,16 +312,16 @@ export default function ServicesPage() {
                     </div>
                 </section>
 
-                {/* ── Our Process ── */}
+                {/* â”€â”€ Our Process â”€â”€ */}
                 <div id="our-process">
                     <HowItWorks variant="scroll" />
                 </div>
 
-                {/* ── Sticky Sidebar Layout ── */}
+                {/* â”€â”€ Sticky Sidebar Layout â”€â”€ */}
                 <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
                     <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-16">
 
-                        {/* LEFT — Sticky sidebar */}
+                        {/* LEFT â€” Sticky sidebar */}
                         <aside className="lg:col-span-1">
                             <div className="sticky top-32 space-y-8">
                                 {/* Current section indicator */}
@@ -352,7 +352,7 @@ export default function ServicesPage() {
                                                 href={`#${s.id}`}
                                                 className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-300 ${isActive
                                                     ? "text-white"
-                                                    : "text-zinc-600 hover:text-lime-300"
+                                                    : "text-zinc-600 hover:text-brand-accent-light"
                                                     }`}
                                             >
                                                 {isActive && (
@@ -363,7 +363,7 @@ export default function ServicesPage() {
                                                     />
                                                 )}
                                                 <span
-                                                    className={`relative z-10 h-1.5 w-1.5 rounded-full flex-shrink-0 transition-colors duration-300 ${isActive ? "bg-lime-400" : "bg-zinc-700"
+                                                    className={`relative z-10 h-1.5 w-1.5 rounded-full flex-shrink-0 transition-colors duration-300 ${isActive ? "bg-brand-accent-light" : "bg-zinc-700"
                                                         }`}
                                                 />
                                                 <span className="relative z-10 font-mono text-xs mr-1 opacity-40">{s.number}</span>
@@ -383,7 +383,7 @@ export default function ServicesPage() {
                                     </p>
                                     <Link
                                         href="/contact"
-                                        className="group inline-flex items-center gap-2 text-sm font-medium text-lime-400 transition-colors duration-200 hover:text-lime-300"
+                                        className="group inline-flex items-center gap-2 text-sm font-medium text-brand-accent-light transition-colors duration-200 hover:text-brand-accent-light"
                                     >
                                         Book a Call
                                         <ArrowRight
@@ -395,7 +395,7 @@ export default function ServicesPage() {
                             </div>
                         </aside>
 
-                        {/* RIGHT — Scrollable content blocks */}
+                        {/* RIGHT â€” Scrollable content blocks */}
                         <div className="space-y-6 lg:col-span-2">
                             {SECTIONS.map((section) => (
                                 <ServiceSection
@@ -408,7 +408,7 @@ export default function ServicesPage() {
                     </div>
                 </div>
 
-                {/* ── Tech Stack ── */}
+                {/* â”€â”€ Tech Stack â”€â”€ */}
                 <TechStackMarquee />
 
                 {/* Subtle lime border glow separating the scrolling content from the reveal footer */}
@@ -416,11 +416,12 @@ export default function ServicesPage() {
                     aria-hidden="true"
                     className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
                     style={{
-                        background: 'linear-gradient(90deg, rgba(132,204,22,0) 0%, rgba(132,204,22,0.4) 30%, rgba(163,230,53,0.6) 50%, rgba(132,204,22,0.4) 70%, rgba(132,204,22,0) 100%)',
-                        boxShadow: '0 0 20px 4px rgba(101,163,13,0.25)',
+                        background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
+                        boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
                     }}
                 />
             </div>
         </div>
     );
 }
+

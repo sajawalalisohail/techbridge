@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
@@ -42,7 +42,7 @@ export default function DeploymentSuccessMockup() {
             {/* Top Bar - Status */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Rocket size={16} className={isComplete ? "text-lime-400" : "text-zinc-500"} />
+                    <Rocket size={16} className={isComplete ? "text-brand-accent-light" : "text-zinc-500"} />
                     <span className="font-mono text-xs font-medium text-zinc-300">
                         system_deploy.sh
                     </span>
@@ -52,7 +52,7 @@ export default function DeploymentSuccessMockup() {
                 <motion.div
                     className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${isComplete
                         ? "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
-                        : "border border-yellow-500/30 bg-yellow-500/10 text-yellow-500"
+                        : "border border-brand-accent/30 bg-brand-accent/10 text-brand-accent"
                         }`}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -88,12 +88,12 @@ export default function DeploymentSuccessMockup() {
                     <svg className="absolute inset-0 h-full w-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
                         <defs>
                             <linearGradient id="chart-area" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgb(132,204,22)" stopOpacity="0.4" />
-                                <stop offset="100%" stopColor="rgb(132,204,22)" stopOpacity="0.0" />
+                                <stop offset="0%" stopColor="rgb(var(--brand-accent-rgb))" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="rgb(var(--brand-accent-rgb))" stopOpacity="0.0" />
                             </linearGradient>
                             <linearGradient id="chart-line" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="rgb(163,230,53)" />
-                                <stop offset="100%" stopColor="rgb(163,230,53)" />
+                                <stop offset="0%" stopColor="rgb(var(--brand-accent-light-rgb))" />
+                                <stop offset="100%" stopColor="rgb(var(--brand-accent-light-rgb))" />
                             </linearGradient>
                         </defs>
 
@@ -120,12 +120,12 @@ export default function DeploymentSuccessMockup() {
                 {/* Uplift Stat */}
                 {isComplete && (
                     <motion.div
-                        className="absolute right-0 top-0 flex items-center gap-1 rounded-lg border border-lime-500/20 bg-lime-900/30 px-2.5 py-1.5 backdrop-blur-sm"
+                        className="absolute right-0 top-0 flex items-center gap-1 rounded-lg border border-brand-accent/20 bg-brand-accent-deep/30 px-2.5 py-1.5 backdrop-blur-sm"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.2, duration: 0.5, ease: "backOut" }}
                     >
-                        <ArrowUpRight size={14} className="text-lime-400" />
+                        <ArrowUpRight size={14} className="text-brand-accent-light" />
                         <span className="font-mono text-xs font-bold text-white">2.4x ROI</span>
                     </motion.div>
                 )}
@@ -135,11 +135,11 @@ export default function DeploymentSuccessMockup() {
             <div>
                 <div className="mb-2 flex justify-between text-[10px] font-medium uppercase tracking-wider text-zinc-500">
                     <span>Performance Optimization</span>
-                    <span className={isComplete ? "text-lime-400" : ""}>{progress}%</span>
+                    <span className={isComplete ? "text-brand-accent-light" : ""}>{progress}%</span>
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
                     <motion.div
-                        className="h-full bg-gradient-to-r from-yellow-500 to-lime-500"
+                        className="h-full bg-gradient-to-r from-brand-accent-light to-brand-accent"
                         initial={{ width: "0%" }}
                         animate={{ width: `${progress}%` }}
                         transition={{ ease: "linear", duration: 0.1 }} // Smooth snap between tick values
@@ -167,3 +167,4 @@ export default function DeploymentSuccessMockup() {
         </motion.div>
     );
 }
+

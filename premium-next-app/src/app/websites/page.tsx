@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
@@ -17,10 +17,10 @@ import {
 } from "@/components/shared/headingAnimations";
 
 
-/* ─── Global ease constant ───────────────────────────────── */
+/* â”€â”€â”€ Global ease constant â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Reusable animation helpers ─────────────────────────── */
+/* â”€â”€â”€ Reusable animation helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp = (delay = 0) => ({
     hidden: { opacity: 0, y: 28 },
     show: {
@@ -40,20 +40,20 @@ const childFade = {
     show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
-/* ─── Section wrapper ────────────────────────────────────── */
-/* ─── Eyebrow ────────────────────────────────────────────── */
+/* â”€â”€â”€ Section wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â”€â”€â”€ Eyebrow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Eyebrow({ children }: { children: React.ReactNode }) {
     return (
         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
             {children}
         </span>
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 1 — HERO
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 1 â€” HERO
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function Hero() {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true });
@@ -69,10 +69,10 @@ function Hero() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background: `
-                        radial-gradient(circle at 50% 50%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 60%),
-                        radial-gradient(circle at 100% 0%, rgba(101,163,13,0.05) 0%, rgba(101,163,13,0) 50%),
-                        radial-gradient(ellipse at 0% 50%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 70%),
-                        radial-gradient(ellipse at 100% 50%, rgba(132,204,22,0.08) 0%, rgba(132,204,22,0) 70%)
+                        radial-gradient(circle at 50% 50%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%),
+                        radial-gradient(circle at 100% 0%, rgba(var(--brand-accent-dark-rgb), 0.05) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%),
+                        radial-gradient(ellipse at 0% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 70%),
+                        radial-gradient(ellipse at 100% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 70%)
                     `,
                 }}
             />
@@ -95,7 +95,7 @@ function Hero() {
                     animate={isInView ? "show" : "hidden"}
                     className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 backdrop-blur-sm"
                 >
-                    <span className="h-1.5 w-1.5 rounded-full bg-lime-400 shadow-[0_0_6px_rgba(163,230,53,0.8)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light shadow-[0_0_6px_rgba(var(--brand-accent-light-rgb), 0.8)]" />
                     <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
                         24-hour studio
                     </span>
@@ -104,7 +104,7 @@ function Hero() {
                 <ClipReveal>
                     <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
                         Your Website. Custom-Coded.{" "}
-                        <span className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                             Live Tomorrow.
                         </span>
                     </h1>
@@ -130,7 +130,7 @@ function Hero() {
                 >
                     <a
                         href="#pricing"
-                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-lime-600 to-lime-600 px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-lime-500/10"
+                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-8 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(var(--brand-accent-dark-rgb), 0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-brand-accent/10"
                     >
                         <span className="relative z-10">See Pricing</span>
                         <ChevronDown size={15} className="relative z-10" />
@@ -140,7 +140,7 @@ function Hero() {
                         href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:text-lime-300"
+                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                     >
                         Book a Call
                         <ExternalLink size={13} className="text-zinc-500" />
@@ -156,7 +156,7 @@ function Hero() {
                 >
                     {["Custom code, not a page builder", "100% satisfaction guarantee", "Built by actual engineers"].map((t) => (
                         <span key={t} className="flex items-center gap-2 text-xs text-zinc-600">
-                            <Check size={12} className="text-lime-500" />
+                            <Check size={12} className="text-brand-accent" />
                             {t}
                         </span>
                     ))}
@@ -166,9 +166,9 @@ function Hero() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 2 — COMPARISON TABLE
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 2 â€” COMPARISON TABLE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const COMPARISON_ROWS = [
     { label: "Price", freelancer: "$300-$800", agency: "$8k-$20k", tb: "$997-$4,997" },
     { label: "Design", freelancer: "Template", agency: "Custom", tb: "Custom" },
@@ -216,10 +216,10 @@ function ComparisonTable() {
                     ].map((col) => (
                         <div
                             key={col.label}
-                            className={`relative px-6 py-5 ${col.highlight ? "bg-lime-950/30" : ""}`}
+                            className={`relative px-6 py-5 ${col.highlight ? "bg-brand-accent-deep/30" : ""}`}
                         >
                             {col.highlight && (
-                                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-lime-500/0 via-lime-500/80 to-lime-500/0" />
+                                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-brand-accent/0 via-brand-accent/80 to-brand-accent/0" />
                             )}
                             <p className={`text-sm font-bold ${col.highlight ? "text-white" : "text-zinc-300"}`}>
                                 {col.label}
@@ -241,7 +241,7 @@ function ComparisonTable() {
                         </div>
                         <div className="px-6 py-4 text-sm text-zinc-500">{row.freelancer}</div>
                         <div className="px-6 py-4 text-sm text-zinc-500">{row.agency}</div>
-                        <div className="relative bg-lime-950/20 px-6 py-4 text-sm font-semibold text-white">
+                        <div className="relative bg-brand-accent-deep/20 px-6 py-4 text-sm font-semibold text-white">
                             {row.tb}
                         </div>
                     </motion.div>
@@ -251,9 +251,9 @@ function ComparisonTable() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 2.5 — THE ARSENAL (TECH STACK)
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 2.5 â€” THE ARSENAL (TECH STACK)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const STACK_MARQUEE_ROW_1 = [
     { name: "Next.js", label: "React Framework" },
     { name: "React", label: "UI Architecture" },
@@ -265,7 +265,7 @@ const STACK_MARQUEE_ROW_1 = [
     { name: "Custom Domains", label: "Fully Managed Setup" },
 ];
 
-// Row 2 scrolls opposite direction — same pills, different order
+// Row 2 scrolls opposite direction â€” same pills, different order
 const STACK_MARQUEE_ROW_2 = [
     { name: "Vercel", label: "Global CDN" },
     { name: "Custom Domains", label: "DNS Config" },
@@ -290,12 +290,12 @@ const marqueeCSS = `
 /* Individual pill */
 function StackPill({ name, label }: { name: string; label: string }) {
     return (
-        <div className="group mx-3 flex-shrink-0 flex items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:shadow-lime-500/10">
+        <div className="group mx-3 flex-shrink-0 flex items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:shadow-brand-accent/10">
             {/* Glow dot */}
-            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-lime-500/60 shadow-[0_0_6px_rgba(163,230,53,0.6)] group-hover:bg-lime-500/5" />
+            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-accent/60 shadow-[0_0_6px_rgba(var(--brand-accent-light-rgb), 0.6)] group-hover:bg-brand-accent/5" />
             <div>
                 <p className="whitespace-nowrap text-sm font-semibold text-white">{name}</p>
-                <p className="whitespace-nowrap text-xs text-zinc-600 group-hover:text-lime-300">{label}</p>
+                <p className="whitespace-nowrap text-xs text-zinc-600 group-hover:text-brand-accent-light">{label}</p>
             </div>
         </div>
     );
@@ -325,7 +325,7 @@ function TechStack() {
                                 {word}
                             </motion.span>
                         ))}
-                        <motion.span variants={slideFromRightItem} className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent" style={{ display: "inline-block" }}>
+                        <motion.span variants={slideFromRightItem} className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent" style={{ display: "inline-block" }}>
                             None of the bloat.
                         </motion.span>
                     </motion.h2>
@@ -335,19 +335,19 @@ function TechStack() {
                 </motion.div>
             </div>
 
-            {/* ── Marquee rows ─────────────────────────────── */}
+            {/* â”€â”€ Marquee rows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <motion.div
                 variants={fadeUp(0.2)}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
                 className="relative"
             >
-                {/* Left fade mask — subtle so it doesn't break global side glow */}
+                {/* Left fade mask â€” subtle so it doesn't break global side glow */}
                 <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-neutral-950/80 to-transparent" />
                 {/* Right fade mask */}
                 <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-neutral-950/80 to-transparent" />
 
-                {/* Row 1 — scrolls left */}
+                {/* Row 1 â€” scrolls left */}
                 <div className="flex overflow-hidden py-3">
                     <div className="marquee-left flex">
                         {[...STACK_MARQUEE_ROW_1, ...STACK_MARQUEE_ROW_1].map((item, i) => (
@@ -356,7 +356,7 @@ function TechStack() {
                     </div>
                 </div>
 
-                {/* Row 2 — scrolls right */}
+                {/* Row 2 â€” scrolls right */}
                 <div className="flex overflow-hidden py-3">
                     <div className="marquee-right flex">
                         {[...STACK_MARQUEE_ROW_2, ...STACK_MARQUEE_ROW_2].map((item, i) => (
@@ -366,7 +366,7 @@ function TechStack() {
                 </div>
             </motion.div>
 
-            {/* ── Performance stat strip ───────────────────── */}
+            {/* â”€â”€ Performance stat strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <motion.div
                 variants={fadeUp(0.3)}
                 initial="hidden"
@@ -382,9 +382,9 @@ function TechStack() {
                     ].map((item) => (
                         <div
                             key={item.label}
-                            className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5"
+                            className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
                         >
-                            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(101,163,13,0.1) 0%, rgba(101,163,13,0) 100%)" }} />
+                            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-dark-rgb), 0.1) 0%, rgba(var(--brand-accent-dark-rgb), 0) 100%)" }} />
                             <p className="font-mono text-3xl font-extrabold text-white">{item.stat}</p>
                             <p className="mt-1 text-xs font-semibold text-zinc-400">{item.label}</p>
                             <p className="mt-0.5 text-xs text-zinc-700">{item.sub}</p>
@@ -396,12 +396,12 @@ function TechStack() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 3 — 24-HOUR PROCESS TIMELINE
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 3 â€” 24-HOUR PROCESS TIMELINE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const TIMELINE = [
     {
-        time: "Day 0  ·  30 min",
+        time: "Day 0  Â·  30 min",
         title: "Scope Confirmed",
         desc: "We lock in your goals, branding, and sitemap in a focused 30-minute kickoff call. 50% deposit collected.",
         tag: "Kickoff",
@@ -447,9 +447,9 @@ function TimelineStep({
                     transition={{ duration: 0.4, delay: 0.2, ease: "backOut" }}
                     className="relative flex h-11 w-11 items-center justify-center"
                 >
-                    <span className={`absolute inset-0 rounded-full blur-md transition-all duration-700 ${isCenterInView ? "bg-lime-500/60 scale-[1.2]" : "bg-lime-500/10"}`} />
-                    <span className={`relative flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-700 ${isCenterInView ? "border-lime-500/40 bg-lime-950/60 shadow-[0_0_20px_rgba(101,163,13,0.4)]" : "border-lime-500/10 bg-lime-950/20 shadow-none"}`}>
-                        <span className={`font-mono text-xs font-bold transition-colors duration-700 ${isCenterInView ? "text-lime-300" : "text-lime-500/50"}`}>{String(index + 1).padStart(2, "0")}</span>
+                    <span className={`absolute inset-0 rounded-full blur-md transition-all duration-700 ${isCenterInView ? "bg-brand-accent/60 scale-[1.2]" : "bg-brand-accent/10"}`} />
+                    <span className={`relative flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-700 ${isCenterInView ? "border-brand-accent/40 bg-brand-accent-deep/60 shadow-[0_0_20px_rgba(var(--brand-accent-dark-rgb), 0.4)]" : "border-brand-accent/10 bg-brand-accent-deep/20 shadow-none"}`}>
+                        <span className={`font-mono text-xs font-bold transition-colors duration-700 ${isCenterInView ? "text-brand-accent-light" : "text-brand-accent/50"}`}>{String(index + 1).padStart(2, "0")}</span>
                     </span>
                 </motion.div>
             </div>
@@ -462,8 +462,8 @@ function TimelineStep({
                 viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                 className={`group relative overflow-hidden rounded-xl border transition-all duration-700 p-6 backdrop-blur-sm ${isCenterInView
-                    ? "border-lime-500/50 bg-lime-500/10 shadow-[0_0_30px_rgba(132,204,22,0.15)] scale-[1.01]"
-                    : "border-white/8 bg-neutral-900/50 hover:border-lime-500/40"
+                    ? "border-brand-accent/50 bg-brand-accent/10 shadow-[0_0_30px_rgba(var(--brand-accent-rgb), 0.15)] scale-[1.01]"
+                    : "border-white/8 bg-neutral-900/50 hover:border-brand-accent/40"
                     }`}
             >
                 {/* Active glow gradient */}
@@ -473,24 +473,24 @@ function TimelineStep({
                         }`}
                     style={{
                         background:
-                            "radial-gradient(ellipse at 0% 50%, rgba(132,204,22,0.15) 0%, rgba(132,204,22,0) 100%)",
+                            "radial-gradient(ellipse at 0% 50%, rgba(var(--brand-accent-rgb), 0.15) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
                     }}
                 />
                 <div className="mb-2 relative z-10 flex flex-wrap items-center gap-3">
                     {step.tag && (
-                        <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-700 ${isCenterInView ? "border-lime-500/30 bg-lime-950/60 text-lime-400" : "border-lime-500/10 bg-lime-950/20 text-lime-500/60"
+                        <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-700 ${isCenterInView ? "border-brand-accent/30 bg-brand-accent-deep/60 text-brand-accent-light" : "border-brand-accent/10 bg-brand-accent-deep/20 text-brand-accent/60"
                             }`}>
                             {step.tag}
                         </span>
                     )}
-                    <span className={`font-mono text-xs transition-colors duration-700 ${isCenterInView ? "text-lime-300" : "text-zinc-600"}`}>
+                    <span className={`font-mono text-xs transition-colors duration-700 ${isCenterInView ? "text-brand-accent-light" : "text-zinc-600"}`}>
                         {step.time}
                     </span>
                 </div>
-                <h3 className={`relative z-10 mb-2 border-none text-base font-bold transition-colors duration-700 ${isCenterInView ? "text-white" : "text-zinc-400 group-hover:text-lime-300"}`}>
+                <h3 className={`relative z-10 mb-2 border-none text-base font-bold transition-colors duration-700 ${isCenterInView ? "text-white" : "text-zinc-400 group-hover:text-brand-accent-light"}`}>
                     {step.title}
                 </h3>
-                <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-700 ${isCenterInView ? "text-zinc-300" : "text-zinc-500 group-hover:text-lime-300"}`}>
+                <p className={`relative z-10 text-sm leading-relaxed transition-colors duration-700 ${isCenterInView ? "text-zinc-300" : "text-zinc-500 group-hover:text-brand-accent-light"}`}>
                     {step.desc}
                 </p>
             </motion.div>
@@ -574,8 +574,8 @@ function Timeline() {
                     }}
                     className="pointer-events-none absolute left-[1.375rem] top-[54px] w-px"
                 >
-                    <div className="h-full w-[2px] -ml-[0.5px] bg-gradient-to-b from-lime-500 via-lime-500 to-lime-500/10" />
-                    <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-500/60 blur-md" />
+                    <div className="h-full w-[2px] -ml-[0.5px] bg-gradient-to-b from-brand-accent via-brand-accent to-brand-accent/10" />
+                    <div className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-accent/60 blur-md" />
                 </motion.div>
 
                 {TIMELINE.map((step, i) => (
@@ -591,9 +591,9 @@ function Timeline() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 4 — SOCIAL PROOF / LIVE EXAMPLE
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 4 â€” SOCIAL PROOF / LIVE EXAMPLE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const SOCIAL_PROOF_PROJECTS = [
     {
         client: "NextLex",
@@ -604,7 +604,7 @@ const SOCIAL_PROOF_PROJECTS = [
         link: "https://nextlex.com",
         tags: ["Next.js", "Marketing Site", "SEO"],
         assets: ["/proofs/NextLex/1.png", "/proofs/NextLex/2.png", "/proofs/NextLex/3.png", "/proofs/NextLex/4.png"],
-        accentColor: "rgb(132,204,22)", // lime
+        accentColor: "rgb(var(--brand-accent-rgb))", // brand accent
     },
     {
         client: "PrimeMark Apparel",
@@ -615,7 +615,7 @@ const SOCIAL_PROOF_PROJECTS = [
         link: "https://primemarkapparel.com",
         tags: ["Corporate Site", "Lead Gen", "Performance"],
         assets: ["/proofs/PrimeMark/1.png", "/proofs/PrimeMark/2.png", "/proofs/PrimeMark/3.png", "/proofs/PrimeMark/4.png"],
-        accentColor: "rgb(163,230,53)", // lime-light
+        accentColor: "rgb(var(--brand-accent-light-rgb))", // brand accent light
     },
     {
         client: "AliWali Trading Co.",
@@ -626,7 +626,7 @@ const SOCIAL_PROOF_PROJECTS = [
         link: "https://aliwalitradingco.com",
         tags: ["Next.js", "Global Reach", "B2B Portal"],
         assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png"],
-        accentColor: "rgb(101,163,13)", // lime-700
+        accentColor: "rgb(var(--brand-accent-dark-rgb))", // brand-accent-dark
     },
 ];
 
@@ -660,7 +660,7 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
             layout
             onHoverStart={() => setExpanded(index)}
             onClick={() => isExpanded ? onSelect(project) : setExpanded(index)}
-            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'border-white/20 bg-neutral-900/60' : 'border-white/5 bg-neutral-900/20 hover:border-lime-500/40 hover:bg-lime-500/5'}`}
+            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'border-white/20 bg-neutral-900/60' : 'border-white/5 bg-neutral-900/20 hover:border-brand-accent/40 hover:bg-brand-accent/5'}`}
         >
             <div className={`p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-opacity ${isExpanded ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}>
 
@@ -683,7 +683,7 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                                     <span key={t} className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500">{t}</span>
                                 ))}
                             </div>
-                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-white tracking-widest uppercase hover:text-lime-300 transition-colors">
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-white tracking-widest uppercase hover:text-brand-accent-light transition-colors">
                                 View Live Site <ExternalLink size={14} />
                             </a>
                         </motion.div>
@@ -693,7 +693,7 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                 {/* Video Player */}
                 <motion.div
                     layout
-                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-lime-500/40'}`}
+                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-brand-accent/40'}`}
                     style={{
                         boxShadow: `0 0 20px ${project.accentColor.replace("rgb", "rgba").replace(")", ", 0.15)")}`
                     }}
@@ -712,14 +712,15 @@ function SocialProof() {
     const [expanded, setExpanded] = useState(0);
     const [selectedProject, setSelectedProject] = useState<typeof SOCIAL_PROOF_PROJECTS[number] | null>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-    // Reset image index when project changes
-    useEffect(() => { setCurrentImageIndex(0); }, [selectedProject]);
+    const selectProject = (project: typeof SOCIAL_PROOF_PROJECTS[number] | null) => {
+        setCurrentImageIndex(0);
+        setSelectedProject(project);
+    };
 
     // Escape listener and Navbar occlusion / body lock
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setSelectedProject(null);
+            if (e.key === "Escape") selectProject(null);
         };
 
         if (selectedProject) {
@@ -745,14 +746,14 @@ function SocialProof() {
         e.stopPropagation();
         if (currentProjectIndex < 0) return;
         const prev = currentProjectIndex > 0 ? currentProjectIndex - 1 : SOCIAL_PROOF_PROJECTS.length - 1;
-        setSelectedProject(SOCIAL_PROOF_PROJECTS[prev]);
+        selectProject(SOCIAL_PROOF_PROJECTS[prev]);
     };
 
     const handleNextProject = (e: React.MouseEvent) => {
         e.stopPropagation();
         if (currentProjectIndex < 0) return;
         const next = currentProjectIndex < SOCIAL_PROOF_PROJECTS.length - 1 ? currentProjectIndex + 1 : 0;
-        setSelectedProject(SOCIAL_PROOF_PROJECTS[next]);
+        selectProject(SOCIAL_PROOF_PROJECTS[next]);
     };
 
     const handlePrevImage = (e: React.MouseEvent) => {
@@ -782,7 +783,7 @@ function SocialProof() {
 
             <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isInView ? "show" : "hidden"} className="flex flex-col gap-4">
                 {SOCIAL_PROOF_PROJECTS.map((project, i) => (
-                    <AccordionRow key={project.client} project={project} index={i} expanded={expanded} setExpanded={setExpanded} onSelect={setSelectedProject} />
+                    <AccordionRow key={project.client} project={project} index={i} expanded={expanded} setExpanded={setExpanded} onSelect={selectProject} />
                 ))}
             </motion.div>
 
@@ -794,13 +795,13 @@ function SocialProof() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-xl bg-black/80"
-                        onClick={() => setSelectedProject(null)}
+                        onClick={() => selectProject(null)}
                     >
                         {/* Level 1 Nav: Project Switchers */}
-                        <button onClick={handlePrevProject} className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-lime-300 hover:bg-lime-500/5 hover:border-lime-500/40 transition-all backdrop-blur-md">
+                        <button onClick={handlePrevProject} className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-brand-accent-light hover:bg-brand-accent/5 hover:border-brand-accent/40 transition-all backdrop-blur-md">
                             <ChevronLeft size={24} />
                         </button>
-                        <button onClick={handleNextProject} className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-lime-300 hover:bg-lime-500/5 hover:border-lime-500/40 transition-all backdrop-blur-md">
+                        <button onClick={handleNextProject} className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-brand-accent-light hover:bg-brand-accent/5 hover:border-brand-accent/40 transition-all backdrop-blur-md">
                             <ChevronRight size={24} />
                         </button>
                         <motion.div
@@ -813,8 +814,8 @@ function SocialProof() {
                         >
                             {/* Close Button */}
                             <button
-                                onClick={() => setSelectedProject(null)}
-                                className="absolute right-4 md:right-6 top-4 md:top-6 z-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-2 text-zinc-400 transition-colors hover:bg-lime-500/5 hover:text-lime-300"
+                                onClick={() => selectProject(null)}
+                                className="absolute right-4 md:right-6 top-4 md:top-6 z-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-2 text-zinc-400 transition-colors hover:bg-brand-accent/5 hover:text-brand-accent-light"
                             >
                                 <X size={20} />
                             </button>
@@ -845,13 +846,13 @@ function SocialProof() {
                                 {/* Inner Image Nav Buttons */}
                                 <button
                                     onClick={handlePrevImage}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-lime-300 hover:bg-lime-500/5 transition-all"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-brand-accent-light hover:bg-brand-accent/5 transition-all"
                                 >
                                     <ChevronLeft size={18} />
                                 </button>
                                 <button
                                     onClick={handleNextImage}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-lime-300 hover:bg-lime-500/5 transition-all"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-brand-accent-light hover:bg-brand-accent/5 transition-all"
                                 >
                                     <ChevronRight size={18} />
                                 </button>
@@ -879,7 +880,7 @@ function SocialProof() {
                                 href={selectedProject.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5"
+                                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
                             >
                                 <span className="relative z-10 tracking-widest uppercase">Explore Live Platform</span>
                                 <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -896,9 +897,9 @@ function SocialProof() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 5 — PRICING TIERS
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 5 â€” PRICING TIERS
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const TIERS = [
     {
         name: "Starter",
@@ -979,21 +980,21 @@ function Pricing() {
                     <motion.div
                         key={tier.name}
                         variants={childFade}
-                        className={`relative flex flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:border-lime-500/40
+                        className={`relative flex flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40
               ${tier.highlight
-                                ? "border-lime-500/40 bg-lime-950/30 shadow-[0_0_40px_rgba(101,163,13,0.2)]"
-                                : "border-white/8 bg-neutral-900/40 hover:bg-lime-500/5"
+                                ? "border-brand-accent/40 bg-brand-accent-deep/30 shadow-[0_0_40px_rgba(var(--brand-accent-dark-rgb), 0.2)]"
+                                : "border-white/8 bg-neutral-900/40 hover:bg-brand-accent/5"
                             }`}
                     >
                         {/* Top glow for highlight */}
                         {tier.highlight && (
-                            <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-lime-500 to-transparent" />
+                            <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-brand-accent to-transparent" />
                         )}
 
                         {/* Badge */}
                         {tier.badge && (
                             <div className="absolute right-5 top-5">
-                                <span className="rounded-full bg-gradient-to-r from-lime-600 to-lime-600 px-3 py-1 text-xs font-semibold text-white">
+                                <span className="rounded-full bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-3 py-1 text-xs font-semibold text-white">
                                     {tier.badge}
                                 </span>
                             </div>
@@ -1010,7 +1011,7 @@ function Pricing() {
                             <ul className="mb-8 flex flex-col gap-3">
                                 {tier.features.map((f) => (
                                     <li key={f} className="flex items-start gap-3 text-sm text-zinc-400">
-                                        <Check size={14} className="mt-0.5 flex-shrink-0 text-lime-400" />
+                                        <Check size={14} className="mt-0.5 flex-shrink-0 text-brand-accent-light" />
                                         {f}
                                     </li>
                                 ))}
@@ -1024,8 +1025,8 @@ function Pricing() {
                                 rel="noopener noreferrer"
                                 className={`group relative w-full inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300
                   ${tier.highlight
-                                        ? "bg-gradient-to-r from-lime-600 to-lime-600 text-white shadow-[0_0_24px_rgba(101,163,13,0.3)] hover:shadow-lime-500/10 hover:scale-[1.02]"
-                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-lime-500/40 hover:bg-lime-500/5"
+                                        ? "bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark text-white shadow-[0_0_24px_rgba(var(--brand-accent-dark-rgb), 0.3)] hover:shadow-brand-accent/10 hover:scale-[1.02]"
+                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-brand-accent/40 hover:bg-brand-accent/5"
                                     }`}
                             >
                                 <span className="relative z-10">Book This Plan</span>
@@ -1042,9 +1043,9 @@ function Pricing() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 6 — CARE PLANS
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 6 â€” CARE PLANS
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const CARE_PLANS = [
     {
         name: "Site Care Plan",
@@ -1111,12 +1112,12 @@ function CarePlans() {
                         variants={childFade}
                         className={`relative overflow-hidden rounded-2xl border backdrop-blur-sm
               ${plan.highlight
-                                ? "border-lime-500/40 bg-lime-950/25 shadow-[0_0_30px_rgba(101,163,13,0.15)]"
+                                ? "border-brand-accent/40 bg-brand-accent-deep/25 shadow-[0_0_30px_rgba(var(--brand-accent-dark-rgb), 0.15)]"
                                 : "border-white/8 bg-neutral-900/40"
                             }`}
                     >
                         {plan.highlight && (
-                            <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-lime-500 to-transparent" />
+                            <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-brand-accent to-transparent" />
                         )}
                         <div className="p-8">
                             <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-zinc-600">{plan.name}</p>
@@ -1128,7 +1129,7 @@ function CarePlans() {
                             <ul className="mb-8 flex flex-col gap-3">
                                 {plan.features.map((f) => (
                                     <li key={f} className="flex items-start gap-3 text-sm text-zinc-400">
-                                        <Check size={13} className="mt-0.5 flex-shrink-0 text-lime-400" />
+                                        <Check size={13} className="mt-0.5 flex-shrink-0 text-brand-accent-light" />
                                         {f}
                                     </li>
                                 ))}
@@ -1139,8 +1140,8 @@ function CarePlans() {
                                 rel="noopener noreferrer"
                                 className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300
                   ${plan.highlight
-                                        ? "bg-gradient-to-r from-lime-600 to-lime-600 text-white hover:shadow-lime-500/10"
-                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-lime-500/40 hover:bg-lime-500/5"
+                                        ? "bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark text-white hover:shadow-brand-accent/10"
+                                        : "border border-white/10 bg-white/[0.04] text-white hover:border-brand-accent/40 hover:bg-brand-accent/5"
                                     }`}
                             >
                                 Get Started
@@ -1153,9 +1154,9 @@ function CarePlans() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
-   STEP 7 — FAQ
-══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP 7 â€” FAQ
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const FAQS = [
     {
         q: "Is it built on a template?",
@@ -1216,7 +1217,7 @@ function FAQ() {
                             key={i}
                             variants={childFade}
                             className={`overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300
-                ${open ? "border-lime-500/30 bg-lime-950/20" : "border-white/8 bg-neutral-900/40 hover:border-lime-500/40 hover:bg-lime-500/5"}`}
+                ${open ? "border-brand-accent/30 bg-brand-accent-deep/20" : "border-white/8 bg-neutral-900/40 hover:border-brand-accent/40 hover:bg-brand-accent/5"}`}
                         >
                             <button
                                 onClick={() => setOpenIdx(open ? null : i)}
@@ -1225,7 +1226,7 @@ function FAQ() {
                                 <span className="text-sm font-semibold text-white">{faq.q}</span>
                                 <ChevronDown
                                     size={16}
-                                    className={`flex-shrink-0 text-zinc-500 transition-transform duration-300 ${open ? "rotate-180 text-lime-400" : ""}`}
+                                    className={`flex-shrink-0 text-zinc-500 transition-transform duration-300 ${open ? "rotate-180 text-brand-accent-light" : ""}`}
                                 />
                             </button>
                             {open && (
@@ -1241,9 +1242,9 @@ function FAQ() {
     );
 }
 
-/* ══════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FINAL CTA SECTION
-══════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function FinalCTA() {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -1255,7 +1256,7 @@ function FinalCTA() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
                 style={{
-                    background: "radial-gradient(circle at 50% 50%, rgba(132,204,22,0.06) 0%, rgba(132,204,22,0) 60%)"
+                    background: "radial-gradient(circle at 50% 50%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%)"
                 }}
             />
 
@@ -1276,7 +1277,7 @@ function FinalCTA() {
                             {word}
                         </motion.span>
                     ))}
-                    <motion.span variants={wordVariants} className="bg-gradient-to-r from-lime-400 to-yellow-400 bg-clip-text text-transparent" style={{ display: "inline-block" }}>
+                    <motion.span variants={wordVariants} className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent" style={{ display: "inline-block" }}>
                         tomorrow?
                     </motion.span>
                 </motion.h2>
@@ -1301,7 +1302,7 @@ function FinalCTA() {
                         href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-lime-600 to-lime-600 px-10 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(101,163,13,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-lime-500/10"
+                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-10 py-4 text-sm font-semibold text-white shadow-[0_0_32px_rgba(var(--brand-accent-dark-rgb), 0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-brand-accent/10"
                     >
                         <span className="relative z-10">Book Your Slot</span>
                         <ArrowRight size={15} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
@@ -1309,9 +1310,9 @@ function FinalCTA() {
                     </a>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-lime-300"
+                        className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-brand-accent-light"
                     >
-                        Or send us a message first →
+                        Or send us a message first â†’
                     </Link>
                 </motion.div>
 
@@ -1322,27 +1323,27 @@ function FinalCTA() {
                     animate={isInView ? "show" : "hidden"}
                     className="mt-8 text-xs text-zinc-700"
                 >
-                    50% deposit on booking · Balance due on delivery · Slots are first-come, first-served
+                    50% deposit on booking Â· Balance due on delivery Â· Slots are first-come, first-served
                 </motion.p>
             </div>
         </section>
     );
 }
 
-/* ══════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PAGE ASSEMBLY
-══════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function WebsitesPage() {
     return (
         <div
-            className="relative z-10 overflow-hidden min-h-screen border border-lime-500/20 rounded-none"
-            style={{ animation: "lime-pulse 4s ease-in-out infinite" }}
+            className="relative z-10 overflow-hidden min-h-screen border border-brand-accent/20 rounded-none"
+            style={{ animation: "accent-pulse 4s ease-in-out infinite" }}
         >
-            {/* Full-bleed side, top, and bottom ambient glows — high z-index to stay on top of section masks */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-lime-600/5 to-transparent" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-lime-600/5 to-transparent" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-lime-600/10 to-transparent" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-lime-600/10 to-transparent" />
+            {/* Full-bleed side, top, and bottom ambient glows â€” high z-index to stay on top of section masks */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-brand-accent-dark/5 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-brand-accent-dark/5 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-brand-accent-dark/10 to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-brand-accent-dark/10 to-transparent" />
             <Hero />
 
             {/* Separator */}
@@ -1350,7 +1351,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 2 — Comparison */}
+            {/* Step 2 â€” Comparison */}
             <section className="py-24 lg:py-32">
                 <ComparisonTable />
             </section>
@@ -1359,7 +1360,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 2.5 — Tech Stack */}
+            {/* Step 2.5 â€” Tech Stack */}
             <section className="py-24 lg:py-32">
                 <TechStack />
             </section>
@@ -1368,7 +1369,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 3 — Timeline */}
+            {/* Step 3 â€” Timeline */}
             <section className="py-24 lg:py-32">
                 <Timeline />
             </section>
@@ -1377,7 +1378,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 4 — Social Proof */}
+            {/* Step 4 â€” Social Proof */}
             <section className="py-24 lg:py-32">
                 <SocialProof />
             </section>
@@ -1386,7 +1387,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 5 — Pricing */}
+            {/* Step 5 â€” Pricing */}
             <section className="py-24 lg:py-32">
                 <Pricing />
             </section>
@@ -1395,7 +1396,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 6 — Care Plans */}
+            {/* Step 6 â€” Care Plans */}
             <section className="py-24 lg:py-28">
                 <CarePlans />
             </section>
@@ -1404,7 +1405,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 7 — FAQ */}
+            {/* Step 7 â€” FAQ */}
             <section className="py-24 lg:py-32">
                 <FAQ />
             </section>
@@ -1415,3 +1416,4 @@ export default function WebsitesPage() {
         </div>
     );
 }
+

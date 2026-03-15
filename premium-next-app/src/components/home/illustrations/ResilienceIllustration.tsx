@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -9,9 +9,9 @@ export default function ResilienceIllustration() {
 
     // 3 isometric layers
     const layers = [
-        { id: "layer1", color: "#65a30d", label: "Client" },   // lime-700
-        { id: "layer2", color: "#65a30d", label: "API" },      // lime-600
-        { id: "layer3", color: "#1a2e05", label: "Database" }, // lime-950
+        { id: "layer1", color: "var(--brand-accent-dark)", label: "Client" },   // brand-accent-dark
+        { id: "layer2", color: "var(--brand-accent-dark)", label: "API" },      // brand-accent-dark
+        { id: "layer3", color: "var(--brand-accent-deep)", label: "Database" }, // brand-accent-deep
     ];
 
     return (
@@ -19,7 +19,7 @@ export default function ResilienceIllustration() {
 
             {/* Animated Shield Radar Sweep */}
             <motion.div
-                className="absolute inset-0 z-0 bg-gradient-to-t from-lime-500/20 to-transparent"
+                className="absolute inset-0 z-0 bg-gradient-to-t from-brand-accent/20 to-transparent"
                 initial={{ y: "100%", opacity: 0 }}
                 animate={isInView ? { y: ["100%", "-100%"], opacity: [0, 0.5, 0] } : {}}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 1.5 }}
@@ -58,7 +58,7 @@ export default function ResilienceIllustration() {
 
                 {/* Vertical connection beam through center */}
                 <motion.div
-                    className="absolute w-2 h-40 bg-gradient-to-b from-lime-300 to-transparent blur-[2px]"
+                    className="absolute w-2 h-40 bg-gradient-to-b from-brand-accent-light to-transparent blur-[2px]"
                     style={{ zIndex: 50, transform: "translateZ(20px)" }}
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 0.7 } : {}}
@@ -68,3 +68,4 @@ export default function ResilienceIllustration() {
         </div>
     );
 }
+

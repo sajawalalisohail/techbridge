@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { CountUp } from "@/components/shared/CountUp";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const BARS = [
     { label: "Q1", height: "60%", value: 24 },
     { label: "Q2", height: "85%", value: 38 },
@@ -13,7 +13,7 @@ const BARS = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function DashboardMockup() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -30,7 +30,7 @@ export default function DashboardMockup() {
             {/* Top bar */}
             <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
                 <span className="h-2 w-2 rounded-full bg-red-500/60" />
-                <span className="h-2 w-2 rounded-full bg-yellow-500/60" />
+                <span className="h-2 w-2 rounded-full bg-brand-accent/60" />
                 <span className="h-2 w-2 rounded-full bg-green-500/60" />
                 <span className="ml-2 font-mono text-[10px] text-zinc-600">dashboard.tsx</span>
             </div>
@@ -46,7 +46,7 @@ export default function DashboardMockup() {
                         {/* Bar container */}
                         <div className="relative h-20 w-8 overflow-hidden rounded-t-sm lg:h-28 lg:w-10">
                             <motion.div
-                                className="absolute inset-x-0 bottom-0 rounded-t-sm bg-gradient-to-t from-lime-600 to-yellow-500"
+                                className="absolute inset-x-0 bottom-0 rounded-t-sm bg-gradient-to-t from-brand-accent-dark to-brand-accent-light"
                                 style={{ height: bar.height, transformOrigin: "bottom" }}
                                 initial={{ scaleY: 0 }}
                                 animate={isInView ? { scaleY: 1 } : {}}
@@ -61,3 +61,4 @@ export default function DashboardMockup() {
         </motion.div>
     );
 }
+

@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
-/* ─── Ease constant ───────────────────────────────────────── */
+/* â”€â”€â”€ Ease constant â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Tech stack data ─────────────────────────────────────── */
+/* â”€â”€â”€ Tech stack data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 interface TechItem {
     name: string;
     icon: React.ReactNode;
@@ -106,7 +106,7 @@ const STACK: TechItem[] = [
     },
 ];
 
-/* ─── Tooltip Data ────────────────────────────────────────── */
+/* â”€â”€â”€ Tooltip Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const TOOLTIPS: Record<string, string> = {
     "Next.js": "Server-first React framework for SEO and performance",
     "TypeScript": "Strict type-checking for resilient code",
@@ -120,13 +120,13 @@ const TOOLTIPS: Record<string, string> = {
     "Postgres": "Robust relational database for complex data",
 };
 
-/* Individual card — muted by default, glows on hover */
+/* Individual card â€” muted by default, glows on hover */
 function TechCard({ name, icon, category }: TechItem) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div
-            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-lime-500/40 hover:bg-lime-500/5 hover:shadow-lime-500/10"
+            className="group/card relative mx-4 flex flex-shrink-0 cursor-default items-center gap-3 rounded-xl border border-white/[0.06] bg-neutral-900/40 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:shadow-brand-accent/10"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -146,7 +146,7 @@ function TechCard({ name, icon, category }: TechItem) {
             </AnimatePresence>
 
             {/* Icon */}
-            <span aria-hidden="true" className="text-zinc-600 transition-colors duration-300 group-hover/card:text-lime-400">
+            <span aria-hidden="true" className="text-zinc-600 transition-colors duration-300 group-hover/card:text-brand-accent-light">
                 {icon}
             </span>
             {/* Text */}
@@ -162,7 +162,7 @@ function TechCard({ name, icon, category }: TechItem) {
     );
 }
 
-/* ─── The Marquee component ───────────────────────────────── */
+/* â”€â”€â”€ The Marquee component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function TechStackMarquee() {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-60px" });
@@ -209,7 +209,7 @@ export default function TechStackMarquee() {
                     className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-black to-transparent"
                 />
 
-                {/* Track — duplicate the array for seamless loop */}
+                {/* Track â€” duplicate the array for seamless loop */}
                 <div className="flex overflow-hidden py-2">
                     <div className="tb-marquee-track flex">
                         {[...STACK, ...STACK].map((item, i) => (
@@ -231,3 +231,4 @@ export default function TechStackMarquee() {
         </section>
     );
 }
+

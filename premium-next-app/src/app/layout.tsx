@@ -7,7 +7,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/shared/JsonLd";
 import SmoothScroll from "@/components/shared/SmoothScroll";
-import ScrollTriggerCleanup from "@/components/shared/ScrollTriggerCleanup";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
 import CursorFollower from "@/components/shared/CursorFollowerWrapper";
 
@@ -73,7 +72,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <SmoothScroll />
-        <ScrollTriggerCleanup />
         <JsonLd />
         <div className="relative min-h-screen bg-[var(--surface-0)] w-full">
           <div className="relative w-full z-10 bg-[var(--surface-0)]">

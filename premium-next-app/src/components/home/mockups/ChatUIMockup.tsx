@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const USER_MESSAGE = "Analyze our team's workflow for automation opportunities.";
 const AI_RESPONSE = "I've identified 3 automation opportunities that could save 12 hours per week.";
 const AI_WORDS = AI_RESPONSE.split(" ");
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Sub-components ─────────────────────────────────────── */
+/* â”€â”€â”€ Sub-components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function TypingDots() {
     return (
         <div className="flex items-center gap-1 px-3 py-2">
@@ -31,14 +31,14 @@ function TypingDots() {
     );
 }
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ChatUIMockup() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
     const [phase, setPhase] = useState<"idle" | "typing" | "response">("idle");
     const [wordIndex, setWordIndex] = useState(0);
 
-    /* Sequence: idle → typing dots → word-by-word response */
+    /* Sequence: idle â†’ typing dots â†’ word-by-word response */
     useEffect(() => {
         if (!isInView) return;
         const typingTimer = setTimeout(() => setPhase("typing"), 600);
@@ -67,7 +67,7 @@ export default function ChatUIMockup() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
-                className="ml-auto max-w-[85%] rounded-xl rounded-br-sm border border-lime-500/20 bg-lime-600/15 px-3 py-2"
+                className="ml-auto max-w-[85%] rounded-xl rounded-br-sm border border-brand-accent/20 bg-brand-accent-dark/15 px-3 py-2"
             >
                 <p className="text-[11px] leading-relaxed text-zinc-300">{USER_MESSAGE}</p>
             </motion.div>
@@ -98,7 +98,7 @@ export default function ChatUIMockup() {
                             <p className="text-[11px] leading-relaxed text-zinc-300">
                                 {AI_WORDS.slice(0, wordIndex).join(" ")}
                                 {wordIndex < AI_WORDS.length && (
-                                    <span className="ml-0.5 inline-block h-3 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-lime-400" />
+                                    <span className="ml-0.5 inline-block h-3 w-[2px] animate-[cursor-blink_1s_step-end_infinite] bg-brand-accent-light" />
                                 )}
                             </p>
                         </motion.div>
@@ -108,3 +108,4 @@ export default function ChatUIMockup() {
         </motion.div>
     );
 }
+

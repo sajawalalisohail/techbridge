@@ -1,14 +1,14 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { wordContainerVariants, wordVariants } from "@/components/shared/headingAnimations";
 
-/* ─── Data ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const TESTIMONIALS = [
     {
         quote:
-            "TechBridge didn't just build our platform — they re-architected the way we think about scale. Our document processing pipeline went from a fragile monolith to a resilient, multi-tenant system that handles ten thousand users without breaking a sweat.",
+            "TechBridge didn't just build our platform â€” they re-architected the way we think about scale. Our document processing pipeline went from a fragile monolith to a resilient, multi-tenant system that handles ten thousand users without breaking a sweat.",
         name: "Sarah Donovan",
         title: "CTO, NextLex",
         initials: "SD",
@@ -22,14 +22,14 @@ const TESTIMONIALS = [
     },
     {
         quote:
-            "After 35 years of operating on paper and phone calls, TechBridge modernized our entire digital footprint without a single day of downtime. Their engineering team understood our industry from day one — no hand-holding required.",
+            "After 35 years of operating on paper and phone calls, TechBridge modernized our entire digital footprint without a single day of downtime. Their engineering team understood our industry from day one â€” no hand-holding required.",
         name: "Ali Wali",
         title: "Managing Director, AliWali Trading Co.",
         initials: "AW",
     },
 ];
 
-/* ─── Animation ──────────────────────────────────────────── */
+/* â”€â”€â”€ Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const slideVariants = {
@@ -49,7 +49,7 @@ const slideVariants = {
     }),
 };
 
-/* ─── Component ──────────────────────────────────────────── */
+/* â”€â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function Testimonials() {
     const ref = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -92,12 +92,12 @@ export default function Testimonials() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 50% 50%, rgba(132,204,22,0.04) 0%, rgba(132,204,22,0) 60%)",
+                        "radial-gradient(ellipse at 50% 50%, rgba(var(--brand-accent-rgb), 0.04) 0%, rgba(var(--brand-accent-rgb), 0) 60%)",
                 }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
-                {/* ── Section Header ── */}
+                {/* â”€â”€ Section Header â”€â”€ */}
                 <motion.div
                     ref={headerRef}
                     initial={{ opacity: 0, y: 24 }}
@@ -106,9 +106,9 @@ export default function Testimonials() {
                     className="mb-14 text-center"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                         from actual clients
-                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                     </span>
                     <motion.h2
                         variants={wordContainerVariants}
@@ -126,14 +126,14 @@ export default function Testimonials() {
                     </motion.h2>
                 </motion.div>
 
-                {/* ── Carousel ── */}
+                {/* â”€â”€ Carousel â”€â”€ */}
                 <motion.div
                     initial={{ opacity: 0, y: 32 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
                     className="mx-auto max-w-3xl"
                 >
-                    {/* Card container — fixed height for smooth transitions */}
+                    {/* Card container â€” fixed height for smooth transitions */}
                     <div className="relative min-h-[380px] sm:min-h-[320px]">
                         <AnimatePresence mode="wait" custom={direction}>
                             <motion.div
@@ -149,7 +149,7 @@ export default function Testimonials() {
                                     {/* Decorative quote mark */}
                                     <span
                                         aria-hidden="true"
-                                        className="absolute left-8 top-6 select-none font-serif text-6xl leading-none text-lime-500/20 sm:left-12 sm:top-8 sm:text-7xl"
+                                        className="absolute left-8 top-6 select-none font-serif text-6xl leading-none text-brand-accent/20 sm:left-12 sm:top-8 sm:text-7xl"
                                     >
                                         &ldquo;
                                     </span>
@@ -161,7 +161,7 @@ export default function Testimonials() {
 
                                     {/* Attribution */}
                                     <div className="relative z-10 mt-8 flex items-center gap-4">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-lime-500/20 bg-lime-950/60 font-mono text-xs font-semibold text-lime-300">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-accent/20 bg-brand-accent-deep/60 font-mono text-xs font-semibold text-brand-accent-light">
                                             {testimonial.initials}
                                         </div>
                                         <div>
@@ -178,7 +178,7 @@ export default function Testimonials() {
                         </AnimatePresence>
                     </div>
 
-                    {/* ── Dot Navigation ── */}
+                    {/* â”€â”€ Dot Navigation â”€â”€ */}
                     <div className="mt-8 flex items-center justify-center gap-2.5">
                         {TESTIMONIALS.map((_, i) => (
                             <button
@@ -186,8 +186,8 @@ export default function Testimonials() {
                                 onClick={() => paginate(i)}
                                 aria-label={`Go to testimonial ${i + 1}`}
                                 className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex
-                                        ? "w-6 bg-lime-400"
-                                        : "w-1.5 bg-zinc-700 hover:bg-lime-500/5"
+                                        ? "w-6 bg-brand-accent-light"
+                                        : "w-1.5 bg-zinc-700 hover:bg-brand-accent/5"
                                     }`}
                             />
                         ))}
@@ -197,3 +197,4 @@ export default function Testimonials() {
         </section>
     );
 }
+

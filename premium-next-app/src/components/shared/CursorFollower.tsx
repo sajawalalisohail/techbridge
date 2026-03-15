@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
-/* ─── Spring configs ─────────────────────────────────────── */
+/* â”€â”€â”€ Spring configs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DOT_SPRING = { stiffness: 560, damping: 28, mass: 0.1 };
 const RING_SPRING = { stiffness: 220, damping: 18, mass: 0.1 };
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function CursorFollower() {
     const [isHovering, setIsHovering] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -34,7 +34,7 @@ export default function CursorFollower() {
     const ringY = useSpring(mouseY, RING_SPRING);
 
     useEffect(() => {
-        /* Touch device or reduced motion → bail */
+        /* Touch device or reduced motion â†’ bail */
         const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
         const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (isTouch || prefersReduced) return;
@@ -97,7 +97,7 @@ export default function CursorFollower() {
                 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
             >
-                <div className="h-full w-full rounded-full border border-lime-400/40" />
+                <div className="h-full w-full rounded-full border border-brand-accent-light/40" />
             </motion.div>
 
             {/* Inner dot */}
@@ -117,8 +117,9 @@ export default function CursorFollower() {
                 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
             >
-                <div className="h-full w-full rounded-full bg-lime-400" />
+                <div className="h-full w-full rounded-full bg-brand-accent-light" />
             </motion.div>
         </>
     );
 }
+

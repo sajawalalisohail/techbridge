@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
@@ -67,11 +67,11 @@ export default function Team() {
             <div className="mx-auto max-w-4xl px-6 text-center lg:px-16">
                 {/* Eyebrow */}
                 <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
-                    <span className="h-px w-4 bg-lime-500/40" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                    <span className="h-px w-4 bg-brand-accent/40" />
                     the team
-                    <span className="h-px w-4 bg-lime-500/40" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
+                    <span className="h-px w-4 bg-brand-accent/40" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                 </span>
 
                 <h2 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">
@@ -90,10 +90,10 @@ export default function Team() {
                             style={{ opacity: 0 }}
                         >
                             {/* Circular headshot */}
-                            <div className="relative h-36 w-36 overflow-hidden rounded-full border-2 border-white/10 transition-all duration-500 hover:border-lime-500/40 hover:shadow-[0_0_30px_rgba(132,204,22,0.15)] lg:h-44 lg:w-44">
+                            <div className="relative h-36 w-36 overflow-hidden rounded-full border-2 border-white/10 transition-all duration-500 hover:border-brand-accent/40 hover:shadow-[0_0_30px_rgba(var(--brand-accent-rgb), 0.15)] lg:h-44 lg:w-44">
                                 <Image
                                     src={member.image}
-                                    alt={`${member.name} — ${member.role}`}
+                                    alt={`${member.name} â€” ${member.role}`}
                                     width={240}
                                     height={240}
                                     className="h-full w-full object-cover"
@@ -103,7 +103,7 @@ export default function Team() {
                             <h3 className="mt-5 text-lg font-semibold tracking-tight text-white">
                                 {member.name}
                             </h3>
-                            <p className="mt-1 font-mono text-xs font-medium uppercase tracking-widest text-lime-400">
+                            <p className="mt-1 font-mono text-xs font-medium uppercase tracking-widest text-brand-accent-light">
                                 {member.role}
                             </p>
                             <p className="mt-3 max-w-xs text-sm leading-relaxed text-zinc-400">
@@ -115,7 +115,7 @@ export default function Team() {
                                     href={member.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="mt-4 inline-flex items-center gap-1.5 text-xs text-zinc-500 transition-colors duration-200 hover:text-lime-300"
+                                    className="mt-4 inline-flex items-center gap-1.5 text-xs text-zinc-500 transition-colors duration-200 hover:text-brand-accent-light"
                                     aria-label={`${member.name} on LinkedIn`}
                                 >
                                     <Linkedin size={14} />
@@ -129,3 +129,4 @@ export default function Team() {
         </section>
     );
 }
+

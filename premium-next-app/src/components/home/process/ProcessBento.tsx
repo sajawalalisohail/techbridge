@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useRef, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { PHASES, EASE, SECTION_HEADER } from "./processData";
 import type { Phase } from "./processData";
 
-/* ─── Animation variants ─────────────────────────────────── */
+/* â”€â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const containerVariants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.12 } },
@@ -16,7 +16,7 @@ const cardVariants = {
     show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
-/* ─── Tilt Card ──────────────────────────────────────────── */
+/* â”€â”€â”€ Tilt Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function BentoCard({ phase, index }: { phase: Phase; index: number }) {
     const cardRef = useRef<HTMLDivElement>(null);
     const Icon = phase.icon;
@@ -53,7 +53,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-[transform,border-color] duration-300 ease-out hover:border-lime-500/40"
+                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-[transform,border-color] duration-300 ease-out hover:border-brand-accent/40"
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* Border gradient pseudo-effect */}
@@ -61,28 +61,28 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
-                        background: "linear-gradient(135deg, rgba(132,204,22,0.15) 0%, transparent 50%, rgba(163,230,53,0.1) 100%)",
+                        background: "linear-gradient(135deg, rgba(var(--brand-accent-rgb), 0.15) 0%, transparent 50%, rgba(var(--brand-accent-light-rgb), 0.1) 100%)",
                     }}
                 />
 
                 <div className="relative z-10 p-7 lg:p-8">
                     {/* Phase number + icon */}
                     <div className="mb-5 flex items-center justify-between">
-                        <span className="font-mono text-4xl font-bold leading-none tracking-tighter text-white/[0.08] select-none group-hover:text-lime-300 transition-colors duration-500">
+                        <span className="font-mono text-4xl font-bold leading-none tracking-tighter text-white/[0.08] select-none group-hover:text-brand-accent-light transition-colors duration-500">
                             {phase.number}
                         </span>
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-all duration-500 group-hover:border-lime-500/40 group-hover:bg-lime-500/5 group-hover:text-lime-300">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-all duration-500 group-hover:border-brand-accent/40 group-hover:bg-brand-accent/5 group-hover:text-brand-accent-light">
                             <Icon size={18} strokeWidth={1.5} />
                         </div>
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-3 text-xl font-semibold leading-snug text-white/90 group-hover:text-lime-300 transition-colors duration-500 lg:text-2xl">
+                    <h3 className="mb-3 text-xl font-semibold leading-snug text-white/90 group-hover:text-brand-accent-light transition-colors duration-500 lg:text-2xl">
                         {phase.label}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-lime-300 transition-colors duration-500">
+                    <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-brand-accent-light transition-colors duration-500">
                         {phase.description}
                     </p>
 
@@ -91,7 +91,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
                         {phase.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500 transition-colors duration-500 group-hover:border-lime-500/40 group-hover:text-lime-300"
+                                className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs text-zinc-500 transition-colors duration-500 group-hover:border-brand-accent/40 group-hover:text-brand-accent-light"
                             >
                                 {tag}
                             </span>
@@ -108,7 +108,7 @@ function BentoCard({ phase, index }: { phase: Phase; index: number }) {
     );
 }
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ProcessBento() {
     const sectionRef = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -131,11 +131,11 @@ export default function ProcessBento() {
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(101,163,13,0.03) 0%, rgba(101,163,13,0) 50%)" }}
+                style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(var(--brand-accent-dark-rgb), 0.03) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }}
             />
 
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
-                {/* ── Section Header ── */}
+                {/* â”€â”€ Section Header â”€â”€ */}
                 <motion.div
                     ref={headerRef}
                     initial={{ opacity: 0, y: 24 }}
@@ -144,12 +144,12 @@ export default function ProcessBento() {
                     className="mb-16 max-w-3xl lg:mb-20"
                 >
                     <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" /><span className="h-px w-4 bg-lime-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                         {SECTION_HEADER.eyebrow}
                     </span>
                     <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                         {SECTION_HEADER.heading}{" "}
-                        <span className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                             {SECTION_HEADER.headingAccent}
                         </span>
                     </h2>
@@ -158,7 +158,7 @@ export default function ProcessBento() {
                     </p>
                 </motion.div>
 
-                {/* ── Bento Grid ── */}
+                {/* â”€â”€ Bento Grid â”€â”€ */}
                 <motion.div
                     ref={gridRef}
                     variants={containerVariants}
@@ -174,3 +174,4 @@ export default function ProcessBento() {
         </section>
     );
 }
+

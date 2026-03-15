@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import {
@@ -14,12 +14,12 @@ import { PHASES, SECTION_HEADER } from "./processData";
 import type { Phase } from "./processData";
 import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 
-/* ─── Constants ─────────────────────────────────────────── */
+/* â”€â”€â”€ Constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const TOTAL_HEIGHT = "650vh";
 const HEADER_END = 0.08;
 const PHASE_DURATION = (1 - HEADER_END) / PHASES.length;
 
-/* ─── Scroll Helpers ────────────────────────────────────── */
+/* â”€â”€â”€ Scroll Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function getPhaseRange(index: number) {
     const start = HEADER_END + index * PHASE_DURATION;
     const end = start + PHASE_DURATION;
@@ -73,7 +73,7 @@ function useMockupAnimation(progress: MotionValue<number>, index: number) {
     return { opacity, y };
 }
 
-/* ─── Sub-components ────────────────────────────────────── */
+/* â”€â”€â”€ Sub-components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function ProgressDots({ activePhase }: { activePhase: number }) {
     return (
@@ -82,15 +82,15 @@ function ProgressDots({ activePhase }: { activePhase: number }) {
                 <div key={phase.number} className="flex items-center gap-2">
                     <span
                         className={`block h-2 w-2 rounded-full transition-all duration-500 ${i === activePhase
-                            ? "bg-lime-500 scale-125 shadow-[0_0_10px_rgba(132,204,22,0.6)]"
+                            ? "bg-brand-accent scale-125 shadow-[0_0_10px_rgba(var(--brand-accent-rgb), 0.6)]"
                             : i < activePhase
-                                ? "bg-lime-500/50"
+                                ? "bg-brand-accent/50"
                                 : "bg-white/10"
                             }`}
                     />
                     {i < PHASES.length - 1 && (
                         <span
-                            className={`block h-px w-6 transition-colors duration-500 ${i < activePhase ? "bg-lime-500/40" : "bg-white/5"
+                            className={`block h-px w-6 transition-colors duration-500 ${i < activePhase ? "bg-brand-accent/40" : "bg-white/5"
                                 }`}
                         />
                     )}
@@ -126,8 +126,8 @@ function StickyHeader({ progress, isInView }: { progress: MotionValue<number>; i
                         animate={isInView ? "show" : "hidden"}
                         className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                     >
-                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
-                        <span className="h-px w-4 bg-lime-500/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                        <span className="h-px w-4 bg-brand-accent/40" />
                         {SECTION_HEADER.eyebrow}
                     </motion.span>
                     <motion.h2
@@ -148,7 +148,7 @@ function StickyHeader({ progress, isInView }: { progress: MotionValue<number>; i
                         ))}
                         <motion.span
                             variants={slideFromLeftItem}
-                            className="bg-gradient-to-br from-lime-400 to-yellow-400 bg-clip-text text-transparent"
+                            className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent"
                             style={{ display: "inline-block" }}
                         >
                             {SECTION_HEADER.headingAccent}
@@ -195,7 +195,7 @@ function PhaseSlide({
         >
             <div className="mx-auto max-w-[90rem] px-6 lg:px-16 w-full">
                 <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-                    {/* ── Text side ── */}
+                    {/* â”€â”€ Text side â”€â”€ */}
                     <motion.div
                         style={{ opacity: text.opacity, y: text.y, willChange: "transform" }}
                         className="relative"
@@ -210,7 +210,7 @@ function PhaseSlide({
 
                         <div className="relative z-10">
                             {/* Icon */}
-                            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-lime-500/40 bg-lime-950/50 text-lime-400 shadow-[0_0_20px_rgba(132,204,22,0.15)]">
+                            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-brand-accent/40 bg-brand-accent-deep/50 text-brand-accent-light shadow-[0_0_20px_rgba(var(--brand-accent-rgb), 0.15)]">
                                 <Icon size={22} strokeWidth={1.5} />
                             </div>
 
@@ -238,7 +238,7 @@ function PhaseSlide({
                         </div>
                     </motion.div>
 
-                    {/* ── Mockup side ── */}
+                    {/* â”€â”€ Mockup side â”€â”€ */}
                     <motion.div
                         style={{ opacity: mockup.opacity, y: mockup.y, willChange: "transform" }}
                         className="max-h-[50vh] overflow-hidden"
@@ -251,7 +251,7 @@ function PhaseSlide({
     );
 }
 
-/* ─── Main Export ────────────────────────────────────────── */
+/* â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ProcessScroll() {
     const sectionRef = useRef<HTMLElement>(null);
     const isHeadingInView = useInView(sectionRef, { once: true, margin: "-80px" });
@@ -267,7 +267,7 @@ export default function ProcessScroll() {
         restDelta: 0.001,
     });
 
-    /* ── Active phase tracking ── */
+    /* â”€â”€ Active phase tracking â”€â”€ */
     const [activePhase, setActivePhase] = useState(-1);
 
     useMotionValueEvent(smoothProgress, "change", (v) => {
@@ -296,7 +296,7 @@ export default function ProcessScroll() {
                 className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
             />
 
-            {/* ── Sticky viewport ── */}
+            {/* â”€â”€ Sticky viewport â”€â”€ */}
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 {/* Ambient glow */}
                 <div
@@ -304,7 +304,7 @@ export default function ProcessScroll() {
                     className="pointer-events-none absolute inset-0"
                     style={{
                         background:
-                            "radial-gradient(ellipse at 20% 40%, rgba(101,163,13,0.04) 0%, rgba(101,163,13,0) 55%), radial-gradient(ellipse at 80% 60%, rgba(132,204,22,0.03) 0%, rgba(132,204,22,0) 50%)",
+                            "radial-gradient(ellipse at 20% 40%, rgba(var(--brand-accent-dark-rgb), 0.04) 0%, rgba(var(--brand-accent-dark-rgb), 0) 55%), radial-gradient(ellipse at 80% 60%, rgba(var(--brand-accent-rgb), 0.03) 0%, rgba(var(--brand-accent-rgb), 0) 50%)",
                     }}
                 />
 
@@ -328,3 +328,4 @@ export default function ProcessScroll() {
         </section>
     );
 }
+

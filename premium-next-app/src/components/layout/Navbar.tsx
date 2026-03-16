@@ -450,29 +450,41 @@ export default function Navbar() {
                                                 : undefined
                                         }
                                     >
-                                        <button
-                                            type="button"
-                                            aria-expanded={servicesMenuOpen}
-                                            aria-controls="services-mega-menu"
-                                            onFocus={() => openServicesMenu("click")}
-                                            onClick={() => {
-                                                if (servicesMenuOpen) closeServicesMenu();
-                                                else openServicesMenu("click");
-                                            }}
-                                            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition-all duration-300 ${
+                                        <span
+                                            className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm transition-all duration-300 ${
                                                 servicesMenuOpen || isServicesActive
                                                     ? "bg-white/[0.07] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
                                                     : "text-zinc-400 hover:bg-white/[0.04] hover:text-brand-accent-light"
                                             }`}
                                         >
-                                            Services
-                                            <ChevronDown
-                                                size={14}
-                                                className={`transition-transform duration-300 ${
-                                                    servicesMenuOpen ? "rotate-180" : ""
-                                                }`}
-                                            />
-                                        </button>
+                                            <Link
+                                                href="/services"
+                                                onClick={closeServicesMenu}
+                                                className="transition-colors duration-200"
+                                            >
+                                                Services
+                                            </Link>
+                                            <button
+                                                type="button"
+                                                aria-expanded={servicesMenuOpen}
+                                                aria-controls="services-mega-menu"
+                                                onFocus={() => openServicesMenu("click")}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    if (servicesMenuOpen) closeServicesMenu();
+                                                    else openServicesMenu("click");
+                                                }}
+                                                className="rounded-sm p-0.5 transition-colors duration-200 hover:text-brand-accent-light"
+                                                aria-label="Toggle services menu"
+                                            >
+                                                <ChevronDown
+                                                    size={14}
+                                                    className={`transition-transform duration-300 ${
+                                                        servicesMenuOpen ? "rotate-180" : ""
+                                                    }`}
+                                                />
+                                            </button>
+                                        </span>
                                     </li>
 
                                     {NAV_LINKS.map((link) => {
@@ -557,7 +569,7 @@ export default function Navbar() {
                                     onMouseEnter={clearMenuTimers}
                                     onMouseLeave={scheduleHoverClose}
                                 >
-                                    <div className="mx-auto max-w-[80rem]">
+                                    <div className="mx-auto max-w-[68rem]">
                                         <ServicesMegaPanel closeMenu={closeServicesMenu} />
                                     </div>
                                 </motion.div>

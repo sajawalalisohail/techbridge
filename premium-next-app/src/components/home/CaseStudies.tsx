@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useRef, useEffect, useLayoutEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -10,17 +10,29 @@ import { getHomepageCaseStudies, type CaseStudy } from "@/data/case-studies";
 
 const HOMEPAGE_STUDIES = getHomepageCaseStudies();
 
-/* â”€â”€â”€ Single Card â”€â”€â”€â”€â”€â”€ */
-function StudyCard({ study }: { study: CaseStudy }) {
+/* ——— Single Card ——— */
+function StudyCard({ study, isActive }: { study: CaseStudy; isActive: boolean }) {
     return (
         <article
-            className="case-card group relative flex h-[28rem] w-full flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5 sm:w-[22rem] md:w-[26rem] lg:w-[28rem]"
-            style={{ opacity: 0, transform: "translateY(40px)" }}
+            className={`case-card group relative flex h-[28rem] w-full flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 sm:w-[22rem] md:w-[26rem] lg:w-[28rem] ${
+                isActive
+                    ? "border-brand-accent/30 scale-[1.02]"
+                    : "border-white/8 lg:opacity-70 hover:border-brand-accent/40 hover:bg-brand-accent/5"
+            }`}
+            style={{
+                opacity: 0,
+                transform: "translateY(40px)",
+                boxShadow: isActive
+                    ? "0 0 40px rgba(var(--brand-accent-rgb), 0.25), 0 0 80px rgba(var(--brand-accent-rgb), 0.08)"
+                    : "none",
+            }}
         >
             {/* Accent glow on hover */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+                    isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                }`}
                 style={{
                     background: `radial-gradient(circle at 100% 0%, rgba(${study.accentColor},0.18) 0%, rgba(${study.accentColor},0) 55%)`,
                 }}
@@ -59,14 +71,36 @@ function StudyCard({ study }: { study: CaseStudy }) {
     );
 }
 
-/* â”€â”€â”€ Main Section â”€â”€â”€â”€â”€â”€ */
+/* ——— Main Section ——— */
 export default function CaseStudies() {
     const sectionRef = useRef<HTMLElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const [shouldInitAnimation, setShouldInitAnimation] = useState(false);
+    const [activeCardIndex, setActiveCardIndex] = useState(Math.floor(HOMEPAGE_STUDIES.length / 2));
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
+
+    const updateActiveCard = useCallback((track: HTMLDivElement) => {
+        const cards = Array.from(track.querySelectorAll<HTMLElement>(".case-card"));
+        if (!cards.length) return;
+
+        const viewportCenter = window.innerWidth / 2;
+        let closestIdx = 0;
+        let closestDist = Infinity;
+
+        cards.forEach((card, i) => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.left + rect.width / 2;
+            const dist = Math.abs(cardCenter - viewportCenter);
+            if (dist < closestDist) {
+                closestDist = dist;
+                closestIdx = i;
+            }
+        });
+
+        setActiveCardIndex(closestIdx);
+    }, []);
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -119,15 +153,19 @@ export default function CaseStudies() {
                 }
 
                 const viewportCenter = window.innerWidth / 2;
+
+                // Start: first card centered in viewport
+                const firstCard = cards[0];
+                const firstCardCenter = firstCard.offsetLeft + firstCard.offsetWidth / 2;
+                const startX = viewportCenter - firstCardCenter;
+
+                // End: last card centered in viewport
                 const lastCard = cards[cards.length - 1];
-                const lastCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
-                const naturalEndX = viewportCenter - lastCenter;
-                const endNudge = Math.max(72, Math.min(160, window.innerWidth * 0.12));
-                const maxLeftTravel = -(track.scrollWidth - window.innerWidth + gap + endNudge);
-                const startX = 0;
-                const endX = Math.max(naturalEndX, maxLeftTravel);
+                const lastCardCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
+                const endX = viewportCenter - lastCardCenter;
+
                 const travel = Math.abs(endX - startX);
-                const holdDistance = Math.max(window.innerWidth * 0.16, Math.min(220, travel * 0.32));
+                const holdDistance = Math.max(window.innerWidth * 0.08, Math.min(140, travel * 0.15));
 
                 return { startX, endX, travel, holdDistance };
             };
@@ -159,6 +197,9 @@ export default function CaseStudies() {
 
                             gsap.set(track, { x: baseX + settleOffset });
                             gsap.set(progress, { scaleX: self.progress });
+
+                            // Update active card based on center position
+                            updateActiveCard(track);
                         },
                         onRefresh: () => {
                             gsap.set(track, { x: getDesktopLayout().startX });
@@ -213,7 +254,7 @@ export default function CaseStudies() {
             matchMediaCleanup?.revert();
             ctx.revert();
         };
-    }, [shouldInitAnimation]);
+    }, [shouldInitAnimation, updateActiveCard]);
 
     return (
         <section
@@ -277,20 +318,9 @@ export default function CaseStudies() {
                 className="flex flex-wrap gap-6 px-6 pb-36 md:pb-28 lg:flex-nowrap lg:px-10 lg:pb-28"
                 style={{ willChange: "transform" }}
             >
-                {HOMEPAGE_STUDIES.map((study) => (
-                    <StudyCard key={study.slug} study={study} />
+                {HOMEPAGE_STUDIES.map((study, index) => (
+                    <StudyCard key={study.slug} study={study} isActive={index === activeCardIndex} />
                 ))}
-            </div>
-
-            {/* View all link */}
-            <div className="mx-auto max-w-[100rem] px-6 pb-8 text-center lg:px-10">
-                <Link
-                    href="/work"
-                    className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors duration-200 hover:text-brand-accent-light"
-                >
-                    View all projects
-                    <ArrowRight size={14} />
-                </Link>
             </div>
 
             {/* Progress bar (desktop only) */}

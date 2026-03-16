@@ -53,12 +53,12 @@ const SERVICES: ServiceCard[] = [
     {
         id: 2,
         icon: BrainCircuit,
-        eyebrow: "automation",
-        title: "AI Workflow Automation",
+        eyebrow: "growth engine",
+        title: "AI Powered Lead Generation",
         description:
-            "Your ops team is copy-pasting between six tabs. We replace that with one system that does it in seconds.",
+            "We build AI systems that find, qualify, and book sales calls on autopilot — so your team closes instead of chases.",
         accentColor: "radial-gradient(ellipse at 80% 50%, rgba(var(--brand-accent-light-rgb), 0.09) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
-        href: "/services#ai-automation",
+        href: "/services#ai-lead-generation",
         Mockup: ChatUIMockup,
     },
     {

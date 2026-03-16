@@ -1,5 +1,5 @@
 ﻿import Hero from "@/components/home/Hero";
-import Differentiators from "@/components/home/Differentiators";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
 import ProcessTimeline from "@/components/home/ProcessTimeline";
@@ -12,8 +12,8 @@ export default function Home() {
       {/* Hero is transparent, letting the sticky background show underneath */}
       <Hero />
 
-      {/* Addition 1: Differentiators strip */}
-      <Differentiators />
+      {/* Why us — animated advantage cards with gradient mesh */}
+      <WhyChooseUs />
 
       <TrustedBy />
       <Services />

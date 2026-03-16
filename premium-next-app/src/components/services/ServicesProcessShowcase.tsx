@@ -356,7 +356,7 @@ function EditorialProcessStep({
 }
 
 export default function ServicesProcessShowcase() {
-    const headerRef = useRef<HTMLElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
 
     return (

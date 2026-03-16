@@ -1,9 +1,9 @@
 ﻿"use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import {
     ArrowUpRight,
     CheckCircle2,
@@ -16,7 +16,6 @@ import {
     Shield,
     XCircle,
 } from "lucide-react";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
 import { blurFocusIn, slideFromLeft, slideFromRight, wordContainerVariants, wordVariants, ClipReveal } from "@/components/shared/headingAnimations";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
@@ -198,6 +197,9 @@ export default function AboutPage() {
     const storyRef = useRef<HTMLElement>(null);
     const teamRef = useRef<HTMLElement>(null);
     const timelineRef = useRef<HTMLElement>(null);
+    const timelineTrackRef = useRef<HTMLDivElement>(null);
+    const milestoneRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const [activeMilestones, setActiveMilestones] = useState<boolean[]>(new Array(TIMELINE.length).fill(false));
     const valuesRef = useRef<HTMLElement>(null);
     const diffRef = useRef<HTMLElement>(null);
     const securityRef = useRef<HTMLElement>(null);
@@ -209,6 +211,26 @@ export default function AboutPage() {
     const isValuesInView = useInView(valuesRef, { once: true, margin: "-80px" });
     const isDiffInView = useInView(diffRef, { once: true, margin: "-80px" });
     const isSecurityInView = useInView(securityRef, { once: true, margin: "-80px" });
+
+    /* Scroll-driven milestone progress line */
+    const { scrollYProgress: timelineProgress } = useScroll({
+        target: timelineTrackRef,
+        offset: ["start 80%", "end 60%"],
+    });
+
+    useMotionValueEvent(timelineProgress, "change", (latest) => {
+        const count = TIMELINE.length;
+        setActiveMilestones((prev) => {
+            const next = prev.map((_, i) => {
+                const threshold = (i + 0.5) / count;
+                return latest >= threshold;
+            });
+            if (next.every((v, i) => v === prev[i])) return prev;
+            return next;
+        });
+    });
+
+    const progressScaleY = useTransform(timelineProgress, [0, 1], [0, 1]);
 
     return (
         <div className="relative text-white">
@@ -354,26 +376,78 @@ export default function AboutPage() {
                                 ))}
                             </motion.h2>
                         </motion.div>
-                        <motion.div variants={staggerContainer} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="space-y-12 lg:space-y-16">
-                            {TIMELINE.map((event) => (
-                                <motion.div key={event.year} variants={childFade} className="flex flex-col gap-4 lg:flex-row lg:gap-12">
-                                    <div className="flex items-center gap-4 lg:w-32 lg:flex-shrink-0">
-                                        <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-neutral-900/80 font-mono text-lg font-bold text-white backdrop-blur-sm">{event.year.slice(-2)}</div>
-                                        <span className="font-mono text-sm font-semibold text-zinc-500 lg:hidden">{event.year}</span>
-                                    </div>
-                                    <div className="flex-1 rounded-2xl border border-white/8 bg-neutral-900/30 p-6 backdrop-blur-sm lg:p-8">
-                                        <p className="mb-1 hidden font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 lg:block">{event.year}</p>
-                                        <h3 className="mb-3 text-lg font-bold tracking-tight text-white">{event.title}</h3>
-                                        <p className="text-sm leading-relaxed text-zinc-400">{event.description}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </motion.div>
+
+                        {/* Timeline with progress line */}
+                        <div ref={timelineTrackRef} className="relative">
+                            {/* Vertical progress track (desktop only) */}
+                            <div className="pointer-events-none absolute left-7 top-0 hidden h-full w-px lg:block" aria-hidden="true">
+                                {/* Background track */}
+                                <div className="h-full w-full bg-white/10" />
+                                {/* Animated fill */}
+                                <motion.div
+                                    className="absolute left-0 top-0 w-full origin-top"
+                                    style={{
+                                        scaleY: progressScaleY,
+                                        height: "100%",
+                                        background: "linear-gradient(180deg, var(--brand-accent) 0%, var(--brand-accent-light) 100%)",
+                                        boxShadow: "0 0 12px rgba(var(--brand-accent-rgb), 0.5), 0 0 4px rgba(var(--brand-accent-light-rgb), 0.3)",
+                                    }}
+                                />
+                            </div>
+
+                            <motion.div variants={staggerContainer} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="space-y-12 lg:space-y-16">
+                                {TIMELINE.map((event, index) => {
+                                    const isActive = activeMilestones[index];
+                                    return (
+                                        <motion.div
+                                            key={event.year}
+                                            variants={childFade}
+                                            ref={(el) => { milestoneRefs.current[index] = el; }}
+                                            className="flex flex-col gap-4 lg:flex-row lg:gap-12"
+                                        >
+                                            <div className="flex items-center gap-4 lg:w-32 lg:flex-shrink-0">
+                                                <div
+                                                    className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-xl font-mono text-lg font-bold backdrop-blur-sm transition-all duration-700 ${
+                                                        isActive
+                                                            ? "border-brand-accent/60 bg-brand-accent/10 text-brand-accent-light"
+                                                            : "border border-white/10 bg-neutral-900/80 text-white"
+                                                    }`}
+                                                    style={{
+                                                        boxShadow: isActive
+                                                            ? "0 0 20px rgba(var(--brand-accent-rgb), 0.35), inset 0 0 12px rgba(var(--brand-accent-rgb), 0.1)"
+                                                            : "none",
+                                                        borderWidth: "1px",
+                                                        borderStyle: "solid",
+                                                    }}
+                                                >
+                                                    {event.year.slice(-2)}
+                                                </div>
+                                                <span className="font-mono text-sm font-semibold text-zinc-500 lg:hidden">{event.year}</span>
+                                            </div>
+                                            <div
+                                                className={`flex-1 rounded-2xl p-6 backdrop-blur-sm transition-all duration-700 lg:p-8 ${
+                                                    isActive
+                                                        ? "border border-brand-accent/40 bg-brand-accent/5"
+                                                        : "border border-white/8 bg-neutral-900/30"
+                                                }`}
+                                                style={{
+                                                    boxShadow: isActive
+                                                        ? "0 0 30px rgba(var(--brand-accent-rgb), 0.15), 0 0 60px rgba(var(--brand-accent-rgb), 0.05)"
+                                                        : "none",
+                                                }}
+                                            >
+                                                <p className="mb-1 hidden font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600 lg:block">{event.year}</p>
+                                                <h3 className="mb-3 text-lg font-bold tracking-tight text-white">{event.title}</h3>
+                                                <p className="text-sm leading-relaxed text-zinc-400">{event.description}</p>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </motion.div>
+                        </div>
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
-                <WhyChooseUs />
                 <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={valuesRef} className="py-24 lg:py-32">

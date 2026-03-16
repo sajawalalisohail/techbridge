@@ -218,7 +218,7 @@ export default function TechStackMarquee() {
             </motion.div>
 
             {/* Hairline bottom */}
-            <div className="mx-auto mt-12 max-w-7xl px-6 lg:px-12">
+            <div className="mx-auto mt-12 max-w-[100rem] px-6 lg:px-10">
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
         </section>

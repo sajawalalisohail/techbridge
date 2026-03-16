@@ -213,15 +213,15 @@ export default function AboutPage() {
             <div className="relative z-10 min-h-screen overflow-hidden">
                 <section ref={heroRef} className="relative flex min-h-[55vh] items-center overflow-hidden border-b border-white/5">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%)" }} />
-                    <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
-                        <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                    <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-32 lg:px-10">
+                        <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                             <span className="h-px w-4 bg-brand-accent/40" />
                             about us
                         </motion.span>
                         <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
                             We&apos;re engineers.{" "}
-                            <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                                 Not an agency wearing a tech hat.
                             </span>
                         </motion.h1>
@@ -232,12 +232,12 @@ export default function AboutPage() {
                 </section>
 
                 <section ref={storyRef} className="relative py-24 lg:py-32">
-                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:gap-20 lg:px-12">
+                    <div className="mx-auto grid max-w-[100rem] grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isStoryInView ? "show" : "hidden"}>
                             <FounderCard />
                         </motion.div>
                         <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isStoryInView ? "show" : "hidden"} className="flex flex-col justify-center">
-                            <span className="mb-4 text-xs font-semibold uppercase tracking-widest text-zinc-600">the short version</span>
+                            <span className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">the short version</span>
                             <motion.h2
                                 variants={slideFromLeft}
                                 initial="hidden"
@@ -264,12 +264,12 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={teamRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 who builds your system
                             </span>
@@ -332,12 +332,12 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={timelineRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTimelineInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />Milestones</span>
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />Milestones</span>
                             <motion.h2
                                 variants={wordContainerVariants}
                                 initial="hidden"
@@ -370,14 +370,14 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
                 <WhyChooseUs />
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={valuesRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isValuesInView ? "show" : "hidden"} className="mb-16">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />what we won&apos;t compromise</span>
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />what we won&apos;t compromise</span>
                             <motion.h2
                                 variants={blurFocusIn()}
                                 initial="hidden"
@@ -402,12 +402,12 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={diffRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isDiffInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />honest comparison</span>
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />honest comparison</span>
                             <motion.h2
                                 variants={slideFromLeft}
                                 initial="hidden"
@@ -434,12 +434,12 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={securityRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isSecurityInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />security</span>
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"><span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />security</span>
                             <motion.h2
                                 variants={slideFromRight}
                                 initial="hidden"
@@ -464,15 +464,15 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 lg:px-12"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
                             <div className="max-w-xl">
                                 <ClipReveal>
                                     <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                                        Ready to talk to the people who&apos;ll <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">actually write your code?</span>
+                                        Ready to talk to the people who&apos;ll <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">actually write your code?</span>
                                     </h2>
                                 </ClipReveal>
                                 <p className="mt-4 text-base leading-relaxed text-zinc-400">30 minutes. No sales pitch. Just the engineer who&apos;ll architect your system.</p>

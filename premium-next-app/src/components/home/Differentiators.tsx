@@ -19,7 +19,7 @@ export default function Differentiators() {
 
     return (
         <section ref={ref} className="relative py-16 lg:py-20">
-            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
+            <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                 {/* Eyebrow */}
                 <motion.span
                     initial={{ opacity: 0, y: 16 }}
@@ -33,7 +33,7 @@ export default function Differentiators() {
                 </motion.span>
 
                 {/* 4-column strip */}
-                <div className="grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-6">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
                     {DIFFERENTIATORS.map((item, index) => {
                         const Icon = item.icon;
                         return (

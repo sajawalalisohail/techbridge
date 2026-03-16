@@ -18,7 +18,7 @@ export default function ProcessTimeline() {
 
     return (
         <section ref={ref} className="relative py-16 lg:py-20">
-            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
+            <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                 {/* Eyebrow */}
                 <motion.span
                     initial={{ opacity: 0, y: 16 }}

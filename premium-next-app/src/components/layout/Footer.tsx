@@ -104,7 +104,7 @@ export default function Footer() {
 
             {/* The actual footer sits fixed at the bottom behind the page content */}
             <footer ref={footerRef} className="fixed bottom-0 left-0 z-[0] w-full bg-[#030303] pt-20 pb-10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-                <div className="mx-auto max-w-7xl px-6 lg:px-16">
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-16">
                     {/* Top hairline */}
                     <div className="mb-16 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
 

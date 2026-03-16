@@ -87,7 +87,7 @@ export default function Navbar() {
                                 }}
                             />
 
-                            <div className="relative z-10 mx-auto flex w-full items-center justify-center py-2.5 px-12 sm:px-16">
+                            <div className="relative z-10 mx-auto flex w-full items-center justify-center py-2.5 px-6 sm:px-12">
                                 <p className="text-center text-sm font-medium text-zinc-300">
                                     Need a website fast? Custom-coded and live in 24 hours.{" "}
                                     <Link href="/websites" className="text-white hover:text-brand-accent-light underline underline-offset-4 transition-colors">
@@ -178,7 +178,7 @@ export default function Navbar() {
 
                             {/* Mobile hamburger */}
                             <button
-                                className="md:hidden flex flex-col gap-1.5 p-2"
+                                className="md:hidden flex flex-col gap-1.5 p-3"
                                 onClick={() => setMobileOpen((v) => !v)}
                                 aria-label="Toggle menu"
                                 aria-expanded={mobileOpen}

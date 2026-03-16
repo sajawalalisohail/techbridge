@@ -1345,7 +1345,7 @@ export default function WebsitesPage() {
     return (
         <div
             className="website-glow-shell relative z-10 min-h-screen overflow-hidden rounded-none border border-brand-accent/20"
-            style={{ animation: "accent-pulse 4s ease-in-out infinite" }}
+            style={{ animation: "accent-pulse 6s ease-in-out infinite" }}
         >
             {/* Full-bleed ambient glows -- inline position overrides .website-glow-shell > * { position: relative } */}
             <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-brand-accent-dark/5 to-transparent" />

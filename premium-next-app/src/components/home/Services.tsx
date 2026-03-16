@@ -261,7 +261,7 @@ export default function Services() {
         <section
             id="services"
             ref={ref}
-            className="relative overflow-hidden pb-16 pt-24 lg:pb-20 lg:pt-32 scroll-mt-24"
+            className="relative overflow-hidden py-24 lg:py-32 scroll-mt-24"
         >
             {/* Section ambient glow */}
             <div
@@ -274,7 +274,7 @@ export default function Services() {
                 style={{ background: "radial-gradient(ellipse at 100% 30%, rgba(var(--brand-accent-rgb), 0.03) 0%, rgba(var(--brand-accent-rgb), 0) 50%)" }}
             />
 
-            <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
+            <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                 {/* â”€â”€ Section Header â”€â”€ */}
                 <div className="mb-16 max-w-3xl lg:mb-20">
                     <motion.span
@@ -290,7 +290,7 @@ export default function Services() {
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
                         variants={fadeUp(0.06)}
-                        className="max-w-[13ch] text-4xl font-bold leading-tight tracking-tight text-white lg:max-w-[16ch] lg:text-6xl xl:max-w-none xl:text-7xl xl:whitespace-nowrap"
+                        className="max-w-[13ch] text-4xl font-bold leading-tight tracking-tight text-white lg:max-w-[16ch] lg:text-5xl xl:max-w-none xl:text-6xl xl:whitespace-nowrap"
                     >
                         Six things we&apos;re good at.
                     </motion.h2>

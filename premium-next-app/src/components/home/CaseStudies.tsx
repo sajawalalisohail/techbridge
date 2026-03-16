@@ -14,7 +14,7 @@ const HOMEPAGE_STUDIES = getHomepageCaseStudies();
 function StudyCard({ study }: { study: CaseStudy }) {
     return (
         <article
-            className="case-card group relative flex h-[28rem] w-[22rem] flex-shrink-0 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5 sm:w-[26rem] lg:w-[28rem]"
+            className="case-card group relative flex h-[28rem] w-full flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5 sm:w-[22rem] md:w-[26rem] lg:w-[28rem]"
             style={{ opacity: 0, transform: "translateY(40px)" }}
         >
             {/* Accent glow on hover */}
@@ -232,7 +232,7 @@ export default function CaseStudies() {
             />
 
             {/* Header */}
-            <div className="mx-auto max-w-[90rem] px-6 pt-12 lg:px-16 lg:pt-16">
+            <div className="mx-auto max-w-[100rem] px-6 pt-20 lg:px-10 lg:pt-24">
                 <div ref={headerRef} className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-3xl">
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
@@ -244,7 +244,7 @@ export default function CaseStudies() {
                             variants={slideFromLeftContainer}
                             initial="hidden"
                             animate={isHeaderInView ? "show" : "hidden"}
-                            className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl"
+                            className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
                             style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                         >
                             {splitWords("Real clients. Real numbers.").map((word, index) => (
@@ -274,7 +274,7 @@ export default function CaseStudies() {
             {/* Horizontal scroll track */}
             <div
                 ref={trackRef}
-                className="flex flex-wrap gap-6 px-6 pb-36 md:pb-28 lg:flex-nowrap lg:px-16 lg:pb-28"
+                className="flex flex-wrap gap-6 px-6 pb-36 md:pb-28 lg:flex-nowrap lg:px-10 lg:pb-28"
                 style={{ willChange: "transform" }}
             >
                 {HOMEPAGE_STUDIES.map((study) => (
@@ -283,12 +283,12 @@ export default function CaseStudies() {
             </div>
 
             {/* View all link */}
-            <div className="mx-auto max-w-[90rem] px-6 pb-8 text-center lg:px-16">
+            <div className="mx-auto max-w-[100rem] px-6 pb-8 text-center lg:px-10">
                 <Link
                     href="/work"
                     className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors duration-200 hover:text-brand-accent-light"
                 >
-                    View all 13 projects
+                    View all projects
                     <ArrowRight size={14} />
                 </Link>
             </div>

@@ -6,13 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 
-const ctaGlow = `
-  @keyframes cta-pulse {
-    0%, 100% { opacity: 0.55; transform: scale(1); }
-    50%       { opacity: 0.85; transform: scale(1.06); }
-  }
-  .cta-glow { animation: cta-pulse 5s ease-in-out infinite; }
-`;
+// cta-pulse keyframe and .cta-glow class are defined in globals.css
 
 export default function CTA() {
     const ref = useRef<HTMLElement>(null);
@@ -20,13 +14,11 @@ export default function CTA() {
 
     return (
         <>
-            <style dangerouslySetInnerHTML={{ __html: ctaGlow }} />
-
             <section
                 id="cta"
                 ref={ref}
                 /* z-10 + solid bg: covers the footer behind it until scroll reveals it */
-                className="relative z-10 mt-10 overflow-hidden py-20 lg:mt-16 lg:py-28"
+                className="relative z-10 mt-10 overflow-hidden py-24 lg:mt-16 lg:py-32"
             >
                 {/* â”€â”€ Subtle Grain Texture Overlay â”€â”€ */}
                 <div
@@ -100,7 +92,7 @@ export default function CTA() {
                         ))}
                         <motion.span
                             variants={slideFromLeftItem}
-                            className="bg-gradient-to-r from-brand-accent-light via-brand-accent-light to-brand-accent-light bg-clip-text text-transparent"
+                            className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent"
                             style={{ display: "inline-block" }}
                         >
                             Start Building.

@@ -59,13 +59,13 @@ export default function InsightsPage() {
                         style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 70%)" }}
                     />
 
-                    <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-12">
+                    <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-28 lg:px-10">
                         <motion.div
                             variants={fadeUp(0)}
                             initial="hidden"
                             animate={isHeroInView ? "show" : "hidden"}
                         >
-                            <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 Engineering Insights
                             </span>
@@ -78,7 +78,7 @@ export default function InsightsPage() {
                             className="text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
                         >
                             Insights{" "}
-                            <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                                 from the Build.
                             </span>
                         </motion.h1>
@@ -97,7 +97,7 @@ export default function InsightsPage() {
 
                 {/* â”€â”€ Article Grid â”€â”€ */}
                 <section ref={gridRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div
                             variants={staggerContainer}
                             initial="hidden"

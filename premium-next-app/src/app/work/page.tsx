@@ -50,7 +50,7 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
 
 function LeadProject({ project }: { project: CaseStudy }) {
     return (
-        <article className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950/70 p-8 backdrop-blur-sm lg:p-10">
+        <article className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950/70 p-8 backdrop-blur-sm lg:p-10">
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
@@ -129,7 +129,7 @@ function LeadProject({ project }: { project: CaseStudy }) {
 
 function ProjectCard({ project }: { project: CaseStudy }) {
     return (
-        <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5">
+        <article className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5">
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -284,7 +284,7 @@ export default function WorkPage() {
                                 "radial-gradient(ellipse at 72% 28%, rgba(var(--brand-accent-rgb), 0.10) 0%, rgba(var(--brand-accent-rgb), 0) 55%), radial-gradient(circle at 0% 100%, rgba(var(--brand-accent-dark-rgb), 0.08) 0%, rgba(var(--brand-accent-dark-rgb), 0) 40%)",
                         }}
                     />
-                    <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-12">
+                    <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-28 lg:px-10">
                         <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
@@ -295,7 +295,7 @@ export default function WorkPage() {
                                 variants={wordContainerVariants}
                                 initial="hidden"
                                 animate={isHeroInView ? "show" : "hidden"}
-                                className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-7xl xl:text-8xl"
+                                className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
                                 style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                             >
                                 <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Real</motion.span>
@@ -314,7 +314,7 @@ export default function WorkPage() {
                     </div>
                 </section>
 
-                <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+                <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-24">
                     <div className="flex flex-wrap gap-3">
                         {WORK_SECTIONS.map((section) => (
                             <a
@@ -335,7 +335,7 @@ export default function WorkPage() {
                 </div>
 
                 <div className="border-t border-white/5">
-                    <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 py-24 lg:px-10">
                         <div ref={ctaRef} className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
                             <div>
                                 <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">

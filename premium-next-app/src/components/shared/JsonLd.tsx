@@ -67,6 +67,35 @@ export default function JsonLd() {
         },
     };
 
+    const localBusinessUS = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://techbridge.dev/#us-office",
+        name: "TechBridge - US Headquarters",
+        parentOrganization: { "@type": "Organization", name: "TechBridge" },
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "Morgantown",
+            addressRegion: "WV",
+            addressCountry: "US",
+        },
+        url: "https://techbridge.dev",
+    };
+
+    const localBusinessPK = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://techbridge.dev/#pk-office",
+        name: "TechBridge - Lahore Engineering",
+        parentOrganization: { "@type": "Organization", name: "TechBridge" },
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "Lahore",
+            addressCountry: "PK",
+        },
+        url: "https://techbridge.dev",
+    };
+
     const servicesSchema = {
         "@context": "https://schema.org",
         "@type": "ItemList",
@@ -133,6 +162,18 @@ export default function JsonLd() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify(servicesSchema),
+                }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(localBusinessUS),
+                }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(localBusinessPK),
                 }}
             />
         </>

@@ -1,8 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useRef, useEffect } from "react";
 import Link from "next/link";
-import { gsap } from "@/lib/gsap";
 
 interface GlowButtonProps {
     href: string;
@@ -17,33 +15,6 @@ export default function GlowButton({
     className = "",
     size = "md",
 }: GlowButtonProps) {
-    const glowRef = useRef<HTMLSpanElement>(null);
-
-    useEffect(() => {
-        const glow = glowRef.current;
-        if (!glow) return;
-
-        // Respect reduced motion
-        const prefersReduced = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-        if (prefersReduced) return;
-
-        const tween = gsap.to(glow, {
-            "--glow-angle": "360deg",
-            duration: 3,
-            repeat: -1,
-            ease: "none",
-            modifiers: {
-                "--glow-angle": (value: string) => value,
-            },
-        });
-
-        return () => {
-            tween.kill();
-        };
-    }, []);
-
     const sizeClasses =
         size === "sm"
             ? "px-4 py-1.5 text-xs"
@@ -54,17 +25,13 @@ export default function GlowButton({
             href={href}
             className={`glow-button group relative inline-flex items-center gap-2 rounded-full font-medium text-white transition-all duration-300 ${sizeClasses} ${className}`}
         >
-            {/* Rotating conic gradient border */}
+            {/* Rotating conic gradient border — animated via CSS @property in globals.css */}
             <span
-                ref={glowRef}
                 aria-hidden="true"
-                className="absolute inset-0 rounded-full opacity-80 blur-[2px] transition-opacity duration-300 group-hover:opacity-100"
-                style={
-                    {
-                        "--glow-angle": "0deg",
-                        background: `conic-gradient(from var(--glow-angle), transparent 0deg, transparent 80deg, var(--brand-accent) 120deg, var(--brand-accent-light) 180deg, var(--brand-accent) 240deg, transparent 280deg, transparent 360deg)`,
-                    } as React.CSSProperties
-                }
+                className="glow-button-ring absolute inset-0 rounded-full opacity-80 blur-[2px] transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                    background: `conic-gradient(from var(--glow-angle), transparent 0deg, transparent 80deg, var(--brand-accent) 120deg, var(--brand-accent-light) 180deg, var(--brand-accent) 240deg, transparent 280deg, transparent 360deg)`,
+                }}
             />
 
             {/* Outer glow blur layer */}
@@ -87,4 +54,3 @@ export default function GlowButton({
         </Link>
     );
 }
-

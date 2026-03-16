@@ -75,13 +75,13 @@ export default function Hero() {
                 variants={container}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
-                className="relative z-10 mx-auto flex min-h-screen max-w-[90rem] flex-col items-center justify-center px-6 pb-24 pt-20 lg:px-16"
+                className="relative z-10 mx-auto flex min-h-screen max-w-[100rem] flex-col items-center justify-center px-6 pb-24 pt-28 lg:px-10"
             >
 
                 {/* Primary headline */}
                 <motion.h1
                     variants={fadeUp}
-                    className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]"
+                    className="max-w-5xl text-center text-3xl font-semibold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl"
                 >
                         <span className="block">Custom Software. AI Systems.</span>{" "}
                         <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent [text-shadow:0_0_22px_rgba(var(--brand-accent-rgb),0.16)]">
@@ -136,7 +136,7 @@ export default function Hero() {
                 {/* Social proof stats */}
                 <motion.dl
                     variants={fadeUp}
-                    className="mt-16 grid grid-cols-3 gap-8 border-t border-white/5 pt-10 sm:gap-16"
+                    className="mt-16 grid grid-cols-1 gap-8 border-t border-white/5 pt-10 sm:grid-cols-3 sm:gap-16"
                 >
                     {STATS.map((stat) => (
                         <div key={stat.label} className="flex flex-col items-center gap-2">

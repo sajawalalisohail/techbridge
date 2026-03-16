@@ -13,6 +13,7 @@ import CursorFollower from "@/components/shared/CursorFollowerWrapper";
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const jetbrainsMono = localFont({
@@ -48,12 +49,14 @@ export const metadata: Metadata = {
     title: "TechBridge | Premium Software & AI Engineering",
     description:
       "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
+    images: [{ url: "https://techbridge.dev/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TechBridge | Premium Software & AI Engineering",
     description:
       "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
+    images: ["https://techbridge.dev/og-image.png"],
   },
   alternates: {
     canonical: "https://techbridge.dev",

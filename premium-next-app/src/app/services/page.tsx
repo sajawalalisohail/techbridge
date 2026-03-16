@@ -14,7 +14,12 @@ import {
 } from "lucide-react";
 import TechStackMarquee from "@/components/home/TechStackMarquee";
 import { ClipReveal } from "@/components/shared/headingAnimations";
-import ServicesProcessShowcase from "@/components/services/ServicesProcessShowcase";
+import dynamic from "next/dynamic";
+
+const ServicesProcessShowcase = dynamic(
+    () => import("@/components/services/ServicesProcessShowcase"),
+    { ssr: false }
+);
 
 /* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SECTIONS = [
@@ -276,19 +281,22 @@ export default function ServicesPage() {
                         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(var(--brand-accent-dark-rgb), 0.06) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
                     </div>
 
-                    <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-28 lg:px-12 lg:pb-24 lg:pt-32">
+                    <div className="relative z-10 mx-auto max-w-[100rem] px-6 pb-20 pt-28 lg:px-10 lg:pb-24 lg:pt-32">
                         <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                            <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 services
                             </span>
                             <ClipReveal>
                                 <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
-                                    What we build, how we build it, and what it costs you to wait.
+                                    What we build, how we build it, and what it costs you to{" "}
+                                    <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
+                                        wait.
+                                    </span>
                                 </h1>
                             </ClipReveal>
                             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
@@ -315,7 +323,7 @@ export default function ServicesPage() {
                 <ServicesProcessShowcase />
 
                 {/* â”€â”€ Sticky Sidebar Layout â”€â”€ */}
-                <div className="mx-auto max-w-7xl px-6 pb-20 pt-28 lg:px-12 lg:pb-28 lg:pt-36">
+                <div className="mx-auto max-w-[100rem] px-6 pb-20 pt-28 lg:px-10 lg:pb-28 lg:pt-36">
                     <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-16">
 
                         {/* LEFT â€” Sticky sidebar */}

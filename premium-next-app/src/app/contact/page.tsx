@@ -88,7 +88,7 @@ export default function ContactPage() {
                             <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(var(--brand-accent-dark-rgb), 0.04) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
                         </div>
 
-                        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-32">
+                        <div className="mx-auto max-w-[100rem] px-6 py-20 lg:px-10 lg:py-32">
                             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
 
                                 {/* â”€â”€ LEFT â€” Hook & Info â”€â”€ */}
@@ -97,7 +97,7 @@ export default function ContactPage() {
                                         variants={fadeUp(0)}
                                         initial="hidden"
                                         animate={isInView ? "show" : "hidden"}
-                                        className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                                        className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                                     >
                                         <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                         let&apos;s talk
@@ -110,7 +110,7 @@ export default function ContactPage() {
                                         className="text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
                                     >
                                         Tell us what you need{" "}
-                                        <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
+                                        <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                                             built.
                                         </span>
                                     </motion.h1>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                                                 <Mail size={16} strokeWidth={1.5} />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                                <p className="font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                                     Email
                                                 </p>
                                                 <p className="text-sm text-zinc-300 transition-colors duration-300 group-hover:text-brand-accent-light">
@@ -154,7 +154,7 @@ export default function ContactPage() {
                                                 <MapPin size={16} strokeWidth={1.5} />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                                <p className="font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                                     Location
                                                 </p>
                                                 <p className="text-sm text-zinc-300">
@@ -171,7 +171,7 @@ export default function ContactPage() {
                                         animate={isInView ? "show" : "hidden"}
                                         className="mt-8 inline-flex items-center gap-2"
                                     >
-                                        <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+                                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light animate-pulse" />
                                         <span className="text-xs text-zinc-600">
                                             You&apos;ll hear back within 24 hours
                                         </span>
@@ -329,9 +329,9 @@ export default function ContactPage() {
 
                     {/* â”€â”€ Cal.com Scheduling â”€â”€ */}
                     <section className="py-24 lg:py-32">
-                        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                             <div className="mb-10">
-                                <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                     <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                     prefer a call?
                                 </span>

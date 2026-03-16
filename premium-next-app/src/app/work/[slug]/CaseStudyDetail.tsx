@@ -182,7 +182,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                             background: `radial-gradient(ellipse at 30% 50%, rgba(${study.accentColor},0.08) 0%, rgba(${study.accentColor},0) 60%)`,
                         }}
                     />
-                    <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-12">
+                    <div className="relative z-10 mx-auto w-full max-w-[100rem] px-6 lg:px-10">
                         {/* Back link */}
                         <motion.div
                             variants={fadeUp(0)}
@@ -252,7 +252,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
 
                 {/* ── 2. The Challenge ── */}
                 <section ref={problemRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div
                             variants={fadeUp(0)}
                             initial="hidden"
@@ -277,13 +277,13 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 </section>
 
                 {/* Separator */}
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
 
                 {/* ── 3. Our Approach ── */}
                 <section ref={solutionRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div
                             variants={fadeUp(0)}
                             initial="hidden"
@@ -308,13 +308,13 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 </section>
 
                 {/* Separator */}
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
 
                 {/* ── 4. The Impact ── */}
                 <section ref={resultsRef} className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div
                             variants={fadeUp(0)}
                             initial="hidden"
@@ -367,11 +367,11 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 </section>
 
                 {/* ── 5. Tech Stack ── */}
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
                 <section className="py-24 lg:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                             Tech Stack
@@ -390,12 +390,12 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                 </section>
 
                 {/* ── 6. Screenshots ── */}
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                     <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
                 </div>
                 {study.assets.length > 0 ? (
                     <section ref={screenshotsRef} className="py-24 lg:py-32">
-                        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                             <motion.div
                                 variants={fadeUp(0)}
                                 initial="hidden"
@@ -439,7 +439,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                     </section>
                 ) : (
                     <section className="py-24 lg:py-32">
-                        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                        <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                             <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/30 p-12 text-center backdrop-blur-sm">
                                 <div
                                     aria-hidden="true"
@@ -458,7 +458,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
 
                 {/* ── 7. CTA ── */}
                 <div className="border-t border-white/5">
-                    <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+                    <div className="mx-auto max-w-[100rem] px-6 py-24 lg:px-10">
                         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
                             <div>
                                 <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">

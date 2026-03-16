@@ -147,7 +147,7 @@ export default function Navbar() {
                                             <Link
                                                 href={link.href}
                                                 className={`relative whitespace-nowrap text-sm transition-colors duration-200
-                                            after:absolute after:-bottom-0.5 after:left-0 after:h-px after:transition-all after:duration-300
+                                            after:absolute after:-bottom-1 after:left-0 after:h-px after:transition-all after:duration-300
                                             ${active
                                                         ? "text-white after:w-full after:bg-brand-accent-light drop-shadow-[0_0_8px_rgba(var(--brand-accent-light-rgb), 0.6)]"
                                                         : "text-zinc-400 hover:text-brand-accent-light after:w-0 after:bg-white hover:after:w-full"

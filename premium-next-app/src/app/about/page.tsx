@@ -43,25 +43,25 @@ const childFade = {
 const VALUES = [
     {
         icon: Code2,
-        title: "First Principles Over Trends",
+        title: "AI From Line One",
         description:
             "We make architecture decisions based on your actual constraints, not whatever framework is trending on Twitter this week.",
     },
     {
         icon: Shield,
-        title: "We Ship It, We Own It",
+        title: "No Middlemen. No Juniors.",
         description:
             "No delivery theater. If we built it, we're accountable for it. The goal is dependable software, not impressive slide decks.",
     },
     {
         icon: Clock,
-        title: "Fast Because We're Disciplined",
+        title: "We Ship Fast Because We're Good",
         description:
             "We move fast by eliminating waste from the process, not by skipping tests or writing code that future-you will regret.",
     },
     {
         icon: Globe,
-        title: "Two Time Zones, One Standard",
+        title: "Code That Survives Your Series B",
         description:
             "Architecture and oversight in West Virginia. Engineering execution in Lahore. Same code reviews, same standards, same accountability.",
     },
@@ -289,7 +289,7 @@ export default function AboutPage() {
                                     <div className="relative z-10">
                                         <div className="mb-6 flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-4">
-                                                <div className="relative h-[72px] w-[72px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
+                                                <div className="relative h-[72px] w-[72px] overflow-hidden rounded-full border border-white/10 bg-white/[0.04]">
                                                     <Image src={member.imageSrc} alt={member.name} fill className="object-cover" sizes="72px" />
                                                 </div>
                                                 <div>

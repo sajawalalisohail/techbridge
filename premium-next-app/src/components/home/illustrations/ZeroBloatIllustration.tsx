@@ -24,8 +24,8 @@ export default function ZeroBloatIllustration() {
                 {/* The Direct Path (Foreground) */}
                 <defs>
                     <linearGradient id="direct-path-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#4f46e5" />
-                        <stop offset="100%" stopColor="#8b5cf6" />
+                        <stop offset="0%" stopColor="var(--brand-accent-dark)" />
+                        <stop offset="100%" stopColor="var(--brand-accent)" />
                     </linearGradient>
 
                     {/* Glow filter */}
@@ -62,7 +62,7 @@ export default function ZeroBloatIllustration() {
                     animate={isInView ? { scale: 1, opacity: 1 } : {}}
                     transition={{ duration: 0.5, delay: 0.1 }}
                 >
-                    <circle cx="30" cy="50" r="12" fill="#18181b" stroke="#4f46e5" strokeWidth="2" />
+                    <circle cx="30" cy="50" r="12" fill="#18181b" stroke="var(--brand-accent-dark)" strokeWidth="2" />
                     <text x="30" y="53" textAnchor="middle" fontSize="8" fill="#a1a1aa" fontFamily="monospace" fontWeight="bold">YOU</text>
                 </motion.g>
 
@@ -72,8 +72,8 @@ export default function ZeroBloatIllustration() {
                     animate={isInView ? { scale: 1, opacity: 1 } : {}}
                     transition={{ duration: 0.5, delay: 1.2 }}
                 >
-                    <circle cx="170" cy="50" r="14" fill="#2e1065" stroke="#8b5cf6" strokeWidth="2" />
-                    <text x="170" y="53" textAnchor="middle" fontSize="7" fill="#ddd6fe" fontFamily="monospace" fontWeight="bold">DEV</text>
+                    <circle cx="170" cy="50" r="14" fill="var(--brand-accent-deep)" stroke="var(--brand-accent)" strokeWidth="2" />
+                    <text x="170" y="53" textAnchor="middle" fontSize="7" fill="var(--text-primary)" fontFamily="monospace" fontWeight="bold">DEV</text>
                 </motion.g>
             </svg>
         </div>

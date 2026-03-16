@@ -197,18 +197,11 @@ export default function TechStackMarquee() {
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
                 className="tb-marquee-container relative"
+                style={{
+                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                    maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                }}
             >
-                {/* Left fade mask */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-black to-transparent"
-                />
-                {/* Right fade mask */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-black to-transparent"
-                />
-
                 {/* Track â€” duplicate the array for seamless loop */}
                 <div className="flex overflow-hidden py-2">
                     <div className="tb-marquee-track flex">

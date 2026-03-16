@@ -12,9 +12,9 @@ import {
     CheckCircle2,
     ArrowRight,
 } from "lucide-react";
-import HowItWorks from "@/components/home/HowItWorks";
 import TechStackMarquee from "@/components/home/TechStackMarquee";
 import { ClipReveal } from "@/components/shared/headingAnimations";
+import ServicesProcessShowcase from "@/components/services/ServicesProcessShowcase";
 
 /* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SECTIONS = [
@@ -269,14 +269,14 @@ export default function ServicesPage() {
             <div className="relative z-10 overflow-clip min-h-screen">
 
                 {/* â”€â”€ Services Hero â”€â”€ */}
-                <section ref={heroRef} className="relative flex min-h-[60vh] items-center overflow-hidden border-b border-white/5">
+                <section ref={heroRef} className="relative flex min-h-[52vh] items-center overflow-hidden border-b border-white/5 lg:min-h-[56vh]">
                     {/* Ambient glow */}
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
                         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 50%)" }} />
                         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 75% 50%, rgba(var(--brand-accent-dark-rgb), 0.06) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
                     </div>
 
-                    <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-12">
+                    <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-28 lg:px-12 lg:pb-24 lg:pt-32">
                         <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
@@ -291,8 +291,8 @@ export default function ServicesPage() {
                                     What we build, how we build it, and what it costs you to wait.
                                 </h1>
                             </ClipReveal>
-                            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
-                                Five service lines. Same engineering standards across all of them. Pick the one that matches your problem.
+                            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
+                                Five service lines, one delivery standard, and a process built to move like an engineering system instead of an agency brochure. Pick the line that matches your problem, then follow how we ship it.
                             </p>
 
                             {/* Jump links */}
@@ -312,13 +312,10 @@ export default function ServicesPage() {
                     </div>
                 </section>
 
-                {/* â”€â”€ Our Process â”€â”€ */}
-                <div id="our-process">
-                    <HowItWorks variant="scroll" />
-                </div>
+                <ServicesProcessShowcase />
 
                 {/* â”€â”€ Sticky Sidebar Layout â”€â”€ */}
-                <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
+                <div className="mx-auto max-w-7xl px-6 pb-20 pt-28 lg:px-12 lg:pb-28 lg:pt-36">
                     <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-16">
 
                         {/* LEFT â€” Sticky sidebar */}

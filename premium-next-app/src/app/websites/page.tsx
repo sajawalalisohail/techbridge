@@ -5,7 +5,6 @@ import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEv
 import { Check, X, ChevronDown, ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import {
-    ClipReveal,
     blurFocusIn,
     slideFromLeftContainer,
     slideFromLeftItem,
@@ -17,10 +16,10 @@ import {
 } from "@/components/shared/headingAnimations";
 
 
-/* â”€â”€â”€ Global ease constant â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Global ease constant â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* â”€â”€â”€ Reusable animation helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Reusable animation helpers â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 const fadeUp = (delay = 0) => ({
     hidden: { opacity: 0, y: 28 },
     show: {
@@ -40,8 +39,8 @@ const childFade = {
     show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
-/* â”€â”€â”€ Section wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-/* â”€â”€â”€ Eyebrow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Section wrapper â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
+/* â"€â"€â"€ Eyebrow â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 function Eyebrow({ children }: { children: React.ReactNode }) {
     return (
         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
@@ -52,7 +51,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 1 â€” HERO
+   STEP 1 â€" HERO
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function Hero() {
     const ref = useRef<HTMLElement>(null);
@@ -61,7 +60,7 @@ function Hero() {
     return (
         <section
             ref={ref}
-            className="relative flex min-h-screen items-center justify-center overflow-hidden border-b border-white/5"
+            className="relative overflow-hidden border-b border-white/5"
         >
             {/* Background glows */}
             <div
@@ -87,13 +86,13 @@ function Hero() {
                 <rect width="100%" height="100%" fill="url(#hero-dots)" />
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-5xl px-6 py-32 text-center lg:px-12">
+            <div className="relative z-10 mx-auto max-w-5xl px-6 pb-16 pt-24 text-center lg:px-12 lg:pb-20 lg:pt-28">
                 {/* Eyebrow badge */}
                 <motion.div
                     variants={fadeUp(0)}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 backdrop-blur-sm"
+                    className="website-glow-pill mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 backdrop-blur-sm"
                 >
                     <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light shadow-[0_0_6px_rgba(var(--brand-accent-light-rgb), 0.8)]" />
                     <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
@@ -101,14 +100,17 @@ function Hero() {
                     </span>
                 </motion.div>
 
-                <ClipReveal>
-                    <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
-                        Your Website. Custom-Coded.{" "}
-                        <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
-                            Live Tomorrow.
-                        </span>
-                    </h1>
-                </ClipReveal>
+                <motion.h1
+                    variants={blurFocusIn(0.08)}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+                >
+                    Your Website. Custom-Coded.{" "}
+                    <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
+                        Live Tomorrow.
+                    </span>
+                </motion.h1>
 
                 <motion.p
                     variants={fadeUp(0.2)}
@@ -140,7 +142,7 @@ function Hero() {
                         href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
+                        className="website-glow-pill inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                     >
                         Book a Call
                         <ExternalLink size={13} className="text-zinc-500" />
@@ -167,7 +169,7 @@ function Hero() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 2 â€” COMPARISON TABLE
+   STEP 2 â€" COMPARISON TABLE
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const COMPARISON_ROWS = [
     { label: "Price", freelancer: "$300-$800", agency: "$8k-$20k", tb: "$997-$4,997" },
@@ -204,7 +206,7 @@ function ComparisonTable() {
                 variants={stagger(0.08)}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
-                className="overflow-hidden rounded-2xl border border-white/8"
+                className="website-glow-shell overflow-hidden rounded-2xl border border-white/8"
             >
                 {/* Header row */}
                 <div className="grid grid-cols-4 border-b border-white/8 bg-white/[0.03]">
@@ -252,7 +254,7 @@ function ComparisonTable() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 2.5 â€” THE ARSENAL (TECH STACK)
+   STEP 2.5 â€" THE ARSENAL (TECH STACK)
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const STACK_MARQUEE_ROW_1 = [
     { name: "Next.js", label: "React Framework" },
@@ -265,7 +267,7 @@ const STACK_MARQUEE_ROW_1 = [
     { name: "Custom Domains", label: "Fully Managed Setup" },
 ];
 
-// Row 2 scrolls opposite direction â€” same pills, different order
+// Row 2 scrolls opposite direction â€" same pills, different order
 const STACK_MARQUEE_ROW_2 = [
     { name: "Vercel", label: "Global CDN" },
     { name: "Custom Domains", label: "DNS Config" },
@@ -290,7 +292,7 @@ const marqueeCSS = `
 /* Individual pill */
 function StackPill({ name, label }: { name: string; label: string }) {
     return (
-        <div className="group mx-3 flex-shrink-0 flex items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:shadow-brand-accent/10">
+        <div className="website-glow-card group mx-3 flex flex-shrink-0 items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5">
             {/* Glow dot */}
             <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-accent/60 shadow-[0_0_6px_rgba(var(--brand-accent-light-rgb), 0.6)] group-hover:bg-brand-accent/5" />
             <div>
@@ -335,19 +337,18 @@ function TechStack() {
                 </motion.div>
             </div>
 
-            {/* â”€â”€ Marquee rows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+            {/* â"€â"€ Marquee rows â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */}
             <motion.div
                 variants={fadeUp(0.2)}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
                 className="relative"
+                style={{
+                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                    maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                }}
             >
-                {/* Left fade mask â€” subtle so it doesn't break global side glow */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-neutral-950/80 to-transparent" />
-                {/* Right fade mask */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-neutral-950/80 to-transparent" />
-
-                {/* Row 1 â€” scrolls left */}
+                {/* Row 1 â€" scrolls left */}
                 <div className="flex overflow-hidden py-3">
                     <div className="marquee-left flex">
                         {[...STACK_MARQUEE_ROW_1, ...STACK_MARQUEE_ROW_1].map((item, i) => (
@@ -356,7 +357,7 @@ function TechStack() {
                     </div>
                 </div>
 
-                {/* Row 2 â€” scrolls right */}
+                {/* Row 2 â€" scrolls right */}
                 <div className="flex overflow-hidden py-3">
                     <div className="marquee-right flex">
                         {[...STACK_MARQUEE_ROW_2, ...STACK_MARQUEE_ROW_2].map((item, i) => (
@@ -366,7 +367,7 @@ function TechStack() {
                 </div>
             </motion.div>
 
-            {/* â”€â”€ Performance stat strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+            {/* â"€â"€ Performance stat strip â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */}
             <motion.div
                 variants={fadeUp(0.3)}
                 initial="hidden"
@@ -382,7 +383,7 @@ function TechStack() {
                     ].map((item) => (
                         <div
                             key={item.label}
-                            className="group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
+                            className="website-glow-card group relative overflow-hidden rounded-xl border border-white/8 bg-neutral-900/40 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
                         >
                             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-dark-rgb), 0.1) 0%, rgba(var(--brand-accent-dark-rgb), 0) 100%)" }} />
                             <p className="font-mono text-3xl font-extrabold text-white">{item.stat}</p>
@@ -397,7 +398,7 @@ function TechStack() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 3 â€” 24-HOUR PROCESS TIMELINE
+   STEP 3 â€" 24-HOUR PROCESS TIMELINE
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const TIMELINE = [
     {
@@ -448,7 +449,7 @@ function TimelineStep({
                     className="relative flex h-11 w-11 items-center justify-center"
                 >
                     <span className={`absolute inset-0 rounded-full blur-md transition-all duration-700 ${isCenterInView ? "bg-brand-accent/60 scale-[1.2]" : "bg-brand-accent/10"}`} />
-                    <span className={`relative flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-700 ${isCenterInView ? "border-brand-accent/40 bg-brand-accent-deep/60 shadow-[0_0_20px_rgba(var(--brand-accent-dark-rgb), 0.4)]" : "border-brand-accent/10 bg-brand-accent-deep/20 shadow-none"}`}>
+                    <span className={`website-glow-nav relative flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-700 ${isCenterInView ? "border-brand-accent/40 bg-brand-accent-deep/60" : "border-brand-accent/10 bg-brand-accent-deep/20 shadow-none"}`}>
                         <span className={`font-mono text-xs font-bold transition-colors duration-700 ${isCenterInView ? "text-brand-accent-light" : "text-brand-accent/50"}`}>{String(index + 1).padStart(2, "0")}</span>
                     </span>
                 </motion.div>
@@ -462,7 +463,7 @@ function TimelineStep({
                 viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                 className={`group relative overflow-hidden rounded-xl border transition-all duration-700 p-6 backdrop-blur-sm ${isCenterInView
-                    ? "border-brand-accent/50 bg-brand-accent/10 shadow-[0_0_30px_rgba(var(--brand-accent-rgb), 0.15)] scale-[1.01]"
+                    ? "website-glow-card-active border-brand-accent/50 bg-brand-accent/10 scale-[1.01]"
                     : "border-white/8 bg-neutral-900/50 hover:border-brand-accent/40"
                     }`}
             >
@@ -592,7 +593,7 @@ function Timeline() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 4 â€” SOCIAL PROOF / LIVE EXAMPLE
+   STEP 4 â€" SOCIAL PROOF / LIVE EXAMPLE
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const SOCIAL_PROOF_PROJECTS = [
     {
@@ -658,11 +659,12 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
     return (
         <motion.div
             layout
+            transition={{ layout: { type: "spring", damping: 32, stiffness: 180, mass: 0.9 } }}
             onHoverStart={() => setExpanded(index)}
             onClick={() => isExpanded ? onSelect(project) : setExpanded(index)}
-            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'border-white/20 bg-neutral-900/60' : 'border-white/5 bg-neutral-900/20 hover:border-brand-accent/40 hover:bg-brand-accent/5'}`}
+            className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${isExpanded ? 'website-glow-card-active border-white/20 bg-neutral-900/60' : 'website-glow-card border-white/5 bg-neutral-900/20 hover:border-brand-accent/40 hover:bg-brand-accent/5'}`}
         >
-            <div className={`p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-opacity ${isExpanded ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}>
+            <div className={`p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-opacity duration-500 ${isExpanded ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}>
 
                 {/* Text Data */}
                 <div className="flex-1">
@@ -676,7 +678,12 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                     </div>
 
                     {isExpanded && (
-                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mt-4">
+                        <motion.div
+                            initial={{ opacity: 0, height: 0, y: 10 }}
+                            animate={{ opacity: 1, height: 'auto', y: 0 }}
+                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                            className="mt-4"
+                        >
                             <p className="text-sm text-zinc-400 max-w-lg mb-6">{project.desc}</p>
                             <div className="flex flex-wrap gap-2 mb-6">
                                 {project.tags.map(t => (
@@ -693,7 +700,8 @@ function AccordionRow({ project, index, expanded, setExpanded, onSelect }: { pro
                 {/* Video Player */}
                 <motion.div
                     layout
-                    className={`relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-brand-accent/40'}`}
+                    transition={{ layout: { type: "spring", damping: 34, stiffness: 170, mass: 1 } }}
+                    className={`website-glow-frame relative overflow-hidden rounded-xl bg-black border border-white/10 transition-all duration-700 ${isExpanded ? 'w-full md:w-1/2 aspect-video scale-[1.02]' : 'w-full md:w-1/4 h-24 scale-100 hover:border-brand-accent/40'}`}
                     style={{
                         boxShadow: `0 0 20px ${project.accentColor.replace("rgb", "rgba").replace(")", ", 0.15)")}`
                     }}
@@ -798,10 +806,10 @@ function SocialProof() {
                         onClick={() => selectProject(null)}
                     >
                         {/* Level 1 Nav: Project Switchers */}
-                        <button onClick={handlePrevProject} className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-brand-accent-light hover:bg-brand-accent/5 hover:border-brand-accent/40 transition-all backdrop-blur-md">
+                        <button onClick={handlePrevProject} className="website-glow-nav absolute left-4 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white/50 transition-all backdrop-blur-md hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light md:left-8 lg:flex">
                             <ChevronLeft size={24} />
                         </button>
-                        <button onClick={handleNextProject} className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-brand-accent-light hover:bg-brand-accent/5 hover:border-brand-accent/40 transition-all backdrop-blur-md">
+                        <button onClick={handleNextProject} className="website-glow-nav absolute right-4 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white/50 transition-all backdrop-blur-md hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light md:right-8 lg:flex">
                             <ChevronRight size={24} />
                         </button>
                         <motion.div
@@ -809,13 +817,13 @@ function SocialProof() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overflow-x-hidden rounded-3xl border border-white/10 bg-neutral-950/80 p-6 md:p-8 shadow-2xl backdrop-blur-2xl"
+                            className="website-glow-modal relative w-full max-w-4xl max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overflow-x-hidden rounded-3xl border border-white/10 bg-neutral-950/80 p-6 shadow-2xl backdrop-blur-2xl md:p-8"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Close Button */}
                             <button
                                 onClick={() => selectProject(null)}
-                                className="absolute right-4 md:right-6 top-4 md:top-6 z-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-2 text-zinc-400 transition-colors hover:bg-brand-accent/5 hover:text-brand-accent-light"
+                                className="website-glow-nav absolute right-4 top-4 z-10 rounded-full border border-white/10 bg-black/60 p-2 text-zinc-400 transition-colors backdrop-blur-md hover:bg-brand-accent/5 hover:text-brand-accent-light md:right-6 md:top-6"
                             >
                                 <X size={20} />
                             </button>
@@ -839,20 +847,20 @@ function SocialProof() {
                                 />
 
                                 {/* Floating Slide Counter */}
-                                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-white/80 font-mono text-[10px] uppercase tracking-widest z-10">
+                                <div className="website-glow-pill absolute left-4 top-4 z-10 rounded-full border border-white/10 bg-black/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-white/80 backdrop-blur-md">
                                     IMG {currentImageIndex + 1} / {selectedProject.assets.length}
                                 </div>
 
                                 {/* Inner Image Nav Buttons */}
                                 <button
                                     onClick={handlePrevImage}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-brand-accent-light hover:bg-brand-accent/5 transition-all"
+                                    className="website-glow-nav absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white/70 opacity-0 transition-all backdrop-blur-md group-hover/carousel:opacity-100 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                                 >
                                     <ChevronLeft size={18} />
                                 </button>
                                 <button
                                     onClick={handleNextImage}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-white/70 opacity-0 group-hover/carousel:opacity-100 hover:text-brand-accent-light hover:bg-brand-accent/5 transition-all"
+                                    className="website-glow-nav absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white/70 opacity-0 transition-all backdrop-blur-md group-hover/carousel:opacity-100 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                                 >
                                     <ChevronRight size={18} />
                                 </button>
@@ -880,7 +888,7 @@ function SocialProof() {
                                 href={selectedProject.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
+                                className="website-glow-pill group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5"
                             >
                                 <span className="relative z-10 tracking-widest uppercase">Explore Live Platform</span>
                                 <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -898,7 +906,7 @@ function SocialProof() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 5 â€” PRICING TIERS
+   STEP 5 â€" PRICING TIERS
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const TIERS = [
     {
@@ -982,8 +990,8 @@ function Pricing() {
                         variants={childFade}
                         className={`relative flex flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40
               ${tier.highlight
-                                ? "border-brand-accent/40 bg-brand-accent-deep/30 shadow-[0_0_40px_rgba(var(--brand-accent-dark-rgb), 0.2)]"
-                                : "border-white/8 bg-neutral-900/40 hover:bg-brand-accent/5"
+                                ? "website-glow-card-active border-brand-accent/40 bg-brand-accent-deep/30"
+                                : "website-glow-card border-white/8 bg-neutral-900/40 hover:bg-brand-accent/5"
                             }`}
                     >
                         {/* Top glow for highlight */}
@@ -994,7 +1002,7 @@ function Pricing() {
                         {/* Badge */}
                         {tier.badge && (
                             <div className="absolute right-5 top-5">
-                                <span className="rounded-full bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-3 py-1 text-xs font-semibold text-white">
+                                <span className="website-glow-pill rounded-full bg-gradient-to-r from-brand-accent-dark to-brand-accent-dark px-3 py-1 text-xs font-semibold text-white">
                                     {tier.badge}
                                 </span>
                             </div>
@@ -1044,7 +1052,7 @@ function Pricing() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 6 â€” CARE PLANS
+   STEP 6 â€" CARE PLANS
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const CARE_PLANS = [
     {
@@ -1112,8 +1120,8 @@ function CarePlans() {
                         variants={childFade}
                         className={`relative overflow-hidden rounded-2xl border backdrop-blur-sm
               ${plan.highlight
-                                ? "border-brand-accent/40 bg-brand-accent-deep/25 shadow-[0_0_30px_rgba(var(--brand-accent-dark-rgb), 0.15)]"
-                                : "border-white/8 bg-neutral-900/40"
+                                ? "website-glow-card-active border-brand-accent/40 bg-brand-accent-deep/25"
+                                : "website-glow-card border-white/8 bg-neutral-900/40"
                             }`}
                     >
                         {plan.highlight && (
@@ -1155,7 +1163,7 @@ function CarePlans() {
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STEP 7 â€” FAQ
+   STEP 7 â€" FAQ
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const FAQS = [
     {
@@ -1217,7 +1225,7 @@ function FAQ() {
                             key={i}
                             variants={childFade}
                             className={`overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300
-                ${open ? "border-brand-accent/30 bg-brand-accent-deep/20" : "border-white/8 bg-neutral-900/40 hover:border-brand-accent/40 hover:bg-brand-accent/5"}`}
+                ${open ? "website-glow-card-active border-brand-accent/30 bg-brand-accent-deep/20" : "website-glow-card border-white/8 bg-neutral-900/40 hover:border-brand-accent/40 hover:bg-brand-accent/5"}`}
                         >
                             <button
                                 onClick={() => setOpenIdx(open ? null : i)}
@@ -1336,14 +1344,14 @@ function FinalCTA() {
 export default function WebsitesPage() {
     return (
         <div
-            className="relative z-10 overflow-hidden min-h-screen border border-brand-accent/20 rounded-none"
+            className="website-glow-shell relative z-10 min-h-screen overflow-hidden rounded-none border border-brand-accent/20"
             style={{ animation: "accent-pulse 4s ease-in-out infinite" }}
         >
-            {/* Full-bleed side, top, and bottom ambient glows â€” high z-index to stay on top of section masks */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-brand-accent-dark/5 to-transparent" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-brand-accent-dark/5 to-transparent" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-brand-accent-dark/10 to-transparent" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-brand-accent-dark/10 to-transparent" />
+            {/* Full-bleed ambient glows -- inline position overrides .website-glow-shell > * { position: relative } */}
+            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-brand-accent-dark/5 to-transparent" />
+            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-brand-accent-dark/5 to-transparent" />
+            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-brand-accent-dark/10 to-transparent" />
+            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-brand-accent-dark/10 to-transparent" />
             <Hero />
 
             {/* Separator */}
@@ -1351,7 +1359,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 2 â€” Comparison */}
+            {/* Step 2 â€" Comparison */}
             <section className="py-24 lg:py-32">
                 <ComparisonTable />
             </section>
@@ -1360,7 +1368,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 2.5 â€” Tech Stack */}
+            {/* Step 2.5 â€" Tech Stack */}
             <section className="py-24 lg:py-32">
                 <TechStack />
             </section>
@@ -1369,7 +1377,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 3 â€” Timeline */}
+            {/* Step 3 â€" Timeline */}
             <section className="py-24 lg:py-32">
                 <Timeline />
             </section>
@@ -1378,7 +1386,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 4 â€” Social Proof */}
+            {/* Step 4 â€" Social Proof */}
             <section className="py-24 lg:py-32">
                 <SocialProof />
             </section>
@@ -1387,7 +1395,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 5 â€” Pricing */}
+            {/* Step 5 â€" Pricing */}
             <section className="py-24 lg:py-32">
                 <Pricing />
             </section>
@@ -1396,7 +1404,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 6 â€” Care Plans */}
+            {/* Step 6 â€" Care Plans */}
             <section className="py-24 lg:py-28">
                 <CarePlans />
             </section>
@@ -1405,7 +1413,7 @@ export default function WebsitesPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Step 7 â€” FAQ */}
+            {/* Step 7 â€" FAQ */}
             <section className="py-24 lg:py-32">
                 <FAQ />
             </section>

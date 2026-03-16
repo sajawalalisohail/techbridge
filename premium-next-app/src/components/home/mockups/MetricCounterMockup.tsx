@@ -31,8 +31,9 @@ export default function MetricCounterMockup() {
             <svg viewBox="0 0 120 40" className="mt-2 h-8 w-24 lg:h-10 lg:w-32">
                 <defs>
                     <linearGradient id="sparkline-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="rgb(139,92,246)" stopOpacity="0.2" />
-                        <stop offset="100%" stopColor="rgb(139,92,246)" stopOpacity="0.8" />
+                        <stop offset="0%" stopColor="rgb(var(--brand-accent-dark-rgb))" stopOpacity="0.28" />
+                        <stop offset="55%" stopColor="rgb(var(--brand-accent-rgb))" stopOpacity="0.7" />
+                        <stop offset="100%" stopColor="rgb(var(--brand-accent-light-rgb))" stopOpacity="0.95" />
                     </linearGradient>
                 </defs>
                 <motion.path

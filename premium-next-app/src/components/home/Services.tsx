@@ -11,7 +11,7 @@ import {
     Smartphone,
     Palette,
 } from "lucide-react";
-import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
+import { fadeUp } from "@/components/shared/headingAnimations";
 import {
     WorkflowDiagramMockup,
     ChatUIMockup,
@@ -261,7 +261,7 @@ export default function Services() {
         <section
             id="services"
             ref={ref}
-            className="relative overflow-hidden py-24 lg:py-32 scroll-mt-24"
+            className="relative overflow-hidden pb-16 pt-24 lg:pb-20 lg:pt-32 scroll-mt-24"
         >
             {/* Section ambient glow */}
             <div
@@ -287,23 +287,12 @@ export default function Services() {
                         what we actually do
                     </motion.span>
                     <motion.h2
-                        variants={slideFromLeftContainer}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
-                        style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                        variants={fadeUp(0.06)}
+                        className="max-w-[13ch] text-4xl font-bold leading-tight tracking-tight text-white lg:max-w-[16ch] lg:text-6xl xl:max-w-none xl:text-7xl xl:whitespace-nowrap"
                     >
-                        {splitWords("Six things we're good at.").map((word, index) => (
-                            <motion.span
-                                key={`${word}-${index}`}
-                                variants={slideFromLeftItem}
-                                style={{ display: "inline-block" }}
-                            >
-                                {word}
-                            </motion.span>
-                        ))}
-                        <span className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
-                        </span>
+                        Six things we&apos;re good at.
                     </motion.h2>
                     <motion.p
                         initial="hidden"

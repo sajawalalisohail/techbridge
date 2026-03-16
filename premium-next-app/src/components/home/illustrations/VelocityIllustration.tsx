@@ -22,13 +22,13 @@ export default function VelocityIllustration() {
             <svg viewBox="0 0 200 100" className="w-full h-full absolute inset-0 preserve-3d">
                 <defs>
                     <linearGradient id="velocity-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.2" />
-                        <stop offset="100%" stopColor="#a78bfa" stopOpacity="1" />
+                        <stop offset="0%" stopColor="var(--brand-accent)" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="var(--brand-accent-light)" stopOpacity="1" />
                     </linearGradient>
 
                     <linearGradient id="velocity-fill" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+                        <stop offset="0%" stopColor="var(--brand-accent)" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="var(--brand-accent)" stopOpacity="0" />
                     </linearGradient>
                 </defs>
 

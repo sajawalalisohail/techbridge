@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import HeroBlobBackground from "./HeroBlobBackground";
-import { ClipReveal } from "@/components/shared/headingAnimations";
 import { CountUp } from "@/components/shared/CountUp";
 
 // Dynamically import 3D background for performance
@@ -62,9 +61,9 @@ export default function Hero() {
                     style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
                         backgroundRepeat: "repeat",
-                        backgroundSize: "240px 240px",
-                        opacity: 0.22,
-                        mixBlendMode: "soft-light",
+                        backgroundSize: "260px 260px",
+                        opacity: 0.12,
+                        mixBlendMode: "overlay",
                     }}
                 />
                 {/* Hairline separator at bottom of hero */}
@@ -76,18 +75,19 @@ export default function Hero() {
                 variants={container}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
-                className="relative z-10 mx-auto flex min-h-screen max-w-[90rem] flex-col items-center justify-center px-6 pb-24 pt-32 lg:px-16"
+                className="relative z-10 mx-auto flex min-h-screen max-w-[90rem] flex-col items-center justify-center px-6 pb-24 pt-20 lg:px-16"
             >
 
                 {/* Primary headline */}
-                <ClipReveal className="pb-[0.14em]">
-                    <h1 className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]">
+                <motion.h1
+                    variants={fadeUp}
+                    className="max-w-5xl text-center text-[2.5rem] font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[6rem] 2xl:text-[7rem]"
+                >
                         <span className="block">Custom Software. AI Systems.</span>{" "}
-                        <span className="bg-gradient-to-r from-brand-accent-light via-white to-brand-accent-light bg-clip-text text-transparent [text-shadow:0_0_28px_rgba(var(--brand-accent-rgb),0.14)]">
+                        <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent [text-shadow:0_0_22px_rgba(var(--brand-accent-rgb),0.16)]">
                             Senior Engineers.
                         </span>
-                    </h1>
-                </ClipReveal>
+                </motion.h1>
 
                 {/* Sub-headline */}
                 <motion.p

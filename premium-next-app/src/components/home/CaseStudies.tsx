@@ -1,15 +1,17 @@
 ﻿"use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import { getHomepageCaseStudies, type CaseStudy } from "@/data/case-studies";
 
 const HOMEPAGE_STUDIES = getHomepageCaseStudies();
 
 /* â”€â”€â”€ Single Card â”€â”€â”€â”€â”€â”€ */
-function StudyCard({ study, index }: { study: CaseStudy; index: number }) {
+function StudyCard({ study }: { study: CaseStudy }) {
     return (
         <article
             className="case-card group relative flex h-[28rem] w-[22rem] flex-shrink-0 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5 sm:w-[26rem] lg:w-[28rem]"
@@ -62,7 +64,9 @@ export default function CaseStudies() {
     const sectionRef = useRef<HTMLElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
     const [shouldInitAnimation, setShouldInitAnimation] = useState(false);
+    const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -85,7 +89,9 @@ export default function CaseStudies() {
         return () => observer.disconnect();
     }, [shouldInitAnimation]);
 
-    useEffect(() => {
+    // useLayoutEffect ensures GSAP pin cleanup runs synchronously before React
+    // removes DOM nodes during client-side navigation (prevents removeChild error)
+    useLayoutEffect(() => {
         if (!shouldInitAnimation) return;
 
         const section = sectionRef.current;
@@ -95,35 +101,67 @@ export default function CaseStudies() {
 
         const localTriggers: ScrollTrigger[] = [];
         const localTweens: gsap.core.Tween[] = [];
-        let matchMediaCleanup: gsap.MatchMedia | null = null;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let matchMediaCleanup: any = null;
 
         const ctx = gsap.context(() => {
-            // Calculate scroll distance
-            const getScrollAmount = () => {
-                return -(track.scrollWidth - window.innerWidth);
+            const getDesktopLayout = () => {
+                const cards = Array.from(track.querySelectorAll<HTMLElement>(".case-card"));
+                const gap = parseFloat(window.getComputedStyle(track).gap || "24");
+
+                if (!cards.length) {
+                    return {
+                        startX: 0,
+                        endX: 0,
+                        travel: 0,
+                        holdDistance: window.innerWidth * 0.18,
+                    };
+                }
+
+                const viewportCenter = window.innerWidth / 2;
+                const lastCard = cards[cards.length - 1];
+                const lastCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
+                const naturalEndX = viewportCenter - lastCenter;
+                const endNudge = Math.max(72, Math.min(160, window.innerWidth * 0.12));
+                const maxLeftTravel = -(track.scrollWidth - window.innerWidth + gap + endNudge);
+                const startX = 0;
+                const endX = Math.max(naturalEndX, maxLeftTravel);
+                const travel = Math.abs(endX - startX);
+                const holdDistance = Math.max(window.innerWidth * 0.16, Math.min(220, travel * 0.32));
+
+                return { startX, endX, travel, holdDistance };
             };
 
             // Mobile: vertical stacked (no pin)
             matchMediaCleanup = ScrollTrigger.matchMedia({
                 // Desktop: horizontal scroll
-                "(min-width: 768px)": function () {
-                    const tween = gsap.to(track, {
-                        x: getScrollAmount,
-                        ease: "none",
-                    });
-                    localTweens.push(tween);
+                "(min-width: 900px)": function () {
+                    gsap.set(track, { x: () => getDesktopLayout().startX });
 
                     const pinTrigger = ScrollTrigger.create({
                         trigger: section,
                         start: "top top",
-                        end: () => `+=${Math.abs(getScrollAmount())}`,
+                        end: () => {
+                            const layout = getDesktopLayout();
+                            return `+=${Math.max(layout.travel + layout.holdDistance * 2, window.innerWidth * 0.9)}`;
+                        },
                         pin: true,
                         pinType: "transform",
                         scrub: 1,
-                        animation: tween,
                         invalidateOnRefresh: true,
                         onUpdate: (self) => {
+                            const layout = getDesktopLayout();
+                            const baseX = gsap.utils.interpolate(layout.startX, layout.endX, self.progress);
+                            const settleOffset =
+                                self.direction < 0 && self.progress < 0.085
+                                    ? Math.sin((self.progress / 0.085) * Math.PI) * Math.min(42, window.innerWidth * 0.032)
+                                    : 0;
+
+                            gsap.set(track, { x: baseX + settleOffset });
                             gsap.set(progress, { scaleX: self.progress });
+                        },
+                        onRefresh: () => {
+                            gsap.set(track, { x: getDesktopLayout().startX });
                         },
                     });
                     localTriggers.push(pinTrigger);
@@ -147,7 +185,8 @@ export default function CaseStudies() {
                     localTweens.push(cardsTween);
                 },
                 // Mobile: simple scroll reveal
-                "(max-width: 767px)": function () {
+                "(max-width: 899px)": function () {
+                    gsap.set(track, { clearProps: "x" });
                     const cardsTween = gsap.fromTo(
                         ".case-card",
                         { opacity: 0, y: 40 },
@@ -193,17 +232,31 @@ export default function CaseStudies() {
             />
 
             {/* Header */}
-            <div className="mx-auto max-w-[90rem] px-6 pt-28 lg:px-16 lg:pt-36">
-                <div className="mb-14 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div className="mx-auto max-w-[90rem] px-6 pt-12 lg:px-16 lg:pt-16">
+                <div ref={headerRef} className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-3xl">
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                             <span className="h-px w-4 bg-brand-accent/40" />
                             proof, not promises
                         </span>
-                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl">
-                            Real clients. Real numbers.
-                        </h2>
+                        <motion.h2
+                            variants={slideFromLeftContainer}
+                            initial="hidden"
+                            animate={isHeaderInView ? "show" : "hidden"}
+                            className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl"
+                            style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                        >
+                            {splitWords("Real clients. Real numbers.").map((word, index) => (
+                                <motion.span
+                                    key={`${word}-${index}`}
+                                    variants={slideFromLeftItem}
+                                    style={{ display: "inline-block" }}
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
+                        </motion.h2>
                         <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
                             Platforms we architected, systems we built, and rapid websites to show we can move fast without cutting corners.
                         </p>
@@ -221,16 +274,27 @@ export default function CaseStudies() {
             {/* Horizontal scroll track */}
             <div
                 ref={trackRef}
-                className="flex gap-6 px-6 pb-28 md:flex-nowrap md:pb-12 flex-wrap lg:px-16"
+                className="flex flex-wrap gap-6 px-6 pb-36 md:pb-28 lg:flex-nowrap lg:px-16 lg:pb-28"
                 style={{ willChange: "transform" }}
             >
-                {HOMEPAGE_STUDIES.map((study, i) => (
-                    <StudyCard key={study.slug} study={study} index={i} />
+                {HOMEPAGE_STUDIES.map((study) => (
+                    <StudyCard key={study.slug} study={study} />
                 ))}
             </div>
 
+            {/* View all link */}
+            <div className="mx-auto max-w-[90rem] px-6 pb-8 text-center lg:px-16">
+                <Link
+                    href="/work"
+                    className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors duration-200 hover:text-brand-accent-light"
+                >
+                    View all 13 projects
+                    <ArrowRight size={14} />
+                </Link>
+            </div>
+
             {/* Progress bar (desktop only) */}
-            <div className="hidden md:block absolute bottom-6 left-1/2 -translate-x-1/2 w-48 h-0.5 rounded-full bg-white/10 overflow-hidden">
+            <div className="absolute bottom-8 left-1/2 hidden h-0.5 w-48 -translate-x-1/2 overflow-hidden rounded-full bg-white/10 md:block lg:bottom-8">
                 <div
                     ref={progressRef}
                     className="h-full w-full origin-left bg-brand-accent/60 rounded-full"
@@ -240,4 +304,3 @@ export default function CaseStudies() {
         </section>
     );
 }
-

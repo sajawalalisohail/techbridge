@@ -1,6 +1,8 @@
 ﻿import Hero from "@/components/home/Hero";
+import Differentiators from "@/components/home/Differentiators";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
+import ProcessTimeline from "@/components/home/ProcessTimeline";
 import CaseStudies from "@/components/home/CaseStudies";
 import CTA from "@/components/home/CTA";
 
@@ -10,8 +12,16 @@ export default function Home() {
       {/* Hero is transparent, letting the sticky background show underneath */}
       <Hero />
 
+      {/* Addition 1: Differentiators strip */}
+      <Differentiators />
+
       <TrustedBy />
       <Services />
+
+      {/* Addition 2: Process timeline */}
+      <ProcessTimeline />
+
+      {/* Addition 3: Trimmed to 3 case studies + "View all" link */}
       <CaseStudies />
       <CTA />
 

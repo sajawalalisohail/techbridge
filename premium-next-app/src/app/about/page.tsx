@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import { blurFocusIn, slideFromLeft, slideFromRight, wordContainerVariants, wordVariants, ClipReveal } from "@/components/shared/headingAnimations";
+import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -212,7 +214,7 @@ export default function AboutPage() {
         <div className="relative text-white">
             <div className="relative z-10 min-h-screen overflow-hidden">
                 <section ref={heroRef} className="relative flex min-h-[55vh] items-center overflow-hidden border-b border-white/5">
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%)" }} />
+                    <InteriorHeroBlob preset="about" />
                     <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-32 lg:px-10">
                         <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
@@ -484,8 +486,9 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
+
+                <PageFooterGlow />
             </div>
         </div>
     );
 }
-

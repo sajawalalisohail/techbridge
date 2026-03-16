@@ -4,6 +4,8 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
+import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
 import { INSIGHTS } from "@/data/insights";
 
 /* â”€â”€â”€ Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -53,11 +55,7 @@ export default function InsightsPage() {
                     ref={heroRef}
                     className="relative flex min-h-[45vh] items-center overflow-hidden border-b border-white/5"
                 >
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0"
-                        style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 70%)" }}
-                    />
+                    <InteriorHeroBlob preset="insights" />
 
                     <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-28 lg:px-10">
                         <motion.div
@@ -159,15 +157,7 @@ export default function InsightsPage() {
                     </div>
                 </section>
 
-                {/* Bottom glow */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
-                    style={{
-                        background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
-                        boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
-                    }}
-                />
+                <PageFooterGlow />
             </div>
         </div>
     );

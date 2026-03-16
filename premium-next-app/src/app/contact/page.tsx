@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail, MapPin, CheckCircle2 } from "lucide-react";
 import { slideFromLeftContainer, slideFromLeftItem, slideFromRight, splitWords } from "@/components/shared/headingAnimations";
+import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
 
 /* â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const inputFocusCSS = `
@@ -82,11 +84,7 @@ export default function ContactPage() {
                         ref={ref}
                         className="relative min-h-[calc(100vh-80px)] overflow-hidden"
                     >
-                        {/* Ambient glows */}
-                        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 0% 30%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%)" }} />
-                            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 100% 70%, rgba(var(--brand-accent-dark-rgb), 0.04) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
-                        </div>
+                        <InteriorHeroBlob preset="contact" />
 
                         <div className="mx-auto max-w-[100rem] px-6 py-20 lg:px-10 lg:py-32">
                             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
@@ -368,15 +366,7 @@ export default function ContactPage() {
                         </div>
                     </section>
 
-                    {/* Subtle lime border glow separating the scrolling content from the reveal footer */}
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
-                        style={{
-                            background: 'linear-gradient(90deg, rgba(var(--brand-accent-rgb), 0) 0%, rgba(var(--brand-accent-rgb), 0.4) 30%, rgba(var(--brand-accent-light-rgb), 0.6) 50%, rgba(var(--brand-accent-rgb), 0.4) 70%, rgba(var(--brand-accent-rgb), 0) 100%)',
-                            boxShadow: '0 0 20px 4px rgba(var(--brand-accent-dark-rgb), 0.25)',
-                        }}
-                    />
+                    <PageFooterGlow />
                 </div>
             </div>
         </>

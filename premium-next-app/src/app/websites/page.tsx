@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Check, X, ChevronDown, ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
 import {
     blurFocusIn,
     slideFromLeftContainer,
@@ -62,37 +64,15 @@ function Hero() {
             ref={ref}
             className="relative overflow-hidden border-b border-white/5"
         >
-            {/* Background glows */}
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                    background: `
-                        radial-gradient(circle at 50% 50%, rgba(var(--brand-accent-rgb), 0.06) 0%, rgba(var(--brand-accent-rgb), 0) 60%),
-                        radial-gradient(circle at 100% 0%, rgba(var(--brand-accent-dark-rgb), 0.05) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%),
-                        radial-gradient(ellipse at 0% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 70%),
-                        radial-gradient(ellipse at 100% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 70%)
-                    `,
-                }}
-            />
+            <InteriorHeroBlob preset="websites" />
 
-            {/* Subtle dot grid */}
-            <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-20" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="hero-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-                        <circle cx="1.5" cy="1.5" r="1" fill="white" fillOpacity="0.1" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#hero-dots)" />
-            </svg>
-
-            <div className="relative z-10 mx-auto max-w-5xl px-6 pb-16 pt-24 text-center lg:px-12 lg:pb-20 lg:pt-28">
+            <div className="relative z-10 mx-auto max-w-[100rem] px-6 pb-20 pt-28 text-center lg:px-10 lg:pb-24 lg:pt-32">
                 {/* Eyebrow badge */}
                 <motion.div
                     variants={fadeUp(0)}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="website-glow-pill mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 backdrop-blur-sm"
+                    className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 backdrop-blur-sm"
                 >
                     <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light shadow-[0_0_6px_rgba(var(--brand-accent-light-rgb), 0.8)]" />
                     <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
@@ -104,10 +84,10 @@ function Hero() {
                     variants={blurFocusIn(0.08)}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+                    className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-7xl"
                 >
                     Your Website. Custom-Coded.{" "}
-                    <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                         Live Tomorrow.
                     </span>
                 </motion.h1>
@@ -142,7 +122,7 @@ function Hero() {
                         href="/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="website-glow-pill inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
+                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5 hover:text-brand-accent-light"
                     >
                         Book a Call
                         <ExternalLink size={13} className="text-zinc-500" />
@@ -206,7 +186,7 @@ function ComparisonTable() {
                 variants={stagger(0.08)}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
-                className="website-glow-shell overflow-hidden rounded-2xl border border-white/8"
+                className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/45 backdrop-blur-sm"
             >
                 {/* Header row */}
                 <div className="grid grid-cols-4 border-b border-white/8 bg-white/[0.03]">
@@ -1343,84 +1323,79 @@ function FinalCTA() {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function WebsitesPage() {
     return (
-        <div
-            className="website-glow-shell relative z-10 min-h-screen overflow-hidden rounded-none border border-brand-accent/20"
-            style={{ animation: "accent-pulse 6s ease-in-out infinite" }}
-        >
-            {/* Full-bleed ambient glows -- inline position overrides .website-glow-shell > * { position: relative } */}
-            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-x-0 top-0 z-50 h-64 bg-gradient-to-b from-brand-accent-dark/5 to-transparent" />
-            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-x-0 bottom-0 z-50 h-64 bg-gradient-to-t from-brand-accent-dark/5 to-transparent" />
-            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-y-0 left-0 z-50 w-[30px] bg-gradient-to-r from-brand-accent-dark/10 to-transparent" />
-            <div aria-hidden="true" style={{ position: "absolute" }} className="pointer-events-none inset-y-0 right-0 z-50 w-[30px] bg-gradient-to-l from-brand-accent-dark/10 to-transparent" />
-            <Hero />
+        <div className="relative min-h-screen text-white">
+            <div className="relative z-10 overflow-hidden min-h-screen">
+                <Hero />
 
-            {/* Separator */}
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                {/* Separator */}
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 2 â€" Comparison */}
+                <section className="py-24 lg:py-32">
+                    <ComparisonTable />
+                </section>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 2.5 â€" Tech Stack */}
+                <section className="py-24 lg:py-32">
+                    <TechStack />
+                </section>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 3 â€" Timeline */}
+                <section className="py-24 lg:py-32">
+                    <Timeline />
+                </section>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 4 â€" Social Proof */}
+                <section className="py-24 lg:py-32">
+                    <SocialProof />
+                </section>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 5 â€" Pricing */}
+                <section className="py-24 lg:py-32">
+                    <Pricing />
+                </section>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 6 â€" Care Plans */}
+                <section className="py-24 lg:py-28">
+                    <CarePlans />
+                </section>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+                </div>
+
+                {/* Step 7 â€" FAQ */}
+                <section className="py-24 lg:py-32">
+                    <FAQ />
+                </section>
+
+                {/* Final CTA */}
+                <FinalCTA />
+
+                <PageFooterGlow />
             </div>
-
-            {/* Step 2 â€" Comparison */}
-            <section className="py-24 lg:py-32">
-                <ComparisonTable />
-            </section>
-
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            </div>
-
-            {/* Step 2.5 â€" Tech Stack */}
-            <section className="py-24 lg:py-32">
-                <TechStack />
-            </section>
-
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            </div>
-
-            {/* Step 3 â€" Timeline */}
-            <section className="py-24 lg:py-32">
-                <Timeline />
-            </section>
-
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            </div>
-
-            {/* Step 4 â€" Social Proof */}
-            <section className="py-24 lg:py-32">
-                <SocialProof />
-            </section>
-
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            </div>
-
-            {/* Step 5 â€" Pricing */}
-            <section className="py-24 lg:py-32">
-                <Pricing />
-            </section>
-
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            </div>
-
-            {/* Step 6 â€" Care Plans */}
-            <section className="py-24 lg:py-28">
-                <CarePlans />
-            </section>
-
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            </div>
-
-            {/* Step 7 â€" FAQ */}
-            <section className="py-24 lg:py-32">
-                <FAQ />
-            </section>
-
-            {/* Final CTA */}
-            <FinalCTA />
-
         </div>
     );
 }

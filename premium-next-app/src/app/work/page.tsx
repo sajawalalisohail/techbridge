@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useRef } from "react";
+import { type CSSProperties, useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
@@ -22,6 +22,8 @@ import {
     type CaseStudy,
     type CaseStudyWorkSection,
 } from "@/data/case-studies";
+import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WORK_SECTIONS: CaseStudyWorkSection[] = [
@@ -38,6 +40,85 @@ const WORK_SECTION_ANIMATIONS = [
     { container: slideFromLeftContainer, item: slideFromLeftItem },
 ] as const;
 
+interface WorkSectionTheme {
+    surfaceRgb: string;
+    edgeRgb: string;
+    chipStyle: CSSProperties;
+    tagStyle: CSSProperties;
+    panelStyle: CSSProperties;
+}
+
+function buildSurfaceBackground(
+    primaryRgb: string,
+    edgeRgb: string,
+    primaryStrength: number,
+    edgeStrength: number,
+) {
+    return `
+        linear-gradient(180deg, rgba(10,10,12,0.94) 0%, rgba(10,10,12,0.84) 100%),
+        radial-gradient(circle at 0% 0%, rgba(${primaryRgb}, ${primaryStrength}) 0%, rgba(${primaryRgb}, 0) 56%),
+        radial-gradient(circle at 100% 100%, rgba(${edgeRgb}, ${edgeStrength}) 0%, rgba(${edgeRgb}, 0) 62%)
+    `;
+}
+
+function buildPillStyle(
+    rgb: string,
+    backgroundStrength: number,
+    borderStrength: number,
+): CSSProperties {
+    return {
+        backgroundColor: `rgba(${rgb}, ${backgroundStrength})`,
+        borderColor: `rgba(${rgb}, ${borderStrength})`,
+    };
+}
+
+function buildPanelStyle(
+    primaryRgb: string,
+    edgeRgb: string,
+    primaryStrength: number,
+    edgeStrength: number,
+): CSSProperties {
+    return {
+        background: `
+            linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.025) 100%),
+            radial-gradient(circle at 100% 0%, rgba(${primaryRgb}, ${primaryStrength}) 0%, rgba(${primaryRgb}, 0) 58%),
+            radial-gradient(circle at 0% 100%, rgba(${edgeRgb}, ${edgeStrength}) 0%, rgba(${edgeRgb}, 0) 64%)
+        `,
+        borderColor: `rgba(${primaryRgb}, 0.16)`,
+    };
+}
+
+const WORK_SECTION_THEME: Record<CaseStudyWorkSection, WorkSectionTheme> = {
+    "flagship-platforms": {
+        surfaceRgb: "var(--brand-accent-dark-rgb)",
+        edgeRgb: "var(--brand-accent-rgb)",
+        chipStyle: buildPillStyle("var(--brand-accent-dark-rgb)", 0.12, 0.2),
+        tagStyle: buildPillStyle("var(--brand-accent-dark-rgb)", 0.08, 0.16),
+        panelStyle: buildPanelStyle("var(--brand-accent-dark-rgb)", "var(--brand-accent-rgb)", 0.14, 0.08),
+    },
+    "systems-tools": {
+        surfaceRgb: "var(--brand-accent-rgb)",
+        edgeRgb: "var(--brand-accent-light-rgb)",
+        chipStyle: buildPillStyle("var(--brand-accent-rgb)", 0.12, 0.2),
+        tagStyle: buildPillStyle("var(--brand-accent-rgb)", 0.08, 0.16),
+        panelStyle: buildPanelStyle("var(--brand-accent-rgb)", "var(--brand-accent-light-rgb)", 0.13, 0.07),
+    },
+    "mobile-products": {
+        surfaceRgb: "var(--brand-accent-light-rgb)",
+        edgeRgb: "var(--brand-accent-rgb)",
+        chipStyle: buildPillStyle("var(--brand-accent-light-rgb)", 0.14, 0.24),
+        tagStyle: buildPillStyle("var(--brand-accent-light-rgb)", 0.1, 0.18),
+        panelStyle: buildPanelStyle("var(--brand-accent-light-rgb)", "var(--brand-accent-rgb)", 0.17, 0.1),
+    },
+    "rapid-websites": {
+        surfaceRgb: "var(--brand-accent-rgb)",
+        edgeRgb: "var(--brand-accent-dark-rgb)",
+        chipStyle: buildPillStyle("var(--brand-accent-rgb)", 0.11, 0.18),
+        tagStyle: buildPillStyle("var(--brand-accent-rgb)", 0.08, 0.15),
+        panelStyle: buildPanelStyle("var(--brand-accent-rgb)", "var(--brand-accent-dark-rgb)", 0.13, 0.08),
+    },
+};
+
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
     return (
         <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
@@ -48,9 +129,20 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
     );
 }
 
-function LeadProject({ project }: { project: CaseStudy }) {
+function LeadProject({ project, theme }: { project: CaseStudy; theme: WorkSectionTheme }) {
     return (
-        <article className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950/70 p-8 backdrop-blur-sm lg:p-10">
+        <article
+            className="relative overflow-hidden rounded-2xl border border-white/10 p-8 backdrop-blur-sm lg:p-10"
+            style={{
+                background: buildSurfaceBackground(
+                    theme.surfaceRgb,
+                    theme.edgeRgb,
+                    0.16,
+                    0.08,
+                ),
+                borderColor: `rgba(${theme.surfaceRgb}, 0.18)`,
+            }}
+        >
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
@@ -80,7 +172,8 @@ function LeadProject({ project }: { project: CaseStudy }) {
                         {project.tags.slice(0, 4).map((tag) => (
                             <span
                                 key={tag}
-                                className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-zinc-400"
+                                className="rounded-full border px-3 py-1.5 text-xs font-medium text-zinc-300"
+                                style={theme.tagStyle}
                             >
                                 {tag}
                             </span>
@@ -88,7 +181,10 @@ function LeadProject({ project }: { project: CaseStudy }) {
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-between rounded-[1.5rem] border border-white/8 bg-white/[0.03] p-6">
+                <div
+                    className="flex flex-col justify-between rounded-[1.5rem] border p-6"
+                    style={theme.panelStyle}
+                >
                     <div>
                         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-600">
                             Signature Outcome
@@ -127,9 +223,20 @@ function LeadProject({ project }: { project: CaseStudy }) {
     );
 }
 
-function ProjectCard({ project }: { project: CaseStudy }) {
+function ProjectCard({ project, theme }: { project: CaseStudy; theme: WorkSectionTheme }) {
     return (
-        <article className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5">
+        <article
+            className="group relative overflow-hidden rounded-2xl border border-white/8 p-6 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40"
+            style={{
+                background: buildSurfaceBackground(
+                    theme.surfaceRgb,
+                    theme.edgeRgb,
+                    0.14,
+                    0.07,
+                ),
+                borderColor: `rgba(${theme.surfaceRgb}, 0.14)`,
+            }}
+        >
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -165,7 +272,8 @@ function ProjectCard({ project }: { project: CaseStudy }) {
                     {project.tags.slice(0, 3).map((tag) => (
                         <span
                             key={tag}
-                            className="rounded-full border border-white/8 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-500"
+                            className="rounded-full border px-2.5 py-1 text-[11px] font-medium text-zinc-300"
+                            style={theme.tagStyle}
                         >
                             {tag}
                         </span>
@@ -198,6 +306,7 @@ function ProjectCard({ project }: { project: CaseStudy }) {
 
 function WorkSection({ section, index }: { section: CaseStudyWorkSection; index: number }) {
     const meta = WORK_SECTION_META[section];
+    const theme = WORK_SECTION_THEME[section];
     const studies = getWorkSectionStudies(section);
     const lead = meta.highlightSlug ? getCaseStudy(meta.highlightSlug) : studies[0];
     const rest = studies.filter((study) => study.slug !== lead?.slug);
@@ -242,7 +351,8 @@ function WorkSection({ section, index }: { section: CaseStudyWorkSection; index:
                     {studies.map((study) => (
                         <span
                             key={study.slug}
-                            className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-zinc-500"
+                            className="rounded-full border px-3 py-1.5 text-xs font-medium text-zinc-300"
+                            style={theme.chipStyle}
                         >
                             {study.client}
                         </span>
@@ -250,12 +360,12 @@ function WorkSection({ section, index }: { section: CaseStudyWorkSection; index:
                 </div>
             </div>
 
-            <LeadProject project={lead} />
+            <LeadProject project={lead} theme={theme} />
 
             {rest.length > 0 && (
                 <div className="mt-6 grid gap-5 lg:grid-cols-2">
                     {rest.map((project) => (
-                        <ProjectCard key={project.slug} project={project} />
+                        <ProjectCard key={project.slug} project={project} theme={theme} />
                     ))}
                 </div>
             )}
@@ -276,14 +386,7 @@ export default function WorkPage() {
                     ref={heroRef}
                     className="relative flex min-h-[52vh] items-center overflow-hidden border-b border-white/5"
                 >
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0"
-                        style={{
-                            background:
-                                "radial-gradient(ellipse at 72% 28%, rgba(var(--brand-accent-rgb), 0.10) 0%, rgba(var(--brand-accent-rgb), 0) 55%), radial-gradient(circle at 0% 100%, rgba(var(--brand-accent-dark-rgb), 0.08) 0%, rgba(var(--brand-accent-dark-rgb), 0) 40%)",
-                        }}
-                    />
+                    <InteriorHeroBlob preset="work" />
                     <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-28 lg:px-10">
                         <motion.div
                             initial={{ opacity: 0, y: 24 }}
@@ -303,8 +406,20 @@ export default function WorkPage() {
                                 <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Real</motion.span>
                                 <motion.span variants={wordVariants} style={{ display: "inline-block" }}>clients.</motion.span>
                                 <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Shipped</motion.span>
-                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>and</motion.span>
-                                <motion.span variants={wordVariants} style={{ display: "inline-block" }}>running.</motion.span>
+                                <motion.span
+                                    variants={wordVariants}
+                                    className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                                    style={{ display: "inline-block" }}
+                                >
+                                    and
+                                </motion.span>
+                                <motion.span
+                                    variants={wordVariants}
+                                    className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                                    style={{ display: "inline-block" }}
+                                >
+                                    running.
+                                </motion.span>
                             </motion.h1>
                             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-zinc-400">
                                 Platforms, internal tools, mobile apps, and rapid websites.
@@ -363,8 +478,9 @@ export default function WorkPage() {
                         </div>
                     </div>
                 </div>
+
+                <PageFooterGlow />
             </div>
         </div>
     );
 }
-

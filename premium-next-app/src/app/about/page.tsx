@@ -309,7 +309,7 @@ export default function AboutPage() {
 
                         <motion.div variants={staggerContainer} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             {TEAM.map((member) => (
-                                <motion.article key={member.name} variants={childFade} className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5">
+                                <motion.article key={member.name} variants={childFade} className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5">
                                     <div className="relative z-10">
                                         <div className="mb-6 flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-4">
@@ -467,7 +467,7 @@ export default function AboutPage() {
                             {VALUES.map((value) => {
                                 const Icon = value.icon;
                                 return (
-                                    <motion.div key={value.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5">
+                                    <motion.div key={value.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5">
                                         <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-brand-accent/40 group-hover:bg-brand-accent/5 group-hover:text-brand-accent-light"><Icon size={20} strokeWidth={1.5} /></div>
                                         <h3 className="mb-3 text-lg font-bold tracking-tight text-white">{value.title}</h3>
                                         <p className="text-sm leading-relaxed text-zinc-500">{value.description}</p>
@@ -529,7 +529,7 @@ export default function AboutPage() {
                             {SECURITY_ITEMS.map((item) => {
                                 const Icon = item.icon;
                                 return (
-                                    <motion.div key={item.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5">
+                                    <motion.div key={item.title} variants={childFade} className="group rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5">
                                         <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-500 transition-all duration-300 group-hover:border-brand-accent/40 group-hover:bg-brand-accent/5 group-hover:text-brand-accent-light"><Icon size={20} strokeWidth={1.5} /></div>
                                         <h3 className="mb-2 text-base font-bold tracking-tight text-white">{item.title}</h3>
                                         <p className="text-sm leading-relaxed text-zinc-500">{item.description}</p>

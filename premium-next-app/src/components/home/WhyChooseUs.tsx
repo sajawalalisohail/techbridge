@@ -92,7 +92,7 @@ function AdvantageCard({ item }: { item: Advantage }) {
     return (
         <motion.div
             variants={cardVariants}
-            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40 hover:bg-brand-accent/5 lg:p-10"
+            className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5 lg:p-10"
         >
             {/* â”€â”€ Gradient mesh - always mounted, fades in on hover â”€â”€ */}
             <div
@@ -184,7 +184,7 @@ export default function WhyChooseUs() {
                     style={{ background: "radial-gradient(circle at 100% 50%, rgba(var(--brand-accent-rgb), 0.04) 0%, rgba(var(--brand-accent-rgb), 0) 50%)" }}
                 />
 
-                <div className="mx-auto max-w-[90rem] px-6 lg:px-16">
+                <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                     {/* â”€â”€ Section Header â”€â”€ */}
                     <div
                         ref={headerRef}
@@ -204,7 +204,7 @@ export default function WhyChooseUs() {
                                 variants={blurFocusIn()}
                                 initial="hidden"
                                 animate={isHeaderInView ? "show" : "hidden"}
-                                className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                                className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
                             >
                                 Four reasons we&apos;re different.{" "}
                                 <span className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">

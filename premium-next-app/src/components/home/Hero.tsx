@@ -78,15 +78,29 @@ export default function Hero() {
                 className="relative z-10 mx-auto flex min-h-screen max-w-[100rem] flex-col items-center justify-center px-6 pb-24 pt-28 lg:px-10"
             >
 
-                {/* Primary headline */}
+                {/* Primary headline — word-by-word reveal */}
                 <motion.h1
-                    variants={fadeUp}
-                    className="max-w-5xl text-center text-3xl font-semibold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl"
+                    variants={{
+                        hidden: {},
+                        show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+                    }}
+                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-3xl font-semibold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl"
                 >
-                        <span className="block">Custom Software. AI Systems.</span>{" "}
-                        <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent [text-shadow:0_0_22px_rgba(var(--brand-accent-rgb),0.16)]">
-                            Senior Engineers.
-                        </span>
+                    {["Custom", "Software.", "AI", "Systems."].map((word, i) => (
+                        <motion.span
+                            key={`w-${i}`}
+                            variants={{ hidden: { y: 40, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
+                            className="inline-block"
+                        >
+                            {word}
+                        </motion.span>
+                    ))}
+                    <motion.span
+                        variants={{ hidden: { y: 40, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
+                        className="inline-block bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                    >
+                        Senior Engineers.
+                    </motion.span>
                 </motion.h1>
 
                 {/* Sub-headline */}

@@ -226,7 +226,7 @@ function LeadProject({ project, theme }: { project: CaseStudy; theme: WorkSectio
 function ProjectCard({ project, theme }: { project: CaseStudy; theme: WorkSectionTheme }) {
     return (
         <article
-            className="group relative overflow-hidden rounded-2xl border border-white/8 p-6 backdrop-blur-sm transition-all duration-500 hover:border-brand-accent/40"
+            className="group relative overflow-hidden rounded-2xl border border-white/8 p-6 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40"
             style={{
                 background: buildSurfaceBackground(
                     theme.surfaceRgb,
@@ -384,9 +384,9 @@ export default function WorkPage() {
             <div className="relative z-10 overflow-hidden min-h-screen">
                 <section
                     ref={heroRef}
-                    className="relative flex min-h-[52vh] items-center overflow-hidden border-b border-white/5"
+                    className="relative flex min-h-[52vh] items-center border-b border-white/5"
                 >
-                    <InteriorHeroBlob preset="work" />
+                    <InteriorHeroBlob preset="work" className="!overflow-visible -bottom-24" />
                     <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-28 lg:px-10">
                         <motion.div
                             initial={{ opacity: 0, y: 24 }}

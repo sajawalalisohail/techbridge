@@ -53,11 +53,11 @@ function ServicesMegaPanel({
                 }}
             />
 
-            <div className="relative z-10 grid gap-5 p-4 lg:grid-cols-[0.82fr_1.18fr] lg:p-5">
+            <div className="relative z-10 grid gap-3 p-3 lg:grid-cols-[0.82fr_1.18fr]">
                 <Link
                     href={FEATURED_STUDY ? `/work/${FEATURED_STUDY.slug}` : "/work"}
                     onClick={closeMenu}
-                    className="group relative overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/[0.03] transition-all duration-300 hover:border-brand-accent/30 hover:bg-white/[0.04]"
+                    className="group relative self-start overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/[0.03] transition-all duration-300 hover:border-brand-accent/30 hover:bg-white/[0.04]"
                 >
                     <div
                         aria-hidden="true"
@@ -68,7 +68,7 @@ function ServicesMegaPanel({
                         }}
                     />
 
-                    <div className="relative h-52 overflow-hidden border-b border-white/8 bg-neutral-950">
+                    <div className="relative h-24 overflow-hidden border-b border-white/8 bg-neutral-950">
                         {FEATURED_STUDY?.assets[0] ? (
                             <Image
                                 src={FEATURED_STUDY.assets[0]}
@@ -82,49 +82,36 @@ function ServicesMegaPanel({
                         )}
                     </div>
 
-                    <div className="relative z-10 flex flex-col gap-4 p-6">
+                    <div className="relative z-10 flex items-center justify-between gap-3 p-3">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
                                 latest work
                             </p>
-                            <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white">
+                            <h3 className="mt-1 text-sm font-semibold tracking-tight text-white">
                                 {FEATURED_STUDY?.client ?? "Selected Work"}
                             </h3>
-                            <p className="mt-2 max-w-md text-sm leading-relaxed text-zinc-400">
-                                {FEATURED_STUDY?.heroDescription ??
-                                    "Selected TechBridge delivery across custom software, AI workflows, mobile products, and rapid websites."}
+                            <p className="font-mono text-lg font-extrabold tracking-tight text-white">
+                                {FEATURED_STUDY?.metric ?? "Fast"}
+                            </p>
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                                {FEATURED_STUDY?.metricLabel ?? "delivery"}
                             </p>
                         </div>
-
-                        <div className="flex items-end justify-between gap-4">
-                            <div>
-                                <p className="font-mono text-4xl font-extrabold tracking-tight text-white">
-                                    {FEATURED_STUDY?.metric ?? "Fast"}
-                                </p>
-                                <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-500">
-                                    {FEATURED_STUDY?.metricLabel ?? "delivery"}
-                                </p>
-                            </div>
-                            <span className="inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-300 group-hover:text-brand-accent-light">
-                                View case study
-                                <ArrowRight
-                                    size={15}
-                                    className="transition-transform duration-300 group-hover:translate-x-1"
-                                />
-                            </span>
-                        </div>
+                        <span className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-zinc-400 transition-colors duration-300 group-hover:text-brand-accent-light">
+                            View
+                            <ArrowRight
+                                size={12}
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                            />
+                        </span>
                     </div>
                 </Link>
 
-                <div className="rounded-[1.5rem] border border-white/8 bg-black/30 p-6">
-                    <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-white/8 pb-4">
+                <div className="rounded-[1.5rem] border border-white/8 bg-black/30 p-4">
+                    <div className="mb-2 flex flex-wrap items-center justify-between gap-2 border-b border-white/8 pb-2">
                         <div>
                             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">
                                 services
-                            </p>
-                            <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-400">
-                                Engineering-first delivery across software, AI, mobile,
-                                and design systems.
                             </p>
                         </div>
                         <Link
@@ -137,7 +124,7 @@ function ServicesMegaPanel({
                         </Link>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
                         {SERVICE_NAV_GROUPS.map((group) => {
                             const Icon = group.icon;
 
@@ -146,27 +133,27 @@ function ServicesMegaPanel({
                                     key={group.id}
                                     href={group.href}
                                     onClick={closeMenu}
-                                    className="group rounded-[1.35rem] border border-white/8 bg-white/[0.02] p-4 transition-all duration-300 hover:border-brand-accent/30 hover:bg-brand-accent/5"
+                                    className="group rounded-[1.35rem] border border-white/8 bg-white/[0.02] p-3 transition-all duration-300 hover:border-brand-accent/30 hover:bg-brand-accent/5"
                                 >
                                     <div className="flex items-start gap-3">
-                                        <span className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-brand-accent-light transition-all duration-300 group-hover:border-brand-accent/30 group-hover:bg-brand-accent/10">
+                                        <span className="mt-0.5 inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-brand-accent-light transition-all duration-300 group-hover:border-brand-accent/30 group-hover:bg-brand-accent/10">
                                             <Icon size={18} strokeWidth={1.8} />
                                         </span>
                                         <div>
                                             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-600">
                                                 {group.number}
                                             </p>
-                                            <h4 className="mt-1 text-lg font-semibold leading-tight text-white">
+                                            <h4 className="mt-0.5 text-sm font-semibold leading-tight text-white">
                                                 {group.label}
                                             </h4>
                                         </div>
                                     </div>
 
-                                    <ul className="mt-4 space-y-2">
+                                    <ul className="mt-2 space-y-1">
                                         {group.capabilities.map((capability) => (
                                             <li
                                                 key={capability}
-                                                className="text-sm leading-relaxed text-zinc-400 transition-colors duration-300 group-hover:text-zinc-300"
+                                                className="text-xs leading-relaxed text-zinc-400 transition-colors duration-300 group-hover:text-zinc-300"
                                             >
                                                 {capability}
                                             </li>
@@ -179,7 +166,7 @@ function ServicesMegaPanel({
                 </div>
             </div>
 
-            <div className="relative z-10 flex flex-col gap-4 border-t border-white/8 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="relative z-10 flex flex-col gap-3 border-t border-white/8 px-5 py-2.5 lg:flex-row lg:items-center lg:justify-between">
                 <p className="text-sm text-zinc-500">
                     Delivery designed to move faster than a traditional agency process.
                 </p>
@@ -265,8 +252,9 @@ export default function Navbar() {
     }, [clearMenuTimers, closeServicesMenu]);
 
     const updateNavState = useCallback(() => {
-        setNavState(getNavState(window.scrollY));
-    }, []);
+        const state = getNavState(window.scrollY);
+        setNavState(pathname === "/work" && state === "pill" ? "hidden" : state);
+    }, [pathname]);
 
     useEffect(() => {
         window.addEventListener("scroll", updateNavState, { passive: true });
@@ -308,10 +296,11 @@ export default function Navbar() {
             closeServicesMenu();
             setMobileOpen(false);
             setMobileServicesOpen(false);
+            updateNavState();
         }, 0);
 
         return () => window.clearTimeout(timer);
-    }, [closeServicesMenu, pathname]);
+    }, [closeServicesMenu, pathname, updateNavState]);
 
     useEffect(() => {
         if (!servicesMenuOpen) return;

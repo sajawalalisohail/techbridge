@@ -112,7 +112,7 @@
   --color-brand-accent-dark: var(--brand-accent-dark);
   --color-brand-accent-deep: var(--brand-accent-deep);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   --shadow-accent-glow: 0 0 40px rgba(var(--brand-accent-rgb), 0.35);
 }
 

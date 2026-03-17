@@ -49,7 +49,7 @@ function HeroClock({ tz }: { tz: string }) {
         <div className="mt-10">
             <div className="flex items-end gap-3">
                 <p
-                    className="font-mono text-[clamp(4rem,11vw,8rem)] font-extrabold leading-none tracking-[-0.08em] text-white"
+                    className="font-mono text-[clamp(4rem,11vw,8rem)] font-thin leading-none tracking-[-0.08em] text-white"
                     suppressHydrationWarning
                 >
                     {timeValue}
@@ -117,7 +117,7 @@ export default function Footer() {
                             <div>
                                 <a
                                     href={`mailto:${FOOTER_EMAIL}`}
-                                    className="inline-flex items-center text-[clamp(2rem,3.4vw,3.25rem)] font-medium tracking-tight text-white transition-colors duration-300 hover:text-brand-accent-light"
+                                    className="inline-flex items-center text-[clamp(1.1rem,1.8vw,1.9rem)] font-medium tracking-tight text-white transition-colors duration-300 hover:text-brand-accent-light"
                                 >
                                     {FOOTER_EMAIL}
                                 </a>
@@ -149,18 +149,18 @@ export default function Footer() {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
+                        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                             {FOOTER_COLUMNS.map((column) => (
                                 <div key={column.title}>
-                                    <p className="mb-5 text-sm font-medium tracking-tight text-zinc-500">
+                                    <p className="mb-3 text-sm font-medium tracking-tight text-zinc-500">
                                         {column.title}
                                     </p>
-                                    <ul className="space-y-3.5">
+                                    <ul className="space-y-2">
                                         {column.links.map((link) => (
                                             <li key={link.label}>
                                                 <Link
                                                     href={link.href}
-                                                    className="text-[1.05rem] leading-snug text-white/88 transition-colors duration-300 hover:text-brand-accent-light"
+                                                    className="text-sm leading-snug text-white/88 transition-colors duration-300 hover:text-brand-accent-light"
                                                 >
                                                     {link.label}
                                                 </Link>

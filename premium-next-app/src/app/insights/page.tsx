@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
+import { blurFocusIn } from "@/components/shared/headingAnimations";
 import { INSIGHTS } from "@/data/insights";
 
 /* â”€â”€â”€ Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -53,9 +54,9 @@ export default function InsightsPage() {
                 {/* â”€â”€ Hero â”€â”€ */}
                 <section
                     ref={heroRef}
-                    className="relative flex min-h-[45vh] items-center overflow-hidden border-b border-white/5"
+                    className="relative flex min-h-[45vh] items-center border-b border-white/5"
                 >
-                    <InteriorHeroBlob preset="insights" />
+                    <InteriorHeroBlob preset="insights" className="!overflow-visible -bottom-24" />
 
                     <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-28 lg:px-10">
                         <motion.div
@@ -70,7 +71,7 @@ export default function InsightsPage() {
                         </motion.div>
 
                         <motion.h1
-                            variants={fadeUp(0.1)}
+                            variants={blurFocusIn(0.1)}
                             initial="hidden"
                             animate={isHeroInView ? "show" : "hidden"}
                             className="text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
@@ -106,7 +107,7 @@ export default function InsightsPage() {
                                 <motion.article key={post.slug} variants={childFade}>
                                     <Link
                                         href={`/insights/${post.slug}`}
-                                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:border-white/15"
+                                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-white/15"
                                     >
                                         {/* Hover glow */}
                                         <div

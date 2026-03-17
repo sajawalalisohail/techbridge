@@ -17,7 +17,7 @@ function StudyCard({ study, isActive }: { study: CaseStudy; isActive: boolean })
             className={`case-card group relative flex h-[28rem] w-full flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 sm:w-[22rem] md:w-[26rem] lg:w-[28rem] ${
                 isActive
                     ? "border-brand-accent/30 scale-[1.02]"
-                    : "border-white/8 lg:opacity-70 hover:border-brand-accent/40 hover:bg-brand-accent/5"
+                    : "border-white/8 lg:opacity-70 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5"
             }`}
             style={{
                 opacity: 0,
@@ -260,7 +260,7 @@ export default function CaseStudies() {
         <section
             id="case-studies"
             ref={sectionRef}
-            className="relative overflow-hidden"
+            className="relative z-20 overflow-hidden"
         >
             {/* Ambient background glow */}
             <div
@@ -275,7 +275,7 @@ export default function CaseStudies() {
             {/* Header */}
             <div className="mx-auto max-w-[100rem] px-6 pt-20 lg:px-10 lg:pt-24">
                 <div ref={headerRef} className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-3xl">
+                    <div>
                         <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                             <span className="h-px w-4 bg-brand-accent/40" />

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -10,17 +9,22 @@ import SmoothScroll from "@/components/shared/SmoothScroll";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
 import CursorFollower from "@/components/shared/CursorFollowerWrapper";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const satoshi = localFont({
+  src: [
+    {
+      path: "../../public/font/satoshi/Satoshi-Variable.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/satoshi/Satoshi-VariableItalic.woff2",
+      style: "italic",
+    },
+  ],
   variable: "--font-sans",
-  subsets: ["latin"],
   display: "swap",
+  weight: "300 900",
 });
 
-const jetbrainsMono = localFont({
-  src: "../../public/font/JetBrainsMono-VariableFont_wght.ttf",
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://techbridge.dev"),
@@ -71,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} bg-[var(--surface-0)] text-white antialiased font-sans`}
+        className={`${satoshi.variable} bg-[var(--surface-0)] text-white antialiased font-sans`}
         suppressHydrationWarning
       >
         <SmoothScroll />

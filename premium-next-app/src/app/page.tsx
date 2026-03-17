@@ -1,31 +1,23 @@
-﻿import Hero from "@/components/home/Hero";
+import Hero from "@/components/home/Hero";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
-import ProcessTimeline from "@/components/home/ProcessTimeline";
 import CaseStudies from "@/components/home/CaseStudies";
+import ProcessShowcase from "@/components/home/ProcessShowcase";
 import CTA from "@/components/home/CTA";
 
 export default function Home() {
   return (
     <>
-      {/* Hero is transparent, letting the sticky background show underneath */}
       <Hero />
-
-      {/* Why us — animated advantage cards with gradient mesh */}
       <WhyChooseUs />
-
-      <TrustedBy />
       <Services />
-
-      {/* Addition 2: Process timeline */}
-      <ProcessTimeline />
-
-      {/* Addition 3: Trimmed to 3 case studies + "View all" link */}
       <CaseStudies />
+      <ProcessShowcase />
+      <TrustedBy />
       <CTA />
 
-      {/* Subtle lime border glow separating the scrolling content from the reveal footer */}
+      {/* Subtle accent border glow separating scrolling content from reveal footer */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
@@ -37,4 +29,3 @@ export default function Home() {
     </>
   );
 }
-

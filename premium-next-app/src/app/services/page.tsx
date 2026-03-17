@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import TechStackMarquee from "@/components/home/TechStackMarquee";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import { wordContainerVariants, wordVariants, splitWords } from "@/components/shared/headingAnimations";
 import dynamic from "next/dynamic";
 import { SERVICE_SECTIONS } from "@/data/site-navigation";
 
@@ -152,15 +153,24 @@ export default function ServicesPage() {
                                 services
                             </span>
                             <motion.h1
-                                initial={{ opacity: 0, y: 18 }}
-                                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ duration: 0.78, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+                                variants={wordContainerVariants}
+                                initial="hidden"
+                                animate={isHeroInView ? "show" : "hidden"}
                                 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                             >
-                                What we build, how we build it, and what it costs you to{" "}
-                                <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
+                                {splitWords("What we build, how we build it, and what it costs you to").map((word, i) => (
+                                    <motion.span key={`${word}-${i}`} variants={wordVariants} style={{ display: "inline-block" }}>
+                                        {word}
+                                    </motion.span>
+                                ))}
+                                <motion.span
+                                    variants={wordVariants}
+                                    className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                                    style={{ display: "inline-block" }}
+                                >
                                     wait.
-                                </span>
+                                </motion.span>
                             </motion.h1>
                             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
                                 Five service lines, one delivery standard, and a process built to move like an engineering system instead of an agency brochure. Pick the line that matches your problem, then follow how we ship it.

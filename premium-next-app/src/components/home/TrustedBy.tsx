@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { ClipReveal, fadeUp } from "@/components/shared/headingAnimations";
 
 /* ─── All project companies ─────────────────────────────── */
 const CLIENTS = [
@@ -33,22 +34,41 @@ export default function TrustedBy() {
     const isInView = useInView(ref, { once: true, margin: "-60px" });
 
     return (
-        <section ref={ref} className="relative overflow-hidden py-14 lg:py-20">
+        <section ref={ref} className="relative overflow-hidden py-20 lg:py-28">
             {/* Top hairline */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
             />
 
-            {/* Label */}
-            <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, ease: EASE }}
-                className="mb-8 text-center font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
-            >
-                currently running our code
-            </motion.p>
+            {/* Content */}
+            <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+                {/* Eyebrow */}
+                <motion.span
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, ease: EASE }}
+                    className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                >
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                    <span className="h-px w-4 bg-brand-accent/40" />
+                    currently running our code
+                </motion.span>
+
+                {/* Heading */}
+                <motion.div
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    variants={fadeUp(0.08)}
+                    className="mb-12"
+                >
+                    <ClipReveal>
+                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
+                            Trusted by teams building real products.
+                        </h2>
+                    </ClipReveal>
+                </motion.div>
+            </div>
 
             {/* Marquee — edge-to-edge, no max-w constraint */}
             <motion.div
@@ -66,8 +86,14 @@ export default function TrustedBy() {
                         {[...CLIENTS, ...CLIENTS].map((name, i) => (
                             <div
                                 key={`a-${i}`}
-                                className="mx-3 shrink-0 rounded-xl border border-white/8 bg-white/[0.03] px-6 py-3.5 backdrop-blur-sm"
+                                className="mx-3 flex shrink-0 items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15"
                             >
+                                {/* Logo placeholder */}
+                                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/10">
+                                    <span className="text-[10px] font-bold uppercase text-white/40">
+                                        {name.charAt(0)}
+                                    </span>
+                                </div>
                                 <span className="whitespace-nowrap font-mono text-sm font-bold uppercase tracking-widest text-white">
                                     {name}
                                 </span>
@@ -78,8 +104,13 @@ export default function TrustedBy() {
                         {[...CLIENTS, ...CLIENTS].map((name, i) => (
                             <div
                                 key={`b-${i}`}
-                                className="mx-3 shrink-0 rounded-xl border border-white/8 bg-white/[0.03] px-6 py-3.5 backdrop-blur-sm"
+                                className="mx-3 flex shrink-0 items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15"
                             >
+                                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/10">
+                                    <span className="text-[10px] font-bold uppercase text-white/40">
+                                        {name.charAt(0)}
+                                    </span>
+                                </div>
                                 <span className="whitespace-nowrap font-mono text-sm font-bold uppercase tracking-widest text-white">
                                     {name}
                                 </span>

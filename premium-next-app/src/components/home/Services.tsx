@@ -11,7 +11,7 @@ import {
     Smartphone,
     Palette,
 } from "lucide-react";
-import { fadeUp } from "@/components/shared/headingAnimations";
+import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import {
     WorkflowDiagramMockup,
     ChatUIMockup,
@@ -146,7 +146,7 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
     return (
         <motion.div
             variants={cardVariants}
-            className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 lg:p-8 ${card.highlight
+            className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 lg:p-8 ${card.highlight
                 ? "border-brand-accent/30 shadow-[0_0_0_1px_rgba(var(--brand-accent-rgb), 0.15)]"
                 : "border-white/8 hover:border-brand-accent/40"
                 }`}
@@ -276,7 +276,7 @@ export default function Services() {
 
             <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                 {/* â”€â”€ Section Header â”€â”€ */}
-                <div className="mb-16 max-w-3xl lg:mb-20">
+                <div className="mb-16 lg:mb-20">
                     <motion.span
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
@@ -287,12 +287,17 @@ export default function Services() {
                         what we actually do
                     </motion.span>
                     <motion.h2
+                        variants={slideFromLeftContainer}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        variants={fadeUp(0.06)}
-                        className="max-w-[13ch] text-4xl font-bold leading-tight tracking-tight text-white lg:max-w-[16ch] lg:text-5xl xl:max-w-none xl:text-6xl xl:whitespace-nowrap"
+                        className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
+                        style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                     >
-                        Six things we&apos;re good at.
+                        {splitWords("Six things we're good at.").map((word, i) => (
+                            <motion.span key={`${word}-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                                {word}
+                            </motion.span>
+                        ))}
                     </motion.h2>
                     <motion.p
                         initial="hidden"

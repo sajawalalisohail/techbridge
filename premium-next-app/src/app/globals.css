@@ -23,85 +23,25 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
+  /* ═══════════════════════════════════════════════
+     Ethereal Obsidian & Bioluminescent Cyan
+     ═══════════════════════════════════════════════ */
+  --brand-accent: #00E5FF;
+  --brand-accent-rgb: 0, 229, 255;
+  --brand-accent-light: #67EFFF;
+  --brand-accent-light-rgb: 103, 239, 255;
+  --brand-accent-dark: #0091A3;
+  --brand-accent-dark-rgb: 0, 145, 163;
+  --brand-accent-deep: #041E23;
 
-  /* original */
-  /* --background: #0a0a0a;
-  --foreground: #ededed;
-  --brand-accent: #84cc16;
-  --brand-accent-rgb: 132, 204, 22;
-  --brand-accent-light: #a3e635;
-  --brand-accent-light-rgb: 163, 230, 53;
-  --brand-accent-dark: #65a30d;
-  --brand-accent-dark-rgb: 101, 163, 13;
-  --brand-accent-deep: #1a2e05;
-  --surface-0: #0a0a0a;
-  --surface-50: #141414;
-  --surface-100: #1c1c1c;
-  --text-primary: #f5f5f5;
-  --text-secondary: #a3a3a3;
-  --text-tertiary: #737373; */
-
-  /* midnight orchid */
-/* --brand-accent: #a61f6b;
---brand-accent-rgb: 166, 31, 107;
-
---brand-accent-light: #c73786;
---brand-accent-light-rgb: 199, 55, 134;
-
---brand-accent-dark: #54273c;
---brand-accent-dark-rgb: 84, 39, 60;
-
---brand-accent-deep: #18393c;
-
---background: #26282d;
---foreground: #f2edf0;
---surface-0: #1f2227;
---surface-50: #233033;
---surface-100: #1a2629;
-
---text-primary: #f2edf0;
---text-secondary: #c5bcc1;
---text-tertiary: #878287; */
-
-/*crimson */
---brand-accent: #c12468;
---brand-accent-rgb: 193, 36, 104;
---brand-accent-light: #df4c8f;
---brand-accent-light-rgb: 223, 76, 143;
---brand-accent-dark: #6a2a43;
---brand-accent-dark-rgb: 106, 42, 67;
---brand-accent-deep: #1a3d3f;
-
---background: #1a1c21;
---foreground: #faf4f7;
---surface-0: #14171b;
---surface-50: #1b2327;
---surface-100: #151d20;
---text-primary: #faf4f7;
---text-secondary: #d7c9d1;
---text-tertiary: #8f878d;
-
-/* berry noir fav */
-/* --brand-accent: #b11f72;
---brand-accent-rgb: 177, 31, 114;
---brand-accent-light: #d13c8b;
---brand-accent-light-rgb: 209, 60, 139;
---brand-accent-dark: #5e2740;
---brand-accent-dark-rgb: 94, 39, 64;
---brand-accent-deep: #163739;
-
---background: #23252a;
---foreground: #f4eef1;
---surface-0: #1d2025;
---surface-50: #223033;
---surface-100: #192628;
---text-primary: #f4eef1;
---text-secondary: #c9c0c5;
---text-tertiary: #8a858a; */
-
-
-
-  
+  --background: #0A0A0B;
+  --foreground: #F8FAFC;
+  --surface-0: #0A0A0B;
+  --surface-50: #131517;
+  --surface-100: #1E2024;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #475569;
 }
 
 @theme inline {
@@ -127,41 +67,96 @@ body {
   /* ── Keyframes ──────────────────────────────────────────── */
 
   @keyframes blobSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes blobMorph {
-    0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    20%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-    40%  { border-radius: 50% 40% 60% 30% / 40% 70% 50% 60%; }
-    60%  { border-radius: 40% 70% 40% 60% / 60% 40% 60% 40%; }
-    80%  { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    0% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    20% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+
+    40% {
+      border-radius: 50% 40% 60% 30% / 40% 70% 50% 60%;
+    }
+
+    60% {
+      border-radius: 40% 70% 40% 60% / 60% 40% 60% 40%;
+    }
+
+    80% {
+      border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+    }
+
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
   }
 
   @keyframes blobPulse {
-    from { transform: scale(0.96); opacity: 0.64; }
-    to   { transform: scale(1.045); opacity: 0.96; }
+    from {
+      transform: scale(0.96);
+      opacity: 0.64;
+    }
+
+    to {
+      transform: scale(1.045);
+      opacity: 0.96;
+    }
   }
 
   @keyframes shimmerPulse {
-    from { opacity: 0.42; transform: scale(0.98); }
-    to   { opacity: 0.82; transform: scale(1.04); }
+    from {
+      opacity: 0.42;
+      transform: scale(0.98);
+    }
+
+    to {
+      opacity: 0.82;
+      transform: scale(1.04);
+    }
   }
 
   /* ─── Blob Drift Keyframes ─────────────────── */
   @keyframes blobDrift {
-    0%   { transform: translate(0, 0) scale(1); }
-    33%  { transform: translate(2.6vw, -1.9vh) scale(1.045); }
-    66%  { transform: translate(-1.9vw, 1.2vh) scale(0.965); }
-    100% { transform: translate(0, 0) scale(1); }
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+      transform: translate(2.6vw, -1.9vh) scale(1.045);
+    }
+
+    66% {
+      transform: translate(-1.9vw, 1.2vh) scale(0.965);
+    }
+
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
   }
 
   @keyframes blobDriftAlt {
-    0%   { transform: translate(0, 0) scale(1); }
-    50%  { transform: translate(-3.5vw, 2.25vh) scale(1.07); }
-    100% { transform: translate(0, 0) scale(1); }
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate(-3.5vw, 2.25vh) scale(1.07);
+    }
+
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
   }
 
   /* Blob container */
@@ -182,7 +177,7 @@ body {
     mix-blend-mode: screen;
     filter: blur(70px) saturate(125%) brightness(0.92);
     will-change: transform;
-    animation: blobDrift 18s ease-in-out infinite;
+    animation: blobDrift 30s ease-in-out infinite;
   }
 
   /* Secondary smaller blob on offset path */
@@ -194,14 +189,14 @@ body {
     mix-blend-mode: screen;
     filter: blur(44px) brightness(0.96);
     will-change: transform;
-    animation: blobDriftAlt 22s ease-in-out infinite;
+    animation: blobDriftAlt 36s ease-in-out infinite;
   }
 
   /* Subtle dot grid texture overlay */
   .blob-dot-grid {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
     background-size: 24px 24px;
     opacity: 0.008;
     pointer-events: none;
@@ -235,7 +230,7 @@ body {
         transparent 78%);
     filter: blur(180px) saturate(120%);
     will-change: transform;
-    animation: blobPulse 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    animation: blobPulse 28s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
   /* Layer 2: Conic base color field */
@@ -251,13 +246,13 @@ body {
         var(--brand-accent-deep) 240deg,
         rgb(var(--brand-accent-light-rgb)) 310deg,
         var(--brand-accent-deep) 360deg);
-    opacity: 0.58;
+    opacity: 0.45;
     mix-blend-mode: screen;
     filter: blur(72px) saturate(165%) brightness(0.96);
     will-change: transform;
     animation:
-      blobSpin 16s linear infinite,
-      blobMorph 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      blobSpin 38s linear infinite,
+      blobMorph 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
   /* Layer 2.5: Rotating highlight — glowing premium beacon */
@@ -275,13 +270,13 @@ body {
         rgba(var(--brand-accent-light-rgb), 0.42) 108deg,
         transparent 125deg,
         transparent 360deg);
-    opacity: 0.68;
+    opacity: 0.5;
     mix-blend-mode: screen;
     filter: blur(28px) saturate(130%) brightness(1.02);
     will-change: transform;
     animation:
-      blobSpin 7s linear infinite,
-      blobMorph 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      blobSpin 18s linear infinite,
+      blobMorph 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   }
 
   /* Bloom corona — wide soft glow that trails the highlight */
@@ -313,11 +308,11 @@ body {
         rgb(var(--brand-accent-light-rgb)) 180deg,
         rgb(var(--brand-accent-dark-rgb)) 270deg,
         rgb(var(--brand-accent-dark-rgb)) 360deg);
-    opacity: 0.32;
+    opacity: 0.24;
     mix-blend-mode: screen;
     filter: blur(110px) saturate(145%) brightness(0.92);
     will-change: transform;
-    animation: blobSpin 22s linear infinite reverse;
+    animation: blobSpin 50s linear infinite reverse;
   }
 
   /* Layer 4: Soft center shimmer */
@@ -331,11 +326,12 @@ body {
         transparent 72%);
     filter: blur(120px) brightness(0.96);
     will-change: transform;
-    animation: shimmerPulse 20s ease-in-out infinite alternate;
+    animation: shimmerPulse 32s ease-in-out infinite alternate;
   }
 
   /* Accessibility: pause all animations */
   @media (prefers-reduced-motion: reduce) {
+
     .blob-halo,
     .blob-core,
     .blob-highlight,
@@ -349,7 +345,9 @@ body {
 
   /* ─── Mesh Drift (WhyChooseUs) ───────────── */
   @keyframes accent-pulse {
-    0%, 100% {
+
+    0%,
+    100% {
       box-shadow:
         0 -1px 0 0 rgba(var(--brand-accent-rgb), 0.12),
         0 1px 0 0 rgba(var(--brand-accent-rgb), 0.12),
@@ -360,6 +358,7 @@ body {
         inset 100px 0 100px -80px rgba(var(--brand-accent-rgb), 0.04),
         inset -100px 0 100px -80px rgba(var(--brand-accent-rgb), 0.04);
     }
+
     50% {
       box-shadow:
         0 -1px 0 0 rgba(var(--brand-accent-rgb), 0.22),
@@ -374,40 +373,139 @@ body {
   }
 
   @keyframes mesh-drift {
-    0%   { transform: translate(0%, 0%) scale(1); }
-    33%  { transform: translate(6%, -8%) scale(1.08); }
-    66%  { transform: translate(-5%, 5%) scale(0.96); }
-    100% { transform: translate(0%, 0%) scale(1); }
+    0% {
+      transform: translate(0%, 0%) scale(1);
+    }
+
+    33% {
+      transform: translate(6%, -8%) scale(1.08);
+    }
+
+    66% {
+      transform: translate(-5%, 5%) scale(0.96);
+    }
+
+    100% {
+      transform: translate(0%, 0%) scale(1);
+    }
   }
 
   @keyframes mesh-drift-b {
-    0%   { transform: translate(0%, 0%) scale(1); }
-    33%  { transform: translate(-7%, 5%) scale(1.06); }
-    66%  { transform: translate(4%, -6%) scale(0.97); }
-    100% { transform: translate(0%, 0%) scale(1); }
+    0% {
+      transform: translate(0%, 0%) scale(1);
+    }
+
+    33% {
+      transform: translate(-7%, 5%) scale(1.06);
+    }
+
+    66% {
+      transform: translate(4%, -6%) scale(0.97);
+    }
+
+    100% {
+      transform: translate(0%, 0%) scale(1);
+    }
   }
 
-  .mesh-orb-a { animation: mesh-drift 9s ease-in-out infinite; }
-  .mesh-orb-b { animation: mesh-drift-b 11s ease-in-out infinite; }
+  .mesh-orb-a {
+    animation: mesh-drift 9s ease-in-out infinite;
+  }
+
+  .mesh-orb-b {
+    animation: mesh-drift-b 11s ease-in-out infinite;
+  }
 
   /* ─── Case Studies SVG Patterns ─────────── */
-  @keyframes scan-down { 0% { transform: translateY(-100%); } 100% { transform: translateY(400%); } }
-  @keyframes grid-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
-  @keyframes node-ping { 0%, 100% { r: 2.5; opacity: 0.5; } 50% { r: 4; opacity: 1; } }
-  @keyframes dash-flow { to { stroke-dashoffset: -40; } }
+  @keyframes scan-down {
+    0% {
+      transform: translateY(-100%);
+    }
 
-  .scan-line { animation: scan-down 4s linear infinite; }
-  .grid-layer { animation: grid-pulse 3s ease-in-out infinite; }
-  .node-a { animation: node-ping 2.4s ease-in-out infinite; }
-  .node-b { animation: node-ping 2.4s ease-in-out 0.8s infinite; }
-  .node-c { animation: node-ping 2.4s ease-in-out 1.6s infinite; }
-  .dash-path { animation: dash-flow 2s linear infinite; }
+    100% {
+      transform: translateY(400%);
+    }
+  }
+
+  @keyframes grid-pulse {
+
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes node-ping {
+
+    0%,
+    100% {
+      r: 2.5;
+      opacity: 0.5;
+    }
+
+    50% {
+      r: 4;
+      opacity: 1;
+    }
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+
+  .scan-line {
+    animation: scan-down 4s linear infinite;
+  }
+
+  .grid-layer {
+    animation: grid-pulse 3s ease-in-out infinite;
+  }
+
+  .node-a {
+    animation: node-ping 2.4s ease-in-out infinite;
+  }
+
+  .node-b {
+    animation: node-ping 2.4s ease-in-out 0.8s infinite;
+  }
+
+  .node-c {
+    animation: node-ping 2.4s ease-in-out 1.6s infinite;
+  }
+
+  .dash-path {
+    animation: dash-flow 2s linear infinite;
+  }
 
   /* ─── Tech Stack Marquee ────── */
-  @keyframes tb-marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes tb-marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
 
   /* ─── Cursor Blink ────── */
-  @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes cursor-blink {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+  }
 
   .tb-marquee-track {
     animation: tb-marquee-scroll 35s linear infinite;
@@ -416,10 +514,22 @@ body {
 
   /* ─── CTA Pulse ────── */
   @keyframes cta-pulse {
-    0%, 100% { opacity: 0.55; transform: scale(1); }
-    50%       { opacity: 0.85; transform: scale(1.06); }
+
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.85;
+      transform: scale(1.06);
+    }
   }
-  .cta-glow { animation: cta-pulse 5s ease-in-out infinite; }
+
+  .cta-glow {
+    animation: cta-pulse 5s ease-in-out infinite;
+  }
 
   /* ─── GlowButton Rotation ────── */
   @property --glow-angle {
@@ -427,12 +537,25 @@ body {
     initial-value: 0deg;
     inherits: false;
   }
-  @keyframes glow-rotate { to { --glow-angle: 360deg; } }
-  .glow-button-ring { animation: glow-rotate 3s linear infinite; }
+
+  @keyframes glow-rotate {
+    to {
+      --glow-angle: 360deg;
+    }
+  }
+
+  .glow-button-ring {
+    animation: glow-rotate 3s linear infinite;
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .cta-glow { animation: none; }
-    .glow-button-ring { animation: none; }
+    .cta-glow {
+      animation: none;
+    }
+
+    .glow-button-ring {
+      animation: none;
+    }
   }
 
   /* Websites page: layered luxury-glass surfaces */
@@ -477,13 +600,13 @@ body {
     z-index: 0;
   }
 
-  .website-glow-shell > *,
-  .website-glow-card > *,
-  .website-glow-card-active > *,
-  .website-glow-frame > *,
-  .website-glow-modal > *,
-  .website-glow-pill > *,
-  .website-glow-nav > * {
+  .website-glow-shell>*,
+  .website-glow-card>*,
+  .website-glow-card-active>*,
+  .website-glow-frame>*,
+  .website-glow-modal>*,
+  .website-glow-pill>*,
+  .website-glow-nav>* {
     position: relative;
     z-index: 1;
   }

@@ -45,7 +45,7 @@ export default function GlowButton({
             />
 
             {/* Inner background (covers the gradient border) */}
-            <span className="absolute inset-[1.5px] rounded-full bg-[#0a0a0a]/90 backdrop-blur-xl" />
+            <span className="absolute inset-[1.5px] rounded-full bg-[var(--surface-0)]/90 backdrop-blur-xl" />
 
             {/* Content */}
             <span className="relative z-10 flex items-center gap-2">

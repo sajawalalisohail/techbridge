@@ -1,112 +1,81 @@
 # TechBridge Project Knowledge
 
+**Version:** 1.0.0
+**Target Framework:** Next.js 16 (App Router), React 19, Tailwind v4
+
 ## Overview
 
-TechBridge is a premium Next.js 16 marketing site with a strong visual layer built from Tailwind v4, Framer Motion, GSAP, and React Three Fiber. The app is primarily client-rendered, with route layouts used for metadata and shell composition.
+TechBridge is a premium marketing site with a strong visual layer built from Tailwind v4, Framer Motion, GSAP, and React Three Fiber. The app is primarily client-rendered, with route layouts used for metadata, SEO, and shell composition.
 
-## Architecture
+## Architecture & Directory Structure
 
-- `src/app/`: route entrypoints, layouts, and `globals.css`
-- `src/components/`: homepage, layout, shared UI, mockups, and illustrations
-- `src/3d/`: particle systems, blobs, interactive backgrounds, and shader-driven effects
-- `src/data/`: typed static content for case studies and insights
-- `src/lib/brand-colors.ts`: runtime bridge between CSS custom properties and Three.js / GLSL
+- `src/app/`: Next.js App Router (entrypoints, layouts, `globals.css`, metadata)
+- `src/components/`: Modular UI, layouts, shared components, mockups, and illustrations
+- `src/3d/`: Advanced WebGL context (particle systems, background blobs, interactive shaders, R3F scenes)
+- `src/data/`: Typed, static JSON/TS content (case studies, insights, timelines)
+- `src/lib/`: Shared utilities (`brand-colors.ts` bridges CSS vars to Three.js; `gsap.ts` hooks)
+- `public/`: Fonts, images, og-images, and proofs
+- `.agent/skills/`: AI agent capabilities catalog, guiding automated LLM feature development
+
+## Agent System Integration
+
+The repository is fully equipped to interact alongside AI agents (Claude, Gemini, Cursor). 
+- Agents must refer to `CLAUDE.md` and `.agent/skills/CATALOG.md` for strict design constraints, workflows, and task automation context.
+- Generated code should inherit the active unified design system rather than inventing ad-hoc styling or missing framework migrations.
 
 ## Rendering And UX Constraints
 
-- Interactive UI stays client-side.
-- Heavy 3D modules should remain dynamically imported with `ssr: false`.
-- ServicesProcessShowcase is dynamically imported with `ssr: false` for bundle reduction.
+- Interactive UI is heavily client-side (`"use client"`).
+- Heavy 3D modules (Three.js, R3F) and complex animations (`ServicesProcessShowcase`) must remain dynamically imported via `next/dynamic` with `ssr: false` to reduce bundle weights.
 - The visual stack depends on layered backgrounds, sticky particle canvases, and a fixed footer reveal.
-- Reduced-motion support is part of the visual system and must remain functional.
+- Reduced-motion support is systematically enforced across the visual system.
 
 ## Homepage Section Order
 
-```
+```text
 Hero -> Differentiators -> TrustedBy (marquee) -> Services (6 cards) -> ProcessTimeline (4 steps) -> CaseStudies (9 cards, horizontal scroll) -> CTA
 ```
 
 ## Accent Token System
 
-The global TechBridge accent is centralized in `src/app/globals.css`:
+The global TechBridge accent is strictly centralized in `src/app/globals.css` using Tailwind v4 `@theme inline`:
 
 ```css
---brand-accent
---brand-accent-rgb
---brand-accent-light
---brand-accent-light-rgb
---brand-accent-dark
---brand-accent-dark-rgb
---brand-accent-deep
+--brand-accent /* Base hex/RGB variations */
 ```
 
-Tailwind v4 exposes matching utilities through `@theme inline`, including:
+**Rules:**
+- **No hardcoding:** Do not use hex/RGB lime values directly in components or inline styles.
+- **CSS:** Use exposed Tailwind v4 tokens: `text-brand-accent`, `bg-brand-accent-dark`, `border-brand-accent/40`, `shadow-accent-glow`.
+- **3D / WebGL:** Use `getBrandColors()` to inject the live CSS values into Three.js materials and GLSL uniforms (e.g., `uBrandAccent`).
 
-- `brand-accent`
-- `brand-accent-light`
-- `brand-accent-dark`
-- `brand-accent-deep`
-- `shadow-accent-glow`
+**Data-Driven Exception:**
+- Case studies store project-specific `accentColor` RGB strings in `src/data/`. This enables distinct thematic colors per project, separate from the global TechBridge styling.
 
-Rules:
+## Typography & Core Styling Standards
 
-- Do not hardcode the site accent in component markup or inline styles.
-- Use `rgba(var(--brand-accent-rgb), alpha)` and companion light/dark RGB tokens for opacity-based styling.
-- Use `getBrandColors()` for Three.js color objects and GLSL uniforms.
+- **Hero h1:** `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`
+- **Text Gradients:** `bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent`
+- **Eyebrows:** `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600` (often decorated with a dot + line)
+- **Whitespace / Padding:** Section padding expects `py-24 lg:py-32` minimally; `py-16 lg:py-20` for tight layouts.
+- **Constraints:** Standard max-widths: `max-w-[100rem]` (Home/Landing), `max-w-7xl` (Interior Routes).
 
-## Typography Standards
+## Animation Pipeline
 
-- **Hero h1 (standard):** `text-5xl font-bold leading-tight tracking-tight lg:text-6xl xl:text-7xl`
-- **Hero h1 (home):** `text-3xl font-semibold leading-[1.12] tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl`
-- **Accent gradient:** `bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent`
-- **Eyebrow labels:** `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600` with dot+line decoration
-- **Section padding:** `py-24 lg:py-32` standard, `py-16 lg:py-20` tight
-- **Container widths:** Homepage `max-w-[100rem]` with `px-6 lg:px-10`, interior pages `max-w-7xl` with `px-6 lg:px-12`
-
-## Animation System
-
-- Standard easing: `[0.22, 1, 0.36, 1]`
-- GlowButton uses CSS `@property --glow-angle` for rotation (no GSAP at runtime)
-- CTA pulse and glow-rotate keyframes live in globals.css
-- GSAP ScrollTrigger for CaseStudies must use `useLayoutEffect` for cleanup (prevents removeChild errors during navigation)
-- ServicesProcessShowcase uses `500vh` height on desktop (lg+), `auto` on mobile via matchMedia
-
-## 3D Color Pipeline
-
-- `MainScene` uses runtime brand colors to generate blob radial gradients.
-- `PageParticles` and `Particles` build color palettes and connection-line colors from the current CSS token values.
-- `DarkMatterField` passes `uBrandAccent`, `uBrandAccentLight`, and `uBrandAccentDark` uniforms into the shader.
-- This makes the accent swap test work across both DOM and WebGL layers.
-
-## Data-Driven Color Exception
-
-Case studies still store project-specific `accentColor` values as RGB triplets in `src/data/`. Those values are separate from the TechBridge global brand accent and should stay data-driven.
+We distribute motion across three specialized tools based on performance/impact:
+1. **Framer Motion**: View transitions, staggered reveal arrays, page loads. Default easing is `[0.22, 1, 0.36, 1]`.
+2. **GSAP**: Scroll triggers, complex timelines (like Horizontal Case Studies), and specialized UI rotation. Must be wrapped in `useLayoutEffect` to clean up upon unmount safely.
+3. **CSS / PostCSS keyframes**: Infinite background loops (blobs, particles, marquee scrolls, rotating button glows using `@property --glow-angle`).
 
 ## SEO Infrastructure
 
-- Root layout: title template, OG + Twitter cards, og:image placeholder at /og-image.png
-- Per-page layouts: each has title, description, canonical URL, openGraph
-- JSON-LD: Organization, WebSite, Services (ItemList), LocalBusiness (US + PK offices)
-- Sitemap: all static routes + all dynamic /work/[slug] and /insights/[slug]
-- Robots: allow /, disallow /api/ and /_next/
+- **Layout metadata:** Root handles base `<title>`, OpenGraph cards, Twitter, and the default `og:image` placeholder. Routes define distinct descriptions, canonicals, and openGraph updates.
+- **JSON-LD Schema:** Comprehensive structured data embedded for `Organization`, `WebSite`, `LocalBusiness` (US & PK branches).
+- **Robots / Sitemap:** Exposes static + dynamic pages (`/work`, `/insights`), disallowing restricted routes.
 
-## Known Gotchas
+## Known Gotchas & Validation Workflow
 
-- `.website-glow-shell > *` in globals.css forces `position: relative` on all direct children. Use `style={{ position: "absolute" }}` inline for decorative overlay divs.
-- The /websites page is exempt from all site-wide consistency rules (typography, spacing, layout).
-- Font loading may fail in restricted network environments during `npm run build`.
-
-## Validation Workflow
-
-1. Run a repo search to ensure no stray hardcoded brand accent classes or RGB literals remain in `src/`.
-2. Run `npm run build`.
-3. If build fails only because `next/font/google` cannot fetch `Plus Jakarta Sans`, record that as an environment/network limitation.
-4. Manually verify core routes at 320px, 375px, 768px, 1024px, 1440px.
-5. Perform the accent swap test by changing only the `--brand-accent*` values in `globals.css`.
-
-## Editing Guidelines
-
-- Prefer token-driven styling over one-off color literals.
-- Keep visual polish intentional: gradients, glows, and layered motion are part of the brand.
-- Preserve existing component structure and data-driven content patterns unless the task explicitly changes them.
-- Always check mobile (320px minimum) for overflow, touch targets (44px min), and grid layouts.
+- Overlay styling (e.g. `.website-glow-shell > *`) may force localized stacking. Beware positioning traps!
+- The `/websites` route is an edge case and handles alternate layout structures.
+- During build (`npm run build`), `next/font/google` fetch requests for `Plus Jakarta Sans` can fail under strict proxy setups.
+- **Validation:** Always test interactions on Safari vs Chrome, verify cleanup hooks for GSAP scroll zones, and confirm dynamic imports correctly split chunks.

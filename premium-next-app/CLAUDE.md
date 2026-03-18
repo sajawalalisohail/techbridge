@@ -1,210 +1,95 @@
-# CLAUDE.md - TechBridge Premium Marketing Site
+# CLAUDE.md
 
-> Current source of truth for AI-assisted development in this repo.
+> **AI System Prompt**: This document is the ultimate source of truth for all AI/LLM-assisted development (Claude, Gemini, Cursor). You must prioritize these rules over your general knowledge.
 
----
+## 🏗️ Project Architecture & Tech Stack
 
-## Stack
+**Core Stack**
+- Framework: Next.js 16.1.6 (App Router)
+- UI: React 19.2.3, Tailwind CSS v4 (@tailwindcss/postcss)
+- 3D/Canvas: Three.js (v0.183), React Three Fiber (v9.5), Drei
+- Animation: Framer Motion v12, GSAP v3.14, Lenis (smooth scroll)
+- Content: React Markdown
+- Media Tooling: Remotion, Puppeteer  
 
-| Package | Version | Purpose |
-|---|---|---|
-| `next` | `16.1.6` | App Router framework |
-| `react` / `react-dom` | `19.2.3` | UI runtime |
-| `typescript` | `^5` | Type safety |
-| `tailwindcss` | `^4` | Utility styling |
-| `@tailwindcss/postcss` | `^4` | Tailwind v4 PostCSS integration |
-| `framer-motion` | `^12.35.0` | Motion and entrance animation |
-| `gsap` | `^3.14.2` | Supplemental motion and glow animation |
-| `three` | `^0.183.2` | 3D engine |
-| `@react-three/fiber` | `^9.5.0` | React renderer for Three.js |
-| `@react-three/drei` | `^10.7.7` | R3F helpers |
-| `@react-three/postprocessing` | `^3.0.4` | Post-processing |
-| `lucide-react` | `^0.577.0` | Icons |
-| `react-markdown` | `^10.1.0` | Insights markdown rendering |
-| `puppeteer` | `^24.38.0` | Headless browser tooling |
+**Repo Structure**
+- `src/app/` - Next.js routing, layouts, pages, global CSS and metadata.
+- `src/components/` - Standard UI components, shared layouts, and icons.
+- `src/3d/` - Specialized WebGL (particles, blobs, shaders, R3F scenes).
+- `src/data/` - Typed JSON/TS content (case studies, insights).
+- `src/lib/` - Shared utils (`brand-colors.ts` bridges CSS to 3D, GSAP config).
+- `docs/` - Extended project knowledge and SEO infrastructure.
+- `.agent/skills/` - Custom agent capacities and AI workflows.
 
 ---
 
-## Project Layout
+## 🤖 AI Agent & Skills System
 
-```text
-premium-next-app/
-├── docs/
-│   └── project-knowledge.md
-├── public/
-│   ├── font/
-│   └── proofs/
-├── src/
-│   ├── 3d/
-│   │   ├── components/
-│   │   └── scenes/
-│   ├── app/
-│   ├── components/
-│   ├── data/
-│   └── lib/
-│       ├── brand-colors.ts
-│       └── gsap.ts
-├── CLAUDE.md
-├── package.json
-└── tsconfig.json
-```
-
-Important paths:
-
-- `src/app/globals.css`: Tailwind import, custom properties, global animations, brand tokens
-- `src/lib/brand-colors.ts`: runtime helper for reading the CSS-driven accent system
-- `src/3d/`: particle fields, blobs, shaders, and scenes
-- `src/data/`: typed static content for case studies and insights
+- **Skill Catalog Reference**: Use `.agent/skills/CATALOG.md` and `skills_index.json` to leverage existing routines before writing redundant scripts.
+- **Workflow Constraints**: 
+  1. Review `CLAUDE.md` and `docs/project-knowledge.md` before coding.
+  2. Implement features following the Design System rigorously.
+  3. Validate strictly against the Rendering constraints.
+  4. Ensure NO hallucinations: Do not configure Tailwind v3 `tailwind.config.ts`, nor use CSS Modules unless explicitly noted.
 
 ---
 
-## Hard Rules
+## 🎨 Design System Consistency
 
-### Rendering
+The UI enforces a single unified token system spanning both the DOM and WebGL environments.
 
-- All interactive pages and components are client components.
-- Route `layout.tsx` files are the only expected server components for metadata and shell composition.
-- Do not add server actions or `"use server"` patterns.
+### 1. Brand Accent System
+- **Source of Truth**: Token definitions are locked in `src/app/globals.css`. 
+- **NEVER** hardcode lime hex/RGB literals in inline styles or classes. 
+- **Tailwind v4 Integration**: Variables map automatically via `@theme inline`. Consume them directly (`text-brand-accent`, `bg-brand-accent-dark`, `border-brand-accent/40`).
+- **3D / Shader Bridging**: Real-time rendering modules must dynamically fetch colors using `getBrandColors()` from `src/lib/brand-colors.ts`, feeding them into GLSL uniforms (e.g., `uBrandAccent`).
+- **Data Exception**: Case studies (`src/data/`) possess individual thematic `accentColor` RGB strings. This is data-driven by design.
 
-### Dynamic Imports
-
-- Heavy Three.js / R3F pieces must stay dynamically imported with `ssr: false`.
-- Existing wrappers and patterns in `src/components/` should be preserved.
-
-### Styling
-
-- Tailwind v4 is configured through `@theme inline` in `src/app/globals.css`.
-- No `tailwind.config.ts` is used.
-- No CSS modules, styled-components, or extra global stylesheets.
-- Inline styles are acceptable for gradients, noise textures, and SVG/animation-specific visuals.
-
-### TypeScript
-
-- `strict: true` is enabled.
-- Path alias: `@/* -> ./src/*`.
-- Keep helper types explicit when they are shared across 3D or data-driven code.
-
-### Icons and Images
-
-- Use `lucide-react` for icons.
-- Use `next/image` for images.
+### 2. Typography & Layout Metrics
+- **Font Family**: *Plus Jakarta Sans* (`next/font/google`).
+- **Hero h1 Guidelines**: Usually `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`.
+- **Eyebrows**: Format strictly as `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600`.
+- **Spacing Guidelines**: Standard section padding is `py-24 lg:py-32`; tight layouts use `py-16 lg:py-20`.
+- **Container Limits**: Max widths adhere to `max-w-[100rem]` (Homepage defaults) and `max-w-7xl` (Interior Routes). Prioritize testing mobile (320px) overflow bounds.
 
 ---
 
-## Brand Accent System
+## 🧩 Component & Pattern Architecture
 
-The site-wide accent is centralized. Do not hardcode lime hex/RGB values in components.
-
-### Source Of Truth
-
-- CSS tokens live in `src/app/globals.css`.
-- Runtime 3D/shader consumers must read colors through `src/lib/brand-colors.ts`.
-
-### Primary Tokens
-
-```css
---brand-accent: #84cc16;
---brand-accent-rgb: 132, 204, 22;
---brand-accent-light: #a3e635;
---brand-accent-light-rgb: 163, 230, 53;
---brand-accent-dark: #65a30d;
---brand-accent-dark-rgb: 101, 163, 13;
---brand-accent-deep: #1a2e05;
-```
-
-### Tailwind Tokens
-
-`@theme inline` exposes:
-
-- `brand-accent`
-- `brand-accent-light`
-- `brand-accent-dark`
-- `brand-accent-deep`
-- `shadow-accent-glow`
-
-Use utilities like:
-
-- `text-brand-accent`
-- `bg-brand-accent-dark`
-- `border-brand-accent/40`
-- `shadow-brand-accent/10`
-
-### 3D / Shader Rules
-
-- Three.js color objects should come from `getBrandColors()`.
-- Shader color uniforms should use:
-  - `uBrandAccent`
-  - `uBrandAccentLight`
-  - `uBrandAccentDark`
-- Blob and particle colors should not embed legacy accent hex values.
-
-### Case Study Accent Data
-
-- Case studies still use per-project `accentColor` RGB triplets in `src/data/`.
-- That data is separate from the global TechBridge brand accent and should remain data-driven.
+- **React Client vs Server Components**: 
+  - All interactive UI and animated segments **must** explicitly use `"use client"`.
+  - Static root shells and route `layout.tsx` files remain Server Components to maximize SEO performance. **Do not** introduce `"use server"` patterns unexpectedly.
+- **Dynamic Imports Strategy**:
+  - Heavy visual logic (`ServicesProcessShowcase`) and WebGL/3D packages **must** use `next/dynamic` with `{ ssr: false }` to avert severe main-thread impacts.
+- **Global Layout Behavior**:
+  - The root layout sets up persistent backgrounds, sticky canvases, and a dynamic footer reveal. New root nodes must accurately handle z-indexing contexts.
+- **Static Artifacts**: Maintain inline SVG noise elements (`feTurbulence`) directly within the components to prevent FOUC or flicker problems.
 
 ---
 
-## Motion And Visual Patterns
+## 🎬 Animation Rules (Framer / GSAP / CSS)
 
-- Framer Motion handles entrances, staggered reveals, and in-view transitions.
-- CSS keyframes in `globals.css` handle ambient loops and shared visual effects.
-- GSAP is used selectively for specialty interactions such as rotating glow borders.
-- Standard easing curve: `[0.22, 1, 0.36, 1]`.
-
-Key shared animations:
-
-- `blobSpin`
-- `blobMorph`
-- `blobPulse`
-- `shimmerPulse`
-- `blobDrift`
-- `blobDriftAlt`
-- `accent-pulse`
-- `mesh-drift`
-- `mesh-drift-b`
-- `scan-down`
-- `grid-pulse`
-- `node-ping`
-- `dash-flow`
-- `tb-marquee-scroll`
-- `cursor-blink`
-
-Accessibility rule:
-
-- `prefers-reduced-motion` support in `globals.css` must continue to disable ambient blob animation.
+Use the correct orchestration layer for smooth 60-120fps metrics:
+- **Framer Motion**: Default tool for mount/unmount presence, list reveals, scroll-into-view triggers.
+  - Standard curve: `[0.22, 1, 0.36, 1]`.
+- **GSAP**: Strictly reserved for complex choreographed scroll features (e.g., Horizontal Parallax / Horizontal Case Studies). Must be rigorously isolated inside `useLayoutEffect` or `gsap.context` for perfect unmount cleanup and DOM safety.
+- **CSS Animations**: Infinite background movements (blobs, pulses) and computational loops (like `@property --glow-angle`) are kept in `globals.css` to offload the main thread.
+- **A11y**: Enforce `prefers-reduced-motion` compliance to halt or minimize background ambient loops automatically.
 
 ---
 
-## Layout Notes
+## ⚡ Code Quality & Performance
 
-- Root layout applies fonts, navbar, footer reveal, particles, and cursor follower.
-- Background layers sit under content with a sticky fullscreen particle canvas.
-- The footer reveal depends on content scrolling above a fixed footer layer.
-- The separator glow between content and footer should use the brand-accent gradient, not a hardcoded color.
+- **Types**: Always uphold `strict: true` compliance. Output explicit interface types, particularly when bridging 3D math logic. Target imports using `@/`.
+- **Hardware Acceleration**: DO NOT strip `will-change: transform` rules off components with computationally dense looping motions like morphing blobs.
+- **Assets**:
+  - Prefer `next/image` for standard web graphics.
+  - Exclusively use `lucide-react` for app and UI iconography.
 
----
-
-## Commands
+## 🛠️ Development Tools
 
 ```bash
-npm run dev
-npm run build
-npm run start
-npm run lint
+npm run dev     # Run hot-reloading native development server
+npm run build   # Production optimized build (Needs internet access for Google Fonts)
+npm run lint    # ESLint static analysis suite
 ```
-
-Note:
-
-- In restricted environments, `next/font/google` may fail to fetch `Plus Jakarta Sans` during `npm run build`. Treat that as an external network blocker unless local code changes introduced additional errors.
-
----
-
-## Preserve These Patterns
-
-1. Inline SVG noise textures and `feTurbulence` data URIs stay inline.
-2. Global accent styling must come from `--brand-accent*` tokens and `getBrandColors()`.
-3. Case-study project accents remain data-driven RGB strings.
-4. Barrel exports in `3d/`, `illustrations/`, `mockups/`, and `process/` should remain intact.
-5. Existing section separator comments and component organization conventions should stay consistent.
-6. Animated blob layers should keep `will-change: transform` where already used.

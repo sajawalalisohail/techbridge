@@ -195,6 +195,46 @@ export const blurFocusIn = (delay = 0): Variants => ({
     },
 });
 
+/* ─── 7. BLUR WORD REVEAL (Staggered Blur + Slide) ──────── */
+export const blurWordContainerVariants = createStaggerContainer(0.06);
+
+export const blurWordVariants: Variants = {
+    hidden: { y: 20, opacity: 0, filter: "blur(10px)" },
+    show: {
+        y: 0,
+        opacity: 1,
+        filter: "blur(0px)",
+        transition: { duration: 0.7, ease: EASE },
+    },
+};
+
+export function BlurWordReveal({
+    text,
+    className,
+}: {
+    text: string;
+    className?: string;
+}) {
+    const words = text.split(" ");
+    return (
+        <motion.div
+            variants={blurWordContainerVariants}
+            className={className}
+            style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+        >
+            {words.map((word, i) => (
+                <motion.span
+                    key={`${word}-${i}`}
+                    variants={blurWordVariants}
+                    style={{ display: "inline-block" }}
+                >
+                    {word}
+                </motion.span>
+            ))}
+        </motion.div>
+    );
+}
+
 export function splitWords(text: string) {
     return text.split(" ");
 }

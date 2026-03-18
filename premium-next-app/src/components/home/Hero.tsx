@@ -36,7 +36,7 @@ const fadeUp = {
 const STATS = [
     { value: 50, suffix: "+", label: "Systems in Production" },
     { value: 98, suffix: "%", label: "Client Retention" },
-    { value: 3, suffix: "Ã—", label: "Faster Than In-House" },
+    { value: 3, suffix: "×", label: "Faster Than In-House" },
 ];
 
 

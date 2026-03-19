@@ -152,6 +152,18 @@ export default function CaseStudies() {
         };
     }, [shouldInitAnimation, updateActiveCard]);
 
+    useEffect(() => {
+        // Auto-rotate the active glow across visible cards when idle
+        if (!shouldInitAnimation) return;
+        const interval = setInterval(() => {
+            setActiveCardIndex((prev) => (prev + 1) % HOMEPAGE_STUDIES.length);
+        }, 3000);
+
+        // GSAP ScrollTrigger's onUpdate actively overrides activeCardIndex thousands of times
+        // per second during an actual user scroll, so this interval only "shines" when the user is completely idle.
+        return () => clearInterval(interval);
+    }, [shouldInitAnimation]);
+
     // useLayoutEffect ensures GSAP pin cleanup runs synchronously before React
     // removes DOM nodes during client-side navigation (prevents removeChild error)
     useLayoutEffect(() => {

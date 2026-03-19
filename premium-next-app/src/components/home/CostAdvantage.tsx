@@ -86,14 +86,14 @@ export default function CostAdvantage() {
             />
 
             <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
-                <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
+                <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20 lg:items-center">
 
                     {/* LEFT — Copy */}
                     <motion.div
                         variants={stagger}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="flex flex-col justify-center"
+                        className="flex flex-col justify-center lg:-mt-12"
                     >
                         <motion.span
                             variants={childFade}

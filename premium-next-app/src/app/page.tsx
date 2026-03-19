@@ -1,23 +1,23 @@
 import Hero from "@/components/home/Hero";
-import TrustedBy from "@/components/home/TrustedBy";
-import Services from "@/components/home/Services";
-import CostAdvantage from "@/components/home/CostAdvantage";
-import CaseStudies from "@/components/home/CaseStudies";
-import ProcessShowcase from "@/components/home/ProcessShowcase";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
-import CTA from "@/components/home/CTA";
+import TrustBar from "@/components/home/TrustBar";
+import ServicesSection from "@/components/home/ServicesSection";
+import ComparisonSection from "@/components/home/ComparisonSection";
+import CaseStudiesSection from "@/components/home/CaseStudiesSection";
+import ProcessSection from "@/components/home/ProcessSection";
+import WhyUsSection from "@/components/home/WhyUsSection";
+import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <TrustedBy />
-      <Services />
-      <CostAdvantage />
-      <CaseStudies />
-      <ProcessShowcase />
-      <WhyChooseUs />
-      <CTA />
+      <TrustBar />
+      <ServicesSection />
+      <ComparisonSection />
+      <CaseStudiesSection />
+      <ProcessSection />
+      <WhyUsSection />
+      <FinalCTA />
 
       {/* Subtle accent border glow separating scrolling content from reveal footer */}
       <div

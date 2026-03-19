@@ -173,7 +173,7 @@ export default function WhyChooseUs() {
             <section
                 id="why-choose-us"
                 ref={ref}
-                className="relative overflow-hidden py-24 lg:py-32 scroll-mt-24"
+                className="relative py-24 lg:py-32 scroll-mt-24"
             >
                 {/* Top separator */}
                 <div
@@ -189,27 +189,27 @@ export default function WhyChooseUs() {
                 />
 
                 <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-                    {/* â”€â”€ Section Header â”€â”€ */}
-                    <div
-                        ref={headerRef}
-                        className="mb-16 flex flex-col items-start text-left lg:mb-20"
-                    >
-                        <motion.span
-                            variants={fadeUp()}
-                            initial="hidden"
-                            animate={isHeaderInView ? "show" : "hidden"}
-                            className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                    <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24">
+                        {/* ─── Section Header (Sticky Left) ─── */}
+                        <div
+                            ref={headerRef}
+                            className="flex flex-col items-start text-left w-full lg:w-[45%] lg:sticky lg:top-32"
                         >
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
-                            why us, honestly
-                        </motion.span>
-                        <div className="flex flex-col items-start gap-5">
-                            <div className="flex flex-wrap items-end gap-5">
+                            <motion.span
+                                variants={fadeUp()}
+                                initial="hidden"
+                                animate={isHeaderInView ? "show" : "hidden"}
+                                className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
+                            >
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
+                                why us, honestly
+                            </motion.span>
+                            <div className="flex flex-col items-start gap-5">
                                 <motion.h2
                                     variants={slideFromLeftContainer}
                                     initial="hidden"
                                     animate={isHeaderInView ? "show" : "hidden"}
-                                    className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                    className="max-w-xl text-left text-3xl font-normal tracking-tight text-white sm:text-4xl lg:text-5xl lg:leading-[1.15]"
                                     style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                                 >
                                     {splitWords("Four reasons we're different. Judge for").map((word, index) => (
@@ -228,7 +228,7 @@ export default function WhyChooseUs() {
                                         yourself.
                                     </motion.span>
                                 </motion.h2>
-                                {/* Inline stat badge */}
+
                                 <motion.div
                                     variants={fadeUp()}
                                     initial="hidden"
@@ -238,22 +238,24 @@ export default function WhyChooseUs() {
                                     <span className="font-mono text-sm font-bold text-brand-accent-light">98%</span>
                                     <span className="ml-1.5 text-xs text-zinc-500">Client Retention</span>
                                 </motion.div>
-                            </div>
-                            <motion.p
-                                variants={fadeUp()}
-                                initial="hidden"
-                                animate={isHeaderInView ? "show" : "hidden"}
-                                className="max-w-2xl text-left text-base leading-relaxed text-zinc-400"
-                            >
-                                Every agency claims to be different. Here&apos;s what we actually do that most won&apos;t.
-                            </motion.p>
-                        </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
-                        {ADVANTAGES.map((item, i) => (
-                            <AdvantageCard key={item.title} item={item} index={i} />
-                        ))}
+                                <motion.p
+                                    variants={fadeUp()}
+                                    initial="hidden"
+                                    animate={isHeaderInView ? "show" : "hidden"}
+                                    className="max-w-md text-left text-base leading-relaxed text-zinc-400"
+                                >
+                                    Every agency claims to be different. Here&apos;s what we actually do that most won&apos;t.
+                                </motion.p>
+                            </div>
+                        </div>
+
+                        {/* ─── Cards Grid (Scrolling Right) ─── */}
+                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1 w-full lg:w-[55%]">
+                            {ADVANTAGES.map((item, i) => (
+                                <AdvantageCard key={item.title} item={item} index={i} />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>

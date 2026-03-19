@@ -434,6 +434,20 @@ body {
     will-change: transform;
   }
 
+  .tb-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* ─── Availability Dot Pulse ────── */
+  @keyframes availability-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .availability-dot {
+    animation: availability-pulse 2s ease-in-out infinite;
+  }
+
   /* ─── CTA Pulse ────── */
   @keyframes cta-pulse {
 
@@ -476,6 +490,14 @@ body {
     }
 
     .glow-button-ring {
+      animation: none;
+    }
+
+    .tb-marquee-track {
+      animation-play-state: paused;
+    }
+
+    .availability-dot {
       animation: none;
     }
   }

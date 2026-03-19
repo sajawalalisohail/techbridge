@@ -80,8 +80,8 @@ export default function ProcessShowcase() {
                             variants={slideFromLeftContainer}
                             initial="hidden"
                             animate={isInView ? "show" : "hidden"}
-                            className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl"
-                            style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                            className="max-w-7xl text-left text-3xl font-normal tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                            style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                         >
                             {splitWords("How the").map((word, i) => (
                                 <motion.span key={`w1-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>

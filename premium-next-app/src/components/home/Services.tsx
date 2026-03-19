@@ -53,9 +53,9 @@ const SERVICES: ServiceCard[] = [
         id: 3,
         icon: BrainCircuit,
         eyebrow: "growth engine",
-        title: "AI Powered Lead Generation",
+        title: "AI & Machine Learning",
         description:
-            "We build AI systems that find, qualify, and book sales calls on autopilot — so your team closes instead of chases.",
+            "We build custom AI systems and intelligent automation that find patterns, streamline operations, and book sales calls backwards-to-front — so your team works smarter.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-rgb), 0.07) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
         href: "/services#ai-lead-generation",
     },
@@ -127,11 +127,10 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
     return (
         <motion.div
             variants={cardVariants}
-            className={`group relative overflow-hidden rounded-2xl border bg-[#06060c]/60 p-6 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 lg:p-7 ${
-                card.highlight
+            className={`group relative overflow-hidden rounded-2xl border bg-[#06060c]/60 p-6 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 lg:p-7 ${card.highlight
                     ? "border-brand-accent/40 shadow-[0_0_30px_rgba(var(--brand-accent-rgb),0.15)]"
                     : "border-white/10 hover:border-brand-accent/40 hover:shadow-[0_8px_32px_rgba(var(--brand-accent-rgb),0.08)]"
-            }`}
+                }`}
         >
             {/* Radial glow on hover */}
             <div
@@ -154,20 +153,18 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
             <div className="relative z-10 flex h-full flex-col">
                 {/* Icon */}
                 <div
-                    className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-300 ${
-                        card.highlight
+                    className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-300 ${card.highlight
                             ? "border-brand-accent/40 bg-brand-accent-deep/60 text-brand-accent-light"
                             : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-brand-accent/40 group-hover:text-brand-accent-light"
-                    }`}
+                        }`}
                 >
                     <Icon size={18} strokeWidth={1.5} />
                 </div>
 
                 {/* Eyebrow */}
                 <p
-                    className={`mb-1.5 font-mono text-xs font-semibold uppercase tracking-widest ${
-                        card.highlight ? "text-brand-accent-light" : "text-zinc-600"
-                    }`}
+                    className={`mb-1.5 font-mono text-xs font-semibold uppercase tracking-widest ${card.highlight ? "text-brand-accent-light" : "text-zinc-600"
+                        }`}
                 >
                     {card.eyebrow}
                 </p>
@@ -187,11 +184,10 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                     <Link
                         href={card.href}
                         aria-label={`Learn more about ${card.title}`}
-                        className={`relative z-20 mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 before:absolute before:inset-0 ${
-                            card.highlight
+                        className={`relative z-20 mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 before:absolute before:inset-0 ${card.highlight
                                 ? "text-brand-accent-light"
                                 : "text-zinc-600 group-hover:text-brand-accent-light"
-                        }`}
+                            }`}
                     >
                         <span>Learn more</span>
                         <svg
@@ -278,12 +274,12 @@ export default function Services() {
                     </motion.p>
                 </div>
 
-                {/* Services Grid */}
+                {/* Services Grid (Staggered Masonry) */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5"
+                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5 [&>*:nth-child(3n+2)]:lg:translate-y-12 [&>*:nth-child(2n+2)]:sm:translate-y-8 [&>*:nth-child(2n+2)]:lg:translate-y-0"
                 >
                     {SERVICES.map((card) => (
                         <ServiceCardItem key={card.id} card={card} />

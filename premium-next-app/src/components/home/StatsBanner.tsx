@@ -28,7 +28,7 @@ export default function StatsBanner() {
                             <CountUp
                                 value={stat.value}
                                 suffix={stat.suffix}
-                                from={20}
+                                from={0}
                                 className="font-mono text-3xl font-bold tracking-tight bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent sm:text-4xl"
                             />
                         </dd>

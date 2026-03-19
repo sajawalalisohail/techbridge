@@ -63,9 +63,28 @@ function ServiceSection({
 
             <div className="p-8 lg:p-10">
                 {/* Sub-headline */}
-                <h3 className="mb-5 text-2xl font-bold leading-snug tracking-tight text-white lg:text-3xl">
-                    {section.subHeadline}
-                </h3>
+                <motion.h3
+                    variants={wordContainerVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-40px" }}
+                    className="mb-5 text-2xl font-bold leading-snug tracking-tight text-white lg:text-3xl"
+                    style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                >
+                    {splitWords(section.subHeadline).map((word, i, arr) => {
+                        const isLast = i === arr.length - 1;
+                        return (
+                            <motion.span
+                                key={i}
+                                variants={wordVariants}
+                                className={isLast ? "bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent" : ""}
+                                style={{ display: "inline-block" }}
+                            >
+                                {word}
+                            </motion.span>
+                        );
+                    })}
+                </motion.h3>
 
                 {/* Description */}
                 <p className="mb-10 max-w-xl text-base leading-relaxed text-zinc-400">
@@ -156,8 +175,8 @@ export default function ServicesPage() {
                                 variants={wordContainerVariants}
                                 initial="hidden"
                                 animate={isHeroInView ? "show" : "hidden"}
-                                className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
-                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                             >
                                 {splitWords("What we build, how we build it, and what it costs you to").map((word, i) => (
                                     <motion.span key={`${word}-${i}`} variants={wordVariants} style={{ display: "inline-block" }}>

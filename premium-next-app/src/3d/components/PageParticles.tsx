@@ -143,10 +143,10 @@ function ParticlesField({ count = 80, positionsRef, brandColors }: ParticlesFiel
       positions[i * 3 + 1] = (seededUnit(i + count * 2.3) - 0.5) * 80;
       positions[i * 3 + 2] = (seededUnit(i + count * 3.7) - 0.5) * 12; // Wider z-spread for depth
 
-      // Slower, more elegant drift
-      velocities[i * 3] = (seededUnit(i + count * 4.9) - 0.5) * 0.004;
-      velocities[i * 3 + 1] = (seededUnit(i + count * 5.7) - 0.5) * 0.004;
-      velocities[i * 3 + 2] = (seededUnit(i + count * 6.1) - 0.5) * 0.002;
+      // Faster, more dynamic drift
+      velocities[i * 3] = (seededUnit(i + count * 4.9) - 0.5) * 0.008;
+      velocities[i * 3 + 1] = (seededUnit(i + count * 5.7) - 0.5) * 0.008;
+      velocities[i * 3 + 2] = (seededUnit(i + count * 6.1) - 0.5) * 0.004;
 
       // Per-particle size variation (0.10 - 0.25)
       sizes[i] = 0.10 + seededUnit(i + count * 7.9) * 0.15;
@@ -257,13 +257,13 @@ export function PageParticles() {
 
     const update = () => {
       if (mqMobile.matches) {
-        setCount(50);
+        setCount(80);
         setShowConnections(false);
       } else if (mqDesktop.matches) {
-        setCount(120);
+        setCount(200);
         setShowConnections(true);
       } else {
-        setCount(80);
+        setCount(140);
         setShowConnections(true);
       }
     };
@@ -293,9 +293,11 @@ export function PageParticles() {
       }}
     >
       <ParticlesField brandColors={brandColors} count={count} positionsRef={positionsRef} />
+      {/* 
       {showConnections && (
         <ConnectionLines brandColors={brandColors} positionsRef={positionsRef} count={count} maxDistance={3.0} />
       )}
+      */}
     </Canvas>
   );
 }

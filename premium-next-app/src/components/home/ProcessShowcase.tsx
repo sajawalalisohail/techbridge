@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { blurFocusIn } from "@/components/shared/headingAnimations";
+import { blurFocusIn, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import {
     ArrowUpRight,
     Bot,
@@ -282,7 +282,7 @@ export default function ProcessShowcase() {
     const isHeaderInView = useInView(ref, { once: true, margin: "-80px" });
 
     return (
-        <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden scroll-mt-24 border-y border-white/5 bg-[#030303]">
+        <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden scroll-mt-24 border-y border-white/5">
             {/* Ambient center glow */}
             <div
                 aria-hidden="true"
@@ -290,52 +290,70 @@ export default function ProcessShowcase() {
                 style={{ background: "radial-gradient(circle at 10% 50%, rgba(var(--brand-accent-rgb), 0.04) 0%, rgba(var(--brand-accent-rgb), 0) 60%)" }}
             />
 
-            <div className="relative z-10 mx-auto max-w-[90rem] px-6 lg:px-10">
-                <div className="mb-14">
+            <div className="relative z-10 mx-auto max-w-[100rem] px-6 lg:px-10">
+                <div className="mb-14 flex flex-col items-start text-left">
                     <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                         <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                         <span className="h-px w-4 bg-brand-accent/40" />
                         our process
                     </span>
                     <motion.h2
-                        variants={blurFocusIn()}
+                        variants={slideFromLeftContainer}
                         initial="hidden"
                         animate={isHeaderInView ? "show" : "hidden"}
-                        className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl"
+                        className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                        style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                     >
-                        How the <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">delivery</span> system works.
+                        {splitWords("How the").map((w, i) => (
+                            <motion.span key={`w1-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>{w}</motion.span>
+                        ))}
+                        <motion.span variants={slideFromLeftItem} className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent" style={{ display: "inline-block" }}>delivery</motion.span>
+                        {splitWords("system works.").map((w, i) => (
+                            <motion.span key={`w2-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>{w}</motion.span>
+                        ))}
                     </motion.h2>
                 </div>
-                <div className="grid gap-6 md:grid-cols-2">
-                    {STEPS.map((s, i) => (
-                        <div
-                            key={s.number}
-                            className="group rounded-[2rem] border border-white/8 bg-neutral-900/30 p-8 shadow-sm backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/30 hover:bg-brand-accent/5 lg:p-10"
-                        >
-                            <div className="flex items-center justify-between">
-                                <span className="font-mono text-5xl font-black leading-none text-white/[0.06] transition-colors duration-500 group-hover:text-brand-accent/20">
-                                    {s.number}
-                                </span>
-                                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] uppercase tracking-[0.24em] text-zinc-400 font-semibold transition-colors duration-500 group-hover:border-brand-accent/30 group-hover:bg-brand-accent/10 group-hover:text-brand-accent-light">
-                                    <ArrowUpRight className="h-3.5 w-3.5" />
-                                    {s.eyebrow}
+                <div className="grid gap-6 md:grid-cols-2 py-4 px-2 -mx-2">
+                    {STEPS.map((s, i) => {
+                        const offset = i % 2 === 0 ? { x: -60, y: 0 } : { x: 60, y: 0 };
+                        const variants: import("framer-motion").Variants = {
+                            hidden: { opacity: 0, x: offset.x, y: offset.y },
+                            show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.8, ease: EASE } }
+                        };
+                        return (
+                            <motion.div
+                                key={s.number}
+                                variants={variants}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true, margin: "-40px 0px" }}
+                                className="group rounded-[2rem] border border-white/8 bg-neutral-900/30 p-8 shadow-sm backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/30 hover:bg-brand-accent/5 lg:p-10"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <span className="font-mono text-5xl font-black leading-none text-white/[0.06] transition-colors duration-500 group-hover:text-brand-accent/20">
+                                        {s.number}
+                                    </span>
+                                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] uppercase tracking-[0.24em] text-zinc-400 font-semibold transition-colors duration-500 group-hover:border-brand-accent/30 group-hover:bg-brand-accent/10 group-hover:text-brand-accent-light">
+                                        <ArrowUpRight className="h-3.5 w-3.5" />
+                                        {s.eyebrow}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <h3 className="mt-8 text-2xl font-bold tracking-tight text-white lg:text-3xl">{s.title}</h3>
-                            <p className="mt-4 text-sm leading-relaxed text-zinc-400 group-hover:text-brand-accent-light lg:text-base transition-colors duration-300">{s.description}</p>
+                                <h3 className="mt-8 text-2xl font-bold tracking-tight text-white lg:text-3xl">{s.title}</h3>
+                                <p className="mt-4 text-sm leading-relaxed text-zinc-400 group-hover:text-brand-accent-light lg:text-base transition-colors duration-300">{s.description}</p>
 
-                            <div className="mt-8 mb-6 relative">
-                                {/* subtle background highlight for graphic */}
-                                <div className="absolute -inset-4 z-0 rounded-3xl bg-black/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                                <div className="relative z-10">{VISUALS[i]}</div>
-                            </div>
+                                <div className="mt-8 mb-6 relative">
+                                    {/* subtle background highlight for graphic */}
+                                    <div className="absolute -inset-4 z-0 rounded-3xl bg-black/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                    <div className="relative z-10">{VISUALS[i]}</div>
+                                </div>
 
-                            <div className="mt-6 rounded-2xl border border-white/5 bg-white/5 p-4 text-sm font-medium leading-relaxed text-zinc-300 border-l-2 border-l-brand-accent transition-colors duration-500 group-hover:border-brand-accent/20 group-hover:bg-brand-accent/10">
-                                {s.outcome}
-                            </div>
-                        </div>
-                    ))}
+                                <div className="mt-6 rounded-2xl border border-white/5 bg-white/5 p-4 text-sm font-medium leading-relaxed text-zinc-300 border-l-2 border-l-brand-accent transition-colors duration-500 group-hover:border-brand-accent/20 group-hover:bg-brand-accent/10">
+                                    {s.outcome}
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

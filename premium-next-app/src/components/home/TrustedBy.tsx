@@ -60,8 +60,8 @@ export default function TrustedBy() {
                     variants={slideFromLeftContainer}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="mb-12 text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
-                    style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                    className="mb-12 max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                 >
                     {splitWords("Trusted by teams building").map((word, index) => (
                         <motion.span

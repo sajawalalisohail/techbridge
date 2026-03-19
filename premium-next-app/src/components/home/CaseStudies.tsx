@@ -303,43 +303,41 @@ export default function CaseStudies() {
 
             {/* Header */}
             <div className="mx-auto max-w-[100rem] px-6 pt-20 lg:px-10 lg:pt-24">
-                <div ref={headerRef} className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                    <div>
-                        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-                            <span className="h-px w-4 bg-brand-accent/40" />
-                            proof, not promises
-                        </span>
-                        <motion.h2
-                            variants={slideFromLeftContainer}
-                            initial="hidden"
-                            animate={isHeaderInView ? "show" : "hidden"}
-                            className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
-                            style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
-                        >
-                            {splitWords("Real clients. Real").map((word, index) => (
-                                <motion.span
-                                    key={`w1-${index}`}
-                                    variants={slideFromLeftItem}
-                                    style={{ display: "inline-block" }}
-                                >
-                                    {word}
-                                </motion.span>
-                            ))}
+                <div ref={headerRef} className="mb-10 flex flex-col items-start text-left gap-6">
+                    <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                        <span className="h-px w-4 bg-brand-accent/40" />
+                        proof, not promises
+                    </span>
+                    <motion.h2
+                        variants={slideFromLeftContainer}
+                        initial="hidden"
+                        animate={isHeaderInView ? "show" : "hidden"}
+                        className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                        style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
+                    >
+                        {splitWords("Real clients. Real").map((word, index) => (
                             <motion.span
+                                key={`w1-${index}`}
                                 variants={slideFromLeftItem}
-                                className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                                style={{ display: "inline-block" }}
                             >
-                                numbers.
+                                {word}
                             </motion.span>
-                        </motion.h2>
-                        <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
-                            Platforms we architected, systems we built, and rapid websites to show we can move fast without cutting corners.
-                        </p>
-                    </div>
+                        ))}
+                        <motion.span
+                            variants={slideFromLeftItem}
+                            className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                        >
+                            numbers.
+                        </motion.span>
+                    </motion.h2>
+                    <p className="max-w-2xl text-base leading-relaxed text-zinc-400 lg:text-lg">
+                        Platforms we architected, systems we built, and rapid websites to show we can move fast without cutting corners.
+                    </p>
                     <Link
                         href="/work"
-                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-brand-accent-light"
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-brand-accent-light mt-2"
                     >
                         See All Projects
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />

@@ -139,7 +139,7 @@ export default function Footer() {
                             </div>
 
                             <p className="mt-8 md:mt-12 text-xs md:text-sm text-zinc-600">
-                                <span className="font-black italic tracking-tighter text-zinc-400">TECH<span className="text-brand-accent">BRIDGE</span></span> <span className="font-mono">&copy; {year}</span>. All rights reserved.
+                                <span className="tracking-tight text-zinc-400"><span className="font-extrabold">TECH</span><span className="font-medium text-brand-accent">BRIDGE</span></span> <span className="font-mono">&copy; {year}</span>. All rights reserved.
                             </p>
                         </div>
 

@@ -76,22 +76,26 @@ const containerVariants = {
     show: { transition: { staggerChildren: 0.13 } },
 };
 
-const cardVariants = {
-    hidden: { opacity: 0, y: 36 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
-    },
-};
-
-/* â”€â”€â”€ Advantage Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-function AdvantageCard({ item }: { item: Advantage }) {
+/* ─── Advantage Card ─────────────────────────────────── */
+function AdvantageCard({ item, index }: { item: Advantage; index: number }) {
     const Icon = item.icon;
+    const offset = index % 2 === 0 ? { x: -60, y: 0 } : { x: 60, y: 0 };
+    const variants: import("framer-motion").Variants = {
+        hidden: { opacity: 0, x: offset.x, y: offset.y },
+        show: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
+        },
+    };
 
     return (
         <motion.div
-            variants={cardVariants}
+            variants={variants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
             className="group relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5 lg:p-10"
         >
             {/* â”€â”€ Gradient mesh - always mounted, fades in on hover â”€â”€ */}
@@ -188,7 +192,7 @@ export default function WhyChooseUs() {
                     {/* â”€â”€ Section Header â”€â”€ */}
                     <div
                         ref={headerRef}
-                        className="mb-16 lg:mb-20"
+                        className="mb-16 flex flex-col items-start text-left lg:mb-20"
                     >
                         <motion.span
                             variants={fadeUp()}
@@ -199,13 +203,13 @@ export default function WhyChooseUs() {
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                             why us, honestly
                         </motion.span>
-                        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                        <div className="flex flex-col items-start gap-5">
                             <motion.h2
                                 variants={slideFromLeftContainer}
                                 initial="hidden"
                                 animate={isHeaderInView ? "show" : "hidden"}
-                                className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl max-w-2xl"
-                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                             >
                                 {splitWords("Four reasons we're different. Judge for").map((word, index) => (
                                     <motion.span
@@ -227,24 +231,18 @@ export default function WhyChooseUs() {
                                 variants={fadeUp()}
                                 initial="hidden"
                                 animate={isHeaderInView ? "show" : "hidden"}
-                                className="max-w-sm text-base leading-relaxed text-zinc-500 lg:text-right"
+                                className="max-w-2xl text-left text-base leading-relaxed text-zinc-400"
                             >
                                 Every agency claims to be different. Here&apos;s what we actually do that most won&apos;t.
                             </motion.p>
                         </div>
                     </div>
 
-                    {/* â”€â”€ 2Ã—2 Grid â”€â”€ */}
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate={isInView ? "show" : "hidden"}
-                        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5"
-                    >
-                        {ADVANTAGES.map((item) => (
-                            <AdvantageCard key={item.title} item={item} />
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
+                        {ADVANTAGES.map((item, i) => (
+                            <AdvantageCard key={item.title} item={item} index={i} />
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </section>
         </>

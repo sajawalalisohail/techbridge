@@ -318,36 +318,40 @@ function WorkSection({ section, index }: { section: CaseStudyWorkSection; index:
 
     return (
         <section ref={sectionRef} id={section} className={index > 0 ? "mt-24 lg:mt-32" : ""}>
-            <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                <div className="max-w-2xl">
+            <div className="mb-10 flex flex-col items-start text-left gap-6">
+                <div className="flex flex-col items-start">
                     <SectionEyebrow>{meta.title}</SectionEyebrow>
                     <motion.h2
                         variants={headingAnimation.container}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
-                        style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                        className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                        style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                     >
-                        {splitWords(meta.title).map((word, wordIndex) => (
-                            <motion.span
-                                key={`${word}-${wordIndex}`}
-                                variants={headingAnimation.item}
-                                style={{ display: "inline-block" }}
-                            >
-                                {word}
-                            </motion.span>
-                        ))}
+                        {splitWords(meta.title).map((word, wordIndex, arr) => {
+                            const isLast = wordIndex === arr.length - 1;
+                            return (
+                                <motion.span
+                                    key={`${word}-${wordIndex}`}
+                                    variants={headingAnimation.item}
+                                    className={isLast ? "bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent" : ""}
+                                    style={{ display: "inline-block" }}
+                                >
+                                    {word}
+                                </motion.span>
+                            );
+                        })}
                     </motion.h2>
                     <motion.p
                         variants={fadeUp(0.12)}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="mt-4 text-base leading-relaxed text-zinc-400"
+                        className="mt-4 max-w-2xl text-left text-base leading-relaxed text-zinc-400"
                     >
                         {meta.description}
                     </motion.p>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap justify-start gap-2">
                     {studies.map((study) => (
                         <span
                             key={study.slug}
@@ -398,7 +402,7 @@ export default function WorkPage() {
                                 variants={wordContainerVariants}
                                 initial="hidden"
                                 animate={isHeroInView ? "show" : "hidden"}
-                                className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
+                                className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl pb-2 pt-1"
                                 style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                             >
                                 <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Real</motion.span>
@@ -462,9 +466,9 @@ export default function WorkPage() {
                                     variants={fadeUp()}
                                 >
                                     <ClipReveal>
-                                    <h2 className="text-3xl font-bold text-white lg:text-4xl">
-                                        Got a project that needs to actually ship?
-                                    </h2>
+                                        <h2 className="text-3xl font-bold text-white lg:text-4xl">
+                                            Got a project that needs to actually ship?
+                                        </h2>
                                     </ClipReveal>
                                 </motion.div>
                             </div>

@@ -120,7 +120,7 @@ function Hero() {
                     variants={fadeUp(0.3)}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+                    className="flex flex-row flex-wrap items-center justify-center gap-3 w-full max-w-sm mx-auto sm:max-w-none sm:gap-4"
                 >
                     <a
                         href="#pricing"
@@ -186,8 +186,10 @@ function ComparisonTable() {
                     className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
                     style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
                 >
-                    {splitWords("What $997 gets you vs. the alternatives.").map((word, index) => (
-                        <motion.span key={`${word}-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                    <motion.span variants={slideFromLeftItem} style={{ display: "inline-block" }}>What</motion.span>
+                    <motion.span variants={slideFromLeftItem} className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent" style={{ display: "inline-block" }}>$997</motion.span>
+                    {splitWords("gets you vs. the alternatives.").map((word, index) => (
+                        <motion.span key={`w-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
                             {word}
                         </motion.span>
                     ))}

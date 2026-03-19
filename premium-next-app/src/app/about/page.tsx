@@ -243,7 +243,7 @@ export default function AboutPage() {
                             <span className="h-px w-4 bg-brand-accent/40" />
                             about us
                         </motion.span>
-                        <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl">
+                        <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]">
                             We&apos;re engineers.{" "}
                             <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                                 Not an agency wearing a tech hat.
@@ -266,7 +266,7 @@ export default function AboutPage() {
                                 variants={slideFromLeft}
                                 initial="hidden"
                                 animate={isStoryInView ? "show" : "hidden"}
-                                className="mb-7 text-3xl font-bold leading-snug tracking-tight text-white lg:text-4xl"
+                                className="mb-7 max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
                             >
                                 Started because agencies kept disappointing us too.
                             </motion.h2>
@@ -301,7 +301,7 @@ export default function AboutPage() {
                                 variants={slideFromRight}
                                 initial="hidden"
                                 animate={isTeamInView ? "show" : "hidden"}
-                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
                             >
                                 Names, not titles.
                             </motion.h2>
@@ -366,8 +366,8 @@ export default function AboutPage() {
                                 variants={wordContainerVariants}
                                 initial="hidden"
                                 animate={isTimelineInView ? "show" : "hidden"}
-                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
-                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                             >
                                 {["How", "we", "got", "here."].map((word, index) => (
                                     <motion.span key={`${word}-${index}`} variants={wordVariants} style={{ display: "inline-block" }}>
@@ -407,11 +407,10 @@ export default function AboutPage() {
                                         >
                                             <div className="flex items-center gap-4 lg:w-32 lg:flex-shrink-0">
                                                 <div
-                                                    className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-xl font-mono text-lg font-bold backdrop-blur-sm transition-all duration-700 ${
-                                                        isActive
+                                                    className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-xl font-mono text-lg font-bold backdrop-blur-sm transition-all duration-700 ${isActive
                                                             ? "border-brand-accent/60 bg-brand-accent/10 text-brand-accent-light"
                                                             : "border border-white/10 bg-neutral-900/80 text-white"
-                                                    }`}
+                                                        }`}
                                                     style={{
                                                         boxShadow: isActive
                                                             ? "0 0 20px rgba(var(--brand-accent-rgb), 0.35), inset 0 0 12px rgba(var(--brand-accent-rgb), 0.1)"
@@ -425,11 +424,10 @@ export default function AboutPage() {
                                                 <span className="font-mono text-sm font-semibold text-zinc-500 lg:hidden">{event.year}</span>
                                             </div>
                                             <div
-                                                className={`flex-1 rounded-2xl p-6 backdrop-blur-sm transition-all duration-700 lg:p-8 ${
-                                                    isActive
+                                                className={`flex-1 rounded-2xl p-6 backdrop-blur-sm transition-all duration-700 lg:p-8 ${isActive
                                                         ? "border border-brand-accent/40 bg-brand-accent/5"
                                                         : "border border-white/8 bg-neutral-900/30"
-                                                }`}
+                                                    }`}
                                                 style={{
                                                     boxShadow: isActive
                                                         ? "0 0 30px rgba(var(--brand-accent-rgb), 0.15), 0 0 60px rgba(var(--brand-accent-rgb), 0.05)"
@@ -458,7 +456,7 @@ export default function AboutPage() {
                                 variants={blurFocusIn()}
                                 initial="hidden"
                                 animate={isValuesInView ? "show" : "hidden"}
-                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
                             >
                                 Four things we actually mean.
                             </motion.h2>
@@ -488,7 +486,7 @@ export default function AboutPage() {
                                 variants={slideFromLeft}
                                 initial="hidden"
                                 animate={isDiffInView ? "show" : "hidden"}
-                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
                             >
                                 Us vs. the last agency you hired.
                             </motion.h2>
@@ -520,7 +518,7 @@ export default function AboutPage() {
                                 variants={slideFromRight}
                                 initial="hidden"
                                 animate={isSecurityInView ? "show" : "hidden"}
-                                className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
                             >
                                 Security that&apos;s built in, not bolted on.
                             </motion.h2>

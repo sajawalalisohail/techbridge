@@ -344,16 +344,16 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="relative z-50">
+            <div className="fixed top-0 left-0 right-0 z-50 flex flex-col pointer-events-none">
                 <AnimatePresence mode="popLayout">
                     {bannerVisible && pathname !== "/websites" && (
                         <motion.div
                             key="announcement-banner"
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.2 }}
-                            className="fixed top-0 left-0 right-0 z-[60] overflow-hidden border-b border-white/[0.06] bg-black/50 backdrop-blur-md"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="relative z-[60] w-full overflow-hidden border-b border-white/[0.06] bg-black/50 backdrop-blur-md pointer-events-auto"
                         >
                             <div
                                 className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -396,13 +396,13 @@ export default function Navbar() {
                             : headerVariants[navState]
                     }
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className={`fixed top-0 left-0 right-0 z-50 ${forceHide ? "pointer-events-none" : ""}`}
+                    className={`relative z-50 w-full pointer-events-auto ${forceHide ? "pointer-events-none" : ""}`}
                 >
                     <div ref={menuShellRef} className="px-3 md:px-4">
                         <div
                             className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-full border ${navState === "pill"
                                 ? "mt-4 max-w-5xl border-brand-accent/20 bg-[#06060c]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(var(--brand-accent-rgb),0.15)] backdrop-blur-2xl"
-                                : "mt-6 max-w-[100rem] border-transparent bg-transparent shadow-none backdrop-blur-none"
+                                : `${bannerVisible ? "mt-0" : "mt-4"} max-w-[100rem] border-transparent bg-transparent shadow-none backdrop-blur-none`
                                 }`}
                         >
                             <nav
@@ -421,8 +421,8 @@ export default function Navbar() {
                                     }}
                                     className="group flex items-center gap-1.5"
                                 >
-                                    <span className="text-xl font-black italic tracking-tighter text-white drop-shadow-md">
-                                        TECH<span className="bg-gradient-to-r from-brand-accent to-brand-accent-light bg-clip-text text-transparent">BRIDGE</span>
+                                    <span className="text-xl tracking-tight text-white drop-shadow-md">
+                                        <span className="font-extrabold">TECH</span><span className="font-medium text-brand-accent">BRIDGE</span>
                                     </span>
                                 </Link>
                                 <ul
@@ -448,7 +448,10 @@ export default function Navbar() {
                                             <Link
                                                 href="/services"
                                                 onClick={closeServicesMenu}
-                                                className="transition-colors duration-200"
+                                                className={`relative whitespace-nowrap transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:transition-all after:duration-300 ${isServicesActive
+                                                    ? "text-white after:w-full after:bg-brand-accent-light drop-shadow-[0_0_8px_rgba(var(--brand-accent-light-rgb),0.6)]"
+                                                    : "after:w-0 after:bg-white hover:text-brand-accent-light hover:after:w-full"
+                                                    }`}
                                             >
                                                 Services
                                             </Link>

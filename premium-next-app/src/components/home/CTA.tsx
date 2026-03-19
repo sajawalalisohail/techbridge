@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { fadeUp } from "@/components/shared/headingAnimations";
 
@@ -10,13 +10,43 @@ export default function CTA() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
 
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+    const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["3deg", "-3deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-3deg", "3deg"]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const xPct = mouseX / width - 0.5;
+        const yPct = mouseY / height - 0.5;
+        x.set(xPct);
+        y.set(yPct);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
     return (
-        <section className="relative z-10 px-6 py-24 lg:px-10 lg:py-32">
+        <section className="relative z-10 px-6 py-24 lg:px-10 lg:py-32" style={{ perspective: "1200px" }}>
             <motion.div
                 ref={ref}
                 variants={fadeUp()}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                 className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/60 px-8 py-10 backdrop-blur-sm sm:px-12 sm:py-12 lg:rounded-[2rem]"
             >
                 {/* Ambient glow */}

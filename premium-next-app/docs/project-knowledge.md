@@ -5,7 +5,7 @@
 
 ## Overview
 
-TechBridge is a premium marketing site with a strong visual layer built from Tailwind v4, Framer Motion, GSAP, and React Three Fiber. The app is primarily client-rendered, with route layouts used for metadata, SEO, and shell composition.
+TechBridge is a premium B2B marketing and conversion site focused intently on **Staff Augmentation**. Our positioning emphasizes "Silicon Valley Quality. Global Cost Advantage," leveraging elite Pakistani software and AI engineering talent. The site features a strong visual layer built from Tailwind v4, Framer Motion, GSAP, and React Three Fiber. The app is primarily client-rendered, with route layouts used for metadata, SEO, and shell composition.
 
 ## Architecture & Directory Structure
 
@@ -30,10 +30,10 @@ The repository is fully equipped to interact alongside AI agents (Claude, Gemini
 - The visual stack depends on layered backgrounds, sticky particle canvases, and a fixed footer reveal.
 - Reduced-motion support is systematically enforced across the visual system.
 
-## Homepage Section Order
+## Homepage Section Order (The Phase 2 Narrative Flow)
 
 ```text
-Hero -> Differentiators -> TrustedBy (marquee) -> Services (6 cards) -> ProcessTimeline (4 steps) -> CaseStudies (9 cards, horizontal scroll) -> CTA
+Hero (Center aligned) -> The Core Problem (Cost vs Freelancers) -> Our Proof (StatsBanner) -> Augmentation Flow (Vetting pipeline) -> Case Studies -> The Guarantee -> End-to-End Process -> Final CTA
 ```
 
 ## Accent Token System
@@ -54,11 +54,11 @@ The global TechBridge accent is strictly centralized in `src/app/globals.css` us
 
 ## Typography & Core Styling Standards
 
+- **Universal Grid Baseline**: Left-Aligned Editorial architecture. Root sections use `max-w-[100rem]`, driving text blocks bounds using `max-w-7xl` pinned with `flex-col items-start text-left`. Wait for Explicit exceptions (like the Hero `items-center`).
 - **Hero h1:** `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`
 - **Text Gradients:** `bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent`
 - **Eyebrows:** `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600` (often decorated with a dot + line)
 - **Whitespace / Padding:** Section padding expects `py-24 lg:py-32` minimally; `py-16 lg:py-20` for tight layouts.
-- **Constraints:** Standard max-widths: `max-w-[100rem]` (Home/Landing), `max-w-7xl` (Interior Routes).
 
 ## Animation Pipeline
 
@@ -75,7 +75,9 @@ We distribute motion across three specialized tools based on performance/impact:
 
 ## Known Gotchas & Validation Workflow
 
-- Overlay styling (e.g. `.website-glow-shell > *`) may force localized stacking. Beware positioning traps!
+- **Navigation Overflow**: Do not set `Navbar` break points to `md`; utilize `lg:hidden` (1024px) for menus to prevent dense horizontal link overlaps on tablets. On narrow screens, dynamically force `navState = "pill"`.
+- **Framer Motion Clipping**: Do not apply `overflow-hidden` wrappers to internal grids manipulating elements outside bounds (i.e. `x: -60` variants), or text will visually shear. Wrap `overflow-hidden` at the root `<section>` level exclusively.
+- **Overlay styling** (e.g. `.website-glow-shell > *`) may force localized stacking. Beware positioning traps!
 - The `/websites` route is an edge case and handles alternate layout structures.
 - During build (`npm run build`), `next/font/google` fetch requests for `Plus Jakarta Sans` can fail under strict proxy setups.
 - **Validation:** Always test interactions on Safari vs Chrome, verify cleanup hooks for GSAP scroll zones, and confirm dynamic imports correctly split chunks.

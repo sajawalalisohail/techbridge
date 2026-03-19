@@ -21,6 +21,10 @@
 - `docs/` - Extended project knowledge and SEO infrastructure.
 - `.agent/skills/` - Custom agent capacities and AI workflows.
 
+**Positioning & Content Strategy (Phase 2)**
+- **Value Proposition**: "Silicon Valley Quality. Global Cost Advantage." The primary commercial narrative hinges on **Premium Staff Augmentation**. We sell the outcome via an elite Pakistani engineering talent pool at a fraction of US/EU expenses.
+- **Tone**: High-end B2B structural engineering partner. Eradicate generic "AI Agency" copy. Emphasize transparent delivery, replacement guarantees, and "code running in production."
+
 ---
 
 ## 🤖 AI Agent & Skills System
@@ -47,10 +51,14 @@ The UI enforces a single unified token system spanning both the DOM and WebGL en
 
 ### 2. Typography & Layout Metrics
 - **Font Family**: *Plus Jakarta Sans* (`next/font/google`).
+- **Universal Grid Standard**: The site utilizes a strict **Left-Aligned Editorial Flow**. Root sections span `max-w-[100rem]`, while text blocks and headers are locked to `max-w-7xl` and strictly `text-left`, `items-start`. Exceptions: The Homepage Hero and explicitly isolated blocks may use `items-center` `text-center`.
 - **Hero h1 Guidelines**: Usually `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`.
 - **Eyebrows**: Format strictly as `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600`.
 - **Spacing Guidelines**: Standard section padding is `py-24 lg:py-32`; tight layouts use `py-16 lg:py-20`.
-- **Container Limits**: Max widths adhere to `max-w-[100rem]` (Homepage defaults) and `max-w-7xl` (Interior Routes). Prioritize testing mobile (320px) overflow bounds.
+- **Overflow constraints**: Do not place `overflow-hidden` on inner structural grids displaying Framer translation motion (e.g., `x: -60`), as clipping will occur during entrance cascades.
+
+### 3. Component Overrides
+- **Navbar Layout**: Navbar breakpoints explicitly break at `lg:hidden` (1024px) instead of `md` to prevent sprawling horizontal menu overlap. Mobile viewing inherently forces the `pill` navState.
 
 ---
 

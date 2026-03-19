@@ -1,30 +1,21 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import {
-    Code2,
     BrainCircuit,
-    LayoutDashboard,
-    Zap,
-    Smartphone,
+    Code2,
     Palette,
+    Smartphone,
+    Users,
+    Wrench,
+    Zap,
 } from "lucide-react";
-import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
-import {
-    WorkflowDiagramMockup,
-    ChatUIMockup,
-    DashboardMockup,
-    BrowserLoadMockup,
-    MetricCounterMockup,
-    DataFlowMockup,
-} from "@/components/home/mockups";
-
-/* â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 import type { LucideIcon } from "lucide-react";
-import type { ComponentType } from "react";
+import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 
+/* ─── Types ──────────────────────────────────────────────────── */
 interface ServiceCard {
     id: number;
     icon: LucideIcon;
@@ -34,10 +25,9 @@ interface ServiceCard {
     highlight?: boolean;
     accentColor: string;
     href?: string;
-    Mockup: ComponentType;
 }
 
-/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Data ────────────────────────────────────────────────────── */
 const SERVICES: ServiceCard[] = [
     {
         id: 1,
@@ -48,29 +38,26 @@ const SERVICES: ServiceCard[] = [
             "Multi-tenant platforms, internal tools, and SaaS products. Architected so your next hire can actually understand the codebase.",
         accentColor: "radial-gradient(ellipse at 20% 50%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
         href: "/services#custom-software",
-        Mockup: WorkflowDiagramMockup,
     },
     {
         id: 2,
+        icon: Users,
+        eyebrow: "your team, extended",
+        title: "Dedicated Engineers",
+        description:
+            "Senior developers and AI engineers embedded in your team. Full-time, part-time, or project-based. Managed by us, accountable to you. If someone isn't performing, we replace them.",
+        accentColor: "radial-gradient(ellipse at 80% 50%, rgba(var(--brand-accent-light-rgb), 0.09) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
+        href: "/staff-augmentation",
+    },
+    {
+        id: 3,
         icon: BrainCircuit,
         eyebrow: "growth engine",
         title: "AI Powered Lead Generation",
         description:
             "We build AI systems that find, qualify, and book sales calls on autopilot — so your team closes instead of chases.",
-        accentColor: "radial-gradient(ellipse at 80% 50%, rgba(var(--brand-accent-light-rgb), 0.09) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
-        href: "/services#ai-lead-generation",
-        Mockup: ChatUIMockup,
-    },
-    {
-        id: 3,
-        icon: LayoutDashboard,
-        eyebrow: "internal tools",
-        title: "Internal Tools & Integrations",
-        description:
-            "The admin panel, the reporting dashboard, the thing your team duct-taped together in Sheets. We build the real version.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-rgb), 0.07) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
-        href: "/services#internal-tools",
-        Mockup: DashboardMockup,
+        href: "/services#ai-lead-generation",
     },
     {
         id: 4,
@@ -82,84 +69,77 @@ const SERVICES: ServiceCard[] = [
         highlight: true,
         accentColor: "radial-gradient(ellipse at 50% 50%, rgba(var(--brand-accent-light-rgb), 0.11) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
         href: "/websites",
-        Mockup: BrowserLoadMockup,
     },
     {
         id: 5,
         icon: Smartphone,
-        eyebrow: "Mobile",
+        eyebrow: "mobile",
         title: "Mobile Apps",
         description:
             "iOS and Android apps that don't crash, don't lag, and don't get uninstalled after the first session.",
         accentColor: "radial-gradient(ellipse at 20% 80%, rgba(var(--brand-accent-light-rgb), 0.08) 0%, rgba(var(--brand-accent-light-rgb), 0) 100%)",
         href: "/services#mobile-apps",
-        Mockup: MetricCounterMockup,
     },
     {
         id: 6,
+        icon: Wrench,
+        eyebrow: "internal tools",
+        title: "Internal Tools & Integrations",
+        description:
+            "The admin panel, the reporting dashboard, the thing your team duct-taped together in Sheets. We build the real version.",
+        accentColor: "radial-gradient(ellipse at 80% 80%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
+        href: "/services#internal-tools",
+    },
+    {
+        id: 7,
         icon: Palette,
-        eyebrow: "Design",
+        eyebrow: "design",
         title: "UI/UX & Brand Identity",
         description:
             "Design systems and brand work grounded in actual user research, not a mood board from Pinterest.",
-        accentColor: "radial-gradient(ellipse at 80% 80%, rgba(var(--brand-accent-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
+        accentColor: "radial-gradient(ellipse at 50% 100%, rgba(var(--brand-accent-rgb), 0.07) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
         href: "/services#design-branding",
-        Mockup: DataFlowMockup,
     },
 ];
 
-/* â”€â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Animation variants ─────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const containerVariants = {
     hidden: {},
-    show: {
-        transition: {
-            staggerChildren: 0.1,
-        },
-    },
+    show: { transition: { staggerChildren: 0.08 } },
 };
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.7, ease: EASE },
-    },
+    hidden: { opacity: 0, y: 32 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
 const headerVariants = {
     hidden: { opacity: 0, y: 24 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.7, ease: EASE },
-    },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
-/* â”€â”€â”€ Sub-components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Card component ─────────────────────────────────────────── */
 function ServiceCardItem({ card }: { card: ServiceCard }) {
     const Icon = card.icon;
-    const { Mockup } = card;
 
     return (
         <motion.div
             variants={cardVariants}
-            className={`group relative overflow-hidden rounded-3xl border bg-[#06060c]/60 p-7 backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02] hover:-translate-y-2 lg:p-8 ${card.highlight
-                ? "border-brand-accent/40 shadow-[0_0_30px_rgba(var(--brand-accent-rgb),0.15)]"
-                : "border-white/10 hover:border-brand-accent/50 hover:shadow-[0_10px_40px_rgba(var(--brand-accent-rgb),0.1)]"
-                }`}
+            className={`group relative overflow-hidden rounded-2xl border bg-[#06060c]/60 p-6 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 lg:p-7 ${
+                card.highlight
+                    ? "border-brand-accent/40 shadow-[0_0_30px_rgba(var(--brand-accent-rgb),0.15)]"
+                    : "border-white/10 hover:border-brand-accent/40 hover:shadow-[0_8px_32px_rgba(var(--brand-accent-rgb),0.08)]"
+            }`}
         >
-
-            {/* Radial glow â€” appears on hover */}
+            {/* Radial glow on hover */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 style={{ background: card.accentColor }}
             />
-
-            {/* Highlight card: permanent subtle glow */}
+            {/* Highlight card permanent glow */}
             {card.highlight && (
                 <div
                     aria-hidden="true"
@@ -167,92 +147,70 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
                     style={{ background: card.accentColor }}
                 />
             )}
-
-            {/* Top-right corner accent line for highlight card */}
             {card.highlight && (
                 <div className="absolute right-0 top-0 h-px w-24 bg-gradient-to-l from-brand-accent-light/60 to-transparent" />
             )}
 
-            {/* Content */}
             <div className="relative z-10 flex h-full flex-col">
                 {/* Icon */}
                 <div
-                    className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-300 ${card.highlight
-                        ? "border-brand-accent/40 bg-brand-accent-deep/60 text-brand-accent-light"
-                        : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-brand-accent/40 group-hover:text-brand-accent-light"
-                        }`}
+                    className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-300 ${
+                        card.highlight
+                            ? "border-brand-accent/40 bg-brand-accent-deep/60 text-brand-accent-light"
+                            : "border-white/10 bg-white/5 text-zinc-400 group-hover:border-brand-accent/40 group-hover:text-brand-accent-light"
+                    }`}
                 >
-                    <Icon size={20} strokeWidth={1.5} />
+                    <Icon size={18} strokeWidth={1.5} />
                 </div>
 
                 {/* Eyebrow */}
                 <p
-                    className={`mb-2 font-mono text-xs font-semibold uppercase tracking-widest ${card.highlight ? "text-brand-accent-light" : "text-zinc-600"
-                        }`}
+                    className={`mb-1.5 font-mono text-xs font-semibold uppercase tracking-widest ${
+                        card.highlight ? "text-brand-accent-light" : "text-zinc-600"
+                    }`}
                 >
                     {card.eyebrow}
                 </p>
 
                 {/* Title */}
-                <h3 className="mb-3 text-lg font-semibold leading-snug text-white lg:text-xl">
+                <h3 className="mb-2.5 text-base font-semibold leading-snug text-white lg:text-lg">
                     {card.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-brand-accent-light transition-colors duration-300">
+                <p className="flex-1 text-sm leading-relaxed text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300">
                     {card.description}
                 </p>
 
-                {/* Interactive mockup demo */}
-                <div className="my-5">
-                    <Mockup />
-                </div>
-
-                <div className="mt-auto">
-                    {card.href ? (
-                        <Link
-                            href={card.href}
-                            aria-label={`Learn more about ${card.title}`}
-                            className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent rounded-sm before:absolute before:inset-0 before:z-20 ${card.highlight ? "text-brand-accent-light" : "text-zinc-600 group-hover:text-brand-accent-light"
-                                }`}
-                        >
-                            <span>Learn more</span>
-                            <svg
-                                className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2.5}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
-                    ) : (
-                        <div
-                            className={`mt-6 flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 ${card.highlight
+                {/* Learn more link */}
+                {card.href && (
+                    <Link
+                        href={card.href}
+                        aria-label={`Learn more about ${card.title}`}
+                        className={`relative z-20 mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 before:absolute before:inset-0 ${
+                            card.highlight
                                 ? "text-brand-accent-light"
                                 : "text-zinc-600 group-hover:text-brand-accent-light"
-                                }`}
+                        }`}
+                    >
+                        <span>Learn more</span>
+                        <svg
+                            className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
                         >
-                            <span>Learn more</span>
-                            <svg
-                                className="h-3 w-3 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2.5}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </div>
-                    )}
-                </div>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </Link>
+                )}
             </div>
         </motion.div>
     );
 }
 
-/* â”€â”€â”€ Main export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Main export ────────────────────────────────────────────── */
 export default function Services() {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -263,7 +221,7 @@ export default function Services() {
             ref={ref}
             className="relative overflow-hidden py-24 lg:py-32 scroll-mt-24"
         >
-            {/* Section ambient glow */}
+            {/* Section ambient */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
@@ -275,15 +233,16 @@ export default function Services() {
             />
 
             <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-                {/* â”€â”€ Section Header â”€â”€ */}
-                <div className="mb-16 lg:mb-20">
+                {/* Section Header */}
+                <div className="mb-14 lg:mb-18">
                     <motion.span
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
                         variants={fadeUp()}
                         className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
                     >
-                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                        <span className="h-px w-4 bg-brand-accent/40" />
                         what we actually do
                     </motion.span>
                     <motion.h2
@@ -293,34 +252,38 @@ export default function Services() {
                         className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
                         style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                     >
-                        {splitWords("Six things we're").map((word, i) => (
+                        {splitWords("Seven ways we").map((word, i) => (
                             <motion.span key={`w1-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
                                 {word}
                             </motion.span>
                         ))}
-                        <motion.span variants={slideFromLeftItem} className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">
-                            good
+                        <motion.span
+                            variants={slideFromLeftItem}
+                            className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                        >
+                            ship
                         </motion.span>
                         <motion.span variants={slideFromLeftItem} style={{ display: "inline-block" }}>
-                            at.
+                            for you.
                         </motion.span>
                     </motion.h2>
                     <motion.p
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
                         variants={headerVariants}
-                        className="mt-5 text-base leading-relaxed text-zinc-500 lg:text-xl"
+                        className="mt-5 max-w-3xl text-base leading-relaxed text-zinc-500 lg:text-lg"
                     >
-                        No buzzword bingo. These are the six categories of work we take on, and what you can expect from each.
+                        No buzzword bingo. These are the seven ways we help startups and companies ship — whether you
+                        need a full build or a senior engineer on your team tomorrow.
                     </motion.p>
                 </div>
 
-                {/* â”€â”€ Bento Grid â”€â”€ */}
+                {/* Services Grid */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5"
+                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5"
                 >
                     {SERVICES.map((card) => (
                         <ServiceCardItem key={card.id} card={card} />
@@ -330,4 +293,3 @@ export default function Services() {
         </section>
     );
 }
-

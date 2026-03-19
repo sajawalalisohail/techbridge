@@ -178,7 +178,7 @@ export default function ServicesPage() {
                                 className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
                                 style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                             >
-                                {splitWords("What we build, how we build it, and what it costs you to").map((word, i) => (
+                                {splitWords("What we build, who we place, and what it costs you to").map((word, i) => (
                                     <motion.span key={`${word}-${i}`} variants={wordVariants} style={{ display: "inline-block" }}>
                                         {word}
                                     </motion.span>
@@ -192,7 +192,7 @@ export default function ServicesPage() {
                                 </motion.span>
                             </motion.h1>
                             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
-                                Five service lines, one delivery standard, and a process built to move like an engineering system instead of an agency brochure. Pick the line that matches your problem, then follow how we ship it.
+                                Seven service lines, one delivery standard, and a process built to move like an engineering system instead of an agency brochure. Pick the line that matches your problem — or the engineer that matches your team.
                             </p>
 
                             {/* Jump links */}

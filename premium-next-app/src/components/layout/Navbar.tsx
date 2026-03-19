@@ -11,9 +11,9 @@ import { getCaseStudy } from "@/data/case-studies";
 import { SERVICE_NAV_GROUPS } from "@/data/site-navigation";
 
 const NAV_LINKS = [
+    { label: "Hire Engineers", href: "/staff-augmentation" },
     { label: "24-Hr Websites", href: "/websites" },
     { label: "Work", href: "/work" },
-    { label: "Insights", href: "/insights" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
 ];

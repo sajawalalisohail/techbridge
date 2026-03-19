@@ -113,7 +113,7 @@ export default function Footer() {
                                     href={`mailto:${FOOTER_EMAIL}`}
                                     className="inline-flex items-center text-[clamp(1.1rem,1.8vw,1.9rem)] font-medium tracking-tight text-white transition-colors duration-300 hover:text-brand-accent-light"
                                 >
-                                    hello@<span className="text-brand-accent">techbridge</span>.com
+                                    hello@<span className="text-brand-accent">techbridge</span>.dev
                                 </a>
 
                                 <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">

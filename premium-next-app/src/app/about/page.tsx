@@ -89,9 +89,9 @@ const TIMELINE = [
     },
     {
         year: "2025",
-        title: "AI and Product Systems",
+        title: "AI Systems & Staff Augmentation",
         description:
-            "Expanded into AI workflow automation, custom internal systems, and higher-throughput SaaS product work for B2B clients.",
+            "Expanded into AI workflow automation, custom internal systems, and higher-throughput SaaS product work for B2B clients. Launched dedicated staff augmentation services, placing senior engineers directly into client teams across the US and Europe.",
     },
 ];
 
@@ -131,6 +131,7 @@ const COMPARISON = [
     { feature: "Post-launch monitoring included", us: true, them: false },
     { feature: "AI and automation capability", us: true, them: false },
     { feature: "Fixed-price estimates up front", us: true, them: true },
+    { feature: "Cost-effective global talent", us: true, them: false },
 ];
 
 const SECURITY_ITEMS = [
@@ -333,24 +334,34 @@ export default function AboutPage() {
                             ))}
                         </motion.div>
 
-                        <motion.div variants={fadeUp(0.3)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mt-16 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
-                            <div className="flex-1">
-                                <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                    TechBridge operates as a hybrid engineering firm with architecture leadership in Morgantown and a dedicated engineering function in Lahore. That structure lets us scale delivery while keeping technical oversight close to the work.
-                                </p>
-                            </div>
-                            <div className="grid flex-1 grid-cols-2 gap-4">
-                                {[
-                                    { label: "Discipline", value: "Computer Science" },
-                                    { label: "Scale", value: "Dedicated Team" },
-                                    { label: "Oversight", value: "WV Leadership" },
-                                    { label: "Model", value: "Hybrid Precision" },
-                                ].map((item) => (
-                                    <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-                                        <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
-                                        <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
-                                    </div>
-                                ))}
+                        <motion.div variants={fadeUp(0.3)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mt-16 rounded-2xl border border-white/8 bg-neutral-900/30 p-8 backdrop-blur-sm lg:p-10">
+                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                                <span className="h-px w-4 bg-brand-accent/40" />
+                                our structure
+                            </span>
+                            <h3 className="mb-5 text-2xl font-bold tracking-tight text-white lg:text-3xl">
+                                How We&apos;re Built
+                            </h3>
+                            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+                                <div className="flex-1">
+                                    <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
+                                        Architecture leadership and client strategy operate from Morgantown, West Virginia. Our dedicated engineering team operates from Lahore, Pakistan. Same code reviews. Same deployment standards. Same Slack channels. The only difference is the timezone — and the price.
+                                    </p>
+                                </div>
+                                <div className="grid flex-1 grid-cols-2 gap-4">
+                                    {[
+                                        { label: "Discipline", value: "Computer Science" },
+                                        { label: "Scale", value: "Dedicated Team" },
+                                        { label: "Oversight", value: "WV Leadership" },
+                                        { label: "Model", value: "Hybrid Precision" },
+                                    ].map((item) => (
+                                        <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+                                            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
+                                            <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </motion.div>
                     </div>

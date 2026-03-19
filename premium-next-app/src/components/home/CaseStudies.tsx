@@ -309,29 +309,41 @@ export default function CaseStudies() {
                         <span className="h-px w-4 bg-brand-accent/40" />
                         proof, not promises
                     </span>
-                    <motion.h2
-                        variants={slideFromLeftContainer}
-                        initial="hidden"
-                        animate={isHeaderInView ? "show" : "hidden"}
-                        className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
-                        style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
-                    >
-                        {splitWords("Real clients. Real").map((word, index) => (
-                            <motion.span
-                                key={`w1-${index}`}
-                                variants={slideFromLeftItem}
-                                style={{ display: "inline-block" }}
-                            >
-                                {word}
-                            </motion.span>
-                        ))}
-                        <motion.span
-                            variants={slideFromLeftItem}
-                            className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                    <div className="flex flex-wrap items-end gap-5">
+                        <motion.h2
+                            variants={slideFromLeftContainer}
+                            initial="hidden"
+                            animate={isHeaderInView ? "show" : "hidden"}
+                            className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                            style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                         >
-                            numbers.
-                        </motion.span>
-                    </motion.h2>
+                            {splitWords("Real clients. Real").map((word, index) => (
+                                <motion.span
+                                    key={`w1-${index}`}
+                                    variants={slideFromLeftItem}
+                                    style={{ display: "inline-block" }}
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
+                            <motion.span
+                                variants={slideFromLeftItem}
+                                className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                            >
+                                numbers.
+                            </motion.span>
+                        </motion.h2>
+                        {/* Inline stat badge */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="mb-1 flex-shrink-0 rounded-full border border-brand-accent/30 bg-brand-accent/5 px-4 py-2"
+                        >
+                            <span className="font-mono text-sm font-bold text-brand-accent-light">50+</span>
+                            <span className="ml-1.5 text-xs text-zinc-500">Systems in Production</span>
+                        </motion.div>
+                    </div>
                     <p className="max-w-2xl text-base leading-relaxed text-zinc-400 lg:text-lg">
                         Platforms we architected, systems we built, and rapid websites to show we can move fast without cutting corners.
                     </p>

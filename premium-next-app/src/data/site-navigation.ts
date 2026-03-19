@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BrainCircuit, Code2, Palette, Smartphone, Zap } from "lucide-react";
+import { BrainCircuit, Code2, Palette, Smartphone, Users, Wrench, Zap } from "lucide-react";
 
 export interface ServiceCallout {
     label: string;
@@ -169,17 +169,70 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
             attribution: "Sajawal Ali Sohail",
         },
     },
+    {
+        id: "internal-tools",
+        number: "06",
+        category: "Internal Tools & Integrations",
+        icon: Wrench,
+        subHeadline: "The tools your team actually uses every day, built right.",
+        description:
+            "Custom internal dashboards, admin panels, workflow automation, and third-party integrations that replace the patchwork of SaaS subscriptions slowing your team down. Built for the people who will use them daily.",
+        capabilities: [
+            "Custom admin dashboards & portals",
+            "Workflow automation & approvals",
+            "Third-party API integrations (Salesforce, HubSpot, etc.)",
+            "Internal data pipelines & reporting",
+            "Role-based access control systems",
+            "Slack / Teams bot integrations",
+            "Legacy system modernization",
+            "Real-time operational dashboards",
+        ],
+        stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Redis", "n8n", "Zapier", "AWS"],
+        callout: {
+            label: "Founder's Principle",
+            text: "Your team shouldn't be copying data between five browser tabs. We build the tool that eliminates that workflow entirely — and your team actually uses it.",
+            attribution: "Sajawal Ali Sohail",
+        },
+    },
+    {
+        id: "staff-augmentation",
+        number: "07",
+        category: "Staff Augmentation",
+        icon: Users,
+        subHeadline: "Your next senior engineer is already vetted and ready.",
+        description:
+            "We place dedicated senior engineers — AI specialists, full-stack developers, mobile devs, QA — directly into your existing team. They join your Slack, your repos, your standups. We handle vetting, management, and architecture oversight. You get the talent without the recruiting overhead or the US price tag.",
+        capabilities: [
+            "AI/ML engineers (LLMs, RAG, NLP, computer vision)",
+            "Full-stack developers (Next.js, React, Node, Python)",
+            "Mobile developers (React Native, Flutter, Swift, Kotlin)",
+            "DevOps & infrastructure engineers",
+            "QA & automation engineers",
+            "Dedicated or fractional engagement models",
+            "48-hour placement from initial call",
+            "Full replacement guarantee",
+        ],
+        stack: ["Next.js", "React", "Node.js", "Python", "React Native", "Flutter", "AWS", "Docker"],
+        callout: {
+            label: "Founder's Principle",
+            text: "We don't just send you a resume. We send you someone we've vetted, trained on your codebase expectations, and will replace if they don't deliver. That's the difference between outsourcing and partnership.",
+            attribution: "Sajawal Ali Sohail",
+        },
+    },
 ];
 
-export const SERVICE_NAV_GROUPS: ServiceNavGroup[] = SERVICE_SECTIONS.map((section) => ({
-    id: section.id,
-    number: section.number,
-    label: section.category,
-    href: section.id === "rapid-deploy" ? "/websites" : `/services#${section.id}`,
-    icon: section.icon,
-    capabilities: section.capabilities.slice(0, 4),
-    featured: section.id === "rapid-deploy",
-}));
+// Dropdown nav: exclude rapid-deploy (has own /websites top-level link) and
+// staff-augmentation (has own /staff-augmentation top-level link).
+export const SERVICE_NAV_GROUPS: ServiceNavGroup[] = SERVICE_SECTIONS
+    .filter((s) => s.id !== "rapid-deploy" && s.id !== "staff-augmentation")
+    .map((section) => ({
+        id: section.id,
+        number: section.number,
+        label: section.category,
+        href: `/services#${section.id}`,
+        icon: section.icon,
+        capabilities: section.capabilities.slice(0, 4),
+    }));
 
 export const FOOTER_EMAIL = "hello@techbridge.dev";
 
@@ -192,7 +245,15 @@ export const FOOTER_SOCIAL_LINKS: FooterSocialLink[] = [
 export const FOOTER_COLUMNS: FooterColumn[] = [
     {
         title: "Services",
-        links: SERVICE_NAV_GROUPS.map(({ label, href }) => ({ label, href })),
+        links: [
+            { label: "Custom Software & SaaS", href: "/services#custom-software" },
+            { label: "AI Powered Lead Generation", href: "/services#ai-lead-generation" },
+            { label: "Mobile App Development", href: "/services#mobile-apps" },
+            { label: "UI/UX Design & Branding", href: "/services#design-branding" },
+            { label: "Internal Tools & Integrations", href: "/services#internal-tools" },
+            { label: "24-Hour Websites", href: "/websites" },
+            { label: "Staff Augmentation", href: "/staff-augmentation" },
+        ],
     },
     {
         title: "Solutions / Build Types",
@@ -201,6 +262,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
             { label: "Systems & Internal Tools", href: "/work#systems-tools" },
             { label: "Mobile Products", href: "/work#mobile-products" },
             { label: "Rapid Websites", href: "/work#rapid-websites" },
+            { label: "Dedicated Engineering Teams", href: "/staff-augmentation" },
         ],
     },
     {

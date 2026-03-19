@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-react";
+import { BadgeCheck, BrainCircuit, Rocket, Users, type LucideIcon } from "lucide-react";
 import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import {
     AINativeIllustration,
@@ -40,7 +40,7 @@ const ADVANTAGES: Advantage[] = [
         eyebrow: "who you work with",
         title: "No Middlemen. No Juniors.",
         description:
-            "You talk to the person writing your code. Not a project manager who translates your requirements wrong, not a junior dev learning on your dime.",
+            "You talk to the person writing your code. Not a project manager who translates your requirements wrong, not a junior dev learning on your dime. And because our engineering team operates from Pakistan, you get senior-level talent at a fraction of US agency rates.",
         detail: "Slack the person writing your code.",
         accentA: "rgba(var(--brand-accent-light-rgb), 0.15)",
         accentB: "rgba(var(--brand-accent-light-rgb), 0.10)",
@@ -58,12 +58,12 @@ const ADVANTAGES: Advantage[] = [
         Illustration: VelocityIllustration,
     },
     {
-        icon: Shield,
-        eyebrow: "longevity",
-        title: "Code That Survives Your Series B",
+        icon: BadgeCheck,
+        eyebrow: "accountability",
+        title: "Replacement Guarantee",
         description:
-            "Every system gets proper auth, monitoring, and test coverage from sprint one. We've seen too many startups hit growth then spend six months rewriting everything.",
-        detail: "No rewrites in 18 months.",
+            "If an engineer on your team isn't performing or isn't the right fit, we replace them — fast, free, no drama. We take full responsibility for the talent we place. That's not a policy footnote. That's how we operate.",
+        detail: "Your risk, eliminated.",
         accentA: "rgba(var(--brand-accent-dark-rgb), 0.15)",
         accentB: "rgba(var(--brand-accent-rgb), 0.10)",
         Illustration: ResilienceIllustration,
@@ -204,29 +204,41 @@ export default function WhyChooseUs() {
                             why us, honestly
                         </motion.span>
                         <div className="flex flex-col items-start gap-5">
-                            <motion.h2
-                                variants={slideFromLeftContainer}
-                                initial="hidden"
-                                animate={isHeaderInView ? "show" : "hidden"}
-                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
-                                style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
-                            >
-                                {splitWords("Four reasons we're different. Judge for").map((word, index) => (
-                                    <motion.span
-                                        key={`w1-${index}`}
-                                        variants={slideFromLeftItem}
-                                        style={{ display: "inline-block" }}
-                                    >
-                                        {word}
-                                    </motion.span>
-                                ))}
-                                <motion.span
-                                    variants={slideFromLeftItem}
-                                    className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                            <div className="flex flex-wrap items-end gap-5">
+                                <motion.h2
+                                    variants={slideFromLeftContainer}
+                                    initial="hidden"
+                                    animate={isHeaderInView ? "show" : "hidden"}
+                                    className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                    style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                                 >
-                                    yourself.
-                                </motion.span>
-                            </motion.h2>
+                                    {splitWords("Four reasons we're different. Judge for").map((word, index) => (
+                                        <motion.span
+                                            key={`w1-${index}`}
+                                            variants={slideFromLeftItem}
+                                            style={{ display: "inline-block" }}
+                                        >
+                                            {word}
+                                        </motion.span>
+                                    ))}
+                                    <motion.span
+                                        variants={slideFromLeftItem}
+                                        className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                                    >
+                                        yourself.
+                                    </motion.span>
+                                </motion.h2>
+                                {/* Inline stat badge */}
+                                <motion.div
+                                    variants={fadeUp()}
+                                    initial="hidden"
+                                    animate={isHeaderInView ? "show" : "hidden"}
+                                    className="mb-1 flex-shrink-0 rounded-full border border-brand-accent/30 bg-brand-accent/5 px-4 py-2"
+                                >
+                                    <span className="font-mono text-sm font-bold text-brand-accent-light">98%</span>
+                                    <span className="ml-1.5 text-xs text-zinc-500">Client Retention</span>
+                                </motion.div>
+                            </div>
                             <motion.p
                                 variants={fadeUp()}
                                 initial="hidden"

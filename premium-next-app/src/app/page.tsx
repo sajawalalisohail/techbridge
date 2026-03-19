@@ -1,23 +1,21 @@
 import Hero from "@/components/home/Hero";
-import UnderHeroText from "@/components/home/UnderHeroText";
-import StatsBanner from "@/components/home/StatsBanner";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
+import CostAdvantage from "@/components/home/CostAdvantage";
 import CaseStudies from "@/components/home/CaseStudies";
 import ProcessShowcase from "@/components/home/ProcessShowcase";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 import CTA from "@/components/home/CTA";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <UnderHeroText />
-      <StatsBanner />
       <TrustedBy />
-      <ProcessShowcase />
       <Services />
+      <CostAdvantage />
       <CaseStudies />
+      <ProcessShowcase />
       <WhyChooseUs />
       <CTA />
 

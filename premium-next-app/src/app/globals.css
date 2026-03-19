@@ -23,16 +23,114 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
+
+
+
   /* ═══════════════════════════════════════════════
-     Ethereal Obsidian & Bioluminescent Cyan
+     Electric Blue & Deep Ocean
      ═══════════════════════════════════════════════ */
-  --brand-accent: #00E5FF;
-  --brand-accent-rgb: 0, 229, 255;
-  --brand-accent-light: #67EFFF;
-  --brand-accent-light-rgb: 103, 239, 255;
-  --brand-accent-dark: #0091A3;
-  --brand-accent-dark-rgb: 0, 145, 163;
-  --brand-accent-deep: #041E23;
+  /* --brand-accent: #3b82f6;
+  --brand-accent-rgb: 59, 130, 246;
+  --brand-accent-light: #93c5fd;
+  --brand-accent-light-rgb: 147, 197, 253;
+  --brand-accent-dark: #1d4ed8;
+  --brand-accent-dark-rgb: 29, 78, 216;
+  --brand-accent-deep: #1e3a8a; */
+
+  /* ═══════════════════════════════════════════════
+     Emerald Green & Deep Forest
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #10b981;
+  --brand-accent-rgb: 16, 185, 129;
+  --brand-accent-light: #6ee7b7;
+  --brand-accent-light-rgb: 110, 231, 183;
+  --brand-accent-dark: #047857;
+  --brand-accent-dark-rgb: 4, 120, 87;
+  --brand-accent-deep: #064e3b; */
+
+  /* ═══════════════════════════════════════════════
+     Midnight Indigo favorite
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #4f46e5;
+  --brand-accent-rgb: 79, 70, 229;
+  --brand-accent-light: #818cf8;
+  --brand-accent-light-rgb: 129, 140, 248;
+  --brand-accent-dark: #3730a3;
+  --brand-accent-dark-rgb: 55, 48, 163;
+  --brand-accent-deep: #1e1b4b; */
+
+  /* ═══════════════════════════════════════════════
+     Ice Slate Blue
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #0ea5e9;
+  --brand-accent-rgb: 14, 165, 233;
+  --brand-accent-light: #7dd3fc;
+  --brand-accent-light-rgb: 125, 211, 252;
+  --brand-accent-dark: #0284c7;
+  --brand-accent-dark-rgb: 2, 132, 199;
+  --brand-accent-deep: #082f49; */
+
+
+  /* ═══════════════════════════════════════════════
+     Bioluminescent True Cyan
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #06b6d4;
+  --brand-accent-rgb: 6, 182, 212;
+  --brand-accent-light: #67e8f9;
+  --brand-accent-light-rgb: 103, 232, 249;
+  --brand-accent-dark: #0891b2;
+  --brand-accent-dark-rgb: 8, 145, 178;
+  --brand-accent-deep: #164e63; */
+
+  /* ═══════════════════════════════════════════════
+     Abyss Navy 3rd fav
+     ═══════════════════════════════════════════════ */
+  --brand-accent: #1e3a8a;
+  --brand-accent-rgb: 30, 58, 138;
+  --brand-accent-light: #3b82f6;
+  --brand-accent-light-rgb: 59, 130, 246;
+  --brand-accent-dark: #172554;
+  --brand-accent-dark-rgb: 23, 37, 84;
+  --brand-accent-deep: #020617;
+
+  /* ═══════════════════════════════════════════════
+     Royal Obsidian 2nd fav
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #0f172a;
+  --brand-accent-rgb: 15, 23, 42;
+  --brand-accent-light: #3b82f6;
+  --brand-accent-light-rgb: 59, 130, 246;
+  --brand-accent-dark: #020617;
+  --brand-accent-dark-rgb: 2, 6, 23;
+  --brand-accent-deep: #000000; */
+
+
+
+  /* ═══════════════════════════════════════════════
+     Carbon Sapphire
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #172554;
+  --brand-accent-rgb: 23, 37, 84;
+  --brand-accent-light: #3b82f6;
+  --brand-accent-light-rgb: 59, 130, 246;
+  --brand-accent-dark: #0f172a;
+  --brand-accent-dark-rgb: 15, 23, 42;
+  --brand-accent-deep: #020617;
+ */
+
+
+  /* ═══════════════════════════════════════════════
+     Storm Steel 1st fav
+     ═══════════════════════════════════════════════ */
+  /* --brand-accent: #1e3a5f;
+  --brand-accent-rgb: 30, 58, 95;
+  --brand-accent-light: #4770af;
+  --brand-accent-light-rgb: 71, 112, 175;
+  --brand-accent-dark: #0f1b2e;
+  --brand-accent-dark-rgb: 15, 27, 46;
+  --brand-accent-deep: #050914; */
+
+
 
   --background: #0A0A0B;
   --foreground: #F8FAFC;
@@ -320,6 +418,15 @@ body {
     50% {
       opacity: 0;
     }
+  }
+
+  /* ─── Text Gradient Wipe Background ────── */
+  .bg-wipe-gradient {
+    background-image: linear-gradient(to right, var(--brand-accent) 0%, var(--brand-accent-light) 20%, var(--brand-accent) 40%, #ffffff 60%, #ffffff 100%);
+    background-size: 300% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .tb-marquee-track {

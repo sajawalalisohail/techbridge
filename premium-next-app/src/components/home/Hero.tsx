@@ -78,7 +78,7 @@ export default function Hero() {
                         hidden: {},
                         show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
                     }}
-                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-4xl font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] sm:text-5xl lg:text-6xl xl:text-7xl"
+                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-4xl font-normal leading-[1.12] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] sm:text-5xl lg:text-6xl xl:text-7xl"
                 >
                     {["Custom", "Software."].map((word, i) => (
                         <motion.span
@@ -105,6 +105,15 @@ export default function Hero() {
                         </motion.span>
                     ))}
                 </motion.h1>
+
+                {/* Sub-headline */}
+                <motion.p
+                    variants={fadeUp}
+                    className="mt-4 max-w-xl text-center text-sm font-medium tracking-wide text-zinc-400 drop-shadow-md sm:mt-6 sm:max-w-2xl sm:text-base leading-relaxed"
+                >
+                    Custom platforms, AI automation, and SaaS systems. <br className="hidden sm:block" />
+                    Architected by senior engineers who&apos;ve shipped this before.
+                </motion.p>
 
                 {/* CTA row */}
                 <motion.div

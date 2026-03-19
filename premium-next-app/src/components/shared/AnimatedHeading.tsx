@@ -21,14 +21,21 @@ const wordVariants: Variants = {
         y: 20,
         opacity: 0,
         filter: "blur(10px)",
+        backgroundPosition: "100% center",
     },
     show: {
         y: 0,
         opacity: 1,
         filter: "blur(0px)",
+        backgroundPosition: "0% center",
         transition: {
             duration: 0.7,
             ease: EASE,
+            backgroundPosition: {
+                duration: 12.0,
+                ease: [0.22, 1, 0.36, 1],
+                delay: 0.3,
+            }
         },
     },
 };

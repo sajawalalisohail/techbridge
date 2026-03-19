@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Check, X, ChevronDown, ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import HeroBlobBackground from "@/components/home/HeroBlobBackground";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
 import {
     blurFocusIn,
@@ -64,7 +64,19 @@ function Hero() {
             ref={ref}
             className="relative overflow-hidden border-b border-white/5"
         >
-            <InteriorHeroBlob preset="websites" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+                <HeroBlobBackground />
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: "repeat",
+                        backgroundSize: "260px 260px",
+                        opacity: 0.12,
+                        mixBlendMode: "overlay",
+                    }}
+                />
+            </div>
 
             <div className="relative z-10 mx-auto max-w-[100rem] px-6 pb-20 pt-28 text-center lg:px-10 lg:pb-24 lg:pt-32">
                 {/* Eyebrow badge */}

@@ -252,13 +252,24 @@ export default function Navbar() {
     }, [clearMenuTimers, closeServicesMenu]);
 
     const updateNavState = useCallback(() => {
-        const state = getNavState(window.scrollY);
-        setNavState(pathname === "/work" && state === "pill" ? "hidden" : state);
+        const isMobileOrTablet = window.innerWidth < 1024;
+        let state = getNavState(window.scrollY);
+
+        if (isMobileOrTablet) {
+            state = "pill";
+        }
+
+        setNavState(pathname === "/work" && state === "pill" && !isMobileOrTablet ? "hidden" : state);
     }, [pathname]);
 
     useEffect(() => {
+        updateNavState(); // Run it once immediately to catch client-side screen size
         window.addEventListener("scroll", updateNavState, { passive: true });
-        return () => window.removeEventListener("scroll", updateNavState);
+        window.addEventListener("resize", updateNavState, { passive: true });
+        return () => {
+            window.removeEventListener("scroll", updateNavState);
+            window.removeEventListener("resize", updateNavState);
+        };
     }, [updateNavState]);
 
     useEffect(() => {
@@ -426,7 +437,7 @@ export default function Navbar() {
                                     </span>
                                 </Link>
                                 <ul
-                                    className={`hidden items-center md:flex transition-all duration-500 rounded-full border ${navState === "pill"
+                                    className={`hidden items-center lg:flex transition-all duration-500 rounded-full border ${navState === "pill"
                                         ? "gap-6 lg:gap-9 border-transparent bg-transparent shadow-none backdrop-blur-none px-0 py-0"
                                         : "gap-6 lg:gap-9 border-white/10 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-2xl px-8 py-2.5"
                                         }`}
@@ -497,7 +508,7 @@ export default function Navbar() {
                                     })}
                                 </ul>
 
-                                <div className="hidden items-center gap-4 md:flex">
+                                <div className="hidden items-center gap-4 lg:flex">
                                     <GlowButton
                                         href="/contact"
                                         size={navState === "pill" ? "sm" : "md"}
@@ -520,7 +531,7 @@ export default function Navbar() {
                                 </div>
 
                                 <button
-                                    className="flex flex-col gap-1.5 p-3 md:hidden"
+                                    className="flex flex-col gap-1.5 p-3 lg:hidden"
                                     onClick={() => {
                                         setMobileOpen((value) => !value);
                                         setMobileServicesOpen(false);
@@ -551,7 +562,7 @@ export default function Navbar() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                                    className="relative z-40 hidden pt-3 md:block"
+                                    className="relative z-40 hidden pt-3 lg:block"
                                     onMouseEnter={clearMenuTimers}
                                     onMouseLeave={scheduleHoverClose}
                                 >
@@ -570,7 +581,7 @@ export default function Navbar() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.25 }}
-                                    className="mx-1 mt-2 rounded-2xl border border-white/10 bg-black/80 p-6 backdrop-blur-xl md:hidden"
+                                    className="mx-1 mt-2 rounded-2xl border border-white/10 bg-black/80 p-6 backdrop-blur-xl lg:hidden"
                                 >
                                     <ul className="flex flex-col gap-4">
                                         <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">

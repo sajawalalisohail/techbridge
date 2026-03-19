@@ -90,9 +90,11 @@ body {
 
   /* Wrapper — covers the hero area */
   .hero-blob-wrapper {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
+    position: absolute;
+    /* Changed from fixed so it scrolls away with the hero */
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
     z-index: -10;
@@ -111,39 +113,37 @@ body {
   /* The colored aura layer — Strict Circle with Pizza Slice */
   .hero-blob-aura {
     position: absolute;
-    /* Medium size */
-    width: 600px;
-    height: 600px;
+    /* Smaller size */
+    width: 400px;
+    height: 400px;
     /* Center it inside the floater */
-    top: -300px;
-    left: -300px;
+    top: -200px;
+    left: -200px;
 
     border-radius: 50%;
     /* Enforce strict circular shape */
 
-    /* 
-      1. Deep Navy / Indigo 
-      2. Soft Peach / Pink 
-      3. Bright White (Pizza Slice) 
-      4. Brilliant Cyan 
+    /*
+      1. Vibrant Blue (Visible against black bg to complete the circle)
+      2. Soft Peach / Pink
+      3. Bright White (Pizza Slice)
+      4. Brilliant Cyan
     */
     background: conic-gradient(from 0deg,
-        #050b24 0%,
-        #050b24 35%,
+        #2563eb 0%,
+        #2563eb 35%,
         #e2aebd 60%,
         #ffffff 75%,
         #ffffff 82%,
         #00d4ff 92%,
-        #050b24 100%);
+        #2563eb 100%);
 
-    animation: blobSpin 20s linear infinite;
+    animation: blobSpin 3s linear infinite;
 
     /* Soft blur to meld the hard conic edges */
     filter: blur(80px);
     opacity: 0.85;
-    /* Opaque enough to show the dark blue against a dark bg */
     mix-blend-mode: normal;
-    /* Normal blend mode keeps the dark blue visible */
   }
 
   @media (prefers-reduced-motion: reduce) {

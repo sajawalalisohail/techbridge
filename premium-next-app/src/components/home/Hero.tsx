@@ -84,7 +84,7 @@ export default function Hero() {
                         hidden: {},
                         show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
                     }}
-                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-3xl font-semibold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl"
+                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-3xl font-semibold leading-[1.12] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] sm:text-4xl lg:text-5xl xl:text-6xl"
                 >
                     {["Custom", "Software.", "AI", "Systems."].map((word, i) => (
                         <motion.span
@@ -106,7 +106,7 @@ export default function Hero() {
                 {/* Sub-headline */}
                 <motion.p
                     variants={fadeUp}
-                    className="mt-6 max-w-2xl text-center text-base leading-relaxed text-zinc-400 sm:text-lg lg:text-xl"
+                    className="mt-6 max-w-2xl text-center text-base leading-relaxed text-zinc-300 drop-shadow-[0_2px_12px_rgba(0,0,0,1)] sm:text-lg lg:text-xl"
                 >
                     Custom platforms, AI automation, and SaaS systems.
                     Architected by senior engineers who&apos;ve shipped this before.

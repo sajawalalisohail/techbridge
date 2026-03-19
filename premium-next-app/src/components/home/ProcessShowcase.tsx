@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
 import type { ReactNode } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { blurFocusIn } from "@/components/shared/headingAnimations";
 import {
     ArrowUpRight,
@@ -278,237 +278,66 @@ const STEPS: ProcessStep[] = [
 /* ─── Main Component ──────────────────────────────────────── */
 
 export default function ProcessShowcase() {
-    const triggerRef = useRef<HTMLDivElement>(null);
-    const pinRef = useRef<HTMLDivElement>(null);
-    const [activeStep, setActiveStep] = useState(0);
-    const [scrollProgress, setScrollProgress] = useState(0);
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    const ref = useRef<HTMLElement>(null);
+    const isHeaderInView = useInView(ref, { once: true, margin: "-80px" });
 
-    useEffect(() => {
-        const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-        setPrefersReducedMotion(mql.matches);
-        const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-        mql.addEventListener("change", handler);
-        return () => mql.removeEventListener("change", handler);
-    }, []);
+    return (
+        <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden scroll-mt-24 border-y border-white/5 bg-[#030303]">
+            {/* Ambient center glow */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{ background: "radial-gradient(circle at 10% 50%, rgba(var(--brand-accent-rgb), 0.04) 0%, rgba(var(--brand-accent-rgb), 0) 60%)" }}
+            />
 
-    useEffect(() => {
-        if (prefersReducedMotion || !triggerRef.current) return;
-
-        const trigger = triggerRef.current;
-
-        const handleScroll = () => {
-            const rect = trigger.getBoundingClientRect();
-            const scrollableDistance = trigger.offsetHeight - window.innerHeight;
-            if (scrollableDistance <= 0) return;
-
-            // progress 0 → 1 as trigger scrolls from top-of-viewport to bottom-of-viewport
-            const scrolled = -rect.top;
-            const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
-
-            setScrollProgress(progress);
-            setActiveStep(Math.min(3, Math.floor(progress * 4)));
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll(); // initial calc
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [prefersReducedMotion]);
-
-    const step = STEPS[activeStep];
-
-    /* ── Reduced motion fallback: stacked grid ── */
-    if (prefersReducedMotion) {
-        return (
-            <section className="relative py-24 lg:py-32">
-                <div className="mx-auto max-w-[90rem] px-6 lg:px-10">
-                    <div className="mb-14">
-                        <span className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-                            <span className="h-px w-4 bg-brand-accent/40" />
-                            our process
-                        </span>
-                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl">
-                            How the delivery system works.
-                        </h2>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2">
-                        {STEPS.map((s, i) => (
-                            <div
-                                key={s.number}
-                                className="rounded-[2rem] border border-white/8 bg-neutral-900/45 p-6"
-                            >
-                                <span className="font-mono text-4xl font-black text-white/[0.08]">
+            <div className="relative z-10 mx-auto max-w-[90rem] px-6 lg:px-10">
+                <div className="mb-14">
+                    <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                        <span className="h-px w-4 bg-brand-accent/40" />
+                        our process
+                    </span>
+                    <motion.h2
+                        variants={blurFocusIn()}
+                        initial="hidden"
+                        animate={isHeaderInView ? "show" : "hidden"}
+                        className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl"
+                    >
+                        How the <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">delivery</span> system works.
+                    </motion.h2>
+                </div>
+                <div className="grid gap-6 md:grid-cols-2">
+                    {STEPS.map((s, i) => (
+                        <div
+                            key={s.number}
+                            className="group rounded-[2rem] border border-white/8 bg-neutral-900/30 p-8 shadow-sm backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/30 hover:bg-brand-accent/5 lg:p-10"
+                        >
+                            <div className="flex items-center justify-between">
+                                <span className="font-mono text-5xl font-black leading-none text-white/[0.06] transition-colors duration-500 group-hover:text-brand-accent/20">
                                     {s.number}
                                 </span>
-                                <h3 className="mt-3 text-xl font-bold text-white">{s.title}</h3>
-                                <p className="mt-3 text-sm text-zinc-400">{s.description}</p>
-                                <div className="mt-4">{VISUALS[i]}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    /* ── Main: pinned kinetic scroll ── */
-    return (
-        <div ref={triggerRef} className="relative" style={{ height: "400vh" }}>
-            <div ref={pinRef} className="sticky top-0 flex h-screen w-full items-center justify-center">
-                {/* Full-screen section background */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                        background:
-                            "radial-gradient(circle at 14% 18%, rgba(var(--brand-accent-rgb), 0.06), transparent 24%), radial-gradient(circle at 86% 82%, rgba(var(--brand-accent-dark-rgb), 0.08), transparent 28%)",
-                    }}
-                />
-
-                <div className="relative z-10 mx-auto w-full max-w-[82rem] px-4 lg:px-8">
-                    {/* Header */}
-                    <div className="mb-6">
-                        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-                            <span className="h-px w-4 bg-brand-accent/40" />
-                            our process
-                        </span>
-                        <motion.h2
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true, margin: "-60px" }}
-                            variants={blurFocusIn()}
-                            className="mt-3 text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
-                        >
-                            How the delivery system works.
-                        </motion.h2>
-                    </div>
-
-                    {/* Glassmorphic container */}
-                    <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0A0A0A]/80 shadow-[0_24px_90px_rgba(0,0,0,0.48),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-2xl">
-                        {/* Scan-line overlay */}
-                        <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute left-0 right-0 z-20 h-px bg-gradient-to-r from-transparent via-brand-accent/30 to-transparent"
-                            style={{ top: `${scrollProgress * 100}%` }}
-                        />
-
-                        {/* Grid overlay */}
-                        <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]"
-                            style={{ opacity: 0.03 + scrollProgress * 0.05 }}
-                        />
-
-                        {/* Two-column layout */}
-                        <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr]">
-                            {/* Left: Visual panel */}
-                            <div className="relative min-h-[28rem] border-b border-white/8 p-6 lg:min-h-[32rem] lg:border-b-0 lg:border-r lg:p-8">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={activeStep}
-                                        initial={{ opacity: 0, scale: 0.96, filter: "blur(8px)" }}
-                                        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                                        exit={{ opacity: 0, scale: 1.02, filter: "blur(6px)" }}
-                                        transition={{ duration: 0.5, ease: EASE }}
-                                        className="flex h-full items-center"
-                                    >
-                                        <div className="w-full">{VISUALS[activeStep]}</div>
-                                    </motion.div>
-                                </AnimatePresence>
-                            </div>
-
-                            {/* Right: Content panel */}
-                            <div className="flex flex-col justify-between p-6 lg:p-8">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={activeStep}
-                                        initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-                                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                        exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
-                                        transition={{ duration: 0.45, ease: EASE }}
-                                    >
-                                        {/* Step number */}
-                                        <div className="mb-4 flex items-center gap-4">
-                                            <span className="font-mono text-6xl font-black leading-none tracking-[-0.08em] text-white/[0.08]">
-                                                {step.number}
-                                            </span>
-                                            <div className="h-px flex-1 bg-gradient-to-r from-brand-accent/50 to-transparent" />
-                                        </div>
-
-                                        {/* Eyebrow */}
-                                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-accent/25 bg-brand-accent-deep/20 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-brand-accent-light">
-                                            <ArrowUpRight className="h-3.5 w-3.5" />
-                                            {step.eyebrow}
-                                        </div>
-
-                                        {/* Title */}
-                                        <h3 className="max-w-lg text-2xl font-bold leading-tight tracking-tight text-white lg:text-3xl">
-                                            {step.title}
-                                        </h3>
-
-                                        {/* Description */}
-                                        <p className="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400 lg:text-base">
-                                            {step.description}
-                                        </p>
-
-                                        {/* Bullet tags */}
-                                        <div className="mt-5 flex flex-wrap gap-2">
-                                            {step.bullets.map((bullet) => (
-                                                <span
-                                                    key={bullet}
-                                                    className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-400"
-                                                >
-                                                    {bullet}
-                                                </span>
-                                            ))}
-                                        </div>
-
-                                        {/* Outcome */}
-                                        <div className="mt-6 rounded-[1.2rem] border border-brand-accent/15 bg-brand-accent-deep/15 p-4 text-sm leading-relaxed text-zinc-300">
-                                            {step.outcome}
-                                        </div>
-                                    </motion.div>
-                                </AnimatePresence>
-
-                                {/* Progress bar */}
-                                <div className="mt-8 flex items-center gap-3">
-                                    {STEPS.map((s, i) => (
-                                        <button
-                                            type="button"
-                                            key={s.number}
-                                            onClick={() => setActiveStep(i)}
-                                            className="group flex items-center gap-2"
-                                        >
-                                            <div
-                                                className={`flex h-8 w-8 items-center justify-center rounded-full border font-mono text-xs font-bold transition-all duration-300 ${
-                                                    i === activeStep
-                                                        ? "border-brand-accent/50 bg-brand-accent/15 text-brand-accent-light shadow-[0_0_12px_rgba(var(--brand-accent-rgb),0.25)]"
-                                                        : i < activeStep
-                                                          ? "border-brand-accent/20 bg-brand-accent/5 text-brand-accent-light/60"
-                                                          : "border-white/10 bg-white/[0.03] text-zinc-600"
-                                                }`}
-                                            >
-                                                {s.number}
-                                            </div>
-                                            {i < STEPS.length - 1 && (
-                                                <div className="hidden h-px w-6 lg:block">
-                                                    <div
-                                                        className="h-full bg-gradient-to-r from-brand-accent/40 to-brand-accent/10 transition-opacity duration-300"
-                                                        style={{ opacity: i < activeStep ? 1 : 0.2 }}
-                                                    />
-                                                </div>
-                                            )}
-                                        </button>
-                                    ))}
+                                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] uppercase tracking-[0.24em] text-zinc-400 font-semibold transition-colors duration-500 group-hover:border-brand-accent/30 group-hover:bg-brand-accent/10 group-hover:text-brand-accent-light">
+                                    <ArrowUpRight className="h-3.5 w-3.5" />
+                                    {s.eyebrow}
                                 </div>
                             </div>
+
+                            <h3 className="mt-8 text-2xl font-bold tracking-tight text-white lg:text-3xl">{s.title}</h3>
+                            <p className="mt-4 text-sm leading-relaxed text-zinc-400 group-hover:text-brand-accent-light lg:text-base transition-colors duration-300">{s.description}</p>
+
+                            <div className="mt-8 mb-6 relative">
+                                {/* subtle background highlight for graphic */}
+                                <div className="absolute -inset-4 z-0 rounded-3xl bg-black/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                <div className="relative z-10">{VISUALS[i]}</div>
+                            </div>
+
+                            <div className="mt-6 rounded-2xl border border-white/5 bg-white/5 p-4 text-sm font-medium leading-relaxed text-zinc-300 border-l-2 border-l-brand-accent transition-colors duration-500 group-hover:border-brand-accent/20 group-hover:bg-brand-accent/10">
+                                {s.outcome}
+                            </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

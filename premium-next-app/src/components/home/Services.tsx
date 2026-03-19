@@ -293,11 +293,17 @@ export default function Services() {
                         className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
                         style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                     >
-                        {splitWords("Six things we're good at.").map((word, i) => (
-                            <motion.span key={`${word}-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                        {splitWords("Six things we're").map((word, i) => (
+                            <motion.span key={`w1-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
                                 {word}
                             </motion.span>
                         ))}
+                        <motion.span variants={slideFromLeftItem} className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">
+                            good
+                        </motion.span>
+                        <motion.span variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                            at.
+                        </motion.span>
                     </motion.h2>
                     <motion.p
                         initial="hidden"

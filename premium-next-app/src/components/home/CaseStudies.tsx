@@ -14,11 +14,10 @@ const HOMEPAGE_STUDIES = getHomepageCaseStudies();
 function StudyCard({ study, isActive }: { study: CaseStudy; isActive: boolean }) {
     return (
         <article
-            className={`case-card group relative flex h-[28rem] w-full flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 sm:w-[22rem] md:w-[26rem] lg:w-[28rem] ${
-                isActive
-                    ? "border-brand-accent/30 scale-[1.02]"
-                    : "border-white/8 lg:opacity-70 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5"
-            }`}
+            className={`case-card group relative flex h-[28rem] w-[85vw] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border bg-neutral-900/40 p-7 backdrop-blur-sm transition-all duration-500 sm:w-[22rem] md:w-[26rem] lg:w-[28rem] ${isActive
+                ? "border-brand-accent/30 scale-[1.02]"
+                : "border-white/8 lg:opacity-70 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-brand-accent/5"
+                }`}
             style={{
                 opacity: 0,
                 transform: "translateY(40px)",
@@ -30,9 +29,8 @@ function StudyCard({ study, isActive }: { study: CaseStudy; isActive: boolean })
             {/* Accent glow on hover */}
             <div
                 aria-hidden="true"
-                className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
-                    isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                }`}
+                className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                    }`}
                 style={{
                     background: `radial-gradient(circle at 100% 0%, rgba(${study.accentColor},0.18) 0%, rgba(${study.accentColor},0) 55%)`,
                 }}
@@ -104,7 +102,35 @@ export default function CaseStudies() {
 
     useEffect(() => {
         const section = sectionRef.current;
-        if (!section || shouldInitAnimation) return;
+        const track = trackRef.current;
+        if (!section) return;
+
+        // Mobile native scroll active card tracking
+        let removeScrollListener = () => { };
+        if (track) {
+            const handleNativeScroll = () => {
+                if (window.innerWidth < 900) {
+                    updateActiveCard(track);
+                }
+            };
+            track.addEventListener("scroll", handleNativeScroll, { passive: true });
+
+            // Initial check for mobile on mount
+            const timeoutId = setTimeout(() => {
+                if (window.innerWidth < 900) {
+                    updateActiveCard(track);
+                }
+            }, 100);
+
+            removeScrollListener = () => {
+                track.removeEventListener("scroll", handleNativeScroll);
+                clearTimeout(timeoutId);
+            };
+        }
+
+        if (shouldInitAnimation) {
+            return removeScrollListener;
+        }
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -120,8 +146,11 @@ export default function CaseStudies() {
         );
 
         observer.observe(section);
-        return () => observer.disconnect();
-    }, [shouldInitAnimation]);
+        return () => {
+            observer.disconnect();
+            removeScrollListener();
+        };
+    }, [shouldInitAnimation, updateActiveCard]);
 
     // useLayoutEffect ensures GSAP pin cleanup runs synchronously before React
     // removes DOM nodes during client-side navigation (prevents removeChild error)
@@ -288,15 +317,21 @@ export default function CaseStudies() {
                             className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
                             style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                         >
-                            {splitWords("Real clients. Real numbers.").map((word, index) => (
+                            {splitWords("Real clients. Real").map((word, index) => (
                                 <motion.span
-                                    key={`${word}-${index}`}
+                                    key={`w1-${index}`}
                                     variants={slideFromLeftItem}
                                     style={{ display: "inline-block" }}
                                 >
                                     {word}
                                 </motion.span>
                             ))}
+                            <motion.span
+                                variants={slideFromLeftItem}
+                                className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                            >
+                                numbers.
+                            </motion.span>
                         </motion.h2>
                         <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
                             Platforms we architected, systems we built, and rapid websites to show we can move fast without cutting corners.
@@ -315,11 +350,13 @@ export default function CaseStudies() {
             {/* Horizontal scroll track */}
             <div
                 ref={trackRef}
-                className="flex flex-wrap gap-6 px-6 pb-36 md:pb-28 lg:flex-nowrap lg:px-10 lg:pb-28"
-                style={{ willChange: "transform" }}
+                className="flex flex-nowrap overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none gap-4 px-6 pb-20 md:pb-28 lg:px-10 lg:pb-28 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                style={{ willChange: "transform", WebkitOverflowScrolling: "touch" }}
             >
                 {HOMEPAGE_STUDIES.map((study, index) => (
-                    <StudyCard key={study.slug} study={study} isActive={index === activeCardIndex} />
+                    <div key={study.slug} className="snap-center shrink-0 first:pl-2 lg:first:pl-0 last:pr-6 lg:last:pr-0">
+                        <StudyCard study={study} isActive={index === activeCardIndex} />
+                    </div>
                 ))}
             </div>
 

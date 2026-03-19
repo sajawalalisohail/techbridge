@@ -19,7 +19,7 @@ const NAV_LINKS = [
 ];
 
 const HOVER_OPEN_DELAY_MS = 90;
-const HOVER_CLOSE_DELAY_MS = 140;
+const HOVER_CLOSE_DELAY_MS = 300;
 
 type NavState = "top" | "hidden" | "pill";
 type ServicesMenuTrigger = "hover" | "click" | null;
@@ -349,11 +349,11 @@ export default function Navbar() {
                     {bannerVisible && pathname !== "/websites" && (
                         <motion.div
                             key="announcement-banner"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.2 }}
-                            className="relative overflow-hidden border-b border-white/[0.06] bg-black"
+                            className="fixed top-0 left-0 right-0 z-[60] overflow-hidden border-b border-white/[0.06] bg-black/50 backdrop-blur-md"
                         >
                             <div
                                 className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -409,13 +409,20 @@ export default function Navbar() {
                                 className={`flex items-center justify-between transition-all duration-500 ${navState === "pill" ? "px-5 py-2.5" : "px-0 py-2"
                                     }`}
                             >
-                                <Link href="/" className="group flex items-center gap-2.5">
-                                    <span className="relative flex h-6 w-6 items-center justify-center">
-                                        <span className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-accent to-brand-accent-dark opacity-80 blur-sm transition-all duration-300 group-hover:blur group-hover:opacity-100" />
-                                        <span className="relative h-3 w-3 rounded-full bg-white" />
-                                    </span>
-                                    <span className="text-sm font-semibold uppercase tracking-widest text-white drop-shadow-md">
-                                        TechBridge
+                                <Link
+                                    href="/"
+                                    onClick={(e) => {
+                                        if (pathname === "/") {
+                                            e.preventDefault();
+                                            window.scrollTo({ top: 0, behavior: "smooth" });
+                                        } else {
+                                            closeServicesMenu();
+                                        }
+                                    }}
+                                    className="group flex items-center gap-1.5"
+                                >
+                                    <span className="text-xl font-black italic tracking-tighter text-white drop-shadow-md">
+                                        TECH<span className="bg-gradient-to-r from-brand-accent to-brand-accent-light bg-clip-text text-transparent">BRIDGE</span>
                                     </span>
                                 </Link>
                                 <ul

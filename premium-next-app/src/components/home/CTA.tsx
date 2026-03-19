@@ -11,7 +11,7 @@ export default function CTA() {
     const isInView = useInView(ref, { once: true, margin: "-80px" });
 
     return (
-        <section className="relative z-10 px-6 py-16 lg:px-10 lg:py-20">
+        <section className="relative z-10 px-6 py-24 lg:px-10 lg:py-32">
             <motion.div
                 ref={ref}
                 variants={fadeUp()}
@@ -36,10 +36,10 @@ export default function CTA() {
                             <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                             next step
                         </span>
-                        <h2 className="text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl lg:text-4xl">
-                            Stop Evaluating.{" "}
+                        <h2 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                            Stop Evaluating. Start{" "}
                             <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
-                                Start Building.
+                                Building.
                             </span>
                         </h2>
                         <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 lg:text-base">

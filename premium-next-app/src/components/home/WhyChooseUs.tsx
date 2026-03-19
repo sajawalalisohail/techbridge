@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BrainCircuit, Users, Rocket, Shield, type LucideIcon } from "lucide-react";
-import { blurFocusIn, fadeUp } from "@/components/shared/headingAnimations";
+import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import {
     AINativeIllustration,
     ZeroBloatIllustration,
@@ -201,21 +201,33 @@ export default function WhyChooseUs() {
                         </motion.span>
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                             <motion.h2
-                                variants={blurFocusIn()}
+                                variants={slideFromLeftContainer}
                                 initial="hidden"
                                 animate={isHeaderInView ? "show" : "hidden"}
-                                className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
+                                className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl max-w-2xl"
+                                style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                             >
-                                Four reasons we&apos;re different.{" "}
-                                <span className="bg-gradient-to-br from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
-                                    Judge for yourself.
-                                </span>
+                                {splitWords("Four reasons we're different. Judge for").map((word, index) => (
+                                    <motion.span
+                                        key={`w1-${index}`}
+                                        variants={slideFromLeftItem}
+                                        style={{ display: "inline-block" }}
+                                    >
+                                        {word}
+                                    </motion.span>
+                                ))}
+                                <motion.span
+                                    variants={slideFromLeftItem}
+                                    className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                                >
+                                    yourself.
+                                </motion.span>
                             </motion.h2>
                             <motion.p
-                            variants={fadeUp()}
-                            initial="hidden"
-                            animate={isHeaderInView ? "show" : "hidden"}
-                            className="max-w-sm text-base leading-relaxed text-zinc-500 lg:text-right"
+                                variants={fadeUp()}
+                                initial="hidden"
+                                animate={isHeaderInView ? "show" : "hidden"}
+                                className="max-w-sm text-base leading-relaxed text-zinc-500 lg:text-right"
                             >
                                 Every agency claims to be different. Here&apos;s what we actually do that most won&apos;t.
                             </motion.p>

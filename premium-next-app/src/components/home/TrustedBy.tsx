@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ClipReveal, fadeUp } from "@/components/shared/headingAnimations";
+import { fadeUp, slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 
 /* ─── All project companies ─────────────────────────────── */
 const CLIENTS = [
@@ -56,18 +56,38 @@ export default function TrustedBy() {
                 </motion.span>
 
                 {/* Heading */}
-                <motion.div
+                <motion.h2
+                    variants={slideFromLeftContainer}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    variants={fadeUp(0.08)}
-                    className="mb-12"
+                    className="mb-12 text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl"
+                    style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                 >
-                    <ClipReveal>
-                        <h2 className="text-4xl font-bold leading-tight tracking-tight text-white lg:text-5xl xl:text-6xl">
-                            Trusted by teams building real products.
-                        </h2>
-                    </ClipReveal>
-                </motion.div>
+                    {splitWords("Trusted by teams building").map((word, index) => (
+                        <motion.span
+                            key={`w1-${index}`}
+                            variants={slideFromLeftItem}
+                            style={{ display: "inline-block" }}
+                        >
+                            {word}
+                        </motion.span>
+                    ))}
+                    <motion.span
+                        variants={slideFromLeftItem}
+                        className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent"
+                    >
+                        real
+                    </motion.span>
+                    {splitWords("products.").map((word, index) => (
+                        <motion.span
+                            key={`w2-${index}`}
+                            variants={slideFromLeftItem}
+                            style={{ display: "inline-block" }}
+                        >
+                            {word}
+                        </motion.span>
+                    ))}
+                </motion.h2>
             </div>
 
             {/* Marquee — edge-to-edge, no max-w constraint */}

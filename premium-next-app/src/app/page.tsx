@@ -15,10 +15,10 @@ export default function Home() {
       <UnderHeroText />
       <StatsBanner />
       <TrustedBy />
-      <WhyChooseUs />
+      <ProcessShowcase />
       <Services />
       <CaseStudies />
-      <ProcessShowcase />
+      <WhyChooseUs />
       <CTA />
 
       {/* Subtle accent border glow separating scrolling content from reveal footer */}

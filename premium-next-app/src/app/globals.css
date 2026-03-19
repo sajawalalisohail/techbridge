@@ -124,24 +124,24 @@ body {
     /* Enforce strict circular shape */
 
     /*
-      1. Vibrant Blue (Visible against black bg to complete the circle)
+      1. Deep Navy / Midnight (Exact match from your image)
       2. Soft Peach / Pink
       3. Bright White (Pizza Slice)
       4. Brilliant Cyan
     */
     background: conic-gradient(from 0deg,
-        #2563eb 0%,
-        #2563eb 35%,
-        #e2aebd 60%,
-        #ffffff 75%,
-        #ffffff 82%,
-        #00d4ff 92%,
-        #2563eb 100%);
+        #00e5ff 10%,
+        #020b4a 25%,
+        #020b4a 65%,
+        #e2aebd 90%,
+        #ffffff 94%,
+        #ffffff 95%,
+        #00e5ff 100%);
 
-    animation: blobSpin 3s linear infinite;
+    animation: blobSpin 5s linear infinite;
 
     /* Soft blur to meld the hard conic edges */
-    filter: blur(80px);
+    filter: blur(40px);
     opacity: 0.85;
     mix-blend-mode: normal;
   }

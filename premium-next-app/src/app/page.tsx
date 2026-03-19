@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import UnderHeroText from "@/components/home/UnderHeroText";
+import StatsBanner from "@/components/home/StatsBanner";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <Hero />
       <UnderHeroText />
+      <StatsBanner />
       <TrustedBy />
       <WhyChooseUs />
       <Services />

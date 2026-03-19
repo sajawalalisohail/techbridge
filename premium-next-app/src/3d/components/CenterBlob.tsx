@@ -17,9 +17,9 @@ interface CenterBlobProps {
   speed?: number;
 }
 
-export function CenterBlob({ 
-  colorStops, 
-  position, 
+export function CenterBlob({
+  colorStops,
+  position,
   scale = 1,
   speed = 1,
 }: CenterBlobProps) {
@@ -30,15 +30,15 @@ export function CenterBlob({
     canvas.width = 512;
     canvas.height = 512;
     const ctx = canvas.getContext('2d')!;
-    
+
     const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
     colorStops.forEach(stop => {
       gradient.addColorStop(stop.offset, stop.color);
     });
-    
+
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 512, 512);
-    
+
     const texture = new THREE.CanvasTexture(canvas);
     texture.needsUpdate = true;
     return texture;
@@ -70,19 +70,19 @@ export function CenterBlob({
 
   useFrame((state) => {
     if (!meshRef.current) return;
-    
+
     const time = state.clock.elapsedTime * speed;
-    
+
     // More dynamic floating
     const floatY = Math.sin(time * 0.46) * 0.22 + Math.sin(time * 0.3) * 0.12;
     meshRef.current.position.y = position[1] + floatY;
     meshRef.current.position.x = position[0];
     meshRef.current.position.z = position[2];
-    
+
     // Gentle pulsing
     const pulse = 1 + Math.sin(time * 0.65) * 0.055;
     meshRef.current.scale.setScalar(scale * pulse);
-    
+
     // Very subtle rotation
     meshRef.current.rotation.z = Math.sin(time * 0.22) * 0.05;
   });

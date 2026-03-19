@@ -119,9 +119,9 @@ export default function Hero() {
                 >
                     <Link
                         href="/contact"
-                        className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:shadow-brand-accent/10"
+                        className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-brand-accent px-8 py-3.5 text-sm font-bold text-black shadow-[0_0_0_1px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_0_rgba(0,229,255,0.5)]"
                     >
-                        <span className="relative z-10">Talk to an Engineer</span>
+                        <span className="relative z-10">Our services</span>
                         <svg
                             className="relative z-10 h-4 w-4 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
                             fill="none"
@@ -131,17 +131,16 @@ export default function Hero() {
                         >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                        {/* Shimmer sweep */}
-                        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     </Link>
 
                     <Link
                         href="/work"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-brand-accent-light"
+                        className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 py-3.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/10 hover:text-brand-accent-light"
                     >
-                        See What We Shipped
-                        <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        Get in touch
+                        <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                         </svg>
                     </Link>
                 </motion.div>

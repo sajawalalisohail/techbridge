@@ -66,279 +66,90 @@ body {
 
   /* ── Keyframes ──────────────────────────────────────────── */
 
-  @keyframes blobSpin {
-    from {
-      transform: rotate(0deg);
-    }
+  /* ── Hero Blob — Conic Gradient with Triple Animation (Bleu Media Replica) ── */
 
+  /* 1. Spin — clockwise rotation */
+  @keyframes blobSpin {
     to {
       transform: rotate(360deg);
     }
   }
 
-  @keyframes blobMorph {
-    0% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
+  /* 2. Float — gentle drift */
+  @keyframes blobFloat {
 
-    20% {
-      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-    }
-
-    40% {
-      border-radius: 50% 40% 60% 30% / 40% 70% 50% 60%;
-    }
-
-    60% {
-      border-radius: 40% 70% 40% 60% / 60% 40% 60% 40%;
-    }
-
-    80% {
-      border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
-    }
-
+    0%,
     100% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
-  }
-
-  @keyframes blobPulse {
-    from {
-      transform: scale(0.96);
-      opacity: 0.64;
-    }
-
-    to {
-      transform: scale(1.045);
-      opacity: 0.96;
-    }
-  }
-
-  @keyframes shimmerPulse {
-    from {
-      opacity: 0.42;
-      transform: scale(0.98);
-    }
-
-    to {
-      opacity: 0.82;
-      transform: scale(1.04);
-    }
-  }
-
-  /* ─── Blob Drift Keyframes ─────────────────── */
-  @keyframes blobDrift {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-
-    33% {
-      transform: translate(2.6vw, -1.9vh) scale(1.045);
-    }
-
-    66% {
-      transform: translate(-1.9vw, 1.2vh) scale(0.965);
-    }
-
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
-
-  @keyframes blobDriftAlt {
-    0% {
-      transform: translate(0, 0) scale(1);
+      transform: translateY(0);
     }
 
     50% {
-      transform: translate(-3.5vw, 2.25vh) scale(1.07);
-    }
-
-    100% {
-      transform: translate(0, 0) scale(1);
+      transform: translateY(-40px);
     }
   }
 
-  /* Blob container */
-  .blob-container {
-    position: relative;
-  }
-
-  /* Multi-layered mesh gradient for depth */
-  .blob-mesh-layer {
-    position: absolute;
-    inset: -60px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 30% 40%, rgba(var(--brand-accent-rgb), 0.15), transparent 55%),
-      radial-gradient(circle at 70% 60%, rgba(var(--brand-accent-light-rgb), 0.16), transparent 55%),
-      radial-gradient(circle at 50% 25%, rgba(var(--brand-accent-light-rgb), 0.11), transparent 50%),
-      radial-gradient(circle at 60% 80%, rgba(var(--brand-accent-dark-rgb), 0.1), transparent 45%);
-    mix-blend-mode: screen;
-    filter: blur(70px) saturate(125%) brightness(0.92);
-    will-change: transform;
-    animation: blobDrift 30s ease-in-out infinite;
-  }
-
-  /* Secondary smaller blob on offset path */
-  .blob-secondary {
-    position: absolute;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle, rgba(var(--brand-accent-light-rgb), 0.28) 0%, rgba(var(--brand-accent-rgb), 0.19) 52%, transparent 76%);
-    mix-blend-mode: screen;
-    filter: blur(44px) brightness(0.96);
-    will-change: transform;
-    animation: blobDriftAlt 36s ease-in-out infinite;
-  }
-
-  /* Subtle dot grid texture overlay */
-  .blob-dot-grid {
-    position: absolute;
+  /* Wrapper — covers the hero area */
+  .hero-blob-wrapper {
+    position: fixed;
     inset: 0;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.008;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -10;
     pointer-events: none;
   }
 
-  /* SVG noise texture for 4K film grain */
-  .blob-noise {
+  /* Anchor container handling the continuous float */
+  .hero-blob-floater {
     position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0.012;
-    mix-blend-mode: overlay;
-    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: blobFloat 8s ease-in-out infinite;
   }
 
-  /* Layer 1: Outer atmospheric halo */
-  .blob-halo {
+  /* The colored aura layer — Strict Circle with Pizza Slice */
+  .hero-blob-aura {
     position: absolute;
-    inset: -120px;
+    /* Medium size */
+    width: 600px;
+    height: 600px;
+    /* Center it inside the floater */
+    top: -300px;
+    left: -300px;
+
     border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(var(--brand-accent-dark-rgb), 0.26) 0%,
-        rgba(var(--brand-accent-rgb), 0.24) 12%,
-        rgba(var(--brand-accent-light-rgb), 0.11) 25%,
-        rgba(var(--brand-accent-dark-rgb), 0.16) 35%,
-        rgba(var(--brand-accent-dark-rgb), 0.11) 48%,
-        rgba(7, 11, 16, 0.08) 60%,
-        rgba(var(--brand-accent-dark-rgb), 0.02) 70%,
-        transparent 78%);
-    filter: blur(180px) saturate(120%);
-    will-change: transform;
-    animation: blobPulse 28s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    /* Enforce strict circular shape */
+
+    /* 
+      1. Deep Navy / Indigo 
+      2. Soft Peach / Pink 
+      3. Bright White (Pizza Slice) 
+      4. Brilliant Cyan 
+    */
+    background: conic-gradient(from 0deg,
+        #050b24 0%,
+        #050b24 35%,
+        #e2aebd 60%,
+        #ffffff 75%,
+        #ffffff 82%,
+        #00d4ff 92%,
+        #050b24 100%);
+
+    animation: blobSpin 20s linear infinite;
+
+    /* Soft blur to meld the hard conic edges */
+    filter: blur(80px);
+    opacity: 0.85;
+    /* Opaque enough to show the dark blue against a dark bg */
+    mix-blend-mode: normal;
+    /* Normal blend mode keeps the dark blue visible */
   }
 
-  /* Layer 2: Conic base color field */
-  .blob-core {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg at 50% 50%,
-        var(--brand-accent-deep) 0deg,
-        rgb(var(--brand-accent-dark-rgb)) 80deg,
-        rgb(var(--brand-accent-rgb)) 120deg,
-        rgb(var(--brand-accent-dark-rgb)) 180deg,
-        var(--brand-accent-deep) 240deg,
-        rgb(var(--brand-accent-light-rgb)) 310deg,
-        var(--brand-accent-deep) 360deg);
-    opacity: 0.45;
-    mix-blend-mode: screen;
-    filter: blur(72px) saturate(165%) brightness(0.96);
-    will-change: transform;
-    animation:
-      blobSpin 38s linear infinite,
-      blobMorph 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-  }
-
-  /* Layer 2.5: Rotating highlight — glowing premium beacon */
-  .blob-highlight {
-    position: absolute;
-    inset: 5%;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg at 50% 50%,
-        transparent 0deg,
-        transparent 55deg,
-        rgba(var(--brand-accent-light-rgb), 0.42) 72deg,
-        rgba(var(--brand-accent-rgb), 0.78) 85deg,
-        rgba(var(--brand-accent-light-rgb), 0.7) 90deg,
-        rgba(var(--brand-accent-rgb), 0.78) 95deg,
-        rgba(var(--brand-accent-light-rgb), 0.42) 108deg,
-        transparent 125deg,
-        transparent 360deg);
-    opacity: 0.5;
-    mix-blend-mode: screen;
-    filter: blur(28px) saturate(130%) brightness(1.02);
-    will-change: transform;
-    animation:
-      blobSpin 18s linear infinite,
-      blobMorph 25s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-  }
-
-  /* Bloom corona — wide soft glow that trails the highlight */
-  .blob-highlight::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg at 50% 50%,
-        transparent 0deg,
-        transparent 60deg,
-        rgba(var(--brand-accent-light-rgb), 0.34) 80deg,
-        rgba(var(--brand-accent-rgb), 0.46) 90deg,
-        rgba(var(--brand-accent-light-rgb), 0.34) 100deg,
-        transparent 120deg,
-        transparent 360deg);
-    filter: blur(48px);
-    mix-blend-mode: screen;
-  }
-
-  /* Layer 3: Inner counter-spinner */
-  .blob-inner {
-    position: absolute;
-    inset: 15%;
-    border-radius: 50%;
-    background: conic-gradient(from 180deg at 50% 50%,
-        rgb(var(--brand-accent-dark-rgb)) 0deg,
-        rgb(var(--brand-accent-rgb)) 90deg,
-        rgb(var(--brand-accent-light-rgb)) 180deg,
-        rgb(var(--brand-accent-dark-rgb)) 270deg,
-        rgb(var(--brand-accent-dark-rgb)) 360deg);
-    opacity: 0.24;
-    mix-blend-mode: screen;
-    filter: blur(110px) saturate(145%) brightness(0.92);
-    will-change: transform;
-    animation: blobSpin 50s linear infinite reverse;
-  }
-
-  /* Layer 4: Soft center shimmer */
-  .blob-shimmer {
-    position: absolute;
-    inset: 30%;
-    border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(var(--brand-accent-rgb), 0.3) 0%,
-        rgba(var(--brand-accent-light-rgb), 0.16) 55%,
-        transparent 72%);
-    filter: blur(120px) brightness(0.96);
-    will-change: transform;
-    animation: shimmerPulse 32s ease-in-out infinite alternate;
-  }
-
-  /* Accessibility: pause all animations */
   @media (prefers-reduced-motion: reduce) {
 
-    .blob-halo,
-    .blob-core,
-    .blob-highlight,
-    .blob-inner,
-    .blob-shimmer,
-    .blob-mesh-layer,
-    .blob-secondary {
+    .hero-blob-floater,
+    .hero-blob-aura {
       animation: none !important;
     }
   }

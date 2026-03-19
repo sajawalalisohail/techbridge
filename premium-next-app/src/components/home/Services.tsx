@@ -146,9 +146,9 @@ function ServiceCardItem({ card }: { card: ServiceCard }) {
     return (
         <motion.div
             variants={cardVariants}
-            className={`group relative overflow-hidden rounded-2xl border bg-neutral-900/50 p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 lg:p-8 ${card.highlight
-                ? "border-brand-accent/30 shadow-[0_0_0_1px_rgba(var(--brand-accent-rgb), 0.15)]"
-                : "border-white/8 hover:border-brand-accent/40"
+            className={`group relative overflow-hidden rounded-3xl border bg-[#06060c]/60 p-7 backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02] hover:-translate-y-2 lg:p-8 ${card.highlight
+                ? "border-brand-accent/40 shadow-[0_0_30px_rgba(var(--brand-accent-rgb),0.15)]"
+                : "border-white/10 hover:border-brand-accent/50 hover:shadow-[0_10px_40px_rgba(var(--brand-accent-rgb),0.1)]"
                 }`}
         >
 

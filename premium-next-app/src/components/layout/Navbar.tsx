@@ -396,24 +396,14 @@ export default function Navbar() {
                             : headerVariants[navState]
                     }
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className={`left-0 right-0 z-50 ${
-                        navState === "top" ? "absolute" : "fixed top-0"
-                    } ${forceHide ? "pointer-events-none" : ""}`}
+                    className={`fixed top-0 left-0 right-0 z-50 ${forceHide ? "pointer-events-none" : ""}`}
                 >
                     <div ref={menuShellRef} className="px-3 md:px-4">
                         <div
-                            className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                                navState === "pill"
-                                    ? "mt-4 max-w-5xl rounded-full border border-brand-accent/20 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(var(--brand-accent-rgb),0.15)] backdrop-blur-xl"
-                                    : "max-w-full rounded-none border-b border-transparent bg-transparent"
-                            }`}
+                            className="mx-auto mt-4 max-w-5xl rounded-full border border-brand-accent/20 bg-[#06060c]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(var(--brand-accent-rgb),0.15)] backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                         >
                             <nav
-                                className={`flex items-center justify-between ${
-                                    navState === "pill"
-                                        ? "px-5 py-2.5"
-                                        : "px-3 py-4 sm:px-6 xl:px-8"
-                                }`}
+                                className="flex items-center justify-between px-5 py-2.5"
                             >
                                 <Link href="/" className="group flex items-center gap-2.5">
                                     <span className="relative flex h-6 w-6 items-center justify-center">
@@ -425,11 +415,7 @@ export default function Navbar() {
                                     </span>
                                 </Link>
                                 <ul
-                                    className={`hidden items-center md:flex ${
-                                        navState === "pill"
-                                            ? "gap-6 lg:gap-9"
-                                            : "gap-6 lg:gap-8"
-                                    }`}
+                                    className="hidden items-center md:flex gap-6 lg:gap-9"
                                 >
                                     <li
                                         onMouseEnter={scheduleHoverOpen}
@@ -440,11 +426,10 @@ export default function Navbar() {
                                         }
                                     >
                                         <span
-                                            className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm transition-all duration-300 ${
-                                                servicesMenuOpen || isServicesActive
+                                            className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm transition-all duration-300 ${servicesMenuOpen || isServicesActive
                                                     ? "bg-white/[0.07] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
                                                     : "text-zinc-400 hover:bg-white/[0.04] hover:text-brand-accent-light"
-                                            }`}
+                                                }`}
                                         >
                                             <Link
                                                 href="/services"
@@ -468,9 +453,8 @@ export default function Navbar() {
                                             >
                                                 <ChevronDown
                                                     size={14}
-                                                    className={`transition-transform duration-300 ${
-                                                        servicesMenuOpen ? "rotate-180" : ""
-                                                    }`}
+                                                    className={`transition-transform duration-300 ${servicesMenuOpen ? "rotate-180" : ""
+                                                        }`}
                                                 />
                                             </button>
                                         </span>
@@ -484,11 +468,10 @@ export default function Navbar() {
                                                 <Link
                                                     href={link.href}
                                                     onClick={closeServicesMenu}
-                                                    className={`relative whitespace-nowrap text-sm transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:transition-all after:duration-300 ${
-                                                        active
+                                                    className={`relative whitespace-nowrap text-sm transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:transition-all after:duration-300 ${active
                                                             ? "text-white after:w-full after:bg-brand-accent-light drop-shadow-[0_0_8px_rgba(var(--brand-accent-light-rgb),0.6)]"
                                                             : "text-zinc-400 after:w-0 after:bg-white hover:text-brand-accent-light hover:after:w-full"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {link.label}
                                                 </Link>
@@ -529,19 +512,16 @@ export default function Navbar() {
                                     aria-expanded={mobileOpen}
                                 >
                                     <span
-                                        className={`block h-px w-6 bg-white transition-transform duration-300 ${
-                                            mobileOpen ? "translate-y-2.5 rotate-45" : ""
-                                        }`}
+                                        className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "translate-y-2.5 rotate-45" : ""
+                                            }`}
                                     />
                                     <span
-                                        className={`block h-px w-6 bg-white transition-opacity duration-300 ${
-                                            mobileOpen ? "opacity-0" : ""
-                                        }`}
+                                        className={`block h-px w-6 bg-white transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""
+                                            }`}
                                     />
                                     <span
-                                        className={`block h-px w-6 bg-white transition-transform duration-300 ${
-                                            mobileOpen ? "-translate-y-2.5 -rotate-45" : ""
-                                        }`}
+                                        className={`block h-px w-6 bg-white transition-transform duration-300 ${mobileOpen ? "-translate-y-2.5 -rotate-45" : ""
+                                            }`}
                                     />
                                 </button>
                             </nav>
@@ -590,9 +570,8 @@ export default function Navbar() {
                                                 </span>
                                                 <ChevronDown
                                                     size={16}
-                                                    className={`text-zinc-400 transition-transform duration-300 ${
-                                                        mobileServicesOpen ? "rotate-180" : ""
-                                                    }`}
+                                                    className={`text-zinc-400 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
+                                                        }`}
                                                 />
                                             </button>
 
@@ -641,11 +620,10 @@ export default function Navbar() {
                                                     <Link
                                                         href={link.href}
                                                         onClick={() => setMobileOpen(false)}
-                                                        className={`block rounded-xl px-2 py-1 text-base transition-colors ${
-                                                            active
+                                                        className={`block rounded-xl px-2 py-1 text-base transition-colors ${active
                                                                 ? "font-medium text-brand-accent-light"
                                                                 : "text-zinc-300 hover:text-brand-accent-light"
-                                                        }`}
+                                                            }`}
                                                     >
                                                         {link.label}
                                                     </Link>

@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import UnderHeroText from "@/components/home/UnderHeroText";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import TrustedBy from "@/components/home/TrustedBy";
 import Services from "@/components/home/Services";
@@ -10,11 +11,12 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <UnderHeroText />
+      <TrustedBy />
       <WhyChooseUs />
       <Services />
       <CaseStudies />
       <ProcessShowcase />
-      <TrustedBy />
       <CTA />
 
       {/* Subtle accent border glow separating scrolling content from reveal footer */}

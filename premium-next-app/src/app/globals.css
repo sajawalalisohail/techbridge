@@ -130,9 +130,11 @@ body {
       4. Brilliant Cyan
     */
     background: conic-gradient(from 0deg,
-        #00e5ff 10%,
-        #020b4a 25%,
-        #020b4a 65%,
+        #00e5ff 0%,
+        #0a58ca 5%,
+        #020b4a 12%,
+        #020b4a 45%,
+        #2a0a4a 65%,
         #e2aebd 90%,
         #ffffff 94%,
         #ffffff 95%,

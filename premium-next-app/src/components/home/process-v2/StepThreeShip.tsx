@@ -42,7 +42,7 @@ export default function StepThreeShip() {
                     </div>
                 </div>
 
-                <div className="relative z-10 p-8 lg:p-10 h-[280px] flex flex-col justify-between">
+                <div className="relative z-10 p-8 lg:p-10 min-h-[320px] flex flex-col justify-between">
                     <div>
                         <p className="text-zinc-400 leading-relaxed max-w-lg">
                             Short delivery cycles so you see real progress every week, not one giant reveal at the end. Kinetic, iterative, and fast.
@@ -56,25 +56,25 @@ export default function StepThreeShip() {
                             <span className="text-brand-accent-light">1 Wk Sprints</span>
                         </div>
 
-                        <div className="relative w-full h-[60px] overflow-hidden rounded-md bg-white/5 border border-white/5 p-3">
-                            <div className="absolute inset-x-4 top-1/2 -mt-px h-px bg-white/10" />
+                        <div className="relative w-full overflow-hidden rounded-md bg-white/5 border border-white/5 pt-5 pb-4 px-3 flex flex-col justify-start">
+                            <div className="absolute inset-x-4 top-[24px] h-px bg-white/10" />
 
                             {/* Animated nodes that slide/fade in to form a timeline on hover */}
-                            <div className="absolute inset-0 flex items-center justify-between px-6 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className="relative z-10 flex items-start justify-between px-3 opacity-40 group-hover:opacity-100 transition-opacity duration-500 w-full">
                                 {/* Node 1 */}
-                                <div className="relative flex flex-col items-center group/node">
+                                <div className="flex flex-col items-center gap-3 group/node">
                                     <div className="w-2 h-2 rounded-full bg-zinc-600 group-hover:bg-brand-accent transition-colors delay-100" />
-                                    <span className="absolute top-4 text-[9px] font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors delay-100 uppercase tracking-widest">Mon: Plan</span>
+                                    <span className="text-[9px] font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors delay-100 uppercase tracking-widest whitespace-nowrap">Mon: Plan</span>
                                 </div>
                                 {/* Node 2 */}
-                                <div className="relative flex flex-col items-center group/node">
+                                <div className="flex flex-col items-center gap-3 group/node">
                                     <div className="w-2 h-2 rounded-full bg-zinc-600 group-hover:bg-brand-accent transition-colors delay-200" />
-                                    <span className="absolute top-4 text-[9px] font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors delay-200 uppercase tracking-widest">Wed: Build</span>
+                                    <span className="text-[9px] font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors delay-200 uppercase tracking-widest whitespace-nowrap">Wed: Build</span>
                                 </div>
                                 {/* Node 3 */}
-                                <div className="relative flex flex-col items-center group/node">
+                                <div className="flex flex-col items-center gap-3 group/node">
                                     <div className="w-2 h-2 rounded-full bg-zinc-600 group-hover:bg-brand-accent-light shadow-[0_0_8px_rgba(var(--brand-accent-rgb),0.8)] transition-colors delay-300" />
-                                    <span className="absolute top-4 text-[9px] font-mono text-brand-accent-light uppercase tracking-widest">Fri: Live</span>
+                                    <span className="text-[9px] font-mono text-brand-accent-light uppercase tracking-widest whitespace-nowrap">Fri: Live</span>
                                 </div>
                             </div>
                         </div>

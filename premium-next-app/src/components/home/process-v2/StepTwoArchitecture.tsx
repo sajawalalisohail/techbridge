@@ -92,42 +92,75 @@ export default function StepTwoArchitecture() {
                         />
                         <motion.div
                             style={{ x: translateZLayer2, y: translateZLayer1 }}
-                            className="absolute right-[20px] top-[-30px] w-32 h-32 border border-brand-accent/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                            className="absolute right-[20px] top-[30px] w-32 h-32 border border-brand-accent/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                         />
                     </div>
 
                     {/* Back Face (Flipped) */}
                     <div
-                        className="absolute inset-0 rounded-2xl border border-brand-accent/40 bg-zinc-950 p-8 lg:p-10 flex flex-col justify-center"
+                        className="absolute inset-0 rounded-2xl border border-brand-accent/40 bg-zinc-950 p-6 lg:p-8 flex flex-col"
                         style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                     >
-                        <div className="space-y-4 relative z-10 w-full">
-                            <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-2">Tech Stack Blueprint</div>
+                        <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-4 z-10">Tech Stack Blueprint</div>
 
-                            <ul className="space-y-3 font-mono text-xs text-zinc-300">
-                                <li className="flex items-center gap-3">
-                                    <span className="w-1.5 h-1.5 bg-brand-accent rounded-full" />
-                                    System Flowcharts
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <span className="w-1.5 h-1.5 bg-brand-accent rounded-full" />
-                                    Database Schema Layout
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <span className="w-1.5 h-1.5 bg-brand-accent rounded-full" />
-                                    Scalability Action Plan
-                                </li>
-                            </ul>
+                        {/* High Fidelity Node Graph Diagram */}
+                        <div className="relative flex-grow w-full border border-white/5 rounded-xl bg-black/40 overflow-hidden flex items-center justify-center">
+                            {/* Grid Background */}
+                            <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)", backgroundSize: "20px 20px" }} />
+
+                            {/* The Nodes */}
+                            <div className="relative w-full max-w-[280px] h-[160px]">
+                                {/* Connecting Lines with glowing data packets */}
+                                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+                                    {/* Client to Gateway */}
+                                    <path d="M 40 80 L 100 80" stroke="rgba(255,255,255,0.1)" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+                                    <motion.circle cx="40" cy="80" r="2" fill="var(--brand-accent)" animate={{ cx: [40, 100] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
+
+                                    {/* Gateway to Database */}
+                                    <path d="M 140 80 L 200 40" stroke="rgba(255,255,255,0.1)" strokeWidth="2" fill="none" />
+                                    <motion.circle cx="140" cy="80" r="2" fill="var(--brand-accent-light)" animate={{ cx: [140, 200], cy: [80, 40] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear", delay: 0.5 }} />
+
+                                    {/* Gateway to Logic */}
+                                    <path d="M 140 80 L 200 120" stroke="rgba(255,255,255,0.1)" strokeWidth="2" fill="none" />
+                                    <motion.circle cx="140" cy="80" r="2" fill="#10B981" animate={{ cx: [140, 200], cy: [80, 120] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear", delay: 0.2 }} />
+                                </svg>
+
+                                {/* Client Node */}
+                                <div className="absolute left-[10px] top-[70px] flex items-center justify-center p-2 rounded border border-white/10 bg-zinc-900 z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                                    <span className="font-mono text-[9px] text-zinc-300">Client</span>
+                                </div>
+
+                                {/* API Gateway Node */}
+                                <div className="absolute left-[100px] top-[65px] flex flex-col items-center justify-center p-2 rounded border border-brand-accent/40 bg-brand-accent/10 z-10 shadow-[0_0_20px_rgba(var(--brand-accent-rgb),0.2)]">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-brand-accent absolute -top-0.5 -right-0.5 animate-ping" />
+                                    <span className="font-mono text-[9px] text-brand-accent-light font-bold">API Gateway</span>
+                                </div>
+
+                                {/* Database Node */}
+                                <div className="absolute left-[200px] top-[25px] flex items-center justify-center p-2 rounded border border-white/10 bg-zinc-900 z-10">
+                                    <span className="font-mono text-[9px] text-zinc-300 flex items-center gap-1">
+                                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></svg>
+                                        Database
+                                    </span>
+                                </div>
+
+                                {/* Logic / Cloud Node */}
+                                <div className="absolute left-[200px] top-[105px] flex items-center justify-center p-2 rounded border border-white/10 bg-zinc-900 z-10">
+                                    <span className="font-mono text-[9px] text-zinc-300 flex items-center gap-1">
+                                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2" /><rect x="2" y="14" width="20" height="8" rx="2" ry="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></svg>
+                                        Cloud Logic
+                                    </span>
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Blurred ER Diagram graphic in background */}
-                        <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none opacity-20 blur-[2px]">
-                            <svg className="w-full h-full stroke-brand-accent" fill="none" viewBox="0 0 400 300">
-                                <rect x="50" y="50" width="80" height="40" rx="4" />
-                                <rect x="250" y="50" width="100" height="60" rx="4" />
-                                <rect x="150" y="180" width="120" height="80" rx="4" />
-                                <path d="M130 70 H250 M170 180 V110" strokeDasharray="4 4" />
-                            </svg>
+                        {/* Status Overlay Footer */}
+                        <div className="mt-4 flex justify-between items-center px-2">
+                            <span className="flex items-center gap-2 font-mono text-[9px] text-zinc-500">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                SCHEMA VALIDATED
+                            </span>
+                            <span className="font-mono text-[9px] text-zinc-600">v2.4.0</span>
                         </div>
                     </div>
                 </motion.div>

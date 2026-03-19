@@ -400,22 +400,29 @@ export default function Navbar() {
                 >
                     <div ref={menuShellRef} className="px-3 md:px-4">
                         <div
-                            className="mx-auto mt-4 max-w-5xl rounded-full border border-brand-accent/20 bg-[#06060c]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(var(--brand-accent-rgb),0.15)] backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-full border ${navState === "pill"
+                                ? "mt-4 max-w-5xl border-brand-accent/20 bg-[#06060c]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(var(--brand-accent-rgb),0.15)] backdrop-blur-2xl"
+                                : "mt-6 max-w-[100rem] border-transparent bg-transparent shadow-none backdrop-blur-none"
+                                }`}
                         >
                             <nav
-                                className="flex items-center justify-between px-5 py-2.5"
+                                className={`flex items-center justify-between transition-all duration-500 ${navState === "pill" ? "px-5 py-2.5" : "px-0 py-2"
+                                    }`}
                             >
                                 <Link href="/" className="group flex items-center gap-2.5">
                                     <span className="relative flex h-6 w-6 items-center justify-center">
                                         <span className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-accent to-brand-accent-dark opacity-80 blur-sm transition-all duration-300 group-hover:blur group-hover:opacity-100" />
                                         <span className="relative h-3 w-3 rounded-full bg-white" />
                                     </span>
-                                    <span className="text-sm font-semibold uppercase tracking-widest text-white">
+                                    <span className="text-sm font-semibold uppercase tracking-widest text-white drop-shadow-md">
                                         TechBridge
                                     </span>
                                 </Link>
                                 <ul
-                                    className="hidden items-center md:flex gap-6 lg:gap-9"
+                                    className={`hidden items-center md:flex transition-all duration-500 rounded-full border ${navState === "pill"
+                                        ? "gap-6 lg:gap-9 border-transparent bg-transparent shadow-none backdrop-blur-none px-0 py-0"
+                                        : "gap-6 lg:gap-9 border-white/10 bg-[#06060c]/80 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-2xl px-8 py-2.5"
+                                        }`}
                                 >
                                     <li
                                         onMouseEnter={scheduleHoverOpen}
@@ -427,8 +434,8 @@ export default function Navbar() {
                                     >
                                         <span
                                             className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm transition-all duration-300 ${servicesMenuOpen || isServicesActive
-                                                    ? "bg-white/[0.07] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
-                                                    : "text-zinc-400 hover:bg-white/[0.04] hover:text-brand-accent-light"
+                                                ? "bg-white/[0.07] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
+                                                : "text-zinc-400 hover:bg-white/[0.04] hover:text-brand-accent-light"
                                                 }`}
                                         >
                                             <Link
@@ -469,8 +476,8 @@ export default function Navbar() {
                                                     href={link.href}
                                                     onClick={closeServicesMenu}
                                                     className={`relative whitespace-nowrap text-sm transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:transition-all after:duration-300 ${active
-                                                            ? "text-white after:w-full after:bg-brand-accent-light drop-shadow-[0_0_8px_rgba(var(--brand-accent-light-rgb),0.6)]"
-                                                            : "text-zinc-400 after:w-0 after:bg-white hover:text-brand-accent-light hover:after:w-full"
+                                                        ? "text-white after:w-full after:bg-brand-accent-light drop-shadow-[0_0_8px_rgba(var(--brand-accent-light-rgb),0.6)]"
+                                                        : "text-zinc-400 after:w-0 after:bg-white hover:text-brand-accent-light hover:after:w-full"
                                                         }`}
                                                 >
                                                     {link.label}
@@ -621,8 +628,8 @@ export default function Navbar() {
                                                         href={link.href}
                                                         onClick={() => setMobileOpen(false)}
                                                         className={`block rounded-xl px-2 py-1 text-base transition-colors ${active
-                                                                ? "font-medium text-brand-accent-light"
-                                                                : "text-zinc-300 hover:text-brand-accent-light"
+                                                            ? "font-medium text-brand-accent-light"
+                                                            : "text-zinc-300 hover:text-brand-accent-light"
                                                             }`}
                                                     >
                                                         {link.label}

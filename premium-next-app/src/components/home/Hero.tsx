@@ -72,13 +72,13 @@ export default function Hero() {
                 className="relative z-10 mx-auto flex min-h-screen max-w-[100rem] flex-col items-center justify-center px-6 pb-24 pt-28 lg:px-10"
             >
 
-                {/* Primary headline — word-by-word reveal */}
+                {/* Primary headline */}
                 <motion.h1
                     variants={{
                         hidden: {},
-                        show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+                        show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
                     }}
-                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-3xl font-semibold leading-[1.12] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] sm:text-4xl lg:text-5xl xl:text-6xl"
+                    className="flex max-w-5xl flex-wrap justify-center gap-x-[0.3em] text-center text-4xl font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] sm:text-5xl lg:text-6xl xl:text-7xl"
                 >
                     {["Custom", "Software."].map((word, i) => (
                         <motion.span
@@ -105,15 +105,6 @@ export default function Hero() {
                         </motion.span>
                     ))}
                 </motion.h1>
-
-                {/* Sub-headline */}
-                <motion.p
-                    variants={fadeUp}
-                    className="mt-6 max-w-2xl text-center text-base leading-relaxed text-zinc-300 drop-shadow-[0_2px_12px_rgba(0,0,0,1)] sm:text-lg lg:text-xl"
-                >
-                    Custom platforms, AI automation, and SaaS systems.
-                    Architected by senior engineers who&apos;ve shipped this before.
-                </motion.p>
 
                 {/* CTA row */}
                 <motion.div

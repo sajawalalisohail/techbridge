@@ -1,110 +1,184 @@
 # CLAUDE.md
 
-> **AI System Prompt**: This document is the ultimate source of truth for all AI/LLM-assisted development (Claude, Gemini, Cursor). You must prioritize these rules over your general knowledge.
+> AI operating manual for TechBridge. Treat this file and `docs/project-knowledge.md` as the source of truth over the default `README.md`, which is still boilerplate.
 
-## 🏗️ Project Architecture & Tech Stack
+## Project Snapshot
 
-**Core Stack**
-- Framework: Next.js 16.1.6 (App Router)
-- UI: React 19.2.3, Tailwind CSS v4 (@tailwindcss/postcss)
-- 3D/Canvas: Three.js (v0.183), React Three Fiber (v9.5), Drei
-- Animation: Framer Motion v12, GSAP v3.14, Lenis (smooth scroll)
-- Content: React Markdown
-- Media Tooling: Remotion, Puppeteer  
+TechBridge is a premium B2B marketing and conversion site for a software and AI engineering studio. The current commercial story combines:
 
-**Repo Structure**
-- `src/app/` - Next.js routing, layouts, pages, global CSS and metadata.
-- `src/components/` - Standard UI components, shared layouts, and icons.
-- `src/3d/` - Specialized WebGL (particles, blobs, shaders, R3F scenes).
-- `src/data/` - Typed JSON/TS content (case studies, insights).
-- `src/lib/` - Shared utils (`brand-colors.ts` bridges CSS to 3D, GSAP config).
-- `docs/` - Extended project knowledge and SEO infrastructure.
+- premium custom software and SaaS delivery
+- AI workflow automation and lead-generation systems
+- 24-hour website launches
+- staff augmentation with Pakistan-based senior engineers under US-side oversight
 
-**Positioning & Content Strategy (Phase 2)**
-- **Value Proposition**: "Silicon Valley Quality. Global Cost Advantage." The primary commercial narrative hinges on **Premium Staff Augmentation**. We sell the outcome via an elite Pakistani engineering talent pool at a fraction of US/EU expenses.
-- **Tone**: High-end B2B structural engineering partner. Eradicate generic "AI Agency" copy. Emphasize transparent delivery, replacement guarantees, and "code running in production."
+This is a Next.js App Router project with a strong visual layer. Performance, motion quality, and design consistency matter as much as the copy.
 
----
+## Core Stack
 
-## 🤖 AI Agent & Skills System
+- Next.js 16.1.6 with App Router
+- React 19.2.3
+- TypeScript with `strict: true`
+- Tailwind CSS v4 via `@tailwindcss/postcss`
+- Framer Motion for most UI motion
+- GSAP + ScrollTrigger for pinned and scroll-linked choreography
+- Lenis for smooth scrolling, initialized in `src/components/shared/SmoothScroll.tsx`
+- Three.js, React Three Fiber, and Drei for WebGL layers
+- React Markdown for insights detail content
+- Remotion and Puppeteer for media/showcase tooling
 
-- **Skill Catalog Reference**: Codex skills are external to the repo. Prefer installed Codex skills only when they are explicitly invoked, and do not assume a repo-local `.agent/skills/` directory exists.
-- **Workflow Constraints**: 
-  1. Review `CLAUDE.md` and `docs/project-knowledge.md` before coding.
-  2. Implement features following the Design System rigorously.
-  3. Validate strictly against the Rendering constraints.
-  4. Ensure NO hallucinations: Do not configure Tailwind v3 `tailwind.config.ts`, nor use CSS Modules unless explicitly noted.
+## Repo Structure
 
----
+- `src/app/` route entrypoints, layouts, metadata, `globals.css`, robots, sitemap
+- `src/components/layout/` global navbar and footer used by the root shell
+- `src/components/home/` homepage sections and shared marketing components
+- `src/components/services/` service-page specific interactive content
+- `src/components/shared/` reusable UI, heading animation helpers, providers, JSON-LD, smooth scroll
+- `src/3d/` particle systems, scenes, shader files, and R3F wrappers
+- `src/data/` service navigation, case studies, and insights source data
+- `src/lib/` brand color bridge, GSAP helpers, jelly morph scroll context
+- `public/` local fonts, proof images, and static assets
+- `docs/` project handbook and non-code documentation
 
-## 🎨 Design System Consistency
+## Route Map
 
-The UI enforces a single unified token system spanning both the DOM and WebGL environments.
+- `/` homepage narrative:
+  `Hero -> TrustBar -> JellyMorphServicesSection -> ComparisonSection -> CaseStudiesSection -> ProcessSection -> WhyUsSection -> FinalCTA`
+- `/services` seven service lines driven from `SERVICE_SECTIONS`
+- `/staff-augmentation` dedicated staffing offer page
+- `/websites` dedicated 24-hour website sales page with its own long-form motion-heavy funnel
+- `/work` grouped case-study overview page
+- `/work/[slug]` static detail pages generated from `CASE_STUDIES`
+- `/insights` article index
+- `/insights/[slug]` static detail pages generated from `INSIGHTS`
+- `/about`, `/contact`, `/privacy`, `/terms`
 
-### 1. Brand Accent System
-- **Source of Truth**: Token definitions are locked in `src/app/globals.css`. 
-- **NEVER** hardcode lime hex/RGB literals in inline styles or classes. 
-- **Tailwind v4 Integration**: Variables map automatically via `@theme inline`. Consume them directly (`text-brand-accent`, `bg-brand-accent-dark`, `border-brand-accent/40`).
-- **3D / Shader Bridging**: Real-time rendering modules must dynamically fetch colors using `getBrandColors()` from `src/lib/brand-colors.ts`, feeding them into GLSL uniforms (e.g., `uBrandAccent`).
-- **Data Exception**: Case studies (`src/data/`) possess individual thematic `accentColor` RGB strings. This is data-driven by design.
+## Root Shell Rules
 
-### 2. Typography & Layout Metrics
-- **Font Family**: *Satoshi* loaded locally via `next/font/local` in `src/app/layout.tsx`.
-- **Universal Grid Standard**: The site utilizes a strict **Left-Aligned Editorial Flow**. Root sections span `max-w-[100rem]`, while text blocks and headers are locked to `max-w-7xl` and strictly `text-left`, `items-start`. Exceptions: The Homepage Hero and explicitly isolated blocks may use `items-center` `text-center`.
-- **Pinned Split Sections**: Even visually split sections must still align to the same centered `max-w-[100rem]` container and shared side padding as the sections below them.
-- **Hero h1 Guidelines**: Usually `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`.
-- **Eyebrows**: Format strictly as `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600`.
-- **Spacing Guidelines**: Standard section padding is `py-24 lg:py-32`; tight layouts use `py-16 lg:py-20`.
-- **Overflow constraints**: Do not place `overflow-hidden` on inner structural grids displaying Framer translation motion (e.g., `x: -60`), as clipping will occur during entrance cascades.
+The root layout in `src/app/layout.tsx` is the backbone of the experience. Preserve these behaviors unless the task explicitly changes them:
 
-### 3. Component Overrides
-- **Navbar Layout**: Navbar breakpoints explicitly break at `lg:hidden` (1024px) instead of `md` to prevent sprawling horizontal menu overlap. Mobile viewing inherently forces the `pill` navState.
+- Local Satoshi variable font is loaded with `next/font/local`
+- `html` is rendered with `className="dark"`
+- `SmoothScroll` mounts globally
+- `JsonLd` mounts globally
+- `ClientProviders` currently supplies `JellyMorphScrollProvider`
+- `PageParticlesWrapper` sits in a sticky full-screen layer behind page content
+- `Navbar` lives above route content
+- `src/components/layout/Footer.tsx` is the real global footer and reveal system
+- `CursorFollowerWrapper` mounts globally
 
----
+Do not casually restructure the root stacking order, sticky canvas wrapper, or footer reveal spacer logic.
 
-## 🧩 Component & Pattern Architecture
+## Data-Driven Content
 
-- **React Client vs Server Components**: 
-  - All interactive UI and animated segments **must** explicitly use `"use client"`.
-  - Static root shells and route `layout.tsx` files remain Server Components to maximize SEO performance. **Do not** introduce `"use server"` patterns unexpectedly.
-- **Dynamic Imports Strategy**:
-  - Heavy visual logic (`ServicesProcessShowcase`) and WebGL/3D packages **must** use `next/dynamic` with `{ ssr: false }` to avert severe main-thread impacts.
-  - The global homepage particle layer is mounted via `PageParticlesWrapper` in `src/app/layout.tsx` and should remain client-only.
-- **Global Layout Behavior**:
-  - The root layout sets up persistent backgrounds, sticky canvases, and a dynamic footer reveal. New root nodes must accurately handle z-indexing contexts.
-- **Static Artifacts**: Maintain inline SVG noise elements (`feTurbulence`) directly within the components to prevent FOUC or flicker problems.
+Prefer editing typed data files over hardcoding copy inside page components:
 
-### 4. Services Section Specifics
-- `JellyMorphServicesSection` is a pinned GSAP-driven horizontal reveal section that visually uses a 40/60 split inside the same centered `max-w-[100rem]` container as the lower homepage sections.
-- Horizontal scroll math in the services section must use the actual card viewport width (`viewportRef.clientWidth`), not `window.innerWidth`, or the section will drift out of alignment with the rest of the page.
-- The current services card reveal depends on `.card-spacer` collapsing to `0%` so inactive titles sit at the bottom and rise during reveal.
-- The services particle field and accent backdrop are driven by `useJellyMorphScrollProgress()` and should fade quickly after the final card exits left.
+- `src/data/site-navigation.ts`
+  source of truth for service sections, mega-menu items, footer columns, and service jump links
+- `src/data/case-studies.ts`
+  source of truth for work page groups, homepage featured studies, and `/work/[slug]`
+- `src/data/insights.ts`
+  source of truth for article cards and markdown-like article bodies rendered in `/insights/[slug]`
 
----
+If a route is generated from these files, keep the data shape and route metadata in sync.
 
-## 🎬 Animation Rules (Framer / GSAP / CSS)
+## Design System
 
-Use the correct orchestration layer for smooth 60-120fps metrics:
-- **Framer Motion**: Default tool for mount/unmount presence, list reveals, scroll-into-view triggers.
-  - Standard curve: `[0.22, 1, 0.36, 1]`.
-- **GSAP**: Strictly reserved for complex choreographed scroll features (e.g., Horizontal Parallax / Horizontal Case Studies). Always clean up `ScrollTrigger` instances on unmount, enable `invalidateOnRefresh`, and prefer measured container widths over raw viewport assumptions for pinned horizontal sections.
-- **CSS Animations**: Infinite background movements (blobs, pulses) and computational loops (like `@property --glow-angle`) are kept in `globals.css` to offload the main thread.
-- **A11y**: Enforce `prefers-reduced-motion` compliance to halt or minimize background ambient loops automatically.
+### Brand Accent Tokens
 
----
+The real source of truth is `src/app/globals.css`, not scattered inline styles.
 
-## ⚡ Code Quality & Performance
+- Current live palette is the "Abyss Navy" set:
+  - `--brand-accent: #1e3a8a`
+  - `--brand-accent-light: #3b82f6`
+  - `--brand-accent-dark: #172554`
+  - `--brand-accent-deep: #020617`
+- Tailwind v4 tokens are exposed via `@theme inline`
+- Use classes like `text-brand-accent`, `bg-brand-accent-dark`, `border-brand-accent/40`
+- Do not hardcode alternate accent hex values into components
+- For WebGL and shader work, read colors with `getBrandColors()` from `src/lib/brand-colors.ts`
+- `brand-colors.ts` contains cyan fallback values only as runtime safety nets; they are not the intended product palette
 
-- **Types**: Always uphold `strict: true` compliance. Output explicit interface types, particularly when bridging 3D math logic. Target imports using `@/`.
-- **Hardware Acceleration**: DO NOT strip `will-change: transform` rules off components with computationally dense looping motions like morphing blobs.
-- **Assets**:
-  - Prefer `next/image` for standard web graphics.
-  - Exclusively use `lucide-react` for app and UI iconography.
+### Typography And Layout
 
-## 🛠️ Development Tools
+- Primary font is Satoshi from `public/font/satoshi/`
+- The general page language is premium, sharp, and B2B; avoid generic "AI agency" phrasing
+- Most interior pages follow a left-aligned editorial layout inside `max-w-[100rem]`
+- Text blocks usually cap around `max-w-7xl` or smaller
+- Homepage hero and some isolated marketing moments can center content when the composition calls for it
+- Eyebrows generally use mono, uppercase, tracked styling
+
+## Rendering Rules
+
+- Interactive and animated components must be client components
+- Keep route layouts and simple shells as server components when interactivity is unnecessary
+- Heavy client-only features should stay dynamically imported with `ssr: false`
+  - `PageParticlesWrapper` imports the jelly morph canvas dynamically
+  - `ServicesProcessShowcase` is dynamically imported on `/services`
+- Do not add Tailwind v3 config files or old config-based token patterns
+- Do not introduce CSS Modules unless there is a strong reason and the task explicitly benefits from them
+- Use the `@/` import alias
+
+## Motion Rules
+
+- Framer Motion is the default animation layer
+- Reuse the house easing curve where possible:
+  `[0.22, 1, 0.36, 1]`
+- GSAP is reserved for scroll-linked or pinned choreography
+- Lenis is initialized once globally and synced with ScrollTrigger
+- Reduced-motion behavior matters:
+  - `SmoothScroll` exits early when reduced motion is requested
+  - several CSS animations in `globals.css` also disable themselves under reduced motion
+
+## 3D And Particle Rules
+
+- The global particle system is controlled through `JellyMorphScrollProvider`
+- `PageParticlesWrapper` fades the backdrop based on the shared jelly morph scroll progress ref
+- `JellyMorphServicesSection` is the section that drives that scroll progress
+- Keep DOM tokens and WebGL colors aligned through the shared brand-color bridge
+- Avoid changing shader uniforms or particle color logic to hardcoded brand values
+
+## Navigation And Footer Gotchas
+
+- The navbar desktop breakpoint is effectively `lg`; on smaller widths it forces the pill/mobile treatment
+- Scroll state logic is intentional:
+  - top under 50px
+  - hidden until about 600px
+  - pill after that
+- On `/work`, the desktop pill navbar is hidden to reduce overlap with the page design
+- The top announcement banner is disabled on `/websites`
+- The navbar listens for a custom `force-hide-navbar` event
+- The footer reveal system relies on setting `--footer-height` from `src/components/layout/Footer.tsx`
+- Do not remove the spacer div or fixed-footer behavior on `md+` without reworking the reveal pattern
+
+## Section-Specific Gotchas
+
+- `JellyMorphServicesSection` must compute horizontal movement from the actual viewport container width, not `window.innerWidth`
+- The services card reveal depends on `.card-spacer` collapsing correctly
+- The services particle fade-out window is intentionally short near the end of the section
+- `/websites` uses a dedicated family of glow utility classes in `globals.css` such as `.website-glow-shell` and `.website-glow-card-active`
+- Avoid `overflow-hidden` on inner grids that need off-axis Framer motion travel, or entrance animations will clip
+
+## SEO And Metadata
+
+- Root metadata is defined in `src/app/layout.tsx`
+- Route-specific metadata is defined in route layouts and in `generateMetadata` for dynamic detail pages
+- `src/components/shared/JsonLd.tsx` injects organization, website, local business, and services schema
+- `src/app/robots.ts` and `src/app/sitemap.ts` are part of the production SEO surface
+
+## Validation
+
+Run these after meaningful code changes:
 
 ```bash
-npm run dev     # Run hot-reloading native development server
-npm run build   # Production optimized build
-npm run lint    # ESLint static analysis suite
+npm run lint
 ```
+
+Also consider `npm run build` when changing route structure, metadata, dynamic imports, or anything likely to affect Next.js compilation boundaries.
+
+## Working Rules For AI Agents
+
+- Read this file and `docs/project-knowledge.md` before making structural changes
+- Prefer updating source data over duplicating content in JSX
+- Preserve the premium visual language and do not downgrade sections into generic SaaS templates
+- Keep changes compatible with the current motion stack, sticky layers, and footer reveal behavior
+- Ignore the default `README.md` for architecture guidance unless it is updated in the future

@@ -1,98 +1,346 @@
 # TechBridge Project Knowledge
 
-**Version:** 1.0.0
-**Target Framework:** Next.js 16 (App Router), React 19, Tailwind v4
+**Version:** 2026-03-20
+**Project Type:** Premium B2B marketing and conversion site
+**Framework:** Next.js 16 App Router, React 19, Tailwind CSS v4
 
 ## Overview
 
-TechBridge is a premium B2B marketing and conversion site focused intently on **Staff Augmentation**. Our positioning emphasizes "Silicon Valley Quality. Global Cost Advantage," leveraging elite Pakistani software and AI engineering talent. The site features a strong visual layer built from Tailwind v4, Framer Motion, GSAP, and React Three Fiber. The app is primarily client-rendered, with route layouts used for metadata, SEO, and shell composition.
+TechBridge presents itself as a premium software and AI engineering partner. The site is not a generic agency brochure. It sells confidence through:
 
-## Architecture & Directory Structure
+- premium custom software and SaaS delivery
+- AI systems and workflow automation
+- fast-turn website launches
+- staff augmentation with vetted senior engineers
 
-- `src/app/`: Next.js App Router (entrypoints, layouts, `globals.css`, metadata)
-- `src/components/`: Modular UI, layouts, shared components, mockups, and illustrations
-- `src/3d/`: Advanced WebGL context (particle systems, background blobs, interactive shaders, R3F scenes)
-- `src/data/`: Typed, static JSON/TS content (case studies, insights, timelines)
-- `src/lib/`: Shared utilities (`brand-colors.ts` bridges CSS vars to Three.js; `gsap.ts` hooks)
-- `public/`: Fonts, images, og-images, and proofs
+The product experience leans heavily on motion, layered backgrounds, particle systems, and strong typography. The codebase is therefore part marketing site, part motion system, and part structured content repository.
 
-## Agent System Integration
+## Current Positioning
 
-The repository is fully equipped to interact alongside AI agents (Claude, Gemini, Cursor). 
-- Agents must refer to `CLAUDE.md` for strict design constraints and current implementation context.
-- Generated code should inherit the active unified design system rather than inventing ad-hoc styling or missing framework migrations.
+The live site supports several offers at once:
 
-## Rendering And UX Constraints
+- **Staff augmentation**
+  Global cost advantage paired with senior talent and US-side oversight.
+- **Custom software and SaaS**
+  Architecture-first delivery for platforms, internal tools, and product infrastructure.
+- **AI automation**
+  Practical business automation rather than generic "AI" marketing.
+- **24-hour websites**
+  A fast-launch offer with a dedicated sales page and proof points.
 
-- Interactive UI is heavily client-side (`"use client"`).
-- Heavy 3D modules (Three.js, R3F) and complex animations (`ServicesProcessShowcase`) must remain dynamically imported via `next/dynamic` with `ssr: false` to reduce bundle weights.
-- The visual stack depends on layered backgrounds, a sticky global `PageParticlesWrapper` canvas in `src/app/layout.tsx`, and a fixed footer reveal.
-- Reduced-motion support is systematically enforced across the visual system.
+Copy should stay premium, direct, and operator-friendly. Avoid vague claims, startup buzzwords, and anything that sounds like a template agency.
 
-## Homepage Section Order (The Phase 2 Narrative Flow)
+## Architecture
 
-```text
-Hero -> Trust Bar -> Jelly Morph Services -> Comparison -> Case Studies -> Process -> Why Us -> Final CTA
+### App Shell
+
+`src/app/layout.tsx` establishes the shared shell:
+
+- local Satoshi font loading through `next/font/local`
+- dark root theme
+- global Lenis smooth scrolling through `SmoothScroll`
+- global JSON-LD injection through `JsonLd`
+- `ClientProviders`, which currently wraps `JellyMorphScrollProvider`
+- sticky full-screen particle backdrop via `PageParticlesWrapper`
+- persistent `Navbar`
+- fixed reveal-style `Footer`
+- global cursor follower
+
+This shell is a major design primitive. Many pages assume those layers already exist.
+
+### Directory Responsibilities
+
+- `src/app/`
+  routes, layouts, metadata, `globals.css`, sitemap, robots
+- `src/components/layout/`
+  actual navbar and footer used by the app shell
+- `src/components/home/`
+  homepage sections, illustrations, mockups, process blocks
+- `src/components/services/`
+  service page specific showcase logic
+- `src/components/shared/`
+  reusable UI, animation helpers, scroll helpers, JSON-LD
+- `src/3d/`
+  WebGL components, particle layers, scenes, shaders
+- `src/data/`
+  central data model for services, work, and insights
+- `src/lib/`
+  shared helpers for brand tokens, GSAP, and jelly morph state
+
+## Route Inventory
+
+### Primary Routes
+
+- `/`
+  Main homepage and the clearest snapshot of the current brand language.
+- `/services`
+  Full service inventory with seven detailed sections.
+- `/staff-augmentation`
+  Dedicated staffing and talent-placement offer page.
+- `/websites`
+  Dedicated 24-hour websites funnel page with long-form comparisons, stack messaging, and pricing-focused flow.
+- `/work`
+  Grouped case-study overview page.
+- `/insights`
+  Editorial listing page for engineering and architecture content.
+- `/about`
+  Company story and team positioning.
+- `/contact`
+  Contact and conversion page.
+- `/privacy`, `/terms`
+  Legal pages.
+
+### Dynamic Routes
+
+- `/work/[slug]`
+  Generated from `CASE_STUDIES` in `src/data/case-studies.ts`
+- `/insights/[slug]`
+  Generated from `INSIGHTS` in `src/data/insights.ts`
+
+Both dynamic routes use `generateStaticParams()` and `generateMetadata()`.
+
+## Homepage Structure
+
+The homepage currently renders in this order:
+
+1. `Hero`
+2. `TrustBar`
+3. `JellyMorphServicesSection`
+4. `ComparisonSection`
+5. `CaseStudiesSection`
+6. `ProcessSection`
+7. `WhyUsSection`
+8. `FinalCTA`
+
+That sequence matters. The site moves from promise to trust, then into an interactive service reveal, proof, process, differentiation, and final conversion.
+
+## Content Model
+
+### Services
+
+`src/data/site-navigation.ts` is the source of truth for:
+
+- `SERVICE_SECTIONS`
+  the seven service lines used for `/services`
+- `SERVICE_NAV_GROUPS`
+  the navbar mega-menu groupings
+- `FOOTER_COLUMNS`
+  footer navigation
+- footer email and social links
+
+The current seven service lines are:
+
+1. Custom Software and SaaS
+2. AI Powered Lead Generation
+3. 24-Hour Web Presence
+4. Mobile App Development
+5. UI/UX Design and Branding
+6. Internal Tools and Integrations
+7. Staff Augmentation
+
+### Work
+
+`src/data/case-studies.ts` defines:
+
+- typed case study records
+- homepage featured work
+- grouped work-page sections
+- dynamic route content for `/work/[slug]`
+
+`WORK_SECTION_META` currently groups work into:
+
+- flagship platforms
+- systems and internal tools
+- mobile products
+- rapid websites
+
+### Insights
+
+`src/data/insights.ts` defines:
+
+- typed insight records
+- card metadata
+- article body content stored inline as markdown strings
+
+Detail pages render that content through `react-markdown`.
+
+## Design System
+
+### Brand Tokens
+
+The canonical brand tokens live in `src/app/globals.css`.
+
+Current live values:
+
+- `--brand-accent: #1e3a8a`
+- `--brand-accent-rgb: 30, 58, 138`
+- `--brand-accent-light: #3b82f6`
+- `--brand-accent-light-rgb: 59, 130, 246`
+- `--brand-accent-dark: #172554`
+- `--brand-accent-dark-rgb: 23, 37, 84`
+- `--brand-accent-deep: #020617`
+
+Tailwind v4 exposes these through `@theme inline`, so components should consume the semantic token classes rather than hardcoded hex values.
+
+### 3D Token Bridge
+
+`src/lib/brand-colors.ts` reads the CSS custom properties at runtime and converts them into forms usable by Three.js and shaders.
+
+Important nuance:
+
+- the fallback constants in `brand-colors.ts` are cyan safety defaults
+- the real design language comes from the CSS tokens in `globals.css`
+
+### Typography
+
+- Satoshi is loaded locally from `public/font/satoshi/`
+- The app uses a premium editorial feel rather than a default SaaS UI stack
+- Mono text is frequently used for eyebrows, labels, and metadata
+
+### Layout
+
+- Main content typically lives inside `max-w-[100rem]`
+- Interior sections generally follow a left-aligned editorial grid
+- Select heroes and isolated promotional blocks may center content
+- The design assumes generous spacing and layered surfaces rather than flat white-card layouts
+
+## Motion And Visual System
+
+### Motion Stack
+
+- **Framer Motion**
+  Default layer for reveal, stagger, and section transitions.
+- **GSAP + ScrollTrigger**
+  Reserved for pinned and scroll-driven experiences, especially the jelly morph services sequence.
+- **Lenis**
+  Global smooth scrolling, initialized once in `SmoothScroll`.
+- **CSS Keyframes**
+  Repeating ambient motion, glow rotation, pulse effects, marquee movement, and other low-level visual loops.
+
+The house easing curve appears throughout the codebase:
+
+```ts
+[0.22, 1, 0.36, 1]
 ```
 
-## Accent Token System
+### Reduced Motion
 
-The global TechBridge accent is strictly centralized in `src/app/globals.css` using Tailwind v4 `@theme inline`:
+Reduced motion is already respected in multiple places:
 
-```css
---brand-accent /* Base hex/RGB variations */
+- `SmoothScroll` exits early if `prefers-reduced-motion` is enabled
+- multiple CSS utility animations disable themselves under reduced motion
+
+New motion work should keep that behavior.
+
+### Particle And Jelly Morph System
+
+The homepage and some global ambience rely on a shared scroll-progress model:
+
+- `JellyMorphScrollProvider` stores a mutable progress ref
+- `JellyMorphServicesSection` updates that ref
+- `PageParticlesWrapper` reads the ref and fades the glow/canvas accordingly
+- `JellyMorphParticles` consumes live brand colors through the brand-color bridge
+
+The particle layer is not decorative filler; it is coordinated with the services section.
+
+## Navigation And Conversion Patterns
+
+### Navbar
+
+`src/components/layout/Navbar.tsx` includes:
+
+- a transient top announcement banner, hidden on `/websites`
+- a scroll-aware top/hidden/pill state machine
+- a desktop services mega-menu
+- mobile services expansion
+- route-specific behavior for `/work`
+
+Practical implementation notes:
+
+- mobile and tablet widths force the pill state
+- the intended desktop breakpoint is `lg`, not `md`
+- the component also responds to a `force-hide-navbar` custom event
+
+### Footer
+
+`src/components/layout/Footer.tsx` is part of the experience, not a generic footer include:
+
+- fixed reveal behavior on `md+`
+- JS-managed `--footer-height` spacer
+- WV location copy plus live Eastern Time clock
+- structured footer columns from `src/data/site-navigation.ts`
+
+If the footer structure changes, the reveal spacer logic usually needs to change too.
+
+## Route-Specific Notes
+
+### `/services`
+
+- Powered by `SERVICE_SECTIONS`
+- Includes a dynamically imported `ServicesProcessShowcase`
+- Uses section-centered active state tracking for the sticky sidebar
+
+### `/websites`
+
+- Long-form, motion-heavy page focused on the 24-hour website offer
+- Uses dedicated "website glow" utility classes defined in `globals.css`
+- Has its own visual language but still sits inside the main site shell
+
+### `/work`
+
+- Uses grouped case-study sections keyed by `WORK_SECTION_META`
+- Pulls highlight items and groups directly from `CASE_STUDIES`
+
+### `/insights`
+
+- Uses `INSIGHTS` as the content source
+- Detail pages render markdown-like strings rather than MDX files
+
+## SEO And Structured Data
+
+The SEO layer is already wired into the app:
+
+- root metadata in `src/app/layout.tsx`
+- route metadata in route layouts
+- per-slug metadata in dynamic route files
+- structured data in `src/components/shared/JsonLd.tsx`
+- robots rules in `src/app/robots.ts`
+- sitemap generation in `src/app/sitemap.ts`
+
+Structured data currently includes:
+
+- `Organization`
+- `WebSite`
+- `LocalBusiness` for US and PK locations
+- `ItemList` for services
+
+## Known Gotchas
+
+- The default `README.md` is stale create-next-app boilerplate and should not be used as project guidance.
+- Do not hardcode accent colors into DOM or WebGL code.
+- Do not replace measured container widths with `window.innerWidth` in pinned horizontal sections.
+- Avoid adding `overflow-hidden` around inner animated grids that rely on off-axis motion.
+- Keep route-driven content in the `src/data/` files when possible.
+- The root shell uses a layered z-index system; casual changes to positioning often break particles, navbar overlays, or footer reveal.
+- `src/components/layout/Footer.tsx` is the active footer. There is an older `src/components/home/Footer.tsx` file in the tree that is not the shell footer.
+
+## Validation Workflow
+
+Minimum validation after changes:
+
+```bash
+npm run lint
 ```
 
-**Rules:**
-- **No hardcoding:** Do not use hex/RGB lime values directly in components or inline styles.
-- **CSS:** Use exposed Tailwind v4 tokens: `text-brand-accent`, `bg-brand-accent-dark`, `border-brand-accent/40`, `shadow-accent-glow`.
-- **3D / WebGL:** Use `getBrandColors()` to inject the live CSS values into Three.js materials and GLSL uniforms (e.g., `uBrandAccent`).
+Recommended when touching route boundaries, metadata, or rendering architecture:
 
-**Data-Driven Exception:**
-- Case studies store project-specific `accentColor` RGB strings in `src/data/`. This enables distinct thematic colors per project, separate from the global TechBridge styling.
+```bash
+npm run build
+```
 
-## Typography & Core Styling Standards
+## Editing Guidance For Future Work
 
-- **Font Family**: `Satoshi` via `next/font/local` in `src/app/layout.tsx`.
-- **Universal Grid Baseline**: Left-Aligned Editorial architecture. Root sections use `max-w-[100rem]`, driving text blocks bounds using `max-w-7xl` pinned with `flex-col items-start text-left`. Wait for explicit exceptions (like the Hero `items-center`).
-- **Hero h1:** `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`
-- **Text Gradients:** `bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent`
-- **Eyebrows:** `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600` (often decorated with a dot + line)
-- **Whitespace / Padding:** Section padding expects `py-24 lg:py-32` minimally; `py-16 lg:py-20` for tight layouts.
-
-## Services Section Implementation Notes
-
-- `src/components/home/JellyMorphServicesSection.tsx` is a pinned GSAP horizontal reveal section that still needs to visually align to the same centered `max-w-[100rem]` container as the sections below it.
-- The services split is currently 40/60 on desktop, but the scroll math must use the measured viewport width (`viewportRef.clientWidth`) rather than `window.innerWidth`.
-- Inactive service cards are designed so the title sits at the bottom, then rises during reveal via the `.card-spacer` collapse animation.
-- The section title remains fixed on the left while the horizontal card track is clipped on the right using a mask gradient.
-
-## Services Particle System Notes
-
-- The sticky particle layer is mounted globally by `src/components/PageParticlesWrapper.tsx`.
-- `src/3d/components/JellyMorphParticles.tsx` reads live brand colors through `getBrandColors()` and passes them into GLSL uniforms rather than hardcoding theme colors.
-- The current services morph uses bright, near-white particles with a subtle brand-blue tint and a radial theme-colored backdrop glow.
-- The particle/glow exit timing should remain tightly synced with the final services card exit; the current fast fade window is roughly `0.9 -> 0.94` of services scroll progress.
-
-## Animation Pipeline
-
-We distribute motion across three specialized tools based on performance/impact:
-1. **Framer Motion**: View transitions, staggered reveal arrays, page loads. Default easing is `[0.22, 1, 0.36, 1]`.
-2. **GSAP**: Scroll triggers, complex timelines (like Horizontal Case Studies), and specialized UI rotation. Must be wrapped in `useLayoutEffect` to clean up upon unmount safely.
-3. **CSS / PostCSS keyframes**: Infinite background loops (blobs, particles, marquee scrolls, rotating button glows using `@property --glow-angle`).
-
-## SEO Infrastructure
-
-- **Layout metadata:** Root handles base `<title>`, OpenGraph cards, Twitter, and the default `og:image` placeholder. Routes define distinct descriptions, canonicals, and openGraph updates.
-- **JSON-LD Schema:** Comprehensive structured data embedded for `Organization`, `WebSite`, `LocalBusiness` (US & PK branches).
-- **Robots / Sitemap:** Exposes static + dynamic pages (`/work`, `/insights`), disallowing restricted routes.
-
-## Known Gotchas & Validation Workflow
-
-- **Navigation Overflow**: Do not set `Navbar` break points to `md`; utilize `lg:hidden` (1024px) for menus to prevent dense horizontal link overlaps on tablets. On narrow screens, dynamically force `navState = "pill"`.
-- **Framer Motion Clipping**: Do not apply `overflow-hidden` wrappers to internal grids manipulating elements outside bounds (i.e. `x: -60` variants), or text will visually shear. Wrap `overflow-hidden` at the root `<section>` level exclusively.
-- **Overlay styling** (e.g. `.website-glow-shell > *`) may force localized stacking. Beware positioning traps!
-- The `/websites` route is an edge case and handles alternate layout structures.
-- The project uses local `Satoshi` fonts, so typography should not depend on `next/font/google` fetches at build time.
-- The services section is easy to misalign if width calculations fall back to raw viewport units. Keep it container-aligned with the sections below.
-- **Validation:** Always test interactions on Safari vs Chrome, verify cleanup hooks for GSAP scroll zones, and confirm dynamic imports correctly split chunks.
+- Start from the current shell and data model before proposing structural changes.
+- Preserve the premium design direction; do not flatten sections into generic SaaS components.
+- Favor shared tokens, shared animation helpers, and data-driven content over one-off implementations.
+- When updating copy, make it sound like a confident engineering partner, not a vague creative agency.

@@ -1,91 +1,107 @@
 "use client";
 
-import { useRef, useState, MouseEvent } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import { motion, useInView, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { MOTION_TRANSITIONS } from "@/lib/motion";
+
+const CALL_STEPS = [
+  "Define the right engagement lane",
+  "Pressure-test scope, timing, and risks",
+  "Leave with a concrete next move",
+];
 
 export default function FinalCTA() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const pillRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
-    // Magnetic effect state
-    const [isHovered, setIsHovered] = useState(false);
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+  return (
+    <section
+      ref={sectionRef}
+      aria-label="Call to action"
+      className="relative overflow-hidden py-28 lg:py-36"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 30%, rgba(var(--brand-accent-rgb), 0.08), transparent 24%), radial-gradient(circle at 82% 70%, rgba(var(--brand-accent-light-rgb), 0.08), transparent 26%)",
+        }}
+      />
 
-    const springConfig = { damping: 30, stiffness: 100, mass: 0.8 };
-    const x = useSpring(mouseX, springConfig);
-    const y = useSpring(mouseY, springConfig);
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!pillRef.current) return;
-        const rect = pillRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        mouseX.set(e.clientX - centerX);
-        mouseY.set(e.clientY - centerY);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-        mouseX.set(0);
-        mouseY.set(0);
-    };
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const backgroundGlow = useMotionTemplate`radial-gradient(400px circle at calc(50% + ${x}px) calc(50% + ${y}px), rgba(var(--brand-accent-rgb), 0.12), transparent 40%)`;
-
-    return (
-        <section
-            ref={sectionRef}
-            aria-label="Call to action"
-            className="relative z-10 py-32 lg:py-40 flex justify-center items-center px-4 overflow-visible"
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
+        <motion.article
+          initial={{ opacity: 0, y: 26 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={MOTION_TRANSITIONS.reveal}
+          className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-4 shadow-[0_28px_70px_rgba(0,0,0,0.32)] backdrop-blur-md sm:p-5"
         >
-            <motion.div
-                ref={pillRef}
-                onMouseMove={handleMouseMove}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative flex w-full max-w-4xl flex-col items-center justify-between gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-900/60 px-8 py-8 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-brand-accent/40 hover:shadow-[0_20px_50px_rgba(var(--brand-accent-rgb),0.15)] sm:flex-row sm:rounded-full lg:px-12"
-            >
-                {/* Left side text */}
-                <div className="z-10 flex w-full flex-col items-center gap-2 text-center sm:items-start sm:text-left">
-                    <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
-                        Next Step
-                    </span>
-                    <h2 className="text-2xl font-light tracking-tight text-white lg:text-3xl">
-                        Stop Evaluating. Start <span className="bg-gradient-to-r from-brand-accent to-brand-accent-light bg-clip-text text-transparent">Building.</span>
-                    </h2>
-                    <p className="max-w-md text-sm text-zinc-400">
-                        Book a 30-minute call with the engineer who&apos;ll actually build your system.
-                    </p>
-                </div>
+          <div className="relative overflow-hidden rounded-[1.7rem] border border-white/8 bg-[#04070d]/90 p-7 sm:p-8 lg:p-10">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 opacity-80"
+              style={{
+                background:
+                  "radial-gradient(circle at top right, rgba(var(--brand-accent-light-rgb), 0.16), transparent 28%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 30%)",
+              }}
+            />
 
-                {/* Right side button */}
-                <div className="z-10 flex-shrink-0">
-                    <Link
-                        href="/contact"
-                        className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold text-black transition-transform duration-300 hover:scale-105 active:scale-95"
+            <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+              <div className="max-w-3xl">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-accent-light">
+                  Closing command panel
+                </p>
+                <h2 className="mt-5 text-3xl font-light leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-[3.2rem]">
+                  Stop circling the project. <span className="text-brand-accent-light">Start the operating lane.</span>
+                </h2>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-zinc-400 sm:text-base">
+                  The first conversation is built to clarify the right engagement model, expose the
+                  real constraints, and show what execution would actually look like with TechBridge.
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <Link
+                    href="/contact"
+                    className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(var(--brand-accent-rgb),0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-light"
+                  >
+                    Start a Project
+                    <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
+                  </Link>
+
+                  <Link
+                    href="/staff-augmentation"
+                    className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/40 hover:bg-brand-accent/[0.12]"
+                  >
+                    Hire Engineers
+                    <ArrowUpRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="rounded-[1.5rem] border border-white/10 bg-black/25 p-5 sm:p-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                  What happens on the call
+                </p>
+                <div className="mt-5 space-y-3">
+                  {CALL_STEPS.map((step, index) => (
+                    <div
+                      key={step}
+                      className="flex items-start gap-4 rounded-[1rem] border border-white/8 bg-white/[0.035] px-4 py-4"
                     >
-                        Book a Call, Free
-                        <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
+                      <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-brand-accent/25 bg-brand-accent/[0.14] text-sm font-semibold text-white">
+                        0{index + 1}
+                      </div>
+                      <p className="pt-1 text-sm leading-6 text-zinc-300">{step}</p>
+                    </div>
+                  ))}
                 </div>
-
-                {/* Interactive background glow that follows the mouse */}
-                <motion.div
-                    className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:rounded-full"
-                    style={{ background: backgroundGlow }}
-                />
-            </motion.div>
-        </section>
-    );
+              </div>
+            </div>
+          </div>
+        </motion.article>
+      </div>
+    </section>
+  );
 }

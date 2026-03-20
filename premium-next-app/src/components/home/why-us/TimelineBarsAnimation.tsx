@@ -1,48 +1,45 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { MOTION_TRANSITIONS } from "@/lib/motion";
 
 export default function TimelineBarsAnimation({ isInView }: { isInView: boolean }) {
-    return (
-        <div aria-hidden="true" className="space-y-4 rounded-lg border border-zinc-800 bg-zinc-900 p-5">
-            {/* Agency bar */}
-            <div>
-                <div className="mb-1.5 flex items-center justify-between text-xs text-zinc-500">
-                    <span>Typical Agency</span>
-                    <span>12 weeks</span>
-                </div>
-                <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-800">
-                    <motion.div
-                        className="h-full rounded-full bg-zinc-600"
-                        initial={{ scaleX: 0 }}
-                        animate={isInView ? { scaleX: 0.85 } : {}}
-                        transition={{ duration: 1.2, ease: EASE, delay: 0.2 }}
-                        style={{ originX: 0 }}
-                    />
-                </div>
-            </div>
-
-            {/* TechBridge bar */}
-            <div>
-                <div className="mb-1.5 flex items-center justify-between text-xs">
-                    <span className="font-medium text-brand-accent-light">TechBridge</span>
-                    <span className="font-bold text-brand-accent-light">Weeks</span>
-                </div>
-                <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-800">
-                    <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-brand-accent to-brand-accent-light"
-                        initial={{ scaleX: 0 }}
-                        animate={isInView ? { scaleX: 0.28 } : {}}
-                        transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
-                        style={{
-                            originX: 0,
-                            boxShadow: "0 0 12px rgba(var(--brand-accent-rgb), 0.4)",
-                        }}
-                    />
-                </div>
-            </div>
+  return (
+    <div
+      aria-hidden="true"
+      className="space-y-5 overflow-hidden rounded-[1.25rem] border border-white/8 bg-black/30 p-5"
+    >
+      <div>
+        <div className="mb-2 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-zinc-500">
+          <span>Typical agency</span>
+          <span>12 weeks</span>
         </div>
-    );
+        <div className="h-3 overflow-hidden rounded-full bg-white/[0.05]">
+          <motion.div
+            className="h-full rounded-full bg-white/20"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 0.86 } : {}}
+            transition={{ ...MOTION_TRANSITIONS.reveal, duration: 0.84 }}
+            style={{ originX: 0 }}
+          />
+        </div>
+      </div>
+
+      <div>
+        <div className="mb-2 flex items-center justify-between text-[11px] uppercase tracking-[0.18em]">
+          <span className="text-brand-accent-light">TechBridge rhythm</span>
+          <span className="text-brand-accent-light">4 weeks</span>
+        </div>
+        <div className="h-3 overflow-hidden rounded-full bg-white/[0.05]">
+          <motion.div
+            className="h-full rounded-full bg-gradient-to-r from-brand-accent to-brand-accent-light shadow-[0_0_14px_rgba(var(--brand-accent-rgb),0.35)]"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 0.32 } : {}}
+            transition={{ ...MOTION_TRANSITIONS.reveal, duration: 0.7, delay: 0.12 }}
+            style={{ originX: 0 }}
+          />
+        </div>
+      </div>
+    </div>
+  );
 }

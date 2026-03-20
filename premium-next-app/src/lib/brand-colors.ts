@@ -15,13 +15,13 @@ export interface BrandColors {
   accentDarkVec3: BrandVec3;
 }
 
-const DEFAULT_ACCENT = "#00E5FF";
-const DEFAULT_ACCENT_LIGHT = "#67EFFF";
-const DEFAULT_ACCENT_DARK = "#0091A3";
-const DEFAULT_ACCENT_DEEP = "#041E23";
-const DEFAULT_ACCENT_RGB = "0, 229, 255";
-const DEFAULT_ACCENT_LIGHT_RGB = "103, 239, 255";
-const DEFAULT_ACCENT_DARK_RGB = "0, 145, 163";
+const DEFAULT_ACCENT = "#2563EB";
+const DEFAULT_ACCENT_LIGHT = "#93C5FD";
+const DEFAULT_ACCENT_DARK = "#0F172A";
+const DEFAULT_ACCENT_DEEP = "#020617";
+const DEFAULT_ACCENT_RGB = "37, 99, 235";
+const DEFAULT_ACCENT_LIGHT_RGB = "147, 197, 253";
+const DEFAULT_ACCENT_DARK_RGB = "15, 23, 42";
 
 function readProperty(style: CSSStyleDeclaration, name: string, fallback: string) {
   const value = style.getPropertyValue(name).trim();
@@ -58,9 +58,9 @@ function buildBrandColors(values: {
   accentLightRgb: string;
   accentDarkRgb: string;
 }): BrandColors {
-  const accentRgbTuple = parseRgb(values.accentRgb, [0, 229, 255]);
-  const accentLightRgbTuple = parseRgb(values.accentLightRgb, [103, 239, 255]);
-  const accentDarkRgbTuple = parseRgb(values.accentDarkRgb, [0, 145, 163]);
+  const accentRgbTuple = parseRgb(values.accentRgb, [37, 99, 235]);
+  const accentLightRgbTuple = parseRgb(values.accentLightRgb, [147, 197, 253]);
+  const accentDarkRgbTuple = parseRgb(values.accentDarkRgb, [15, 23, 42]);
 
   return {
     accent: values.accent,

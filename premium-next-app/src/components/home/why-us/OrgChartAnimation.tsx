@@ -1,105 +1,104 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MOTION_TRANSITIONS } from "@/lib/motion";
 
 interface Node {
-    label: string;
-    x: number;
+  label: string;
+  x: number;
 }
 
 const FULL_CHAIN: Node[] = [
-    { label: "YOU", x: 30 },
-    { label: "PM", x: 110 },
-    { label: "LEAD", x: 190 },
-    { label: "DEV", x: 270 },
+  { label: "YOU", x: 34 },
+  { label: "PM", x: 114 },
+  { label: "LEAD", x: 194 },
+  { label: "DEV", x: 274 },
 ];
 
-const SIMPLIFIED: Node[] = [
-    { label: "YOU", x: 70 },
-    { label: "DEV", x: 230 },
+const DIRECT_CHAIN: Node[] = [
+  { label: "YOU", x: 78 },
+  { label: "DEV", x: 230 },
 ];
 
 export default function OrgChartAnimation({ isInView }: { isInView: boolean }) {
-    const [simplified, setSimplified] = useState(false);
+  const [directMode, setDirectMode] = useState(false);
 
-    useEffect(() => {
-        if (!isInView) return;
-        const timer = setTimeout(() => setSimplified(true), 1600);
-        return () => clearTimeout(timer);
-    }, [isInView]);
+  useEffect(() => {
+    if (!isInView || directMode) {
+      return;
+    }
 
-    const nodes = simplified ? SIMPLIFIED : FULL_CHAIN;
+    const timer = window.setTimeout(() => setDirectMode(true), 900);
+    return () => window.clearTimeout(timer);
+  }, [directMode, isInView]);
 
-    return (
-        <div aria-hidden="true" className="rounded-lg border border-zinc-800 bg-zinc-900 p-4">
-            <svg viewBox="0 0 300 60" className="w-full" style={{ maxWidth: 320 }}>
-                {/* Connecting line */}
-                <motion.line
-                    x1={nodes[0].x}
-                    y1={30}
-                    x2={nodes[nodes.length - 1].x}
-                    y2={30}
-                    stroke="url(#orgGrad)"
-                    strokeWidth={2}
-                    initial={{ pathLength: 0 }}
-                    animate={isInView ? { pathLength: 1 } : {}}
-                    transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
-                />
+  const nodes = directMode ? DIRECT_CHAIN : FULL_CHAIN;
 
-                <defs>
-                    <linearGradient id="orgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="var(--brand-accent)" />
-                        <stop offset="100%" stopColor="var(--brand-accent-light)" />
-                    </linearGradient>
-                </defs>
+  return (
+    <div
+      aria-hidden="true"
+      className="overflow-hidden rounded-[1.25rem] border border-white/8 bg-black/30 p-4"
+    >
+      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+        Communication lane
+      </p>
 
-                {/* Nodes */}
-                <AnimatePresence mode="popLayout">
-                    {nodes.map((node) => (
-                        <motion.g
-                            key={node.label}
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1, x: node.x }}
-                            exit={{ opacity: 0, scale: 0 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 300,
-                                damping: 25,
-                            }}
-                        >
-                            <circle
-                                cx={0}
-                                cy={30}
-                                r={16}
-                                fill="rgba(var(--brand-accent-rgb), 0.1)"
-                                stroke="var(--brand-accent-light)"
-                                strokeWidth={1.5}
-                            />
-                            <text
-                                x={0}
-                                y={34}
-                                textAnchor="middle"
-                                className="fill-white text-[9px] font-bold"
-                            >
-                                {node.label}
-                            </text>
-                        </motion.g>
-                    ))}
-                </AnimatePresence>
-            </svg>
+      <svg viewBox="0 0 310 72" className="mt-4 w-full">
+        <motion.line
+          x1={nodes[0].x}
+          y1={36}
+          x2={nodes[nodes.length - 1].x}
+          y2={36}
+          stroke="url(#org-line)"
+          strokeWidth={2}
+          initial={{ pathLength: 0 }}
+          animate={isInView ? { pathLength: 1 } : {}}
+          transition={{ ...MOTION_TRANSITIONS.reveal, duration: 0.56 }}
+        />
 
-            {/* Supporting text */}
-            <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: simplified ? 1 : 0 }}
-                transition={{ duration: 0.4, ease: EASE }}
-                className="mt-3 text-center text-xs font-medium text-zinc-500"
+        <defs>
+          <linearGradient id="org-line" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="var(--brand-accent)" />
+            <stop offset="100%" stopColor="var(--brand-accent-light)" />
+          </linearGradient>
+        </defs>
+
+        <AnimatePresence mode="popLayout">
+          {nodes.map((node) => (
+            <motion.g
+              key={node.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1, x: node.x }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              transition={{ ...MOTION_TRANSITIONS.ui }}
             >
-                Slack the person writing your code.
-            </motion.p>
-        </div>
-    );
+              <circle
+                cx={0}
+                cy={36}
+                r={17}
+                fill="rgba(var(--brand-accent-rgb), 0.12)"
+                stroke="rgba(var(--brand-accent-light-rgb), 0.72)"
+                strokeWidth={1.5}
+              />
+              <text
+                x={0}
+                y={40}
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="700"
+              >
+                {node.label}
+              </text>
+            </motion.g>
+          ))}
+        </AnimatePresence>
+      </svg>
+
+      <p className="mt-4 text-sm leading-6 text-zinc-400">
+        The chain compresses down to the person actually writing the code.
+      </p>
+    </div>
+  );
 }

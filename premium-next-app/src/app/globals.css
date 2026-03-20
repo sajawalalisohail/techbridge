@@ -85,12 +85,12 @@
   /* ═══════════════════════════════════════════════
      Abyss Navy 3rd fav
      ═══════════════════════════════════════════════ */
-  --brand-accent: #1e3a8a;
-  --brand-accent-rgb: 30, 58, 138;
-  --brand-accent-light: #3b82f6;
-  --brand-accent-light-rgb: 59, 130, 246;
-  --brand-accent-dark: #172554;
-  --brand-accent-dark-rgb: 23, 37, 84;
+  --brand-accent: #2563eb;
+  --brand-accent-rgb: 37, 99, 235;
+  --brand-accent-light: #93c5fd;
+  --brand-accent-light-rgb: 147, 197, 253;
+  --brand-accent-dark: #0f172a;
+  --brand-accent-dark-rgb: 15, 23, 42;
   --brand-accent-deep: #020617;
 
   /* ═══════════════════════════════════════════════
@@ -132,11 +132,11 @@
 
 
 
-  --background: #0A0A0B;
+  --background: #06070A;
   --foreground: #F8FAFC;
-  --surface-0: #0A0A0B;
-  --surface-50: #131517;
-  --surface-100: #1E2024;
+  --surface-0: #06070A;
+  --surface-50: #0D1015;
+  --surface-100: #151922;
   --text-primary: #F8FAFC;
   --text-secondary: #94A3B8;
   --text-tertiary: #475569;

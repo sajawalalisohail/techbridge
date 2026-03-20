@@ -2,178 +2,201 @@
 
 import { useRef, type ComponentType } from "react";
 import { motion, useInView } from "framer-motion";
-import { slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import CodeTypingAnimation from "./why-us/CodeTypingAnimation";
 import OrgChartAnimation from "./why-us/OrgChartAnimation";
 import TimelineBarsAnimation from "./why-us/TimelineBarsAnimation";
 import GuaranteeBadgeAnimation from "./why-us/GuaranteeBadgeAnimation";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-/* ─── Data ─────────────────────────────────────────────── */
+import { MOTION_STAGGER, MOTION_TRANSITIONS } from "@/lib/motion";
 
 interface Reason {
-    tag: string;
-    headline: string;
-    description: string;
-    tagline: string;
-    Animation: ComponentType<{ isInView: boolean }>;
+  tag: string;
+  headline: string;
+  description: string;
+  tagline: string;
+  proof: string;
+  Animation: ComponentType<{ isInView: boolean }>;
 }
 
 const REASONS: Reason[] = [
-    {
-        tag: "how we build",
-        headline: "AI From Line One",
-        description:
-            "We don't bolt AI on at the end. Every system we build ships with machine-readable APIs and automation hooks from day one.",
-        tagline: "Not bolted on later.",
-        Animation: CodeTypingAnimation,
-    },
-    {
-        tag: "who you work with",
-        headline: "No Middlemen. No Juniors.",
-        description:
-            "You talk to the person writing your code. Not a project manager who translates your requirements wrong.",
-        tagline: "Direct access. Always.",
-        Animation: OrgChartAnimation,
-    },
-    {
-        tag: "speed",
-        headline: "We Ship Fast Because We're Good",
-        description:
-            "MVPs in weeks, websites in 24 hours. Not because we skip testing or write sloppy code. We've done this so many times the process is tight.",
-        tagline: "Weeks, not quarters.",
-        Animation: TimelineBarsAnimation,
-    },
-    {
-        tag: "accountability",
-        headline: "Replacement Guarantee",
-        description:
-            "If an engineer on your team isn't performing or isn't the right fit, we replace them — fast, free, no drama.",
-        tagline: "Your risk, eliminated.",
-        Animation: GuaranteeBadgeAnimation,
-    },
+  {
+    tag: "How we build",
+    headline: "AI from line one",
+    description:
+      "We design systems so automation hooks, machine-readable interfaces, and future AI workflows are part of the architecture from the start.",
+    tagline: "No retrofit tax later.",
+    proof: "Machine-ready APIs and operations hooks built into the first version.",
+    Animation: CodeTypingAnimation,
+  },
+  {
+    tag: "Who you work with",
+    headline: "Direct access to builders",
+    description:
+      "Clients talk to the people making the product real. Less translation, fewer layers, and faster decision loops when something changes.",
+    tagline: "No middle-management fog.",
+    proof: "Slack, repos, standups, and direct conversation with the people shipping.",
+    Animation: OrgChartAnimation,
+  },
+  {
+    tag: "Speed with discipline",
+    headline: "Fast because the lane is sharp",
+    description:
+      "Speed comes from operating rhythm and senior judgment, not from skipping structure. The process is tuned so quality and pace reinforce each other.",
+    tagline: "Weeks, not quarters.",
+    proof: "Tight loops, visible progress, and fewer restart moments mid-project.",
+    Animation: TimelineBarsAnimation,
+  },
+  {
+    tag: "Accountability",
+    headline: "Replacement risk covered",
+    description:
+      "When an engineer is not the right fit, the model absorbs that risk instead of pushing it back onto your team or timeline.",
+    tagline: "Senior capacity without hiring roulette.",
+    proof: "Replacement coverage stays inside the operating model, not outside it.",
+    Animation: GuaranteeBadgeAnimation,
+  },
 ];
 
-/* ─── Reason Card ──────────────────────────────────────── */
+function ReasonCard({
+  reason,
+  index,
+}: {
+  reason: Reason;
+  index: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-60px" });
+  const { Animation } = reason;
 
-function ReasonCard({ reason, index }: { reason: Reason; index: number }) {
-    const ref = useRef<HTMLDivElement>(null);
-    // Center-of-viewport detection for opacity transitions
-    const isCenterView = useInView(ref, { margin: "-40% 0px -40% 0px" });
-    // One-time trigger for animations
-    const hasEntered = useInView(ref, { once: true, margin: "-15%" });
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{
+        ...MOTION_TRANSITIONS.reveal,
+        delay: index * MOTION_STAGGER.tight,
+      }}
+      className="group relative overflow-hidden rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-4 backdrop-blur-md transition-colors duration-200 hover:border-brand-accent/35"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-80"
+        style={{
+          background:
+            "radial-gradient(circle at top right, rgba(var(--brand-accent-light-rgb), 0.12), transparent 26%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 28%)",
+        }}
+      />
 
-    const { Animation } = reason;
-
-    return (
-        <motion.div
-            ref={ref}
-            animate={{ opacity: isCenterView ? 1 : 0.15 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="flex min-h-[80vh] flex-col justify-center py-16 lg:min-h-[80vh]"
-        >
-            {/* Tag */}
-            <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                {reason.tag}
+      <div className="relative rounded-[1.55rem] border border-white/8 bg-[#04070d]/88 p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-accent-light">
+              {reason.tag}
             </p>
-
-            {/* Headline */}
-            <h3 className="mb-4 text-2xl font-bold leading-snug tracking-tight text-white lg:text-3xl">
-                {reason.headline}
+            <h3 className="mt-4 text-[1.55rem] font-semibold leading-tight tracking-[-0.035em] text-white sm:text-[1.75rem]">
+              {reason.headline}
             </h3>
+          </div>
+          <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-400">
+            0{index + 1}
+          </div>
+        </div>
 
-            {/* Description */}
-            <p className="mb-8 max-w-md text-sm leading-relaxed text-zinc-400 lg:text-base">
-                {reason.description}
-            </p>
+        <p className="mt-5 text-sm leading-7 text-zinc-400 sm:text-base">{reason.description}</p>
 
-            {/* Unique micro-animation */}
-            <div className="mb-6 max-w-sm">
-                <Animation isInView={hasEntered} />
-            </div>
+        <div className="mt-6">
+          <Animation isInView={isInView} />
+        </div>
 
-            {/* Tagline */}
-            <div className="flex items-center gap-3">
-                <span className="h-px w-5 flex-shrink-0 bg-brand-accent/60" />
-                <p className="text-sm font-semibold text-zinc-300">{reason.tagline}</p>
-            </div>
-        </motion.div>
-    );
+        <div className="mt-6 border-t border-white/8 pt-5">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+            Why it matters
+          </p>
+          <p className="mt-3 text-sm leading-6 text-zinc-300">{reason.proof}</p>
+          <p className="mt-4 text-xs uppercase tracking-[0.2em] text-brand-accent-light">
+            {reason.tagline}
+          </p>
+        </div>
+      </div>
+    </motion.article>
+  );
 }
 
-/* ─── Main Component ───────────────────────────────────── */
-
 export default function WhyUsSection() {
-    const headerRef = useRef<HTMLDivElement>(null);
-    const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
-    return (
-        <section aria-label="Why choose us" className="relative py-24 lg:py-32">
-            {/* Top hairline */}
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-            />
+  return (
+    <section
+      ref={sectionRef}
+      aria-label="Why choose us"
+      className="relative overflow-hidden py-24 lg:py-32"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 82% 18%, rgba(var(--brand-accent-light-rgb), 0.08), transparent 24%), radial-gradient(circle at 18% 82%, rgba(var(--brand-accent-rgb), 0.08), transparent 28%)",
+        }}
+      />
 
-            <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-[45%_1fr] lg:gap-24">
-                    {/* ─── Left column (sticky on desktop) ─── */}
-                    <div ref={headerRef} className="lg:sticky lg:top-[50vh] lg:-translate-y-1/2 lg:self-start">
-                        <motion.span
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, ease: EASE }}
-                            className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
-                        >
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-                            <span className="h-px w-4 bg-brand-accent/40" />
-                            why us, honestly
-                        </motion.span>
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid gap-12 xl:grid-cols-[320px_minmax(0,1fr)] xl:gap-14">
+          <div className="xl:sticky xl:top-28 xl:self-start">
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={MOTION_TRANSITIONS.reveal}
+              className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-accent-light"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light" />
+              Why us, honestly
+            </motion.span>
 
-                        <motion.h2
-                            variants={slideFromLeftContainer}
-                            initial="hidden"
-                            animate={isHeaderInView ? "show" : "hidden"}
-                            className="mb-2 text-3xl font-light leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl"
-                            style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
-                        >
-                            {splitWords("Four reasons we're different.").map((word, i) => (
-                                <motion.span key={`w-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
-                                    {word}
-                                </motion.span>
-                            ))}
-                        </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 22 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...MOTION_TRANSITIONS.reveal, delay: 0.08 }}
+              className="mt-6 text-3xl font-light leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-[3rem]"
+            >
+              Four operating advantages that show up in the work, not just the pitch.
+            </motion.h2>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 12 }}
-                            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-                            className="mb-8 text-lg text-zinc-500"
-                        >
-                            Judge for yourself.
-                        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 22 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...MOTION_TRANSITIONS.reveal, delay: 0.14 }}
+              className="mt-5 max-w-md text-sm leading-7 text-zinc-400 sm:text-base"
+            >
+              The difference is not a vague agency claim. It is how the team is structured, how the
+              systems are designed, and how risk is handled when the work gets real.
+            </motion.p>
 
-                        {/* Stat badge */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="inline-flex items-center rounded-full border border-brand-accent/30 bg-brand-accent/5 px-4 py-2"
-                        >
-                            <span className="font-mono text-sm font-bold text-brand-accent-light">98%</span>
-                            <span className="ml-1.5 text-xs text-zinc-500">Client Retention</span>
-                        </motion.div>
-                    </div>
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...MOTION_TRANSITIONS.reveal, delay: 0.2 }}
+              className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-5"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                Credibility check
+              </p>
+              <p className="mt-3 text-sm leading-6 text-zinc-300">
+                The model is built for mixed B2B buyers who want senior execution, clear ownership,
+                and less waste between strategy and delivery.
+              </p>
+            </motion.div>
+          </div>
 
-                    {/* ─── Right column (scrolling reasons) ─── */}
-                    <div>
-                        {REASONS.map((reason, i) => (
-                            <ReasonCard key={reason.headline} reason={reason} index={i} />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+          <div className="grid gap-4 xl:grid-cols-2">
+            {REASONS.map((reason, index) => (
+              <ReasonCard key={reason.headline} reason={reason} index={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,208 +1,263 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { motion, useInView, useMotionValueEvent, useScroll } from 'framer-motion';
+import { ArrowRight, type LucideIcon } from 'lucide-react';
+import { SERVICE_SECTIONS, type ServiceSectionData } from '@/data/site-navigation';
 import { useJellyMorphScrollProgress } from '@/lib/jelly-morph-context';
-import { SERVICES_DATA } from './ServicesData';
+import { MOTION_STAGGER, MOTION_TRANSITIONS } from '@/lib/motion';
 
-const INACTIVE_CARD_BG = '#020617';
-const INACTIVE_CARD_BORDER = 'rgba(59, 130, 246, 0.08)';
-const ACTIVE_CARD_BG = '#172554';
-const ACTIVE_CARD_BORDER = 'rgba(59, 130, 246, 0.18)';
+const SERVICE_LAYOUT: Record<string, string> = {
+  'custom-software': 'xl:col-span-7',
+  'ai-lead-generation': 'xl:col-span-5',
+  'rapid-deploy': 'xl:col-span-5',
+  'mobile-apps': 'xl:col-span-7',
+  'design-branding': 'xl:col-span-6',
+  'internal-tools': 'xl:col-span-6',
+  'staff-augmentation': 'xl:col-span-12',
+};
+
+const SERVICE_BEST_FIT: Record<string, string> = {
+  'custom-software': 'Product teams building a flagship platform or serious internal system.',
+  'ai-lead-generation': 'Operators who need pipeline creation to stop depending on manual outreach.',
+  'rapid-deploy': 'Founders who need a premium web presence live this week, not next quarter.',
+  'mobile-apps': 'Teams launching mobile products that need repeat use and production discipline.',
+  'design-branding': 'Companies that want design to survive contact with engineering and launch.',
+  'internal-tools': 'Operations-heavy teams replacing spreadsheet glue and disconnected SaaS habits.',
+  'staff-augmentation': 'CTOs and founders who need senior capacity embedded without recruiting drag.',
+};
+
+function getServiceHref(serviceId: string) {
+  if (serviceId === 'rapid-deploy') {
+    return '/websites';
+  }
+
+  if (serviceId === 'staff-augmentation') {
+    return '/staff-augmentation';
+  }
+
+  return `/services#${serviceId}`;
+}
+
+function getServiceCta(serviceId: string) {
+  if (serviceId === 'rapid-deploy') {
+    return 'See 24-Hour Sites';
+  }
+
+  if (serviceId === 'staff-augmentation') {
+    return 'See Talent Model';
+  }
+
+  return 'Explore Service';
+}
+
+function getEngagementLabel(service: ServiceSectionData) {
+  if (service.id === 'rapid-deploy') {
+    return 'Rapid launch';
+  }
+
+  if (service.id === 'staff-augmentation') {
+    return 'Embedded talent';
+  }
+
+  if (service.id === 'internal-tools') {
+    return 'Operational system';
+  }
+
+  if (service.id === 'design-branding') {
+    return 'Design-to-code';
+  }
+
+  return 'Custom build';
+}
+
+function ServiceCard({
+  index,
+  service,
+}: {
+  index: number;
+  service: ServiceSectionData;
+}) {
+  const Icon = service.icon as LucideIcon;
+  const href = getServiceHref(service.id);
+  const cta = getServiceCta(service.id);
+  const bestFit = SERVICE_BEST_FIT[service.id];
+  const isPrimaryLane = service.id === 'custom-software' || service.id === 'staff-augmentation';
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileHover={{ y: -8 }}
+      viewport={{ once: true, margin: '-80px' }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{
+        ...MOTION_TRANSITIONS.reveal,
+        delay: index * MOTION_STAGGER.tight,
+      }}
+      className={SERVICE_LAYOUT[service.id]}
+    >
+      <Link
+        href={href}
+        className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-6 backdrop-blur-md transition-colors duration-200 hover:border-brand-accent/35 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] sm:p-7"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-80 transition-opacity duration-200 group-hover:opacity-100"
+          style={{
+            background: isPrimaryLane
+              ? 'radial-gradient(circle at top right, rgba(var(--brand-accent-light-rgb), 0.18), transparent 28%), radial-gradient(circle at bottom left, rgba(var(--brand-accent-rgb), 0.12), transparent 34%)'
+              : 'radial-gradient(circle at top right, rgba(var(--brand-accent-rgb), 0.12), transparent 26%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 26%)',
+          }}
+        />
+
+        <div className="relative flex items-start justify-between gap-5">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-zinc-500">
+              {service.number} / {getEngagementLabel(service)}
+            </p>
+            <h3 className="mt-4 max-w-[18ch] text-[1.6rem] font-semibold leading-tight tracking-[-0.035em] text-white sm:text-[1.9rem]">
+              {service.category}
+            </h3>
+          </div>
+
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-black/25 text-brand-accent-light">
+            <Icon size={19} />
+          </div>
+        </div>
+
+        <p className="relative mt-6 max-w-2xl text-base leading-7 text-zinc-100">
+          {service.subHeadline}
+        </p>
+
+        <div className="relative mt-8 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-start">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-500">
+              Capabilities
+            </p>
+            <ul className="mt-4 space-y-3">
+              {service.capabilities.slice(0, 3).map((capability) => (
+                <li key={capability} className="flex items-start gap-3 text-sm leading-6 text-zinc-300">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-accent-light shadow-[0_0_10px_rgba(var(--brand-accent-light-rgb),0.72)]" />
+                  <span>{capability}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-[1.25rem] border border-white/8 bg-black/20 px-4 py-4 lg:max-w-[13rem]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+              Best fit
+            </p>
+            <p className="mt-3 text-sm leading-6 text-zinc-300">{bestFit}</p>
+          </div>
+        </div>
+
+        <div className="relative mt-auto flex items-end justify-between gap-5 border-t border-white/8 pt-8">
+          <p className="max-w-[18rem] text-xs uppercase tracking-[0.2em] text-zinc-500">
+            {service.stack.slice(0, 3).join(' / ')}
+          </p>
+
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-white">
+            {cta}
+            <ArrowRight
+              size={15}
+              className="transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </span>
+        </div>
+      </Link>
+    </motion.article>
+  );
+}
 
 export default function JellyMorphServicesSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
-    const viewportRef = useRef<HTMLDivElement>(null);
-    const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-    const scrollProgressRef = useJellyMorphScrollProgress();
-    const [viewportWidth, setViewportWidth] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const scrollProgressRef = useJellyMorphScrollProgress();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const isHeaderInView = useInView(headerRef, { once: true, margin: '-80px' });
 
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
+  useMotionValueEvent(scrollYProgress, 'change', (value) => {
+    scrollProgressRef.current = value;
+  });
 
-        const measure = () => {
-            setViewportWidth(viewportRef.current?.clientWidth ?? 0);
-        };
+  useEffect(() => {
+    return () => {
+      scrollProgressRef.current = 0;
+    };
+  }, [scrollProgressRef]);
 
-        measure();
-        window.addEventListener('resize', measure);
+  return (
+    <section ref={sectionRef} id="services" className="relative overflow-hidden py-24 lg:py-32">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(circle at 18% 22%, rgba(var(--brand-accent-rgb), 0.08), transparent 28%), radial-gradient(circle at 82% 68%, rgba(var(--brand-accent-light-rgb), 0.07), transparent 24%)',
+        }}
+      />
 
-        return () => {
-            window.removeEventListener('resize', measure);
-        };
-    }, []);
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid gap-12 xl:grid-cols-[320px_minmax(0,1fr)] xl:gap-14">
+          <div ref={headerRef} className="xl:sticky xl:top-28 xl:self-start">
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+              transition={MOTION_TRANSITIONS.reveal}
+              className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-accent-light"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light" />
+              Service architecture
+            </motion.span>
 
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        gsap.registerPlugin(ScrollTrigger);
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...MOTION_TRANSITIONS.reveal, delay: 0.08 }}
+              className="mt-6 text-3xl font-light leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-[3rem]"
+            >
+              Canonical services, redesigned as editorial decision panels.
+            </motion.h2>
 
-        const container = containerRef.current;
-        const track = trackRef.current;
-        const viewport = viewportRef.current;
-        if (!container || !track || !viewport) return;
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...MOTION_TRANSITIONS.reveal, delay: 0.14 }}
+              className="mt-5 max-w-md text-sm leading-7 text-zinc-400 sm:text-base"
+            >
+              The homepage no longer sells vague disciplines. Each card now maps directly to the
+              real service taxonomy, clarifies the outcome, and gives visitors a clear route into
+              the right engagement model.
+            </motion.p>
 
-        const containerW = viewport.clientWidth;
-        if (!containerW) return;
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...MOTION_TRANSITIONS.reveal, delay: 0.2 }}
+              className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-5"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                Section logic
+              </p>
+              <p className="mt-3 text-sm leading-6 text-zinc-300">
+                Build lanes, rapid launch lanes, and talent lanes are shown together so mixed B2B
+                buyers can orient quickly without guessing where TechBridge fits.
+              </p>
+            </motion.div>
+          </div>
 
-        const revealOffset = containerW * 0.15;
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                start: 'top top',
-                end: () => `+=${track.scrollWidth * 1.5}`,
-                pin: true,
-                scrub: 1,
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    scrollProgressRef.current = self.progress;
-                },
-                onLeave: () => { scrollProgressRef.current = 1; },
-                onLeaveBack: () => { scrollProgressRef.current = 0; },
-            }
-        });
-
-        let currentX = 0;
-        const maxScroll = -(track.scrollWidth - containerW);
-
-        cardsRef.current.forEach((card, index) => {
-            if (!card) return;
-            const details = card.querySelector('.card-details') as HTMLElement;
-            const spacer = card.querySelector('.card-spacer') as HTMLElement;
-            const numberEl = card.querySelector('.service-number') as HTMLElement;
-
-            let targetX = -(card.offsetLeft - revealOffset);
-            if (targetX < maxScroll) targetX = maxScroll;
-            if (targetX > 0) targetX = 0;
-
-            const dist = Math.abs(targetX - currentX);
-
-            if (dist > 0) {
-                tl.to(track, { x: targetX, ease: 'none', duration: dist / 400 });
-                currentX = targetX;
-            }
-
-            const openDur = 0.5;
-            const label = `open-${index}`;
-            tl.addLabel(label);
-            tl.to(details, { height: 'auto', opacity: 1, ease: 'power2.out', duration: openDur }, label);
-            tl.to(spacer, { height: '0%', ease: 'power2.out', duration: openDur }, label);
-            tl.to(numberEl, { opacity: 0, ease: 'power2.out', duration: openDur }, label);
-            tl.to(card, { backgroundColor: ACTIVE_CARD_BG, borderColor: ACTIVE_CARD_BORDER, ease: 'power2.out', duration: openDur }, label);
-
-            tl.to({}, { duration: 0.4 });
-        });
-
-        if (currentX > maxScroll) {
-            const dist = Math.abs(maxScroll - currentX);
-            tl.to(track, { x: maxScroll, ease: 'none', duration: dist / 400 });
-        }
-
-        const handleResize = () => ScrollTrigger.refresh();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            tl.scrollTrigger?.kill();
-            tl.kill();
-        };
-    }, [scrollProgressRef, viewportWidth]);
-
-    return (
-        <section ref={containerRef} id="services" className="relative h-screen w-full overflow-hidden" style={{ background: 'transparent' }}>
-            <div className="mx-auto h-full w-full max-w-[100rem] px-6 lg:px-10">
-                <div className="relative h-full w-full">
-                    <div className="absolute left-0 top-0 z-10 flex h-full w-full flex-col justify-start pt-24 transition-opacity duration-500 md:w-[40%] md:pt-28">
-                        <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light" />
-                            <span className="h-px w-4 bg-brand-accent-light/40" />
-                            WHAT WE DO
-                        </span>
-
-                        <h2 className="mb-6 text-3xl font-light leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-                            Our <span className="inline-block bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent font-medium">Services.</span>
-                        </h2>
-
-                        <p className="max-w-md text-sm font-light leading-relaxed text-zinc-400 md:text-base">
-                            We build high-performance products combining pixel-perfect design with scalable engineering.
-                        </p>
-                    </div>
-
-                    <div
-                        ref={viewportRef}
-                        className="absolute right-0 top-0 z-20 h-full w-full overflow-hidden md:w-[60%]"
-                        style={{
-                            maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
-                            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
-                        }}
-                    >
-                        <div ref={trackRef} className="flex h-full w-max flex-nowrap items-center pt-48 md:pt-24">
-                            <div className="flex-shrink-0" style={{ width: Math.max(viewportWidth, 1) }} />
-
-                            {SERVICES_DATA.map((service, index) => (
-                                <div key={service.id} className="flex flex-shrink-0 items-center justify-center px-4 md:mr-[3vw] md:px-0">
-                                    <div
-                                        ref={(el) => { cardsRef.current[index] = el; }}
-                                        className="service-card relative flex h-[480px] w-[85vw] flex-shrink-0 flex-col overflow-hidden rounded-2xl border p-8 backdrop-blur-2xl md:w-[420px]"
-                                        style={{ backgroundColor: INACTIVE_CARD_BG, borderColor: INACTIVE_CARD_BORDER }}
-                                    >
-                                        <div className="pointer-events-none absolute left-8 right-8 top-8 z-10 flex items-start justify-between">
-                                            <span className="service-number font-sans text-4xl font-medium tracking-normal text-white md:text-5xl">
-                                                {service.number}
-                                            </span>
-                                            <div className="text-white">
-                                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="h-7 w-7">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                                                </svg>
-                                            </div>
-                                        </div>
-
-                                        <div className="content-wrapper z-10 flex h-full w-full flex-col">
-                                            <div className="card-spacer" style={{ height: '100%', flexShrink: 1 }} />
-                                            <h2 className="mb-2 text-3xl font-semibold tracking-tight text-white md:text-[32px]">{service.title}</h2>
-
-                                            <div className="card-details flex h-0 flex-1 flex-col overflow-hidden opacity-0">
-                                                <div className="mt-4 flex flex-1 items-center">
-                                                    <p className="text-[15px] font-light leading-relaxed text-white">
-                                                        {service.description}
-                                                    </p>
-                                                </div>
-
-                                                <div className="mt-auto grid grid-cols-[1.5fr_1fr] gap-4 pt-8">
-                                                    <div>
-                                                        <h3 className="mb-2 text-[14px] font-normal tracking-wide text-white/60">Services</h3>
-                                                        <ul className="space-y-1">
-                                                            {service.services.map((item, itemIndex) => (
-                                                                <li key={itemIndex} className="text-[13px] leading-snug text-white">
-                                                                    {item}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <h3 className="mb-2 text-[14px] font-normal tracking-wide text-white/60">Tools</h3>
-                                                        <div className="mt-2 flex flex-wrap gap-4">
-                                                            {service.tools.map((tool, toolIndex) => (
-                                                                <div key={toolIndex} className="flex h-6 w-6 items-center justify-center text-white" title={tool.name}>
-                                                                    <div className="flex scale-[1.2] items-center justify-center drop-shadow-md">{tool.svg}</div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-
-                            <div className="flex-shrink-0" style={{ width: Math.max(viewportWidth, 1) }} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-12">
+            {SERVICE_SECTIONS.map((service, index) => (
+              <ServiceCard key={service.id} index={index} service={service} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

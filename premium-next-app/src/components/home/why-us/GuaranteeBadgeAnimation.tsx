@@ -1,60 +1,45 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { MOTION_TRANSITIONS } from "@/lib/motion";
 
 export default function GuaranteeBadgeAnimation({ isInView }: { isInView: boolean }) {
-    return (
-        <div
-            aria-hidden="true"
-            className="flex flex-col items-center rounded-lg border border-zinc-800 bg-zinc-900 p-6"
-        >
-            {/* Shield with checkmark */}
-            <svg
-                viewBox="0 0 80 90"
-                className="h-20 w-20"
-                fill="none"
-            >
-                {/* Shield outline — draw in */}
-                <motion.path
-                    d="M40 5 L70 20 V50 C70 65 55 80 40 85 C25 80 10 65 10 50 V20 Z"
-                    stroke="var(--brand-accent-light)"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="rgba(var(--brand-accent-rgb), 0.06)"
-                    initial={{ pathLength: 0 }}
-                    animate={isInView ? { pathLength: 1 } : {}}
-                    transition={{ duration: 0.8, ease: EASE }}
-                />
+  return (
+    <div
+      aria-hidden="true"
+      className="flex flex-col items-center overflow-hidden rounded-[1.25rem] border border-white/8 bg-black/30 p-5"
+    >
+      <svg viewBox="0 0 88 92" className="h-24 w-24" fill="none">
+        <motion.path
+          d="M44 6 L74 20 V50 C74 66 58 81 44 86 C30 81 14 66 14 50 V20 Z"
+          stroke="var(--brand-accent-light)"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="rgba(var(--brand-accent-rgb), 0.08)"
+          initial={{ pathLength: 0 }}
+          animate={isInView ? { pathLength: 1 } : {}}
+          transition={{ ...MOTION_TRANSITIONS.reveal, duration: 0.72 }}
+        />
 
-                {/* Checkmark — draw in after shield */}
-                <motion.path
-                    d="M26 45 L36 55 L54 35"
-                    stroke="var(--brand-accent-light)"
-                    strokeWidth={3}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
-                    transition={{
-                        pathLength: { duration: 0.4, ease: EASE, delay: 0.8 },
-                        opacity: { duration: 0.1, delay: 0.8 },
-                    }}
-                />
-            </svg>
+        <motion.path
+          d="M30 47 L40 57 L58 37"
+          stroke="var(--brand-accent-light)"
+          strokeWidth={3}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+          transition={{ ...MOTION_TRANSITIONS.ui, delay: 0.24 }}
+        />
+      </svg>
 
-            {/* Text */}
-            <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 1.2, ease: EASE }}
-                className="mt-4 text-center text-xs font-bold uppercase tracking-widest text-brand-accent-light"
-            >
-                100% Replacement Guarantee
-            </motion.p>
-        </div>
-    );
+      <p className="mt-4 text-center text-xs font-semibold uppercase tracking-[0.24em] text-brand-accent-light">
+        Replacement coverage
+      </p>
+      <p className="mt-3 max-w-[15rem] text-center text-sm leading-6 text-zinc-400">
+        If the fit is off, the model absorbs the replacement burden instead of your timeline.
+      </p>
+    </div>
+  );
 }

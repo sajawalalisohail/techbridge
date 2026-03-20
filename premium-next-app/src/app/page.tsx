@@ -13,8 +13,8 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <JellyMorphServicesSection />
-      <ComparisonSection />
       <CaseStudiesSection />
+      <ComparisonSection />
       <ProcessSection />
       <WhyUsSection />
       <FinalCTA />

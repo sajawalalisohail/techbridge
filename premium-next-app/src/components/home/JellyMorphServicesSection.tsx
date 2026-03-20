@@ -56,6 +56,9 @@ export default function JellyMorphServicesSection() {
             if (!details) return;
 
             // In the "Antigravity" effect, the card details open scrubbed to scroll
+            const spacer = card.querySelector('.card-spacer') as HTMLElement;
+            const numberEl = card.querySelector('.service-number') as HTMLElement;
+
             const openTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
@@ -70,10 +73,20 @@ export default function JellyMorphServicesSection() {
                 { height: 0, opacity: 0 },
                 { height: 'auto', opacity: 1, ease: 'none' }, 0);
 
+            // Collapse the spacer to slide the title up
+            openTl.fromTo(spacer,
+                { height: '100%' },
+                { height: '0%', ease: 'none' }, 0);
+
+            // Fade out the number
+            openTl.fromTo(numberEl,
+                { opacity: 1 },
+                { opacity: 0, ease: 'none' }, 0);
+
             // Simultaneously transition the background
             openTl.fromTo(card,
                 { backgroundColor: 'rgba(5, 5, 16, 0.8)', borderColor: 'rgba(255,255,255,0.05)' },
-                { backgroundColor: '#1e3a8a', borderColor: 'rgba(255,255,255,0.2)', ease: 'none' }, 0);
+                { backgroundColor: '#3b3f7f', borderColor: 'rgba(255,255,255,0.15)', ease: 'none' }, 0);
 
             // Collapse animation when it moves past center toward the left
             const closeTl = gsap.timeline({
@@ -85,11 +98,11 @@ export default function JellyMorphServicesSection() {
                     scrub: true,
                 }
             });
-            closeTl.to(details,
-                { height: 0, opacity: 0, ease: 'none' }, 0);
 
-            closeTl.to(card,
-                { backgroundColor: 'rgba(5, 5, 16, 0.8)', borderColor: 'rgba(255,255,255,0.05)', ease: 'none' }, 0);
+            closeTl.to(details, { height: 0, opacity: 0, ease: 'none' }, 0);
+            closeTl.to(spacer, { height: '100%', ease: 'none' }, 0);
+            closeTl.to(numberEl, { opacity: 1, ease: 'none' }, 0);
+            closeTl.to(card, { backgroundColor: 'rgba(5, 5, 16, 0.8)', borderColor: 'rgba(255,255,255,0.05)', ease: 'none' }, 0);
 
             if (openTl.scrollTrigger) cardTriggers.push(openTl.scrollTrigger);
             if (closeTl.scrollTrigger) cardTriggers.push(closeTl.scrollTrigger);
@@ -148,43 +161,45 @@ export default function JellyMorphServicesSection() {
                                 ref={(el) => { cardsRef.current[index] = el; }}
                                 className="service-card relative flex-shrink-0 h-[480px] w-[85vw] md:w-[420px] rounded-2xl border flex flex-col p-8 overflow-hidden bg-[#050510]/80 backdrop-blur-2xl border-white/5"
                             >
-                                <div className="flex justify-between items-start mb-6">
-                                    <span className="text-5xl md:text-6xl font-bold font-mono text-white/30 select-none tracking-tighter">
+                                <div className="absolute top-8 left-8 right-8 flex justify-between items-start pointer-events-none z-10">
+                                    <span className="text-4xl md:text-5xl font-medium font-sans text-white service-number tracking-normal">
                                         {service.number}
                                     </span>
-                                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 text-white/50 card-icon">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M12 5v14M5 12h14" />
+                                    <div className="text-white">
+                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="w-7 h-7">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                                         </svg>
                                     </div>
                                 </div>
 
-                                <div className="flex-1">
-                                    <h2 className="text-3xl font-bold text-white tracking-tight mb-2">{service.title}</h2>
-                                    <p className="text-white/70 text-sm leading-relaxed max-w-sm font-light">
-                                        {service.description}
-                                    </p>
+                                <div className="card-spacer" style={{ height: '100%', flexShrink: 1 }}></div>
 
-                                    {/* Collapsible Antigravity Content */}
+                                <div className="content-wrapper z-10 w-full flex flex-col">
+                                    <h2 className="text-3xl md:text-[32px] font-semibold text-white tracking-tight mb-2">{service.title}</h2>
+
+                                    {/* Collapsible Content */}
                                     <div className="card-details overflow-hidden h-0 opacity-0">
-                                        <div className="pt-6 mt-6 border-t border-white/20 grid grid-cols-2 gap-4">
+                                        <p className="text-white text-[15px] leading-relaxed font-light mt-4">
+                                            {service.description}
+                                        </p>
+
+                                        <div className="pt-8 mt-6 grid grid-cols-[1.5fr_1fr] gap-4">
                                             <div>
-                                                <h3 className="text-[10px] uppercase tracking-widest text-white/50 mb-3 font-mono">Capabilities</h3>
+                                                <h3 className="text-[14px] text-white/60 mb-2 font-normal tracking-wide">Services</h3>
                                                 <ul className="space-y-1">
                                                     {service.services.map((s, i) => (
-                                                        <li key={i} className="text-xs text-white/80 flex items-center gap-2">
-                                                            <div className="w-1 h-1 rounded-full bg-white/50 flex-shrink-0" />
+                                                        <li key={i} className="text-[13px] text-white leading-snug">
                                                             {s}
                                                         </li>
                                                     ))}
                                                 </ul>
                                             </div>
                                             <div>
-                                                <h3 className="text-[10px] uppercase tracking-widest text-white/50 mb-3 font-mono">Core Stack</h3>
-                                                <div className="flex flex-wrap gap-2">
+                                                <h3 className="text-[14px] text-white/60 mb-2 font-normal tracking-wide">Tools</h3>
+                                                <div className="flex flex-wrap gap-4 mt-2">
                                                     {service.tools.map((tool, i) => (
-                                                        <div key={i} className="flex items-center justify-center w-8 h-8 rounded border border-white/20 bg-white/10 text-white" title={tool.name}>
-                                                            <div className="scale-[0.6] origin-center flex items-center justify-center text-white">{tool.svg}</div>
+                                                        <div key={i} className="flex items-center justify-center w-6 h-6 text-white" title={tool.name}>
+                                                            <div className="scale-[1.2] flex items-center justify-center drop-shadow-md">{tool.svg}</div>
                                                         </div>
                                                     ))}
                                                 </div>

@@ -111,10 +111,10 @@ void main() {
   // Density control: Only 30% of particles visible in ambient state
   float isAmbientVisibleStep = step(aRandom, 0.3);
 
-  vec3 ambientBase = mix(uAccentDarkColor, uAccentLightColor, 0.35);
-  vec3 ambientColor = ambientBase * (1.15 + noiseVal * 0.2);
-  float ambientAlpha = (0.42 + noiseVal * 0.22) * isAmbientVisibleStep;
-  float ambientSize = 4.6;
+  vec3 ambientBase = mix(uAccentColor, uAccentLightColor, 0.55);
+  vec3 ambientColor = mix(ambientBase, vec3(1.0), 0.18) * (0.82 + noiseVal * 0.14);
+  float ambientAlpha = (0.26 + noiseVal * 0.16) * isAmbientVisibleStep;
+  float ambientSize = 4.4;
 
   // 2) Compute Morph/Shape State
   int currentIdx = int(floor(uCurrentShape));
@@ -152,9 +152,9 @@ void main() {
 
   vec3 shapePos = shapeTarget + displacement;
 
-  vec3 shapeColor = mix(uAccentColor, uAccentLightColor, 0.45) * 1.45;
-  float shapeAlpha = 1.0;
-  float shapeSize = 6.8;
+  vec3 shapeColor = mix(uAccentLightColor, vec3(1.0), 0.62) * 1.28;
+  float shapeAlpha = 0.88;
+  float shapeSize = 6.9;
 
   // 3) Continuous mixing based on uState
   // Since we scaled uState from 0.0 to 0.1 in JS, gatherProgress = uState * 10
@@ -187,7 +187,7 @@ void main() {
   float glow = 1.0 - (dist * 2.0);
   glow = pow(glow, 1.3);
 
-  vec3 finalColor = vColor * (1.15 + glow * 0.75);
+  vec3 finalColor = vColor * (1.2 + glow * 0.95);
   float alpha = glow * vAlpha;
 
   gl_FragColor = vec4(finalColor, alpha);
@@ -375,6 +375,8 @@ function JellyMorphField({ count, scrollProgressRef }: JellyMorphFieldProps) {
         // Read scroll progress from shared ref (0 to 1)
         const scroll = scrollProgressRef.current ?? 0;
         const totalCards = 6;
+        const exitStart = 0.9;
+        const exitEnd = 0.94;
         let targetState = 0;
         let targetShape = 0;
 
@@ -390,9 +392,9 @@ function JellyMorphField({ count, scrollProgressRef }: JellyMorphFieldProps) {
             targetState = 0.1;
             // Map 0.1 to 0.9 scrub into 0.0 to 5.0 (totalCards - 1)
             targetShape = ((scroll - 0.1) / 0.8) * (totalCards - 1);
-        } else if (scroll < 1.0) {
+        } else if (scroll < exitEnd) {
             // Exiting back to ambient state
-            targetState = 0.1 - ((scroll - 0.9) / 0.1) * 0.1; // 0.1 down to 0.0
+            targetState = 0.1 - ((scroll - exitStart) / (exitEnd - exitStart)) * 0.1; // 0.1 down to 0.0
             targetShape = totalCards - 1;
         } else {
             targetState = 0;

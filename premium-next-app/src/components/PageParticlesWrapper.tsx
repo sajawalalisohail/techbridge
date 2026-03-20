@@ -1,16 +1,19 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useJellyMorphScrollProgress } from "@/lib/jelly-morph-context";
 
-const PageParticles = dynamic(
-  () => import("@/3d").then((mod) => mod.PageParticles),
+const JellyMorphCanvas = dynamic(
+  () => import("@/3d/components/JellyMorphParticles").then((mod) => mod.JellyMorphCanvas),
   { ssr: false }
 );
 
 export function PageParticlesWrapper() {
+  const scrollProgressRef = useJellyMorphScrollProgress();
+
   return (
     <div className="w-full h-full">
-      <PageParticles />
+      <JellyMorphCanvas scrollProgressRef={scrollProgressRef} />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import JsonLd from "@/components/shared/JsonLd";
 import SmoothScroll from "@/components/shared/SmoothScroll";
 import { PageParticlesWrapper } from "@/components/PageParticlesWrapper";
 import CursorFollower from "@/components/shared/CursorFollowerWrapper";
+import { ClientProviders } from "@/components/shared/ClientProviders";
 
 const satoshi = localFont({
   src: [
@@ -80,23 +81,25 @@ export default function RootLayout({
       >
         <SmoothScroll />
         <JsonLd />
-        <div className="relative min-h-screen bg-[var(--surface-0)] w-full">
-          <div className="relative w-full z-10 bg-[var(--surface-0)]">
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <div className="sticky top-0 h-screen w-full overflow-hidden">
-                <PageParticlesWrapper />
+        <ClientProviders>
+          <div className="relative min-h-screen bg-[var(--surface-0)] w-full">
+            <div className="relative w-full z-10 bg-[var(--surface-0)]">
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="sticky top-0 h-screen w-full overflow-hidden">
+                  <PageParticlesWrapper />
+                </div>
+              </div>
+
+              <div className="relative z-10 w-full">
+                <Navbar />
+                {children}
               </div>
             </div>
 
-            <div className="relative z-10 w-full">
-              <Navbar />
-              {children}
-            </div>
+            <Footer />
+            <CursorFollower />
           </div>
-
-          <Footer />
-          <CursorFollower />
-        </div>
+        </ClientProviders>
       </body>
     </html>
   );

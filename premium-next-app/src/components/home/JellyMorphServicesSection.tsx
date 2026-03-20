@@ -20,26 +20,19 @@ export default function JellyMorphServicesSection() {
         const track = trackRef.current;
         if (!container || !track) return;
 
-        // Calculate how far the track needs to scroll to the left
-        const getScrollAmount = () => {
-            // The track is inside a container that is restricted to the right side (60vw on desktop)
-            const containerW = window.innerWidth >= 768 ? window.innerWidth * 0.6 : window.innerWidth;
-            return -(track.scrollWidth - containerW);
-        };
+        // Unified master timeline that coordinates horizontal scroll -> card reveal -> pause -> scroll
+        const containerW = window.innerWidth >= 768 ? window.innerWidth * 0.6 : window.innerWidth;
+        const revealOffset = containerW * 0.15; // Frame where card reveals safely past the mask
 
-        // 1. Main horizontal pin and translation
-        const hScrollTween = gsap.to(track, {
-            x: getScrollAmount,
-            ease: "none",
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container,
                 start: "top top",
-                end: () => `+=${track.scrollWidth}`, // Scroll duration equals track width
+                end: () => `+=${track.scrollWidth * 1.5}`, // increase scroll length for pauses
                 pin: true,
                 scrub: 1,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
-                    // Write progress so the WebGL components can smoothly morph the shapes
                     scrollProgressRef.current = self.progress;
                 },
                 onLeave: () => { scrollProgressRef.current = 1; },
@@ -47,75 +40,57 @@ export default function JellyMorphServicesSection() {
             }
         });
 
-        // 2. Individual card "Antigravity" reveal animations mapped strictly to horizontal scrub
-        const cardTriggers: ScrollTrigger[] = [];
+        let currentX = 0;
+        const maxScroll = -(track.scrollWidth - containerW);
 
         cardsRef.current.forEach((card, index) => {
             if (!card) return;
             const details = card.querySelector('.card-details') as HTMLElement;
-            if (!details) return;
-
-            // In the "Antigravity" effect, the card details open scrubbed to scroll
             const spacer = card.querySelector('.card-spacer') as HTMLElement;
             const numberEl = card.querySelector('.service-number') as HTMLElement;
 
-            const openTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: card,
-                    containerAnimation: hScrollTween,
-                    start: 'left center+=30%', // start opening when left edge sweeps into framing 
-                    end: 'left center-=10%',   // fully open just as it hits center
-                    scrub: true,
-                }
-            });
-            // Tween height to auto using a known max-height or directly auto in GSAP 3
-            openTl.fromTo(details,
-                { height: 0, opacity: 0 },
-                { height: 'auto', opacity: 1, ease: 'none' }, 0);
+            let targetX = -(card.offsetLeft - revealOffset);
+            if (targetX < maxScroll) targetX = maxScroll;
+            if (targetX > 0) targetX = 0;
 
-            // Collapse the spacer to slide the title up
-            openTl.fromTo(spacer,
-                { height: '100%' },
-                { height: '0%', ease: 'none' }, 0);
+            const dist = Math.abs(targetX - currentX);
 
-            // Fade out the number
-            openTl.fromTo(numberEl,
-                { opacity: 1 },
-                { opacity: 0, ease: 'none' }, 0);
+            // 1. HORIZONTAL SCROLL IN: Card enters inactive state
+            if (dist > 0) {
+                tl.to(track, { x: targetX, ease: "none", duration: dist / 400 });
+                currentX = targetX;
+            }
 
-            // Simultaneously transition the background
-            openTl.fromTo(card,
-                { backgroundColor: 'rgba(5, 5, 16, 0.8)', borderColor: 'rgba(255,255,255,0.05)' },
-                { backgroundColor: '#3b3f7f', borderColor: 'rgba(255,255,255,0.15)', ease: 'none' }, 0);
+            // 2. ACTIVE REVEAL STATE (track pauses horizontally)
+            const openDur = 0.5;
+            const label = `open-${index}`;
+            tl.addLabel(label);
+            tl.to(details, { height: 'auto', opacity: 1, ease: 'power2.out', duration: openDur }, label);
+            tl.to(spacer, { height: '0%', ease: 'power2.out', duration: openDur }, label);
+            tl.to(numberEl, { opacity: 0, ease: 'power2.out', duration: openDur }, label);
+            tl.to(card, { backgroundColor: '#3b3f7f', borderColor: 'rgba(255,255,255,0.15)', ease: 'power2.out', duration: openDur }, label);
 
-            // Collapse animation when it moves past center toward the left
-            const closeTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: card,
-                    containerAnimation: hScrollTween,
-                    start: 'center center-=10%', // start closing slightly past true center
-                    end: 'right center-=20%',    // fully closed quickly
-                    scrub: true,
-                }
-            });
+            // 3. SUBTLE PAUSE before disappearing
+            tl.to({}, { duration: 0.4 });
 
-            closeTl.to(details, { height: 0, opacity: 0, ease: 'none' }, 0);
-            closeTl.to(spacer, { height: '100%', ease: 'none' }, 0);
-            closeTl.to(numberEl, { opacity: 1, ease: 'none' }, 0);
-            closeTl.to(card, { backgroundColor: 'rgba(5, 5, 16, 0.8)', borderColor: 'rgba(255,255,255,0.05)', ease: 'none' }, 0);
-
-            if (openTl.scrollTrigger) cardTriggers.push(openTl.scrollTrigger);
-            if (closeTl.scrollTrigger) cardTriggers.push(closeTl.scrollTrigger);
+            // 4. Reset state slightly before or as next card forces it out?
+            // User requested: "remain in inactive state until they reach the left most position... pause... then disappear to left"
+            // Disappearing happens inherently as the next `track.x` translation executes!
         });
+
+        // Continue scrolling to end if distance remains
+        if (currentX > maxScroll) {
+            const dist = Math.abs(maxScroll - currentX);
+            tl.to(track, { x: maxScroll, ease: "none", duration: dist / 400 });
+        }
 
         const handleResize = () => ScrollTrigger.refresh();
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            hScrollTween.scrollTrigger?.kill();
-            hScrollTween.kill();
-            cardTriggers.forEach(t => t.kill());
+            tl.scrollTrigger?.kill();
+            tl.kill();
         };
     }, [scrollProgressRef]);
 

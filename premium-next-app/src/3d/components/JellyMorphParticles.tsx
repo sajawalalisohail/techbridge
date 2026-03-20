@@ -124,7 +124,7 @@ void main() {
   vec3 shapeTarget = mix(currentTarget, nextTarget, smoothstep(0.0, 1.0, shapeMorphT));
 
   // Offset shape to left side of viewport, vertically centered with the cards
-  shapeTarget.x -= 6.0;
+  shapeTarget.x -= 5.5;
   shapeTarget.y -= 1.3;
 
   // Jelly mouse interaction for shape

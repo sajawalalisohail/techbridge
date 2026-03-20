@@ -85,12 +85,10 @@ export default function JellyMorphServicesSection() {
                     scrub: true,
                 }
             });
-            closeTl.fromTo(details,
-                { height: 'auto', opacity: 1 },
+            closeTl.to(details,
                 { height: 0, opacity: 0, ease: 'none' }, 0);
 
-            closeTl.fromTo(card,
-                { backgroundColor: '#1e3a8a', borderColor: 'rgba(255,255,255,0.2)' },
+            closeTl.to(card,
                 { backgroundColor: 'rgba(5, 5, 16, 0.8)', borderColor: 'rgba(255,255,255,0.05)', ease: 'none' }, 0);
 
             if (openTl.scrollTrigger) cardTriggers.push(openTl.scrollTrigger);
@@ -161,7 +159,7 @@ export default function JellyMorphServicesSection() {
                                     </div>
                                 </div>
 
-                                <div className="mt-auto">
+                                <div className="flex-1">
                                     <h2 className="text-3xl font-bold text-white tracking-tight mb-2">{service.title}</h2>
                                     <p className="text-white/70 text-sm leading-relaxed max-w-sm font-light">
                                         {service.description}

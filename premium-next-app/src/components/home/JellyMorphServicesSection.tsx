@@ -6,6 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useJellyMorphScrollProgress } from '@/lib/jelly-morph-context';
 import { SERVICES_DATA } from './ServicesData';
 
+const INACTIVE_CARD_BG = '#020617';
+const INACTIVE_CARD_BORDER = 'rgba(59, 130, 246, 0.08)';
+const ACTIVE_CARD_BG = '#172554';
+const ACTIVE_CARD_BORDER = 'rgba(59, 130, 246, 0.18)';
+
 export default function JellyMorphServicesSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
@@ -68,7 +73,7 @@ export default function JellyMorphServicesSection() {
             tl.to(details, { height: 'auto', opacity: 1, ease: 'power2.out', duration: openDur }, label);
             tl.to(spacer, { height: '0%', ease: 'power2.out', duration: openDur }, label);
             tl.to(numberEl, { opacity: 0, ease: 'power2.out', duration: openDur }, label);
-            tl.to(card, { backgroundColor: '#3b3f7f', borderColor: 'rgba(255,255,255,0.15)', ease: 'power2.out', duration: openDur }, label);
+            tl.to(card, { backgroundColor: ACTIVE_CARD_BG, borderColor: ACTIVE_CARD_BORDER, ease: 'power2.out', duration: openDur }, label);
 
             // 3. SUBTLE PAUSE before disappearing
             tl.to({}, { duration: 0.4 });
@@ -134,7 +139,8 @@ export default function JellyMorphServicesSection() {
 
                             <div
                                 ref={(el) => { cardsRef.current[index] = el; }}
-                                className="service-card relative flex-shrink-0 h-[480px] w-[85vw] md:w-[420px] rounded-2xl border flex flex-col p-8 overflow-hidden bg-[#050510]/80 backdrop-blur-2xl border-white/5"
+                                className="service-card relative flex-shrink-0 h-[480px] w-[85vw] md:w-[420px] rounded-2xl border flex flex-col p-8 overflow-hidden backdrop-blur-2xl"
+                                style={{ backgroundColor: INACTIVE_CARD_BG, borderColor: INACTIVE_CARD_BORDER }}
                             >
                                 <div className="absolute top-8 left-8 right-8 flex justify-between items-start pointer-events-none z-10">
                                     <span className="text-4xl md:text-5xl font-medium font-sans text-white service-number tracking-normal">
@@ -147,18 +153,19 @@ export default function JellyMorphServicesSection() {
                                     </div>
                                 </div>
 
-                                <div className="card-spacer" style={{ height: '100%', flexShrink: 1 }}></div>
-
-                                <div className="content-wrapper z-10 w-full flex flex-col">
+                                <div className="content-wrapper z-10 h-full w-full flex flex-col">
+                                    <div className="card-spacer" style={{ height: '100%', flexShrink: 1 }}></div>
                                     <h2 className="text-3xl md:text-[32px] font-semibold text-white tracking-tight mb-2">{service.title}</h2>
 
                                     {/* Collapsible Content */}
-                                    <div className="card-details overflow-hidden h-0 opacity-0">
-                                        <p className="text-white text-[15px] leading-relaxed font-light mt-4">
-                                            {service.description}
-                                        </p>
+                                    <div className="card-details overflow-hidden h-0 opacity-0 flex flex-col flex-1">
+                                        <div className="mt-4 flex flex-1 items-center">
+                                            <p className="text-white text-[15px] leading-relaxed font-light">
+                                                {service.description}
+                                            </p>
+                                        </div>
 
-                                        <div className="pt-8 mt-6 grid grid-cols-[1.5fr_1fr] gap-4">
+                                        <div className="pt-8 mt-auto grid grid-cols-[1.5fr_1fr] gap-4">
                                             <div>
                                                 <h3 className="text-[14px] text-white/60 mb-2 font-normal tracking-wide">Services</h3>
                                                 <ul className="space-y-1">

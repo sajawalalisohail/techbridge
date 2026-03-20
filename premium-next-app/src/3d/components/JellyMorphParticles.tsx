@@ -4,6 +4,7 @@ import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
+import { getBrandColors } from '@/lib/brand-colors';
 
 // ─── Shader sources (inlined) ────────────────────────────────
 
@@ -14,6 +15,10 @@ uniform float uCurrentShape;
 uniform float uShapeProgress;
 uniform vec2 uMouse;
 uniform float uJellyStrength;
+uniform vec3 uAccentColor;
+uniform vec3 uAccentLightColor;
+uniform vec3 uAccentDarkColor;
+uniform vec3 uAccentDeepColor;
 
 attribute vec3 aRandomPos;
 attribute float aRandom;
@@ -87,9 +92,6 @@ vec3 getShape(float idx) {
 
 void main() {
   float state = clamp(uState, 0.0, 1.0);
-  
-  // Theme Blue color
-  vec3 themeBlue = vec3(0.231, 0.510, 0.965);
 
   // 1) Compute Ambient State (always computed for smooth mixing)
   float noiseVal = snoise(aRandomPos * 0.4 + uTime * 0.15);
@@ -109,9 +111,10 @@ void main() {
   // Density control: Only 30% of particles visible in ambient state
   float isAmbientVisibleStep = step(aRandom, 0.3);
 
-  vec3 ambientColor = vec3(0.4, 0.4, 0.6) * (0.8 + noiseVal * 0.2);
-  float ambientAlpha = (0.3 + noiseVal * 0.2) * isAmbientVisibleStep;
-  float ambientSize = 4.0;
+  vec3 ambientBase = mix(uAccentDarkColor, uAccentLightColor, 0.35);
+  vec3 ambientColor = ambientBase * (1.15 + noiseVal * 0.2);
+  float ambientAlpha = (0.42 + noiseVal * 0.22) * isAmbientVisibleStep;
+  float ambientSize = 4.6;
 
   // 2) Compute Morph/Shape State
   int currentIdx = int(floor(uCurrentShape));
@@ -149,9 +152,9 @@ void main() {
 
   vec3 shapePos = shapeTarget + displacement;
 
-  vec3 shapeColor = themeBlue * 1.5; // Glowing Theme Blue
-  float shapeAlpha = 0.85;
-  float shapeSize = 6.0;
+  vec3 shapeColor = mix(uAccentColor, uAccentLightColor, 0.45) * 1.45;
+  float shapeAlpha = 1.0;
+  float shapeSize = 6.8;
 
   // 3) Continuous mixing based on uState
   // Since we scaled uState from 0.0 to 0.1 in JS, gatherProgress = uState * 10
@@ -184,7 +187,7 @@ void main() {
   float glow = 1.0 - (dist * 2.0);
   glow = pow(glow, 1.3);
 
-  vec3 finalColor = vColor * (1.0 + glow * 0.5);
+  vec3 finalColor = vColor * (1.15 + glow * 0.75);
   float alpha = glow * vAlpha;
 
   gl_FragColor = vec4(finalColor, alpha);
@@ -313,6 +316,7 @@ function JellyMorphField({ count, scrollProgressRef }: JellyMorphFieldProps) {
     const pointsRef = useRef<THREE.Points>(null);
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const { mouse } = useThree();
+    const brandColors = useMemo(() => getBrandColors(), []);
 
     const geometry = useMemo(() => {
         const geo = new THREE.BufferGeometry();
@@ -407,7 +411,11 @@ function JellyMorphField({ count, scrollProgressRef }: JellyMorphFieldProps) {
         uShapeProgress: { value: 0 },
         uMouse: { value: new THREE.Vector2(0, 0) },
         uJellyStrength: { value: 0.8 },
-    }), []);
+        uAccentColor: { value: new THREE.Color(brandColors.accent) },
+        uAccentLightColor: { value: new THREE.Color(brandColors.accentLight) },
+        uAccentDarkColor: { value: new THREE.Color(brandColors.accentDark) },
+        uAccentDeepColor: { value: new THREE.Color(brandColors.accentDeep) },
+    }), [brandColors]);
 
     return (
         <points ref={pointsRef} geometry={geometry}>

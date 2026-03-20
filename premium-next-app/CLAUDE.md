@@ -19,7 +19,6 @@
 - `src/data/` - Typed JSON/TS content (case studies, insights).
 - `src/lib/` - Shared utils (`brand-colors.ts` bridges CSS to 3D, GSAP config).
 - `docs/` - Extended project knowledge and SEO infrastructure.
-- `.agent/skills/` - Custom agent capacities and AI workflows.
 
 **Positioning & Content Strategy (Phase 2)**
 - **Value Proposition**: "Silicon Valley Quality. Global Cost Advantage." The primary commercial narrative hinges on **Premium Staff Augmentation**. We sell the outcome via an elite Pakistani engineering talent pool at a fraction of US/EU expenses.
@@ -29,7 +28,7 @@
 
 ## 🤖 AI Agent & Skills System
 
-- **Skill Catalog Reference**: Use `.agent/skills/CATALOG.md` and `skills_index.json` to leverage existing routines before writing redundant scripts.
+- **Skill Catalog Reference**: Codex skills are external to the repo. Prefer installed Codex skills only when they are explicitly invoked, and do not assume a repo-local `.agent/skills/` directory exists.
 - **Workflow Constraints**: 
   1. Review `CLAUDE.md` and `docs/project-knowledge.md` before coding.
   2. Implement features following the Design System rigorously.
@@ -50,8 +49,9 @@ The UI enforces a single unified token system spanning both the DOM and WebGL en
 - **Data Exception**: Case studies (`src/data/`) possess individual thematic `accentColor` RGB strings. This is data-driven by design.
 
 ### 2. Typography & Layout Metrics
-- **Font Family**: *Plus Jakarta Sans* (`next/font/google`).
+- **Font Family**: *Satoshi* loaded locally via `next/font/local` in `src/app/layout.tsx`.
 - **Universal Grid Standard**: The site utilizes a strict **Left-Aligned Editorial Flow**. Root sections span `max-w-[100rem]`, while text blocks and headers are locked to `max-w-7xl` and strictly `text-left`, `items-start`. Exceptions: The Homepage Hero and explicitly isolated blocks may use `items-center` `text-center`.
+- **Pinned Split Sections**: Even visually split sections must still align to the same centered `max-w-[100rem]` container and shared side padding as the sections below them.
 - **Hero h1 Guidelines**: Usually `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`.
 - **Eyebrows**: Format strictly as `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600`.
 - **Spacing Guidelines**: Standard section padding is `py-24 lg:py-32`; tight layouts use `py-16 lg:py-20`.
@@ -69,9 +69,16 @@ The UI enforces a single unified token system spanning both the DOM and WebGL en
   - Static root shells and route `layout.tsx` files remain Server Components to maximize SEO performance. **Do not** introduce `"use server"` patterns unexpectedly.
 - **Dynamic Imports Strategy**:
   - Heavy visual logic (`ServicesProcessShowcase`) and WebGL/3D packages **must** use `next/dynamic` with `{ ssr: false }` to avert severe main-thread impacts.
+  - The global homepage particle layer is mounted via `PageParticlesWrapper` in `src/app/layout.tsx` and should remain client-only.
 - **Global Layout Behavior**:
   - The root layout sets up persistent backgrounds, sticky canvases, and a dynamic footer reveal. New root nodes must accurately handle z-indexing contexts.
 - **Static Artifacts**: Maintain inline SVG noise elements (`feTurbulence`) directly within the components to prevent FOUC or flicker problems.
+
+### 4. Services Section Specifics
+- `JellyMorphServicesSection` is a pinned GSAP-driven horizontal reveal section that visually uses a 40/60 split inside the same centered `max-w-[100rem]` container as the lower homepage sections.
+- Horizontal scroll math in the services section must use the actual card viewport width (`viewportRef.clientWidth`), not `window.innerWidth`, or the section will drift out of alignment with the rest of the page.
+- The current services card reveal depends on `.card-spacer` collapsing to `0%` so inactive titles sit at the bottom and rise during reveal.
+- The services particle field and accent backdrop are driven by `useJellyMorphScrollProgress()` and should fade quickly after the final card exits left.
 
 ---
 
@@ -80,7 +87,7 @@ The UI enforces a single unified token system spanning both the DOM and WebGL en
 Use the correct orchestration layer for smooth 60-120fps metrics:
 - **Framer Motion**: Default tool for mount/unmount presence, list reveals, scroll-into-view triggers.
   - Standard curve: `[0.22, 1, 0.36, 1]`.
-- **GSAP**: Strictly reserved for complex choreographed scroll features (e.g., Horizontal Parallax / Horizontal Case Studies). Must be rigorously isolated inside `useLayoutEffect` or `gsap.context` for perfect unmount cleanup and DOM safety.
+- **GSAP**: Strictly reserved for complex choreographed scroll features (e.g., Horizontal Parallax / Horizontal Case Studies). Always clean up `ScrollTrigger` instances on unmount, enable `invalidateOnRefresh`, and prefer measured container widths over raw viewport assumptions for pinned horizontal sections.
 - **CSS Animations**: Infinite background movements (blobs, pulses) and computational loops (like `@property --glow-angle`) are kept in `globals.css` to offload the main thread.
 - **A11y**: Enforce `prefers-reduced-motion` compliance to halt or minimize background ambient loops automatically.
 
@@ -98,6 +105,6 @@ Use the correct orchestration layer for smooth 60-120fps metrics:
 
 ```bash
 npm run dev     # Run hot-reloading native development server
-npm run build   # Production optimized build (Needs internet access for Google Fonts)
+npm run build   # Production optimized build
 npm run lint    # ESLint static analysis suite
 ```

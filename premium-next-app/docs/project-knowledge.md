@@ -15,25 +15,24 @@ TechBridge is a premium B2B marketing and conversion site focused intently on **
 - `src/data/`: Typed, static JSON/TS content (case studies, insights, timelines)
 - `src/lib/`: Shared utilities (`brand-colors.ts` bridges CSS vars to Three.js; `gsap.ts` hooks)
 - `public/`: Fonts, images, og-images, and proofs
-- `.agent/skills/`: AI agent capabilities catalog, guiding automated LLM feature development
 
 ## Agent System Integration
 
 The repository is fully equipped to interact alongside AI agents (Claude, Gemini, Cursor). 
-- Agents must refer to `CLAUDE.md` and `.agent/skills/CATALOG.md` for strict design constraints, workflows, and task automation context.
+- Agents must refer to `CLAUDE.md` for strict design constraints and current implementation context.
 - Generated code should inherit the active unified design system rather than inventing ad-hoc styling or missing framework migrations.
 
 ## Rendering And UX Constraints
 
 - Interactive UI is heavily client-side (`"use client"`).
 - Heavy 3D modules (Three.js, R3F) and complex animations (`ServicesProcessShowcase`) must remain dynamically imported via `next/dynamic` with `ssr: false` to reduce bundle weights.
-- The visual stack depends on layered backgrounds, sticky particle canvases, and a fixed footer reveal.
+- The visual stack depends on layered backgrounds, a sticky global `PageParticlesWrapper` canvas in `src/app/layout.tsx`, and a fixed footer reveal.
 - Reduced-motion support is systematically enforced across the visual system.
 
 ## Homepage Section Order (The Phase 2 Narrative Flow)
 
 ```text
-Hero (Center aligned) -> The Core Problem (Cost vs Freelancers) -> Our Proof (StatsBanner) -> Augmentation Flow (Vetting pipeline) -> Case Studies -> The Guarantee -> End-to-End Process -> Final CTA
+Hero -> Trust Bar -> Jelly Morph Services -> Comparison -> Case Studies -> Process -> Why Us -> Final CTA
 ```
 
 ## Accent Token System
@@ -54,11 +53,26 @@ The global TechBridge accent is strictly centralized in `src/app/globals.css` us
 
 ## Typography & Core Styling Standards
 
-- **Universal Grid Baseline**: Left-Aligned Editorial architecture. Root sections use `max-w-[100rem]`, driving text blocks bounds using `max-w-7xl` pinned with `flex-col items-start text-left`. Wait for Explicit exceptions (like the Hero `items-center`).
+- **Font Family**: `Satoshi` via `next/font/local` in `src/app/layout.tsx`.
+- **Universal Grid Baseline**: Left-Aligned Editorial architecture. Root sections use `max-w-[100rem]`, driving text blocks bounds using `max-w-7xl` pinned with `flex-col items-start text-left`. Wait for explicit exceptions (like the Hero `items-center`).
 - **Hero h1:** `text-5xl font-bold leading-tight tracking-tight lg:text-7xl xl:text-7xl`
 - **Text Gradients:** `bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent`
 - **Eyebrows:** `font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600` (often decorated with a dot + line)
 - **Whitespace / Padding:** Section padding expects `py-24 lg:py-32` minimally; `py-16 lg:py-20` for tight layouts.
+
+## Services Section Implementation Notes
+
+- `src/components/home/JellyMorphServicesSection.tsx` is a pinned GSAP horizontal reveal section that still needs to visually align to the same centered `max-w-[100rem]` container as the sections below it.
+- The services split is currently 40/60 on desktop, but the scroll math must use the measured viewport width (`viewportRef.clientWidth`) rather than `window.innerWidth`.
+- Inactive service cards are designed so the title sits at the bottom, then rises during reveal via the `.card-spacer` collapse animation.
+- The section title remains fixed on the left while the horizontal card track is clipped on the right using a mask gradient.
+
+## Services Particle System Notes
+
+- The sticky particle layer is mounted globally by `src/components/PageParticlesWrapper.tsx`.
+- `src/3d/components/JellyMorphParticles.tsx` reads live brand colors through `getBrandColors()` and passes them into GLSL uniforms rather than hardcoding theme colors.
+- The current services morph uses bright, near-white particles with a subtle brand-blue tint and a radial theme-colored backdrop glow.
+- The particle/glow exit timing should remain tightly synced with the final services card exit; the current fast fade window is roughly `0.9 -> 0.94` of services scroll progress.
 
 ## Animation Pipeline
 
@@ -79,5 +93,6 @@ We distribute motion across three specialized tools based on performance/impact:
 - **Framer Motion Clipping**: Do not apply `overflow-hidden` wrappers to internal grids manipulating elements outside bounds (i.e. `x: -60` variants), or text will visually shear. Wrap `overflow-hidden` at the root `<section>` level exclusively.
 - **Overlay styling** (e.g. `.website-glow-shell > *`) may force localized stacking. Beware positioning traps!
 - The `/websites` route is an edge case and handles alternate layout structures.
-- During build (`npm run build`), `next/font/google` fetch requests for `Plus Jakarta Sans` can fail under strict proxy setups.
+- The project uses local `Satoshi` fonts, so typography should not depend on `next/font/google` fetches at build time.
+- The services section is easy to misalign if width calculations fall back to raw viewport units. Keep it container-aligned with the sections below.
 - **Validation:** Always test interactions on Safari vs Chrome, verify cleanup hooks for GSAP scroll zones, and confirm dynamic imports correctly split chunks.

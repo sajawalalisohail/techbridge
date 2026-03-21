@@ -23,7 +23,7 @@ const ROWS: ComparisonRow[] = [
 const COLUMN_HEADERS = ["US / Europe", "Freelancer", "TechBridge"];
 
 const BULLET_POINTS = [
-  "Senior engineers vetted and supported by a US-based architecture lead.",
+  "Senior engineers working inside a TechBridge-managed global engineering office.",
   "Replacement coverage if the fit slips, without restarting the whole search.",
   "Direct repo and Slack access so execution stays transparent and fast.",
 ];
@@ -31,7 +31,7 @@ const BULLET_POINTS = [
 const PROOF_POINTS = [
   { label: "Talent lane", value: "Senior only" },
   { label: "Placement window", value: "48 hrs" },
-  { label: "Management model", value: "Hands-on" },
+  { label: "Management model", value: "Global office" },
 ];
 
 const ENGINEER_COUNTS = [1, 2, 3, 5, 10] as const;
@@ -186,8 +186,8 @@ export default function ComparisonSection() {
               className="mt-5 max-w-lg text-sm leading-7 text-zinc-400 sm:text-base"
             >
               US and European teams often pay top-market rates without getting tighter execution.
-              TechBridge pairs senior Pakistan-based engineers with US-led architecture oversight so
-              the buying model stays lean without feeling outsourced.
+              TechBridge pairs a global engineering office with US-led architecture oversight so the
+              buying model stays lean without ever feeling like a handoff.
             </motion.p>
 
             <motion.ul

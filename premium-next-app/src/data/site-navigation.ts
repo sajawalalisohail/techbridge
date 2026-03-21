@@ -201,7 +201,7 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         icon: Users,
         subHeadline: "Your next senior engineer is already vetted and ready.",
         description:
-            "We place dedicated senior engineers - AI specialists, full-stack developers, mobile devs, QA - directly into your existing team. They join your Slack, your repos, your standups. We handle vetting, management, and architecture oversight. You get the talent without the recruiting overhead or the US price tag.",
+            "We place dedicated senior engineers - AI specialists, full-stack developers, mobile devs, QA - directly into your existing team. They join your Slack, your repos, your standups. We handle vetting, management, and architecture oversight inside a TechBridge-managed global engineering office. You get senior capacity without the recruiting drag or management vacuum.",
         capabilities: [
             "AI/ML engineers (LLMs, RAG, NLP, computer vision)",
             "Full-stack developers (Next.js, React, Node, Python)",
@@ -215,7 +215,7 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         stack: ["Next.js", "React", "Node.js", "Python", "React Native", "Flutter", "AWS", "Docker"],
         callout: {
             label: "Founder's Principle",
-            text: "We don't just send you a resume. We send you someone we've vetted, trained on your codebase expectations, and will replace if they don't deliver. That's the difference between outsourcing and partnership.",
+            text: "We don't just send you a resume. We place senior engineers inside a system we've already vetted, aligned to your codebase expectations, and back with replacement coverage if the fit slips. That's the difference between a global engineering office and a handoff model.",
             attribution: "Sajawal Ali Sohail",
         },
     },

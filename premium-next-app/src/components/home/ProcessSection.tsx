@@ -46,12 +46,13 @@ export default function ProcessSection() {
               The delivery system
             </p>
             <h2 className="mt-5 text-3xl font-light tracking-[-0.045em] text-white sm:text-4xl lg:text-[3rem]">
-              Four deliberate steps. One operating rhythm from discovery to live support.
+              Four deliberate steps. One distributed operating rhythm from discovery to live support.
             </h2>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-zinc-400 sm:text-base">
               The workflow is designed to feel like a senior product and engineering lane, not a
-              parade of disconnected handoffs. Each step has a concrete output, a clear owner, and
-              a visible decision point.
+              parade of disconnected handoffs. US strategy and a global engineering office move
+              against the same execution map, so each step has a concrete output, a clear owner,
+              and a visible decision point.
             </p>
           </motion.div>
 
@@ -65,8 +66,8 @@ export default function ProcessSection() {
               Delivery rule
             </p>
             <p className="mt-3 text-sm leading-6 text-zinc-300">
-              Strategy, architecture, implementation, and launch stay in one lane so progress shows
-              up weekly instead of waiting for a giant reveal.
+              The distributed engineering model keeps strategy, architecture, implementation, and
+              launch in one lane so progress shows up weekly instead of waiting for a giant reveal.
             </p>
           </motion.div>
         </div>

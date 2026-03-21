@@ -160,8 +160,8 @@ export default function Hero() {
               data-hero-copy="true"
               className="mt-3 max-w-none text-sm leading-7 text-zinc-500 sm:text-[15px] lg:whitespace-nowrap"
             >
-              West Virginia leadership. Senior execution in Pakistan. Structured like a command
-              surface instead of a handoff maze.
+              US strategy. Global engineering office. Structured like one operating system instead
+              of a handoff maze.
             </p>
 
             <div data-hero-copy="true" className="mt-9 flex flex-col items-center gap-4">

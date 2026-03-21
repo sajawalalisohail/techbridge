@@ -67,7 +67,7 @@ const VALUES = [
         icon: Globe,
         title: "Code That Survives Your Series B",
         description:
-            "Architecture and oversight in West Virginia. Engineering execution in Lahore. Same code reviews, same standards, same accountability.",
+            "US-led architecture and a global engineering office working under the same code reviews, standards, and accountability.",
     },
 ];
 
@@ -88,7 +88,7 @@ const TIMELINE = [
         year: "2024",
         title: "Hybrid Delivery Model",
         description:
-            "Scaled into a hybrid model with dedicated engineering support in Pakistan while keeping architecture and oversight tightly aligned.",
+            "Scaled into a distributed delivery model with a dedicated global engineering office while keeping architecture and oversight tightly aligned in the US.",
     },
     {
         year: "2025",
@@ -118,9 +118,9 @@ const TEAM: TeamMember[] = [
     },
     {
         name: "Hamza Majeed",
-        role: "Head of Technology, Pakistan",
+        role: "CTO & Partner",
         location: "PK",
-        bio: "Leads technical delivery across our Pakistan engineering function, overseeing implementation quality, engineering coordination, and execution across active client work.",
+        bio: "Leads our global engineering office and technical delivery through Sydstack, aligning engineering cells, implementation quality, and execution standards across active client work.",
         imageSrc: "/headshots/Hamza.jpg",
         linkedinUrl: "https://www.linkedin.com/in/hamzamajeed1234/",
     },
@@ -188,6 +188,79 @@ function FounderCard() {
                     ))}
                 </div>
             </div>
+        </div>
+    );
+}
+
+function GlobalConnectionMap() {
+    return (
+        <div className="relative h-[220px] overflow-hidden rounded-[1.4rem] border border-white/8 bg-black/25">
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-90"
+                style={{
+                    background:
+                        "radial-gradient(circle at 22% 28%, rgba(var(--brand-accent-rgb), 0.16), transparent 26%), radial-gradient(circle at 76% 70%, rgba(var(--brand-accent-light-rgb), 0.14), transparent 24%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%)",
+                }}
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-45"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+                    backgroundSize: "34px 34px",
+                }}
+            />
+
+            <svg
+                aria-hidden="true"
+                viewBox="0 0 400 220"
+                className="absolute inset-0 h-full w-full"
+                fill="none"
+            >
+                <path
+                    d="M82 76 C 140 34, 214 24, 322 146"
+                    stroke="rgba(255,255,255,0.12)"
+                    strokeWidth="1.25"
+                    strokeDasharray="5 7"
+                />
+                <path
+                    d="M82 76 C 140 34, 214 24, 322 146"
+                    stroke="rgba(var(--brand-accent-light-rgb), 0.45)"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeDasharray="1 18"
+                />
+            </svg>
+
+            <motion.div
+                aria-hidden="true"
+                className="absolute left-[19%] top-[34%] h-2.5 w-2.5 rounded-full bg-brand-accent-light shadow-[0_0_12px_rgba(var(--brand-accent-light-rgb),0.85)]"
+                animate={{
+                    x: [0, 52, 132, 224],
+                    y: [0, -26, -10, 58],
+                    opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                    duration: 4.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            />
+
+            <div className="absolute left-[11%] top-[22%] rounded-[1rem] border border-white/10 bg-[#05070d]/80 px-3 py-2 backdrop-blur-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500">Strategy Hub</p>
+                <p className="mt-1 text-sm font-medium text-white">Morgantown, WV</p>
+            </div>
+
+            <div className="absolute right-[10%] bottom-[18%] rounded-[1rem] border border-white/10 bg-[#05070d]/80 px-3 py-2 text-right backdrop-blur-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500">Engineering Office</p>
+                <p className="mt-1 text-sm font-medium text-white">Lahore, PK</p>
+            </div>
+
+            <div className="absolute left-[18%] top-[37%] h-3 w-3 rounded-full border border-brand-accent/35 bg-brand-accent/15" />
+            <div className="absolute right-[17%] bottom-[28%] h-3 w-3 rounded-full border border-brand-accent-light/35 bg-brand-accent-light/15" />
         </div>
     );
 }
@@ -266,20 +339,20 @@ export default function AboutPage() {
                                 animate={isStoryInView ? "show" : "hidden"}
                                 className={`mb-7 max-w-7xl text-left ${STUDIO_TYPE.section}`}
                             >
-                                Started because agencies kept disappointing us too.
+                                Boutique strategy. Engineering rigor at global scale.
                             </motion.h2>
                             <p className={STUDIO_TYPE.lead}>
-                                Based in Morgantown, WV. Founded because we kept seeing the same thing: agencies delivering beautiful front-ends on top of architectures that collapse under real load.
+                                TechBridge was built to close the gap between high-context strategy and the disciplined engineering execution B2B software actually demands.
                             </p>
                             <p className={`mt-5 ${STUDIO_TYPE.lead}`}>
-                                We bring actual engineering rigor to B2B companies that need their tech to be an asset, not a liability that slows them down in six months.
+                                Sajawal leads system architecture, design intent, and client strategy from Morgantown. Hamza leads the global engineering office that turns those decisions into reliable delivery across live projects.
                             </p>
                             <div className="mt-10 border-l-2 border-brand-accent/60 pl-6">
                                 <p className="text-base font-medium italic text-zinc-300 lg:text-lg">
-                                    &quot;Your tech stack should be a weapon, not a weight.&quot;
+                                    &quot;The strategy should feel boutique. The execution should feel industrial.&quot;
                                 </p>
                                 <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    Sajawal Ali Sohail, Founder
+                                    TechBridge operating principle
                                 </p>
                             </div>
                         </motion.div>
@@ -291,14 +364,14 @@ export default function AboutPage() {
                 <section ref={teamRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
-                            <StudioEyebrow className="mb-4">who builds your system</StudioEyebrow>
+                            <StudioEyebrow className="mb-4">leadership</StudioEyebrow>
                             <motion.h2
                                 variants={slideFromRight}
                                 initial="hidden"
                                 animate={isTeamInView ? "show" : "hidden"}
                                 className={`max-w-7xl text-left ${STUDIO_TYPE.section}`}
                             >
-                                Names, not titles.
+                                Leadership, not layers.
                             </motion.h2>
                         </motion.div>
 
@@ -332,29 +405,50 @@ export default function AboutPage() {
                             <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                                 <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                                 <span className="h-px w-4 bg-brand-accent/40" />
-                                our structure
+                                operating model
                             </span>
                             <h3 className="mb-5 text-2xl font-bold tracking-tight text-white lg:text-3xl">
-                                How We&apos;re Built
+                                Architectural Intent Meets Engineering Rigor
                             </h3>
-                            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+                            <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
                                 <div className="flex-1">
                                     <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
-                                        Architecture leadership and client strategy operate from Morgantown, West Virginia. Our dedicated engineering team operates from Lahore, Pakistan. Same code reviews. Same deployment standards. Same Slack channels. The only difference is the timezone — and the price.
+                                        TechBridge leads client strategy, system architecture, and design direction from Morgantown, West Virginia. Hamza leads our global engineering office through Sydstack, coordinating specialized engineering execution against the same standards, code reviews, and delivery rhythm.
                                     </p>
+                                    <div className="mt-6 rounded-[1.2rem] border border-white/8 bg-white/[0.03] p-4">
+                                        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                                            Strategic partnership
+                                        </p>
+                                        <p className="mt-3 text-sm leading-6 text-zinc-300">
+                                            TechBridge operates with a strategic engineering partnership through Sydstack, led by Hamza Majeed.
+                                        </p>
+                                    </div>
+                                    <div className="mt-6 flex flex-wrap gap-3">
+                                        {["US Strategy Hub", "Global Engineering Office"].map((label) => (
+                                            <span
+                                                key={label}
+                                                className="inline-flex items-center rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-500"
+                                            >
+                                                {label}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="grid flex-1 grid-cols-2 gap-4">
+                                <div className="flex-1">
+                                    <GlobalConnectionMap />
+                                    <div className="mt-4 grid grid-cols-2 gap-4">
                                     {[
-                                        { label: "Discipline", value: "Computer Science" },
-                                        { label: "Scale", value: "Dedicated Team" },
-                                        { label: "Oversight", value: "WV Leadership" },
-                                        { label: "Model", value: "Hybrid Precision" },
+                                        { label: "Strategy", value: "US-led" },
+                                        { label: "Execution", value: "Global office" },
+                                        { label: "Oversight", value: "Shared standards" },
+                                        { label: "Rhythm", value: "Follow-the-sun" },
                                     ].map((item) => (
                                         <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
                                             <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
                                             <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
                                         </div>
                                     ))}
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>

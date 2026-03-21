@@ -295,9 +295,9 @@ function TechStack() {
                         </motion.span>
                     </motion.h2>
                     <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-zinc-400 sm:text-base">
-                        The sprint is fast because the delivery system is pre-shaped: library selection, interaction design,
-                        performance posture, and deployment discipline are decided like engineering constraints, not treated
-                        as optional polish.
+                        The sprint is fast because the delivery system is pre-shaped: strategy leadership, component
+                        selection, interaction design, and a global engineering office all move against the same
+                        execution map instead of waiting on disconnected handoffs.
                     </p>
                 </motion.div>
             </div>

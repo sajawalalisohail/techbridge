@@ -98,9 +98,9 @@ function Hero() {
                         variants={childFade}
                         className={`mt-6 max-w-3xl ${STUDIO_TYPE.lead}`}
                     >
-                        Stop overpaying for engineering talent. Our Pakistan-based senior developers and AI engineers
-                        integrate directly into your workflow — managed by our US architecture team, accountable to you,
-                        and replaceable if they don&apos;t deliver.
+                        Stop overpaying for engineering talent. Our global engineering office embeds senior developers
+                        and AI engineers directly into your workflow with US-led architecture oversight, direct
+                        communication, and replacement coverage built into the model.
                     </motion.p>
 
                     <motion.div variants={childFade} className="mt-10 flex flex-wrap items-center gap-4">
@@ -128,6 +128,16 @@ function Hero() {
                                 <Check size={12} className="text-brand-accent flex-shrink-0" />
                                 <span className="text-xs text-zinc-500">{signal}</span>
                             </div>
+                        ))}
+                    </motion.div>
+                    <motion.div variants={childFade} className="mt-6 flex flex-wrap items-center gap-3">
+                        {["US Strategy Hub", "Global Engineering Office"].map((label) => (
+                            <span
+                                key={label}
+                                className="inline-flex items-center rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-500"
+                            >
+                                {label}
+                            </span>
                         ))}
                     </motion.div>
                 </motion.div>
@@ -510,7 +520,7 @@ const DIFFERENTIATORS = [
         icon: Layers,
         title: "US-Led Architecture",
         description:
-            "Every engineer we place operates under the oversight of our West Virginia-based architecture team. Code reviews, system design decisions, and quality standards are set and enforced from the US.",
+            "Every engineer we place works inside a TechBridge-managed global engineering office with US-led architecture oversight. Code reviews, system design decisions, and quality standards are set and enforced from the US.",
     },
     {
         icon: BadgeCheck,

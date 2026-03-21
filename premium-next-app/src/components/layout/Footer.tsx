@@ -140,6 +140,10 @@ export default function Footer() {
                                     <span className="text-zinc-500">Serving clients globally</span>
                                 </div>
 
+                                <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-zinc-600">
+                                    US strategy. Global engineering office.
+                                </p>
+
                                 <HeroClock tz="America/New_York" />
                             </div>
 

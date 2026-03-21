@@ -15,7 +15,7 @@ const COMMAND_MODES = {
     tabLabel: "Build a System",
     panelLabel: "Product + engineering strike team",
     title:
-      "Ship custom software, AI systems, and premium launch surfaces without stitching together five vendors.",
+      "Ship custom software, AI systems, and premium launch surfaces without stitching together disconnected teams.",
     description:
       "We run architecture, product thinking, design, and senior execution as one lane so the build moves like a focused internal team instead of a bloated agency relay.",
     bullets: [
@@ -48,7 +48,7 @@ const COMMAND_MODES = {
     metrics: [
       { value: "48 hrs", label: "from brief to candidate shortlist" },
       { value: "Full", label: "replacement guarantee coverage" },
-      { value: "Direct", label: "team integration, not outsourced distance" },
+      { value: "Direct", label: "team integration inside one operating lane" },
     ],
     bestFit:
       "CTOs and operators who need senior capacity now without paying US-market hiring overhead.",

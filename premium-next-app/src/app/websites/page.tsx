@@ -6,6 +6,8 @@ import { Check, X, ChevronDown, ArrowRight, ExternalLink, ChevronLeft, ChevronRi
 import Link from "next/link";
 import HeroBlobBackground from "@/components/home/HeroBlobBackground";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
+import SpecSheetSection from "@/components/shared/SpecSheetSection";
+import StudioEyebrow from "@/components/shared/StudioEyebrow";
 import {
     blurFocusIn,
     slideFromLeftContainer,
@@ -16,6 +18,7 @@ import {
     wordContainerVariants,
     wordVariants,
 } from "@/components/shared/headingAnimations";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 
 /* â"€â"€â"€ Global ease constant â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
@@ -44,12 +47,7 @@ const childFade = {
 /* â"€â"€â"€ Section wrapper â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 /* â"€â"€â"€ Eyebrow â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 function Eyebrow({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
-            {children}
-        </span>
-    );
+    return <StudioEyebrow className="mb-4">{children}</StudioEyebrow>;
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -96,7 +94,7 @@ function Hero() {
                     variants={blurFocusIn(0.08)}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-7xl"
+                    className={`mb-6 ${STUDIO_TYPE.display}`}
                 >
                     Your Website. Custom-Coded.{" "}
                     <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
@@ -108,7 +106,7 @@ function Hero() {
                     variants={fadeUp(0.2)}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed text-zinc-400"
+                    className={`mx-auto mb-10 max-w-2xl ${STUDIO_TYPE.lead}`}
                 >
                     From{" "}
                     <span className="font-semibold text-white">$997.</span>{" "}
@@ -183,7 +181,7 @@ function ComparisonTable() {
                     variants={slideFromLeftContainer}
                     initial="hidden"
                     animate={isInView ? "show" : "hidden"}
-                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                    className={STUDIO_TYPE.section}
                     style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
                 >
                     <motion.span variants={slideFromLeftItem} style={{ display: "inline-block" }}>What</motion.span>
@@ -250,123 +248,97 @@ function ComparisonTable() {
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    STEP 2.5 â€" THE ARSENAL (TECH STACK)
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-const STACK_MARQUEE_ROW_1 = [
-    { name: "Next.js", label: "React Framework" },
-    { name: "React", label: "UI Architecture" },
-    { name: "Vercel", label: "Edge Deployment" },
-    { name: "Tailwind CSS", label: "Precision Styling" },
-    { name: "Framer Motion", label: "Fluid Animations" },
-    { name: "Cloudflare", label: "DNS & Security" },
-    { name: "Stripe", label: "Payment Integration" },
-    { name: "Custom Domains", label: "Fully Managed Setup" },
+const ENGINEERING_POSTURE = [
+    {
+        label: "08:00 posture",
+        title: "Pre-vetted component selection",
+        description:
+            "We start from trusted Next.js primitives and pre-vetted libraries so design time is spent on fit, not on rediscovering basic infrastructure.",
+    },
+    {
+        label: "12:00 posture",
+        title: "Deep dimensionality, controlled motion",
+        description:
+            "Glass surfaces, mesh gradients, and Framer orchestration are layered with restraint so the site feels premium without losing legibility or performance.",
+    },
+    {
+        label: "16:00 posture",
+        title: "SEO and performance are part of the build",
+        description:
+            "Technical SEO, sub-second LCP targets, and deployment-readiness checks are handled during production, not as a post-launch apology phase.",
+    },
 ];
-
-// Row 2 scrolls opposite direction â€" same pills, different order
-const STACK_MARQUEE_ROW_2 = [
-    { name: "Vercel", label: "Global CDN" },
-    { name: "Custom Domains", label: "DNS Config" },
-    { name: "Stripe", label: "Payments" },
-    { name: "Next.js", label: "App Router" },
-    { name: "Cloudflare", label: "DDoS Protection" },
-    { name: "Framer Motion", label: "60fps Animations" },
-    { name: "React", label: "Component System" },
-    { name: "Tailwind CSS", label: "Zero Runtime CSS" },
-];
-
-/* Inline keyframes injected once at the top of the section */
-const marqueeCSS = `
-  @keyframes marquee-left  { from { transform: translateX(0) }          to { transform: translateX(-50%) } }
-  @keyframes marquee-right { from { transform: translateX(-50%) }       to { transform: translateX(0) } }
-  .marquee-left  { animation: marquee-left  28s linear infinite; }
-  .marquee-right { animation: marquee-right 22s linear infinite; }
-  .marquee-left:hover,
-  .marquee-right:hover { animation-play-state: paused; }
-`;
-
-/* Individual pill */
-function StackPill({ name, label }: { name: string; label: string }) {
-    return (
-        <div className="website-glow-card group mx-3 flex flex-shrink-0 items-center gap-3 rounded-xl border border-white/8 bg-neutral-900/60 px-5 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent/40 hover:bg-brand-accent/5">
-            {/* Glow dot */}
-            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-accent/60 shadow-[0_0_6px_rgba(var(--brand-accent-light-rgb), 0.6)] group-hover:bg-brand-accent/5" />
-            <div>
-                <p className="whitespace-nowrap text-sm font-semibold text-white">{name}</p>
-                <p className="whitespace-nowrap text-xs text-zinc-600 group-hover:text-brand-accent-light">{label}</p>
-            </div>
-        </div>
-    );
-}
 
 function TechStack() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
 
     return (
-        <div ref={ref} className="overflow-hidden">
-            <style dangerouslySetInnerHTML={{ __html: marqueeCSS }} />
-
-            {/* Header */}
-            <div className="mx-auto mb-16 max-w-5xl px-6 text-center lg:px-12">
+        <div ref={ref} className="mx-auto max-w-6xl px-6 lg:px-12">
+            <div className="mx-auto mb-16 max-w-4xl text-center">
                 <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"}>
-                    <Eyebrow>the stack</Eyebrow>
+                    <Eyebrow>engineering posture</Eyebrow>
                     <motion.h2
                         variants={slideFromRightContainer}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                        className={STUDIO_TYPE.section}
                         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.3em" }}
                     >
-                        {splitWords("Same stack as the fastest sites on the internet.").map((word, index) => (
+                        {splitWords("A 24-hour build still needs a technical spine.").map((word, index) => (
                             <motion.span key={`${word}-${index}`} variants={slideFromRightItem} style={{ display: "inline-block" }}>
                                 {word}
                             </motion.span>
                         ))}
                         <motion.span variants={slideFromRightItem} className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent" style={{ display: "inline-block" }}>
-                            None of the bloat.
+                            No filler theatrics.
                         </motion.span>
                     </motion.h2>
-                    <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-zinc-500">
-                        No drag-and-drop builders. Your site runs on Next.js, deploys to Vercel&apos;s edge network, and loads faster than most sites built at 10x the cost.
+                    <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-zinc-400 sm:text-base">
+                        The sprint is fast because the delivery system is pre-shaped: library selection, interaction design,
+                        performance posture, and deployment discipline are decided like engineering constraints, not treated
+                        as optional polish.
                     </p>
                 </motion.div>
             </div>
 
-            {/* â"€â"€ Marquee rows â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */}
             <motion.div
                 variants={fadeUp(0.2)}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
-                className="relative"
-                style={{
-                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-                    maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-                }}
+                className="grid gap-4 lg:grid-cols-3"
             >
-                {/* Row 1 â€" scrolls left */}
-                <div className="flex overflow-hidden py-3">
-                    <div className="marquee-left flex">
-                        {[...STACK_MARQUEE_ROW_1, ...STACK_MARQUEE_ROW_1].map((item, i) => (
-                            <StackPill key={`r1-${i}`} name={item.name} label={item.label} />
-                        ))}
+                {ENGINEERING_POSTURE.map((item) => (
+                    <div
+                        key={item.title}
+                        className="website-glow-card relative overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/45 p-6 backdrop-blur-sm"
+                    >
+                        <div
+                            aria-hidden="true"
+                            className="absolute inset-0 opacity-70"
+                            style={{
+                                background:
+                                    "radial-gradient(circle at top right, rgba(var(--brand-accent-light-rgb), 0.12), transparent 26%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 28%)",
+                            }}
+                        />
+                        <div className="relative">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-accent-light">
+                                {item.label}
+                            </p>
+                            <h3 className="mt-4 text-xl font-semibold tracking-tight text-white">
+                                {item.title}
+                            </h3>
+                            <p className="mt-4 text-sm leading-7 text-zinc-400">{item.description}</p>
+                        </div>
                     </div>
-                </div>
-
-                {/* Row 2 â€" scrolls right */}
-                <div className="flex overflow-hidden py-3">
-                    <div className="marquee-right flex">
-                        {[...STACK_MARQUEE_ROW_2, ...STACK_MARQUEE_ROW_2].map((item, i) => (
-                            <StackPill key={`r2-${i}`} name={item.name} label={item.label} />
-                        ))}
-                    </div>
-                </div>
+                ))}
             </motion.div>
 
-            {/* â"€â"€ Performance stat strip â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */}
             <motion.div
                 variants={fadeUp(0.3)}
                 initial="hidden"
                 animate={isInView ? "show" : "hidden"}
-                className="mx-auto mt-14 max-w-5xl px-6 lg:px-12"
+                className="mx-auto mt-10 max-w-5xl"
             >
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                     {[
@@ -396,25 +368,28 @@ function TechStack() {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const TIMELINE = [
     {
-        time: "Day 0  Â·  30 min",
-        title: "Scope Confirmed",
-        desc: "We lock in your goals, branding, and sitemap in a focused 30-minute kickoff call. 50% deposit collected.",
-        tag: "Kickoff",
+        time: "08:00",
+        title: "Architecture & Component Selection",
+        desc: "Selecting from pre-vetted Next.js libraries and component patterns so the build starts from a technical baseline instead of a blank-canvas guess.",
+        tag: "System frame",
     },
     {
-        time: "9:00 AM",
-        title: "Design & Architecture Begin",
-        desc: "Our engineer starts your custom layout - no theme files, no page builders. Built precisely for your brand.",
+        time: "12:00",
+        title: "Visual Identity & Interaction Layer",
+        desc: "Implementing deep dimensionality, glassmorphism, and Framer Motion orchestration with a design system that translates cleanly into code.",
+        tag: "Interface pass",
     },
     {
-        time: "5:00 PM",
-        title: "Staging Site Live",
-        desc: "Your complete site is deployed to a private staging URL for your review. We walk you through it live.",
+        time: "16:00",
+        title: "Technical SEO & Performance Audit",
+        desc: "Optimizing for sub-second LCP, clean metadata, crawlability, and the performance constraints that matter before launch.",
+        tag: "Performance check",
     },
     {
-        time: "8:00 PM",
-        title: "Revisions Applied. You're Live.",
-        desc: "After your approval, we apply all revisions, point your DNS, and your site goes live before you sleep.",
+        time: "20:00",
+        title: "Final QA & Global Edge Deployment",
+        desc: "Final polish, runtime verification, and deployment through Vercel's global edge network with rollback-ready release posture.",
+        tag: "Launch lane",
     },
 ];
 
@@ -593,11 +568,11 @@ const SOCIAL_PROOF_PROJECTS = [
     {
         client: "NextLex",
         metrics: "14 Days",
-        metricSubtitle: "From Idea To Live",
-        engagementType: "Extended Engagement",
-        desc: "A premium marketing website for a legal document automation SaaS. Designed and deployed rapidly to support their high-growth acquisition strategy.",
+        metricSubtitle: "From Concept To Live",
+        engagementType: "Production-Grade Codebase",
+        desc: "A production-grade codebase for a legal document automation company, built to sharpen positioning and support a more serious go-to-market motion.",
         link: "https://nextlex.com",
-        tags: ["Next.js", "Marketing Site", "SEO"],
+        tags: ["Next.js", "Production Codebase", "SEO"],
         assets: ["/proofs/NextLex/1.png", "/proofs/NextLex/2.png", "/proofs/NextLex/3.png", "/proofs/NextLex/4.png"],
         accentColor: "rgb(var(--brand-accent-rgb))", // brand accent
     },
@@ -616,10 +591,10 @@ const SOCIAL_PROOF_PROJECTS = [
         client: "AliWali Trading Co.",
         metrics: "35+",
         metricSubtitle: "Years of Legacy",
-        engagementType: "24-Hour Build",
-        desc: "A fast, modern digital presence for a direct buyer of industrial plied rubber conveyor belts. Replacing an outdated platform with zero downtime.",
+        engagementType: "Production-Grade Codebase",
+        desc: "A rapid-turnaround production-grade codebase for an industrial trading company, replacing an outdated digital presence without operational disruption.",
         link: "https://aliwalitradingco.com",
-        tags: ["Next.js", "Global Reach", "B2B Portal"],
+        tags: ["24-Hour Build", "Next.js", "B2B Portal"],
         assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png"],
         accentColor: "rgb(var(--brand-accent-dark-rgb))", // brand-accent-dark
     },
@@ -1404,6 +1379,13 @@ export default function WebsitesPage() {
                 <section className="py-24 lg:py-32">
                     <FAQ />
                 </section>
+
+                <SpecSheetSection
+                    eyebrow="Spec sheet"
+                    title="The same runtime and deployment posture behind the sprint."
+                    description="The build is fast because the technical stack is settled, production-friendly, and optimized for launch velocity without sacrificing engineering standards."
+                    className="py-10 lg:py-12"
+                />
 
                 {/* Final CTA */}
                 <FinalCTA />

@@ -14,6 +14,7 @@ interface Reason {
   description: string;
   tagline: string;
   proof: string;
+  technicalOpinion?: string;
   Animation: ComponentType<{ isInView: boolean }>;
 }
 
@@ -25,6 +26,8 @@ const REASONS: Reason[] = [
       "We design systems so automation hooks, machine-readable interfaces, and future AI workflows are part of the architecture from the start.",
     tagline: "No retrofit tax later.",
     proof: "Machine-ready APIs and operations hooks built into the first version.",
+    technicalOpinion:
+      "We don't build wrappers. We architect agentic systems using Next.js App Router for streaming UX and RAG (Retrieval-Augmented Generation) architectures that prioritize data privacy and sub-second context injection.",
     Animation: CodeTypingAnimation,
   },
   {
@@ -104,6 +107,15 @@ function ReasonCard({
         </div>
 
         <p className="mt-5 text-sm leading-7 text-zinc-400 sm:text-base">{reason.description}</p>
+
+        {reason.technicalOpinion && (
+          <div className="mt-5 rounded-[1.2rem] border border-brand-accent/20 bg-brand-accent/[0.07] p-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-accent-light">
+              Technical opinion
+            </p>
+            <p className="mt-3 text-sm leading-6 text-zinc-200">{reason.technicalOpinion}</p>
+          </div>
+        )}
 
         <div className="mt-6">
           <Animation isInView={isInView} />

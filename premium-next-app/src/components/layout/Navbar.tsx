@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, X } from "lucide-react";
 import GlowButton from "@/components/shared/GlowButton";
+import StudioLogo from "@/components/shared/StudioLogo";
 import { getCaseStudy } from "@/data/case-studies";
 import { SERVICE_NAV_GROUPS } from "@/data/site-navigation";
 
@@ -263,10 +264,13 @@ export default function Navbar() {
     }, [pathname]);
 
     useEffect(() => {
-        updateNavState(); // Run it once immediately to catch client-side screen size
+        const frameId = window.requestAnimationFrame(() => {
+            updateNavState();
+        });
         window.addEventListener("scroll", updateNavState, { passive: true });
         window.addEventListener("resize", updateNavState, { passive: true });
         return () => {
+            window.cancelAnimationFrame(frameId);
             window.removeEventListener("scroll", updateNavState);
             window.removeEventListener("resize", updateNavState);
         };
@@ -430,11 +434,9 @@ export default function Navbar() {
                                             closeServicesMenu();
                                         }
                                     }}
-                                    className="group flex items-center gap-1.5"
+                                    className="group flex items-center"
                                 >
-                                    <span className="text-xl tracking-tight text-white drop-shadow-md">
-                                        <span className="font-extrabold">TECH</span><span className="font-medium text-brand-accent">BRIDGE</span>
-                                    </span>
+                                    <StudioLogo size="sm" />
                                 </Link>
                                 <ul
                                     className={`hidden items-center lg:flex transition-all duration-500 rounded-full border ${navState === "pill"

@@ -5,13 +5,13 @@ import type { ReactNode } from "react";
 import { motion, useInView } from "framer-motion";
 import {
     ArrowUpRight,
-    Bot,
     Boxes,
     Gauge,
     MessagesSquare,
     Radar,
     Rocket,
     Route,
+    Workflow,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -222,7 +222,7 @@ function LaunchVisual() {
                 <div className="grid grid-cols-2 gap-3">
                     {[
                         { icon: <Gauge className="h-4 w-4" />, label: "Response", value: "248ms" },
-                        { icon: <Bot className="h-4 w-4" />, label: "Health", value: "99.98%" },
+                        { icon: <Workflow className="h-4 w-4" />, label: "Health", value: "99.98%" },
                         { icon: <MessagesSquare className="h-4 w-4" />, label: "Queue", value: "Clear" },
                         { icon: <ArrowUpRight className="h-4 w-4" />, label: "Sessions", value: "Live" },
                     ].map((item) => (

@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 import {
     ArrowRight,
     BadgeCheck,
-    Bot,
     Briefcase,
     Check,
     ChevronDown,
@@ -14,12 +13,15 @@ import {
     Layers,
     Shield,
     Smartphone,
-    Users,
+    Workflow,
 } from "lucide-react";
 import Link from "next/link";
 import GlowButton from "@/components/shared/GlowButton";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import StudioEyebrow from "@/components/shared/StudioEyebrow";
 import { wordContainerVariants, wordVariants, splitWords } from "@/components/shared/headingAnimations";
+import { RAMISH_PROFILE } from "@/data/engineer-profiles";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 /* ─── Animation constants ─────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -41,13 +43,7 @@ const childFade = {
 
 /* ─── Reusable sub-components ─────────────────────────────────── */
 function Eyebrow({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-            <span className="h-px w-4 bg-brand-accent/40" />
-            {children}
-        </span>
-    );
+    return <StudioEyebrow className="mb-5">{children}</StudioEyebrow>;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -75,7 +71,7 @@ function Hero() {
                         variants={wordContainerVariants}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="max-w-5xl text-left text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+                        className={`max-w-5xl text-left ${STUDIO_TYPE.display}`}
                         style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                     >
                         {splitWords("Senior Engineers. Embedded in Your Team.").map((word, i, arr) => {
@@ -100,7 +96,7 @@ function Hero() {
 
                     <motion.p
                         variants={childFade}
-                        className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400"
+                        className={`mt-6 max-w-3xl ${STUDIO_TYPE.lead}`}
                     >
                         Stop overpaying for engineering talent. Our Pakistan-based senior developers and AI engineers
                         integrate directly into your workflow — managed by our US architecture team, accountable to you,
@@ -184,7 +180,7 @@ function HowItWorks() {
                     className="mb-16"
                 >
                     <Eyebrow>how it works</Eyebrow>
-                    <h2 className="max-w-7xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    <h2 className={`max-w-7xl ${STUDIO_TYPE.section}`}>
                         From call to committed engineer in{" "}
                         <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                             48 hours.
@@ -234,7 +230,7 @@ function HowItWorks() {
 ══════════════════════════════════════════════════════════════ */
 const ROLES = [
     {
-        icon: Bot,
+        icon: Workflow,
         title: "AI / ML Engineers",
         description:
             "LLMs, RAG systems, computer vision, NLP pipelines. Production-grade AI, not notebook demos.",
@@ -285,10 +281,10 @@ function RolesAvailable() {
                     className="mb-16"
                 >
                     <Eyebrow>roles available</Eyebrow>
-                    <h2 className="max-w-7xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    <h2 className={`max-w-7xl ${STUDIO_TYPE.section}`}>
                         Senior engineers across every discipline.
                     </h2>
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">
+                    <p className={`mt-4 max-w-2xl ${STUDIO_TYPE.lead}`}>
                         All engineers are vetted through technical interviews, portfolio review, architecture assessment,
                         and a trial task before joining our bench.
                     </p>
@@ -320,6 +316,41 @@ function RolesAvailable() {
                             </motion.div>
                         );
                     })}
+                </motion.div>
+
+                <motion.div
+                    variants={fadeUp(0.14)}
+                    initial="hidden"
+                    animate={isInView ? "show" : "hidden"}
+                    className="mt-8 rounded-[2rem] border border-white/8 bg-neutral-900/55 p-6 backdrop-blur-sm lg:p-8"
+                >
+                    <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+                        <div>
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-accent-light">
+                                Placed engineer proof
+                            </p>
+                            <h3 className={`mt-4 ${STUDIO_TYPE.sectionTight}`}>
+                                {RAMISH_PROFILE.name}
+                            </h3>
+                            <p className="mt-2 text-sm uppercase tracking-[0.2em] text-zinc-500">
+                                {RAMISH_PROFILE.role} · {RAMISH_PROFILE.experience}
+                            </p>
+                            <p className="mt-5 max-w-xl text-sm leading-7 text-zinc-300 sm:text-base">
+                                {RAMISH_PROFILE.summary}
+                            </p>
+                        </div>
+
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            {RAMISH_PROFILE.stackClusters.map((cluster) => (
+                                <div
+                                    key={cluster}
+                                    className="rounded-[1.1rem] border border-white/8 bg-white/[0.03] px-4 py-4 text-sm leading-6 text-zinc-200"
+                                >
+                                    {cluster}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </motion.div>
             </div>
         </section>
@@ -402,13 +433,13 @@ function PricingTransparency() {
                     className="mb-12"
                 >
                     <Eyebrow>pricing transparency</Eyebrow>
-                    <h2 className="max-w-7xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    <h2 className={`max-w-7xl ${STUDIO_TYPE.section}`}>
                         No hidden fees.{" "}
                         <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                             No surprises.
                         </span>
                     </h2>
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">
+                    <p className={`mt-4 max-w-2xl ${STUDIO_TYPE.lead}`}>
                         You know exactly what you&apos;re paying and who you&apos;re paying for. Compare us honestly against every
                         alternative.
                     </p>
@@ -509,7 +540,7 @@ function TechBridgeDifference() {
                     className="mb-16"
                 >
                     <Eyebrow>the techbridge difference</Eyebrow>
-                    <h2 className="max-w-7xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    <h2 className={`max-w-7xl ${STUDIO_TYPE.section}`}>
                         Accountability built into every engagement.
                     </h2>
                 </motion.div>
@@ -561,10 +592,7 @@ function CtaSection() {
                     <motion.div variants={childFade}>
                         <Eyebrow>get started</Eyebrow>
                     </motion.div>
-                    <motion.h2
-                        variants={childFade}
-                        className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl"
-                    >
+                    <motion.h2 variants={childFade} className={STUDIO_TYPE.section}>
                         Your Next Engineer Is{" "}
                         <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                             48 Hours Away.

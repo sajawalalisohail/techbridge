@@ -7,6 +7,7 @@ import CaseStudiesSection from "@/components/home/CaseStudiesSection";
 import ProcessSection from "@/components/home/ProcessSection";
 import WhyUsSection from "@/components/home/WhyUsSection";
 import FinalCTA from "@/components/home/FinalCTA";
+import SpecSheetSection from "@/components/shared/SpecSheetSection";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <ComparisonSection />
       <ProcessSection />
       <WhyUsSection />
+      <SpecSheetSection className="pt-10 lg:pt-12" />
       <FinalCTA />
 
       {/* Subtle accent border glow separating scrolling content from reveal footer */}

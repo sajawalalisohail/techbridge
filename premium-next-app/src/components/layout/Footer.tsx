@@ -7,6 +7,7 @@ import {
     FOOTER_EMAIL,
     FOOTER_SOCIAL_LINKS,
 } from "@/data/site-navigation";
+import StudioLogo from "@/components/shared/StudioLogo";
 
 function HeroClock({ tz }: { tz: string }) {
     const [timeMain, setTimeMain] = useState("--:--");
@@ -109,6 +110,10 @@ export default function Footer() {
                     <div className="grid gap-6 md:gap-14 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,1.25fr)] xl:gap-16">
                         <div className="flex flex-col justify-between">
                             <div>
+                                <div className="mb-6">
+                                    <StudioLogo size="lg" showTagline />
+                                </div>
+
                                 <a
                                     href={`mailto:${FOOTER_EMAIL}`}
                                     className="inline-flex items-center text-[clamp(1.1rem,1.8vw,1.9rem)] font-medium tracking-tight text-white transition-colors duration-300 hover:text-brand-accent-light"
@@ -139,7 +144,7 @@ export default function Footer() {
                             </div>
 
                             <p className="mt-8 md:mt-12 text-xs md:text-sm text-zinc-600">
-                                <span className="tracking-tight text-zinc-400"><span className="font-extrabold">TECH</span><span className="font-medium text-brand-accent">BRIDGE</span></span> <span className="font-mono">&copy; {year}</span>. All rights reserved.
+                                <span className="font-mono">&copy; {year}</span> TechBridge. All rights reserved.
                             </p>
                         </div>
 

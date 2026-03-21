@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BrainCircuit, Code2, Palette, Smartphone, Users, Wrench, Zap } from "lucide-react";
+import { Code2, Layers, Smartphone, Users, Workflow, Wrench, Zap } from "lucide-react";
 
 export interface ServiceCallout {
     label: string;
@@ -70,27 +70,27 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         },
     },
     {
-        id: "ai-lead-generation",
+        id: "ai-ml-business-systems",
         number: "02",
-        category: "AI Powered Lead Generation",
-        icon: BrainCircuit,
-        subHeadline: "Your pipeline is empty because your outreach is manual. We fix that.",
+        category: "AI, ML & Business Systems",
+        icon: Workflow,
+        subHeadline: "Operational AI built like software infrastructure, not a growth hack.",
         description:
-            "We build AI-driven lead generation systems that research prospects, craft personalized outreach, qualify leads, and book sales calls — on autopilot. Most clients see their first booked calls within two weeks of launch.",
+            "High-signal AI systems for research, analytics, automation, and business workflows. We treat applied AI like an engineering problem with interfaces, retrieval, observability, and production safety, not a prompt wrapper with a dashboard.",
         capabilities: [
-            "AI-powered prospect research & enrichment",
-            "Automated multi-channel outreach sequences",
-            "Lead scoring & qualification pipelines",
-            "Meeting booking automation",
-            "CRM integration & pipeline analytics",
-            "Custom AI agents for follow-up",
-            "Workflow orchestration engines",
-            "AI-powered reporting & attribution",
+            "RAG pipelines and private knowledge systems",
+            "LLM workflows for internal tools and operations",
+            "Machine learning for analytics and decision support",
+            "Workflow orchestration for business systems",
+            "Computer vision and document processing pipelines",
+            "Custom APIs and business-system integrations",
+            "MLOps, observability, and production deployment",
+            "Automation interfaces designed for real operators",
         ],
-        stack: ["Python", "LangChain", "OpenAI", "Anthropic", "Pinecone", "FastAPI", "n8n", "Zapier"],
+        stack: ["Python", "TypeScript", "Next.js", "OpenAI", "PostgreSQL", "Docker", "GCP", "Runpod"],
         callout: {
             label: "Founder's Principle",
-            text: "We don't hand you a lead list. We ship autonomous systems that fill your calendar with qualified sales calls while you sleep.",
+            text: "We don't build wrappers. We architect AI systems that fit the real workflow, respect the data boundary, and still hold up when the traffic or complexity gets real.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -124,9 +124,9 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         number: "04",
         category: "Mobile App Development",
         icon: Smartphone,
-        subHeadline: "Apps people actually keep installed.",
+        subHeadline: "Production-grade mobile engineering that performs like a native product.",
         description:
-            "Cross-platform and native mobile apps that feel fast on real devices, not just in the simulator. We handle the full lifecycle: architecture, build, App Store deployment, and the painful parts in between.",
+            "Production-grade mobile engineering. Cross-platform performance that feels native, with deployment pipelines built for rapid iteration and zero-downtime updates.",
         capabilities: [
             "React Native & Flutter cross-platform",
             "Native iOS (Swift) & Android (Kotlin)",
@@ -148,10 +148,10 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         id: "design-branding",
         number: "05",
         category: "UI/UX Design & Branding",
-        icon: Palette,
-        subHeadline: "Design that ships to production, not just Figma.",
+        icon: Layers,
+        subHeadline: "Design systems built to survive contact with engineering and launch.",
         description:
-            "Design systems, brand identity, and UX grounded in actual user research. We design inside the constraints of real engineering systems, so what ships is exactly what was designed. Not a watered-down version.",
+            "High-fidelity design systems. We build visual identities and component libraries in Figma that are architected for direct translation to React and Next.js codebases.",
         capabilities: [
             "User research & persona development",
             "Wireframing & interactive prototyping",
@@ -165,7 +165,7 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         stack: ["Figma", "Adobe Creative Suite", "Framer", "Principle", "Lottie", "Storybook"],
         callout: {
             label: "Founder's Principle",
-            text: "A Figma file isn't a product. We design with engineering constraints in mind from the start, so developers don't spend two sprints negotiating what's 'feasible.'",
+            text: "A Figma file isn't a product. We design with engineering constraints in mind from the start, so developers don't spend two sprints negotiating what's feasible.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -190,7 +190,7 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Redis", "n8n", "Zapier", "AWS"],
         callout: {
             label: "Founder's Principle",
-            text: "Your team shouldn't be copying data between five browser tabs. We build the tool that eliminates that workflow entirely — and your team actually uses it.",
+            text: "Your team shouldn't be copying data between five browser tabs. We build the tool that eliminates that workflow entirely, and your team actually uses it.",
             attribution: "Sajawal Ali Sohail",
         },
     },
@@ -201,7 +201,7 @@ export const SERVICE_SECTIONS: ServiceSectionData[] = [
         icon: Users,
         subHeadline: "Your next senior engineer is already vetted and ready.",
         description:
-            "We place dedicated senior engineers — AI specialists, full-stack developers, mobile devs, QA — directly into your existing team. They join your Slack, your repos, your standups. We handle vetting, management, and architecture oversight. You get the talent without the recruiting overhead or the US price tag.",
+            "We place dedicated senior engineers - AI specialists, full-stack developers, mobile devs, QA - directly into your existing team. They join your Slack, your repos, your standups. We handle vetting, management, and architecture oversight. You get the talent without the recruiting overhead or the US price tag.",
         capabilities: [
             "AI/ML engineers (LLMs, RAG, NLP, computer vision)",
             "Full-stack developers (Next.js, React, Node, Python)",
@@ -247,7 +247,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
         title: "Services",
         links: [
             { label: "Custom Software & SaaS", href: "/services#custom-software" },
-            { label: "AI Powered Lead Generation", href: "/services#ai-lead-generation" },
+            { label: "AI, ML & Business Systems", href: "/services#ai-ml-business-systems" },
             { label: "Mobile App Development", href: "/services#mobile-apps" },
             { label: "UI/UX Design & Branding", href: "/services#design-branding" },
             { label: "Internal Tools & Integrations", href: "/services#internal-tools" },

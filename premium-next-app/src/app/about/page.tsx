@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
@@ -19,6 +19,9 @@ import {
 import { blurFocusIn, slideFromLeft, slideFromRight, wordContainerVariants, wordVariants, ClipReveal } from "@/components/shared/headingAnimations";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
+import StudioEyebrow from "@/components/shared/StudioEyebrow";
+import StudioLogo from "@/components/shared/StudioLogo";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -164,15 +167,11 @@ function FounderCard() {
             <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(circle at 100% 100%, rgba(var(--brand-accent-dark-rgb), 0.12) 0%, rgba(var(--brand-accent-dark-rgb), 0) 50%)" }} />
             <div className="relative z-10 flex h-full flex-col justify-between p-10">
                 <div className="flex items-center gap-3">
-                    <span className="relative flex h-8 w-8 items-center justify-center">
-                        <span className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-accent to-brand-accent-dark opacity-80 blur-sm" />
-                        <span className="relative h-4 w-4 rounded-full bg-white" />
-                    </span>
-                    <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">TechBridge</span>
+                    <StudioLogo size="sm" />
                 </div>
                 <div className="text-center">
                     <span className="block select-none font-mono text-[120px] font-extrabold leading-none tracking-tighter text-white/[0.06]">
-                        TB
+                        STUDIO
                     </span>
                     <p className="mt-2 text-xs font-medium uppercase tracking-widest text-zinc-600">Engineering Firm</p>
                 </div>
@@ -239,18 +238,16 @@ export default function AboutPage() {
                 <section ref={heroRef} className="relative flex min-h-[55vh] items-center overflow-hidden border-b border-white/5">
                     <InteriorHeroBlob preset="about" />
                     <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-32 lg:px-10">
-                        <motion.span variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-                            <span className="h-px w-4 bg-brand-accent/40" />
-                            about us
-                        </motion.span>
-                        <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]">
+                        <motion.div variants={fadeUp(0)} initial="hidden" animate={isHeroInView ? "show" : "hidden"}>
+                            <StudioEyebrow className="mb-5">about us</StudioEyebrow>
+                        </motion.div>
+                        <motion.h1 variants={blurFocusIn(0.1)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className={`max-w-7xl text-left ${STUDIO_TYPE.display}`}>
                             We&apos;re engineers.{" "}
                             <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
                                 Not an agency wearing a tech hat.
                             </span>
                         </motion.h1>
-                        <motion.p variants={fadeUp(0.22)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+                        <motion.p variants={fadeUp(0.22)} initial="hidden" animate={isHeroInView ? "show" : "hidden"} className={`mt-6 max-w-2xl ${STUDIO_TYPE.lead}`}>
                             CS fundamentals, disciplined execution, and a deep discomfort with shipping anything we wouldn&apos;t maintain ourselves.
                         </motion.p>
                     </div>
@@ -262,19 +259,19 @@ export default function AboutPage() {
                             <FounderCard />
                         </motion.div>
                         <motion.div variants={fadeUp(0.15)} initial="hidden" animate={isStoryInView ? "show" : "hidden"} className="flex flex-col justify-center">
-                            <span className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">the short version</span>
+                            <StudioEyebrow className="mb-4">the short version</StudioEyebrow>
                             <motion.h2
                                 variants={slideFromLeft}
                                 initial="hidden"
                                 animate={isStoryInView ? "show" : "hidden"}
-                                className="mb-7 max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                className={`mb-7 max-w-7xl text-left ${STUDIO_TYPE.section}`}
                             >
                                 Started because agencies kept disappointing us too.
                             </motion.h2>
-                            <p className="text-base leading-relaxed text-zinc-400 lg:text-lg">
+                            <p className={STUDIO_TYPE.lead}>
                                 Based in Morgantown, WV. Founded because we kept seeing the same thing: agencies delivering beautiful front-ends on top of architectures that collapse under real load.
                             </p>
-                            <p className="mt-5 text-base leading-relaxed text-zinc-400 lg:text-lg">
+                            <p className={`mt-5 ${STUDIO_TYPE.lead}`}>
                                 We bring actual engineering rigor to B2B companies that need their tech to be an asset, not a liability that slows them down in six months.
                             </p>
                             <div className="mt-10 border-l-2 border-brand-accent/60 pl-6">
@@ -294,15 +291,12 @@ export default function AboutPage() {
                 <section ref={teamRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                         <motion.div variants={fadeUp(0)} initial="hidden" animate={isTeamInView ? "show" : "hidden"} className="mb-14">
-                            <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
-                                who builds your system
-                            </span>
+                            <StudioEyebrow className="mb-4">who builds your system</StudioEyebrow>
                             <motion.h2
                                 variants={slideFromRight}
                                 initial="hidden"
                                 animate={isTeamInView ? "show" : "hidden"}
-                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                className={`max-w-7xl text-left ${STUDIO_TYPE.section}`}
                             >
                                 Names, not titles.
                             </motion.h2>

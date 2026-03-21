@@ -7,6 +7,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { CountUp } from "@/components/shared/CountUp";
 import type { CaseStudy } from "@/data/case-studies";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 /* ─── Animation ──────────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -216,7 +217,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                     variants={fadeUp(0.1)}
                                     initial="hidden"
                                     animate={isHeroInView ? "show" : "hidden"}
-                                    className="mb-4 text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl"
+                                    className={`mb-4 ${STUDIO_TYPE.display}`}
                                 >
                                     {study.client}
                                 </motion.h1>
@@ -226,7 +227,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                     variants={fadeUp(0.18)}
                                     initial="hidden"
                                     animate={isHeroInView ? "show" : "hidden"}
-                                    className="max-w-2xl text-lg leading-relaxed text-zinc-400"
+                                    className={`max-w-2xl ${STUDIO_TYPE.lead}`}
                                 >
                                     {study.heroDescription}
                                 </motion.p>
@@ -266,7 +267,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                 {study.problem.split("\n\n").map((paragraph, i) => (
                                     <p
                                         key={i}
-                                        className="text-base leading-relaxed text-zinc-400 lg:text-lg"
+                                        className={STUDIO_TYPE.lead}
                                     >
                                         {paragraph}
                                     </p>
@@ -297,7 +298,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                 {study.solution.split("\n\n").map((paragraph, i) => (
                                     <p
                                         key={i}
-                                        className="text-base leading-relaxed text-zinc-400 lg:text-lg"
+                                        className={STUDIO_TYPE.lead}
                                     >
                                         {paragraph}
                                     </p>
@@ -325,7 +326,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                                 <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
                                 The Impact
                             </span>
-                            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                            <h2 className={STUDIO_TYPE.section}>
                                 Results that speak for themselves.
                             </h2>
                         </motion.div>
@@ -461,7 +462,7 @@ export default function CaseStudyDetail({ study }: { study: CaseStudy }) {
                     <div className="mx-auto max-w-[100rem] px-6 py-24 lg:px-10">
                         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
                             <div>
-                                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                                <h2 className={STUDIO_TYPE.section}>
                                     Ready to build something{" "}
                                     <span className="bg-gradient-to-r from-brand-accent-light to-brand-accent-light bg-clip-text text-transparent">
                                         like this?

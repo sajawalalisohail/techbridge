@@ -10,7 +10,7 @@ import { MOTION_STAGGER, MOTION_TRANSITIONS } from '@/lib/motion';
 
 const SERVICE_LAYOUT: Record<string, string> = {
   'custom-software': 'xl:col-span-7',
-  'ai-lead-generation': 'xl:col-span-5',
+  'ai-ml-business-systems': 'xl:col-span-5',
   'rapid-deploy': 'xl:col-span-5',
   'mobile-apps': 'xl:col-span-7',
   'design-branding': 'xl:col-span-6',
@@ -20,7 +20,7 @@ const SERVICE_LAYOUT: Record<string, string> = {
 
 const SERVICE_BEST_FIT: Record<string, string> = {
   'custom-software': 'Product teams building a flagship platform or serious internal system.',
-  'ai-lead-generation': 'Operators who need pipeline creation to stop depending on manual outreach.',
+  'ai-ml-business-systems': 'Operators who need AI, analytics, and business systems that work inside real workflows.',
   'rapid-deploy': 'Founders who need a premium web presence live this week, not next quarter.',
   'mobile-apps': 'Teams launching mobile products that need repeat use and production discipline.',
   'design-branding': 'Companies that want design to survive contact with engineering and launch.',

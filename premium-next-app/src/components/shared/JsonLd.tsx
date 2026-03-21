@@ -4,7 +4,7 @@ export default function JsonLd() {
         "@type": "Organization",
         name: "TechBridge",
         url: "https://techbridge.dev",
-        logo: "https://techbridge.dev/logo.png",
+        logo: "https://techbridge.dev/icon",
         description:
             "Senior engineering team building scalable custom software, SaaS platforms, and AI workflows for B2B enterprises.",
         foundingDate: "2023",
@@ -39,7 +39,7 @@ export default function JsonLd() {
         },
         knowsAbout: [
             "Custom Software Development",
-            "AI Workflow Automation",
+            "AI, ML & Business Systems",
             "SaaS Platform Development",
             "API Integration",
             "Enterprise Engineering",
@@ -116,8 +116,8 @@ export default function JsonLd() {
                 position: 2,
                 item: {
                     "@type": "Service",
-                    name: "AI Workflow Automation",
-                    description: "Intelligent automation systems that replace manual processes with AI-powered workflows.",
+                    name: "AI, ML & Business Systems",
+                    description: "Applied AI, machine learning, and business-system engineering for analytics, automation, and production workflows.",
                     provider: { "@type": "Organization", name: "TechBridge" },
                 },
             },

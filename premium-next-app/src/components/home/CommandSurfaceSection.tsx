@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { animate, cubicBezier, stagger } from "animejs";
 import { ArrowRight, Clock3, ShieldCheck, Users2, Workflow } from "lucide-react";
+import { RAMISH_PROFILE } from "@/data/engineer-profiles";
 import { MOTION_TRANSITIONS } from "@/lib/motion";
 
 type CommandMode = "build" | "hire";
@@ -318,6 +319,45 @@ export default function CommandSurfaceSection() {
                         </p>
                       </div>
                     ))}
+
+                    {activeMode === "hire" && (
+                      <div
+                        data-command-item="true"
+                        className="rounded-[1.35rem] border border-brand-accent/20 bg-brand-accent/[0.08] p-4"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-accent-light">
+                              Placed engineer proof
+                            </p>
+                            <h4 className="mt-3 text-lg font-semibold tracking-[-0.03em] text-white">
+                              {RAMISH_PROFILE.name}
+                            </h4>
+                            <p className="mt-1 text-sm text-zinc-300">
+                              {RAMISH_PROFILE.role} · {RAMISH_PROFILE.experience}
+                            </p>
+                          </div>
+                          <div className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-zinc-400">
+                            Embedded
+                          </div>
+                        </div>
+
+                        <p className="mt-4 text-sm leading-6 text-zinc-300">
+                          {RAMISH_PROFILE.summary}
+                        </p>
+
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {RAMISH_PROFILE.stackClusters.slice(0, 3).map((cluster) => (
+                            <span
+                              key={cluster}
+                              className="rounded-full border border-white/8 bg-black/20 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-zinc-300"
+                            >
+                              {cluster}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 

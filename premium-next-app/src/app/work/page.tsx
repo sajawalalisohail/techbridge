@@ -4,6 +4,7 @@ import { type CSSProperties, useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import StudioEyebrow from "@/components/shared/StudioEyebrow";
 import {
     ClipReveal,
     fadeUp,
@@ -24,6 +25,7 @@ import {
 } from "@/data/case-studies";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WORK_SECTIONS: CaseStudyWorkSection[] = [
@@ -120,13 +122,7 @@ const WORK_SECTION_THEME: Record<CaseStudyWorkSection, WorkSectionTheme> = {
 };
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-            <span className="h-px w-4 bg-brand-accent/40" />
-            {children}
-        </span>
-    );
+    return <StudioEyebrow className="mb-4">{children}</StudioEyebrow>;
 }
 
 function LeadProject({ project, theme }: { project: CaseStudy; theme: WorkSectionTheme }) {
@@ -325,7 +321,7 @@ function WorkSection({ section, index }: { section: CaseStudyWorkSection; index:
                         variants={headingAnimation.container}
                         initial="hidden"
                         animate={isInView ? "show" : "hidden"}
-                        className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                        className={`max-w-7xl text-left ${STUDIO_TYPE.section}`}
                         style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                     >
                         {splitWords(meta.title).map((word, wordIndex, arr) => {
@@ -402,7 +398,7 @@ export default function WorkPage() {
                                 variants={wordContainerVariants}
                                 initial="hidden"
                                 animate={isHeroInView ? "show" : "hidden"}
-                                className="max-w-5xl text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl pb-2 pt-1"
+                        className={`max-w-5xl pb-2 pt-1 ${STUDIO_TYPE.display}`}
                                 style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                             >
                                 <motion.span variants={wordVariants} style={{ display: "inline-block" }}>Real</motion.span>
@@ -425,7 +421,7 @@ export default function WorkPage() {
                                     running.
                                 </motion.span>
                             </motion.h1>
-                            <p className="mt-7 max-w-3xl text-lg leading-relaxed text-zinc-400">
+                            <p className={`mt-7 max-w-3xl ${STUDIO_TYPE.lead}`}>
                                 Platforms, internal tools, mobile apps, and rapid websites.
                                 Organized by what they actually are, not buzzword categories.
                             </p>
@@ -466,7 +462,7 @@ export default function WorkPage() {
                                     variants={fadeUp()}
                                 >
                                     <ClipReveal>
-                                        <h2 className="text-3xl font-bold text-white lg:text-4xl">
+                                        <h2 className={STUDIO_TYPE.section}>
                                             Got a project that needs to actually ship?
                                         </h2>
                                     </ClipReveal>

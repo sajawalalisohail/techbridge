@@ -63,7 +63,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     {
         slug: "nextlex",
         client: "NextLex",
-        sector: "Legal SaaS Marketing Website",
+        sector: "Production-Grade Codebase",
         metric: "14 Days",
         metricLabel: "From Concept to Live",
         heroDescription:
@@ -79,7 +79,7 @@ export const CASE_STUDIES: CaseStudy[] = [
             { stat: "Live", label: "Campaign-Ready Delivery" },
         ],
         techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-        tags: ["Marketing Website", "Legal Tech", "Next.js", "Conversion Design"],
+        tags: ["Production-Grade Codebase", "Legal Tech", "Next.js", "Conversion Design"],
         assets: ["/proofs/NextLex/1.png", "/proofs/NextLex/2.png", "/proofs/NextLex/3.png", "/proofs/NextLex/4.png", "/proofs/NextLex/5.png"],
         liveUrl: "https://nextlex.com",
         accentColor: "var(--brand-accent-rgb)",
@@ -92,7 +92,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     {
         slug: "ali-wali",
         client: "Ali Wali Trading Company",
-        sector: "B2B Industrial Website",
+        sector: "Production-Grade Codebase",
         metric: "24 Hours",
         metricLabel: "Rapid Launch Delivery",
         heroDescription:
@@ -108,7 +108,7 @@ export const CASE_STUDIES: CaseStudy[] = [
             { stat: "4x", label: "Increase in Inbound Inquiries" },
         ],
         techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-        tags: ["Rapid Website", "Global Logistics", "Next.js", "B2B Lead Gen"],
+        tags: ["Production-Grade Codebase", "Global Logistics", "Next.js", "B2B Lead Gen"],
         assets: ["/proofs/AliWali/1.png", "/proofs/AliWali/2.png", "/proofs/AliWali/3.png", "/proofs/AliWali/4.png", "/proofs/AliWali/5.png", "/proofs/AliWali/6.png"],
         liveUrl: "https://aliwalitrading.com",
         accentColor: "var(--brand-accent-dark-rgb)",

@@ -57,7 +57,7 @@ const SERVICES: ServiceCard[] = [
         description:
             "We build custom AI systems and intelligent automation that find patterns, streamline operations, and book sales calls backwards-to-front — so your team works smarter.",
         accentColor: "radial-gradient(ellipse at 50% 0%, rgba(var(--brand-accent-rgb), 0.07) 0%, rgba(var(--brand-accent-rgb), 0) 100%)",
-        href: "/services#ai-lead-generation",
+        href: "/services#ai-ml-business-systems",
     },
     {
         id: 4,

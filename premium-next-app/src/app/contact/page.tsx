@@ -3,9 +3,11 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail, MapPin, CheckCircle2 } from "lucide-react";
+import StudioEyebrow from "@/components/shared/StudioEyebrow";
 import { slideFromLeftContainer, slideFromLeftItem, slideFromRight, splitWords } from "@/components/shared/headingAnimations";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
 import { PageFooterGlow } from "@/components/shared/PageFooterGlow";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 /* â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const inputFocusCSS = `
@@ -91,21 +93,15 @@ export default function ContactPage() {
 
                                 {/* â”€â”€ LEFT â€” Hook & Info â”€â”€ */}
                                 <div className="flex flex-col justify-center">
-                                    <motion.span
-                                        variants={fadeUp(0)}
-                                        initial="hidden"
-                                        animate={isInView ? "show" : "hidden"}
-                                        className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600"
-                                    >
-                                        <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
-                                        let&apos;s talk
-                                    </motion.span>
+                                    <motion.div variants={fadeUp(0)} initial="hidden" animate={isInView ? "show" : "hidden"}>
+                                        <StudioEyebrow className="mb-5">let&apos;s talk</StudioEyebrow>
+                                    </motion.div>
 
                                     <motion.h1
                                         variants={slideFromRight}
                                         initial="hidden"
                                         animate={isInView ? "show" : "hidden"}
-                                        className="text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl xl:text-7xl"
+                                        className={STUDIO_TYPE.display}
                                     >
                                         Tell us what you need{" "}
                                         <span className="bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent">
@@ -117,7 +113,7 @@ export default function ContactPage() {
                                         variants={fadeUp(0.2)}
                                         initial="hidden"
                                         animate={isInView ? "show" : "hidden"}
-                                        className="mt-6 text-lg leading-relaxed text-zinc-400"
+                                        className={`mt-6 ${STUDIO_TYPE.lead}`}
                                     >
                                         Describe the problem. We&apos;ll tell you honestly if we&apos;re
                                         the right team, and what it&apos;ll take.
@@ -247,8 +243,8 @@ export default function ContactPage() {
                                                             <option value="saas-platform">
                                                                 SaaS Platform Development
                                                             </option>
-                                                            <option value="ai-automation">
-                                                                AI Workflow Automation
+                                                            <option value="ai-ml-business-systems">
+                                                                AI, ML &amp; Business Systems
                                                             </option>
                                                             <option value="internal-tools">
                                                                 Internal Business Tools
@@ -329,15 +325,12 @@ export default function ContactPage() {
                     <section className="py-24 lg:py-32">
                         <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                             <div className="mb-10">
-                                <span className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
-                                    prefer a call?
-                                </span>
+                                <StudioEyebrow className="mb-4">prefer a call?</StudioEyebrow>
                                 <motion.h2
                                     variants={slideFromLeftContainer}
                                     initial="hidden"
                                     animate={isInView ? "show" : "hidden"}
-                                    className="text-3xl font-bold tracking-tight text-white lg:text-4xl"
+                                    className={STUDIO_TYPE.section}
                                     style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                                 >
                                     {splitWords("Skip the form. Grab a time.").map((word, index) => (
@@ -346,7 +339,7 @@ export default function ContactPage() {
                                         </motion.span>
                                     ))}
                                 </motion.h2>
-                                <p className="mt-3 max-w-lg text-base text-zinc-400">
+                                <p className={`mt-3 max-w-lg ${STUDIO_TYPE.body}`}>
                                     30 minutes with the engineer who&apos;d actually work on your project. No sales rep.
                                 </p>
                             </div>

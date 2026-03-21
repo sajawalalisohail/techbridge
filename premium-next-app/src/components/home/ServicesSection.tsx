@@ -59,7 +59,7 @@ const TABS: ServiceTab[] = [
         description:
             "From automated lead generation pipelines to custom machine learning models, we build smart systems so your team works smarter instead of harder.",
         stats: ["Autopilot outreach", "Process automation", "Custom ML models"],
-        cta: { label: "Learn more →", href: "/services#ai-lead-generation" },
+        cta: { label: "Learn more →", href: "/services#ai-ml-business-systems" },
     },
 ];
 

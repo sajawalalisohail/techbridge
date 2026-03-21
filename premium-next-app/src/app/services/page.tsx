@@ -4,11 +4,13 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import TechStackMarquee from "@/components/home/TechStackMarquee";
 import { InteriorHeroBlob } from "@/components/shared/InteriorHeroBlob";
+import StudioEyebrow from "@/components/shared/StudioEyebrow";
 import { wordContainerVariants, wordVariants, splitWords } from "@/components/shared/headingAnimations";
 import dynamic from "next/dynamic";
 import { SERVICE_SECTIONS } from "@/data/site-navigation";
+import SpecSheetSection from "@/components/shared/SpecSheetSection";
+import { STUDIO_TYPE } from "@/lib/type-system";
 
 const ServicesProcessShowcase = dynamic(
     () => import("@/components/services/ServicesProcessShowcase"),
@@ -68,7 +70,7 @@ function ServiceSection({
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: "-40px" }}
-                    className="mb-5 text-2xl font-bold leading-snug tracking-tight text-white lg:text-3xl"
+                    className={`mb-5 ${STUDIO_TYPE.sectionTight} leading-snug`}
                     style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                 >
                     {splitWords(section.subHeadline).map((word, i, arr) => {
@@ -167,15 +169,12 @@ export default function ServicesPage() {
                             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            <span className="mb-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" /><span className="h-px w-4 bg-brand-accent/40" />
-                                services
-                            </span>
+                            <StudioEyebrow className="mb-5">services</StudioEyebrow>
                             <motion.h1
                                 variants={wordContainerVariants}
                                 initial="hidden"
                                 animate={isHeroInView ? "show" : "hidden"}
-                                className="max-w-7xl text-left text-3xl font-medium tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.15]"
+                                className={`max-w-7xl text-left ${STUDIO_TYPE.display}`}
                                 style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "0 0.3em" }}
                             >
                                 {splitWords("What we build, who we place, and what it costs you to").map((word, i) => (
@@ -191,7 +190,7 @@ export default function ServicesPage() {
                                     wait.
                                 </motion.span>
                             </motion.h1>
-                            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
+                            <p className={`mt-6 max-w-3xl ${STUDIO_TYPE.lead}`}>
                                 Seven service lines, one delivery standard, and a process built to move like an engineering system instead of an agency brochure. Pick the line that matches your problem — or the engineer that matches your team.
                             </p>
 
@@ -305,8 +304,11 @@ export default function ServicesPage() {
                     </div>
                 </div>
 
-                {/* â”€â”€ Tech Stack â”€â”€ */}
-                <TechStackMarquee />
+                <SpecSheetSection
+                    eyebrow="Spec sheet"
+                    title="The technical baseline behind the service catalog."
+                    description="The same engineering posture powers custom systems, mobile builds, design-system delivery, and embedded senior execution."
+                />
 
                 {/* Subtle lime border glow separating the scrolling content from the reveal footer */}
                 <div

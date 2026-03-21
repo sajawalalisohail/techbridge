@@ -93,7 +93,7 @@ export default function Hero() {
       />
 
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        <HeroBlobBackground variant="contained" className="scale-[1.08] opacity-90" />
+        <HeroBlobBackground variant="contained" className="translate-y-8 scale-[1.08] opacity-90" />
       </div>
 
       <div
@@ -108,29 +108,28 @@ export default function Hero() {
 
       <div
         ref={copyRef}
-        className="relative z-10 mx-auto max-w-[100rem] px-6 pb-8 pt-24 sm:pt-28 lg:px-10 lg:pb-10"
+        className="relative z-10 mx-auto max-w-[100rem] px-6 pb-8 pt-20 sm:px-8 sm:pt-24 lg:px-10 lg:pb-10"
       >
-        <div className="flex min-h-[calc(100svh-5.75rem)] flex-col justify-between gap-8">
-          <div className="mx-auto flex max-w-5xl flex-1 flex-col items-center justify-center text-center">
+        <div className="flex min-h-[calc(100svh-5.75rem)] flex-col justify-center">
+          <div className="mx-auto flex max-w-[74rem] flex-col items-center text-center">
             <div
               data-hero-copy="true"
-              className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-300 backdrop-blur-md"
+              className="inline-flex items-center rounded-full border border-white/8 bg-white/[0.025] px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-zinc-500 backdrop-blur-sm"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent-light shadow-[0_0_12px_rgba(var(--brand-accent-light-rgb),0.7)]" />
-              Obsidian Cobalt Delivery Model
+              Custom software / AI systems / embedded senior engineers
             </div>
 
-            <h1 className="mt-7 max-w-none text-[clamp(2.6rem,5.4vw,5.6rem)] font-light leading-[0.92] tracking-[-0.05em] text-white">
+            <h1 className="mt-8 max-w-[15.5ch] text-[clamp(2.8rem,5.3vw,5.35rem)] font-light leading-[1.03] tracking-[-0.055em] text-white">
               {HERO_HEADLINE.map((line, lineIndex) => (
                 <span
                   key={`hero-line-${lineIndex}`}
-                  className="block overflow-hidden pb-2 lg:whitespace-nowrap"
+                  className="block overflow-visible pb-[0.12em] lg:whitespace-nowrap"
                 >
                   {line.map((word) => (
                     <span
                       key={word.text}
                       data-hero-word="true"
-                      className={`mr-[0.22em] inline-block ${
+                      className={`mr-[0.18em] inline-block pb-[0.09em] ${
                         word.accent
                           ? "bg-gradient-to-r from-white via-brand-accent-light to-brand-accent bg-clip-text text-transparent"
                           : word.muted
@@ -147,44 +146,49 @@ export default function Hero() {
 
             <p
               data-hero-copy="true"
-              className="mt-6 max-w-3xl text-base leading-7 text-zinc-300 sm:text-lg"
+              className="mt-5 flex max-w-[50rem] flex-col items-center text-[15px] leading-[1.72] text-zinc-300 sm:text-[16px] lg:text-[15px]"
             >
-              TechBridge builds custom software, AI systems, and premium web presences while also
-              embedding vetted senior engineers directly into client teams. The result is sharper
-              execution, clearer accountability, and less agency drag.
+              <span className="inline-block text-center lg:whitespace-nowrap">
+                TechBridge builds custom software, AI systems, and premium web presences
+              </span>
+              <span className="inline-block text-center lg:whitespace-nowrap">
+                while embedding vetted senior engineers directly into client teams. The result is sharper execution, clearer accountability, and less agency drag.
+              </span>
             </p>
 
             <p
               data-hero-copy="true"
-              className="mt-4 max-w-2xl text-sm leading-6 text-zinc-500 sm:text-[15px]"
+              className="mt-3 max-w-none text-sm leading-7 text-zinc-500 sm:text-[15px] lg:whitespace-nowrap"
             >
               West Virginia leadership. Senior execution in Pakistan. Structured like a command
               surface instead of a handoff maze.
             </p>
 
-            <div data-hero-copy="true" className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="/contact"
-                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(var(--brand-accent-rgb),0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-light"
-              >
-                Start a Project
-                <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
+            <div data-hero-copy="true" className="mt-9 flex flex-col items-center gap-4">
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  href="/contact"
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(var(--brand-accent-rgb),0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-light"
+                >
+                  Start a Project
+                  <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
+                </Link>
 
-              <Link
-                href="/staff-augmentation"
-                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/50 hover:bg-brand-accent/[0.12]"
-              >
-                Hire Engineers
-                <ArrowUpRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+                <Link
+                  href="/staff-augmentation"
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/50 hover:bg-brand-accent/[0.12]"
+                >
+                  Hire Engineers
+                  <ArrowUpRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
 
-              <Link
-                href="/work"
-                className="inline-flex min-h-12 items-center justify-center text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
-              >
-                See Selected Work
-              </Link>
+                <Link
+                  href="/work"
+                  className="inline-flex min-h-12 items-center justify-center px-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                >
+                  See Selected Work
+                </Link>
+              </div>
             </div>
           </div>
         </div>

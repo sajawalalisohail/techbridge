@@ -2,18 +2,29 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useJellyMorphScrollProgress } from "@/lib/jelly-morph-context";
 
 const JellyMorphCanvas = dynamic(
   () => import("@/3d/components/JellyMorphParticles").then((mod) => mod.JellyMorphCanvas),
   { ssr: false }
 );
+const PageParticles = dynamic(
+  () => import("@/3d/components/PageParticles").then((mod) => mod.PageParticles),
+  { ssr: false }
+);
 
 export function PageParticlesWrapper() {
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
   const scrollProgressRef = useJellyMorphScrollProgress();
   const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isHomepage) {
+      return;
+    }
+
     let frameId = 0;
 
     const tick = () => {
@@ -40,7 +51,25 @@ export function PageParticlesWrapper() {
     frameId = window.requestAnimationFrame(tick);
 
     return () => window.cancelAnimationFrame(frameId);
-  }, [scrollProgressRef]);
+  }, [isHomepage, scrollProgressRef]);
+
+  if (isHomepage) {
+    return (
+      <div className="relative h-full w-full">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 30%, rgba(var(--brand-accent-light-rgb), 0.08) 0%, rgba(var(--brand-accent-rgb), 0.05) 24%, rgba(var(--brand-accent-deep), 0) 62%)",
+            filter: "blur(28px)",
+            transform: "scale(1.02)",
+          }}
+        />
+        <PageParticles />
+      </div>
+    );
+  }
 
   return (
     <div className="relative h-full w-full">

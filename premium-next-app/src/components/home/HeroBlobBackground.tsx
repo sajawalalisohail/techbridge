@@ -1,11 +1,22 @@
 "use client";
 
-export default function HeroBlobBackground() {
+interface HeroBlobBackgroundProps {
+  variant?: "fullscreen" | "contained";
+  className?: string;
+}
+
+export default function HeroBlobBackground({
+  variant = "fullscreen",
+  className = "",
+}: HeroBlobBackgroundProps) {
+  const wrapperClassName =
+    variant === "contained"
+      ? `absolute inset-0 overflow-hidden pointer-events-none ${className}`.trim()
+      : `hero-blob-wrapper ${className}`.trim();
+
   return (
-    <div className="hero-blob-wrapper" aria-hidden="true">
-      {/* Anchor container that handles the bouncing float animation */}
+    <div className={wrapperClassName} aria-hidden="true">
       <div className="hero-blob-floater">
-        {/* The single strictly circular aura layer that spins with the pizza-slice gradient */}
         <div className="hero-blob-aura" />
       </div>
     </div>

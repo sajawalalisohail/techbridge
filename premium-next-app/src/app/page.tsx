@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/home/TrustBar";
+import CommandSurfaceSection from "@/components/home/CommandSurfaceSection";
 import JellyMorphServicesSection from "@/components/home/JellyMorphServicesSection";
 import ComparisonSection from "@/components/home/ComparisonSection";
 import CaseStudiesSection from "@/components/home/CaseStudiesSection";
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustBar />
+      <CommandSurfaceSection />
       <JellyMorphServicesSection />
       <CaseStudiesSection />
       <ComparisonSection />

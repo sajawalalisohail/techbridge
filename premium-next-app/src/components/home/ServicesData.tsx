@@ -1,8 +1,9 @@
-import React from "react";
+import type { ReactNode } from "react";
+import { SERVICE_SECTIONS } from "@/data/site-navigation";
 
 export interface ToolIcon {
     name: string;
-    svg: React.ReactNode;
+    svg: ReactNode;
 }
 
 export interface ServiceCardData {
@@ -23,105 +24,111 @@ export const SVGS = {
     flutter: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.471 6.47H21.7l-6.471-6.471 6.471-6.471h-7.372z" /></svg>,
     ts: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M1.1 0C.5 0 0 .5 0 1.1v21.8C0 23.5.5 24 1.1 24h21.8c.6 0 1.1-.5 1.1-1.1V1.1C24 .5 23.5 0 22.9 0H1.1zm10.1 11.5v5.3h-1.8V9.5h5.4v1.5h-3.6zm5.8 5.4c-1.8 0-2.9-1-3.1-2.3l1.6-.7c.1.6.6 1.4 1.5 1.4 1 0 1.3-.7 1.3-1.1 0-.9-2.6-1-2.6-2.7 0-1.4 1.1-2.5 2.9-2.5 1.3 0 2.5.8 2.8 2.1l-1.6.7c-.2-.7-.6-1.2-1.2-1.2-.6 0-1.1.4-1.1.9 0 .8 2.6 1 2.6 2.8 0 1.5-1.1 2.6-2.9 2.6z" /></svg>,
     figma: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 12c-2.2 0-4-1.8-4-4s1.8-4 4-4h4v8H8zm4-8h4c2.2 0 4 1.8 4 4s-1.8 4-4 4h-4V4zm0 8h4c2.2 0 4 1.8 4 4s-1.8 4-4 4h-4v-8zm-4 8c-2.2 0-4-1.8-4-4s1.8-4 4-4h4v8H8zm4 0v4c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4h4v-4h-4z" /></svg>,
-    blender: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3L5.8 2.9 2.8 8.9l.5 6.6 5.1 5.7 6.5 0 5.2-4.6 1.4-6.2L18.2 3.8 12 .3zM12 6c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6 2.7-6 6-6zm0 2.5c-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5 3.5 3.5 3.5-1.6 3.5-3.5-1.6-3.5-3.5-3.5z" /></svg>,
-    sketch: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 8l11 14L23 8 12 2zm0 2.8L18.7 7H5.3L12 4.8zM3.5 8h3.3l4.6 10.7L3.5 8zm13.7 0h3.3L12.5 18.7 17.2 8zM9.4 8h5.3l-2.6 8L9.4 8z" /></svg>,
     adobexd: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M2.6 1.9h18.8v18.8H2.6V1.9zM11 14.9c0-1.8.8-2.9 2.4-2.9 1.3 0 2.4.9 2.4 2.1v-2h2V17h-2v-1.6c-.8 1.3-1.8 1.8-3 1.8-1.5 0-1.8-.6-1.8-2.3zm8.6-.9v0l1.8 2.9h-2.1v0c-.2.4-.4.8-.7 1.1h2.2L17.2 14zM14.6 15.7c0 .6-.3.8-.8.8-.5 0-1-.3-1-1.5V13c.1 0 .2 0 .2.1.2.1.4.3.5.6.2.3.3.7.3 1v.9zM7 9l1.6 2.8L7.2 14h1.8l.6-1.1c.2.3.3.6.5.9h0c.2.3.3.4.5.9l.7 1.1H13l-1.5-2.3L13.1 9h-1.8l-.6 1c-.1.3-.3.5-.4.8h0c-.1-.3-.2-.5-.4-.8L9.3 9H7z" /></svg>,
     hubspot: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13 1.2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm-8.8 8.8a2.5 2.5 0 0 0-1.4 4.6l3.2 3.2c0 .2-.1.5-.1.7 0 1.9 1.6 3.5 3.5 3.5s3.5-1.6 3.5-3.5c0-.8-.3-1.5-.7-2.1l2.8-2.8c1.2.5 2.6.5 3.8 0L20.9 15.8a2.5 2.5 0 1 0 1.2-1.9l-2.1-2.1c.2-1.3.1-2.6-.3-3.8L17.7 4.3a3 3 0 0 0-.9 1.9l1.7 2.9a2.5 2.5 0 0 1 .1 2.3 4 4 0 0 0-3.5 2.1c-1.3 0-2.4-.9-2.9-2.1L9.7 9.1a3.5 3.5 0 0 0-1.1-.7L5.5 5.3A2.5 2.5 0 0 0 4.2 10z" /></svg>,
     salesforce: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 6.4c-1.7-1.2-4.2-.6-5.3 1-.7-1.2-2-1.8-3.4-1.6-1.4.3-2.5 1.4-2.7 2.9-1 0-1.9.6-2.2 1.5-.3.9 0 2 1 2.5v0h14.9s1.4 0 2.1-1c.7-1 .3-2.6-.9-3.2-1-.5-2-1.5-3.6-2.1z" /></svg>,
-    googleanalytics: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 12.4l-3.3-3.3a1.6 1.6 0 0 0-2.3 0l-3.1 3.1L9.6 8.8V4.6a1.6 1.6 0 0 0-3.2 0v14.8h15.2a1.6 1.6 0 1 0 0-3.2h-10l2.7-2.7L17.2 16.4a1.6 1.6 0 0 0 2.3 0l3-3a1.6 1.6 0 0 0 0-2.3" /></svg>,
-    x: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.2h3.7l-8 9.2L24 22.8H16.6l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9zM17.6 20.6h2L6.5 3.2H4.3z" /></svg>,
-    arduino: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-4.8 4.8c2.7 0 4.8 2.2 4.8 4.8v4.8c0 2.7-2.2 4.8-4.8 4.8-2.7 0-4.8-2.2-4.8-4.8V9.6c0-2.7 2.2-4.8 4.8-4.8zm9.6 0c2.7 0 4.8 2.2 4.8 4.8v4.8c0 2.7-2.2 4.8-4.8 4.8-2.7 0-4.8-2.2-4.8-4.8V9.6c0-2.7 2.2-4.8 4.8-4.8zm-2.4 8.4V8.4H19v4.8h-4.8zM4.8 13.2h4.8V12H4.8v1.2zM15.6 13.2h2.4v-2.4h1.2v2.4h2.4v1.2h-2.4v2.4h-1.2v-2.4h-2.4v-1.2z" /></svg>,
-    pi: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 10.3c.5 0 .9.4 1 .8l1.3 7.8c.1.6 1.1.6 1.3 0l1.4-8.7a1 1 0 0 0-1.9-.3l-.9 5.6-1.1-6.3a1 1 0 0 0-1.9.1l-1.1 6.3-.9-5.6a1 1 0 0 0-1.9.3l1.4 8.7c.1.6 1.1.6 1.3 0l1.3-7.8a1 1 0 0 0 1-.8zm8.8 3.5a5 5 0 0 0-1.8-4.8l-1.4 1.4a3 3 0 0 1-5.5-2.1l-1.9-1.9a1 1 0 0 0-1.5 0 1 1 0 0 0 0 1.5l1.1 1.4zM3.7 13.8a5 5 0 0 0 9.2 3.5l-1.4-1.4a3 3 0 0 1-5.5-2.1l-1.9-1.9a1 1 0 0 0-1.5 0 1 1 0 0 0 0 1.5l1.1 1.4z" /></svg>,
-    cpp: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M5.4 15.6c-.6 0-1.2-.2-1.6-.6-.4-.4-.6-1-.6-1.6 0-.6.2-1.2.6-1.6.4-.4 1-.6 1.6-.6.6 0 1.2.2 1.6.6.4.4.6 1 .6 1.6h2c0-1.2-.4-2.2-1.2-3-1-.8-2.2-1.2-3.4-1.2-1.2 0-2.4.4-3.4 1.2C.8 11.2.4 12.2.4 13.4c0 1.2.4 2.2 1.2 3 1 .8 2.2 1.2 3.4 1.2 1.2 0 2.4-.4 3.4-1.2h-2c-.4.4-1 .6-1.6.6zm9-1.4v-1.6h1.6V11H14.4V9.6h-1.6V11H11.2v1.6h1.6v1.6H14.4zm6.6 0v-1.6h1.6V11H21V9.6H19.4V11H17.8v1.6h1.6v1.6H21z" /></svg>,
     aws: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13 9.9c-.3-.1-.9-.3-1.5-.3-1.6 0-2.6 1.2-2.6 2.6 0 1.3.8 2.3 2.3 2.3 1.1 0 1.6-.5 1.9-.7V9.9zm2.1 6.1h-1.9V14.9c-.5.8-1.5 1.3-2.5 1.3-2.1 0-3.6-1.5-3.6-3.6 0-2.1 1.5-3.6 3.6-3.6 1 0 1.8.4 2.5 1.1V9h1.9v7zm4.7-4.7L21 6.4h-1.9l.1 4.1-1.3-4.1h-1.3l-1.3 4.1-.3-4.1H13l1.5 7.1h1.8l1-3.2 1 3.2h1.8l1.4-7h-1.8l-.3 1.7zm-14.7 4.7H3.3V9h1.8v7zm-2 .2C1.6 15.1 1 14 1 12.9c0-1.8 1.4-3.1 3.6-3.1 2.3 0 3.8 1.4 3.8 3.3 0 1.8-1.4 3.3-3.6 3.4-.6 0-1.1-.1-1.7-.3zM12 22.8c-6.6 0-12-5.3-12-11.9V8h3v3h18.2c0 5.6-2.6 11.9-6.2 11.9z" /></svg>,
     vercel: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.5H0l12-21 12 21z" /></svg>,
+    python: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.1 2c-4.8 0-4.5 2.1-4.5 2.1v2.2h4.6V7H5.7S2 6.6 2 12c0 5.4 3.2 5.2 3.2 5.2h1.9v-2.7s-.1-3.2 3.2-3.2h5.4s3-.1 3-2.9V4.9S19.1 2 14 2h-1.9zm-2.5 1.6a1 1 0 1 1 0 2.1 1 1 0 0 1 0-2.1zM11.9 22c4.8 0 4.5-2.1 4.5-2.1v-2.2h-4.6V17h6.5s3.7.4 3.7-5c0-5.2-3.2-5.2-3.2-5.2h-1.9v2.7s.1 3.2-3.2 3.2H8.3s-3 .1-3 2.9v3.5S4.9 22 10 22h1.9zm2.5-1.6a1 1 0 1 1 0-2.1 1 1 0 0 1 0 2.1z" /></svg>,
+    openai: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.98 1.5a4.55 4.55 0 0 0-3.95 2.3L3.8 6.24A4.56 4.56 0 0 0 1.5 10.2c0 1.4.64 2.7 1.73 3.56a4.6 4.6 0 0 0 .56 5.54 4.53 4.53 0 0 0 5.47.66 4.56 4.56 0 0 0 7.9 0 4.54 4.54 0 0 0 5.47-.66 4.58 4.58 0 0 0 .56-5.54 4.55 4.55 0 0 0-.3-7.52 4.57 4.57 0 0 0-6.58-1.5 4.52 4.52 0 0 0-4.33-3.24zm0 2.04c1.1 0 2.08.58 2.64 1.47l-2.62 1.5-2.62-1.5a3.03 3.03 0 0 1 2.6-1.47zm-5.66 4.1 2.63 1.51v3.03L6.32 13.7a3.03 3.03 0 0 1 0-6.06zm11.36 0a3.03 3.03 0 0 1 0 6.06l-2.63-1.52V9.15l2.63-1.5zm-5.7-.33 2.63 1.51v3.03l-2.63 1.52-2.63-1.52V8.82l2.63-1.51zm-5.66 8.99 2.63-1.52 2.62 1.52v3.03a3.03 3.03 0 0 1-5.25-3.03zm11.36 0a3.03 3.03 0 0 1-5.25 3.03V16.3l2.62-1.52 2.63 1.52z" /></svg>,
+    framer: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l-6 6h6l-12 12V9l6-6H6V3z" /></svg>,
+    storybook: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M5.5 2.7 18.8 1.8l-.1 16.5-6.8 3.9-6.5-3.2.1-16.3zm10.7 1.5-7.9.6-.3 13.1 3.8 1.9 4.1-2.4.3-13.2zM9.4 8.8c0-1.3 1-2.1 2.7-2.1 1.7 0 2.7.8 2.8 2.2h-1.5c0-.5-.4-.9-1.2-.9-.7 0-1.1.3-1.1.8 0 .4.3.7 1.3.8 1.7.3 2.6.8 2.6 2.2 0 1.4-1.1 2.3-2.9 2.3-1.9 0-3-.9-3-2.4H10c0 .7.5 1.1 1.5 1.1.8 0 1.3-.3 1.3-.8 0-.4-.3-.7-1.2-.8-1.9-.3-2.6-1-2.6-2.3z" /></svg>,
+    reactnative: <svg width="24" height="24" viewBox="-11.5 -10.231 23 20.463" fill="currentColor"><circle cx="0" cy="0" r="2.05" /><g stroke="currentColor" strokeWidth="1" fill="none"><ellipse rx="11" ry="4.2" /><ellipse rx="11" ry="4.2" transform="rotate(60)" /><ellipse rx="11" ry="4.2" transform="rotate(120)" /></g><path d="M0-7.5v15" stroke="currentColor" strokeWidth="1" opacity="0.35" /></svg>,
+    firebase: <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M5 19.5 7.5 3.9c.1-.7.9-.9 1.3-.3l2.2 4-4.8 11.9c-.2.5-1 .5-1.2 0zm2.4.3L18.3 4.5c.4-.5 1.2-.2 1.2.4l-1.3 14.4c0 .3-.2.5-.4.6l-5.4 3-5-3.1zm3.1-12.8 1.8-3.4c.3-.5 1-.5 1.3 0L19 13.9l-8.3-6.9z" /></svg>,
 };
 
-export const SERVICES_DATA: ServiceCardData[] = [
-    {
-        id: "design",
-        number: "01",
-        title: "Product Design",
-        description: "End-to-end product design—from research and UX flows to polished UI systems and developer-ready handoff.",
-        services: ["User Research & Strategy", "UX Flows & Wireframes", "UI Systems & Prototypes", "Design Ops & Dev Handoff"],
-        tools: [
-            { name: "Figma", svg: SVGS.figma },
-            { name: "Sketch", svg: SVGS.sketch },
-            { name: "Adobe XD", svg: SVGS.adobexd },
-            { name: "Blender", svg: SVGS.blender }
-        ],
-        href: "/services/design",
-    },
-    {
-        id: "dev",
-        number: "02",
-        title: "Development",
-        description: "Robust, scalable products across web and mobile—from elegant UIs to reliable APIs and automated DevOps.",
-        services: ["Frontend Platforms (React / Next)", "Backend APIs & Microservices (Node)", "Mobile & Cross-platform (Flutter)", "CI/CD & Cloud Ops (Docker)"],
-        tools: [
-            { name: "React", svg: SVGS.react },
-            { name: "Next.js", svg: SVGS.nextjs },
-            { name: "Node.js", svg: SVGS.node },
-            { name: "Docker", svg: SVGS.docker },
-            { name: "Flutter", svg: SVGS.flutter },
-            { name: "TypeScript", svg: SVGS.ts }
-        ],
-        href: "/services/development",
-    },
-    {
-        id: "gtm",
-        number: "03",
-        title: "GTM Strategy",
-        description: "Data-driven go-to-market for SaaS and AI—clear positioning, smart pricing, and repeatable growth loops.",
-        services: ["ICP & Segmentation", "Narrative & Messaging", "Pricing & Packaging", "Demand Gen & Content"],
-        tools: [
-            { name: "HubSpot", svg: SVGS.hubspot },
-            { name: "Salesforce", svg: SVGS.salesforce },
-            { name: "Google Analytics", svg: SVGS.googleanalytics },
-            { name: "X", svg: SVGS.x }
-        ],
-        href: "/services/gtm",
-    },
-    {
-        id: "staff",
-        number: "04",
-        title: "Staff Augmentation",
-        description: "Senior developers and AI engineers embedded in your team. Managed by our internal architects, accountable entirely to you.",
-        services: ["48-Hour Placement", "Senior & Staff Level", "Full-stack & AI Experts", "US Architecture Oversight"],
-        tools: [
-            { name: "TypeScript", svg: SVGS.ts },
-            { name: "Node.js", svg: SVGS.node },
-            { name: "AWS", svg: SVGS.aws },
-            { name: "React", svg: SVGS.react }
-        ],
-        href: "/staff-augmentation",
-    },
-    {
-        id: "web",
-        number: "05",
-        title: "24-Hour Websites",
-        description: "A real website. Custom code, not a template. Architected natively. Deployed and live before you wake up tomorrow.",
-        services: ["Custom Next.js Frontend", "Vercel Edge Deployment", "100 Lighthouse Score", "CMS Integration"],
-        tools: [
-            { name: "Next.js", svg: SVGS.nextjs },
-            { name: "React", svg: SVGS.react },
-            { name: "Vercel", svg: SVGS.vercel },
-            { name: "Figma", svg: SVGS.figma }
-        ],
-        href: "/websites",
-    },
-    {
-        id: "iot",
-        number: "06",
-        title: "IoT Development",
-        description: "From device firmware to cloud ingestion—secure, reliable IoT systems with OTA updates and telemetry.",
-        services: ["Embedded Firmware & Drivers", "BLE / Zigbee / LoRa", "MQTT & Stream Processing", "Edge AI & OTA Pipelines"],
-        tools: [
-            { name: "Arduino", svg: SVGS.arduino },
-            { name: "Raspberry Pi", svg: SVGS.pi },
-            { name: "C/C++", svg: SVGS.cpp },
-            { name: "AWS Edge", svg: SVGS.aws }
-        ],
-        href: "/services/iot",
+const HOMEPAGE_SERVICE_ORDER = [
+    "design-branding",
+    "custom-software",
+    "ai-ml-business-systems",
+    "mobile-apps",
+    "internal-tools",
+    "staff-augmentation",
+    "rapid-deploy",
+] as const;
+
+const HOMEPAGE_SUMMARIES: Record<(typeof HOMEPAGE_SERVICE_ORDER)[number], string> = {
+    "design-branding":
+        "Design systems and brand work grounded in research, built to translate cleanly into production code.",
+    "custom-software":
+        "Multi-tenant platforms, internal tools, and SaaS products architected so your next hire can actually understand the codebase.",
+    "ai-ml-business-systems":
+        "Operational AI, analytics, and automation systems built like product infrastructure instead of prompt wrappers.",
+    "mobile-apps":
+        "Cross-platform and native apps that feel fast on real devices and hold up once they hit production.",
+    "internal-tools":
+        "Dashboards, workflows, and integrations that replace the manual browser-tab maze slowing teams down.",
+    "staff-augmentation":
+        "Senior developers and AI engineers embedded in your team, managed inside our global engineering office.",
+    "rapid-deploy":
+        "A real website. Custom code, not a template. Deployed and live before you wake up tomorrow.",
+};
+
+const HOMEPAGE_TOOLS: Record<(typeof HOMEPAGE_SERVICE_ORDER)[number], ToolIcon[]> = {
+    "design-branding": [
+        { name: "Figma", svg: SVGS.figma },
+        { name: "Adobe XD", svg: SVGS.adobexd },
+        { name: "Framer", svg: SVGS.framer },
+        { name: "Storybook", svg: SVGS.storybook },
+    ],
+    "custom-software": [
+        { name: "Next.js", svg: SVGS.nextjs },
+        { name: "TypeScript", svg: SVGS.ts },
+        { name: "Docker", svg: SVGS.docker },
+        { name: "AWS", svg: SVGS.aws },
+    ],
+    "ai-ml-business-systems": [
+        { name: "Python", svg: SVGS.python },
+        { name: "OpenAI", svg: SVGS.openai },
+        { name: "Docker", svg: SVGS.docker },
+        { name: "Next.js", svg: SVGS.nextjs },
+    ],
+    "mobile-apps": [
+        { name: "React Native", svg: SVGS.reactnative },
+        { name: "Flutter", svg: SVGS.flutter },
+        { name: "Firebase", svg: SVGS.firebase },
+        { name: "TypeScript", svg: SVGS.ts },
+    ],
+    "internal-tools": [
+        { name: "Next.js", svg: SVGS.nextjs },
+        { name: "TypeScript", svg: SVGS.ts },
+        { name: "HubSpot", svg: SVGS.hubspot },
+        { name: "Salesforce", svg: SVGS.salesforce },
+    ],
+    "staff-augmentation": [
+        { name: "React", svg: SVGS.react },
+        { name: "Node.js", svg: SVGS.node },
+        { name: "AWS", svg: SVGS.aws },
+        { name: "TypeScript", svg: SVGS.ts },
+    ],
+    "rapid-deploy": [
+        { name: "Next.js", svg: SVGS.nextjs },
+        { name: "Vercel", svg: SVGS.vercel },
+        { name: "Figma", svg: SVGS.figma },
+        { name: "React", svg: SVGS.react },
+    ],
+};
+
+function getServiceSection(id: (typeof HOMEPAGE_SERVICE_ORDER)[number]) {
+    const section = SERVICE_SECTIONS.find((item) => item.id === id);
+
+    if (!section) {
+        throw new Error(`Missing homepage service section for ${id}`);
     }
-];
+
+    return section;
+}
+
+export const SERVICES_DATA: ServiceCardData[] = HOMEPAGE_SERVICE_ORDER.map((id, index) => {
+    const section = getServiceSection(id);
+
+    return {
+        id: section.id,
+        number: `${index + 1}`.padStart(2, "0"),
+        title: section.category,
+        description: HOMEPAGE_SUMMARIES[id],
+        services: section.capabilities.slice(0, 4),
+        tools: HOMEPAGE_TOOLS[id],
+        href: id === "rapid-deploy" ? "/websites" : `/services#${section.id}`,
+    };
+});

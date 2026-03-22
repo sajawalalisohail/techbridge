@@ -1,74 +1,21 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
+import { getCaseStudy, getHomepageCaseStudies, type CaseStudy } from "@/data/case-studies";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const AUTO_ADVANCE_MS = 6000;
-
-/* ─── Data ─────────────────────────────────────────────── */
-
-interface CaseStudy {
-    tag: string;
-    name: string;
-    description: string;
-    metric: string;
-    metricLabel: string;
-    slug: string;
-}
-
-const STUDIES: CaseStudy[] = [
-    {
-        tag: "Revenue Operations Platform",
-        name: "SignalOps Control Center",
-        description:
-            "A unified revenue operations platform that consolidated fragmented sales data into a single source of truth — cutting weekly reporting time by more than half.",
-        metric: "62%",
-        metricLabel: "Faster Weekly Reporting",
-        slug: "signalops-control-center",
-    },
-    {
-        tag: "Supply Chain Intelligence",
-        name: "StockPulse AI",
-        description:
-            "An AI-driven supply chain intelligence system generating millions of demand predictions monthly, keeping inventory lean and fulfillment fast.",
-        metric: "3.2M+",
-        metricLabel: "Predictions Generated Monthly",
-        slug: "stockpulse-ai",
-    },
-    {
-        tag: "Fitness & Wellness",
-        name: "Buff Dudes",
-        description:
-            "A cross-platform fitness app for one of YouTube's largest fitness channels — workout programs, nutrition tracking, and community, all in one place.",
-        metric: "50k+",
-        metricLabel: "App Downloads",
-        slug: "buff-dudes",
-    },
-    {
-        tag: "Enterprise Internal Tools",
-        name: "Internal Ops Dashboard",
-        description:
-            "A custom operations dashboard that replaced four separate spreadsheets and two manual processes, reducing ops overhead by 40%.",
-        metric: "40%",
-        metricLabel: "Reduction in Ops Overhead",
-        slug: "internal-ops-dashboard",
-    },
-    {
-        tag: "B2B Apparel Website",
-        name: "PrimeMark Apparel",
-        description:
-            "A high-performance digital storefront that transformed global supply chain operations and dramatically improved inbound lead quality.",
-        metric: "12x",
-        metricLabel: "Lead Quality Improvement",
-        slug: "primemark",
-    },
-];
-
-/* ─── Slide animation variants ─────────────────────────── */
+const CAROUSEL_SLUGS = [
+    "signalops-control-center",
+    "saas-analytics-platform",
+    "buff-dudes",
+    "internal-ops-dashboard",
+    "primemark",
+] as const;
 
 const slideVariants = {
     enter: (direction: number) => ({
@@ -87,9 +34,13 @@ const slideVariants = {
     }),
 };
 
-/* ─── Main Component ───────────────────────────────────── */
+function getCarouselStudies(): CaseStudy[] {
+    const ordered = CAROUSEL_SLUGS.map((slug) => getCaseStudy(slug)).filter(Boolean) as CaseStudy[];
+    return ordered.length ? ordered : getHomepageCaseStudies().slice(0, 5);
+}
 
 export default function CaseStudiesSection() {
+    const studies = useMemo(() => getCarouselStudies(), []);
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState(1);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -97,34 +48,41 @@ export default function CaseStudiesSection() {
     const headerRef = useRef<HTMLDivElement>(null);
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
 
-    const study = STUDIES[activeIndex];
+    const study = studies[activeIndex] ?? studies[0];
 
     const navigate = useCallback(
-        (dir: 1 | -1) => {
-            setDirection(dir);
-            setActiveIndex((prev) => (prev + dir + STUDIES.length) % STUDIES.length);
+        (delta: 1 | -1) => {
+            setDirection(delta);
+            setActiveIndex((current) => (current + delta + studies.length) % studies.length);
         },
-        []
+        [studies.length]
     );
 
-    const goTo = useCallback((index: number) => {
-        setDirection(index > activeIndex ? 1 : -1);
-        setActiveIndex(index);
-    }, [activeIndex]);
+    const goTo = useCallback(
+        (index: number) => {
+            setDirection(index > activeIndex ? 1 : -1);
+            setActiveIndex(index);
+        },
+        [activeIndex]
+    );
 
-    /* Auto-advance */
     useEffect(() => {
+        if (!study) {
+            return;
+        }
+
         intervalRef.current = setInterval(() => {
             setDirection(1);
-            setActiveIndex((prev) => (prev + 1) % STUDIES.length);
+            setActiveIndex((current) => (current + 1) % studies.length);
         }, AUTO_ADVANCE_MS);
 
         return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
         };
-    }, [activeIndex]);
+    }, [studies.length, study]);
 
-    /* Swipe handler for mobile */
     const handleDragEnd = useCallback(
         (_: unknown, info: { offset: { x: number }; velocity: { x: number } }) => {
             if (info.offset.x > 50 || info.velocity.x > 200) {
@@ -136,6 +94,10 @@ export default function CaseStudiesSection() {
         [navigate]
     );
 
+    if (!study) {
+        return null;
+    }
+
     return (
         <section
             ref={sectionRef}
@@ -143,7 +105,6 @@ export default function CaseStudiesSection() {
             aria-roledescription="carousel"
             className="relative overflow-hidden py-24 lg:py-32"
         >
-            {/* Ambient glow */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
@@ -154,7 +115,6 @@ export default function CaseStudiesSection() {
             />
 
             <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
-                {/* Header */}
                 <div ref={headerRef} className="mb-14 flex flex-col gap-6">
                     <motion.span
                         initial={{ opacity: 0, y: 16 }}
@@ -175,8 +135,8 @@ export default function CaseStudiesSection() {
                             className="text-3xl font-light leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl"
                             style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                         >
-                            {splitWords("Real clients. Real").map((word, i) => (
-                                <motion.span key={`w-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                            {splitWords("Real clients. Real").map((word, index) => (
+                                <motion.span key={`w-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
                                     {word}
                                 </motion.span>
                             ))}
@@ -188,7 +148,6 @@ export default function CaseStudiesSection() {
                             </motion.span>
                         </motion.h2>
 
-                        {/* Inline stat badge */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
@@ -209,7 +168,6 @@ export default function CaseStudiesSection() {
                     </Link>
                 </div>
 
-                {/* Spotlight area */}
                 <div className="relative">
                     <div className="overflow-hidden rounded-2xl border border-white/8 bg-neutral-900/40 backdrop-blur-sm">
                         <AnimatePresence mode="wait" custom={direction}>
@@ -225,19 +183,18 @@ export default function CaseStudiesSection() {
                                 dragConstraints={{ left: 0, right: 0 }}
                                 dragElastic={0.12}
                                 onDragEnd={handleDragEnd}
-                                aria-label={`Case study ${activeIndex + 1} of ${STUDIES.length}: ${study.name}`}
+                                aria-label={`Case study ${activeIndex + 1} of ${studies.length}: ${study.client}`}
                                 className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2 lg:gap-12 lg:p-12"
                             >
-                                {/* Left — text */}
                                 <div className="flex flex-col justify-center">
                                     <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
-                                        {study.tag}
+                                        {study.sector}
                                     </p>
                                     <h3 className="mb-4 text-3xl font-bold leading-snug tracking-tight text-white lg:text-4xl">
-                                        {study.name}
+                                        {study.client}
                                     </h3>
                                     <p className="mb-8 max-w-md text-sm leading-relaxed text-zinc-400 lg:text-base">
-                                        {study.description}
+                                        {study.heroDescription}
                                     </p>
                                     <Link
                                         href={`/work/${study.slug}`}
@@ -248,7 +205,6 @@ export default function CaseStudiesSection() {
                                     </Link>
                                 </div>
 
-                                {/* Right — metric */}
                                 <div className="flex flex-col items-start justify-center lg:items-center">
                                     <span className="text-5xl font-bold tracking-tight text-white lg:text-6xl xl:text-7xl">
                                         {study.metric}
@@ -261,7 +217,6 @@ export default function CaseStudiesSection() {
                         </AnimatePresence>
                     </div>
 
-                    {/* Desktop arrows */}
                     <button
                         onClick={() => navigate(-1)}
                         aria-label="Previous case study"
@@ -278,43 +233,38 @@ export default function CaseStudiesSection() {
                     </button>
                 </div>
 
-                {/* Progress dots */}
                 <div
                     role="tablist"
                     aria-label="Case study navigation"
                     className="mt-8 flex items-center justify-center gap-2"
                 >
-                    {STUDIES.map((s, i) => (
+                    {studies.map((item, index) => (
                         <button
-                            key={s.slug}
+                            key={item.slug}
                             role="tab"
-                            aria-selected={i === activeIndex}
-                            aria-label={`Go to ${s.name}`}
-                            onClick={() => goTo(i)}
+                            aria-selected={index === activeIndex}
+                            aria-label={`Go to ${item.client}`}
+                            onClick={() => goTo(index)}
                             className="relative h-1.5 w-8 overflow-hidden rounded-full bg-zinc-800 transition-colors duration-300"
                         >
-                            {i === activeIndex && (
+                            {index === activeIndex ? (
                                 <motion.div
                                     className="absolute inset-0 rounded-full bg-brand-accent-light"
                                     initial={{ scaleX: 0 }}
                                     animate={{ scaleX: 1 }}
-                                    transition={{
-                                        duration: AUTO_ADVANCE_MS / 1000,
-                                        ease: "linear",
-                                    }}
+                                    transition={{ duration: AUTO_ADVANCE_MS / 1000, ease: "linear" }}
                                     style={{ originX: 0 }}
                                 />
-                            )}
-                            {i !== activeIndex && i < activeIndex && (
+                            ) : null}
+                            {index !== activeIndex && index < activeIndex ? (
                                 <div className="absolute inset-0 rounded-full bg-zinc-600" />
-                            )}
+                            ) : null}
                         </button>
                     ))}
                 </div>
 
-                {/* Visually hidden live region */}
                 <div aria-live="polite" className="sr-only">
-                    Showing case study {activeIndex + 1} of {STUDIES.length}: {study.name}
+                    Showing case study {activeIndex + 1} of {studies.length}: {study.client}
                 </div>
             </div>
         </section>

@@ -3,14 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import dynamic from "next/dynamic";
 import HeroBlobBackground from "./HeroBlobBackground";
-
-// Dynamically import 3D background for performance
-const HybridBackground = dynamic(
-    () => import("@/3d").then((mod) => mod.HybridBackground),
-    { ssr: false }
-);
 
 /* Stagger container + child variants */
 const container = {
@@ -147,6 +140,22 @@ export default function Hero() {
                         Hire Engineers
                         <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </Link>
+
+                    <Link
+                        href="/work"
+                        className="group inline-flex items-center justify-center gap-2 px-1 py-3 text-[13.5px] font-medium text-zinc-400 transition-colors duration-300 hover:text-brand-accent-light sm:text-sm"
+                    >
+                        <span>See Selected Work</span>
+                        <svg
+                            className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                     </Link>
                 </motion.div>

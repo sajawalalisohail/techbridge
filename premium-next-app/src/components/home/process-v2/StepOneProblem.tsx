@@ -51,7 +51,7 @@ export default function StepOneProblem() {
                     {/* Left Pane: Descriptive Content */}
                     <div className="p-8 lg:p-10 flex-1 flex flex-col justify-center">
                         <p className="text-zinc-400 leading-relaxed mb-8">
-                            We identify bottlenecks and define one clear scope before touching a build. The vibe is diagnostic, precise, and forensic.
+                            We map user friction, operator pain, technical constraints, and decision boundaries before anyone disappears into build mode.
                         </p>
 
                         {/* Output Micro-tag */}
@@ -60,7 +60,7 @@ export default function StepOneProblem() {
                                 Discovery Output
                             </span>
                             <div className="rounded-md border border-brand-accent/20 bg-brand-accent/5 px-3 py-2 text-xs font-mono text-brand-accent-light shadow-[0_0_15px_rgba(var(--brand-accent-rgb),0.1)] w-fit backdrop-blur-md">
-                                {">"} Problem Definition Doc
+                                {">"} Shared Brief + Scope Boundary
                             </div>
                         </div>
                     </div>
@@ -92,22 +92,22 @@ export default function StepOneProblem() {
 
                             <div className="flex flex-col gap-2 items-start animate-[scrollUp_15s_linear_infinite] font-mono text-[9px] text-brand-accent-light/70 pointer-events-none select-none h-full">
                                 {[
-                                    "[AUDIT] Analyzing legacy architecture...",
-                                    "[DISCOVERY] Mapping core user journeys...",
-                                    "[SCOPE] Defining success metrics... PASS",
-                                    "[VERIFY] Checking API rate limits... OK",
-                                    "[AUDIT] System health check... NOMINAL",
-                                    "[DISCOVERY] Bottleneck located at Node 7... LOGGED",
-                                    "[SCOPE] Blueprint constraints generated... PASS",
-                                    "[VERIFY] Security vulnerability scan... 0 Threats",
-                                    "[AUDIT] Analyzing legacy architecture...",
-                                    "[DISCOVERY] Mapping core user journeys...",
-                                    "[SCOPE] Defining success metrics... PASS",
-                                    "[VERIFY] Checking API rate limits... OK",
-                                    "[AUDIT] System health check... NOMINAL",
-                                    "[DISCOVERY] Bottleneck located at Node 7... LOGGED",
-                                    "[SCOPE] Blueprint constraints generated... PASS",
-                                    "[VERIFY] Security vulnerability scan... 0 Threats",
+                                    "[DISCOVERY] Mapping user and operator journeys...",
+                                    "[AUDIT] Logging technical constraints...",
+                                    "[SCOPE] Scope boundary approved... PASS",
+                                    "[METRICS] Success and failure paths logged... OK",
+                                    "[DISCOVERY] Shared brief compiled... NOMINAL",
+                                    "[AUDIT] Hidden bottleneck located... LOGGED",
+                                    "[SCOPE] Delivery constraints aligned... PASS",
+                                    "[VERIFY] Decision map validated... 0 conflicts",
+                                    "[DISCOVERY] Mapping user and operator journeys...",
+                                    "[AUDIT] Logging technical constraints...",
+                                    "[SCOPE] Scope boundary approved... PASS",
+                                    "[METRICS] Success and failure paths logged... OK",
+                                    "[DISCOVERY] Shared brief compiled... NOMINAL",
+                                    "[AUDIT] Hidden bottleneck located... LOGGED",
+                                    "[SCOPE] Delivery constraints aligned... PASS",
+                                    "[VERIFY] Decision map validated... 0 conflicts",
                                 ].map((log, i) => (
                                     <div key={i} className="flex items-start gap-2 w-full">
                                         <span className="text-zinc-600 opacity-50 shrink-0">{`>_`}</span>

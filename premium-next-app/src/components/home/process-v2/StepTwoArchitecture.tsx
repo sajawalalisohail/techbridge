@@ -75,13 +75,14 @@ export default function StepTwoArchitecture() {
                         style={{ backfaceVisibility: "hidden" }}
                     >
                         <p className="text-zinc-400 leading-relaxed flex-grow">
-                            Integration maps, data boundaries, and failure paths — all defined up front before a single line of code is written. Structure, 3D, and blueprint-focused.
+                            Interfaces, data flow, failure paths, and rollout guardrails get
+                            resolved before design and engineering split into parallel work.
                         </p>
 
                         <div className="flex items-center justify-between mt-6">
                             <span className="text-xs text-zinc-500 font-mono uppercase tracking-widest">Blueprint Toggle</span>
                             <button className="rounded-full bg-white/5 border border-white/10 px-4 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/10 hover:text-brand-accent">
-                                Click to See Schema
+                                Click to See Blueprint
                             </button>
                         </div>
 
@@ -101,7 +102,7 @@ export default function StepTwoArchitecture() {
                         className="absolute inset-0 rounded-2xl border border-brand-accent/40 bg-zinc-950 p-6 lg:p-8 flex flex-col"
                         style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                     >
-                        <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-4 z-10">Tech Stack Blueprint</div>
+                        <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-4 z-10">Execution Blueprint</div>
 
                         {/* High Fidelity Node Graph Diagram */}
                         <div className="relative flex-grow w-full border border-white/5 rounded-xl bg-black/40 overflow-hidden flex items-center justify-center">
@@ -140,7 +141,7 @@ export default function StepTwoArchitecture() {
                                 <div className="absolute left-[200px] top-[25px] flex items-center justify-center p-2 rounded border border-white/10 bg-zinc-900 z-10">
                                     <span className="font-mono text-[9px] text-zinc-300 flex items-center gap-1">
                                         <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></svg>
-                                        Database
+                                        Data Layer
                                     </span>
                                 </div>
 
@@ -158,7 +159,7 @@ export default function StepTwoArchitecture() {
                         <div className="mt-4 flex justify-between items-center px-2">
                             <span className="flex items-center gap-2 font-mono text-[9px] text-zinc-500">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                                SCHEMA VALIDATED
+                                EXECUTION MAP LOCKED
                             </span>
                             <span className="font-mono text-[9px] text-zinc-600">v2.4.0</span>
                         </div>

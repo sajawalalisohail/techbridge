@@ -5,17 +5,24 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const CLIENTS = [
-    "NextLex",
-    "PrimeMark Apparel",
-    "AliWali Trading Co.",
-    "SignalOps",
-    "Buff Dudes",
-    "Truck Adda",
-    "StockPulse AI",
-    "Muraqaba",
-    "CoolingOnDemand",
-    "TableTapp",
+interface MarqueeClient {
+    name: string;
+    metric?: string;
+}
+
+const CLIENTS: MarqueeClient[] = [
+    { name: "NextLex", metric: "14 Days" },
+    { name: "AliWali Trading Co.", metric: "24 Hours" },
+    { name: "PrimeMark Apparel", metric: "12x" },
+    { name: "Internal Ops", metric: "40%" },
+    { name: "SaaS Analytics", metric: "5M+" },
+    { name: "SignalOps", metric: "62%" },
+    { name: "Buff Dudes" },
+    { name: "Truck Adda" },
+    { name: "StockPulse AI" },
+    { name: "Muraqaba" },
+    { name: "CoolingOnDemand" },
+    { name: "TableTapp" },
 ];
 
 export default function TrustBar() {
@@ -53,26 +60,32 @@ export default function TrustBar() {
             >
                 <div className="flex overflow-hidden">
                     <div className="tb-marquee-track flex shrink-0 items-center gap-12 lg:gap-16">
-                        {[...CLIENTS, ...CLIENTS].map((name, i) => (
-                            <span
+                        {[...CLIENTS, ...CLIENTS].map((client, i) => (
+                            <div
                                 key={`a-${i}`}
                                 className="whitespace-nowrap text-base font-semibold text-zinc-600 sm:text-lg"
                             >
-                                {name}
-                            </span>
+                                <span>{client.name}</span>
+                                {client.metric ? (
+                                    <span className="text-zinc-500"> {"\u00b7"} {client.metric}</span>
+                                ) : null}
+                            </div>
                         ))}
                     </div>
                     <div
                         className="tb-marquee-track flex shrink-0 items-center gap-12 lg:gap-16"
                         aria-hidden="true"
                     >
-                        {[...CLIENTS, ...CLIENTS].map((name, i) => (
-                            <span
+                        {[...CLIENTS, ...CLIENTS].map((client, i) => (
+                            <div
                                 key={`b-${i}`}
                                 className="whitespace-nowrap text-base font-semibold text-zinc-600 sm:text-lg"
                             >
-                                {name}
-                            </span>
+                                <span>{client.name}</span>
+                                {client.metric ? (
+                                    <span className="text-zinc-500"> {"\u00b7"} {client.metric}</span>
+                                ) : null}
+                            </div>
                         ))}
                     </div>
                 </div>

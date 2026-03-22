@@ -53,7 +53,9 @@ export default function StepFourLaunch() {
                     {/* Default View (Always visible partially) */}
                     <div className="p-8 lg:p-10 transition-transform duration-500 group-hover:-translate-y-4">
                         <p className="text-zinc-400 leading-relaxed max-w-lg mb-8">
-                            Go-live is not the finish line. Monitoring, rollback paths, and next-iteration hooks are built in. Mission control stability for live applications.
+                            Going live is an operating phase, not a handoff. Monitoring, rollback
+                            paths, and the first post-launch iteration are defined before release
+                            day arrives.
                         </p>
 
                         <div className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-600">

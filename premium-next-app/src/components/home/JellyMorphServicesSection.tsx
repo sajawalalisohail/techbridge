@@ -126,7 +126,7 @@ export default function JellyMorphServicesSection() {
                         </h2>
 
                         <p className="max-w-md text-sm font-light leading-relaxed text-zinc-400 md:text-base">
-                            We build high-performance products combining pixel-perfect design with scalable engineering.
+                            Seven focused service lines spanning design, software, AI systems, mobile, internal tools, embedded senior talent, and rapid website launches.
                         </p>
                     </div>
 

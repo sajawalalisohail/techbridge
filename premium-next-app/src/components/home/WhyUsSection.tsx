@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ComponentType } from "react";
+import { type ComponentType, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { slideFromLeftContainer, slideFromLeftItem, splitWords } from "@/components/shared/headingAnimations";
 import CodeTypingAnimation from "./why-us/CodeTypingAnimation";
@@ -10,12 +10,11 @@ import GuaranteeBadgeAnimation from "./why-us/GuaranteeBadgeAnimation";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ─── Data ─────────────────────────────────────────────── */
-
 interface Reason {
     tag: string;
     headline: string;
     description: string;
+    proof: string;
     tagline: string;
     Animation: ComponentType<{ isInView: boolean }>;
 }
@@ -23,47 +22,46 @@ interface Reason {
 const REASONS: Reason[] = [
     {
         tag: "how we build",
-        headline: "AI From Line One",
+        headline: "AI from line one",
         description:
-            "We don't bolt AI on at the end. Every system we build ships with machine-readable APIs and automation hooks from day one.",
+            "We do not bolt AI on at the end. Every system we build ships with machine-readable APIs and automation hooks from day one.",
+        proof: "Machine-ready interfaces and automation hooks are part of the first version, not the retrofit plan.",
         tagline: "Not bolted on later.",
         Animation: CodeTypingAnimation,
     },
     {
         tag: "who you work with",
-        headline: "No Middlemen. No Juniors.",
+        headline: "No middlemen. No juniors.",
         description:
-            "You talk to the person writing your code. Not a project manager who translates your requirements wrong.",
+            "You talk to the person writing your code, not a project manager who translates the requirement twice and still gets it wrong.",
+        proof: "Slack, repos, standups, and direct conversation with the people shipping the work.",
         tagline: "Direct access. Always.",
         Animation: OrgChartAnimation,
     },
     {
         tag: "speed",
-        headline: "We Ship Fast Because We're Good",
+        headline: "Fast because the lane is sharp",
         description:
-            "MVPs in weeks, websites in 24 hours. Not because we skip testing or write sloppy code. We've done this so many times the process is tight.",
+            "We ship quickly because the operating rhythm is tight, not because we skip structure. The process is tuned so quality and pace reinforce each other.",
+        proof: "MVPs in weeks, websites in 24 hours, and working software showing up every week instead of one giant reveal.",
         tagline: "Weeks, not quarters.",
         Animation: TimelineBarsAnimation,
     },
     {
         tag: "accountability",
-        headline: "Replacement Guarantee",
+        headline: "Replacement guarantee",
         description:
-            "If an engineer on your team isn't performing or isn't the right fit, we replace them — fast, free, no drama.",
+            "If an engineer on your team is not performing or is not the right fit, we replace them fast, free, and without pushing the risk back onto your timeline.",
+        proof: "The model absorbs the fit risk instead of making your team restart hiring from zero.",
         tagline: "Your risk, eliminated.",
         Animation: GuaranteeBadgeAnimation,
     },
 ];
 
-/* ─── Reason Card ──────────────────────────────────────── */
-
-function ReasonCard({ reason, index }: { reason: Reason; index: number }) {
+function ReasonCard({ reason }: { reason: Reason }) {
     const ref = useRef<HTMLDivElement>(null);
-    // Center-of-viewport detection for opacity transitions
     const isCenterView = useInView(ref, { margin: "-40% 0px -40% 0px" });
-    // One-time trigger for animations
     const hasEntered = useInView(ref, { once: true, margin: "-15%" });
-
     const { Animation } = reason;
 
     return (
@@ -73,28 +71,30 @@ function ReasonCard({ reason, index }: { reason: Reason; index: number }) {
             transition={{ duration: 0.5, ease: EASE }}
             className="flex min-h-[80vh] flex-col justify-center py-16 lg:min-h-[80vh]"
         >
-            {/* Tag */}
             <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-600">
                 {reason.tag}
             </p>
 
-            {/* Headline */}
             <h3 className="mb-4 text-2xl font-bold leading-snug tracking-tight text-white lg:text-3xl">
                 {reason.headline}
             </h3>
 
-            {/* Description */}
             <p className="mb-8 max-w-md text-sm leading-relaxed text-zinc-400 lg:text-base">
                 {reason.description}
             </p>
 
-            {/* Unique micro-animation */}
             <div className="mb-6 max-w-sm">
                 <Animation isInView={hasEntered} />
             </div>
 
-            {/* Tagline */}
-            <div className="flex items-center gap-3">
+            <div className="max-w-md rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                    Why it matters
+                </p>
+                <p className="mt-3 text-sm leading-6 text-zinc-300">{reason.proof}</p>
+            </div>
+
+            <div className="mt-5 flex items-center gap-3">
                 <span className="h-px w-5 flex-shrink-0 bg-brand-accent/60" />
                 <p className="text-sm font-semibold text-zinc-300">{reason.tagline}</p>
             </div>
@@ -102,15 +102,12 @@ function ReasonCard({ reason, index }: { reason: Reason; index: number }) {
     );
 }
 
-/* ─── Main Component ───────────────────────────────────── */
-
 export default function WhyUsSection() {
     const headerRef = useRef<HTMLDivElement>(null);
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
 
     return (
         <section aria-label="Why choose us" className="relative py-24 lg:py-32">
-            {/* Top hairline */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent"
@@ -118,7 +115,6 @@ export default function WhyUsSection() {
 
             <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-[45%_1fr] lg:gap-24">
-                    {/* ─── Left column (sticky on desktop) ─── */}
                     <div ref={headerRef} className="lg:sticky lg:top-[50vh] lg:-translate-y-1/2 lg:self-start">
                         <motion.span
                             initial={{ opacity: 0, y: 16 }}
@@ -138,8 +134,8 @@ export default function WhyUsSection() {
                             className="mb-2 text-3xl font-light leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl"
                             style={{ display: "flex", flexWrap: "wrap", gap: "0 0.3em" }}
                         >
-                            {splitWords("Four reasons we're different.").map((word, i) => (
-                                <motion.span key={`w-${i}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
+                            {splitWords("Four reasons we're different.").map((word, index) => (
+                                <motion.span key={`w-${index}`} variants={slideFromLeftItem} style={{ display: "inline-block" }}>
                                     {word}
                                 </motion.span>
                             ))}
@@ -154,7 +150,6 @@ export default function WhyUsSection() {
                             Judge for yourself.
                         </motion.p>
 
-                        {/* Stat badge */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
@@ -166,10 +161,9 @@ export default function WhyUsSection() {
                         </motion.div>
                     </div>
 
-                    {/* ─── Right column (scrolling reasons) ─── */}
                     <div>
-                        {REASONS.map((reason, i) => (
-                            <ReasonCard key={reason.headline} reason={reason} index={i} />
+                        {REASONS.map((reason) => (
+                            <ReasonCard key={reason.headline} reason={reason} />
                         ))}
                     </div>
                 </div>

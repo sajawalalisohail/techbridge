@@ -1,0 +1,19 @@
+{
+    "name": "projects/16738540292916667953",
+    "projectId": "16738540292916667953",
+    "title": "TechBridge 3D Globe",
+    "visibility": "PRIVATE",
+    "projectType": "PROJECT_DESIGN",
+    "origin": "STITCH",
+    "deviceType": "DESKTOP",
+    "screens": {
+        "about-globe": {
+            "id": "d162a9da0bcb4d22b6cfb9f065ce8e43",
+            "sourceScreen": "projects/16738540292916667953/screens/d162a9da0bcb4d22b6cfb9f065ce8e43",
+            "width": 2560,
+            "height": 3012,
+            "x": 0,
+            "y": 0
+        }
+    }
+}

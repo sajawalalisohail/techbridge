@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global Reach | Celestial Observer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "on-surface": "#e3e2e7",
+              "inverse-surface": "#e3e2e7",
+              "on-tertiary": "#2d3133",
+              "surface-container-lowest": "#0d0e12",
+              "secondary-fixed-dim": "#9ccaff",
+              "surface-container-high": "#292a2e",
+              "surface-variant": "#343538",
+              "primary-fixed": "#dbe1ff",
+              "surface-container-highest": "#343538",
+              "background": "#06070A",
+              "on-primary-fixed-variant": "#003ea8",
+              "on-secondary-fixed-variant": "#03497a",
+              "surface-bright": "#38393d",
+              "surface": "#0D1015",
+              "outline": "#8d90a0",
+              "on-secondary-container": "#87b9f0",
+              "surface-tint": "#b4c5ff",
+              "inverse-on-surface": "#2f3034",
+              "surface-container-low": "#1a1b1f",
+              "secondary-container": "#03497a",
+              "on-tertiary-container": "#eff1f3",
+              "secondary": "#9ccaff",
+              "on-secondary": "#003257",
+              "error": "#ffb4ab",
+              "on-tertiary-fixed-variant": "#444749",
+              "on-secondary-fixed": "#001d35",
+              "inverse-primary": "#0053db",
+              "primary": "#b4c5ff",
+              "surface-dim": "#121317",
+              "on-background": "#e3e2e7",
+              "on-primary": "#002a78",
+              "tertiary-fixed": "#e0e3e5",
+              "surface-container": "#1e1f23",
+              "primary-fixed-dim": "#b4c5ff",
+              "tertiary-fixed-dim": "#c4c7c9",
+              "on-primary-fixed": "#00174b",
+              "outline-variant": "#434655",
+              "on-error-container": "#ffdad6",
+              "primary-container": "#2563eb",
+              "secondary-fixed": "#d0e4ff",
+              "on-primary-container": "#eeefff",
+              "on-surface-variant": "#c3c6d7",
+              "tertiary": "#c4c7c9",
+              "tertiary-container": "#6b6e70",
+              "on-tertiary-fixed": "#191c1e"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(13, 14, 18, 0.65);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(147, 197, 253, 0.1);
+        }
+        .celestial-glow {
+            box-shadow: 0 0 40px rgba(180, 197, 255, 0.04);
+        }
+        .pulse-ring {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.5); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen overflow-x-hidden">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/65 backdrop-blur-xl border-b border-blue-400/10 shadow-[0_0_15px_rgba(37,99,235,0.04)] flex justify-between items-center px-8 h-16 w-full">
+<div class="text-xl font-bold tracking-widest text-blue-500 uppercase font-headline">Celestial Observer</div>
+<div class="hidden md:flex items-center gap-8 h-full">
+<a class="font-headline tracking-tight text-blue-400 border-b-2 border-blue-500 pb-1 h-full flex items-center" href="#">Observer</a>
+<a class="font-headline tracking-tight text-slate-400 hover:text-slate-100 transition-colors h-full flex items-center" href="#">Data Arcs</a>
+<a class="font-headline tracking-tight text-slate-400 hover:text-slate-100 transition-colors h-full flex items-center" href="#">Global Fleet</a>
+<a class="font-headline tracking-tight text-slate-400 hover:text-slate-100 transition-colors h-full flex items-center" href="#">Chronicle</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-blue-400 transition-all duration-400 ease-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-blue-400 transition-all duration-400 ease-out">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-20 hover:w-64 transition-all duration-500 z-40 bg-slate-950/30 backdrop-blur-md flex flex-col py-20 gap-8 items-center group overflow-hidden shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col gap-6 w-full">
+<div class="flex items-center px-6 gap-4 w-full bg-blue-600/20 text-blue-400 border-r-2 border-blue-500 py-3">
+<span class="material-symbols-outlined min-w-[24px]" data-icon="public">public</span>
+<span class="font-headline text-xs font-medium uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Atmosphere</span>
+</div>
+<div class="flex items-center px-6 gap-4 w-full text-slate-500 opacity-60 py-3 hover:bg-white/5 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined min-w-[24px]" data-icon="location_on">location_on</span>
+<span class="font-headline text-xs font-medium uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Morgantown Node</span>
+</div>
+<div class="flex items-center px-6 gap-4 w-full text-slate-500 opacity-60 py-3 hover:bg-white/5 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined min-w-[24px]" data-icon="location_on">location_on</span>
+<span class="font-headline text-xs font-medium uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Lahore Node</span>
+</div>
+<div class="flex items-center px-6 gap-4 w-full text-slate-500 opacity-60 py-3 hover:bg-white/5 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined min-w-[24px]" data-icon="hub">hub</span>
+<span class="font-headline text-xs font-medium uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Network Health</span>
+</div>
+</div>
+<div class="mt-auto w-full border-t border-white/5 pt-6">
+<div class="flex items-center px-6 gap-4 w-full text-slate-500 opacity-60 py-3 hover:bg-white/5 hover:opacity-100 transition-all">
+<span class="material-symbols-outlined min-w-[24px]" data-icon="settings">settings</span>
+<span class="font-headline text-xs font-medium uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 pt-16 min-h-screen relative flex flex-col items-center justify-center">
+<!-- Section Header -->
+<header class="text-center z-10 mb-12">
+<h1 class="text-5xl font-headline font-bold text-on-surface tracking-tight mb-2">Global Reach</h1>
+<p class="text-on-surface-variant font-body text-lg">Bridging distance through data</p>
+</header>
+<!-- 3D Globe Visualization Area -->
+<section class="relative w-full max-w-6xl aspect-video flex items-center justify-center">
+<!-- Simulated 3D Globe -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="relative w-[600px] h-[600px] rounded-full celestial-glow overflow-hidden bg-[#0a0c10] border border-white/5">
+<!-- Background Map/Texture -->
+<div class="absolute inset-0 opacity-20 mix-blend-screen" data-alt="Dark stylized world map silhouette texture">
+<img alt="World Map" class="w-full h-full object-cover scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpI9QuDuEIDDKrslaUhw_vyRRjUN45QEFnUbvwfy3MdAezthgOZL0TdsqKfpjklx105e14pQILOXcPrgXFJlHUqVmG8SOyAGirlk_y0Q5G9c_JHxmP9ERp_2cwP9VSlxb46HkeX9JwFDuPXxCwAD3qkOaoIJt0S8EuF57nZII6bbC0Hk-qOm-HOjj80l92yG3O12ySJbriHBuUcS0R6mQwfvvq742gkgUA1knCyVWtTFdwsXauOK3VNHsK6pfWL90Ujf7dQ-qHR1zs"/>
+</div>
+<!-- Atmospheric Gradients -->
+<div class="absolute inset-0 bg-gradient-to-tr from-[#2563eb]/10 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06070A]/80"></div>
+<!-- Data Points and Arcs (Static simulation for pure HTML) -->
+<div class="absolute top-[42%] left-[28%] group pointer-events-auto cursor-pointer">
+<div class="relative">
+<div class="absolute -inset-4 rounded-full bg-[#2563eb]/20 pulse-ring"></div>
+<div class="w-3 h-3 rounded-full bg-[#93c5fd] shadow-[0_0_10px_#2563eb]"></div>
+</div>
+</div>
+<div class="absolute top-[52%] left-[72%] group pointer-events-auto cursor-pointer">
+<div class="relative">
+<div class="absolute -inset-4 rounded-full bg-[#2563eb]/20 pulse-ring"></div>
+<div class="w-3 h-3 rounded-full bg-[#93c5fd] shadow-[0_0_10px_#2563eb]"></div>
+</div>
+</div>
+<!-- Flowing Data Arc (SVG for curve) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-40" viewbox="0 0 600 600">
+<defs>
+<lineargradient id="arcGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#2563eb" stop-opacity="0"></stop>
+<stop offset="50%" stop-color="#93c5fd" stop-opacity="1"></stop>
+<stop offset="100%" stop-color="#2563eb" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M168 252 Q 300 150 432 312" fill="none" stroke="url(#arcGradient)" stroke-dasharray="10 5" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Legend/Interactive Overlays -->
+<div class="absolute top-8 right-8 w-72 glass-panel p-6 celestial-glow z-20 group">
+<div class="flex items-center justify-between mb-4">
+<span class="label-sm text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold">Network Status</span>
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse"></div>
+<span class="text-[10px] text-slate-400">SYNCED</span>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="pt-1">
+<span class="material-symbols-outlined text-blue-400 text-lg" data-icon="hub">hub</span>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Morgantown Node</p>
+<p class="text-sm font-headline font-semibold text-slate-100">LAT: 39.63° N</p>
+<p class="text-xs text-blue-500/80 font-mono">STABLE - 14ms</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="pt-1">
+<span class="material-symbols-outlined text-blue-400 text-lg" data-icon="language">language</span>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Lahore Node</p>
+<p class="text-sm font-headline font-semibold text-slate-100">LAT: 31.52° N</p>
+<p class="text-xs text-blue-500/80 font-mono">ACTIVE - 128ms</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-white/5">
+<button class="w-full py-2 bg-primary-container text-on-primary-container text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_15px_#2563eb]">
+                        Initialize Warp
+                    </button>
+</div>
+</div>
+<!-- Coordinate Metadata (Bottom Left) -->
+<div class="absolute bottom-8 left-8 flex flex-col gap-1 z-20">
+<div class="flex items-baseline gap-2">
+<span class="text-blue-500 font-headline font-bold text-4xl">247</span>
+<span class="text-slate-400 text-xs uppercase tracking-widest">Active Satellites</span>
+</div>
+<div class="h-px w-24 bg-gradient-to-r from-blue-500/50 to-transparent"></div>
+<span class="text-[10px] text-slate-500 font-mono mt-1">UPLINK_STRENGTH: 98.4%</span>
+</div>
+</section>
+<!-- Feature Grid (Subtle Asymmetric Layout) -->
+<section class="max-w-6xl w-full px-8 py-24 grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-7 glass-panel p-8 celestial-glow flex flex-col justify-between min-h-[300px]">
+<div>
+<h3 class="text-2xl font-headline font-semibold mb-4 text-on-surface">Hyper-Localized Node Distribution</h3>
+<p class="text-on-surface-variant max-w-md leading-relaxed">
+                        Our nodes are strategically anchored in high-traffic terrestrial hubs, ensuring low-latency data relay across the trans-continental orbital network.
+                    </p>
+</div>
+<div class="flex gap-12 mt-8">
+<div>
+<p class="text-3xl font-headline font-bold text-blue-400">99.99</p>
+<p class="text-[10px] uppercase tracking-widest text-slate-500">Uptime %</p>
+</div>
+<div>
+<p class="text-3xl font-headline font-bold text-blue-400">0.4ms</p>
+<p class="text-[10px] uppercase tracking-widest text-slate-500">Local Jitter</p>
+</div>
+</div>
+</div>
+<div class="md:col-span-5 flex flex-col gap-8">
+<div class="bg-surface-container-low p-8 border border-white/5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl" data-icon="security">security</span>
+</div>
+<h4 class="text-lg font-headline font-medium text-blue-200 mb-2">Encrypted Telemetry</h4>
+<p class="text-sm text-slate-400 leading-relaxed">
+                        Every data packet is wrapped in a dynamic 256-bit layer, preventing interception between orbital hops.
+                    </p>
+</div>
+<div class="bg-surface-container-low p-8 border border-white/5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<h4 class="text-lg font-headline font-medium text-blue-200 mb-2">Atmospheric Correction</h4>
+<p class="text-sm text-slate-400 leading-relaxed">
+                        AI-driven signal processing adjusts for ionospheric interference in real-time.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Decoration -->
+<footer class="w-full py-12 border-t border-white/5 flex flex-col items-center gap-4 opacity-40">
+<div class="text-[10px] font-headline tracking-[0.4em] uppercase text-slate-500">Celestial Observer // Orbital Operations</div>
+<div class="flex gap-6">
+<span class="text-[10px] uppercase tracking-widest cursor-pointer hover:text-blue-400 transition-colors">Coordinates</span>
+<span class="text-[10px] uppercase tracking-widest cursor-pointer hover:text-blue-400 transition-colors">Manifesto</span>
+<span class="text-[10px] uppercase tracking-widest cursor-pointer hover:text-blue-400 transition-colors">Legal</span>
+</div>
+</footer>
+</body></html>

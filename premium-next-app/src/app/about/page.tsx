@@ -192,6 +192,7 @@ function FounderCard() {
     );
 }
 
+// GlobalConnectionMap restored after reverting the 3D Globe section
 function GlobalConnectionMap() {
     return (
         <div className="relative h-[220px] overflow-hidden rounded-[1.4rem] border border-white/8 bg-black/25">
@@ -437,25 +438,23 @@ export default function AboutPage() {
                                 <div className="flex-1">
                                     <GlobalConnectionMap />
                                     <div className="mt-4 grid grid-cols-2 gap-4">
-                                    {[
-                                        { label: "Strategy", value: "US-led" },
-                                        { label: "Execution", value: "Global office" },
-                                        { label: "Oversight", value: "Shared standards" },
-                                        { label: "Rhythm", value: "Follow-the-sun" },
-                                    ].map((item) => (
-                                        <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-                                            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
-                                            <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
-                                        </div>
-                                    ))}
+                                        {[
+                                            { label: "Strategy", value: "US-led" },
+                                            { label: "Execution", value: "Global office" },
+                                            { label: "Oversight", value: "Shared standards" },
+                                            { label: "Rhythm", value: "Follow-the-sun" },
+                                        ].map((item) => (
+                                            <div key={item.label} className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+                                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-600">{item.label}</p>
+                                                <p className="mt-1 text-sm font-medium text-zinc-300">{item.value}</p>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </motion.div>
                     </div>
                 </section>
-
-                <div className="mx-auto max-w-[100rem] px-6 lg:px-10"><div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" /></div>
 
                 <section ref={timelineRef} className="py-24 lg:py-32">
                     <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
@@ -507,8 +506,8 @@ export default function AboutPage() {
                                             <div className="flex items-center gap-4 lg:w-32 lg:flex-shrink-0">
                                                 <div
                                                     className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-xl font-mono text-lg font-bold backdrop-blur-sm transition-all duration-700 ${isActive
-                                                            ? "border-brand-accent/60 bg-brand-accent/10 text-brand-accent-light"
-                                                            : "border border-white/10 bg-neutral-900/80 text-white"
+                                                        ? "border-brand-accent/60 bg-brand-accent/10 text-brand-accent-light"
+                                                        : "border border-white/10 bg-neutral-900/80 text-white"
                                                         }`}
                                                     style={{
                                                         boxShadow: isActive
@@ -524,8 +523,8 @@ export default function AboutPage() {
                                             </div>
                                             <div
                                                 className={`flex-1 rounded-2xl p-6 backdrop-blur-sm transition-all duration-700 lg:p-8 ${isActive
-                                                        ? "border border-brand-accent/40 bg-brand-accent/5"
-                                                        : "border border-white/8 bg-neutral-900/30"
+                                                    ? "border border-brand-accent/40 bg-brand-accent/5"
+                                                    : "border border-white/8 bg-neutral-900/30"
                                                     }`}
                                                 style={{
                                                     boxShadow: isActive
